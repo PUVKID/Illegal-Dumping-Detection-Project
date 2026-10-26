@@ -1,8 +1,12 @@
 <div align="center">
 
-# Illegal-Dumping-Detection-Project
+# 클린뷰 불법투기 쓰레기 탐지
 
-## 🌿 클린뷰 불법투기 쓰레기 탐지
+**Illegal-Dumping-Detection-Project**
+
+**기술 분류:** 컴퓨터 비전 › 객체 검출·추적 › 정지·주변 사람 조건의 이벤트 후보
+
+
 
 ### 쓰레기 객체 탐지 · 영상 추론 · 로컬 결과 확인
 
@@ -16,7 +20,33 @@
 
 [빠른 시작](#quick-start) · [저장소 구성](#repository-structure) · [데이터 구성](#data-settings)
 
+[예시 이미지](#preview)
+
 </div>
+
+<a name="preview"></a>
+
+## 🖼️ 예시로 보기
+
+<p align="center"><img src="assets/previews/heldout-test-performance.png" width="900" alt="기존 성능 보고서 · Illegal-Dumping-Detection-Project" /></p>
+
+**기존 성능 보고서** — 기존 성능보고서의 최종 성능 그래프입니다. 고정 테스트 150장 평가를 나타내며 이번 문서 작업에서 학습·평가를 다시 실행하지 않았습니다.
+
+[근거 파일 보기](%EC%B5%9C%EC%A2%85/%EC%B5%9C%EC%A2%85/%EC%84%B1%EB%8A%A5%EB%B3%B4%EA%B3%A0%EC%84%9C/%EC%B5%9C%EC%A2%85%EC%84%B1%EB%8A%A5.png)
+
+
+
+<a name="input-processing-output"></a>
+
+## 🔄 입력·처리·출력
+
+| 단계 | 이 프로젝트에서 다루는 내용 |
+| :--- | :--- |
+| 입력 | 쓰레기 라벨 영상·검사할 동영상 |
+| 처리 | YOLO 검출과 IoU 연결, 정지 시간·사람 이탈 조건 |
+| 출력 | 검토 후보·결과 영상·CSV·보고서 |
+
+
 
 ---
 
