@@ -1,0 +1,6 @@
+names:
+  0: trash
+path: /root/환경 PBL/trash_round3
+test: /root/환경 PBL/trash_round3/data/full/images/test
+train: /root/환경 PBL/trash_round3/train_focus.txt
+val: /root/환경 PBL/trash_round3/data/full/images/val

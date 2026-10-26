@@ -1,0 +1,6 @@
+names:
+  0: trash
+path: /root/환경 PBL/trash_new_dataset_experiment/verified_trash_v1
+test: images/test
+train: images/train
+val: images/val

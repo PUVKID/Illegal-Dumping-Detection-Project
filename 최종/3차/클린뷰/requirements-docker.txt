@@ -1,0 +1,7 @@
+ultralytics==8.4.160
+opencv-python==4.14.0.94
+imageio-ffmpeg==0.6.0
+requests
+PyYAML
+matplotlib
+# Existing CUDA torch 2.14.0+cu130 / torchvision are reused; do not replace with CPU wheels.
