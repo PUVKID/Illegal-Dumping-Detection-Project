@@ -1,6 +1,8 @@
 <div align="center">
 
-# 🌿 클린뷰 불법투기 쓰레기 탐지
+# Illegal-Dumping-Detection-Project
+
+## 🌿 클린뷰 불법투기 쓰레기 탐지
 
 ### 쓰레기 객체 탐지 · 영상 추론 · 로컬 결과 확인
 
@@ -118,6 +120,14 @@ ROI는 0~1 좌표의 다각형으로 받고, 결과는 `result.mp4`, 프레임�
 
 `build_windows.ps1`은 PyInstaller로 화면·작업 코드·폰트를 묶는 도구입니다. `make_report.py`는 저장된 최종 평가로 그래프·CSV·HTML을 만듭니다. `finalize_round3.py`와 `finish_on_exit.py`는 특정 과거 작업 ID·폴더에 연결된 결과 보관 도구이므로 새 학습을 시작하는 일반 명령으로 사용하지 않습니다.
 
+### 초기 실험과 외부 TACO 코드
+
+1차 노트북은 YOLOv8m을 150 epoch·입력 960·batch 16으로 설정하고, TACO와 Amsterdam 자료를 출처별 무작위 80/10/10으로 나눕니다. 이 분할은 후속 코드의 중복 그룹 관리와 같지 않습니다. 초기 영상 결과에는 투기 행위 정답 라벨이 없으므로 정지·추적 조건을 만족한 장면은 검토 후보로 해석합니다. 초기 재개 JSON도 모델·영상·설정 해시에 결합되어 있지 않습니다.
+
+`데이터/taco/`의 외부 코드는 Pedro F. Proença와 Matterport 계열의 MIT 라이선스 Mask R-CNN 구현입니다. TensorFlow 1·Keras 2 기반이며 클린뷰의 PyTorch·YOLO 학습 코드와 개발 귀속·성능을 구분합니다. `detector.py`는 train/test/evaluate(COCO segmentation) 명령을 제공하고, 세 노트북은 통계·전처리·anchor/ROI 탐색을 다룹니다.
+
+TACO의 `requirements.txt`만으로 TensorFlow·Keras·imgaug·scikit-image·SciPy·pycocotools·h5py가 모두 충족되지는 않습니다. 코드의 최소 버전 검사는 TensorFlow 2·Keras 3 호환성 보증이 아닙니다. 공개 사본에는 클래스 매핑 CSV와 원본 이미지·주석·가중치가 없으므로 해당 외부 예제를 바로 실행할 수 없습니다. 기존 README와 LICENSE를 함께 확인하세요.
+
 <a name="quick-start"></a>
 
 ## 🚀 빠른 시작
@@ -148,6 +158,21 @@ python launcher.py --no-browser
 <a name="data-settings"></a>
 
 ## 📊 데이터 구성과 실험 설정
+
+### 보존한 최종 성능 보고서
+
+[3차 최종 보고서](최종/최종/성능보고서/3차_최종보고서.html)와 [최종 성능 CSV](최종/최종/성능보고서/최종성능.csv)를 함께 보관합니다. 다음 수치는 저장된 CSV의 **고정 테스트 150장·검증에서 선택한 신뢰도** 조건을 반올림한 값입니다.
+
+| 지표 | 보존된 결과 |
+| :--- | ---: |
+| 정밀도 | 61.36% |
+| 재현율 | 65.83% |
+| F1 | 63.52% |
+| mAP50 | 67.31% |
+| mAP50–95 | 45.70% |
+
+정밀도·재현율 각각 90% 이상이라는 목표에는 미달했습니다. 이번 공개 정리에서는 재학습하지 않았으며, 위 값은 새 측정 결과가 아닙니다. 보고서의 그래프 5개·집계 CSV와 기존 글꼴·OFL 라이선스를 함께 포함합니다. GitHub에서 HTML은 소스로 표시될 수 있으므로 보고서 폴더를 함께 내려받아 로컬 브라우저로 확인할 수 있습니다.
+
 
 | 구성 | 역할 |
 | :--- | :--- |
