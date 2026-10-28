@@ -6,23 +6,18 @@
 
 **기술 분류:** 컴퓨터 비전 › 객체 검출·추적 › 정지·주변 사람 조건의 이벤트 후보
 
-![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
-![YOLO](https://img.shields.io/badge/Detection-YOLO-7C3AED?style=flat-square)
-![OpenCV](https://img.shields.io/badge/OpenCV-5C3EE8?style=flat-square&logo=opencv&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white)
+`Python`
+`YOLO`
+`OpenCV`
+`Docker`
 
 [빠른 시작](#quick-start) · [저장소 구성](#repository-structure) · [데이터 구성](#data-settings)
 
-[예시 이미지](#preview)
+[핵심 구성](#input-processing-output)
 
 </div>
 
 <a name="overview"></a>
-
-## 🗺️ 한눈에 보는 구성
-
-<p align="center"><img src="assets/overview.png" width="960" alt="프로젝트의 입력·처리·출력을 정리한 설명도" /></p>
-보관한 프로젝트 자료의 흐름을 정리한 설명도입니다.
 
 ## ✨ 최신 차수에서 달라진 점
 
@@ -35,18 +30,7 @@
 
 **자료별 안내:** [최종](docs/versions/final-container.md) · [1차](docs/versions/stage-1.md) · [2차](docs/versions/stage-2.md) · [최종/3차](docs/versions/stage-3.md) · [최종/4차](docs/versions/stage-4.md) · [최종/최종](docs/versions/stage-5.md) · [전체 기록](docs/VERSIONS.md)
 
-
 <a name="preview"></a>
-
-## 🖼️ 예시로 보기
-
-<p align="center"><img src="assets/previews/heldout-test-performance.png" width="900" alt="기존 성능 보고서 · Illegal-Dumping-Detection-Project" /></p>
-
-**기존 성능 보고서** — 기존 성능보고서의 최종 성능 그래프입니다. 고정 테스트 150장 평가를 나타내며 이번 문서 작업에서 학습·평가를 다시 실행하지 않았습니다.
-
-[근거 파일 보기](%EC%B5%9C%EC%A2%85/%EC%B5%9C%EC%A2%85/%EC%84%B1%EB%8A%A5%EB%B3%B4%EA%B3%A0%EC%84%9C/%EC%B5%9C%EC%A2%85%EC%84%B1%EB%8A%A5.png)
-
-
 
 <a name="input-processing-output"></a>
 
@@ -54,10 +38,9 @@
 
 | 단계 | 이 프로젝트에서 다루는 내용 |
 | :--- | :--- |
-| 입력 | 쓰레기 라벨 영상·검사할 동영상 |
-| 처리 | YOLO 검출과 IoU 연결, 정지 시간·사람 이탈 조건 |
-| 출력 | 검토 후보·결과 영상·CSV·보고서 |
-
+| 📥 입력 | 쓰레기 라벨 영상·검사할 동영상 |
+| ⚙️ 처리 | YOLO 검출과 IoU 연결, 정지 시간·사람 이탈 조건 |
+| 📤 출력 | 검토 후보·결과 영상·CSV·보고서 |
 
 
 ---
