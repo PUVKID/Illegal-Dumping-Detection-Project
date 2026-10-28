@@ -1,17 +1,10 @@
 <div align="center">
 
-# 🧹 클린뷰 불법투기 쓰레기 탐지
+# 🧹 Illegal Dumping Detection Project
 
-**Illegal-Dumping-Detection-Project**
+물체의 정지 시간과 사람의 이탈을 분석해 불법투기 의심 이벤트를 찾습니다.
 
 **기술 분류:** 컴퓨터 비전 › 객체 검출·추적 › 정지·주변 사람 조건의 이벤트 후보
-
-
-
-### ✨ 쓰레기 객체 탐지 · 영상 추론 · 로컬 결과 확인
-
-쓰레기 탐지 데이터를 준비하고 YOLO 모델을 학습한 뒤, 영상에서 탐지 결과를 확인합니다.<br>
-노트북 실험과 Python 작업 서버, 로컬 웹 화면을 연결한 컴퓨터 비전 프로젝트입니다.
 
 ![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
 ![YOLO](https://img.shields.io/badge/Detection-YOLO-7C3AED?style=flat-square)
@@ -23,6 +16,25 @@
 [예시 이미지](#preview)
 
 </div>
+
+<a name="overview"></a>
+
+## 🗺️ 한눈에 보는 구성
+
+<p align="center"><img src="assets/overview.png" width="960" alt="프로젝트의 입력·처리·출력을 정리한 설명도" /></p>
+보관한 프로젝트 자료의 흐름을 정리한 설명도입니다.
+
+## ✨ 최신 차수에서 달라진 점
+
+고정 테스트와 CCTV 해석 한계를 포함한 3차 최종 성능보고서를 보관합니다.
+
+보존된 결과이며 이번 작업에서 재학습하거나 평가하지 않았습니다.
+
+- 저장 HTML은 고정 test 150장과 선택한 앙상블·정책의 결과를 보고합니다. 관련 CSV·그림은 보존 산출물입니다.
+- 정밀도·재현율 목표 미달과 행위 정답 없는 CCTV의 정확도 미계산을 함께 확인해야 합니다.
+
+**자료별 안내:** [최종](docs/versions/final-container.md) · [1차](docs/versions/stage-1.md) · [2차](docs/versions/stage-2.md) · [최종/3차](docs/versions/stage-3.md) · [최종/4차](docs/versions/stage-4.md) · [최종/최종](docs/versions/stage-5.md) · [전체 기록](docs/VERSIONS.md)
+
 
 <a name="preview"></a>
 
