@@ -1,0 +1,18 @@
+{
+  "repository": "https://github.com/alinacherkas/salsa",
+  "annotations_url": "https://raw.githubusercontent.com/alinacherkas/salsa/main/src/salsa_utils/data/annotations.json",
+  "licenses": [
+    {
+      "id": 0,
+      "name": "Open Data Commons Open Database License (ODbL) (c) OpenLitterMap & Contributors",
+      "url": "https://opendatacommons.org/licenses/odbl"
+    },
+    {
+      "id": 1,
+      "name": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+      "url": "https://creativecommons.org/licenses/by/4.0/"
+    }
+  ],
+  "annotations_license": "ODbL",
+  "policy": "Exclude all batch_* TACO-derived photos; reject pHash Hamming <=6 vs all original photos and new photos. New data is training only."
+}

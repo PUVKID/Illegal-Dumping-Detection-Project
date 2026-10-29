@@ -1,0 +1,1629 @@
+{
+  "job": "20261013_060956_6d373b",
+  "training_complete": true,
+  "results_saved": true,
+  "all_materials_saved": false,
+  "pending": [
+    "Docker data/additional",
+    "Docker data/zoom",
+    "Docker data/full"
+  ],
+  "reason": "C drive free space insufficient for complete training-data archive",
+  "model_sha256": {
+    "/root/환경 PBL/trash_round3/runs/yolo26x_focus/weights/best.pt": "9891bbff735b57f1617ff7ab660244a464581b9fa702b0c1b09f28f478ef44b3",
+    "/root/환경 PBL/trash_round3/runs/yolo26l_p2_focus/weights/best.pt": "f527db785a84ae44d22aeadf5318422b5991a6fc6ca3e0dc65c55cbffce1eb3c"
+  },
+  "test": {
+    "split": "test",
+    "images": 150,
+    "weights": [
+      "/root/환경 PBL/trash_round3/runs/yolo26x_focus/weights/best.pt",
+      "/root/환경 PBL/trash_round3/runs/yolo26l_p2_focus/weights/best.pt"
+    ],
+    "policy": "full",
+    "imgsz": 1536,
+    "operating": {
+      "threshold": 0.17,
+      "precision": 0.6135957066189625,
+      "recall": 0.6583493282149712,
+      "f1": 0.6351851851851852,
+      "tp": 343,
+      "fp": 216,
+      "fn": 178,
+      "iou": 0.5
+    },
+    "metrics": {
+      "metrics/precision(B)": 0.7664687286381844,
+      "metrics/recall(B)": 0.6007677543186181,
+      "metrics/mAP50(B)": 0.6730610113280037,
+      "metrics/mAP50-95(B)": 0.45698670867102936,
+      "fitness": 0.45698670867102936
+    },
+    "threshold_source": "validation only",
+    "evaluator": "Ultralytics IoU matching and AP; original-resolution full-image coordinates; NMS IoU=.5; max_det=300"
+  },
+  "target_met": false,
+  "files": 263,
+  "bytes": 1227012008,
+  "records": [
+    {
+      "file": "클린뷰\\backend.py",
+      "bytes": 6031,
+      "sha256": "cae87033e58cebc3affd122ea6d5070c28456ad45d22a9f740c59b4d3237a32c",
+      "method": "canonical"
+    },
+    {
+      "file": "클린뷰\\build_windows.ps1",
+      "bytes": 1179,
+      "sha256": "079be8abbd81cbc3d3ca55942542fbaccefd6677de7f5ad7c562e2678dca7169",
+      "method": "canonical"
+    },
+    {
+      "file": "클린뷰\\CleanView.exe",
+      "bytes": 10207213,
+      "sha256": "ca7146bd02fc95f791739b5f419175d0569b6004c64178af572323fa14524413",
+      "method": "canonical"
+    },
+    {
+      "file": "클린뷰\\data_pipeline.py",
+      "bytes": 14165,
+      "sha256": "7c553ecdcbc642a56958e484a52a9d956e962859cd241f3e09fd3a781cff69c2",
+      "method": "canonical"
+    },
+    {
+      "file": "클린뷰\\detector.py",
+      "bytes": 8444,
+      "sha256": "4d103a0595078bc3b2445120336eb1dd9a8d94cf9cc1fc361f9b87f4b2e29a06",
+      "method": "canonical"
+    },
+    {
+      "file": "클린뷰\\finalize_round3.py",
+      "bytes": 9329,
+      "sha256": "b41cd42474a26ae0b5b94b60e171ceff3676b5be717dd0d1f600cb1744a9d26f",
+      "method": "canonical"
+    },
+    {
+      "file": "클린뷰\\finish_on_exit.py",
+      "bytes": 6437,
+      "sha256": "f6b19191cf4e57dcd2609f79c7469ed9a5d32732ee484faba2318b16c585b7b9",
+      "method": "canonical"
+    },
+    {
+      "file": "클린뷰\\index.html",
+      "bytes": 19908,
+      "sha256": "e3d3239455975f52975358733a3f258aa11239ebbe4e6b84355388ab98c559a8",
+      "method": "canonical"
+    },
+    {
+      "file": "클린뷰\\inference.py",
+      "bytes": 6096,
+      "sha256": "458ac4b4cc27e11eeeabaf540f0407e2d06551074eccfa0548d18a3bf5342f40",
+      "method": "canonical"
+    },
+    {
+      "file": "클린뷰\\launcher.py",
+      "bytes": 8942,
+      "sha256": "4ce840506dcb2cdf257f5d463a0afa180701818110fda3065a6725435a9c5bc2",
+      "method": "canonical"
+    },
+    {
+      "file": "클린뷰\\make_report.py",
+      "bytes": 9373,
+      "sha256": "3ce368fc16fdaa232195d36f3fc1f537bf9b6f0ee22bb5888b1b1ea1d8c35c8b",
+      "method": "canonical"
+    },
+    {
+      "file": "클린뷰\\requirements-docker.txt",
+      "bytes": 188,
+      "sha256": "6126e7b39491351259a2e6c9e91cc54889b8804f3c2124623989b9a7acec6de2",
+      "method": "canonical"
+    },
+    {
+      "file": "클린뷰\\train_round3.py",
+      "bytes": 7638,
+      "sha256": "f98b4c83c3924d16b7e16f96a0b0d8284862e10b34d7f17ad0699975a315922c",
+      "method": "canonical"
+    },
+    {
+      "file": "클린뷰\\verification.json",
+      "bytes": 612,
+      "sha256": "e98705a0091f6f6da1e0277d6cfa694604a71bb8387ff79e7853d6fde9b36ee9",
+      "method": "canonical"
+    },
+    {
+      "file": "클린뷰\\사용설명.txt",
+      "bytes": 2566,
+      "sha256": "b13ea9096a5006c6517199d775a5c589a4693715dce3ce8bdf17130393a816c4",
+      "method": "canonical"
+    },
+    {
+      "file": "클린뷰\\환경버전.json",
+      "bytes": 13372,
+      "sha256": "a35c17a290eff87857ba07b1617ac4a8561354e9e328b0dbd8ea43f3e89fc209",
+      "method": "canonical"
+    },
+    {
+      "file": "클린뷰\\fonts\\NanumGothic-Bold.ttf",
+      "bytes": 2073868,
+      "sha256": "f96298f9fb18e364d2370f4c3ce948ac67a2b61af992d7234bc15c42b033c674",
+      "method": "canonical"
+    },
+    {
+      "file": "클린뷰\\fonts\\OFL.txt",
+      "bytes": 4534,
+      "sha256": "eeacf16032901d0ed0456876ec77b8f0fda6b3fecec7d972f8543eb602e6c30f",
+      "method": "canonical"
+    },
+    {
+      "file": "실험기록\\yolo26l_p2_focus\\BoxF1_curve.png",
+      "bytes": 101653,
+      "sha256": "5a83c4f871741ef8fd0977692fe14ebb7df6c483a384de2df020b75ec816bd6e",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26l_p2_focus\\BoxPR_curve.png",
+      "bytes": 90714,
+      "sha256": "4c447bb8af1e0ba0a148b3e9d02b936ceb62df7112f6ce5f20dd6386c84c313a",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26l_p2_focus\\BoxP_curve.png",
+      "bytes": 101476,
+      "sha256": "6e753efdf4c9117629db3c2a48bfa42d2abd8a90ca44bd249fd0f53cea545b3e",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26l_p2_focus\\BoxR_curve.png",
+      "bytes": 102477,
+      "sha256": "0d68003f7b5b498314b7a7ff7f7d011902ec70b8209daffb863284a12df18892",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26l_p2_focus\\args.yaml",
+      "bytes": 1803,
+      "sha256": "0ed338726c19262a846463119fe96b11d15610d9a9a491d43bb95860c77a7071",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26l_p2_focus\\confusion_matrix.png",
+      "bytes": 93183,
+      "sha256": "302b22a24fa51bf0f087cefa7126d00dd46461c492d51b871554ac998379c534",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26l_p2_focus\\confusion_matrix_normalized.png",
+      "bytes": 95388,
+      "sha256": "4e3531c9213e9375500a2be2bf1ba22f885ab5b9384c61e2da600c89dcb42945",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26l_p2_focus\\labels.jpg",
+      "bytes": 191174,
+      "sha256": "ea4a890dea3934d6d8031bb23613ba481ef78433e0d825651c7be42a6de88448",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26l_p2_focus\\phase_complete.json",
+      "bytes": 209,
+      "sha256": "163cf2d79a2f46ac9fbffd130f71db96172a2517432d07c7a84edb20afb107ec",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26l_p2_focus\\results.csv",
+      "bytes": 5032,
+      "sha256": "1807a7c25e3f0afb206963c8b17f3bb59da8e0c049268cc54a8f0c6ece6b33df",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26l_p2_focus\\results.png",
+      "bytes": 385949,
+      "sha256": "cdac2834a8387301c53000de4d21a70142cc4f48c7bdf8b6edfa97bae64dde70",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26l_p2_focus\\train_batch0.jpg",
+      "bytes": 359561,
+      "sha256": "9e39df3bc8a2de5e87880b49c3ec338682d3b4ef3fc65f57073df0d33b09b983",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26l_p2_focus\\train_batch1.jpg",
+      "bytes": 372866,
+      "sha256": "ebb51d00c71623ff0a2ddbce5db626d9fdc8b1e7294ed0a2a9b1188cb286cdbf",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26l_p2_focus\\train_batch2.jpg",
+      "bytes": 272740,
+      "sha256": "a5a27662e1bfd81106186772e973d0de92bf10742d4412d40fefd2cdb8356923",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26l_p2_focus\\val_batch0_labels.jpg",
+      "bytes": 503984,
+      "sha256": "d5cf623722512f1fb8399d5143b9b8d0a7d80e56e4a7be056d9be8217a4ebd52",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26l_p2_focus\\val_batch0_pred.jpg",
+      "bytes": 501413,
+      "sha256": "9a44281d9e120be7d00635ffcd1946da3c1f39da65572ceb1944465ac126135d",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26l_p2_focus\\val_batch1_labels.jpg",
+      "bytes": 613100,
+      "sha256": "f645112e926707794f6785feab0dcdb96b8f45eefeac36445855d486bf075cd8",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26l_p2_focus\\val_batch1_pred.jpg",
+      "bytes": 617383,
+      "sha256": "8800c3cb57e428b585c00c212e8781c794a7f266d328c652402e5421f2b810f6",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26l_p2_focus\\val_batch2_labels.jpg",
+      "bytes": 514318,
+      "sha256": "33f538cce04b5ec35a1d72a1fa84aa4a00708281c9de8fd92a72b1d16ef19b56",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26l_p2_focus\\val_batch2_pred.jpg",
+      "bytes": 515892,
+      "sha256": "5330ce5a6df566774c52bfad52930cca98194f72ae108eda4564e4390206c66f",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26l_p2_focus\\weights\\best.pt",
+      "bytes": 52786937,
+      "sha256": "f527db785a84ae44d22aeadf5318422b5991a6fc6ca3e0dc65c55cbffce1eb3c",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26l_p2_focus\\weights\\last.pt",
+      "bytes": 52786937,
+      "sha256": "4ddd5aac1a3e0a9381ecf7f42a7c8faa8532ff5ffe26fa0f708fb59e4f214424",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26l_p2_mix\\BoxF1_curve.png",
+      "bytes": 103524,
+      "sha256": "f8f834f7fcbd0bd85288a1a18882745a5f15228a0414cf7d19fa87dceb62a007",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26l_p2_mix\\BoxPR_curve.png",
+      "bytes": 92775,
+      "sha256": "74a89d108bfd277603511cdc3bc5964d5e0a470b219e4939d6a6811479d32146",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26l_p2_mix\\BoxP_curve.png",
+      "bytes": 101246,
+      "sha256": "4373a1e4817726a46a74022326f1f4539002363ffa269eb02ae5a9d78bbfbc1e",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26l_p2_mix\\BoxR_curve.png",
+      "bytes": 104164,
+      "sha256": "db6f926da886f2b34390a7270f7ffb6f4a9ba8e6b5e302c324e1d691fd5e1bee",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26l_p2_mix\\args.yaml",
+      "bytes": 1746,
+      "sha256": "b86771d7af6a5d303fcc996ba3cd74c8325c04bdb9c30e04193f2d00ee2c891f",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26l_p2_mix\\confusion_matrix.png",
+      "bytes": 94104,
+      "sha256": "94c863ef28db88c3332ba49d3b895d49d539e4230790e3a5773d33656eefb31f",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26l_p2_mix\\confusion_matrix_normalized.png",
+      "bytes": 96072,
+      "sha256": "5caf2a51397a46375f9e147c9dac16e95c855035d6f6dd08ce7c9c8727e767dc",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26l_p2_mix\\labels.jpg",
+      "bytes": 113386,
+      "sha256": "3110e9005c3469b1f44093ee36bcace10dd79d600cc0cfc6d06edee0ad1c1d9a",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26l_p2_mix\\phase_complete.json",
+      "bytes": 206,
+      "sha256": "5970aeed97fbe25c50b08ede86557ecbbbb2333dd6cfd23717c46ff0a4d14018",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26l_p2_mix\\results.csv",
+      "bytes": 22774,
+      "sha256": "c769ec79f7106fa95cc23a52b15c608e53150a3631caafb4ec30bb3b21073b3f",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26l_p2_mix\\results.png",
+      "bytes": 273098,
+      "sha256": "ef1fe71a4094617af07134f8423d1eacf4bc712ee848054ad79a267fda5b15c6",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26l_p2_mix\\train_batch0.jpg",
+      "bytes": 416842,
+      "sha256": "48fa0013028aae27be6e2a92093cf16c1e198fb40c3e8373ac126ec6e28324ae",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26l_p2_mix\\train_batch1.jpg",
+      "bytes": 329311,
+      "sha256": "4072aec5766b6205bfd819f86d497cc18f90eab6e002a80f9ab1c1865b3fa780",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26l_p2_mix\\train_batch2.jpg",
+      "bytes": 365080,
+      "sha256": "1b444376bb4a9602b9f6c36d3931235d9b5ece9b326c0fea834d764ebfdd8ea5",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26l_p2_mix\\train_batch710325.jpg",
+      "bytes": 430554,
+      "sha256": "b4cf31f2048ee0d5e72d8f6e0fcd684d1856209017d1507580de5beb1a5ccdc1",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26l_p2_mix\\train_batch710326.jpg",
+      "bytes": 188622,
+      "sha256": "d7fc16f3b40c788ca27fa6042f4c16d7e189e732a33ce195d873b3f61967b557",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26l_p2_mix\\train_batch710327.jpg",
+      "bytes": 217860,
+      "sha256": "ac1fd09c828774c5a3123c34337911f44f0c8ecc9d965ef42b200c39e6973c56",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26l_p2_mix\\val_batch0_labels.jpg",
+      "bytes": 503984,
+      "sha256": "d5cf623722512f1fb8399d5143b9b8d0a7d80e56e4a7be056d9be8217a4ebd52",
+      "method": "hardlink"
+    },
+    {
+      "file": "실험기록\\yolo26l_p2_mix\\val_batch0_pred.jpg",
+      "bytes": 501898,
+      "sha256": "59973abcbda118dc24f6f9273949b7f748057249be65a95c954f6a9516165ecd",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26l_p2_mix\\val_batch1_labels.jpg",
+      "bytes": 613100,
+      "sha256": "f645112e926707794f6785feab0dcdb96b8f45eefeac36445855d486bf075cd8",
+      "method": "hardlink"
+    },
+    {
+      "file": "실험기록\\yolo26l_p2_mix\\val_batch1_pred.jpg",
+      "bytes": 616405,
+      "sha256": "087b7ded96b781aae92013368987eb532845ba9c9cce991e1b5913380042922c",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26l_p2_mix\\val_batch2_labels.jpg",
+      "bytes": 514318,
+      "sha256": "33f538cce04b5ec35a1d72a1fa84aa4a00708281c9de8fd92a72b1d16ef19b56",
+      "method": "hardlink"
+    },
+    {
+      "file": "실험기록\\yolo26l_p2_mix\\val_batch2_pred.jpg",
+      "bytes": 516679,
+      "sha256": "9e451d0043767d31fba9597443fb53ca9bf039cbfd7b3656508a022665088206",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26l_p2_mix\\weights\\best.pt",
+      "bytes": 52804857,
+      "sha256": "6af7a2d9492d184673396711c2cc2f0cd8286789553db1cfc8f4c69d2f133589",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26l_p2_mix\\weights\\last.pt",
+      "bytes": 52804857,
+      "sha256": "1295412fef1b185ebac72306b01ae7a5cb0fa1b0004aa5c227cfda64df8ce354",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26x_focus\\BoxF1_curve.png",
+      "bytes": 103917,
+      "sha256": "ee676e35fddd2f30d023a5bec14703d44fe45658e6e66438c28c6ea7a9c5f2a2",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26x_focus\\BoxPR_curve.png",
+      "bytes": 91767,
+      "sha256": "13aab8a7891d15ac020778c052d11f11bbbd7269cf1917e0a187c264a08f7deb",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26x_focus\\BoxP_curve.png",
+      "bytes": 103469,
+      "sha256": "b841a16b6eece4f00aedf92503fae2a8474e4c8267be2851a9a2c51d1f3087de",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26x_focus\\BoxR_curve.png",
+      "bytes": 104563,
+      "sha256": "604f9e1128c1a6469be63cf461e166931d0f968a7d03e46ced6135f532102ffe",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26x_focus\\args.yaml",
+      "bytes": 1794,
+      "sha256": "9478edbe7eb4c68f5b784dabbc78984641a38432512a9f1c96719fc0ddc3a4bb",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26x_focus\\confusion_matrix.png",
+      "bytes": 93672,
+      "sha256": "0fa869539d24960fff7a9973d7fad4c23e42c385cf69f581538e588289f87840",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26x_focus\\confusion_matrix_normalized.png",
+      "bytes": 96077,
+      "sha256": "459848b9af082f0975b76b8f0eaa92268aca6fa79f26e29a046ca2fa1a0f0be6",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26x_focus\\labels.jpg",
+      "bytes": 191174,
+      "sha256": "ea4a890dea3934d6d8031bb23613ba481ef78433e0d825651c7be42a6de88448",
+      "method": "hardlink"
+    },
+    {
+      "file": "실험기록\\yolo26x_focus\\phase_complete.json",
+      "bytes": 203,
+      "sha256": "060287a1fcb1f39269a0d05fb07fb6429a5b951210d82d184dbd8970ee893b77",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26x_focus\\results.csv",
+      "bytes": 4265,
+      "sha256": "27037eaa3154acea373f093b6d829c7b749e986555aeab21dc765d8fb1939b0f",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26x_focus\\results.png",
+      "bytes": 388657,
+      "sha256": "70945caeed9df673b79c3b99fde599c46c635384c8e74250e13ea6fed7cc9822",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26x_focus\\train_batch0.jpg",
+      "bytes": 359561,
+      "sha256": "9e39df3bc8a2de5e87880b49c3ec338682d3b4ef3fc65f57073df0d33b09b983",
+      "method": "hardlink"
+    },
+    {
+      "file": "실험기록\\yolo26x_focus\\train_batch1.jpg",
+      "bytes": 372866,
+      "sha256": "ebb51d00c71623ff0a2ddbce5db626d9fdc8b1e7294ed0a2a9b1188cb286cdbf",
+      "method": "hardlink"
+    },
+    {
+      "file": "실험기록\\yolo26x_focus\\train_batch2.jpg",
+      "bytes": 272740,
+      "sha256": "a5a27662e1bfd81106186772e973d0de92bf10742d4412d40fefd2cdb8356923",
+      "method": "hardlink"
+    },
+    {
+      "file": "실험기록\\yolo26x_focus\\val_batch0_labels.jpg",
+      "bytes": 503984,
+      "sha256": "d5cf623722512f1fb8399d5143b9b8d0a7d80e56e4a7be056d9be8217a4ebd52",
+      "method": "hardlink"
+    },
+    {
+      "file": "실험기록\\yolo26x_focus\\val_batch0_pred.jpg",
+      "bytes": 503092,
+      "sha256": "98487841921ccd0ed3cb92e86f38a274eb0cae813d1eff8433f192de604d75f8",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26x_focus\\val_batch1_labels.jpg",
+      "bytes": 613100,
+      "sha256": "f645112e926707794f6785feab0dcdb96b8f45eefeac36445855d486bf075cd8",
+      "method": "hardlink"
+    },
+    {
+      "file": "실험기록\\yolo26x_focus\\val_batch1_pred.jpg",
+      "bytes": 614626,
+      "sha256": "7e0549ab8d73e26a9869638c4a11271716606d26373ead2ae0af529783e61a4f",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26x_focus\\val_batch2_labels.jpg",
+      "bytes": 514318,
+      "sha256": "33f538cce04b5ec35a1d72a1fa84aa4a00708281c9de8fd92a72b1d16ef19b56",
+      "method": "hardlink"
+    },
+    {
+      "file": "실험기록\\yolo26x_focus\\val_batch2_pred.jpg",
+      "bytes": 513242,
+      "sha256": "e96e6e474f3aa0e459e3bcc8497a6f81d4e2f8dd6828babc13b0c955688e15f2",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26x_focus\\weights\\best.pt",
+      "bytes": 118454863,
+      "sha256": "9891bbff735b57f1617ff7ab660244a464581b9fa702b0c1b09f28f478ef44b3",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26x_focus\\weights\\last.pt",
+      "bytes": 118454863,
+      "sha256": "1af49624ad112e7f169e0d27e2b8a3109a9c70e4343132bbac19b9047fd5625b",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26x_mix\\BoxF1_curve.png",
+      "bytes": 103585,
+      "sha256": "0d69f490b08740309f3040e6b554a3509e89b00a28d2c570ddf1f33706f231d3",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26x_mix\\BoxPR_curve.png",
+      "bytes": 92756,
+      "sha256": "8f2685b7527cba7b3f5e9787f8ed40cc8438ed41a4437c13ed0ae40a090831a3",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26x_mix\\BoxP_curve.png",
+      "bytes": 101674,
+      "sha256": "d0c7b368228e06b0ffdfd3b0fac9bc6372fbcfc2dd6c00a2f8ba0c8804fb1f3c",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26x_mix\\BoxR_curve.png",
+      "bytes": 103716,
+      "sha256": "1a608d021adb65da74439d1dbf97f95a5cd02baa6ee0f902776eb837c0900e71",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26x_mix\\args.yaml",
+      "bytes": 1844,
+      "sha256": "4733141ab402169d5e6548e157e790d9706a1917470dd04ed2e76cc64ba07a79",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26x_mix\\confusion_matrix.png",
+      "bytes": 93590,
+      "sha256": "973623862a6a4e1e9ddba2f659796ed28771a4bb02ab196940151f6d862b9171",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26x_mix\\confusion_matrix_normalized.png",
+      "bytes": 95587,
+      "sha256": "382c1eb2950df29a8cc72eeef8959effc296b73e3be59b84715e7e8c05559648",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26x_mix\\labels.jpg",
+      "bytes": 113386,
+      "sha256": "3110e9005c3469b1f44093ee36bcace10dd79d600cc0cfc6d06edee0ad1c1d9a",
+      "method": "hardlink"
+    },
+    {
+      "file": "실험기록\\yolo26x_mix\\phase_complete.json",
+      "bytes": 200,
+      "sha256": "0a57c1a75de63d030d7b90a1feb1af564e1e903e8be91994f6838d9f10f7789c",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26x_mix\\results.csv",
+      "bytes": 20233,
+      "sha256": "f3e81f4d6e680c1e6f7a6a1aa77642a3682f95e6190369bd18543f8f6afeee07",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26x_mix\\results.png",
+      "bytes": 299845,
+      "sha256": "0bee941893c62d74bd81619a6cffa477e421e6a1d160d168124dd53e7b4fe0cb",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26x_mix\\train_batch0.jpg",
+      "bytes": 416842,
+      "sha256": "48fa0013028aae27be6e2a92093cf16c1e198fb40c3e8373ac126ec6e28324ae",
+      "method": "hardlink"
+    },
+    {
+      "file": "실험기록\\yolo26x_mix\\train_batch1.jpg",
+      "bytes": 329311,
+      "sha256": "4072aec5766b6205bfd819f86d497cc18f90eab6e002a80f9ab1c1865b3fa780",
+      "method": "hardlink"
+    },
+    {
+      "file": "실험기록\\yolo26x_mix\\train_batch2.jpg",
+      "bytes": 365080,
+      "sha256": "1b444376bb4a9602b9f6c36d3931235d9b5ece9b326c0fea834d764ebfdd8ea5",
+      "method": "hardlink"
+    },
+    {
+      "file": "실험기록\\yolo26x_mix\\val_batch0_labels.jpg",
+      "bytes": 503984,
+      "sha256": "d5cf623722512f1fb8399d5143b9b8d0a7d80e56e4a7be056d9be8217a4ebd52",
+      "method": "hardlink"
+    },
+    {
+      "file": "실험기록\\yolo26x_mix\\val_batch0_pred.jpg",
+      "bytes": 503011,
+      "sha256": "73172411d74aa9fd1b2f60756346cb90552028ec24d1e8d08a1d4355c67d911e",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26x_mix\\val_batch1_labels.jpg",
+      "bytes": 613100,
+      "sha256": "f645112e926707794f6785feab0dcdb96b8f45eefeac36445855d486bf075cd8",
+      "method": "hardlink"
+    },
+    {
+      "file": "실험기록\\yolo26x_mix\\val_batch1_pred.jpg",
+      "bytes": 614128,
+      "sha256": "16d3c9e5518ff0db6bb80112c44df2a9d9b9a5e985a1b75cad517dfdf22a5136",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26x_mix\\val_batch2_labels.jpg",
+      "bytes": 514318,
+      "sha256": "33f538cce04b5ec35a1d72a1fa84aa4a00708281c9de8fd92a72b1d16ef19b56",
+      "method": "hardlink"
+    },
+    {
+      "file": "실험기록\\yolo26x_mix\\val_batch2_pred.jpg",
+      "bytes": 515746,
+      "sha256": "cf8a35faa9add72a327f38a389ed79e680cdf0d0b8a19d9d9a0b644c28889ee9",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26x_mix\\weights\\best.pt",
+      "bytes": 118471119,
+      "sha256": "23420ee83444cb338010ae10ef1f7d928c27378c95d6b9c07bcfde343c35fb4c",
+      "method": "copy"
+    },
+    {
+      "file": "실험기록\\yolo26x_mix\\weights\\last.pt",
+      "bytes": 118471119,
+      "sha256": "4f1eaf3942dc83a2e8915fcaee1e3ad4df58638fc491771044d110a42ba1f263",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\test_final\\BoxF1_curve.png",
+      "bytes": 106832,
+      "sha256": "abc7961f09aafca99d8e2757a67f4ff8492584490d3f56c22bebd982cb293615",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\test_final\\BoxPR_curve.png",
+      "bytes": 92129,
+      "sha256": "89d7c8411d0a07701e460aac9b0dd06af1ab6fa13951e90c3d6059c65e52eb85",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\test_final\\BoxP_curve.png",
+      "bytes": 106336,
+      "sha256": "7cc0f3c8f972021a46aed0e8ea3a4fedf57cdc2abcba2a88f57ae424bf6e42ab",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\test_final\\BoxR_curve.png",
+      "bytes": 105572,
+      "sha256": "5b17835a2bc6f4d5fe2507ea45116ed56d94a21dc2c16dde297df76afd277994",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\test_final\\confusion_matrix.png",
+      "bytes": 96238,
+      "sha256": "937803c5eb10679430f5033ad0a6e35fc2abd9a82724f8225ad42d96448b5372",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\test_final\\confusion_matrix_normalized.png",
+      "bytes": 96622,
+      "sha256": "7792a16bfb5edbc0fc4b1a57b5816654de60d884d4b1e5ade8b112f5dd278312",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\test_final\\metrics.json",
+      "bytes": 847,
+      "sha256": "5080af145092d3b35448b18651285551a610f184db516d89b6cddb4b205413fd",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\test_final\\operating_thresholds.json",
+      "bytes": 195,
+      "sha256": "69406aba2080c9cf95bd0bbcb5f1512213d17f6adbe17d4e257288ed93af710e",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\test_final\\predictions.json",
+      "bytes": 845868,
+      "sha256": "72bf1927c9b413e903d2a01d01138c1b3b24e3c1e125ff55b695ecc7bbf3586b",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\test_final\\stats.npz",
+      "bytes": 32475,
+      "sha256": "66dae715f44064348b77180973d1eeb76652652001481d9436db56f32fdde01c",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_ensemble_full\\BoxF1_curve.png",
+      "bytes": 105428,
+      "sha256": "6ecfca5a28ee29a923677ca45522e1aadbda3e5aa8a5a4b29bb5255572b2953e",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_ensemble_full\\BoxPR_curve.png",
+      "bytes": 92811,
+      "sha256": "85c441d43333f5ff236bd4371c6e316d74cbd05bd69c8feed2510955574531c3",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_ensemble_full\\BoxP_curve.png",
+      "bytes": 104054,
+      "sha256": "c1ce56a730a672b2a81d78b1e0a2742ebe10d488042b6877468661cd86c0feb3",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_ensemble_full\\BoxR_curve.png",
+      "bytes": 107877,
+      "sha256": "ee374c06289b06f54c9ab0900c2d73eec1af5e5c590248c23b0cfb2c5738242f",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_ensemble_full\\metrics.json",
+      "bytes": 844,
+      "sha256": "4b484003f5c66a320cfa6918df02e76a73d639ff343a2129ac6a8736efb348dd",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_ensemble_full\\operating_thresholds.json",
+      "bytes": 18129,
+      "sha256": "11695394c133f5d46eb88c1f71721f4d3b1707d32cf20a20900dc9a75ef1871e",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_ensemble_full\\predictions.json",
+      "bytes": 719473,
+      "sha256": "634e10af72183365775e04a92f242a71f6cb61d4fca38600f367c8822f741764",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_ensemble_full\\stats.npz",
+      "bytes": 27734,
+      "sha256": "12bdda01381757918b4ce5b19e50be6fb195bf91e8e92dfc7b128f201b3c5eab",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_ensemble_tiles3\\BoxF1_curve.png",
+      "bytes": 102242,
+      "sha256": "9acc7fc86ee25775e94842c965b893413a274df58fec5399b6e003ccc5a6b883",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_ensemble_tiles3\\BoxPR_curve.png",
+      "bytes": 92941,
+      "sha256": "de8700ef03ba6d8db4fc5de9d0a7680f52ae018996e619f2c739df3065c65ab5",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_ensemble_tiles3\\BoxP_curve.png",
+      "bytes": 127561,
+      "sha256": "67d430b5cf73847be3946e62963ef47a4cc212c37b0a59f582b4b603188c4803",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_ensemble_tiles3\\BoxR_curve.png",
+      "bytes": 106477,
+      "sha256": "313391620fcfb92ac2109b30e6dec86b49b2b5e79c035c34942a2bdcf1ee37f2",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_ensemble_tiles3\\metrics.json",
+      "bytes": 847,
+      "sha256": "047636443e90db7415f83be3a63fe7e2e2b5276354e450200bf26b10e89d7da2",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_ensemble_tiles3\\operating_thresholds.json",
+      "bytes": 18288,
+      "sha256": "09a139512b777d5801046e60e456fc91f93edea33070a904056cff803a28b072",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_ensemble_tiles3\\predictions.json",
+      "bytes": 1847412,
+      "sha256": "53e2f23a314b813c9ea41bae0897f69041eb80747cfce480d0237beb2061ceae",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_ensemble_tiles3\\stats.npz",
+      "bytes": 70962,
+      "sha256": "cc72d57e95cf5ed9fbf6aee2b0304b7457516882bce8fb89f62f2c9dd9f348bc",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26l_p2_focus_full\\BoxF1_curve.png",
+      "bytes": 103195,
+      "sha256": "5e4435d0a2b5a25ab5fa689cb0df3ed67bcc7455008ea821dc4409a4fc5a1250",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26l_p2_focus_full\\BoxPR_curve.png",
+      "bytes": 90190,
+      "sha256": "c2e7ac491de704631fd86617e5e938c4630dfd8adcc428ede91bfa76603238b4",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26l_p2_focus_full\\BoxP_curve.png",
+      "bytes": 103233,
+      "sha256": "2af5190bdd3abb27f3a5485bf3b430ef39e15dcb80bba8ee504db49186240399",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26l_p2_focus_full\\BoxR_curve.png",
+      "bytes": 104509,
+      "sha256": "2c402f5eb902b401e191a8968d6fe0427d939342766cea91450264ce8d2d8658",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26l_p2_focus_full\\metrics.json",
+      "bytes": 771,
+      "sha256": "acb7440cedaebb69592a11b9348625262a0fa649619926b227ca46f5c9bb3f45",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26l_p2_focus_full\\operating_thresholds.json",
+      "bytes": 17972,
+      "sha256": "2752eee7e01e46593147d7a3c75a46d2d8172fc2245cbd3d43c475d8fd7e9feb",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26l_p2_focus_full\\predictions.json",
+      "bytes": 442635,
+      "sha256": "eb34075af3b8df5c308fa1efa6dd2bcf4976573a08e7c0551cf5a3e207546a6d",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26l_p2_focus_full\\stats.npz",
+      "bytes": 17158,
+      "sha256": "1f8b09810a870c009de833dc360c755fa183794cc04ae6f1ff42620ca7edcfe4",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26l_p2_focus_tiles2\\BoxF1_curve.png",
+      "bytes": 101762,
+      "sha256": "4f064b260110dc4cc6e7450beab1bb3796264c025df21272aaa7209cdf7ba081",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26l_p2_focus_tiles2\\BoxPR_curve.png",
+      "bytes": 94089,
+      "sha256": "98dd1c83a1fa2568d75d6f8b86e0ad449c5b8204e63314fdfdbd7abda0ef004d",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26l_p2_focus_tiles2\\BoxP_curve.png",
+      "bytes": 108028,
+      "sha256": "c5fe19c574d59db697f8b5aa26def1c030e8e46db15ad4e2c5dd49a693501f39",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26l_p2_focus_tiles2\\BoxR_curve.png",
+      "bytes": 106165,
+      "sha256": "38ca04f4d4ce0df9fae381841f89c90414bed8d31704b92acb493c155c6a2eba",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26l_p2_focus_tiles2\\metrics.json",
+      "bytes": 773,
+      "sha256": "6feee7dbadd1056e7d96f0b472bafc42b43e3acc1ab80ae1b5b1ea549901b0b1",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26l_p2_focus_tiles2\\operating_thresholds.json",
+      "bytes": 18086,
+      "sha256": "20a552b715a3ecbadd11ad7ac3266ed1a13c225fed722f3ad7b55cd3d61e384c",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26l_p2_focus_tiles2\\predictions.json",
+      "bytes": 807882,
+      "sha256": "618a94d152890313daec3e457e1acf6368e25f1f6ff8a7df99f6e32b43bf9032",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26l_p2_focus_tiles2\\stats.npz",
+      "bytes": 31163,
+      "sha256": "7fb1ce644b6e1f0487c77af70671f4f719c0c5501318bcc90e4f488bcba942e4",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26l_p2_focus_tiles3\\BoxF1_curve.png",
+      "bytes": 101051,
+      "sha256": "1e92da92d7f534e2d83423d1b8d2e75c4b3d7ce775cacbffbce829cd27691b19",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26l_p2_focus_tiles3\\BoxPR_curve.png",
+      "bytes": 94651,
+      "sha256": "18b8da18697e5151a741c8575722b42bdf5b2b91491a223a921aad866b586e97",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26l_p2_focus_tiles3\\BoxP_curve.png",
+      "bytes": 129886,
+      "sha256": "329d083b83efddd12c81496296290bb564926276eb8c6cf93653ce88ffa7f2cd",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26l_p2_focus_tiles3\\BoxR_curve.png",
+      "bytes": 105410,
+      "sha256": "a93feab8df94065f1402fe7f2f585354c2c7bd51a913dea91d8be94783665162",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26l_p2_focus_tiles3\\metrics.json",
+      "bytes": 775,
+      "sha256": "cb891cda505b7a1a66e5977d4844f895fa6a8bd8110b4210b577c363ec61ac35",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26l_p2_focus_tiles3\\operating_thresholds.json",
+      "bytes": 18178,
+      "sha256": "04f98e6c6533ee8b9412c1798e183dd2a9013a1104099dc5f58e847a8ac2dfef",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26l_p2_focus_tiles3\\predictions.json",
+      "bytes": 1031221,
+      "sha256": "3620d71e855f77d51ed32cad903a7ff6f9f6640f12cc9a840aaa6e57ca0883f6",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26l_p2_focus_tiles3\\stats.npz",
+      "bytes": 39789,
+      "sha256": "4e1ae210fb11c1994d713425095b09e918c67b638558d99906067c2e496d079c",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26l_p2_mix_full\\BoxF1_curve.png",
+      "bytes": 102285,
+      "sha256": "ea5ae9bf4b729887eca36410ab6d8c5b3f11bd369b421f46108247ed8bf36ba2",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26l_p2_mix_full\\BoxPR_curve.png",
+      "bytes": 91835,
+      "sha256": "f3a221f4e8038289feb5eebaf52365d0e7bea02c0e268c8a53b7b20c1175d40d",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26l_p2_mix_full\\BoxP_curve.png",
+      "bytes": 98850,
+      "sha256": "ccba5a9c88f53c9c1e0d42a9795290ca923f689eed30c4e4809a8fce4518ed66",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26l_p2_mix_full\\BoxR_curve.png",
+      "bytes": 101285,
+      "sha256": "0a4bed640f520c6b1444fa65d8605f6dd2898e0469890ef020d037c9fe64fd72",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26l_p2_mix_full\\metrics.json",
+      "bytes": 769,
+      "sha256": "eafccc8af950c43e22ede89546c18e0f27c3dc959cf1b5fe8fe3d6b8b5b6a5f1",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26l_p2_mix_full\\operating_thresholds.json",
+      "bytes": 17894,
+      "sha256": "e90fc6fe2265857ad81d34512e0082bceab06eb4a93dd222f2fe21426131edb8",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26l_p2_mix_full\\predictions.json",
+      "bytes": 465980,
+      "sha256": "4d26877b9ea524f46e031e849b57cab6ec0b9db1cc2ae1ad9667de4605413983",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26l_p2_mix_full\\stats.npz",
+      "bytes": 18164,
+      "sha256": "78c413267b4b8b4e0e227b2fb95785a628e8d2ce027be9016a1c0de00099048d",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26l_p2_mix_tiles2\\BoxF1_curve.png",
+      "bytes": 102936,
+      "sha256": "5ba994264510824c39412a28ec7a340eda7b85cce07ed137ef4e05de282640bf",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26l_p2_mix_tiles2\\BoxPR_curve.png",
+      "bytes": 93107,
+      "sha256": "dc653934890257ef8853d121d881508792b7648b8813eb55b1f1598b7a5b86d1",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26l_p2_mix_tiles2\\BoxP_curve.png",
+      "bytes": 105156,
+      "sha256": "9465a8978ac4ef2bec347833d650ce1627a49daac7f856c48e0246960fa0301f",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26l_p2_mix_tiles2\\BoxR_curve.png",
+      "bytes": 105233,
+      "sha256": "bd3f5f1948e2a115bad0c7047d2f152904079989a9a5b67eeef2400abed2d9f5",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26l_p2_mix_tiles2\\metrics.json",
+      "bytes": 773,
+      "sha256": "e0767cca4e7310671b8abe9331cf59796f004724900cd888eb271e3db6921e0a",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26l_p2_mix_tiles2\\operating_thresholds.json",
+      "bytes": 18087,
+      "sha256": "f4ba086a547a21abdb8a4b08cf6ea6ebb8ff9fc627e80f99bebff0d4f8cde701",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26l_p2_mix_tiles2\\predictions.json",
+      "bytes": 782677,
+      "sha256": "de42372609daec845ad5205005ecf261944439fd1f405174d93fded9855a6acd",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26l_p2_mix_tiles2\\stats.npz",
+      "bytes": 30178,
+      "sha256": "c3f306dffff81aa285874dab4f0daa7b3cb64a4ad36116b08f4bcc26812add6f",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26l_p2_mix_tiles3\\BoxF1_curve.png",
+      "bytes": 100619,
+      "sha256": "b842646b9be2fefb3a11a65e579fc81ce42ed408e997e2bdee493553ff752e2b",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26l_p2_mix_tiles3\\BoxPR_curve.png",
+      "bytes": 92967,
+      "sha256": "91828dda12c93bc3c32ff257d70a25c414131adcec615b502a2101932701d64f",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26l_p2_mix_tiles3\\BoxP_curve.png",
+      "bytes": 112471,
+      "sha256": "a05777d396db549695645c2debbf6237c6d6ac9a5c298c27965d96acf8119450",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26l_p2_mix_tiles3\\BoxR_curve.png",
+      "bytes": 104707,
+      "sha256": "10d90253d8b10df34ff0b46f0736ebd2a9581314e8acac82fb5a763d4c8a5eaa",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26l_p2_mix_tiles3\\metrics.json",
+      "bytes": 771,
+      "sha256": "ae21c059aede41bbf407abba763b41aebcc64444ba425ce51b14e05e313cd5af",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26l_p2_mix_tiles3\\operating_thresholds.json",
+      "bytes": 18146,
+      "sha256": "aa2a44dae99570b64bc921f85457c278e33a50d48c8c4038f0fb707d73feef54",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26l_p2_mix_tiles3\\predictions.json",
+      "bytes": 995417,
+      "sha256": "41aafee60cd8de97805544687c77095176d05a5716e728d1410ee745c0fabc41",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26l_p2_mix_tiles3\\stats.npz",
+      "bytes": 38506,
+      "sha256": "91703c13375619d7b271d3bfadd397bfbe9ba5cc049fc12ec30db65e1dea4187",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26x_focus_full\\BoxF1_curve.png",
+      "bytes": 104695,
+      "sha256": "f12158f6c323363d43c289487ff6d2d772e4c0c88e47f1626d9ceab087042fb0",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26x_focus_full\\BoxPR_curve.png",
+      "bytes": 92679,
+      "sha256": "90709d00a5962cbf66ace2771622e609512e35927ec0b8348c3f5377b327b03c",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26x_focus_full\\BoxP_curve.png",
+      "bytes": 105309,
+      "sha256": "7e8b4a3d248d6ac1862d8cbc6492032c5daa364c59180daaa5622a395c7f1b7a",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26x_focus_full\\BoxR_curve.png",
+      "bytes": 103406,
+      "sha256": "9c62f164eaaec98197e5a0005bdedc64ff7f8376166b033c13bc92ced058322d",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26x_focus_full\\metrics.json",
+      "bytes": 769,
+      "sha256": "6797ebeb203dd045e30cbe7c503e6b539472e320da2c4d0e4ef21ec70c4511b7",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26x_focus_full\\operating_thresholds.json",
+      "bytes": 17977,
+      "sha256": "6f2b403cd0489137df6e98c766bdf3251975f2cacefedd00abcf237c3aef75b8",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26x_focus_full\\predictions.json",
+      "bytes": 522779,
+      "sha256": "c982b04f2173bc108f3ff5e0156ebc8a05a8d7c6bdc704aacd0c0fada254400d",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26x_focus_full\\stats.npz",
+      "bytes": 20270,
+      "sha256": "abd83abfa0727d0a50d316527c586a5394fb26f37fe14e8678ef39f6f13d42e6",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26x_focus_tiles2\\BoxF1_curve.png",
+      "bytes": 105121,
+      "sha256": "dfefb3270ae94b2a99ab2289da0832c018568638157fc05c2060776648ccaeb7",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26x_focus_tiles2\\BoxPR_curve.png",
+      "bytes": 94579,
+      "sha256": "99421b5e83664c4f5c47e2e4a6acfc086eaa65f97edcb1a7e467c76778693da0",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26x_focus_tiles2\\BoxP_curve.png",
+      "bytes": 106685,
+      "sha256": "29cc955b581cb14bdc86cd024189fa6d8301195f6136c860c3a1f61077a011ab",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26x_focus_tiles2\\BoxR_curve.png",
+      "bytes": 106891,
+      "sha256": "fe659dcc32dd539343ae4d29ddd2f040ec25592a49956f433f5475352459b405",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26x_focus_tiles2\\metrics.json",
+      "bytes": 773,
+      "sha256": "375f4df5b3a002771e6133fdcb35cd4378e7cc86bc5a51b2e8ae0b1846d7a5ce",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26x_focus_tiles2\\operating_thresholds.json",
+      "bytes": 17973,
+      "sha256": "36c02e07d62f99291db789e304246216caeb7051e2fa97bfe01ea431f2534391",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26x_focus_tiles2\\predictions.json",
+      "bytes": 998986,
+      "sha256": "2b354b760dee7832095e252820ee89ef33bbb10cb0272551e4a579967e865b69",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26x_focus_tiles2\\stats.npz",
+      "bytes": 38505,
+      "sha256": "eb16cb5483e36db0f80ea9f6460f7458dc815265310a11ba533e27bf95c57394",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26x_focus_tiles3\\BoxF1_curve.png",
+      "bytes": 101464,
+      "sha256": "42c69f7a7ed876fe07c4f7d87e9b7f6b9331463103e296375c6e5fb8e44915ad",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26x_focus_tiles3\\BoxPR_curve.png",
+      "bytes": 94421,
+      "sha256": "8c2d47ae94a4910db53dff257c34cf3d99ec3bbf5329d302915a09c73bebb6f6",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26x_focus_tiles3\\BoxP_curve.png",
+      "bytes": 105033,
+      "sha256": "c05e3921dd30066ce32e675fb261b83d72dcbbd3a433507d0c9c0df74ab3a357",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26x_focus_tiles3\\BoxR_curve.png",
+      "bytes": 105612,
+      "sha256": "38bf41fd3c4e645b1497dcab5d45fc005aec07c38314a961cee5b36b878d2bd5",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26x_focus_tiles3\\metrics.json",
+      "bytes": 771,
+      "sha256": "01d6b511e31050ab4c7bd2c27dbcaced7e019429f8a9ad6150c47a7a7d87bb18",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26x_focus_tiles3\\operating_thresholds.json",
+      "bytes": 17974,
+      "sha256": "ad8a222e23e6ac2e94f10c6ee86b91bc0f81e12dbc91b988b8922cecf2db8a1a",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26x_focus_tiles3\\predictions.json",
+      "bytes": 1382201,
+      "sha256": "8b26f90e3348a7065512b3a1c55a9a04826871ac82a03e1038aa77d817547096",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26x_focus_tiles3\\stats.npz",
+      "bytes": 53387,
+      "sha256": "33aec6c696c867e19f8a5d901d0ca49a4fcd9a811a96cad24d9b39093b918cc9",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26x_mix_full\\BoxF1_curve.png",
+      "bytes": 102082,
+      "sha256": "5f259c575d8fcbdfb2111cef6c8419c72853133536b1518062b316e67249e8e4",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26x_mix_full\\BoxPR_curve.png",
+      "bytes": 92894,
+      "sha256": "0d30edd469faf1a2fcedf026df4ac4ea3ba222a813dbad04860e8bb025a0d4fa",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26x_mix_full\\BoxP_curve.png",
+      "bytes": 102661,
+      "sha256": "d73709bed4bd093cdf224b58dacc853e6a2e28938af8bcaa590ceab0584f134d",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26x_mix_full\\BoxR_curve.png",
+      "bytes": 102208,
+      "sha256": "8cabf5869a228cc202ae67985bd082b3b83eeff27f5876648c1af81fe4cedf5c",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26x_mix_full\\metrics.json",
+      "bytes": 765,
+      "sha256": "51be0d6591508edd95f0eaf6e85725bea25908e1016b063fdc68da48a4f9321f",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26x_mix_full\\operating_thresholds.json",
+      "bytes": 17758,
+      "sha256": "8a4a665e8e01616b540ecb1337be32e1248b77f14fb87607edea34ba1e13bb84",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26x_mix_full\\predictions.json",
+      "bytes": 343181,
+      "sha256": "4ef7ff50a6e1f57df38d8b2798b905e23fb461e806dcfbbf9760c59c205511c6",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26x_mix_full\\stats.npz",
+      "bytes": 13492,
+      "sha256": "b4e12de0dcd380c4d09a1e576c72465c9d6743e99cdaadbe24ab31a8ada78332",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26x_mix_tiles2\\BoxF1_curve.png",
+      "bytes": 102456,
+      "sha256": "a6e3ac9d2fe402202c07a0161ea290e6a14e9aac9a0d02df162f45c522654977",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26x_mix_tiles2\\BoxPR_curve.png",
+      "bytes": 93238,
+      "sha256": "c7a7b0d1be78cc0cc438afc46b4e2c6b1689b109c73edb3ba27cf2f8a4db3408",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26x_mix_tiles2\\BoxP_curve.png",
+      "bytes": 107702,
+      "sha256": "b59d3f478e6ba04e9c8afd94cf105ca76ce4857cd43acc60f5fae6f7db9e40fe",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26x_mix_tiles2\\BoxR_curve.png",
+      "bytes": 103581,
+      "sha256": "2e29ec486dfdf0138d21c951ba24b46c0e256d071203145cd67dc0b4180945b3",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26x_mix_tiles2\\metrics.json",
+      "bytes": 771,
+      "sha256": "163f9972d2580050e3ebea84303cb46e760493a473ae446aaa592a1e436bc3a1",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26x_mix_tiles2\\operating_thresholds.json",
+      "bytes": 17879,
+      "sha256": "872b78aff145045e035a5a7b1860bf661df3ac76b56253ec83489df39bd4fb69",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26x_mix_tiles2\\predictions.json",
+      "bytes": 576339,
+      "sha256": "8d79e6e98bdb8d526ac92dff8288a8ac274e11ddc3fca9718c034e198a2d5d7b",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26x_mix_tiles2\\stats.npz",
+      "bytes": 22540,
+      "sha256": "d90e2e3eb5990c69e014d2ccda25e8ab6e75511047524f6e722df148323ce90e",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26x_mix_tiles3\\BoxF1_curve.png",
+      "bytes": 101859,
+      "sha256": "32a33e1cb5683897838fafdf29514c5396e32f0e4de44a19d276c99eb6ee9763",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26x_mix_tiles3\\BoxPR_curve.png",
+      "bytes": 92094,
+      "sha256": "fb74091981b88750f202bd72665edd6e3440fe4caa53e49d0246db17ab3c1e04",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26x_mix_tiles3\\BoxP_curve.png",
+      "bytes": 107426,
+      "sha256": "069b383e312fbd09a31bcc614f45c86ae34ab6e9a41e8385b422dcedea0e6a0f",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26x_mix_tiles3\\BoxR_curve.png",
+      "bytes": 106399,
+      "sha256": "23e9b0f7f9bc1c7aa4f5c1bb0e0373c0dd9d6483f01ef9a5054383ab232ae0de",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26x_mix_tiles3\\metrics.json",
+      "bytes": 772,
+      "sha256": "a7ce99971b6f8bc1c221ba9f152626cc536b73eac528c2c385d194140421007c",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26x_mix_tiles3\\operating_thresholds.json",
+      "bytes": 17899,
+      "sha256": "93cdc5394c19577ed6a53b2da712b157755c53e3374094921fa3543ce06c8422",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26x_mix_tiles3\\predictions.json",
+      "bytes": 792227,
+      "sha256": "9b4470282c94eb3b15641026b4bf1b5c87b80fe1590aa9ac3d72a3ac7eae68b7",
+      "method": "copy"
+    },
+    {
+      "file": "평가원자료\\val_yolo26x_mix_tiles3\\stats.npz",
+      "bytes": 30928,
+      "sha256": "da0950d67d59095c06b8ee9fa1ff70690c352226d260a87d15891108f408d07e",
+      "method": "copy"
+    },
+    {
+      "file": "출처\\TACO_annotations.json",
+      "bytes": 3022022,
+      "sha256": "ac1ec605c9e1fcda767970de3457c69b4a43b62c02aca8c4c80f51d1b5ae8449",
+      "method": "hardlink"
+    },
+    {
+      "file": "출처\\TACO_annotations_unofficial.json",
+      "bytes": 3936209,
+      "sha256": "49a688137371571fac0dfd14c5309a09e1cc4e6eb1e28b3f6ea4a8671de35925",
+      "method": "hardlink"
+    },
+    {
+      "file": "출처\\TACO_unofficial.json",
+      "bytes": 7608149,
+      "sha256": "f1e0dd83f69e27018d33d680d732019d3b4dd46940a2c2eacced0090d128da54",
+      "method": "copy"
+    },
+    {
+      "file": "출처\\additional_manifest.json",
+      "bytes": 1166748,
+      "sha256": "bddc9ed1d55137cf763967e08212439fdbaecdc5be738d3a7bc64dc5fdbd5397",
+      "method": "copy"
+    },
+    {
+      "file": "출처\\attribution.json",
+      "bytes": 421,
+      "sha256": "2ca82d02ef41efb7138826ae7113084a390873f26a12b12a26c8d2d023ac076f",
+      "method": "copy"
+    },
+    {
+      "file": "출처\\download_errors.json",
+      "bytes": 464488,
+      "sha256": "ba09c6cb0e839c6ff7b844d7d7b40e1db230473fcabda4ca0bdc37eccf8a7035",
+      "method": "copy"
+    },
+    {
+      "file": "출처\\excluded.json",
+      "bytes": 1026,
+      "sha256": "070624d0a1eca4b6f7f3e22e81f3c6acae9dd5ce68681099be67baa8597ae7bb",
+      "method": "copy"
+    },
+    {
+      "file": "출처\\original_resolution_manifest.json",
+      "bytes": 451381,
+      "sha256": "cc139659046f10e5a0119ef77e741ceccc851fe0ac4b55bd5d701442140149d0",
+      "method": "copy"
+    },
+    {
+      "file": "출처\\pLitter_annotations.json",
+      "bytes": 27784638,
+      "sha256": "57e6b73a6109325a7b3864f577fdcd293065f153a6f6466d0bb31314381c21b3",
+      "method": "copy"
+    },
+    {
+      "file": "출처\\pLitter_annotations.zip",
+      "bytes": 8764662,
+      "sha256": "d57e8306a76458e1e20c0dfd3517831ae242b9936cb8b9ee1ebe8542b5daca82",
+      "method": "copy"
+    },
+    {
+      "file": "출처\\salsa\\annotations.json",
+      "bytes": 2801859,
+      "sha256": "3497c2153da3e2130ae1e0960762d420772ae6f318cd3cdf5183d2c3717a7fad",
+      "method": "unchanged"
+    },
+    {
+      "file": "출처\\salsa\\attribution.json",
+      "bytes": 725,
+      "sha256": "7d01cc2ba06fdb58f15d448e092bc54175e4032539e7d943741edf13fd6f0655",
+      "method": "unchanged"
+    },
+    {
+      "file": "출처\\salsa\\external_manifest.json",
+      "bytes": 394508,
+      "sha256": "c392a37abd75982ee6816290a385da5b1e8d1ed516cd14e516244e31c0ea15ab",
+      "method": "unchanged"
+    },
+    {
+      "file": "사전학습가중치\\yolo26l.pt",
+      "bytes": 53211173,
+      "sha256": "9fe3c544f2b19bebad7ea41e76d7ad3d88b7c2f10d11d24430c5311f6b32db26",
+      "method": "copy"
+    },
+    {
+      "file": "사전학습가중치\\yolo26x.pt",
+      "bytes": 118667365,
+      "sha256": "9fdd44a31c504547ffb81d2c6d9e6dac3493c8eaa8b0398d3f43bae6c7003e92",
+      "method": "copy"
+    },
+    {
+      "file": "사전학습가중치\\yolov8n.pt",
+      "bytes": 6549796,
+      "sha256": "f59b3d833e2ff32e194b5bb8e08d211dc7c5bdf144b90d2c8412c47ccfc83b36",
+      "method": "copy"
+    },
+    {
+      "file": "실행기록\\results\\preview_55d13ced16a22b6914c5.jpg",
+      "bytes": 782753,
+      "sha256": "a74af39fdb969c79815a4f03ce15f1300acc4b43a95f11ac2d482447f5778b86",
+      "method": "copy"
+    },
+    {
+      "file": "실행기록\\selected_model.json",
+      "bytes": 1224,
+      "sha256": "af3aaf0828885a094eb4322ff4de28a5d9efaf4751dbaaeb5fbc5f1c9eeb7776",
+      "method": "copy"
+    },
+    {
+      "file": "실행기록\\state\\jobs\\20261013_060956_6d373b.json",
+      "bytes": 3080,
+      "sha256": "d18a6285d2c7174704534a8a140e30eaa55f8f53bcda9476f5e5071f83312188",
+      "method": "copy"
+    },
+    {
+      "file": "실행기록\\state\\jobs\\20261013_060956_6d373b.lock",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "method": "copy"
+    },
+    {
+      "file": "실행기록\\state\\jobs\\20261013_060956_6d373b.log",
+      "bytes": 249393097,
+      "sha256": "ebd85f51b70968e514425bef6b325a106bb4a1fc4576b3985c3a699eb615b59f",
+      "method": "copy"
+    },
+    {
+      "file": "실행기록\\state\\start.lock",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "method": "hardlink"
+    },
+    {
+      "file": "보고서\\3차_최종보고서.html",
+      "bytes": 5684,
+      "sha256": "d7d1e6680d2430d8ce8d6a19f3718a0b309de7f4d9dc15290af48c5e19dd1dc4",
+      "method": "copy"
+    },
+    {
+      "file": "보고서\\fonts\\NanumGothic-Bold.ttf",
+      "bytes": 2073868,
+      "sha256": "f96298f9fb18e364d2370f4c3ce948ac67a2b61af992d7234bc15c42b033c674",
+      "method": "hardlink"
+    },
+    {
+      "file": "보고서\\fonts\\OFL.txt",
+      "bytes": 4534,
+      "sha256": "eeacf16032901d0ed0456876ec77b8f0fda6b3fecec7d972f8543eb602e6c30f",
+      "method": "hardlink"
+    },
+    {
+      "file": "보고서\\summary.json",
+      "bytes": 3852,
+      "sha256": "49c5a966ea943b8129cae37b5191afeb14a051553cbbe4a3da4d8b0a86d6d6d2",
+      "method": "copy"
+    },
+    {
+      "file": "보고서\\검증임계값.png",
+      "bytes": 59593,
+      "sha256": "aaf7f78e9f710838cf65a99784ef8f06b3d7e5a6babfed9f2b96d595c434b3c8",
+      "method": "copy"
+    },
+    {
+      "file": "보고서\\최종성능.csv",
+      "bytes": 567,
+      "sha256": "e582fb1b873cde594acefd4ef175a9ac80337c2dbdbf0b296f41d0d90713960d",
+      "method": "copy"
+    },
+    {
+      "file": "보고서\\최종성능.png",
+      "bytes": 46296,
+      "sha256": "cc11dc10810409eaf138f6516792328a59f5e157648a4cbf1038b41ea448d2a1",
+      "method": "copy"
+    },
+    {
+      "file": "보고서\\탐지개수.png",
+      "bytes": 19661,
+      "sha256": "3ff4740f36a216ab329824c7bfd223ba97fdd79991b59a47e4803f7efd36ed0c",
+      "method": "copy"
+    },
+    {
+      "file": "보고서\\테스트곡선.png",
+      "bytes": 56446,
+      "sha256": "0fef9c03d7ed4623e3972af641d330a98f980527695f3e060a54e2488c02622a",
+      "method": "copy"
+    },
+    {
+      "file": "보고서\\학습곡선.png",
+      "bytes": 152660,
+      "sha256": "727c088a786f35541012cea0951a5152695891b4b5091ab1a9d9879382e0d8f1",
+      "method": "copy"
+    }
+  ],
+  "created": 1792377128.539578
+}

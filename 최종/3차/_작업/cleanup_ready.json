@@ -1,0 +1,11 @@
+{
+  "verified_holdout_files": 600,
+  "videos": 28,
+  "data_transferred": true,
+  "retire_scope": [
+    "월요일 PBL/1차",
+    "월요일 PBL/2차",
+    "this chat previous output folders"
+  ],
+  "method": "Windows Recycle Bin; no unrelated projects"
+}

@@ -1,0 +1,30 @@
+{
+  "split": "val",
+  "images": 150,
+  "weights": [
+    "/root/환경 PBL/trash_round3/runs/yolo26x_focus/weights/best.pt",
+    "/root/환경 PBL/trash_round3/runs/yolo26l_p2_focus/weights/best.pt"
+  ],
+  "policy": "full",
+  "imgsz": 1536,
+  "operating": {
+    "threshold": 0.17,
+    "precision": 0.6233009708737864,
+    "recall": 0.6184971098265896,
+    "f1": 0.6208897485493231,
+    "tp": 321,
+    "fp": 194,
+    "fn": 198,
+    "iou": 0.5
+  },
+  "metrics": {
+    "metrics/precision(B)": 0.6475732451256281,
+    "metrics/recall(B)": 0.5895953757225434,
+    "metrics/mAP50(B)": 0.6374384569121905,
+    "metrics/mAP50-95(B)": 0.4330381917999282,
+    "fitness": 0.4330381917999282
+  },
+  "threshold_source": "validation only",
+  "evaluator": "Ultralytics IoU matching and AP; original-resolution full-image coordinates; NMS IoU=.5; max_det=300",
+  "candidate": "ensemble"
+}

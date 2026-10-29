@@ -1,0 +1,33 @@
+{
+  "id": "20261019_084945_fe574d",
+  "kind": "detect",
+  "params": {
+    "path": "/root/환경 PBL/trash_round3/videos/C_3_10_smp_su_08-27_18-28-00_a_set_DF1.mp4",
+    "model": "/root/환경 PBL/trash_round3/runs/yolo26x_focus/weights/best.pt",
+    "seconds": 120,
+    "abandon": 20,
+    "leave": 5,
+    "conf": 0.17,
+    "baseline": 10,
+    "roi": null
+  },
+  "state": "complete",
+  "created": 1792399785.9710991,
+  "pid": 20070,
+  "updated": 1792399830.1193774,
+  "stage": "완료",
+  "progress": 100,
+  "frame": 360,
+  "total": 360,
+  "result": "/root/환경 PBL/trash_round3/app/results/20261019_084945_fe574d/result.mp4",
+  "csv": "/root/환경 PBL/trash_round3/app/results/20261019_084945_fe574d/frames.csv",
+  "summary": "/root/환경 PBL/trash_round3/app/results/20261019_084945_fe574d/summary.json",
+  "events": [
+    {
+      "track_id": 25,
+      "time_sec": 71.0,
+      "first_seen_sec": 51.0,
+      "reason": "새 정지 물체 지속 + 주변 사람 이탈 (투기 의심 후보)"
+    }
+  ]
+}

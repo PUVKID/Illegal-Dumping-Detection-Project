@@ -1,0 +1,8 @@
+{
+  "TACO": "https://github.com/pedropro/TACO",
+  "TACO_unofficial": "https://github.com/pedropro/TACO/blob/master/data/annotations_unofficial.json",
+  "pLitterStreet": "https://zenodo.org/records/8288500",
+  "pLitterStreet_license": "CC BY 4.0",
+  "SALSA": "https://github.com/alinacherkas/salsa",
+  "license_note": "TACO per-image license fields are recorded as declared, including unknown; no blanket license claim."
+}
