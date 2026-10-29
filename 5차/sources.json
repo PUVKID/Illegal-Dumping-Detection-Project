@@ -1,0 +1,50 @@
+{
+  "checked_date": "2026-10-28",
+  "TACO": {
+    "url": "https://github.com/pedropro/TACO",
+    "role": "보존 원본 train 1200 / validation 150 / historical test 150",
+    "license": "원래 이미지별 권리와 출처를 보존하며 새 배포 권한을 부여하지 않음"
+  },
+  "pLitterStreet": {
+    "url": "https://zenodo.org/records/8288500",
+    "metadata_url": "https://zenodo.org/api/records/8288500",
+    "license": "CC-BY-4.0",
+    "license_evidence": "공식 API metadata.license.id = cc-by-4.0",
+    "annotations_url": "https://zenodo.org/api/records/8288500/files/annotations.zip/content",
+    "annotations_md5": "2484e076b1e9d66036b0a15e9928692f",
+    "images_url": "https://zenodo.org/api/records/8288500/files/images.zip/content",
+    "images_zip_bytes": 13728630001,
+    "images_zip_md5": "02382a3b9620ae7b086ff4c7fd11891d",
+    "whole_image_zip_downloaded": false,
+    "whole_image_zip_md5_verified": false,
+    "verification": "선택 ZIP member별 CRC와 실제 이미지 SHA256, 해독, COCO 좌표 확인",
+    "training_image_limit": 4000,
+    "excluded_category": {"id": 4, "name": "trash bin"},
+    "evaluation_use": "기존 사용 출처이므로 학습 전용, 새로운 독립 테스트로 주장하지 않음"
+  },
+  "SALSA": {
+    "url": "https://github.com/alinacherkas/salsa",
+    "annotation_origin": "보존 sources/salsa/annotations.json",
+    "annotations_license": "ODbL-1.0",
+    "tool_license": "Apache-2.0",
+    "image_license_policy": "annotations.licenses에서 id1 = CC BY4.0인 비TACO 이미지에 한정",
+    "image_origin": "https://cv4ld.blob.core.windows.net/salsa/v1/",
+    "training_image_limit": 1400,
+    "observed_non_taco_images": 1244,
+    "observed_cc_by_4_eligible_non_taco_images": 0,
+    "observed_license_0_images": 1244,
+    "annotations_sha256": "3497c2153da3e2130ae1e0960762d420772ae6f318cd3cdf5183d2c3717a7fad",
+    "status": "신규 사진의 license=0 표기를 이미지 CC BY4로 대체하지 않아 이번 추가 사용 0개"
+  },
+  "RoLID-11K": {
+    "url": "https://github.com/xq141839/RoLID-11K",
+    "official_download": "https://drive.google.com/drive/folders/1aPPW76js_JKdx_9SF0tioxjs17sLbOn-",
+    "repository_license": "Apache-2.0",
+    "dataset_license": null,
+    "status": "후보 보류: 저장소 라이선스를 데이터 권한으로 간주하지 않으며 데이터 내부 권리 미확인",
+    "training_use": false,
+    "public_folder_observation": {"http_status": 200, "title": "RoLID-11K - Google Drive", "html_bytes": 385075, "html_sha256": "1b606baefede288f6a41eedda5407970a9e78364147cab1bb70831a0caa66646", "login_page": false, "dataset_license_verified": false}
+  },
+  "download_budget": {"maximum_bytes": 21474836480, "scope": "실패와 ZIP 범위 조회를 포함한 누적 전송", "request_timeout_seconds": 40},
+  "attribution": "Mandhati et al., pLitterStreet, DOI 10.5281/zenodo.8288500; Alina Cherkas, SALSA; Proenca and Simoes, TACO. 이미지별 manifest에 원본 URL과 라이선스를 보존함."
+}
