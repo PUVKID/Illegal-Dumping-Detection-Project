@@ -1,0 +1,74 @@
+{
+  "created": 1791875321.7746544,
+  "phases": [
+    {
+      "name": "yolo26x_mix",
+      "base": "yolo26x.pt",
+      "data": "mix",
+      "epochs": 180,
+      "patience": 40,
+      "batch": 2,
+      "imgsz": 1536,
+      "lr0": 0.001,
+      "mosaic": 0.5,
+      "scale": 0.4
+    },
+    {
+      "name": "yolo26x_focus",
+      "base": "yolo26x_mix",
+      "data": "focus",
+      "epochs": 60,
+      "patience": 20,
+      "batch": 2,
+      "imgsz": 1536,
+      "lr0": 0.00012,
+      "mosaic": 0.1,
+      "scale": 0.2
+    },
+    {
+      "name": "yolo26l_p2_mix",
+      "base": "yolo26l.pt",
+      "data": "mix",
+      "epochs": 180,
+      "patience": 40,
+      "batch": 2,
+      "imgsz": 1536,
+      "lr0": 0.001,
+      "mosaic": 0.5,
+      "scale": 0.4
+    },
+    {
+      "name": "yolo26l_p2_focus",
+      "base": "yolo26l_p2_mix",
+      "data": "focus",
+      "epochs": 60,
+      "patience": 20,
+      "batch": 2,
+      "imgsz": 1536,
+      "lr0": 0.00012,
+      "mosaic": 0.1,
+      "scale": 0.2
+    }
+  ],
+  "data": {
+    "original_train": 1200,
+    "salsa_train": 1243,
+    "additional_taco": 1232,
+    "additional_street": 1999,
+    "zoom_images": 2936,
+    "train_mix": 8610,
+    "train_focus": 4760,
+    "val": 150,
+    "test": 150,
+    "held_out_photo_identity_unchanged": true,
+    "old_reference_bytes_unchanged": true,
+    "evaluation_protocol": "Same held-out photographs and labels, restored original resolution; validation chooses model, tiles and operating threshold. Do not directly compare pixel preprocessing to round 2.",
+    "download_failures": 2598,
+    "duplicates_excluded": 2,
+    "seed": 20261013
+  },
+  "target": "precision >=.90 and recall >=.90 at IoU=.50",
+  "selection": "validation only; maximize min(P,R), F1, then AP50",
+  "test": "same photo identities and labels, original resolution; one final evaluation after selection",
+  "further_training_after_final_test": false
+}

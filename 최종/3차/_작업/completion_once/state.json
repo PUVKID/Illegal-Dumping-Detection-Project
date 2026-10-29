@@ -1,0 +1,8 @@
+{
+  "stage": "waiting_for_completion_event",
+  "pid": 91360,
+  "job": "20261013_060956_6d373b",
+  "updated": 1791892427.3068836,
+  "mechanism": "Linux atomic completion-file event; no periodic checks",
+  "docker_wait_pid": 89920
+}

@@ -1,0 +1,112 @@
+{
+  "selected": {
+    "split": "val",
+    "images": 150,
+    "weights": [
+      "/root/환경 PBL/trash_round3/runs/yolo26x_focus/weights/best.pt",
+      "/root/환경 PBL/trash_round3/runs/yolo26l_p2_focus/weights/best.pt"
+    ],
+    "policy": "full",
+    "imgsz": 1536,
+    "operating": {
+      "threshold": 0.17,
+      "precision": 0.6233009708737864,
+      "recall": 0.6184971098265896,
+      "f1": 0.6208897485493231,
+      "tp": 321,
+      "fp": 194,
+      "fn": 198,
+      "iou": 0.5
+    },
+    "metrics": {
+      "metrics/precision(B)": 0.6475732451256281,
+      "metrics/recall(B)": 0.5895953757225434,
+      "metrics/mAP50(B)": 0.6374384569121905,
+      "metrics/mAP50-95(B)": 0.4330381917999282,
+      "fitness": 0.4330381917999282
+    },
+    "threshold_source": "validation only",
+    "evaluator": "Ultralytics IoU matching and AP; original-resolution full-image coordinates; NMS IoU=.5; max_det=300",
+    "candidate": "ensemble"
+  },
+  "test": {
+    "split": "test",
+    "images": 150,
+    "weights": [
+      "/root/환경 PBL/trash_round3/runs/yolo26x_focus/weights/best.pt",
+      "/root/환경 PBL/trash_round3/runs/yolo26l_p2_focus/weights/best.pt"
+    ],
+    "policy": "full",
+    "imgsz": 1536,
+    "operating": {
+      "threshold": 0.17,
+      "precision": 0.6135957066189625,
+      "recall": 0.6583493282149712,
+      "f1": 0.6351851851851852,
+      "tp": 343,
+      "fp": 216,
+      "fn": 178,
+      "iou": 0.5
+    },
+    "metrics": {
+      "metrics/precision(B)": 0.7664687286381844,
+      "metrics/recall(B)": 0.6007677543186181,
+      "metrics/mAP50(B)": 0.6730610113280037,
+      "metrics/mAP50-95(B)": 0.45698670867102936,
+      "fitness": 0.45698670867102936
+    },
+    "threshold_source": "validation only",
+    "evaluator": "Ultralytics IoU matching and AP; original-resolution full-image coordinates; NMS IoU=.5; max_det=300"
+  },
+  "history": [
+    {
+      "name": "yolo26x_mix",
+      "epochs": 160,
+      "best": "/root/환경 PBL/trash_round3/runs/yolo26x_mix/weights/best.pt",
+      "sha256": "23420ee83444cb338010ae10ef1f7d928c27378c95d6b9c07bcfde343c35fb4c"
+    },
+    {
+      "name": "yolo26x_focus",
+      "epochs": 33,
+      "best": "/root/환경 PBL/trash_round3/runs/yolo26x_focus/weights/best.pt",
+      "sha256": "9891bbff735b57f1617ff7ab660244a464581b9fa702b0c1b09f28f478ef44b3"
+    },
+    {
+      "name": "yolo26l_p2_mix",
+      "epochs": 180,
+      "best": "/root/환경 PBL/trash_round3/runs/yolo26l_p2_mix/weights/best.pt",
+      "sha256": "6af7a2d9492d184673396711c2cc2f0cd8286789553db1cfc8f4c69d2f133589"
+    },
+    {
+      "name": "yolo26l_p2_focus",
+      "epochs": 39,
+      "best": "/root/환경 PBL/trash_round3/runs/yolo26l_p2_focus/weights/best.pt",
+      "sha256": "f527db785a84ae44d22aeadf5318422b5991a6fc6ca3e0dc65c55cbffce1eb3c"
+    }
+  ],
+  "data": {
+    "original_train": 1200,
+    "salsa_train": 1243,
+    "additional_taco": 1232,
+    "additional_street": 1999,
+    "zoom_images": 2936,
+    "train_mix": 8610,
+    "train_focus": 4760,
+    "val": 150,
+    "test": 150,
+    "held_out_photo_identity_unchanged": true,
+    "old_reference_bytes_unchanged": true,
+    "evaluation_protocol": "Same held-out photographs and labels, restored original resolution; validation chooses model, tiles and operating threshold. Do not directly compare pixel preprocessing to round 2.",
+    "download_failures": 2598,
+    "duplicates_excluded": 2,
+    "seed": 20261013
+  },
+  "target_met": false,
+  "holdout_identity_unchanged": true,
+  "best_sha256": {
+    "/root/환경 PBL/trash_round3/runs/yolo26x_focus/weights/best.pt": "9891bbff735b57f1617ff7ab660244a464581b9fa702b0c1b09f28f478ef44b3",
+    "/root/환경 PBL/trash_round3/runs/yolo26l_p2_focus/weights/best.pt": "f527db785a84ae44d22aeadf5318422b5991a6fc6ca3e0dc65c55cbffce1eb3c"
+  },
+  "finished": 1792167661.4180853,
+  "further_training": false
+}

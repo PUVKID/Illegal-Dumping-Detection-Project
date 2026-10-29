@@ -1,0 +1,15 @@
+{
+  "API": "passed",
+  "videos": 28,
+  "first_video_decode": "passed",
+  "models_forward_backward": "passed batch2/1536 on RTX4090",
+  "report_contract": "passed on synthetic statistics, no real test used",
+  "holdout_reference": "600 file hashes preserved",
+  "cleanup": "old round1/round2 and duplicate old outputs removed; necessary inputs moved",
+  "job": "20261013_060956_6d373b",
+  "stage": "yolo26x_mix 학습 · GPU 동작 확인",
+  "completion": "local file-change event, no Codex/API polling",
+  "train_images": 8610,
+  "added_original_images": 3231,
+  "train_only_zoom_images": 2936
+}

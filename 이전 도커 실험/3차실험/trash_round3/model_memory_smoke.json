@@ -1,0 +1,21 @@
+{
+  "models": [
+    {
+      "architecture": "yolo26x.pt",
+      "batch": 2,
+      "imgsz": 1536,
+      "forward_backward": "passed",
+      "peak_GB": 13.302272512
+    },
+    {
+      "architecture": "yolo26l-p2.yaml",
+      "batch": 2,
+      "imgsz": 1536,
+      "forward_backward": "passed",
+      "peak_GB": 13.642752
+    }
+  ],
+  "metric_match_test": "passed",
+  "heldout_hashes": "passed",
+  "note": "Random inputs, no optimizer update, no accuracy evaluation"
+}

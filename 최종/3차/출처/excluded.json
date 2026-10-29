@@ -1,0 +1,38 @@
+[
+  {
+    "source": "TACO unofficial",
+    "image": {
+      "width": 4032,
+      "flickr_640_url": null,
+      "license": "ODBL (c) OpenLitterMap & Contributors",
+      "file_name": "unofficial/000679.jpg",
+      "date_captured": null,
+      "coco_url": null,
+      "flickr_url": "https://olm-s3.s3.eu-west-1.amazonaws.com/2019/04/26/0uplqWcslnjqXyVakXvUAs7ntqNXGSi1f0xWWGRi.jpeg",
+      "id": 679,
+      "height": 3024
+    },
+    "reason": "pHash near duplicate"
+  },
+  {
+    "source": "pLitterStreet",
+    "image": {
+      "id": 69,
+      "dataset_id": 1,
+      "category_ids": [],
+      "path": "/datasets/Mekong_2020/ATT7_15827077730558065475701396371366.jpg",
+      "width": 4608,
+      "height": 3456,
+      "file_name": "ATT7_15827077730558065475701396371366.jpg",
+      "annotated": false,
+      "annotating": [],
+      "num_annotations": 0,
+      "metadata": {},
+      "deleted": false,
+      "milliseconds": 0,
+      "events": [],
+      "regenerate_thumbnail": false
+    },
+    "reason": "pHash near duplicate"
+  }
+]

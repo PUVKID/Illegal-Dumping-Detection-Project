@@ -1,0 +1,101 @@
+{
+  "id": "20261013_060956_6d373b",
+  "kind": "improve",
+  "params": {},
+  "state": "complete",
+  "created": 1791871796.689098,
+  "pid": 6484,
+  "updated": 1792167661.4199445,
+  "stage": "완료",
+  "additional_taco": 1126,
+  "additional_street": 1900,
+  "zoom_images": 2866,
+  "candidate": 4,
+  "candidates": 4,
+  "epoch": 39,
+  "epochs": 60,
+  "progress": 100,
+  "metrics": {
+    "metrics/precision(B)": 0.6826234784867878,
+    "metrics/recall(B)": 0.5472061657032755,
+    "metrics/mAP50(B)": 0.6124132515050531,
+    "metrics/mAP50-95(B)": 0.42536447666332855
+  },
+  "resumed_at": 1791892426.309786,
+  "error": null,
+  "completed_candidates": [
+    {
+      "name": "yolo26x_mix",
+      "epochs": 160,
+      "best": "/root/환경 PBL/trash_round3/runs/yolo26x_mix/weights/best.pt",
+      "sha256": "23420ee83444cb338010ae10ef1f7d928c27378c95d6b9c07bcfde343c35fb4c"
+    },
+    {
+      "name": "yolo26x_focus",
+      "epochs": 33,
+      "best": "/root/환경 PBL/trash_round3/runs/yolo26x_focus/weights/best.pt",
+      "sha256": "9891bbff735b57f1617ff7ab660244a464581b9fa702b0c1b09f28f478ef44b3"
+    },
+    {
+      "name": "yolo26l_p2_mix",
+      "epochs": 180,
+      "best": "/root/환경 PBL/trash_round3/runs/yolo26l_p2_mix/weights/best.pt",
+      "sha256": "6af7a2d9492d184673396711c2cc2f0cd8286789553db1cfc8f4c69d2f133589"
+    },
+    {
+      "name": "yolo26l_p2_focus",
+      "epochs": 39,
+      "best": "/root/환경 PBL/trash_round3/runs/yolo26l_p2_focus/weights/best.pt",
+      "sha256": "f527db785a84ae44d22aeadf5318422b5991a6fc6ca3e0dc65c55cbffce1eb3c"
+    }
+  ],
+  "selection": {
+    "split": "val",
+    "images": 150,
+    "weights": [
+      "/root/환경 PBL/trash_round3/runs/yolo26x_focus/weights/best.pt",
+      "/root/환경 PBL/trash_round3/runs/yolo26l_p2_focus/weights/best.pt"
+    ],
+    "policy": "full",
+    "imgsz": 1536,
+    "operating": {
+      "threshold": 0.17,
+      "precision": 0.6233009708737864,
+      "recall": 0.6184971098265896,
+      "f1": 0.6208897485493231,
+      "tp": 321,
+      "fp": 194,
+      "fn": 198,
+      "iou": 0.5
+    },
+    "metrics": {
+      "metrics/precision(B)": 0.6475732451256281,
+      "metrics/recall(B)": 0.5895953757225434,
+      "metrics/mAP50(B)": 0.6374384569121905,
+      "metrics/mAP50-95(B)": 0.4330381917999282,
+      "fitness": 0.4330381917999282
+    },
+    "threshold_source": "validation only",
+    "evaluator": "Ultralytics IoU matching and AP; original-resolution full-image coordinates; NMS IoU=.5; max_det=300",
+    "candidate": "ensemble"
+  },
+  "model": "/root/환경 PBL/trash_round3/runs/yolo26x_focus/weights/best.pt",
+  "test_metrics": {
+    "metrics/precision(B)": 0.7664687286381844,
+    "metrics/recall(B)": 0.6007677543186181,
+    "metrics/mAP50(B)": 0.6730610113280037,
+    "metrics/mAP50-95(B)": 0.45698670867102936,
+    "fitness": 0.45698670867102936
+  },
+  "operating_metrics": {
+    "threshold": 0.17,
+    "precision": 0.6135957066189625,
+    "recall": 0.6583493282149712,
+    "f1": 0.6351851851851852,
+    "tp": 343,
+    "fp": 216,
+    "fn": 178,
+    "iou": 0.5
+  },
+  "target_met": false
+}

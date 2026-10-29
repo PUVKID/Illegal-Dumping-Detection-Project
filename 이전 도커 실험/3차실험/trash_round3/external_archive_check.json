@@ -1,0 +1,14 @@
+{
+  "archive_members": 15139,
+  "metadata_images": 13064,
+  "sample_id": 62611,
+  "decoded_shape": [
+    1080,
+    1920,
+    3
+  ],
+  "CRC": "passed",
+  "range_extraction": "passed",
+  "archive_bytes": 13728630001,
+  "full_zip_downloaded": false
+}

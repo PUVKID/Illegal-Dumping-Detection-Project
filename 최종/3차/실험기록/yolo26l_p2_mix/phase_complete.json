@@ -1,0 +1,6 @@
+{
+  "name": "yolo26l_p2_mix",
+  "epochs": 180,
+  "best": "/root/환경 PBL/trash_round3/runs/yolo26l_p2_mix/weights/best.pt",
+  "sha256": "6af7a2d9492d184673396711c2cc2f0cd8286789553db1cfc8f4c69d2f133589"
+}
