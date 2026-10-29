@@ -1,0 +1,12 @@
+{
+  "checked_kst": "2026-10-30T07:17:00+09:00",
+  "evidence_level": "실제 보존 파일 SHA256; 공식 배포 서버의 서명이나 모델 신원 인증을 뜻하지 않음",
+  "files": [
+    {"path":"/workspace/2026/월요일 PBL/이전 도커 실험/3차실험/trash_round3/pretrained/yolo26l.pt","sha256":"9fe3c544f2b19bebad7ea41e76d7ad3d88b7c2f10d11d24430c5311f6b32db26"},
+    {"path":"/workspace/2026/월요일 PBL/이전 도커 실험/3차실험/trash_round3/runs/yolo26l_p2_focus/weights/best.pt","sha256":"f527db785a84ae44d22aeadf5318422b5991a6fc6ca3e0dc65c55cbffce1eb3c"},
+    {"path":"/workspace/2026/월요일 PBL/5차/work/training/final.json","sha256":"cad47b23e489763b4e45d71c8a07a60e91cf027b76e685757cc511f29f23fc37"},
+    {"path":"/workspace/2026/월요일 PBL/5차/work/training/data_manifest.json","sha256":"79184840e87155061a1f493bb679cfbd149b2985d9754f30d2d3fb838a866127"},
+    {"path":"/workspace/2026/월요일 PBL/5차/prepare_training.py","sha256":"cec566249989c41acf3b20460b29d9ba26652fc5c40c3dccfc0a5c9f42292fd5"},
+    {"path":"/workspace/2026/월요일 PBL/5차/train_pipeline.py","sha256":"9d490e15b082c480fd2e9f41873c018ad383ad600d2fe2fac5897523edc13ea8"}
+  ]
+}

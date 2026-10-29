@@ -1,0 +1,19 @@
+{
+  "seed": 20261030,
+  "candidate_hours": 6,
+  "gpu_minimum_free_mib": 18000,
+  "gpu_wait_seconds": 7200,
+  "checkpoint_reserve_bytes": 8589934592,
+  "selection": "TACO validation minimum(precision,recall), F1, PlastOPol validation minimum(precision,recall), AP50; baseline wins ties",
+  "candidates": [
+    {"name":"diverse_coco26l","initial":"pretrained/yolo26l.pt","imgsz":960,"batch":4,"epochs":60,"patience":12,"lr0":0.0005},
+    {"name":"small_l_p2","initial":"runs/yolo26l_p2_focus/weights/best.pt","imgsz":1280,"batch":2,"epochs":45,"patience":12,"lr0":0.0001}
+  ],
+  "validation_policies": ["full", "full_grid3"],
+  "evaluation_imgsz": 1280,
+  "evaluation_conf_floor": 0.001,
+  "evaluation_nms_iou": 0.5,
+  "evaluation_max_det": 1000,
+  "download_limit_bytes": 107374182400,
+  "minimum_disk_free_bytes": 107374182400
+}
