@@ -1,0 +1,22 @@
+{
+  "group": "1차",
+  "current_files": 1,
+  "changes": [
+    {
+      "path": "illegal_dumping_trash_all_new_datasets.ipynb",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 92728,
+        "sha256": "c8b9c0414693ac2d99776c714afb352676df82c472d8d8c1b262bbd1de6c19b9"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    }
+  ],
+  "current_file_hashes": {
+    "illegal_dumping_trash_all_new_datasets.ipynb": {
+      "bytes": 92728,
+      "sha256": "c8b9c0414693ac2d99776c714afb352676df82c472d8d8c1b262bbd1de6c19b9"
+    }
+  }
+}

@@ -1,0 +1,198 @@
+{
+  "group": "최종/최종",
+  "current_files": 10,
+  "changes": [
+    {
+      "path": "성능보고서/3차_최종보고서.html",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 5684,
+        "sha256": "d7d1e6680d2430d8ce8d6a19f3718a0b309de7f4d9dc15290af48c5e19dd1dc4"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "성능보고서/fonts/NanumGothic-Bold.ttf",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 2073868,
+        "sha256": "f96298f9fb18e364d2370f4c3ce948ac67a2b61af992d7234bc15c42b033c674"
+      },
+      "comparison": "바이너리 크기·SHA-256"
+    },
+    {
+      "path": "성능보고서/fonts/OFL.txt",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 4534,
+        "sha256": "eeacf16032901d0ed0456876ec77b8f0fda6b3fecec7d972f8543eb602e6c30f"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "성능보고서/검증임계값.png",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 59593,
+        "sha256": "aaf7f78e9f710838cf65a99784ef8f06b3d7e5a6babfed9f2b96d595c434b3c8"
+      },
+      "comparison": "바이너리 크기·SHA-256"
+    },
+    {
+      "path": "성능보고서/최종성능.csv",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 567,
+        "sha256": "e582fb1b873cde594acefd4ef175a9ac80337c2dbdbf0b296f41d0d90713960d"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "성능보고서/최종성능.png",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 46296,
+        "sha256": "cc11dc10810409eaf138f6516792328a59f5e157648a4cbf1038b41ea448d2a1"
+      },
+      "comparison": "바이너리 크기·SHA-256"
+    },
+    {
+      "path": "성능보고서/탐지개수.png",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 19661,
+        "sha256": "3ff4740f36a216ab329824c7bfd223ba97fdd79991b59a47e4803f7efd36ed0c"
+      },
+      "comparison": "바이너리 크기·SHA-256"
+    },
+    {
+      "path": "성능보고서/테스트곡선.png",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 56446,
+        "sha256": "0fef9c03d7ed4623e3972af641d330a98f980527695f3e060a54e2488c02622a"
+      },
+      "comparison": "바이너리 크기·SHA-256"
+    },
+    {
+      "path": "성능보고서/학습곡선.png",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 152660,
+        "sha256": "727c088a786f35541012cea0951a5152695891b4b5091ab1a9d9879382e0d8f1"
+      },
+      "comparison": "바이너리 크기·SHA-256"
+    },
+    {
+      "path": "지능정보시스템_불법쓰레기탐지_2팀_최종보고서.docx",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 3509205,
+        "sha256": "a331b1e9788fb497131e32114be2db022dd106fe59b12401518e16bbb91b5a97"
+      },
+      "comparison": "바이너리 크기·SHA-256"
+    },
+    {
+      "path": "_작업/make_frame.py",
+      "change": "이전에만 존재",
+      "before": {
+        "bytes": 2315,
+        "sha256": "b5e0647dd781d0087d6c7c3c2d084056106e4dc9ff5e1ee0a6bd794f48969dd1"
+      },
+      "after": null,
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "_작업/render_with_word.py",
+      "change": "이전에만 존재",
+      "before": {
+        "bytes": 1103,
+        "sha256": "f5fabcc898141375bb1fe365589f9a73afd3e16e2857744adeb01199d8b5ac8b"
+      },
+      "after": null,
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "_작업/word_render.ps1",
+      "change": "이전에만 존재",
+      "before": {
+        "bytes": 710,
+        "sha256": "6cb0aec045c4af6d94846755a5c80ceb8ef0496d5927cc9f2ee2a2f16f552e69"
+      },
+      "after": null,
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "_작업/자료/프레임_확인.json",
+      "change": "이전에만 존재",
+      "before": {
+        "bytes": 147,
+        "sha256": "abca8a817f4f791fcdfb047de7d3221a5b25b950494ba49e39631b0e4fb7445c"
+      },
+      "after": null,
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "지능정보시스템_불법쓰레기탐지_2팀_곽윤석_시나리오추가.docx",
+      "change": "이전에만 존재",
+      "before": {
+        "bytes": 3509205,
+        "sha256": "a331b1e9788fb497131e32114be2db022dd106fe59b12401518e16bbb91b5a97"
+      },
+      "after": null,
+      "comparison": "바이너리 크기·SHA-256"
+    }
+  ],
+  "current_file_hashes": {
+    "지능정보시스템_불법쓰레기탐지_2팀_최종보고서.docx": {
+      "bytes": 3509205,
+      "sha256": "a331b1e9788fb497131e32114be2db022dd106fe59b12401518e16bbb91b5a97"
+    },
+    "성능보고서/3차_최종보고서.html": {
+      "bytes": 5684,
+      "sha256": "d7d1e6680d2430d8ce8d6a19f3718a0b309de7f4d9dc15290af48c5e19dd1dc4"
+    },
+    "성능보고서/검증임계값.png": {
+      "bytes": 59593,
+      "sha256": "aaf7f78e9f710838cf65a99784ef8f06b3d7e5a6babfed9f2b96d595c434b3c8"
+    },
+    "성능보고서/최종성능.csv": {
+      "bytes": 567,
+      "sha256": "e582fb1b873cde594acefd4ef175a9ac80337c2dbdbf0b296f41d0d90713960d"
+    },
+    "성능보고서/최종성능.png": {
+      "bytes": 46296,
+      "sha256": "cc11dc10810409eaf138f6516792328a59f5e157648a4cbf1038b41ea448d2a1"
+    },
+    "성능보고서/탐지개수.png": {
+      "bytes": 19661,
+      "sha256": "3ff4740f36a216ab329824c7bfd223ba97fdd79991b59a47e4803f7efd36ed0c"
+    },
+    "성능보고서/테스트곡선.png": {
+      "bytes": 56446,
+      "sha256": "0fef9c03d7ed4623e3972af641d330a98f980527695f3e060a54e2488c02622a"
+    },
+    "성능보고서/학습곡선.png": {
+      "bytes": 152660,
+      "sha256": "727c088a786f35541012cea0951a5152695891b4b5091ab1a9d9879382e0d8f1"
+    },
+    "성능보고서/fonts/NanumGothic-Bold.ttf": {
+      "bytes": 2073868,
+      "sha256": "f96298f9fb18e364d2370f4c3ce948ac67a2b61af992d7234bc15c42b033c674"
+    },
+    "성능보고서/fonts/OFL.txt": {
+      "bytes": 4534,
+      "sha256": "eeacf16032901d0ed0456876ec77b8f0fda6b3fecec7d972f8543eb602e6c30f"
+    }
+  }
+}

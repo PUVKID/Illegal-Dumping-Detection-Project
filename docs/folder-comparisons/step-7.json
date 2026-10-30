@@ -1,0 +1,308 @@
+{
+  "group": "6차",
+  "current_files": 5,
+  "changes": [
+    {
+      "path": "변경전_5차/build_exe.py",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 1751,
+        "sha256": "09de7abb17ec53c202c24b63c688c55603eddbc5b12e83af27d3dfd2e9e97454"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "변경전_5차/pipeline.py",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 8010,
+        "sha256": "0cc45ddda244ae0ba01a2c933259bbab93788c54f9294fb342e4d8fd69429f0e"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "변경전_5차/tests/test_dashboard.py",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 5564,
+        "sha256": "29559cff330370247da5f70c7c23a0ada4d5ad1a9675540ad87e0cfebecc994c"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "변경전_5차/tests/test_pipeline.py",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 2077,
+        "sha256": "3b27c1ee776ef339065c574d0a5cd42010d5d46f3ba5f1280d55680e9a74459e"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "변경전_5차/web/app.js",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 8529,
+        "sha256": "e71ad9a51652df57b8de572dc5d582ab2f1d2b3f7a20d610274a564b82e985f9"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "README.md",
+      "change": "이전에만 존재",
+      "before": {
+        "bytes": 2554,
+        "sha256": "2a03777b26c1650d0b85600d66c8225a43982e211c310c5564f21de3c416df03"
+      },
+      "after": null,
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "build_exe.py",
+      "change": "이전에만 존재",
+      "before": {
+        "bytes": 1751,
+        "sha256": "09de7abb17ec53c202c24b63c688c55603eddbc5b12e83af27d3dfd2e9e97454"
+      },
+      "after": null,
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "dashboard.py",
+      "change": "이전에만 존재",
+      "before": {
+        "bytes": 12135,
+        "sha256": "b14ca511e6a35f3a6afefde576e6e5833173618e37d45c78b40fda38e3e87de8"
+      },
+      "after": null,
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "docs/계획.md",
+      "change": "이전에만 존재",
+      "before": {
+        "bytes": 2570,
+        "sha256": "0861b7e3a0bdea16606ffdca6431115a2b08de987f4a217bda425d483ad24f57"
+      },
+      "after": null,
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "docs/데이터와평가.md",
+      "change": "이전에만 존재",
+      "before": {
+        "bytes": 6759,
+        "sha256": "9c580cca1035a3e12f4d52e31c8582291c089e6d1529690a2cb76f0ecff28f16"
+      },
+      "after": null,
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "gpu_worker.py",
+      "change": "이전에만 존재",
+      "before": {
+        "bytes": 11186,
+        "sha256": "9a10639f6d7871b406ea229762c7e65916e7d08b4b215814881db0f831a133e3"
+      },
+      "after": null,
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "launcher.py",
+      "change": "이전에만 존재",
+      "before": {
+        "bytes": 4091,
+        "sha256": "8f83404bc35e74e685c7ac60b09e35e1021fd8bb6d73f07d3ab393a8aad285ee"
+      },
+      "after": null,
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "pipeline.py",
+      "change": "이전에만 존재",
+      "before": {
+        "bytes": 9413,
+        "sha256": "ea46c051c8d08b04dab4fba8a596c860c6f67471bf23561192b74384b2a38ba8"
+      },
+      "after": null,
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "prepare_training.py",
+      "change": "이전에만 존재",
+      "before": {
+        "bytes": 27888,
+        "sha256": "cec566249989c41acf3b20460b29d9ba26652fc5c40c3dccfc0a5c9f42292fd5"
+      },
+      "after": null,
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "sources.json",
+      "change": "이전에만 존재",
+      "before": {
+        "bytes": 3019,
+        "sha256": "2105c2cd47d902565765c520a371cd8684da61376abe6055a5c306707c789bbc"
+      },
+      "after": null,
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "tests/test_dashboard.py",
+      "change": "이전에만 존재",
+      "before": {
+        "bytes": 5564,
+        "sha256": "29559cff330370247da5f70c7c23a0ada4d5ad1a9675540ad87e0cfebecc994c"
+      },
+      "after": null,
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "tests/test_gpu_worker.py",
+      "change": "이전에만 존재",
+      "before": {
+        "bytes": 1792,
+        "sha256": "78235980a0c8227f7d9bb9cecfe21ff5f53dd29681f101c717a48893224b98cd"
+      },
+      "after": null,
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "tests/test_pipeline.py",
+      "change": "이전에만 존재",
+      "before": {
+        "bytes": 6202,
+        "sha256": "3f0b954b901fed812fd67a62efce6118c83802569ce9c3a811a3fa1bb79a4f9b"
+      },
+      "after": null,
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "tests/test_training.py",
+      "change": "이전에만 존재",
+      "before": {
+        "bytes": 10666,
+        "sha256": "fc132a56e8c40698746a6eed9f92a46e30cf19b767bcbe5bf92a8a25fb76f5c0"
+      },
+      "after": null,
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "train_pipeline.py",
+      "change": "이전에만 존재",
+      "before": {
+        "bytes": 13752,
+        "sha256": "9d490e15b082c480fd2e9f41873c018ad383ad600d2fe2fac5897523edc13ea8"
+      },
+      "after": null,
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "verify_sources.py",
+      "change": "이전에만 존재",
+      "before": {
+        "bytes": 748,
+        "sha256": "7cde820b55a358111ffefef6252d115d0824b518233e961ec4c92df31306d9e4"
+      },
+      "after": null,
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "web/app.js",
+      "change": "이전에만 존재",
+      "before": {
+        "bytes": 9696,
+        "sha256": "f77ceef0a5bbbe5565319149d34632068fa5233d5b1b884c425e99dd01bda757"
+      },
+      "after": null,
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "web/fonts/NanumGothic-Bold.ttf",
+      "change": "이전에만 존재",
+      "before": {
+        "bytes": 2073868,
+        "sha256": "f96298f9fb18e364d2370f4c3ce948ac67a2b61af992d7234bc15c42b033c674"
+      },
+      "after": null,
+      "comparison": "바이너리 크기·SHA-256"
+    },
+    {
+      "path": "web/fonts/OFL.txt",
+      "change": "이전에만 존재",
+      "before": {
+        "bytes": 4534,
+        "sha256": "eeacf16032901d0ed0456876ec77b8f0fda6b3fecec7d972f8543eb602e6c30f"
+      },
+      "after": null,
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "web/index.html",
+      "change": "이전에만 존재",
+      "before": {
+        "bytes": 2833,
+        "sha256": "d4ff4a9186002fe80c3e560730afb4c340815c5b88e12eec046b74d887c62e04"
+      },
+      "after": null,
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "web/style.css",
+      "change": "이전에만 존재",
+      "before": {
+        "bytes": 2756,
+        "sha256": "a25705a44a36617fdd33619cc43a4bd5ad228f15351c7b339427b8aafef6efc6"
+      },
+      "after": null,
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "사용안내.txt",
+      "change": "이전에만 존재",
+      "before": {
+        "bytes": 2309,
+        "sha256": "e786f67244735d1324d800d5d6cbba06b2c8ce764f92a3d5dfbe7e14cdd10fbe"
+      },
+      "after": null,
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "실행.bat",
+      "change": "이전에만 존재",
+      "before": {
+        "bytes": 539,
+        "sha256": "c0b66ee70117f78f5f59aeadf1a9745b4021a98dedb351071cd1dbe0a4246cd9"
+      },
+      "after": null,
+      "comparison": "UTF-8 전체 텍스트"
+    }
+  ],
+  "current_file_hashes": {
+    "변경전_5차/build_exe.py": {
+      "bytes": 1751,
+      "sha256": "09de7abb17ec53c202c24b63c688c55603eddbc5b12e83af27d3dfd2e9e97454"
+    },
+    "변경전_5차/pipeline.py": {
+      "bytes": 8010,
+      "sha256": "0cc45ddda244ae0ba01a2c933259bbab93788c54f9294fb342e4d8fd69429f0e"
+    },
+    "변경전_5차/tests/test_dashboard.py": {
+      "bytes": 5564,
+      "sha256": "29559cff330370247da5f70c7c23a0ada4d5ad1a9675540ad87e0cfebecc994c"
+    },
+    "변경전_5차/tests/test_pipeline.py": {
+      "bytes": 2077,
+      "sha256": "3b27c1ee776ef339065c574d0a5cd42010d5d46f3ba5f1280d55680e9a74459e"
+    },
+    "변경전_5차/web/app.js": {
+      "bytes": 8529,
+      "sha256": "e71ad9a51652df57b8de572dc5d582ab2f1d2b3f7a20d610274a564b82e985f9"
+    }
+  }
+}

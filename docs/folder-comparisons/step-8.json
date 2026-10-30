@@ -1,0 +1,268 @@
+{
+  "group": "7차",
+  "current_files": 15,
+  "changes": [
+    {
+      "path": "README.md",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 3772,
+        "sha256": "629ab088036865872d67e389325fd6d90960da7bd3493a477baa3b96d706eba9"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "configs/protected_sources.json",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 1194,
+        "sha256": "6158cda1bcb6521f2dfa6b0f5000d1ba18e781181a82fcb14d846af825331c21"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "configs/training.json",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 829,
+        "sha256": "e64cdc187c260564f13206f21f632d65b3e2d67b021a12bffc36aefbb0535401"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "docs/이전검증분석.md",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 2353,
+        "sha256": "cf1e22da1eff8566dee1498258ef8a63f5bbd9b22a9438b5f540a9d57fea3687"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "docs/출처와실험계약.md",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 11845,
+        "sha256": "dadc2a49f013a7d00e753315d40fb2e56f0d51698fadb48df43285cae2edaacb"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "prepare_dataset.py",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 43383,
+        "sha256": "5b555b1c597734072be12ab46b1c0f9a74f4dbb3a84144cb3ba9c7e74fc19ced"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "tests/test_prepare_dataset.py",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 22686,
+        "sha256": "152270ec6a95dfbc121a764a9f1dce0a55daf69822519005817714a4e3450afb"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "tests/test_train_pipeline.py",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 4535,
+        "sha256": "1fab15d83877161fe96e036f30f32e049da4c38c7a88dc1ddf59b7be50f17ff3"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "tests/test_worker.py",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 10012,
+        "sha256": "4ea644d849c145cf2e6beaa9047e6ab84ef2fa5f4ee48d0cf415515f6415c4da"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "train_pipeline.py",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 21176,
+        "sha256": "03979d8a9f43457cd0b3f8ba0e2f4e8910ee99627be91a6e1e96b6b58a0ae4aa"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "verify_sources.py",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 1400,
+        "sha256": "8d486ac1ca00571675cee9db5cfc278cc4e0e4f6e8c83fecda618c34a202dbdd"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "worker.py",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 11185,
+        "sha256": "2bac26a2ab4c837dfb075ef014c1f4ef4ac9ea76d0ad26b2ce64c97b02306194"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "사용안내.txt",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 2239,
+        "sha256": "a087656951b5ef0f9f70542299d0974f03ea0e1dfad63912c0f733464f4e8646"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "학습상태.bat",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 517,
+        "sha256": "9abdb4ef09839135f09f53c5572ccc49ba97af51fb2d40065905a34899a1f6d6"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "학습실행.bat",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 746,
+        "sha256": "45410e9a232d114e99a0bf4a6da12128f15c2ccf3741efb2aff5d3db87c759a8"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "변경전_5차/build_exe.py",
+      "change": "이전에만 존재",
+      "before": {
+        "bytes": 1751,
+        "sha256": "09de7abb17ec53c202c24b63c688c55603eddbc5b12e83af27d3dfd2e9e97454"
+      },
+      "after": null,
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "변경전_5차/pipeline.py",
+      "change": "이전에만 존재",
+      "before": {
+        "bytes": 8010,
+        "sha256": "0cc45ddda244ae0ba01a2c933259bbab93788c54f9294fb342e4d8fd69429f0e"
+      },
+      "after": null,
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "변경전_5차/tests/test_dashboard.py",
+      "change": "이전에만 존재",
+      "before": {
+        "bytes": 5564,
+        "sha256": "29559cff330370247da5f70c7c23a0ada4d5ad1a9675540ad87e0cfebecc994c"
+      },
+      "after": null,
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "변경전_5차/tests/test_pipeline.py",
+      "change": "이전에만 존재",
+      "before": {
+        "bytes": 2077,
+        "sha256": "3b27c1ee776ef339065c574d0a5cd42010d5d46f3ba5f1280d55680e9a74459e"
+      },
+      "after": null,
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "변경전_5차/web/app.js",
+      "change": "이전에만 존재",
+      "before": {
+        "bytes": 8529,
+        "sha256": "e71ad9a51652df57b8de572dc5d582ab2f1d2b3f7a20d610274a564b82e985f9"
+      },
+      "after": null,
+      "comparison": "UTF-8 전체 텍스트"
+    }
+  ],
+  "current_file_hashes": {
+    "prepare_dataset.py": {
+      "bytes": 43383,
+      "sha256": "5b555b1c597734072be12ab46b1c0f9a74f4dbb3a84144cb3ba9c7e74fc19ced"
+    },
+    "README.md": {
+      "bytes": 3772,
+      "sha256": "629ab088036865872d67e389325fd6d90960da7bd3493a477baa3b96d706eba9"
+    },
+    "train_pipeline.py": {
+      "bytes": 21176,
+      "sha256": "03979d8a9f43457cd0b3f8ba0e2f4e8910ee99627be91a6e1e96b6b58a0ae4aa"
+    },
+    "verify_sources.py": {
+      "bytes": 1400,
+      "sha256": "8d486ac1ca00571675cee9db5cfc278cc4e0e4f6e8c83fecda618c34a202dbdd"
+    },
+    "worker.py": {
+      "bytes": 11185,
+      "sha256": "2bac26a2ab4c837dfb075ef014c1f4ef4ac9ea76d0ad26b2ce64c97b02306194"
+    },
+    "사용안내.txt": {
+      "bytes": 2239,
+      "sha256": "a087656951b5ef0f9f70542299d0974f03ea0e1dfad63912c0f733464f4e8646"
+    },
+    "학습상태.bat": {
+      "bytes": 517,
+      "sha256": "9abdb4ef09839135f09f53c5572ccc49ba97af51fb2d40065905a34899a1f6d6"
+    },
+    "학습실행.bat": {
+      "bytes": 746,
+      "sha256": "45410e9a232d114e99a0bf4a6da12128f15c2ccf3741efb2aff5d3db87c759a8"
+    },
+    "configs/protected_sources.json": {
+      "bytes": 1194,
+      "sha256": "6158cda1bcb6521f2dfa6b0f5000d1ba18e781181a82fcb14d846af825331c21"
+    },
+    "configs/training.json": {
+      "bytes": 829,
+      "sha256": "e64cdc187c260564f13206f21f632d65b3e2d67b021a12bffc36aefbb0535401"
+    },
+    "docs/이전검증분석.md": {
+      "bytes": 2353,
+      "sha256": "cf1e22da1eff8566dee1498258ef8a63f5bbd9b22a9438b5f540a9d57fea3687"
+    },
+    "docs/출처와실험계약.md": {
+      "bytes": 11845,
+      "sha256": "dadc2a49f013a7d00e753315d40fb2e56f0d51698fadb48df43285cae2edaacb"
+    },
+    "tests/test_prepare_dataset.py": {
+      "bytes": 22686,
+      "sha256": "152270ec6a95dfbc121a764a9f1dce0a55daf69822519005817714a4e3450afb"
+    },
+    "tests/test_train_pipeline.py": {
+      "bytes": 4535,
+      "sha256": "1fab15d83877161fe96e036f30f32e049da4c38c7a88dc1ddf59b7be50f17ff3"
+    },
+    "tests/test_worker.py": {
+      "bytes": 10012,
+      "sha256": "4ea644d849c145cf2e6beaa9047e6ab84ef2fa5f4ee48d0cf415515f6415c4da"
+    }
+  }
+}

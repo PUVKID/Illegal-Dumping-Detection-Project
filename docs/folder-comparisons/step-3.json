@@ -1,0 +1,886 @@
+{
+  "group": "최종/3차",
+  "current_files": 62,
+  "changes": [
+    {
+      "path": "_작업/check_external_archive.py",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 1584,
+        "sha256": "09f2665df1f9115c0364fe50b22d5d1ce4ac0ec0286ea06bd4f1bfddf0f82460"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "_작업/check_models.py",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 1826,
+        "sha256": "ead897fe2d66c1dbb7a96bf932339c16c02de68988204c39aa623cf4cd04c36b"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "_작업/check_report_contract.py",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 1545,
+        "sha256": "c70b880e207996c61c30dd6a635205ce5161d4e398419bcb10d665aee0ef0b60"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "_작업/cleanup_ready.json",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 264,
+        "sha256": "89b052e4d2e5fac3939bea8915fd324ba21ee3d7f2a5876936671b61b13e3ac7"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "_작업/completion_once/state.json",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 237,
+        "sha256": "372c498546deb3b8c1ae4e22954753126e69e6898f7e9a0e8cebde03ef21dfde"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "_작업/migrate_inputs.py",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 2033,
+        "sha256": "60d9a5d5eeede5b8ecd1d413ee46d0f1379e31722e43983446f9a1aaf40b0974"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "_작업/save_results_now.py",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 3118,
+        "sha256": "8e29ca0e9dd33e017b9f4953a001a806a08082bbd73368c60c364064993ec429"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "_작업/wait_code.py",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 1547,
+        "sha256": "ff4737226aac77c20d99d94db9d20dd3d316dc285d6ed077de8fbc83ba64402d"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "결과저장.json",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 58266,
+        "sha256": "65927d0fff5975b6ee6fa845ceec4a344ade18bb2c67a1e76a89070f0b272274"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "데이터/reference/data.yaml",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 142,
+        "sha256": "a7dcd1daec7db9d6a523390a6b517b14747b70793ac90f3f43ec4d45f223a437"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "데이터/taco/.gitignore",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 13,
+        "sha256": "55b0116910a7e6957faecf53884148584d8051be53a6f2afd49515229db76e7d"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "데이터/taco/LICENSE",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 1074,
+        "sha256": "2280878a21e4c4a9ff18e232c78182ac1300b3fd3641a1db1b503d1e2b7d4443"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "데이터/taco/README.md",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 4475,
+        "sha256": "26800c1d7a5588b6bc72045e2dba27172ec6aaa7cf781793271d341e72417bec"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "데이터/taco/demo.ipynb",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 14785,
+        "sha256": "02e2854effb9c1a07780278efa10a3061fb06a15ce92deee83a6f161d8086b75"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "데이터/taco/detector/config.py",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 9084,
+        "sha256": "5f4f5090e1f9a1a4b0fb0c452b97d9f5e3417ba1d4b2c3f2ecfbe500e80cfd0c"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "데이터/taco/detector/dataset.py",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 9614,
+        "sha256": "13e5cc880ba6108c40ad3084b1e864a75ba3c9a4394f855f0ae729315efa8c3d"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "데이터/taco/detector/detector.ipynb",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 36991,
+        "sha256": "7e3225d1b463f4be5b8ae7d43734036bd36604644a25d03c88f3922a5102f155"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "데이터/taco/detector/detector.py",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 14722,
+        "sha256": "2624bc20bb86f658623bd0644e9e976bd9044d510becfa367282c3c72650a7c0"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "데이터/taco/detector/inspect_data.ipynb",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 29797,
+        "sha256": "426e908ef2e5d4b56e6584732908f2d152861fa0f857f8113fbb9e4b61345d6c"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "데이터/taco/detector/model.py",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 129707,
+        "sha256": "22763d986cfd313f9e4754b2d1ce4d3a65c548ce2306784df7aa4586bd436195"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "데이터/taco/detector/split_dataset.py",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 3352,
+        "sha256": "88c8709509c78c1a5a2df4a89efa7fd4f78da35ddfe44587e4606a7f299915d7"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "데이터/taco/detector/utils.py",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 41325,
+        "sha256": "923e63ca0bb5b0ea24e35ac7d92924b8af3f4962d264632c1d4183545e7deb67"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "데이터/taco/detector/visualize.py",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 19056,
+        "sha256": "105acdca43660da41f468bf493d7d20810ba03a66c1eda22a1ac781813440de3"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "데이터/taco/download.py",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 1751,
+        "sha256": "10d629fb23c35d6263ee6de28854523446d814f0bca2649c91d06d53b06b4f6d"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "데이터/taco/requirements.txt",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 71,
+        "sha256": "67ff2b90239ea339c9c902cad67ef8d2915f9303eca75bc6eff702b7b8865f06"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "실행기록/selected_model.json",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 1224,
+        "sha256": "af3aaf0828885a094eb4322ff4de28a5d9efaf4751dbaaeb5fbc5f1c9eeb7776"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "실행기록/state/jobs/20261013_060956_6d373b.json",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 3080,
+        "sha256": "d18a6285d2c7174704534a8a140e30eaa55f8f53bcda9476f5e5071f83312188"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "실험기록/yolo26l_p2_focus/args.yaml",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 1803,
+        "sha256": "0ed338726c19262a846463119fe96b11d15610d9a9a491d43bb95860c77a7071"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "실험기록/yolo26l_p2_focus/phase_complete.json",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 209,
+        "sha256": "163cf2d79a2f46ac9fbffd130f71db96172a2517432d07c7a84edb20afb107ec"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "실험기록/yolo26l_p2_mix/args.yaml",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 1746,
+        "sha256": "b86771d7af6a5d303fcc996ba3cd74c8325c04bdb9c30e04193f2d00ee2c891f"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "실험기록/yolo26l_p2_mix/phase_complete.json",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 206,
+        "sha256": "5970aeed97fbe25c50b08ede86557ecbbbb2333dd6cfd23717c46ff0a4d14018"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "실험기록/yolo26x_focus/args.yaml",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 1794,
+        "sha256": "9478edbe7eb4c68f5b784dabbc78984641a38432512a9f1c96719fc0ddc3a4bb"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "실험기록/yolo26x_focus/phase_complete.json",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 203,
+        "sha256": "060287a1fcb1f39269a0d05fb07fb6429a5b951210d82d184dbd8970ee893b77"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "실험기록/yolo26x_mix/args.yaml",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 1844,
+        "sha256": "4733141ab402169d5e6548e157e790d9706a1917470dd04ed2e76cc64ba07a79"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "실험기록/yolo26x_mix/phase_complete.json",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 200,
+        "sha256": "0a57c1a75de63d030d7b90a1feb1af564e1e903e8be91994f6838d9f10f7789c"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "실험설정/data_focus.yaml",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 221,
+        "sha256": "0e1f7da67d5cc80f09be8077b9854a754543bbb7f38c3e391dfce41f80acc9ba"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "실험설정/data_mix.yaml",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 219,
+        "sha256": "4c1ea91fd476a6686ac2791ef3b5967e908ca292a9a20d3acf6e1c6c552da1bc"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "실험설정/experiment_plan.json",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 1903,
+        "sha256": "c9a858af27077a7c3cf5dec2bb61c058eb5cc36a514607fba52f97428a79cb7f"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "실험설정/external_archive_check.json",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 247,
+        "sha256": "7e9e8cd9118a89c7ed8cc8e47a7202da3d78e97139d11ff7f30afcea12c0d719"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "실험설정/final.json",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 3852,
+        "sha256": "49c5a966ea943b8129cae37b5191afeb14a051553cbbe4a3da4d8b0a86d6d6d2"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "실험설정/model_memory_smoke.json",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 465,
+        "sha256": "74ec5111ea9963917403d6e1c255c10a3c5876ecdb1379edae1992b77b647c89"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "실험설정/selection.json",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 871,
+        "sha256": "8aac3f2c567658f08fea7e5e0060445975779fcc4f3ef67c1636bcfcb82a4289"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "실험설정/validation_comparison.json",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 12234,
+        "sha256": "0907e1e67cc39da800c8f148200ee01212dee83d135648ae9b722c17e06f6030"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "저장현황.txt",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 339,
+        "sha256": "85b5d5b7d0512a5f17dd107abf84ee947e1df9821169a06e5a14488488d7399f"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "출처/attribution.json",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 421,
+        "sha256": "2ca82d02ef41efb7138826ae7113084a390873f26a12b12a26c8d2d023ac076f"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "출처/excluded.json",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 1026,
+        "sha256": "070624d0a1eca4b6f7f3e22e81f3c6acae9dd5ce68681099be67baa8597ae7bb"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "출처/salsa/attribution.json",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 725,
+        "sha256": "7d01cc2ba06fdb58f15d448e092bc54175e4032539e7d943741edf13fd6f0655"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "클린뷰/backend.py",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 6031,
+        "sha256": "cae87033e58cebc3affd122ea6d5070c28456ad45d22a9f740c59b4d3237a32c"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "클린뷰/build_windows.ps1",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 1179,
+        "sha256": "079be8abbd81cbc3d3ca55942542fbaccefd6677de7f5ad7c562e2678dca7169"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "클린뷰/data_pipeline.py",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 14165,
+        "sha256": "7c553ecdcbc642a56958e484a52a9d956e962859cd241f3e09fd3a781cff69c2"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "클린뷰/detector.py",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 8444,
+        "sha256": "4d103a0595078bc3b2445120336eb1dd9a8d94cf9cc1fc361f9b87f4b2e29a06"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "클린뷰/finalize_round3.py",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 9293,
+        "sha256": "b9e1d9642740ad8d1c4eeb938f6233f154449d776946d71b7b3f236332460787"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "클린뷰/finish_on_exit.py",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 6400,
+        "sha256": "9a5b5fc191252ebef92bf3389a6e1797e969a283d3ccec4b6491ed498a74c39b"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "클린뷰/fonts/OFL.txt",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 4534,
+        "sha256": "eeacf16032901d0ed0456876ec77b8f0fda6b3fecec7d972f8543eb602e6c30f"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "클린뷰/index.html",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 19908,
+        "sha256": "e3d3239455975f52975358733a3f258aa11239ebbe4e6b84355388ab98c559a8"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "클린뷰/inference.py",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 6096,
+        "sha256": "458ac4b4cc27e11eeeabaf540f0407e2d06551074eccfa0548d18a3bf5342f40"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "클린뷰/launcher.py",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 8942,
+        "sha256": "4ce840506dcb2cdf257f5d463a0afa180701818110fda3065a6725435a9c5bc2"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "클린뷰/make_report.py",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 9373,
+        "sha256": "3ce368fc16fdaa232195d36f3fc1f537bf9b6f0ee22bb5888b1b1ea1d8c35c8b"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "클린뷰/requirements-docker.txt",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 188,
+        "sha256": "6126e7b39491351259a2e6c9e91cc54889b8804f3c2124623989b9a7acec6de2"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "클린뷰/train_round3.py",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 7638,
+        "sha256": "f98b4c83c3924d16b7e16f96a0b0d8284862e10b34d7f17ad0699975a315922c"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "클린뷰/verification.json",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 612,
+        "sha256": "e98705a0091f6f6da1e0277d6cfa694604a71bb8387ff79e7853d6fde9b36ee9"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "클린뷰/사용설명.txt",
+      "change": "추가",
+      "before": null,
+      "after": {
+        "bytes": 2566,
+        "sha256": "b13ea9096a5006c6517199d775a5c589a4693715dce3ce8bdf17130393a816c4"
+      },
+      "comparison": "UTF-8 전체 텍스트"
+    },
+    {
+      "path": "illegal_dumping_detector.ipynb",
+      "change": "이전에만 존재",
+      "before": {
+        "bytes": 42001,
+        "sha256": "9eef0dbfce84d3f9f9ebdafbc164f6a50013310a34c102b7aadc3ee778cd9006"
+      },
+      "after": null,
+      "comparison": "UTF-8 전체 텍스트"
+    }
+  ],
+  "current_file_hashes": {
+    "결과저장.json": {
+      "bytes": 58266,
+      "sha256": "65927d0fff5975b6ee6fa845ceec4a344ade18bb2c67a1e76a89070f0b272274"
+    },
+    "저장현황.txt": {
+      "bytes": 339,
+      "sha256": "85b5d5b7d0512a5f17dd107abf84ee947e1df9821169a06e5a14488488d7399f"
+    },
+    "_작업/check_external_archive.py": {
+      "bytes": 1584,
+      "sha256": "09f2665df1f9115c0364fe50b22d5d1ce4ac0ec0286ea06bd4f1bfddf0f82460"
+    },
+    "_작업/check_models.py": {
+      "bytes": 1826,
+      "sha256": "ead897fe2d66c1dbb7a96bf932339c16c02de68988204c39aa623cf4cd04c36b"
+    },
+    "_작업/check_report_contract.py": {
+      "bytes": 1545,
+      "sha256": "c70b880e207996c61c30dd6a635205ce5161d4e398419bcb10d665aee0ef0b60"
+    },
+    "_작업/cleanup_ready.json": {
+      "bytes": 264,
+      "sha256": "89b052e4d2e5fac3939bea8915fd324ba21ee3d7f2a5876936671b61b13e3ac7"
+    },
+    "_작업/migrate_inputs.py": {
+      "bytes": 2033,
+      "sha256": "60d9a5d5eeede5b8ecd1d413ee46d0f1379e31722e43983446f9a1aaf40b0974"
+    },
+    "_작업/save_results_now.py": {
+      "bytes": 3118,
+      "sha256": "8e29ca0e9dd33e017b9f4953a001a806a08082bbd73368c60c364064993ec429"
+    },
+    "_작업/wait_code.py": {
+      "bytes": 1547,
+      "sha256": "ff4737226aac77c20d99d94db9d20dd3d316dc285d6ed077de8fbc83ba64402d"
+    },
+    "실행기록/selected_model.json": {
+      "bytes": 1224,
+      "sha256": "af3aaf0828885a094eb4322ff4de28a5d9efaf4751dbaaeb5fbc5f1c9eeb7776"
+    },
+    "실험설정/data_focus.yaml": {
+      "bytes": 221,
+      "sha256": "0e1f7da67d5cc80f09be8077b9854a754543bbb7f38c3e391dfce41f80acc9ba"
+    },
+    "실험설정/data_mix.yaml": {
+      "bytes": 219,
+      "sha256": "4c1ea91fd476a6686ac2791ef3b5967e908ca292a9a20d3acf6e1c6c552da1bc"
+    },
+    "실험설정/experiment_plan.json": {
+      "bytes": 1903,
+      "sha256": "c9a858af27077a7c3cf5dec2bb61c058eb5cc36a514607fba52f97428a79cb7f"
+    },
+    "실험설정/external_archive_check.json": {
+      "bytes": 247,
+      "sha256": "7e9e8cd9118a89c7ed8cc8e47a7202da3d78e97139d11ff7f30afcea12c0d719"
+    },
+    "실험설정/final.json": {
+      "bytes": 3852,
+      "sha256": "49c5a966ea943b8129cae37b5191afeb14a051553cbbe4a3da4d8b0a86d6d6d2"
+    },
+    "실험설정/model_memory_smoke.json": {
+      "bytes": 465,
+      "sha256": "74ec5111ea9963917403d6e1c255c10a3c5876ecdb1379edae1992b77b647c89"
+    },
+    "실험설정/selection.json": {
+      "bytes": 871,
+      "sha256": "8aac3f2c567658f08fea7e5e0060445975779fcc4f3ef67c1636bcfcb82a4289"
+    },
+    "실험설정/validation_comparison.json": {
+      "bytes": 12234,
+      "sha256": "0907e1e67cc39da800c8f148200ee01212dee83d135648ae9b722c17e06f6030"
+    },
+    "출처/attribution.json": {
+      "bytes": 421,
+      "sha256": "2ca82d02ef41efb7138826ae7113084a390873f26a12b12a26c8d2d023ac076f"
+    },
+    "출처/excluded.json": {
+      "bytes": 1026,
+      "sha256": "070624d0a1eca4b6f7f3e22e81f3c6acae9dd5ce68681099be67baa8597ae7bb"
+    },
+    "클린뷰/backend.py": {
+      "bytes": 6031,
+      "sha256": "cae87033e58cebc3affd122ea6d5070c28456ad45d22a9f740c59b4d3237a32c"
+    },
+    "클린뷰/build_windows.ps1": {
+      "bytes": 1179,
+      "sha256": "079be8abbd81cbc3d3ca55942542fbaccefd6677de7f5ad7c562e2678dca7169"
+    },
+    "클린뷰/data_pipeline.py": {
+      "bytes": 14165,
+      "sha256": "7c553ecdcbc642a56958e484a52a9d956e962859cd241f3e09fd3a781cff69c2"
+    },
+    "클린뷰/detector.py": {
+      "bytes": 8444,
+      "sha256": "4d103a0595078bc3b2445120336eb1dd9a8d94cf9cc1fc361f9b87f4b2e29a06"
+    },
+    "클린뷰/finalize_round3.py": {
+      "bytes": 9293,
+      "sha256": "b9e1d9642740ad8d1c4eeb938f6233f154449d776946d71b7b3f236332460787"
+    },
+    "클린뷰/finish_on_exit.py": {
+      "bytes": 6400,
+      "sha256": "9a5b5fc191252ebef92bf3389a6e1797e969a283d3ccec4b6491ed498a74c39b"
+    },
+    "클린뷰/index.html": {
+      "bytes": 19908,
+      "sha256": "e3d3239455975f52975358733a3f258aa11239ebbe4e6b84355388ab98c559a8"
+    },
+    "클린뷰/inference.py": {
+      "bytes": 6096,
+      "sha256": "458ac4b4cc27e11eeeabaf540f0407e2d06551074eccfa0548d18a3bf5342f40"
+    },
+    "클린뷰/launcher.py": {
+      "bytes": 8942,
+      "sha256": "4ce840506dcb2cdf257f5d463a0afa180701818110fda3065a6725435a9c5bc2"
+    },
+    "클린뷰/make_report.py": {
+      "bytes": 9373,
+      "sha256": "3ce368fc16fdaa232195d36f3fc1f537bf9b6f0ee22bb5888b1b1ea1d8c35c8b"
+    },
+    "클린뷰/requirements-docker.txt": {
+      "bytes": 188,
+      "sha256": "6126e7b39491351259a2e6c9e91cc54889b8804f3c2124623989b9a7acec6de2"
+    },
+    "클린뷰/train_round3.py": {
+      "bytes": 7638,
+      "sha256": "f98b4c83c3924d16b7e16f96a0b0d8284862e10b34d7f17ad0699975a315922c"
+    },
+    "클린뷰/verification.json": {
+      "bytes": 612,
+      "sha256": "e98705a0091f6f6da1e0277d6cfa694604a71bb8387ff79e7853d6fde9b36ee9"
+    },
+    "클린뷰/사용설명.txt": {
+      "bytes": 2566,
+      "sha256": "b13ea9096a5006c6517199d775a5c589a4693715dce3ce8bdf17130393a816c4"
+    },
+    "_작업/completion_once/state.json": {
+      "bytes": 237,
+      "sha256": "372c498546deb3b8c1ae4e22954753126e69e6898f7e9a0e8cebde03ef21dfde"
+    },
+    "데이터/reference/data.yaml": {
+      "bytes": 142,
+      "sha256": "a7dcd1daec7db9d6a523390a6b517b14747b70793ac90f3f43ec4d45f223a437"
+    },
+    "데이터/taco/.gitignore": {
+      "bytes": 13,
+      "sha256": "55b0116910a7e6957faecf53884148584d8051be53a6f2afd49515229db76e7d"
+    },
+    "데이터/taco/demo.ipynb": {
+      "bytes": 14785,
+      "sha256": "02e2854effb9c1a07780278efa10a3061fb06a15ce92deee83a6f161d8086b75"
+    },
+    "데이터/taco/download.py": {
+      "bytes": 1751,
+      "sha256": "10d629fb23c35d6263ee6de28854523446d814f0bca2649c91d06d53b06b4f6d"
+    },
+    "데이터/taco/LICENSE": {
+      "bytes": 1074,
+      "sha256": "2280878a21e4c4a9ff18e232c78182ac1300b3fd3641a1db1b503d1e2b7d4443"
+    },
+    "데이터/taco/README.md": {
+      "bytes": 4475,
+      "sha256": "26800c1d7a5588b6bc72045e2dba27172ec6aaa7cf781793271d341e72417bec"
+    },
+    "데이터/taco/requirements.txt": {
+      "bytes": 71,
+      "sha256": "67ff2b90239ea339c9c902cad67ef8d2915f9303eca75bc6eff702b7b8865f06"
+    },
+    "데이터/taco/detector/config.py": {
+      "bytes": 9084,
+      "sha256": "5f4f5090e1f9a1a4b0fb0c452b97d9f5e3417ba1d4b2c3f2ecfbe500e80cfd0c"
+    },
+    "데이터/taco/detector/dataset.py": {
+      "bytes": 9614,
+      "sha256": "13e5cc880ba6108c40ad3084b1e864a75ba3c9a4394f855f0ae729315efa8c3d"
+    },
+    "데이터/taco/detector/detector.ipynb": {
+      "bytes": 36991,
+      "sha256": "7e3225d1b463f4be5b8ae7d43734036bd36604644a25d03c88f3922a5102f155"
+    },
+    "데이터/taco/detector/detector.py": {
+      "bytes": 14722,
+      "sha256": "2624bc20bb86f658623bd0644e9e976bd9044d510becfa367282c3c72650a7c0"
+    },
+    "데이터/taco/detector/inspect_data.ipynb": {
+      "bytes": 29797,
+      "sha256": "426e908ef2e5d4b56e6584732908f2d152861fa0f857f8113fbb9e4b61345d6c"
+    },
+    "데이터/taco/detector/model.py": {
+      "bytes": 129707,
+      "sha256": "22763d986cfd313f9e4754b2d1ce4d3a65c548ce2306784df7aa4586bd436195"
+    },
+    "데이터/taco/detector/split_dataset.py": {
+      "bytes": 3352,
+      "sha256": "88c8709509c78c1a5a2df4a89efa7fd4f78da35ddfe44587e4606a7f299915d7"
+    },
+    "데이터/taco/detector/utils.py": {
+      "bytes": 41325,
+      "sha256": "923e63ca0bb5b0ea24e35ac7d92924b8af3f4962d264632c1d4183545e7deb67"
+    },
+    "데이터/taco/detector/visualize.py": {
+      "bytes": 19056,
+      "sha256": "105acdca43660da41f468bf493d7d20810ba03a66c1eda22a1ac781813440de3"
+    },
+    "실행기록/state/jobs/20261013_060956_6d373b.json": {
+      "bytes": 3080,
+      "sha256": "d18a6285d2c7174704534a8a140e30eaa55f8f53bcda9476f5e5071f83312188"
+    },
+    "실험기록/yolo26l_p2_focus/args.yaml": {
+      "bytes": 1803,
+      "sha256": "0ed338726c19262a846463119fe96b11d15610d9a9a491d43bb95860c77a7071"
+    },
+    "실험기록/yolo26l_p2_focus/phase_complete.json": {
+      "bytes": 209,
+      "sha256": "163cf2d79a2f46ac9fbffd130f71db96172a2517432d07c7a84edb20afb107ec"
+    },
+    "실험기록/yolo26l_p2_mix/args.yaml": {
+      "bytes": 1746,
+      "sha256": "b86771d7af6a5d303fcc996ba3cd74c8325c04bdb9c30e04193f2d00ee2c891f"
+    },
+    "실험기록/yolo26l_p2_mix/phase_complete.json": {
+      "bytes": 206,
+      "sha256": "5970aeed97fbe25c50b08ede86557ecbbbb2333dd6cfd23717c46ff0a4d14018"
+    },
+    "실험기록/yolo26x_focus/args.yaml": {
+      "bytes": 1794,
+      "sha256": "9478edbe7eb4c68f5b784dabbc78984641a38432512a9f1c96719fc0ddc3a4bb"
+    },
+    "실험기록/yolo26x_focus/phase_complete.json": {
+      "bytes": 203,
+      "sha256": "060287a1fcb1f39269a0d05fb07fb6429a5b951210d82d184dbd8970ee893b77"
+    },
+    "실험기록/yolo26x_mix/args.yaml": {
+      "bytes": 1844,
+      "sha256": "4733141ab402169d5e6548e157e790d9706a1917470dd04ed2e76cc64ba07a79"
+    },
+    "실험기록/yolo26x_mix/phase_complete.json": {
+      "bytes": 200,
+      "sha256": "0a57c1a75de63d030d7b90a1feb1af564e1e903e8be91994f6838d9f10f7789c"
+    },
+    "출처/salsa/attribution.json": {
+      "bytes": 725,
+      "sha256": "7d01cc2ba06fdb58f15d448e092bc54175e4032539e7d943741edf13fd6f0655"
+    },
+    "클린뷰/fonts/OFL.txt": {
+      "bytes": 4534,
+      "sha256": "eeacf16032901d0ed0456876ec77b8f0fda6b3fecec7d972f8543eb602e6c30f"
+    }
+  }
+}

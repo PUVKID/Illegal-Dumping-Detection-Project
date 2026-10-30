@@ -1,0 +1,3021 @@
+--- previous/변경전_5차/build_exe.py
++++ current/변경전_5차/build_exe.py
+@@ -0,0 +1,35 @@
++"""PyInstaller 의존성 확인과 사용자가 선택한 빌드를 수행합니다."""
++import argparse
++import importlib.util
++from pathlib import Path
++import subprocess
++import sys
++import shutil
++import os
++
++
++def main():
++    parser = argparse.ArgumentParser()
++    parser.add_argument('--build', action='store_true', help='확인만 하지 않고 실제 EXE를 빌드합니다.')
++    args = parser.parse_args()
++    available = importlib.util.find_spec('PyInstaller') is not None
++    print('PyInstaller: ' + ('사용 가능' if available else '미설치 · 소스 실행은 가능합니다.'))
++    if not args.build:
++        return
++    if not available:
++        raise SystemExit('빌드하려면 별도로 PyInstaller를 준비해야 합니다. 자동 설치하지 않습니다.')
++    root = Path(__file__).resolve().parent
++    subprocess.run([sys.executable, '-m', 'PyInstaller', '--noconfirm', '--onedir', '--name', 'CleanView5',
++                    '--hidden-import', 'pipeline',
++                    '--distpath', str(root / 'work' / 'dist'), '--workpath', str(root / 'work' / 'build'),
++                    '--specpath', str(root / 'work'), str(root / 'launcher.py')], cwd=str(root), check=True, shell=False,
++                   env={**os.environ, 'PYTHONUTF8': '1', 'PYTHONIOENCODING': 'utf-8'})
++    # EXE를 원래 프로젝트 옆에 두어 고정된 데이터·Docker 경로를 유지합니다.
++    source = root / 'work/dist/CleanView5'
++    shutil.copy2(source / 'CleanView5.exe', root / 'CleanView5.exe')
++    shutil.copytree(source / '_internal', root / '_internal', dirs_exist_ok=True)
++    print('프로젝트의 CleanView5.exe를 생성했습니다. web·GPU 작업 소스와 함께 유지해 주세요.')
++
++
++if __name__ == '__main__':
++    main()
+--- previous/변경전_5차/pipeline.py
++++ current/변경전_5차/pipeline.py
+@@ -0,0 +1,174 @@
++"""D 드라이브의 앱과 기존 GPU 컨테이너를 연결합니다."""
++import argparse
++import json
++import os
++import subprocess
++import sys
++import time
++from pathlib import Path
++
++ROOT = (Path(sys.executable).resolve().parent if getattr(sys, "frozen", False)
++        else Path(__file__).resolve().parent)
++PROJECT = ROOT.parent
++WORK = ROOT / "work"
++CONTAINER = "2026"
++REMOTE = "/workspace/2026/월요일 PBL/5차"
++PYTHON = "/opt/venvs/torch/bin/python"
++ARCHIVE = PROJECT / "이전 도커 실험/3차실험/trash_round3"
++VIDEO_ROOTS = [WORK / "uploads", PROJECT / "최종/3차/테스트영상", ARCHIVE / "videos"]
++EXTENSIONS = {".mp4", ".avi", ".mov", ".mkv", ".m4v"}
++
++
++def load(path, default=None):
++    try:
++        return json.loads(Path(path).read_text(encoding="utf-8"))
++    except FileNotFoundError:
++        return default
++
++
++def remote_path(path):
++    resolved = Path(path).resolve()
++    base = Path("D:/2026").resolve()
++    return "/workspace/2026/" + resolved.relative_to(base).as_posix()
++
++
++def local_paths(value):
++    if isinstance(value, dict):
++        return {k: local_paths(v) for k, v in value.items()}
++    if isinstance(value, list):
++        return [local_paths(v) for v in value]
++    if isinstance(value, str) and value.startswith("/workspace/2026/"):
++        return str(Path("D:/2026") / value.removeprefix("/workspace/2026/"))
++    return value
++
++
++def video_path(value):
++    p = Path(value).resolve(strict=True)
++    if not p.is_file() or p.suffix.lower() not in EXTENSIONS:
++        raise ValueError("지원하는 영상 파일을 선택하세요.")
++    if not any(p.is_relative_to(root.resolve()) for root in VIDEO_ROOTS):
++        raise ValueError("허용된 영상 폴더가 아닙니다.")
++    if not p.stat().st_size:
++        raise ValueError("0바이트 영상은 처리할 수 없습니다.")
++    return p
++
++
++def docker_call(arguments, timeout=25):
++    flags = subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0
++    p = subprocess.run(["docker", "exec", CONTAINER, PYTHON, *arguments],
++                       capture_output=True, timeout=timeout, creationflags=flags)
++    if p.returncode:
++        message = p.stderr.decode("utf-8", errors="replace")[-3500:]
++        raise RuntimeError(message or "Docker 실행에 실패했습니다. Docker Desktop과 2026 컨테이너를 확인하세요.")
++    output = p.stdout.decode("utf-8").strip()
++    result = json.loads(output)
++    if not result.get("ok"):
++        raise RuntimeError(result.get("error", "GPU 작업 오류"))
++    return local_paths(result["data"])
++
++
++def tail(path, maximum=12000):
++    if not path or not Path(path).is_file():
++        return ""
++    with Path(path).open("rb") as stream:
++        stream.seek(max(0, Path(path).stat().st_size - maximum))
++        return stream.read(maximum).decode("utf-8", errors="replace")
++
++
++def history():
++    import csv
++    files = sorted((WORK / "training/runs").glob("*/results.csv"), key=lambda p: p.stat().st_mtime)
++    if not files:
++        return []
++    with files[-1].open(encoding="utf-8") as stream:
++        rows = list(csv.DictReader(stream))
++    result = []
++    for row in rows:
++        row = {k.strip(): v for k, v in row.items()}
++        try:
++            result.append({"epoch": int(float(row["epoch"])),
++                           "precision": float(row.get("metrics/precision(B)", 0)),
++                           "recall": float(row.get("metrics/recall(B)", 0)),
++                           "map50": float(row.get("metrics/mAP50(B)", 0)),
++                           "loss": float(row.get("train/box_loss", 0))})
++        except (KeyError, ValueError):
++            continue
++    return result
++
++
++def status():
++    jobs = [load(p, {}) for p in (WORK / "jobs").glob("*.json")]
++    # 화면은 로컬 파일을 읽고, 실행 중 작업의 생존 여부만 30초 간격으로 확인합니다.
++    check = load(WORK / "container_check.json", {})
++    if any(j.get("state") in {"queued", "running"} for j in jobs) and time.time() - check.get("checked", 0) >= 30:
++        try:
++            docker_call([REMOTE + "/gpu_worker.py", "--action", "status"], timeout=6)
++            check = {"checked": time.time(), "error": None}
++            jobs = [load(p, {}) for p in (WORK / "jobs").glob("*.json")]
++        except (RuntimeError, OSError, subprocess.SubprocessError) as error:
++            check = {"checked": time.time(), "error": "Docker 연결 확인: " + str(error)}
++        temporary = WORK / f"container_check.{os.getpid()}.tmp"
++        temporary.write_text(json.dumps(check, ensure_ascii=False), encoding="utf-8")
++        temporary.replace(WORK / "container_check.json")
++    if check.get("error"):
++        for job in jobs:
++            if job.get("state") in {"queued", "running"}:
++                job.update(error=check["error"])
++    jobs = sorted(jobs, key=lambda j: j.get("created", 0), reverse=True)
++    for job in jobs[:20]:
++        job["log"] = tail(WORK / "jobs" / (job.get("id", "") + ".log"))
++    final = load(WORK / "training/final.json") or load(ARCHIVE / "final.json", {})
++    test = final.get("test", {})
++    operating = test.get("operating", {})
++    ap = test.get("metrics", {})
++    metrics = {"precision": operating.get("precision"), "recall": operating.get("recall"),
++               "map50": ap.get("metrics/mAP50(B)", ap.get("map50")),
++               "map50_95": ap.get("metrics/mAP50-95(B)", ap.get("map50_95")),
++               "split": "5차 최종 테스트" if (WORK / "training/final.json").is_file() else "3차 과거 테스트 150장",
++               "target_met": final.get("target_met", False)}
++    training_job = next((j for j in jobs if j.get("kind") == "train"), {})
++    training = {**load(WORK / "training/status.json", {}), "history": history(), "log": training_job.get("log", "")}
++    manifest = load(WORK / "training/data_manifest.json", {})
++    dataset = {key: manifest[key] for key in ("counts", "sources", "download_bytes", "test_protocol", "external_test", "near_duplicate", "created") if key in manifest}
++    dataset["manifest_path"] = str(WORK / "training/data_manifest.json")
++    return local_paths({"jobs": jobs[:20], "selection": load(WORK / "selected_model.json", {}),
++                        "metrics": metrics, "training": training,
++                        "dataset": dataset,
++                        "container": CONTAINER, "project": str(ROOT),
++                        "independent": True, "note": "Codex/API 토큰 없이 이 PC의 Docker GPU에서 실행됩니다."})
++
++
++def action(name, params):
++    if not isinstance(params, dict):
++        raise ValueError("설정은 JSON 객체여야 합니다.")
++    if name == "status":
++        return status()
++    if name == "videos":
++        # 같은 보존 영상을 두 번 나열하지 않고 대표 폴더를 사용합니다.
++        stored = next((p for p in VIDEO_ROOTS[1:] if p.is_dir() and any(p.iterdir())), None)
++        folders = [VIDEO_ROOTS[0]] + ([stored] if stored else [])
++        return [{"path": str(p.resolve()), "name": p.name, "bytes": p.stat().st_size}
++                for folder in folders if folder.exists()
++                for p in sorted(folder.rglob("*")) if p.is_file() and p.suffix.lower() in EXTENSIONS]
++    if name in {"probe", "detect"}:
++        params = {**params, "path": remote_path(video_path(params.get("path", "")))}
++    if name not in {"probe", "detect", "train", "health"}:
++        raise ValueError("지원하지 않는 작업입니다.")
++    return docker_call([REMOTE + "/gpu_worker.py", "--action", name,
++                        "--params", json.dumps(params, ensure_ascii=False)], timeout=25)
++
++
++def main():
++    parser = argparse.ArgumentParser()
++    parser.add_argument("--action", required=True)
++    parser.add_argument("--params", default="{}")
++    args = parser.parse_args()
++    try:
++        result = {"ok": True, "data": action(args.action, json.loads(args.params))}
++    except Exception as error:
++        result = {"ok": False, "error": str(error)}
++    print(json.dumps(result, ensure_ascii=False, allow_nan=False))
++
++
++if __name__ == "__main__":
++    main()
+--- previous/변경전_5차/tests/test_dashboard.py
++++ current/변경전_5차/tests/test_dashboard.py
+@@ -0,0 +1,121 @@
++"""실제 HTTP 경계와 파이프라인 오류 전달을 검사합니다."""
++import http.client
++import json
++from pathlib import Path
++import tempfile
++import threading
++import unittest
++from unittest.mock import patch
++import dashboard
++
++
++class DashboardTests(unittest.TestCase):
++    def setUp(self):
++        self.temp = tempfile.TemporaryDirectory()
++        self.root = Path(self.temp.name)
++        self.server = dashboard.create_server(self.root, token='test-token')
++        self.thread = threading.Thread(target=self.server.serve_forever, daemon=True)
++        self.thread.start()
++
++    def tearDown(self):
++        self.server.shutdown()
++        self.server.server_close()
++        self.thread.join()
++        self.temp.cleanup()
++
++    def request(self, path, method='GET', body=None, auth=True, **headers):
++        connection = http.client.HTTPConnection('127.0.0.1', self.server.server_port)
++        if auth:
++            headers.update({'X-Token': 'test-token'})
++        if method == 'POST':
++            headers.setdefault('X-CSRF-Token', 'test-token')
++            headers.setdefault('Origin', f'http://127.0.0.1:{self.server.server_port}')
++        connection.request(method, path, body=body, headers=headers)
++        response = connection.getresponse()
++        result = (response.status, response.read(), dict(response.getheaders()))
++        connection.close()
++        return result
++
++    def test_no_auth(self):
++        self.assertEqual(self.request('/api/status', auth=False)[0], 403)
++
++    def test_missing_file(self):
++        self.assertEqual(self.request('/asset?path=uploads/missing.mp4')[0], 400)
++
++    def test_upload_extension_and_size(self):
++        self.assertEqual(self.request('/api/upload', 'POST', b'content', **{'X-Filename': 'unsafe.html'})[0], 400)
++        self.assertEqual(self.request('/api/upload', 'POST', b'x', **{'X-Filename': 'x.mp4', 'Content-Length': str(dashboard.MAX_UPLOAD + 1)})[0], 400)
++        self.assertEqual(list((self.root / 'work/uploads').iterdir()), [])
++
++    def test_host_boundary(self):
++        self.assertEqual(self.request('/api/health', Host='evil.example')[0], 403)
++
++    def test_origin_and_csrf(self):
++        self.assertEqual(self.request('/api/train', 'POST', b'{}', Origin='https://evil.example')[0], 403)
++        self.assertEqual(self.request('/api/train', 'POST', b'{}', **{'X-CSRF-Token': 'bad'})[0], 403)
++
++    def test_bad_json(self):
++        self.assertEqual(self.request('/api/train', 'POST', b'{')[0], 400)
++        self.assertEqual(self.request('/api/train', 'POST', b'[]')[0], 400)
++
++    def test_traversal(self):
++        secret = self.root / 'secret.txt'
++        secret.write_text('private', encoding='utf-8')
++        self.assertEqual(self.request('/asset?path=../secret.txt')[0], 400)
++        self.assertEqual(self.request('/asset?path=' + str(secret))[0], 400)
++
++    def test_upload_preserves_original(self):
++        original = self.root / 'original.mp4'
++        original.write_bytes(b'original')
++        status, raw, _ = self.request('/api/upload', 'POST', b'new-video', **{'X-Filename': '../../original.mp4'})
++        self.assertEqual(status, 200)
++        data = json.loads(raw)['data']
++        self.assertEqual(Path(data['path']).read_bytes(), b'new-video')
++        self.assertEqual(original.read_bytes(), b'original')
++        self.assertEqual(Path(data['path']).parent, self.root / 'work' / 'uploads')
++
++    def test_pipeline_error_and_duplicate(self):
++        with patch.object(self.server.app, 'pipeline', side_effect=RuntimeError('이미 학습 중입니다.')):
++            status, raw, _ = self.request('/api/train', 'POST', b'{}')
++        self.assertEqual(status, 502)
++        self.assertIn('이미 학습 중', json.loads(raw)['error'])
++
++    def test_log_limit_and_utf8(self):
++        log = self.root / 'work' / 'logs' / 'train.log'
++        log.parent.mkdir(parents=True, exist_ok=True)
++        log.write_text('가' * 100000, encoding='utf-8')
++        status, raw, _ = self.request('/api/log?path=logs/train.log')
++        data = json.loads(raw)['data']
++        self.assertEqual(status, 200)
++        self.assertTrue(data['truncated'])
++        self.assertLessEqual(data['captured_bytes'], dashboard.LOG_LIMIT)
++        self.assertNotIn('\ufffd', data['text'])
++
++    def test_range_and_health(self):
++        video = self.root / 'work' / 'uploads' / 'x.mp4'
++        video.write_bytes(b'0123456789')
++        status, raw, headers = self.request('/asset?path=uploads/x.mp4', Range='bytes=2-5')
++        self.assertEqual((status, raw), (206, b'2345'))
++        self.assertEqual(headers['Content-Range'], 'bytes 2-5/10')
++        self.assertEqual(self.request('/api/health')[0], 200)
++
++    def test_pipeline_argv_and_invalid_response(self):
++        with patch('dashboard.subprocess.run') as run:
++            run.return_value.returncode = 0
++            def response(*args, **kwargs):
++                kwargs['stdout'].write(b'{"ok":true,"data":{"jobs":[]}}')
++                return run.return_value
++            run.side_effect = response
++            self.assertEqual(self.server.app.pipeline('status', {}), {'jobs': []})
++            self.assertFalse(run.call_args.kwargs['shell'])
++            self.assertEqual(run.call_args.args[0][-4:], ['--action', 'status', '--params', '{}'])
++            def invalid(*args, **kwargs):
++                kwargs['stdout'].write(b'not json')
++                return run.return_value
++            run.side_effect = invalid
++            with self.assertRaisesRegex(RuntimeError, 'JSON'):
++                self.server.app.pipeline('status', {})
++
++
++if __name__ == '__main__':
++    unittest.main()
+--- previous/변경전_5차/tests/test_pipeline.py
++++ current/변경전_5차/tests/test_pipeline.py
+@@ -0,0 +1,52 @@
++"""허용 경로와 API 설정 실패 경로를 확인합니다."""
++import tempfile
++import unittest
++from pathlib import Path
++from unittest.mock import patch
++import pipeline
++
++
++class PipelineTests(unittest.TestCase):
++    def test_only_declared_video_roots(self):
++        with tempfile.TemporaryDirectory() as temp:
++            base = Path(temp)
++            allowed = base / "allowed"
++            allowed.mkdir()
++            good = allowed / "a.mp4"
++            good.write_bytes(b"a")
++            bad = base / "secret.mp4"
++            bad.write_bytes(b"a")
++            with patch.object(pipeline, "VIDEO_ROOTS", [allowed]):
++                self.assertEqual(pipeline.video_path(good), good.resolve())
++                with self.assertRaisesRegex(ValueError, "허용"):
++                    pipeline.video_path(bad)
++
++    def test_settings_must_be_an_object(self):
++        with self.assertRaises(ValueError):
++            pipeline.action("train", [])
++
++    def test_unknown_action_rejected(self):
++        with self.assertRaises(ValueError):
++            pipeline.action("delete", {})
++
++    def test_log_tail_is_bounded(self):
++        with tempfile.TemporaryDirectory() as temp:
++            path = Path(temp) / "large.log"
++            path.write_bytes(b"x" * 50000)
++            self.assertLessEqual(len(pipeline.tail(path).encode()), 12000)
++
++    def test_status_does_not_export_entire_dataset(self):
++        import json
++        rows = [{"image": "image.jpg", "url": "https://example.org/" + "x" * 600} for _ in range(5000)]
++        def fake_load(path, default=None):
++            if Path(path).name == "data_manifest.json":
++                return {"records": rows, "counts": {"train": 5000}, "sources": []}
++            return default
++        with patch.object(pipeline, "load", side_effect=fake_load):
++            result = pipeline.status()
++        self.assertFalse("records" in result["dataset"], "대시보드 상태에는 전체 데이터 레코드를 포함하면 안 됩니다.")
++        self.assertLess(len(json.dumps(result)), 100000)
++
++
++if __name__ == "__main__":
++    unittest.main()
+--- previous/변경전_5차/web/app.js
++++ current/변경전_5차/web/app.js
+@@ -0,0 +1,67 @@
++'use strict';
++const token = new URLSearchParams(location.search).get('token') || '';
++const $ = id => document.getElementById(id);
++let state = {}, loading = false, pending = false, resultKey = null;
++const asset = path => '/asset?token=' + encodeURIComponent(token) + '&path=' + encodeURIComponent(path);
++function message(value) { $('message').textContent = value; }
++async function api(name, data) {
++  const controller = new AbortController(), timer = setTimeout(() => controller.abort(), 65000);
++  try {
++    const response = await fetch('/api/' + name, {method: data === undefined ? 'GET' : 'POST', headers: {'X-Token': token, 'X-CSRF-Token': token, 'Content-Type': 'application/json'}, body: data === undefined ? undefined : JSON.stringify(data), signal: controller.signal});
++    const value = await response.json();
++    if (!response.ok || !value.ok) throw Error(value.error || '요청을 처리하지 못했습니다.');
++    return value.data;
++  } finally { clearTimeout(timer); }
++}
++function textNode(tag, value) { const element = document.createElement(tag); element.textContent = value; return element; }
++function metric(value) { return typeof value === 'number' && Number.isFinite(value) ? (value * 100).toFixed(1) + '%' : '미측정'; }
++function curves(history) {
++  const canvas = $('curves'), context = canvas.getContext('2d'), width = canvas.width, height = canvas.height;
++  context.clearRect(0, 0, width, height); context.font = '700 13px Nanum'; context.fillStyle = '#64778a';
++  for (let i = 0; i <= 4; i++) { const y = 20 + i * 45; context.strokeStyle = '#e1e8ee'; context.beginPath(); context.moveTo(48, y); context.lineTo(width - 15, y); context.stroke(); context.fillText((100 - i * 25) + '%', 5, y + 4); }
++  if (!Array.isArray(history) || !history.length) { context.fillText('에포크별 실측 데이터가 아직 없습니다.', 300, 110); return; }
++  [['precision', '#2770b1'], ['recall', '#21866c'], ['map50', '#dc8a35']].forEach(([key, color]) => {
++    context.strokeStyle = color; context.lineWidth = 2; context.beginPath(); let active = false;
++    history.forEach((row, i) => { const value = row[key]; if (typeof value !== 'number' || !Number.isFinite(value)) { active = false; return; } const x = 48 + i * (width - 65) / Math.max(1, history.length - 1), y = 200 - Math.max(0, Math.min(1, value)) * 180; if (active) context.lineTo(x, y); else context.moveTo(x, y); active = true; }); context.stroke();
++  });
++  context.fillStyle = '#64778a'; context.fillText('에포크 ' + history[0].epoch, 48, 222); context.fillText('에포크 ' + history[history.length - 1].epoch, width - 120, 222);
++}
++function render() {
++  const jobs = Array.isArray(state.jobs) ? state.jobs : [], training = state.training || {};
++  const metrics = state.metrics || state.selection?.test?.operating || {};
++  $('precision').textContent = metric(metrics.precision); $('recall').textContent = metric(metrics.recall);
++  $('map50').textContent = metric(metrics.map50 ?? state.selection?.test?.metrics?.['metrics/mAP50(B)']);
++  $('metricNote').textContent = '목표 P·R 각각 90% · 평가 구분: ' + (metrics.split || '상태 원문 확인') + ' · 객체 탐지 지표이며 투기 행동 정확도와 구분합니다.';
++  const progress = [training.state, training.stage];
++  if (training.epoch != null) progress.push('에포크 ' + training.epoch + (training.epochs ? ' / ' + training.epochs : ''));
++  if (training.images != null) progress.push('이미지 ' + training.images + '장');
++  if (training.downloaded_bytes != null) progress.push('다운로드 ' + (training.downloaded_bytes / 1024 ** 2).toFixed(1) + 'MB');
++  if (training.progress != null) progress.push('진행 ' + training.progress + '%');
++  $('trainingState').textContent = progress.filter(value => value !== undefined && value !== null && value !== '').join(' · ') || '작업 대기';
++  curves(training.history || state.history || []);
++  $('raw').textContent = JSON.stringify(state, null, 2);
++  const newResultKey = JSON.stringify(jobs.filter(job => job.kind === 'detect' && job.result).map(job => [job.id, job.result]));
++  const updateResults = newResultKey !== resultKey;
++  $('jobs').replaceChildren();
++  if (updateResults) { $('results').replaceChildren(); resultKey = newResultKey; }
++  jobs.forEach(job => {
++    const card = document.createElement('article'); card.append(textNode('p', (job.kind || '작업') + ' · ' + (job.state || '') + ' · ' + (job.stage || '') + (job.epoch ? ' · ' + job.epoch + '/' + job.epochs : '')));
++    if (job.error) card.append(textNode('p', job.error));
++    if (job.log) { const button = textNode('button', '이 작업 로그'); button.className = 'secondary'; button.onclick = () => { $('log').textContent = job.log; $('logInfo').textContent = '상태 응답에 포함된 로그 끝부분 · 전체 파일은 아래 경로에서 확인'; if (/^[A-Za-z0-9_-]+$/.test(job.id || '')) $('logPath').value = 'jobs/' + job.id + '.log'; }; card.append(button); }
++    $('jobs').append(card);
++    if (updateResults && job.kind === 'detect' && job.result) { const result = document.createElement('article'); result.append(textNode('p', job.id || '탐지 결과')); const video = document.createElement('video'); video.controls = true; video.preload = 'metadata'; video.src = asset(job.result); result.append(video); const link = textNode('a', '결과 파일 열기'); link.href = asset(job.result); link.target = '_blank'; link.rel = 'noopener'; result.append(link); $('results').append(result); }
++  });
++  if (!$('results').children.length) $('results').textContent = '아직 완료된 탐지 결과가 없습니다.';
++  const busy = jobs.some(job => ['running', 'queued', 'starting'].includes(job.state));
++  $('train').disabled = pending || busy; $('detect').disabled = pending || !$('videos').value;
++}
++async function refresh() { if (loading) return; loading = true; try { state = await api('status'); render(); } catch (error) { message(error.message); } finally { loading = false; } }
++async function videos() { try { const result = await api('videos'), list = Array.isArray(result) ? result : result.videos || [], previous = $('videos').value; $('videos').replaceChildren(new Option('영상 선택', '')); list.forEach(video => $('videos').add(new Option(video.name || video.path, video.path))); if (list.some(video => video.path === previous)) $('videos').value = previous; render(); } catch (error) { message(error.message); } }
++async function probe() { const path = $('videos').value; render(); if (!path) return; try { const data = await api('probe', {path}); $('probe').textContent = JSON.stringify(data, null, 2); if (data.preview) $('previewImage').src = asset(data.preview); if (path.replaceAll('\\', '/').includes('/work/uploads/')) $('preview').src = asset(path); else $('preview').removeAttribute('src'); } catch (error) { message(error.message); } }
++async function start(action, params) { if (pending) return; pending = true; render(); try { await api(action, params); message(action === 'train' ? '추가 학습 요청을 전달했습니다.' : '영상 탐지 요청을 전달했습니다.'); } catch (error) { message(error.message); } finally { pending = false; await refresh(); } }
++async function loadLog() { try { const data = await api('log?path=' + encodeURIComponent($('logPath').value)); $('log').textContent = data.text; $('logInfo').textContent = '원본 ' + data.original_bytes + '바이트 · 표시 ' + data.captured_bytes + '바이트' + (data.truncated ? ' · 앞부분 생략' : ' · 전체'); } catch (error) { message(error.message); } }
++$('reload').onclick = videos; $('videos').onchange = probe; $('logButton').onclick = loadLog;
++$('detect').onclick = () => start('detect', {path: $('videos').value});
++$('train').onclick = () => start('train', {resume: $('resume').checked});
++$('upload').onchange = async () => { const file = $('upload').files[0]; if (!file) return; if (file.size > 4 * 1024 ** 3) { message('4GB 이하 영상을 선택해 주세요.'); return; } try { message('영상을 가져오는 중입니다.'); const response = await fetch('/api/upload', {method: 'POST', headers: {'X-Token': token, 'X-CSRF-Token': token, 'X-Filename': encodeURIComponent(file.name)}, body: file}); const result = await response.json(); if (!response.ok || !result.ok) throw Error(result.error); await videos(); $('videos').value = result.data.path; await probe(); message('영상 가져오기를 마쳤습니다.'); } catch (error) { message(error.message); } };
++refresh(); videos(); setInterval(refresh, 8000);
+--- previous/README.md
++++ current/README.md
+@@ -1,27 +0,0 @@
+-# D 드라이브 대시보드와 추가 학습
+-
+-2026-10-30 확인 자료입니다. 이전 차수는 보존합니다.
+-
+-- 로컬 전용 대시보드, 독립 실행 파일 빌드 소스, Docker 연결, 데이터 준비·학습·평가 코드와 회귀 검사를 포함합니다.
+-- 현재 배치는 Windows의 D:/2026/월요일 PBL/5차와 Docker 2026의 /workspace/2026 마운트, /opt/venvs/torch/bin/python을 사용합니다. 데이터·기존 모델·기존 탐지기와 학습 환경은 저장소에 포함하지 않으므로 단독 복제만으로 전체 실험이 실행되지는 않습니다.
+-- 나눔고딕 Bold와 OFL을 함께 보존합니다. 새 라이선스를 임의 부여하지 않습니다. 사용하는 Ultralytics 및 데이터의 개별 라이선스를 확인해야 합니다.
+-- 일반 Python 실행은 launcher.py, Windows 배포 빌드는 build_exe.py를 참고합니다. API 키나 Codex 토큰 없이 로컬로 동작하며, 브라우저의 로컬 세션 인증은 유지합니다.
+-- 검사: `python -B -X utf8 -m unittest discover -s tests -v`, `python -B -X utf8 verify_sources.py`입니다.
+-
+-이번 수리에서는 최신 실패 작업 대신 준비 단계가 남던 표시를 고쳤습니다. 신규 회귀 검사 5개를 포함한 47개 검사와 별도의 실제 EXE·HTTP 검사를 수행했습니다.
+-
+-추가 학습은 78 epochs에서 조기 종료됐으나, 학습 라이브러리가 JPEG 19개를 자동 재저장하여 이후 원본 해시 검사에서 중단됐습니다. 평가 기준이나 해시를 바꾸지 않고 공식 원본 바이트 19개를 복원했으며 기존 모델로 평가만 재개해 완료했습니다. 정밀도·재현율 90% 목표에는 미달했습니다. 과거 test 150장은 기존에 사용한 벤치마크이며 새로운 독립 테스트로 주장하지 않습니다.
+-
+-데이터·모델·실행 파일·작업 로그·인증정보·개인 지침·Word 문서는 공개 범위에서 제외했습니다.
+-
+-## 복구 후 고정 테스트 측정
+-
+-| 항목 | 결과 |
+-|---|---:|
+-| 정밀도 | 52.04% |
+-| 재현율 | 53.74% |
+-| F1 | 52.88% |
+-| mAP50 | 47.48% |
+-| mAP50–95 | 32.45% |
+-
+-검증에서 baseline_l_p2와 신뢰도0.1을 선택했고, 기존 테스트150장을 평가했습니다. 추가 학습 모델은 선택 기준상 기존 모델을 넘지 못했습니다. 입력해상도와 평가기가 과거 보고서와 달라 같은 조건의 개선률로 비교하지 않습니다. 테스트 결과로 모델·임계값을 재조정하거나 새 학습을 시작하지 않았습니다.
+--- previous/build_exe.py
++++ current/build_exe.py
+@@ -1,35 +0,0 @@
+-"""PyInstaller 의존성 확인과 사용자가 선택한 빌드를 수행합니다."""
+-import argparse
+-import importlib.util
+-from pathlib import Path
+-import subprocess
+-import sys
+-import shutil
+-import os
+-
+-
+-def main():
+-    parser = argparse.ArgumentParser()
+-    parser.add_argument('--build', action='store_true', help='확인만 하지 않고 실제 EXE를 빌드합니다.')
+-    args = parser.parse_args()
+-    available = importlib.util.find_spec('PyInstaller') is not None
+-    print('PyInstaller: ' + ('사용 가능' if available else '미설치 · 소스 실행은 가능합니다.'))
+-    if not args.build:
+-        return
+-    if not available:
+-        raise SystemExit('빌드하려면 별도로 PyInstaller를 준비해야 합니다. 자동 설치하지 않습니다.')
+-    root = Path(__file__).resolve().parent
+-    subprocess.run([sys.executable, '-m', 'PyInstaller', '--noconfirm', '--onedir', '--name', 'CleanView5',
+-                    '--hidden-import', 'pipeline',
+-                    '--distpath', str(root / 'work' / 'dist'), '--workpath', str(root / 'work' / 'build'),
+-                    '--specpath', str(root / 'work'), str(root / 'launcher.py')], cwd=str(root), check=True, shell=False,
+-                   env={**os.environ, 'PYTHONUTF8': '1', 'PYTHONIOENCODING': 'utf-8'})
+-    # EXE를 원래 프로젝트 옆에 두어 고정된 데이터·Docker 경로를 유지합니다.
+-    source = root / 'work/dist/CleanView5'
+-    shutil.copy2(source / 'CleanView5.exe', root / 'CleanView5.exe')
+-    shutil.copytree(source / '_internal', root / '_internal', dirs_exist_ok=True)
+-    print('프로젝트의 CleanView5.exe를 생성했습니다. web·GPU 작업 소스와 함께 유지해 주세요.')
+-
+-
+-if __name__ == '__main__':
+-    main()
+--- previous/dashboard.py
++++ current/dashboard.py
+@@ -1,244 +0,0 @@
+-"""Codex와 독립 실행되는 루프백 전용 대시보드입니다."""
+-import json
+-import mimetypes
+-import os
+-from pathlib import Path
+-import secrets
+-import subprocess
+-import sys
+-import tempfile
+-import uuid
+-from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+-from urllib.parse import parse_qs, unquote, urlsplit
+-
+-LOG_LIMIT = 64 * 1024
+-MAX_UPLOAD = 4 * 1024**3
+-VIDEO_EXT = {'.mp4', '.avi', '.mov', '.mkv', '.m4v', '.webm'}
+-ROOT = Path(sys.executable).resolve().parent if getattr(sys, 'frozen', False) else Path(__file__).resolve().parent
+-
+-
+-class Dashboard:
+-    def __init__(self, root, token):
+-        self.root = Path(root).resolve()
+-        self.work = self.root / 'work'
+-        self.token = token
+-        for name in ('uploads', 'results', 'logs'):
+-            (self.work / name).mkdir(parents=True, exist_ok=True)
+-
+-    def pipeline(self, action, params):
+-        argv = ([sys.executable, '--pipeline'] if getattr(sys, 'frozen', False) else
+-                [sys.executable, '-B', '-X', 'utf8', str(self.root / 'pipeline.py')])
+-        argv += ['--action', action, '--params', json.dumps(params, ensure_ascii=False)]
+-        # 출력은 임시 파일로 받아 메모리에 무제한 누적하지 않습니다.
+-        with tempfile.TemporaryFile() as output, tempfile.TemporaryFile() as errors:
+-            result = subprocess.run(argv, cwd=str(self.root), shell=False, stdout=output,
+-                                    stderr=errors, timeout=15 if action == 'status' else 60,
+-                                    creationflags=getattr(subprocess, 'CREATE_NO_WINDOW', 0))
+-            output.seek(0, 2)
+-            size = output.tell()
+-            if size > 2 * 1024**2:
+-                raise RuntimeError('파이프라인 JSON 응답이 2MB 상한을 넘었습니다.')
+-            output.seek(0)
+-            raw = output.read()
+-            errors.seek(0, 2)
+-            errors.seek(max(0, errors.tell() - LOG_LIMIT))
+-            error = errors.read().decode('utf-8', errors='replace')
+-        try:
+-            value = json.loads(raw.decode('utf-8'))
+-        except (ValueError, UnicodeError) as exc:
+-            raise RuntimeError('파이프라인 JSON 응답이 잘못되었습니다. ' + error[-2000:]) from exc
+-        if not isinstance(value, dict) or not isinstance(value.get('ok'), bool):
+-            raise RuntimeError('파이프라인 JSON 응답 형식이 잘못되었습니다.')
+-        if result.returncode or not value['ok']:
+-            raise RuntimeError(str(value.get('error') or error or f'종료 코드 {result.returncode}'))
+-        return value.get('data')
+-
+-    def confined(self, value, areas):
+-        if not isinstance(value, str) or not value:
+-            raise ValueError('파일 경로가 필요합니다.')
+-        path = Path(value)
+-        if not path.is_absolute():
+-            path = self.work / path
+-        path = path.resolve()
+-        if not any(path.is_relative_to((self.work / area).resolve()) for area in areas):
+-            raise ValueError('허용된 작업 폴더 밖의 경로입니다.')
+-        if not path.is_file():
+-            raise ValueError('파일이 없습니다.')
+-        return path
+-
+-    def log(self, value):
+-        path = self.confined(value, ('logs', 'results', 'jobs', 'training'))
+-        if path.suffix.lower() not in ('.log', '.txt'):
+-            raise ValueError('로그 파일만 읽을 수 있습니다.')
+-        size = path.stat().st_size
+-        with path.open('rb') as stream:
+-            stream.seek(max(0, size - LOG_LIMIT))
+-            raw = stream.read(LOG_LIMIT)
+-        # 잘린 첫 UTF-8 문자만 제거하고 원본의 잘못된 바이트는 오류로 알립니다.
+-        if size > LOG_LIMIT:
+-            while raw and raw[0] & 0xC0 == 0x80:
+-                raw = raw[1:]
+-        text = raw.decode('utf-8')
+-        return {'text': text, 'original_bytes': size, 'captured_bytes': len(raw),
+-                'truncated': size > len(raw)}
+-
+-
+-class Handler(BaseHTTPRequestHandler):
+-    def setup(self):
+-        super().setup()
+-        self.connection.settimeout(60)
+-
+-    def log_message(self, *_):
+-        pass
+-
+-    def reply(self, value, status=200, content_type='application/json; charset=utf-8'):
+-        raw = value if isinstance(value, bytes) else json.dumps(value, ensure_ascii=False).encode('utf-8')
+-        self.send_response(status)
+-        self.send_header('Content-Type', content_type)
+-        self.send_header('Content-Length', str(len(raw)))
+-        self.send_header('Cache-Control', 'no-store')
+-        self.send_header('X-Content-Type-Options', 'nosniff')
+-        self.send_header('Referrer-Policy', 'no-referrer')
+-        self.send_header('Content-Security-Policy', "default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' blob:; media-src 'self' blob:; font-src 'self'; frame-ancestors 'none'")
+-        self.end_headers()
+-        self.wfile.write(raw)
+-
+-    def authorized(self, mutation=False):
+-        expected = f'127.0.0.1:{self.server.server_port}'
+-        if self.headers.get('Host') != expected:
+-            return False
+-        query = parse_qs(urlsplit(self.path).query)
+-        token = self.headers.get('X-Token') or query.get('token', [''])[0]
+-        if not secrets.compare_digest(token, self.server.app.token):
+-            return False
+-        if mutation:
+-            if not secrets.compare_digest(self.headers.get('X-CSRF-Token', ''), self.server.app.token):
+-                return False
+-            if self.headers.get('Origin') != f'http://{expected}':
+-                return False
+-        return True
+-
+-    def sendfile(self, path):
+-        size = path.stat().st_size
+-        start, end, status = 0, size - 1, 200
+-        requested = self.headers.get('Range')
+-        if requested:
+-            try:
+-                if not requested.startswith('bytes=') or ',' in requested:
+-                    raise ValueError()
+-                first, last = requested[6:].split('-')
+-                if first:
+-                    start = int(first)
+-                    end = min(size - 1, int(last)) if last else size - 1
+-                else:
+-                    length = int(last)
+-                    if length <= 0:
+-                        raise ValueError()
+-                    start = max(0, size - length)
+-                if start < 0 or start > end or start >= size:
+-                    raise ValueError()
+-                status = 206
+-            except ValueError:
+-                self.reply({'ok': False, 'error': '유효하지 않은 파일 범위입니다.'}, 416)
+-                return
+-        self.send_response(status)
+-        self.send_header('Content-Type', mimetypes.guess_type(path.name)[0] or 'application/octet-stream')
+-        self.send_header('Content-Length', str(max(0, end - start + 1)))
+-        self.send_header('Accept-Ranges', 'bytes')
+-        self.send_header('X-Content-Type-Options', 'nosniff')
+-        self.send_header('Referrer-Policy', 'no-referrer')
+-        self.send_header('Cache-Control', 'no-store')
+-        if status == 206:
+-            self.send_header('Content-Range', f'bytes {start}-{end}/{size}')
+-        self.end_headers()
+-        with path.open('rb') as stream:
+-            stream.seek(start)
+-            remaining = end - start + 1
+-            while remaining > 0:
+-                chunk = stream.read(min(1024 * 1024, remaining))
+-                if not chunk:
+-                    break
+-                self.wfile.write(chunk)
+-                remaining -= len(chunk)
+-
+-    def do_GET(self):
+-        if not self.authorized():
+-            self.reply({'ok': False, 'error': '로컬 접속 토큰이 필요합니다.'}, 403)
+-            return
+-        url = urlsplit(self.path)
+-        query = parse_qs(url.query)
+-        try:
+-            if url.path == '/api/health':
+-                self.reply({'ok': True, 'data': {'service': 'cleanview-dashboard', 'pid': os.getpid()}})
+-            elif url.path in ('/api/status', '/api/videos'):
+-                self.reply({'ok': True, 'data': self.server.app.pipeline(url.path.rsplit('/', 1)[1], {})})
+-            elif url.path == '/api/log':
+-                self.reply({'ok': True, 'data': self.server.app.log(query.get('path', [''])[0])})
+-            elif url.path == '/asset':
+-                self.sendfile(self.server.app.confined(query.get('path', [''])[0], ('uploads', 'results')))
+-            elif url.path in ('/', '/app.js', '/style.css', '/fonts/NanumGothic-Bold.ttf'):
+-                name = 'index.html' if url.path == '/' else url.path[1:]
+-                path = self.server.app.root / 'web' / name
+-                if name in ('index.html', 'style.css'):
+-                    content = path.read_text(encoding='utf-8')
+-                    for asset in ('/style.css', '/app.js', '/fonts/NanumGothic-Bold.ttf'):
+-                        content = content.replace(asset, asset + '?token=' + self.server.app.token)
+-                    self.reply(content.encode('utf-8'), content_type='text/html; charset=utf-8' if name == 'index.html' else 'text/css; charset=utf-8')
+-                else:
+-                    self.sendfile(path)
+-            else:
+-                self.reply({'ok': False, 'error': '없는 주소입니다.'}, 404)
+-        except (ValueError, OSError, UnicodeError) as exc:
+-            self.reply({'ok': False, 'error': str(exc)}, 400)
+-        except (RuntimeError, subprocess.SubprocessError) as exc:
+-            self.reply({'ok': False, 'error': str(exc)}, 502)
+-
+-    def do_POST(self):
+-        if not self.authorized(mutation=True):
+-            self.reply({'ok': False, 'error': '토큰·요청 출처를 확인해 주세요.'}, 403)
+-            return
+-        try:
+-            if self.headers.get('Transfer-Encoding'):
+-                raise ValueError('Content-Length가 있는 요청만 허용합니다.')
+-            length = int(self.headers.get('Content-Length', '0'))
+-            route = urlsplit(self.path).path
+-            if route == '/api/upload':
+-                if not 0 < length <= MAX_UPLOAD:
+-                    raise ValueError('영상은 0 초과 4GB 이하만 업로드할 수 있습니다.')
+-                suffix = Path(unquote(self.headers.get('X-Filename', ''))).suffix.lower()
+-                if suffix not in VIDEO_EXT:
+-                    raise ValueError('지원하지 않는 영상 확장자입니다.')
+-                destination = self.server.app.work / 'uploads' / (uuid.uuid4().hex + suffix)
+-                try:
+-                    with destination.open('xb') as output:
+-                        remaining = length
+-                        while remaining:
+-                            chunk = self.rfile.read(min(1024 * 1024, remaining))
+-                            if not chunk:
+-                                raise ValueError('영상 업로드가 중단되었습니다.')
+-                            output.write(chunk)
+-                            remaining -= len(chunk)
+-                except Exception:
+-                    destination.unlink(missing_ok=True)
+-                    raise
+-                self.reply({'ok': True, 'data': {'path': str(destination), 'name': destination.name}})
+-                return
+-            if not 0 < length <= 64 * 1024:
+-                raise ValueError('JSON 요청은 64KB 이하이어야 합니다.')
+-            params = json.loads(self.rfile.read(length).decode('utf-8'))
+-            if not isinstance(params, dict):
+-                raise ValueError('JSON 객체가 필요합니다.')
+-            if route not in ('/api/probe', '/api/detect', '/api/train'):
+-                self.reply({'ok': False, 'error': '없는 주소입니다.'}, 404)
+-                return
+-            self.reply({'ok': True, 'data': self.server.app.pipeline(route.rsplit('/', 1)[1], params)})
+-        except (ValueError, OSError, UnicodeError) as exc:
+-            self.reply({'ok': False, 'error': str(exc)}, 400)
+-        except (RuntimeError, subprocess.SubprocessError) as exc:
+-            self.reply({'ok': False, 'error': str(exc)}, 502)
+-
+-
+-def create_server(root=ROOT, port=0, token=None):
+-    server = ThreadingHTTPServer(('127.0.0.1', port), Handler)
+-    server.app = Dashboard(root, token or secrets.token_urlsafe(32))
+-    return server
+--- previous/docs/계획.md
++++ current/docs/계획.md
+@@ -1,14 +0,0 @@
+-# 복구 및 추가학습 계획
+-작성일: 2026-10-28, 사용자 직접 실행 요청. 구현 선택은 main의 판단이며 사용자 설계 승인으로 꾸미지 않습니다.
+-## 목표
+-D의 보존 자료로 탐지 앱을 실행하고 Codex 옆에서 대시보드를 제공합니다. Codex/API 토큰 없이 브라우저와 독립 프로세스로 계속 실행합니다. 새 데이터를 조사·확보하고 누출 없는 추가학습을 시작할 수 있게 합니다. 목표는 IoU .5에서 정밀도와 재현율 각각 .90 이상입니다. 성공을 보장하거나 미달 값을 숨기지 않습니다.
+-## 선택
+-기존 Docker 이미지·보존 모델과 Python 표준 HTTP 대시보드를 재사용합니다. 유료 클라우드/API 의존은 추가하지 않습니다. Docker 디스크 전체 교체보다 보존 폴더 바인드마운트와 별도 컨테이너로 한정 복구합니다. 이전 앱은 보존하고 신버전에 학습상태·로그·성능을 추가합니다.
+-## 구현
+-1. 기존 이미지 CUDA/Ultralytics/모델·GPU를 확인하고 2026-2 복구 또는 작업 전용 컨테이너를 생성합니다. 임의 디스크 재연결·삭제는 금지합니다.
+-2. dashboard.py와 launcher.py: 로컬 loopback, 토큰 인증, 업로드·미리보기·탐지·작업로그. 학습 시작은 중복 잠금과 독립 프로세스를 쓰고 결과를 work에 보존합니다. 앱 종료가 학습을 종료하지 않도록 합니다.
+-3. prepare_training.py와 train_pipeline.py: 출처 manifest, 해시·이미지 유효성·레이블 검사, train/val/test 분리, val 전용 선택, test 최종평가. 다운로드 실패와 용량 부족을 숨기지 않습니다. 기존 데이터와 신규 데이터를 섞되 중복·근접 중복은 holdout 우선 제외합니다.
+-4. 실행기와 사용안내, 필요 시 EXE. 재실행 시 완료학습을 자동 재시작하지 않습니다. 중단 checkpoint 재개를 지원합니다.
+-5. tests: 무인증·경로탈출·중복학습·없는파일·잘못된입력·실제상태를 검사합니다. 실제 Docker GPU·한프레임 탐지와 브라우저 핵심화면을 확인합니다. 별도 verifier가 최종 검사합니다.
+-## 보존 및 한계
+-기존 150장 test는 과거에 이미 평가된 historical benchmark로 표시합니다. 신규 미사용 holdout이 확보되면 별도로 보고합니다. CCTV 투기 행동 정확도는 객체검출 수치와 구분합니다. PC/Docker가 꺼지면 계산이 멈추며 재개가 필요합니다. Codex 토큰 소진과 PC 실행은 별개입니다.
+--- previous/docs/데이터와평가.md
++++ current/docs/데이터와평가.md
+@@ -1,37 +0,0 @@
+-# 5차 데이터와 평가
+-
+-확인일: 2026-10-28. 목표는 IoU 0.5에서 정밀도·재현율 각각 90% 이상입니다. 목표 달성은 보장하지 않습니다.
+-
+-## 보존과 출처
+-
+-기존 TACO 학습 1,200장·검증 150장·테스트 150장의 이미지와 라벨을 읽기 전용으로 재사용합니다. `reference_holdout_sha256.json`과 `original_holdout_sha256.json`의 과거 해시를 먼저 대조합니다. 현재 파일로 원본 기준을 바꾸지 않습니다. 원본 라벨과 데이터는 복사·덮어쓰기하지 않습니다.
+-
+-추가 자료는 [공식 pLitterStreet](https://zenodo.org/records/8288500)에서 최대 4,000개를 준비합니다. [공식 SALSA](https://github.com/alinacherkas/salsa)의 보존 COCO 주석도 조사했으나 비TACO 1,244장은 모두 license=0(ODbL 표기)이고 CC BY 4.0인 license=1 신규 사진은 0개입니다. 이미지 권리를 CC BY로 대체하지 않으므로 이번 SALSA 추가 사용은 0개입니다. SALSA 주석은 ODbL이고 도구는 Apache 2.0이며 이미지 권리는 개별 필드를 따릅니다. 분류 전용 사진은 포함하지 않습니다. pLitterStreet의 trash bin 클래스는 제외하고 실제 쓰레기 상자만 단일 trash 클래스로 변환합니다. pLitterStreet 공식 API의 권리는 CC BY 4.0입니다. `sources.json`과 실제 데이터 manifest에 출처·URL·권리·해시를 남깁니다.
+-
+-[RoLID-11K](https://github.com/xq141839/RoLID-11K)는 새 후보입니다. 공식 Google Drive 폴더는 HTTP 200과 공개 제목을 실제 확인했지만 데이터 파일은 받지 않았습니다. 공식 저장소는 Apache 2.0이지만 Google Drive 내부 데이터 권리는 미확인하여 사용하지 않습니다. 이 상태를 다운로드·사용 완료로 표현하지 않습니다.
+-
+-## 데이터 안전과 재개
+-
+-전송은 요청별 40초 제한, 실패 포함 누적 20GiB 상한입니다. 누적 전송량은 `work/training/download_ledger.json`에 남아 재시작으로 초기화되지 않습니다. ZIP 전체를 받지 않고 중앙 디렉터리와 선택 이미지 범위만 읽으며 응답 범위·크기·압축 크기·CRC를 검사합니다. 일반 다운로드는 ETag가 일치할 때만 부분 파일을 재개합니다. 실패는 `download_errors.jsonl`에 기록하며 성공으로 숨기지 않습니다.
+-
+-이미지는 끝까지 해독하고 COCO 크기·유한 좌표·양수 면적을 확인합니다. 부분적으로 경계를 벗어난 COCO 상자는 실제 경계로 자르며, 이미지와 겹치지 않는 상자는 거부합니다. 학습 입력은 고정 holdout과 정확 SHA256 및 64비트 차분 이미지 해시의 해밍 거리 4 이하를 비교해 배제합니다. 이 근접 기준이 모든 유사 사진을 찾아낸다는 보장은 없습니다. 새 독립 테스트를 만들 때 필요한 영상 그룹 함수는 같은 GoPro 녹화의 장과 물체 종류별 하위 폴더를 통합합니다.
+-
+-현재 추가 출처는 기존 3차 학습에 이미 사용됐습니다. 따라서 추가 이미지는 학습에만 사용하고 새 독립 테스트는 만들지 않습니다. 기존 테스트 150장은 **과거에 이미 평가된 historical benchmark**입니다. 미사용 외부 테스트의 성능이라고 표시하지 않습니다.
+-
+-검사·중복 배제 후 실제 남은 수만 `data_manifest.json`에 고정합니다. manifest가 있으면 이미지·라벨 해시를 대조해 재사용하며 현재 파일에 맞춰 교체하지 않습니다. 다운로드·검사 단계와 카운트·전송량은 `status.json`으로 원자 저장해 대시보드가 읽습니다.
+-
+-과거 `sources/additional_manifest.json`의 pLitterStreet 레코드에서 `plitter_<COCO ID>` 또는 `street_<COCO ID>`를 대조합니다. `counts.restored`는 그 명세에 있던 ID를 복원한 수이고 `counts.new_identity`는 그 명세에 없던 원본 ID 수입니다. 과거 재저장 JPEG와 원본의 해시가 다르다는 사실만으로 새 사진이라고 하지 않습니다. 새 ID도 과거 사용 영상·장소와 다를 수 있다는 뜻은 아니며, 미사용 독립 테스트라고 주장하지 않습니다. 과거 ID를 해석하지 못하면 새 자료로 추정하지 않고 오류로 중단합니다.
+-
+-## 추가 학습과 비교
+-
+-큰 YOLO26x, 1536 입력, 네 단계의 과거 실험에서 목표에 미달했습니다. 5차는 보존 YOLO26l-P2 집중 학습 가중치에서 작은 물체 후보 한 개를 미세 조정합니다. 입력 1280, batch 2, seed 20261028, 최대 180 epoch, patience 35, AdamW를 사용합니다. mosaic·scale 확대 증강은 학습에만 적용합니다. 원본 검증·테스트에는 증강을 적용하지 않습니다. 메모리 부족을 성공으로 숨기거나 CPU 바퀴로 교체하지 않습니다.
+-
+-checkpoint는 데이터 manifest와 초기 모델·파이프라인 소스 해시·학습 조건이 같고 사용자가 재개를 명시한 경우에만 재개합니다. checkpoint가 있는데 재개를 선택하지 않으면 오류로 중단합니다. 완료 학습은 다시 시작하지 않습니다. 작업 프로세스와 로그는 부모 GPU worker가 소유하고 `train_pipeline.run(job, notify=callback, resume=False)`를 호출합니다. 이 구현은 장기 학습을 자체 시작하지 않습니다.
+-
+-같은 고정 validation 150장에서 기존 선택 ensemble, 기존 단일 l-P2, 새 l-P2를 동일 입력 1280·전체 화면·NMS IoU 0.5로 비교합니다. 선택 순서는 min(P,R), F1, AP50이며 동점이면 먼저 등록한 기존 모델을 유지합니다. 모델마다 고정 임계값 후보를 validation에서만 비교합니다. 개선이 없으면 기존 모델을 유지합니다.
+-
+-선택 결과에는 `imgsz=1280`도 저장하며 운영 추론은 같은 입력 크기를 사용합니다. baseline이 이번 검증에서 다시 선택된 경우에도 이 입력 크기를 기록합니다.
+-
+-선택과 테스트 계약을 동결한 뒤 선택 모델 하나를 기존 테스트에서 평가합니다. 예측은 이미지별 원자 저장하여 중단 후 이미 평가한 이미지를 재사용합니다. 테스트 성능으로 선택·임계값을 다시 조정하지 않습니다. `final.json`을 저장한 완료 실험은 자동 재학습하지 않습니다.
+-
+-AP는 신뢰도 순 단일 클래스 일대일 IoU 매칭과 101점 보간을 사용하고 AP50 및 IoU 0.50~0.95 평균을 기록합니다. 과거 Ultralytics 평가기·1536 입력과 조건이 다르므로 과거 보고서 수치와 직접 동일 조건 비교로 주장하지 않습니다. 이번 후보 세 개 사이의 비교는 같은 구현과 입력을 사용합니다. CCTV 투기 행동 정확도는 객체 탐지 지표와 별개입니다.
+--- previous/gpu_worker.py
++++ current/gpu_worker.py
+@@ -1,249 +0,0 @@
+-"""기존 GPU 환경에서 탐지와 학습을 독립 프로세스로 실행합니다."""
+-import argparse
+-import importlib.util
+-import json
+-import math
+-import os
+-import shutil
+-import subprocess
+-import sys
+-import time
+-import traceback
+-import types
+-import uuid
+-from functools import partial
+-from pathlib import Path
+-
+-ROOT = Path(__file__).resolve().parent
+-PROJECT = ROOT.parent
+-WORK = ROOT / "work"
+-ARCHIVE = PROJECT / "이전 도커 실험/3차실험/trash_round3"
+-OLD_APP = PROJECT / "최종/3차/클린뷰"
+-VIDEO_ROOTS = [WORK / "uploads", PROJECT / "최종/3차/테스트영상", ARCHIVE / "videos"]
+-
+-
+-def save(path, value):
+-    path = Path(path)
+-    path.parent.mkdir(parents=True, exist_ok=True)
+-    tmp = path.with_suffix("." + uuid.uuid4().hex + ".tmp")
+-    tmp.write_text(json.dumps(value, ensure_ascii=False, allow_nan=False, indent=2), encoding="utf-8")
+-    tmp.replace(path)
+-
+-
+-def read(path, default=None):
+-    try:
+-        return json.loads(Path(path).read_text(encoding="utf-8"))
+-    except FileNotFoundError:
+-        return default
+-
+-
+-def update(job, **kwargs):
+-    import fcntl
+-    path = WORK / "jobs" / f"{job}.json"
+-    with path.with_suffix(".lock").open("w") as lock:
+-        fcntl.flock(lock, fcntl.LOCK_EX)
+-        save(path, {**read(path, {}), **kwargs, "updated": time.time()})
+-
+-
+-def allowed_video(value):
+-    path = Path(value).resolve(strict=True)
+-    if not any(path.is_relative_to(p.resolve()) for p in VIDEO_ROOTS):
+-        raise ValueError("허용된 영상 폴더가 아닙니다.")
+-    if path.suffix.lower() not in {".mp4", ".avi", ".mov", ".mkv", ".m4v"} or not path.is_file() or not path.stat().st_size:
+-        raise ValueError("유효한 영상을 선택하세요.")
+-    return path
+-
+-
+-def probe(value):
+-    import cv2
+-    import hashlib
+-    path = allowed_video(value)
+-    cap = cv2.VideoCapture(str(path))
+-    try:
+-        ok, frame = cap.read()
+-        fps = cap.get(cv2.CAP_PROP_FPS)
+-        frames = cap.get(cv2.CAP_PROP_FRAME_COUNT)
+-        if not ok or frame is None or not math.isfinite(fps) or fps <= 0:
+-            raise ValueError("영상을 읽을 수 없습니다. 파일과 코덱을 확인하세요.")
+-        out = WORK / "results" / ("preview_" + hashlib.sha256(str(path).encode()).hexdigest()[:20] + ".jpg")
+-        out.parent.mkdir(parents=True, exist_ok=True)
+-        if not cv2.imwrite(str(out), frame):
+-            raise RuntimeError("영상 미리보기를 저장하지 못했습니다.")
+-        return {"width": frame.shape[1], "height": frame.shape[0], "fps": fps,
+-                "frames": int(frames), "seconds": frames / fps, "bytes": path.stat().st_size, "preview": str(out)}
+-    finally:
+-        cap.release()
+-
+-
+-def ensure_selection():
+-    path = WORK / "selected_model.json"
+-    if path.exists():
+-        return read(path)
+-    final = read(ARCHIVE / "final.json")
+-    if not final:
+-        raise RuntimeError("보존된 final.json이 없습니다.")
+-    chosen = final["selected"]
+-    weights = [str(ARCHIVE / Path(p).relative_to("/root/환경 PBL/trash_round3")) for p in chosen["weights"]]
+-    if not all(Path(p).is_file() for p in weights):
+-        raise RuntimeError("보존된 학습 모델을 찾을 수 없습니다.")
+-    value = {"weights": weights[0], "ensemble": weights, "policy": chosen["policy"],
+-             "conf": chosen["operating"]["threshold"], "source": "3차 보존 모델", "test": final["test"]}
+-    save(path, value)
+-    return value
+-
+-
+-def is_alive(pid, identity):
+-    try:
+-        stat = Path(f"/proc/{int(pid)}/stat").read_text()
+-        command = Path(f"/proc/{int(pid)}/cmdline").read_bytes().split(b"\0")
+-        return (stat.split(") ", 1)[1].split()[0] != "Z"
+-                and str(Path(__file__).resolve()).encode() in command
+-                and identity.encode() in command)
+-    except (ValueError, FileNotFoundError, ProcessLookupError):
+-        return False
+-
+-
+-def reconcile():
+-    # 재부팅 뒤 같은 PID가 다른 프로세스에 재사용돼도 작업으로 오인하지 않습니다.
+-    import fcntl
+-    changed = 0
+-    jobs = WORK / "jobs"
+-    jobs.mkdir(parents=True, exist_ok=True)
+-    with (jobs / "start.lock").open("a") as lock:
+-        fcntl.flock(lock, fcntl.LOCK_EX)
+-        for path in jobs.glob("*.json"):
+-            job = read(path, {})
+-            if job.get("state") in {"queued", "running"} and not is_alive(job.get("pid", 0), job.get("id", "")):
+-                update(job["id"], state="interrupted", error="작업 프로세스가 종료됐습니다. 체크포인트 재개를 선택하세요.")
+-                changed += 1
+-    return {"reconciled": changed}
+-
+-
+-def start(kind, params):
+-    import fcntl
+-    jobs = WORK / "jobs"
+-    jobs.mkdir(parents=True, exist_ok=True)
+-    with (jobs / "start.lock").open("w") as lock:
+-        fcntl.flock(lock, fcntl.LOCK_EX)
+-        for path in jobs.glob("*.json"):
+-            job = read(path, {})
+-            if job.get("state") in {"queued", "running"}:
+-                if job.get("pid") and is_alive(job["pid"], job["id"]):
+-                    raise ValueError("GPU 작업이 이미 진행 중입니다. 완료 후 실행하세요.")
+-                update(job["id"], state="interrupted", error="Docker 또는 작업 프로세스가 종료됐습니다. 학습 재개를 선택하세요.")
+-        if kind == "detect":
+-            if set(params) - {"path", "seconds", "abandon", "leave", "baseline"}:
+-                raise ValueError("지원하지 않는 탐지 설정입니다.")
+-            allowed_video(params.get("path", ""))
+-            for key, low, high in [("seconds", 0, 86400), ("abandon", 1, 600), ("leave", 0, 120), ("baseline", 0, 60)]:
+-                number = float(params.get(key, {"seconds": 120, "abandon": 20, "leave": 5, "baseline": 10}[key]))
+-                if not math.isfinite(number) or not low <= number <= high:
+-                    raise ValueError("탐지 설정 범위를 확인하세요.")
+-                params[key] = number
+-        elif kind == "train":
+-            if not isinstance(params.get("resume", False), bool):
+-                raise ValueError("재개 설정은 true 또는 false여야 합니다.")
+-            if (WORK / "training/final.json").exists():
+-                raise ValueError("이 실험은 이미 완료됐습니다. 결과를 보존하며 자동 재학습하지 않습니다.")
+-            if not (ROOT / "train_pipeline.py").is_file():
+-                raise ValueError("학습 구성을 준비 중입니다.")
+-            if set(params) - {"resume"}:
+-                raise ValueError("지원하지 않는 학습 설정입니다.")
+-        else:
+-            raise ValueError("지원하지 않는 작업입니다.")
+-        identity = time.strftime("%Y%m%d_%H%M%S") + "_" + uuid.uuid4().hex[:6]
+-        save(jobs / f"{identity}.json", {"id": identity, "kind": kind, "state": "queued", "params": params, "created": time.time()})
+-        with (jobs / f"{identity}.log").open("w") as log:
+-            process = subprocess.Popen([sys.executable, "-u", "-B", str(Path(__file__).resolve()), "--worker", identity],
+-                                       stdout=log, stderr=subprocess.STDOUT, start_new_session=True, cwd=str(WORK))
+-        update(identity, pid=process.pid)
+-        return {"job": identity, "state": "running"}
+-
+-
+-def detect(job, params):
+-    selection = ensure_selection()
+-    font = OLD_APP / "fonts"
+-    if not (WORK / "fonts").exists():
+-        shutil.copytree(font, WORK / "fonts")
+-    person = ARCHIVE / "pretrained/yolov8n.pt"
+-    if not person.is_file():
+-        person = PROJECT / "최종/3차/사전학습가중치/yolov8n.pt"
+-    if not (WORK / "yolov8n.pt").exists():
+-        os.symlink(person, WORK / "yolov8n.pt")
+-    adapter = types.ModuleType("backend")
+-    model_root = Path(selection["weights"]).resolve().parents[3]
+-    permitted = [ARCHIVE.resolve(), (WORK / "training").resolve()]
+-    if model_root not in permitted:
+-        raise ValueError("선택 모델의 저장 위치가 허용되지 않습니다.")
+-    for key, value in {"APP": WORK, "ROOT": model_root, "update": update, "probe": probe,
+-                       "allowed_video": allowed_video, "save": save, "read": read}.items():
+-        setattr(adapter, key, value)
+-    sys.modules["backend"] = adapter
+-    ffmpeg = types.ModuleType("imageio_ffmpeg")
+-    ffmpeg.get_ffmpeg_exe = lambda: shutil.which("ffmpeg") or (_ for _ in ()).throw(RuntimeError("ffmpeg가 없습니다."))
+-    sys.modules.setdefault("imageio_ffmpeg", ffmpeg)
+-    spec = importlib.util.spec_from_file_location("cleanview_legacy_inference", OLD_APP / "inference.py")
+-    original = importlib.util.module_from_spec(spec)
+-    spec.loader.exec_module(original)
+-    inference_adapter = types.ModuleType("inference")
+-    inference_adapter.predict = configured_predict(original.predict, selection)
+-    sys.modules["inference"] = inference_adapter
+-    sys.path.insert(0, str(OLD_APP))
+-    from detector import detect as run_detect
+-    chosen_conf = float(selection["conf"])
+-    run_detect(job, model=selection["weights"], conf=chosen_conf, **params)
+-
+-
+-def configured_predict(predict, selection):
+-    # 검증에서 선택한 해상도와 실제 앱 추론의 해상도를 일치시킵니다.
+-    size = selection.get("imgsz", 1536)
+-    if type(size) is not int or not 640 <= size <= 2048:
+-        raise ValueError("선택 모델의 추론 해상도가 올바르지 않습니다.")
+-    return partial(predict, imgsz=size)
+-
+-
+-def worker(identity):
+-    job = read(WORK / "jobs" / f"{identity}.json")
+-    update(identity, state="running", pid=os.getpid(), stage="준비 중")
+-    try:
+-        if job["kind"] == "detect":
+-            detect(identity, job["params"])
+-        else:
+-            from train_pipeline import run
+-            run(identity, notify=lambda **kw: update(identity, **kw), resume=job["params"].get("resume", False))
+-        update(identity, state="complete", finished=time.time())
+-    except Exception as error:
+-        traceback.print_exc()
+-        update(identity, state="failed", error=str(error), finished=time.time())
+-        raise
+-
+-
+-def main():
+-    parser = argparse.ArgumentParser()
+-    parser.add_argument("--action")
+-    parser.add_argument("--params", default="{}")
+-    parser.add_argument("--worker")
+-    args = parser.parse_args()
+-    if args.worker:
+-        worker(args.worker)
+-        return
+-    try:
+-        if args.action == "health":
+-            import torch
+-            import ultralytics
+-            result = {"cuda": torch.cuda.is_available(), "torch": torch.__version__, "ultralytics": ultralytics.__version__,
+-                      "gpu": torch.cuda.get_device_name(0) if torch.cuda.is_available() else None,
+-                      "selection": ensure_selection(), "ffmpeg": shutil.which("ffmpeg")}
+-        elif args.action == "status":
+-            result = reconcile()
+-        elif args.action == "probe":
+-            result = probe(json.loads(args.params)["path"])
+-        else:
+-            result = start(args.action, json.loads(args.params))
+-        print(json.dumps({"ok": True, "data": result}, ensure_ascii=False))
+-    except Exception as error:
+-        print(json.dumps({"ok": False, "error": str(error)}, ensure_ascii=False))
+-
+-
+-if __name__ == "__main__":
+-    main()
+--- previous/launcher.py
++++ current/launcher.py
+@@ -1,107 +0,0 @@
+-"""독립 대시보드 실행기입니다. 학습은 자동 시작하지 않습니다."""
+-import argparse
+-import json
+-import os
+-from pathlib import Path
+-import subprocess
+-import sys
+-import threading
+-import http.client
+-import webbrowser
+-
+-from dashboard import ROOT, create_server
+-
+-
+-def health(port, query):
+-    connection = http.client.HTTPConnection('127.0.0.1', port, timeout=3)
+-    try:
+-        connection.request('GET', '/api/health?' + query)
+-        response = connection.getresponse()
+-        if response.status != 200:
+-            raise ValueError('루프백 상태 검사에 실패했습니다.')
+-        return json.loads(response.read(4096).decode('utf-8'))
+-    finally:
+-        connection.close()
+-
+-
+-def session_health(root=ROOT):
+-    path = Path(root) / 'work' / 'session.json'
+-    if not path.is_file():
+-        return None
+-    try:
+-        value = json.loads(path.read_text(encoding='utf-8'))
+-        from urllib.parse import urlsplit
+-        url = urlsplit(value['url'])
+-        if url.scheme != 'http' or url.hostname != '127.0.0.1' or not url.port:
+-            return None
+-        result = health(url.port, url.query)
+-        if result.get('ok') and result['data'].get('service') == 'cleanview-dashboard':
+-            return value
+-    except (OSError, ValueError, KeyError, TypeError):
+-        return None
+-    return None
+-
+-
+-def main():
+-    for stream in (sys.stdout, sys.stderr):
+-        if stream is not None and hasattr(stream, 'reconfigure'):
+-            stream.reconfigure(encoding='utf-8')
+-    if '--pipeline' in sys.argv:
+-        sys.argv.remove('--pipeline')
+-        import pipeline
+-        pipeline.main()
+-        return
+-    parser = argparse.ArgumentParser(description='클린뷰 독립 대시보드')
+-    parser.add_argument('--no-browser', action='store_true')
+-    parser.add_argument('--port', type=int, default=0)
+-    parser.add_argument('--self-test', action='store_true')
+-    parser.add_argument('--hidden', action='store_true')
+-    args = parser.parse_args()
+-    if args.hidden and not args.self_test:
+-        argv = ([sys.executable] if getattr(sys, 'frozen', False) else
+-                [sys.executable, '-B', '-X', 'utf8', str(ROOT / 'launcher.py')]) + ['--port', str(args.port)]
+-        if args.no_browser:
+-            argv.append('--no-browser')
+-        (ROOT / 'work').mkdir(exist_ok=True)
+-        with (ROOT / 'work' / 'dashboard.log').open('ab') as log:
+-            child = subprocess.Popen(argv, cwd=str(ROOT), stdin=subprocess.DEVNULL, stdout=log, stderr=log,
+-                                     shell=False, creationflags=getattr(subprocess, 'CREATE_NO_WINDOW', 0))
+-        print(json.dumps({'pid': child.pid, 'session': str(ROOT / 'work' / 'session.json')}, ensure_ascii=False))
+-        return
+-    if not args.self_test:
+-        existing = session_health()
+-        if existing:
+-            if not args.no_browser:
+-                webbrowser.open(existing['url'])
+-            print(json.dumps({'reused': True, 'pid': existing['pid']}, ensure_ascii=False))
+-            return
+-    server = create_server(port=args.port)
+-    url = f'http://127.0.0.1:{server.server_port}/?token={server.app.token}'
+-    if args.self_test:
+-        thread = threading.Thread(target=server.serve_forever, daemon=True)
+-        thread.start()
+-        try:
+-            print(json.dumps(health(server.server_port, 'token=' + server.app.token), ensure_ascii=False))
+-        finally:
+-            server.shutdown()
+-            server.server_close()
+-            thread.join()
+-        return
+-    session = ROOT / 'work' / 'session.json'
+-    temporary = session.with_suffix('.tmp')
+-    temporary.write_text(json.dumps({'url': url, 'pid': os.getpid()}, ensure_ascii=False), encoding='utf-8')
+-    temporary.replace(session)
+-    if not args.no_browser:
+-        webbrowser.open(url)
+-    try:
+-        server.serve_forever()
+-    except KeyboardInterrupt:
+-        pass
+-    finally:
+-        server.server_close()
+-        if session.exists() and json.loads(session.read_text(encoding='utf-8')).get('pid') == os.getpid():
+-            session.unlink()
+-
+-
+-if __name__ == '__main__':
+-    main()
+--- previous/pipeline.py
++++ current/pipeline.py
+@@ -1,194 +0,0 @@
+-"""D 드라이브의 앱과 기존 GPU 컨테이너를 연결합니다."""
+-import argparse
+-import json
+-import os
+-import subprocess
+-import sys
+-import time
+-from pathlib import Path
+-
+-ROOT = (Path(sys.executable).resolve().parent if getattr(sys, "frozen", False)
+-        else Path(__file__).resolve().parent)
+-PROJECT = ROOT.parent
+-WORK = ROOT / "work"
+-CONTAINER = "2026"
+-REMOTE = "/workspace/2026/월요일 PBL/5차"
+-PYTHON = "/opt/venvs/torch/bin/python"
+-ARCHIVE = PROJECT / "이전 도커 실험/3차실험/trash_round3"
+-VIDEO_ROOTS = [WORK / "uploads", PROJECT / "최종/3차/테스트영상", ARCHIVE / "videos"]
+-EXTENSIONS = {".mp4", ".avi", ".mov", ".mkv", ".m4v"}
+-
+-
+-def load(path, default=None):
+-    try:
+-        return json.loads(Path(path).read_text(encoding="utf-8"))
+-    except FileNotFoundError:
+-        return default
+-
+-
+-def remote_path(path):
+-    resolved = Path(path).resolve()
+-    base = Path("D:/2026").resolve()
+-    return "/workspace/2026/" + resolved.relative_to(base).as_posix()
+-
+-
+-def local_paths(value):
+-    if isinstance(value, dict):
+-        return {k: local_paths(v) for k, v in value.items()}
+-    if isinstance(value, list):
+-        return [local_paths(v) for v in value]
+-    if isinstance(value, str) and value.startswith("/workspace/2026/"):
+-        return str(Path("D:/2026") / value.removeprefix("/workspace/2026/"))
+-    return value
+-
+-
+-def video_path(value):
+-    p = Path(value).resolve(strict=True)
+-    if not p.is_file() or p.suffix.lower() not in EXTENSIONS:
+-        raise ValueError("지원하는 영상 파일을 선택하세요.")
+-    if not any(p.is_relative_to(root.resolve()) for root in VIDEO_ROOTS):
+-        raise ValueError("허용된 영상 폴더가 아닙니다.")
+-    if not p.stat().st_size:
+-        raise ValueError("0바이트 영상은 처리할 수 없습니다.")
+-    return p
+-
+-
+-def docker_call(arguments, timeout=25):
+-    flags = subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0
+-    p = subprocess.run(["docker", "exec", CONTAINER, PYTHON, *arguments],
+-                       capture_output=True, timeout=timeout, creationflags=flags)
+-    if p.returncode:
+-        message = p.stderr.decode("utf-8", errors="replace")[-3500:]
+-        raise RuntimeError(message or "Docker 실행에 실패했습니다. Docker Desktop과 2026 컨테이너를 확인하세요.")
+-    output = p.stdout.decode("utf-8").strip()
+-    result = json.loads(output)
+-    if not result.get("ok"):
+-        raise RuntimeError(result.get("error", "GPU 작업 오류"))
+-    return local_paths(result["data"])
+-
+-
+-def tail(path, maximum=12000):
+-    if not path or not Path(path).is_file():
+-        return ""
+-    with Path(path).open("rb") as stream:
+-        stream.seek(max(0, Path(path).stat().st_size - maximum))
+-        return stream.read(maximum).decode("utf-8", errors="replace")
+-
+-
+-def history():
+-    import csv
+-    files = sorted((WORK / "training/runs").glob("*/results.csv"), key=lambda p: p.stat().st_mtime)
+-    if not files:
+-        return []
+-    with files[-1].open(encoding="utf-8") as stream:
+-        rows = list(csv.DictReader(stream))
+-    result = []
+-    for row in rows:
+-        row = {k.strip(): v for k, v in row.items()}
+-        try:
+-            result.append({"epoch": int(float(row["epoch"])),
+-                           "precision": float(row.get("metrics/precision(B)", 0)),
+-                           "recall": float(row.get("metrics/recall(B)", 0)),
+-                           "map50": float(row.get("metrics/mAP50(B)", 0)),
+-                           "loss": float(row.get("train/box_loss", 0))})
+-        except (KeyError, ValueError):
+-            continue
+-    return result
+-
+-
+-def status():
+-    jobs = [load(p, {}) for p in (WORK / "jobs").glob("*.json")]
+-    # 화면은 로컬 파일을 읽고, 실행 중 작업의 생존 여부만 30초 간격으로 확인합니다.
+-    check = load(WORK / "container_check.json", {})
+-    if any(j.get("state") in {"queued", "running"} for j in jobs) and time.time() - check.get("checked", 0) >= 30:
+-        try:
+-            docker_call([REMOTE + "/gpu_worker.py", "--action", "status"], timeout=6)
+-            check = {"checked": time.time(), "error": None}
+-            jobs = [load(p, {}) for p in (WORK / "jobs").glob("*.json")]
+-        except (RuntimeError, OSError, subprocess.SubprocessError) as error:
+-            check = {"checked": time.time(), "error": "Docker 연결 확인: " + str(error)}
+-        temporary = WORK / f"container_check.{os.getpid()}.tmp"
+-        temporary.write_text(json.dumps(check, ensure_ascii=False), encoding="utf-8")
+-        temporary.replace(WORK / "container_check.json")
+-    if check.get("error"):
+-        for job in jobs:
+-            if job.get("state") in {"queued", "running"}:
+-                job.update(error=check["error"])
+-    jobs = sorted(jobs, key=lambda j: j.get("created", 0), reverse=True)
+-    for job in jobs[:20]:
+-        job["log"] = tail(WORK / "jobs" / (job.get("id", "") + ".log"))
+-    final = load(WORK / "training/final.json") or load(ARCHIVE / "final.json", {})
+-    test = final.get("test", {})
+-    operating = test.get("operating", {})
+-    ap = test.get("metrics", {})
+-    metrics = {"precision": operating.get("precision"), "recall": operating.get("recall"),
+-               "map50": ap.get("metrics/mAP50(B)", ap.get("map50")),
+-               "map50_95": ap.get("metrics/mAP50-95(B)", ap.get("map50_95")),
+-               "split": "5차 최종 테스트" if (WORK / "training/final.json").is_file() else "3차 과거 테스트 150장",
+-               "target_met": final.get("target_met", False)}
+-    training_job = next((j for j in jobs if j.get("kind") == "train"), {})
+-    progress = load(WORK / "training/status.json", {})
+-    # 진행 파일은 같은 작업의 부가 정보이며 작업의 최종 상태를 덮어쓰지 않습니다.
+-    training = dict(progress) if training_job and progress.get("job") == training_job.get("id") else {}
+-    if training_job:
+-        for key in ("state", "error", "updated", "stage", "epoch", "epochs", "progress"):
+-            if key in training_job:
+-                training[key] = training_job[key]
+-        training.update(job=training_job["id"], id=training_job["id"],
+-                        state=training_job.get("state"), error=training_job.get("error"),
+-                        updated=training_job.get("updated"))
+-    # 보존된 곡선은 최신 작업의 진행률이 아닙니다. 실행 폴더와 완료 증거를 따로 표시합니다.
+-    training["history"] = history()
+-    training["log"] = training_job.get("log", "")
+-    runs = sorted((WORK / "training/runs").glob("*/results.csv"), key=lambda p: p.stat().st_mtime)
+-    if runs:
+-        completed = load(runs[-1].parent / "phase_complete.json", {})
+-        training["history_context"] = {"run": runs[-1].parent.name,
+-                                       "source": str(runs[-1]),
+-                                       "phase_complete": bool(completed.get("completed")),
+-                                       "phase_completed_at": completed.get("completed"),
+-                                       "last_epoch": training["history"][-1]["epoch"] if training["history"] else None}
+-    manifest = load(WORK / "training/data_manifest.json", {})
+-    dataset = {key: manifest[key] for key in ("counts", "sources", "download_bytes", "test_protocol", "external_test", "near_duplicate", "created") if key in manifest}
+-    dataset["manifest_path"] = str(WORK / "training/data_manifest.json")
+-    return local_paths({"jobs": jobs[:20], "selection": load(WORK / "selected_model.json", {}),
+-                        "metrics": metrics, "training": training,
+-                        "dataset": dataset,
+-                        "container": CONTAINER, "project": str(ROOT),
+-                        "independent": True, "note": "Codex/API 토큰 없이 이 PC의 Docker GPU에서 실행됩니다."})
+-
+-
+-def action(name, params):
+-    if not isinstance(params, dict):
+-        raise ValueError("설정은 JSON 객체여야 합니다.")
+-    if name == "status":
+-        return status()
+-    if name == "videos":
+-        # 같은 보존 영상을 두 번 나열하지 않고 대표 폴더를 사용합니다.
+-        stored = next((p for p in VIDEO_ROOTS[1:] if p.is_dir() and any(p.iterdir())), None)
+-        folders = [VIDEO_ROOTS[0]] + ([stored] if stored else [])
+-        return [{"path": str(p.resolve()), "name": p.name, "bytes": p.stat().st_size}
+-                for folder in folders if folder.exists()
+-                for p in sorted(folder.rglob("*")) if p.is_file() and p.suffix.lower() in EXTENSIONS]
+-    if name in {"probe", "detect"}:
+-        params = {**params, "path": remote_path(video_path(params.get("path", "")))}
+-    if name not in {"probe", "detect", "train", "health"}:
+-        raise ValueError("지원하지 않는 작업입니다.")
+-    return docker_call([REMOTE + "/gpu_worker.py", "--action", name,
+-                        "--params", json.dumps(params, ensure_ascii=False)], timeout=25)
+-
+-
+-def main():
+-    parser = argparse.ArgumentParser()
+-    parser.add_argument("--action", required=True)
+-    parser.add_argument("--params", default="{}")
+-    args = parser.parse_args()
+-    try:
+-        result = {"ok": True, "data": action(args.action, json.loads(args.params))}
+-    except Exception as error:
+-        result = {"ok": False, "error": str(error)}
+-    print(json.dumps(result, ensure_ascii=False, allow_nan=False))
+-
+-
+-if __name__ == "__main__":
+-    main()
+--- previous/prepare_training.py
++++ current/prepare_training.py
+@@ -1,559 +0,0 @@
+-"""출처와 고정 평가 자료를 보존하며 추가 학습 데이터를 준비합니다."""
+-import argparse
+-import collections
+-import concurrent.futures
+-import hashlib
+-import io
+-import json
+-import math
+-import os
+-import random
+-import re
+-import shutil
+-import struct
+-import threading
+-import time
+-import urllib.request
+-import uuid
+-import zipfile
+-import zlib
+-from pathlib import Path, PurePosixPath
+-
+-ROOT = Path(__file__).resolve().parent
+-ARCHIVE = ROOT.parent / "이전 도커 실험/3차실험/trash_round3"
+-TRAINING = ROOT / "work/training"
+-SEED = 20261028
+-MAX_BYTES = 20 * 1024 ** 3
+-STREET_URL = "https://zenodo.org/api/records/8288500/files/images.zip/content"
+-STREET_SIZE = 13728630001
+-_ERROR_LOCK = threading.Lock()
+-
+-
+-def atomic_json(path, value):
+-    path = Path(path)
+-    path.parent.mkdir(parents=True, exist_ok=True)
+-    temporary = path.with_suffix("." + uuid.uuid4().hex + ".tmp")
+-    temporary.write_text(json.dumps(value, ensure_ascii=False, allow_nan=False, indent=2), encoding="utf-8")
+-    temporary.replace(path)
+-
+-
+-def sha256_file(path):
+-    value = hashlib.sha256()
+-    with Path(path).open("rb") as stream:
+-        for block in iter(lambda: stream.read(1024 * 1024), b""):
+-            value.update(block)
+-    return value.hexdigest()
+-
+-
+-def load(path):
+-    return json.loads(Path(path).read_text(encoding="utf-8"))
+-
+-
+-def validate_yolo(text):
+-    rows = []
+-    for line in text.split("\n"):
+-        if not line.strip():
+-            continue
+-        row = list(map(float, line.split()))
+-        if len(row) != 5 or row[0] != 0 or not all(math.isfinite(n) for n in row):
+-            raise ValueError("단일 trash 클래스와 유한한 YOLO 좌표가 필요합니다.")
+-        _, x, y, width, height = row
+-        # 보존 라벨 소수점 7자리 반올림의 최대 5e-8 경계 차이를 허용합니다.
+-        tolerance = 1e-7
+-        if width <= 0 or height <= 0 or not (-tolerance <= x - width / 2 and x + width / 2 <= 1 + tolerance
+-                                                           and -tolerance <= y - height / 2 and y + height / 2 <= 1 + tolerance):
+-            raise ValueError("라벨 상자가 이미지 경계를 벗어났습니다.")
+-        rows.append([0, x, y, width, height])
+-    return rows
+-
+-
+-def coco_to_yolo(image, annotations):
+-    width, height = float(image["width"]), float(image["height"])
+-    if not all(math.isfinite(n) and n > 0 for n in (width, height)):
+-        raise ValueError("이미지 크기가 올바르지 않습니다.")
+-    rows = []
+-    for annotation in annotations:
+-        x, y, w, h = map(float, annotation["bbox"])
+-        if not all(math.isfinite(n) for n in (x, y, w, h)) or w <= 0 or h <= 0:
+-            raise ValueError("COCO 상자의 크기가 올바르지 않습니다.")
+-        left, top, right, bottom = max(0, x), max(0, y), min(width, x + w), min(height, y + h)
+-        if right <= left or bottom <= top:
+-            raise ValueError("이미지와 겹치지 않는 COCO 상자입니다.")
+-        rows.append([0, (left + right) / (2 * width), (top + bottom) / (2 * height),
+-                     (right - left) / width, (bottom - top) / height])
+-    return rows
+-
+-
+-def group_key(source, image):
+-    path = PurePosixPath(str(image.get("path", image.get("file_name", image.get("id", "unknown")))).replace("\\", "/"))
+-    parts = [s for s in path.parts if s not in {"/", "datasets"}]
+-    location = parts[0] if len(parts) > 1 else "unknown-location"
+-    match = re.search(r"G[HX]\d{2}(\d{4})", path.stem)
+-    # 같은 GoPro 녹화의 장 번호와 물체 종류별 하위 폴더는 분리하지 않습니다.
+-    identity = match.group(1) if match else location
+-    return f"{source}:{location}:{identity}"
+-
+-
+-def prior_street_ids(records):
+-    identities = set()
+-    for row in records:
+-        if row.get("source") != "pLitterStreet":
+-            continue
+-        match = re.search(r"(?:plitter|street)_(\d+)(?:\.[^/\\]+)?$", str(row.get("image", "")))
+-        if not match:
+-            raise ValueError("과거 pLitterStreet 자료의 원본 ID를 확인할 수 없습니다.")
+-        identities.add(match.group(1))
+-    return identities
+-
+-
+-def split_groups(records, seen_groups=(), seed=SEED):
+-    groups = sorted({r["group"] for r in records} - set(seen_groups))
+-    random.Random(seed).shuffle(groups)
+-    count = max(1, len(groups) // 10) if len(groups) >= 10 else 0
+-    mapping = {g: "external_test" for g in groups[:count]}
+-    mapping.update({g: "external_val" for g in groups[count:2 * count]})
+-    return [{**r, "split": mapping.get(r["group"], "train")} for r in sorted(records, key=lambda r: r["id"])]
+-
+-
+-def image_info(path):
+-    from PIL import Image, UnidentifiedImageError
+-    try:
+-        with Image.open(path) as image:
+-            image.verify()
+-        with Image.open(path) as image:
+-            image.load()
+-            if image.width < 16 or image.height < 16 or image.width * image.height > 100000000:
+-                raise ValueError("허용 범위 밖의 이미지 크기입니다.")
+-            gray = image.convert("L").resize((9, 8))
+-            pixels = [gray.getpixel((x, y)) for y in range(8) for x in range(9)]
+-            signature = sum((pixels[y * 9 + x] > pixels[y * 9 + x + 1]) << (y * 8 + x)
+-                            for y in range(8) for x in range(8))
+-            return {"sha256": sha256_file(path), "signature": f"{signature:016x}",
+-                    "width": image.width, "height": image.height, "bytes": Path(path).stat().st_size}
+-    except (OSError, UnidentifiedImageError, SyntaxError) as error:
+-        raise ValueError("이미지를 완전히 해독할 수 없습니다.") from error
+-
+-
+-def deduplicate(records, protected=(), distance=4):
+-    accepted, rejected = [], []
+-    hashes = {r["sha256"] for r in protected}
+-    signatures = [int(r["signature"], 16) for r in protected]
+-    for record in records:
+-        signature = int(record["signature"], 16)
+-        reason = "동일 해시" if record["sha256"] in hashes else "근접 이미지" if any(
+-            (signature ^ old).bit_count() <= distance for old in signatures) else None
+-        if reason:
+-            rejected.append({**record, "excluded_reason": reason})
+-        else:
+-            accepted.append(record)
+-            hashes.add(record["sha256"])
+-            signatures.append(signature)
+-    return accepted, rejected
+-
+-
+-class BudgetExceeded(ValueError):
+-    pass
+-
+-
+-class DownloadBudget:
+-    def __init__(self, root, limit=MAX_BYTES, notify=lambda **kw: None):
+-        self.root = Path(root)
+-        self.path = self.root / "download_ledger.json"
+-        self.limit, self.notify = min(limit, MAX_BYTES), notify
+-        self.used = int(load(self.path)["download_bytes"]) if self.path.exists() else 0
+-        self.reserved = 0
+-        self.lock = threading.Lock()
+-
+-    def reserve(self, count):
+-        with self.lock:
+-            if count < 0 or self.used + self.reserved + count > self.limit:
+-                raise BudgetExceeded("추가 데이터 전송 누적 20GB 상한에 도달했습니다.")
+-            self.reserved += count
+-
+-    def release(self, count):
+-        with self.lock:
+-            self.reserved -= count
+-            if self.reserved < 0:
+-                raise ValueError("전송 예약량이 음수가 됐습니다.")
+-
+-    def charge(self, count, reserved=False):
+-        with self.lock:
+-            if count < 0 or self.used + (0 if reserved else self.reserved) + count > self.limit:
+-                raise BudgetExceeded("추가 데이터 전송 누적 20GB 상한에 도달했습니다.")
+-            if reserved:
+-                if count > self.reserved:
+-                    raise ValueError("전송 예약보다 수신량이 큽니다.")
+-                self.reserved -= count
+-            self.used += count
+-            atomic_json(self.path, {"download_bytes": self.used, "limit_bytes": self.limit})
+-            self.notify(download_bytes=self.used, download_limit_bytes=self.limit)
+-
+-
+-def request(url, **kwargs):
+-    if not url.startswith("https://") and not url.startswith("http://127.0.0.1:"):
+-        raise ValueError("HTTPS 데이터 출처만 허용됩니다.")
+-    return urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": "CleanView/5 research preparation", **kwargs.pop("headers", {})}, **kwargs), timeout=40)
+-
+-
+-def download(url, destination, budget, expected_md5=None):
+-    destination = Path(destination)
+-    destination.parent.mkdir(parents=True, exist_ok=True)
+-    receipt = destination.with_suffix(destination.suffix + ".download.json")
+-    if destination.exists() and receipt.exists() and load(receipt)["sha256"] == sha256_file(destination):
+-        return destination
+-    with request(url, method="HEAD") as response:
+-        length = int(response.headers["Content-Length"])
+-        etag = response.headers.get("ETag")
+-    if length <= 0:
+-        raise ValueError("원본 크기가 올바르지 않습니다.")
+-    partial = destination.with_suffix(destination.suffix + ".part")
+-    metadata = destination.with_suffix(destination.suffix + ".part.json")
+-    identity = {"url": url, "etag": etag, "size": length}
+-    resume = bool(etag and partial.exists() and metadata.exists() and load(metadata) == identity)
+-    start = partial.stat().st_size if resume else 0
+-    if start > length:
+-        raise ValueError("부분 다운로드가 원본 크기보다 큽니다.")
+-    atomic_json(metadata, identity)
+-    if start < length:
+-        remaining = length - start
+-        budget.reserve(remaining)
+-        try:
+-            with request(url, headers={"Range": f"bytes={start}-", "If-Range": etag} if start else {}) as response:
+-                if start and (response.status != 206 or not response.headers.get("Content-Range", "").startswith(f"bytes {start}-")):
+-                    raise ValueError("서버가 재개 범위 요청을 보존하지 않았습니다.")
+-                if int(response.headers.get("Content-Length", remaining)) != remaining:
+-                    raise ValueError("원본과 실제 전송 크기가 다릅니다.")
+-                with partial.open("ab" if start else "wb") as stream:
+-                    while remaining:
+-                        block = response.read(min(256 * 1024, remaining))
+-                        if not block:
+-                            break
+-                        budget.charge(len(block), reserved=True)
+-                        remaining -= len(block)
+-                        stream.write(block)
+-        finally:
+-            budget.release(remaining)
+-    if partial.stat().st_size != length:
+-        raise ValueError("다운로드가 완성되지 않았습니다.")
+-    if expected_md5:
+-        digest = hashlib.md5(partial.read_bytes(), usedforsecurity=False).hexdigest()
+-        if digest != expected_md5:
+-            raise ValueError("공식 MD5와 다운로드가 일치하지 않습니다.")
+-    partial.replace(destination)
+-    atomic_json(receipt, {**identity, "sha256": sha256_file(destination)})
+-    return destination
+-
+-
+-class RemoteZip:
+-    def __init__(self, url, size, budget):
+-        self.url, self.size, self.budget, self.pos = url, size, budget, 0
+-
+-    def seekable(self):
+-        return True
+-
+-    def tell(self):
+-        return self.pos
+-
+-    def seek(self, offset, whence=0):
+-        self.pos = offset if whence == 0 else self.pos + offset if whence == 1 else self.size + offset
+-        return self.pos
+-
+-    def read(self, n=-1):
+-        n = min(self.size - self.pos, n if n >= 0 else self.size - self.pos)
+-        if n <= 0:
+-            return b""
+-        data = range_bytes(self.url, self.pos, self.pos + n - 1, self.budget)
+-        self.pos += len(data)
+-        return data
+-
+-
+-def range_bytes(url, start, end, budget):
+-    if start < 0 or end < start or end - start > 32 * 1024 ** 2:
+-        raise ValueError("허용 범위를 넘는 ZIP 부분 요청입니다.")
+-    remaining = end - start + 1
+-    budget.reserve(remaining)
+-    blocks = []
+-    try:
+-        with request(url, headers={"Range": f"bytes={start}-{end}"}) as response:
+-            if response.status != 206 or not response.headers.get("Content-Range", "").startswith(f"bytes {start}-{end}/"):
+-                raise ValueError("서버가 정확한 ZIP 부분 요청을 지원하지 않습니다.")
+-            while remaining:
+-                block = response.read(min(256 * 1024, remaining))
+-                if not block:
+-                    break
+-                budget.charge(len(block), reserved=True)
+-                remaining -= len(block)
+-                blocks.append(block)
+-    finally:
+-        budget.release(remaining)
+-    data = b"".join(blocks)
+-    if len(data) != end - start + 1:
+-        raise ValueError("ZIP 부분 응답 크기가 다릅니다.")
+-    return data
+-
+-
+-def zip_member(info, budget):
+-    if info.file_size > 32 * 1024 ** 2 or info.compress_size > 32 * 1024 ** 2:
+-        raise ValueError("과도한 단일 이미지 크기입니다.")
+-    header = range_bytes(STREET_URL, info.header_offset, info.header_offset + 29, budget)
+-    if header[:4] != b"PK\x03\x04":
+-        raise ValueError("ZIP 지역 헤더가 올바르지 않습니다.")
+-    name_size, extra_size = struct.unpack_from("<HH", header, 26)
+-    offset = info.header_offset + 30 + name_size + extra_size
+-    payload = range_bytes(STREET_URL, offset, offset + info.compress_size - 1, budget)
+-    if info.compress_type == zipfile.ZIP_DEFLATED:
+-        decoder = zlib.decompressobj(-15)
+-        data = decoder.decompress(payload, info.file_size + 1)
+-        if decoder.unconsumed_tail or not decoder.eof:
+-            raise ValueError("ZIP 압축 해제 크기가 선언과 다릅니다.")
+-    elif info.compress_type == zipfile.ZIP_STORED:
+-        data = payload
+-    else:
+-        raise ValueError("지원하지 않는 ZIP 압축입니다.")
+-    if len(data) != info.file_size or zlib.crc32(data) & 0xffffffff != info.CRC:
+-        raise ValueError("ZIP 이미지 CRC가 일치하지 않습니다.")
+-    return data
+-
+-
+-def freeze_manifest(path, value):
+-    path = Path(path)
+-    if path.exists():
+-        if load(path) != value:
+-            raise ValueError("고정 데이터 명세를 현재 값으로 바꿀 수 없습니다.")
+-        return
+-    atomic_json(path, value)
+-
+-
+-def failure(training, source, identity, error):
+-    with _ERROR_LOCK:
+-        with (training / "download_errors.jsonl").open("a", encoding="utf-8", newline="\n") as stream:
+-            stream.write(json.dumps({"kst": time.strftime("%Y-%m-%dT%H:%M:%S%z"), "source": source,
+-                                     "id": identity, "error": str(error)}, ensure_ascii=False) + "\n")
+-
+-
+-def write_labels(path, rows):
+-    path = Path(path)
+-    path.parent.mkdir(parents=True, exist_ok=True)
+-    text = "".join(" ".join(f"{v:.9g}" for v in row) + "\n" for row in rows)
+-    validate_yolo(text)
+-    path.write_text(text, encoding="utf-8", newline="\n")
+-
+-
+-def verify_records(records):
+-    for row in records:
+-        if sha256_file(row["image"]) != row["sha256"] or sha256_file(row["label"]) != row["label_sha256"]:
+-            raise ValueError("고정 이미지 또는 라벨이 변경됐습니다: " + row["id"])
+-
+-
+-def _prepare(notify=lambda **kw: None, street_limit=4000, salsa_limit=1400):
+-    training = TRAINING
+-    training.mkdir(parents=True, exist_ok=True)
+-    status = {}
+-    status_lock = threading.Lock()
+-    def progress(**kw):
+-        with status_lock:
+-            status.update(kw, updated=time.time())
+-            atomic_json(training / "status.json", status)
+-            notify(**kw)
+-    progress(stage="학습 데이터와 고정 평가 자료 확인", epoch=0, epochs=180)
+-    manifest_path = training / "data_manifest.json"
+-    if manifest_path.exists():
+-        manifest = load(manifest_path)
+-        if manifest["sources_sha256"] != sha256_file(ROOT / "sources.json"):
+-            raise ValueError("고정 명세 작성 뒤 데이터 출처 정책이 바뀌었습니다.")
+-        verify_records(manifest["records"])
+-        progress(stage="고정 데이터 명세 재사용", **manifest["counts"])
+-        return manifest
+-    if shutil.disk_usage(training).free < 25 * 1024 ** 3:
+-        raise ValueError("데이터 준비와 학습을 위한 여유 공간 25GB가 필요합니다.")
+-    budget = DownloadBudget(training, notify=progress)
+-    records, rejected, protected = [], [], []
+-    for manifest_name, base in [("reference_holdout_sha256.json", ARCHIVE / "data/reference"),
+-                                ("original_holdout_sha256.json", ARCHIVE)]:
+-        for relative, expected in load(ARCHIVE / manifest_name).items():
+-            source = base / relative
+-            if sha256_file(source) != expected:
+-                raise ValueError("과거 고정 평가 기준과 다릅니다: " + str(source))
+-    for split in ["val", "test", "train"]:
+-        folder = ARCHIVE / "data/full/images" / split
+-        for index, image in enumerate(sorted(folder.glob("*"))):
+-            if not image.is_file():
+-                continue
+-            label = ARCHIVE / "data/full/labels" / split / (image.stem + ".txt")
+-            validate_yolo(label.read_text(encoding="utf-8"))
+-            info = image_info(image)
+-            row = {**info, "id": "taco_" + split + "_" + image.stem, "source": "TACO preserved",
+-                   "image": str(image), "label": str(label), "label_sha256": sha256_file(label),
+-                   "group": "taco:" + image.stem, "split": split}
+-            records.append(row)
+-            if split != "train":
+-                protected.append(row)
+-                reference = ARCHIVE / "data/reference/images" / split / image.name
+-                if reference.is_file():
+-                    protected.append(image_info(reference))
+-            if index % 100 == 0:
+-                progress(stage=f"원본 {split} 무결성 검사", checked=index + 1)
+-    baseline_train, removed = deduplicate([r for r in records if r["split"] == "train"], protected)
+-    rejected.extend(removed)
+-    records = [r for r in records if r["split"] != "train"] + baseline_train
+-    protected_for_external = records + protected
+-    raw = training / "downloads"
+-    raw.mkdir(exist_ok=True)
+-    sources = load(ROOT / "sources.json")
+-    old_street_manifest = ARCHIVE / "sources/additional_manifest.json"
+-    used_street_ids = prior_street_ids(load(old_street_manifest))
+-    # 공식 원자료와 MD5를 보존하고 ZIP 전체 대신 선택한 이미지 범위만 읽습니다.
+-    annotations = download("https://zenodo.org/api/records/8288500/files/annotations.zip/content",
+-                           raw / "plitter_annotations.zip", budget, "2484e076b1e9d66036b0a15e9928692f")
+-    with zipfile.ZipFile(annotations) as archive:
+-        name = next(n for n in archive.namelist() if n.endswith("10_class_splits/annotations_all.json"))
+-        street = json.loads(archive.read(name))
+-    by_id = collections.defaultdict(list)
+-    for annotation in street["annotations"]:
+-        if annotation["category_id"] != 4:
+-            by_id[annotation["image_id"]].append(annotation)
+-    images = [i for i in street["images"] if by_id[i["id"]] and not i.get("deleted")]
+-    random.Random(SEED).shuffle(images)
+-    with zipfile.ZipFile(RemoteZip(STREET_URL, STREET_SIZE, budget)) as remote:
+-        members = collections.defaultdict(list)
+-        for member in remote.infolist():
+-            if not member.is_dir():
+-                members[PurePosixPath(member.filename).name].append(member)
+-    choices = []
+-    for image in images:
+-        found = members.get(image["file_name"], [])
+-        exact = [m for m in found if m.filename.endswith(image.get("path", "").removeprefix("/datasets/"))]
+-        member = exact[0] if len(exact) == 1 else found[0] if len(found) == 1 else None
+-        if member:
+-            choices.append((image, member))
+-        if len(choices) >= street_limit:
+-            break
+-    progress(stage="pLitterStreet 원본 이미지 확보", requested=len(choices), downloaded=0, download_bytes=budget.used)
+-    external = []
+-    def acquire(pair):
+-        image, member = pair
+-        identity = f"plitter_{image['id']}"
+-        destination = training / "data/images/train" / (identity + ".jpg")
+-        label = training / "data/labels/train" / (identity + ".txt")
+-        receipt = destination.with_suffix(".source.json")
+-        try:
+-            if destination.exists():
+-                if not receipt.exists() or load(receipt)["sha256"] != sha256_file(destination):
+-                    raise ValueError("기존 다운로드의 보존 해시가 없거나 다릅니다.")
+-            else:
+-                data = zip_member(member, budget)
+-                destination.parent.mkdir(parents=True, exist_ok=True)
+-                temporary = destination.with_suffix(".part")
+-                temporary.write_bytes(data)
+-                image_info(temporary)
+-                temporary.replace(destination)
+-                atomic_json(receipt, {"sha256": sha256_file(destination), "zip_member": member.filename,
+-                                      "crc32": member.CRC, "zip_bytes": STREET_SIZE, "url": STREET_URL})
+-            info = image_info(destination)
+-            if info["width"] != image["width"] or info["height"] != image["height"]:
+-                raise ValueError("COCO와 원본 이미지 크기가 다릅니다.")
+-            write_labels(label, coco_to_yolo(image, by_id[image["id"]]))
+-            return {**info, "id": identity, "source": "pLitterStreet", "image": str(destination),
+-                    "label": str(label), "label_sha256": sha256_file(label), "group": group_key("pLitterStreet", image),
+-                    "split": "train", "url": STREET_URL, "zip_member": member.filename, "license": "CC-BY-4.0",
+-                    "source_id": str(image["id"]), "identity_status": "restored" if str(image["id"]) in used_street_ids
+-                    else "new_to_round3_manifest"}
+-        except BudgetExceeded:
+-            raise
+-        except Exception as error:
+-            failure(training, "pLitterStreet", identity, error)
+-            return None
+-    with concurrent.futures.ThreadPoolExecutor(max_workers=6) as pool:
+-        consecutive_failures = 0
+-        for start in range(0, len(choices), 6):
+-            for index, row in enumerate(pool.map(acquire, choices[start:start + 6]), start):
+-                if row:
+-                    external.append(row)
+-                    consecutive_failures = 0
+-                else:
+-                    consecutive_failures += 1
+-                if consecutive_failures >= 3:
+-                    raise ValueError("이미지 확보가 연속 3개 실패했습니다. 원인을 확인한 뒤 재개하세요.")
+-                progress(stage="pLitterStreet 원본 이미지 확보", downloaded=index + 1, valid_images=len(external), requested=len(choices))
+-    if len(external) < min(500, street_limit):
+-        raise ValueError(f"pLitterStreet 유효 이미지 부족: {len(external)}. download_errors.jsonl을 확인하세요.")
+-    # 기존 학습에 사용한 데이터셋은 새로운 독립 테스트라고 표시하지 않습니다.
+-    # pLitterStreet와 SALSA는 전부 학습 전용이며 고정 TACO val/test는 따로 유지합니다.
+-    salsa_path = ARCHIVE / "sources/salsa/annotations.json"
+-    salsa = load(salsa_path)
+-    salsa_by_id = collections.defaultdict(list)
+-    for annotation in salsa["annotations"]:
+-        salsa_by_id[annotation["image_id"]].append(annotation)
+-    salsa_images = [i for i in salsa["images"] if i.get("license") == 1 and not i["file_name"].startswith("batch_") and salsa_by_id[i["id"]]]
+-    random.Random(SEED).shuffle(salsa_images)
+-    progress(stage="SALSA CC BY 4.0 이미지 복원", requested=min(len(salsa_images), salsa_limit), downloaded=0)
+-    for index, image in enumerate(salsa_images[:salsa_limit]):
+-        identity = f"salsa_{image['id']}"
+-        destination = training / "data/images/train" / (identity + ".jpg")
+-        label = training / "data/labels/train" / (identity + ".txt")
+-        try:
+-            download(image["flickr_url"], destination, budget)
+-            info = image_info(destination)
+-            if (info["width"], info["height"]) != (image["width"], image["height"]):
+-                raise ValueError("SALSA 라벨과 이미지 크기가 다릅니다.")
+-            write_labels(label, coco_to_yolo(image, salsa_by_id[image["id"]]))
+-            external.append({**info, "id": identity, "source": "SALSA", "image": str(destination), "label": str(label),
+-                             "label_sha256": sha256_file(label), "group": "SALSA:OpenLitterMap", "split": "train",
+-                             "url": image["flickr_url"], "license": "CC-BY-4.0", "annotations_license": "ODbL-1.0"})
+-        except BudgetExceeded:
+-            raise
+-        except Exception as error:
+-            failure(training, "SALSA", identity, error)
+-        if index % 10 == 0:
+-            progress(stage="SALSA CC BY 4.0 이미지 복원", downloaded=index + 1)
+-    progress(stage="고정 평가 우선 해시·근접 중복 배제")
+-    accepted, excluded = deduplicate(external, protected_for_external)
+-    rejected.extend(excluded)
+-    records += accepted
+-    if len(accepted) < 500:
+-        raise ValueError("중복 배제 후 추가 학습 이미지가 500개 미만입니다.")
+-    counts = dict(collections.Counter(r["split"] for r in records))
+-    counts.update(additional=len(accepted), original_train=len(baseline_train),
+-                  plitter=sum(r["source"] == "pLitterStreet" for r in accepted),
+-                  salsa=sum(r["source"] == "SALSA" for r in accepted), excluded=len(rejected),
+-                  restored=sum(r.get("identity_status") == "restored" for r in accepted),
+-                  new_identity=sum(r.get("identity_status") == "new_to_round3_manifest" for r in accepted))
+-    for split in ["train", "val", "test"]:
+-        (training / (split + ".txt")).write_text("".join(r["image"] + "\n" for r in records if r["split"] == split), encoding="utf-8", newline="\n")
+-    config = {"path": str(training), "train": str(training / "train.txt"), "val": str(training / "val.txt"),
+-              "test": str(training / "test.txt"), "names": {0: "trash"}}
+-    # JSON은 YAML의 부분집합이므로 별도 YAML 패키지 없이 같은 명세를 저장합니다.
+-    atomic_json(training / "dataset.yaml", config)
+-    atomic_json(training / "excluded.json", rejected)
+-    manifest = {"schema": 1, "seed": SEED, "records": records, "counts": counts,
+-                "sources": sources, "sources_sha256": sha256_file(ROOT / "sources.json"),
+-                "prior_street_manifest_sha256": sha256_file(old_street_manifest), "prior_street_ids": len(used_street_ids),
+-                "download_bytes": budget.used, "test_protocol": "historical benchmark: previously evaluated 150 photographs",
+-                "external_test": None, "near_duplicate": "64-bit difference hash, Hamming <= 4; holdout wins",
+-                "created": time.time()}
+-    freeze_manifest(manifest_path, manifest)
+-    progress(stage="학습 데이터 고정 완료", **counts, download_bytes=budget.used)
+-    return manifest
+-
+-
+-def prepare(notify=lambda **kw: None, street_limit=4000, salsa_limit=1400):
+-    import fcntl
+-    TRAINING.mkdir(parents=True, exist_ok=True)
+-    with (TRAINING / "preparation.lock").open("a") as lock:
+-        try:
+-            fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+-        except BlockingIOError as error:
+-            raise ValueError("다른 데이터 준비 프로세스가 실행 중입니다.") from error
+-        return _prepare(notify=notify, street_limit=street_limit, salsa_limit=salsa_limit)
+-
+-
+-def main():
+-    parser = argparse.ArgumentParser()
+-    parser.add_argument("--prepare", action="store_true", required=True)
+-    args = parser.parse_args()
+-    result = prepare(notify=lambda **kw: print(json.dumps(kw, ensure_ascii=False), flush=True))
+-    print(json.dumps(result["counts"], ensure_ascii=False))
+-
+-
+-if __name__ == "__main__":
+-    main()
+--- previous/sources.json
++++ current/sources.json
+@@ -1,50 +0,0 @@
+-{
+-  "checked_date": "2026-10-28",
+-  "TACO": {
+-    "url": "https://github.com/pedropro/TACO",
+-    "role": "보존 원본 train 1200 / validation 150 / historical test 150",
+-    "license": "원래 이미지별 권리와 출처를 보존하며 새 배포 권한을 부여하지 않음"
+-  },
+-  "pLitterStreet": {
+-    "url": "https://zenodo.org/records/8288500",
+-    "metadata_url": "https://zenodo.org/api/records/8288500",
+-    "license": "CC-BY-4.0",
+-    "license_evidence": "공식 API metadata.license.id = cc-by-4.0",
+-    "annotations_url": "https://zenodo.org/api/records/8288500/files/annotations.zip/content",
+-    "annotations_md5": "2484e076b1e9d66036b0a15e9928692f",
+-    "images_url": "https://zenodo.org/api/records/8288500/files/images.zip/content",
+-    "images_zip_bytes": 13728630001,
+-    "images_zip_md5": "02382a3b9620ae7b086ff4c7fd11891d",
+-    "whole_image_zip_downloaded": false,
+-    "whole_image_zip_md5_verified": false,
+-    "verification": "선택 ZIP member별 CRC와 실제 이미지 SHA256, 해독, COCO 좌표 확인",
+-    "training_image_limit": 4000,
+-    "excluded_category": {"id": 4, "name": "trash bin"},
+-    "evaluation_use": "기존 사용 출처이므로 학습 전용, 새로운 독립 테스트로 주장하지 않음"
+-  },
+-  "SALSA": {
+-    "url": "https://github.com/alinacherkas/salsa",
+-    "annotation_origin": "보존 sources/salsa/annotations.json",
+-    "annotations_license": "ODbL-1.0",
+-    "tool_license": "Apache-2.0",
+-    "image_license_policy": "annotations.licenses에서 id1 = CC BY4.0인 비TACO 이미지에 한정",
+-    "image_origin": "https://cv4ld.blob.core.windows.net/salsa/v1/",
+-    "training_image_limit": 1400,
+-    "observed_non_taco_images": 1244,
+-    "observed_cc_by_4_eligible_non_taco_images": 0,
+-    "observed_license_0_images": 1244,
+-    "annotations_sha256": "3497c2153da3e2130ae1e0960762d420772ae6f318cd3cdf5183d2c3717a7fad",
+-    "status": "신규 사진의 license=0 표기를 이미지 CC BY4로 대체하지 않아 이번 추가 사용 0개"
+-  },
+-  "RoLID-11K": {
+-    "url": "https://github.com/xq141839/RoLID-11K",
+-    "official_download": "https://drive.google.com/drive/folders/1aPPW76js_JKdx_9SF0tioxjs17sLbOn-",
+-    "repository_license": "Apache-2.0",
+-    "dataset_license": null,
+-    "status": "후보 보류: 저장소 라이선스를 데이터 권한으로 간주하지 않으며 데이터 내부 권리 미확인",
+-    "training_use": false,
+-    "public_folder_observation": {"http_status": 200, "title": "RoLID-11K - Google Drive", "html_bytes": 385075, "html_sha256": "1b606baefede288f6a41eedda5407970a9e78364147cab1bb70831a0caa66646", "login_page": false, "dataset_license_verified": false}
+-  },
+-  "download_budget": {"maximum_bytes": 21474836480, "scope": "실패와 ZIP 범위 조회를 포함한 누적 전송", "request_timeout_seconds": 40},
+-  "attribution": "Mandhati et al., pLitterStreet, DOI 10.5281/zenodo.8288500; Alina Cherkas, SALSA; Proenca and Simoes, TACO. 이미지별 manifest에 원본 URL과 라이선스를 보존함."
+-}
+--- previous/tests/test_dashboard.py
++++ current/tests/test_dashboard.py
+@@ -1,121 +0,0 @@
+-"""실제 HTTP 경계와 파이프라인 오류 전달을 검사합니다."""
+-import http.client
+-import json
+-from pathlib import Path
+-import tempfile
+-import threading
+-import unittest
+-from unittest.mock import patch
+-import dashboard
+-
+-
+-class DashboardTests(unittest.TestCase):
+-    def setUp(self):
+-        self.temp = tempfile.TemporaryDirectory()
+-        self.root = Path(self.temp.name)
+-        self.server = dashboard.create_server(self.root, token='test-token')
+-        self.thread = threading.Thread(target=self.server.serve_forever, daemon=True)
+-        self.thread.start()
+-
+-    def tearDown(self):
+-        self.server.shutdown()
+-        self.server.server_close()
+-        self.thread.join()
+-        self.temp.cleanup()
+-
+-    def request(self, path, method='GET', body=None, auth=True, **headers):
+-        connection = http.client.HTTPConnection('127.0.0.1', self.server.server_port)
+-        if auth:
+-            headers.update({'X-Token': 'test-token'})
+-        if method == 'POST':
+-            headers.setdefault('X-CSRF-Token', 'test-token')
+-            headers.setdefault('Origin', f'http://127.0.0.1:{self.server.server_port}')
+-        connection.request(method, path, body=body, headers=headers)
+-        response = connection.getresponse()
+-        result = (response.status, response.read(), dict(response.getheaders()))
+-        connection.close()
+-        return result
+-
+-    def test_no_auth(self):
+-        self.assertEqual(self.request('/api/status', auth=False)[0], 403)
+-
+-    def test_missing_file(self):
+-        self.assertEqual(self.request('/asset?path=uploads/missing.mp4')[0], 400)
+-
+-    def test_upload_extension_and_size(self):
+-        self.assertEqual(self.request('/api/upload', 'POST', b'content', **{'X-Filename': 'unsafe.html'})[0], 400)
+-        self.assertEqual(self.request('/api/upload', 'POST', b'x', **{'X-Filename': 'x.mp4', 'Content-Length': str(dashboard.MAX_UPLOAD + 1)})[0], 400)
+-        self.assertEqual(list((self.root / 'work/uploads').iterdir()), [])
+-
+-    def test_host_boundary(self):
+-        self.assertEqual(self.request('/api/health', Host='evil.example')[0], 403)
+-
+-    def test_origin_and_csrf(self):
+-        self.assertEqual(self.request('/api/train', 'POST', b'{}', Origin='https://evil.example')[0], 403)
+-        self.assertEqual(self.request('/api/train', 'POST', b'{}', **{'X-CSRF-Token': 'bad'})[0], 403)
+-
+-    def test_bad_json(self):
+-        self.assertEqual(self.request('/api/train', 'POST', b'{')[0], 400)
+-        self.assertEqual(self.request('/api/train', 'POST', b'[]')[0], 400)
+-
+-    def test_traversal(self):
+-        secret = self.root / 'secret.txt'
+-        secret.write_text('private', encoding='utf-8')
+-        self.assertEqual(self.request('/asset?path=../secret.txt')[0], 400)
+-        self.assertEqual(self.request('/asset?path=' + str(secret))[0], 400)
+-
+-    def test_upload_preserves_original(self):
+-        original = self.root / 'original.mp4'
+-        original.write_bytes(b'original')
+-        status, raw, _ = self.request('/api/upload', 'POST', b'new-video', **{'X-Filename': '../../original.mp4'})
+-        self.assertEqual(status, 200)
+-        data = json.loads(raw)['data']
+-        self.assertEqual(Path(data['path']).read_bytes(), b'new-video')
+-        self.assertEqual(original.read_bytes(), b'original')
+-        self.assertEqual(Path(data['path']).parent, self.root / 'work' / 'uploads')
+-
+-    def test_pipeline_error_and_duplicate(self):
+-        with patch.object(self.server.app, 'pipeline', side_effect=RuntimeError('이미 학습 중입니다.')):
+-            status, raw, _ = self.request('/api/train', 'POST', b'{}')
+-        self.assertEqual(status, 502)
+-        self.assertIn('이미 학습 중', json.loads(raw)['error'])
+-
+-    def test_log_limit_and_utf8(self):
+-        log = self.root / 'work' / 'logs' / 'train.log'
+-        log.parent.mkdir(parents=True, exist_ok=True)
+-        log.write_text('가' * 100000, encoding='utf-8')
+-        status, raw, _ = self.request('/api/log?path=logs/train.log')
+-        data = json.loads(raw)['data']
+-        self.assertEqual(status, 200)
+-        self.assertTrue(data['truncated'])
+-        self.assertLessEqual(data['captured_bytes'], dashboard.LOG_LIMIT)
+-        self.assertNotIn('\ufffd', data['text'])
+-
+-    def test_range_and_health(self):
+-        video = self.root / 'work' / 'uploads' / 'x.mp4'
+-        video.write_bytes(b'0123456789')
+-        status, raw, headers = self.request('/asset?path=uploads/x.mp4', Range='bytes=2-5')
+-        self.assertEqual((status, raw), (206, b'2345'))
+-        self.assertEqual(headers['Content-Range'], 'bytes 2-5/10')
+-        self.assertEqual(self.request('/api/health')[0], 200)
+-
+-    def test_pipeline_argv_and_invalid_response(self):
+-        with patch('dashboard.subprocess.run') as run:
+-            run.return_value.returncode = 0
+-            def response(*args, **kwargs):
+-                kwargs['stdout'].write(b'{"ok":true,"data":{"jobs":[]}}')
+-                return run.return_value
+-            run.side_effect = response
+-            self.assertEqual(self.server.app.pipeline('status', {}), {'jobs': []})
+-            self.assertFalse(run.call_args.kwargs['shell'])
+-            self.assertEqual(run.call_args.args[0][-4:], ['--action', 'status', '--params', '{}'])
+-            def invalid(*args, **kwargs):
+-                kwargs['stdout'].write(b'not json')
+-                return run.return_value
+-            run.side_effect = invalid
+-            with self.assertRaisesRegex(RuntimeError, 'JSON'):
+-                self.server.app.pipeline('status', {})
+-
+-
+-if __name__ == '__main__':
+-    unittest.main()
+--- previous/tests/test_gpu_worker.py
++++ current/tests/test_gpu_worker.py
+@@ -1,32 +0,0 @@
+-"""중단 작업과 재사용 PID를 실제 실행 작업으로 오인하지 않는지 확인합니다."""
+-import unittest
+-from pathlib import Path
+-from unittest.mock import patch, Mock
+-import gpu_worker
+-
+-
+-class WorkerOwnershipTests(unittest.TestCase):
+-    def test_deployment_uses_selected_validation_resolution(self):
+-        function = Mock()
+-        gpu_worker.configured_predict(function, {"imgsz": 1280})("models", "image", conf=.17)
+-        function.assert_called_once_with("models", "image", imgsz=1280, conf=.17)
+-
+-    def test_past_model_keeps_past_resolution(self):
+-        function = Mock()
+-        gpu_worker.configured_predict(function, {})("models", "image")
+-        function.assert_called_once_with("models", "image", imgsz=1536)
+-
+-    def test_same_pid_with_another_command_is_not_our_job(self):
+-        with patch.object(Path, "read_text", return_value="22 (python) S 1 2"), patch.object(Path, "read_bytes", return_value=b"other-program\x00job-a\x00"):
+-            self.assertFalse(gpu_worker.is_alive(22, "job-a"))
+-
+-    def test_worker_identity_and_command_must_match(self):
+-        command = b"python\0" + str(Path(gpu_worker.__file__).resolve()).encode() + b"\0--worker\0job-a\0"
+-        with patch.object(Path, "read_text", return_value="22 (python) S 1 2"), patch.object(Path, "read_bytes", return_value=command):
+-            self.assertTrue(gpu_worker.is_alive(22, "job-a"))
+-            self.assertFalse(gpu_worker.is_alive(22, "job-b"))
+-
+-    def test_zombie_worker_is_not_running(self):
+-        command = str(Path(gpu_worker.__file__).resolve()).encode() + b"\0job-a\0"
+-        with patch.object(Path, "read_text", return_value="22 (python) Z 1 2"), patch.object(Path, "read_bytes", return_value=command):
+-            self.assertFalse(gpu_worker.is_alive(22, "job-a"))
+--- previous/tests/test_pipeline.py
++++ current/tests/test_pipeline.py
+@@ -1,125 +0,0 @@
+-"""허용 경로와 API 설정 실패 경로를 확인합니다."""
+-import tempfile
+-import json
+-import unittest
+-from pathlib import Path
+-from unittest.mock import patch
+-import pipeline
+-
+-
+-class TrainingStatusTests(unittest.TestCase):
+-    def setUp(self):
+-        self.temp = tempfile.TemporaryDirectory()
+-        self.work = Path(self.temp.name) / 'work'
+-        (self.work / 'jobs').mkdir(parents=True)
+-        (self.work / 'training').mkdir()
+-        self.work_patch = patch.object(pipeline, 'WORK', self.work)
+-        self.archive_patch = patch.object(pipeline, 'ARCHIVE', Path(self.temp.name) / 'archive')
+-        self.work_patch.start()
+-        self.archive_patch.start()
+-
+-    def tearDown(self):
+-        self.archive_patch.stop()
+-        self.work_patch.stop()
+-        self.temp.cleanup()
+-
+-    def save(self, relative, value):
+-        (self.work / relative).write_text(json.dumps(value), encoding='utf-8')
+-
+-    def test_failed_job_overrides_stale_preparation_status(self):
+-        self.save('jobs/latest.json', {'id': 'latest', 'kind': 'train', 'created': 10,
+-                                      'state': 'failed', 'error': '고정 이미지 변경: plitter_381',
+-                                      'epoch': 0, 'epochs': 180, 'updated': 20})
+-        self.save('training/status.json', {'job': 'latest', 'stage': '자료 확인', 'epoch': 0, 'updated': 11})
+-        training = pipeline.status()['training']
+-        self.assertEqual(training.get('state'), 'failed')
+-        self.assertEqual(training.get('error'), '고정 이미지 변경: plitter_381')
+-        self.assertEqual(training.get('job'), 'latest')
+-        self.assertEqual(training.get('updated'), 20)
+-        self.assertEqual(training.get('epoch'), 0)
+-
+-    def test_complete_job_overrides_stale_state_and_error(self):
+-        self.save('jobs/done.json', {'id': 'done', 'kind': 'train', 'created': 10,
+-                                    'state': 'complete', 'stage': '최종 평가 완료', 'epoch': 79})
+-        self.save('training/status.json', {'job': 'done', 'state': 'failed', 'error': '과거 오류', 'epoch': 0})
+-        training = pipeline.status()['training']
+-        self.assertEqual(training.get('state'), 'complete')
+-        self.assertIsNone(training.get('error'))
+-        self.assertEqual(training.get('epoch'), 79)
+-
+-    def test_other_job_progress_is_not_current_training(self):
+-        self.save('jobs/new.json', {'id': 'new', 'kind': 'train', 'created': 20,
+-                                   'state': 'failed', 'epoch': 0, 'stage': '자료 확인'})
+-        self.save('jobs/detection.json', {'id': 'detection', 'kind': 'detect', 'created': 30, 'state': 'complete'})
+-        self.save('training/status.json', {'job': 'old', 'epoch': 79, 'images': 5000, 'stage': '학습 중'})
+-        training = pipeline.status()['training']
+-        self.assertEqual(training.get('job'), 'new')
+-        self.assertEqual(training.get('epoch'), 0)
+-        self.assertEqual(training.get('stage'), '자료 확인')
+-        self.assertNotIn('images', training)
+-
+-    def test_completed_history_is_separate_from_latest_failed_zero_epoch(self):
+-        self.save('jobs/old.json', {'id': 'old', 'kind': 'train', 'created': 10, 'state': 'failed', 'epoch': 79})
+-        self.save('jobs/new.json', {'id': 'new', 'kind': 'train', 'created': 20, 'state': 'failed', 'epoch': 0})
+-        run = self.work / 'training/runs/prior_run'
+-        run.mkdir(parents=True)
+-        (run / 'results.csv').write_text('epoch,metrics/precision(B)\n78,0.7\n', encoding='utf-8')
+-        (run / 'phase_complete.json').write_text('{"completed":30}', encoding='utf-8')
+-        training = pipeline.status()['training']
+-        self.assertEqual(training.get('epoch'), 0)
+-        self.assertEqual(training['history'][-1]['epoch'], 78)
+-        self.assertEqual(training['history_context']['run'], 'prior_run')
+-        self.assertTrue(training['history_context']['phase_complete'])
+-        self.assertEqual(training['history_context']['last_epoch'], 78)
+-
+-    def test_orphan_status_does_not_imply_running_job(self):
+-        self.save('training/status.json', {'job': 'unknown', 'state': 'running', 'epoch': 79})
+-        training = pipeline.status()['training']
+-        self.assertNotEqual(training.get('state'), 'running')
+-        self.assertNotIn('epoch', training)
+-
+-
+-class PipelineTests(unittest.TestCase):
+-    def test_only_declared_video_roots(self):
+-        with tempfile.TemporaryDirectory() as temp:
+-            base = Path(temp)
+-            allowed = base / "allowed"
+-            allowed.mkdir()
+-            good = allowed / "a.mp4"
+-            good.write_bytes(b"a")
+-            bad = base / "secret.mp4"
+-            bad.write_bytes(b"a")
+-            with patch.object(pipeline, "VIDEO_ROOTS", [allowed]):
+-                self.assertEqual(pipeline.video_path(good), good.resolve())
+-                with self.assertRaisesRegex(ValueError, "허용"):
+-                    pipeline.video_path(bad)
+-
+-    def test_settings_must_be_an_object(self):
+-        with self.assertRaises(ValueError):
+-            pipeline.action("train", [])
+-
+-    def test_unknown_action_rejected(self):
+-        with self.assertRaises(ValueError):
+-            pipeline.action("delete", {})
+-
+-    def test_log_tail_is_bounded(self):
+-        with tempfile.TemporaryDirectory() as temp:
+-            path = Path(temp) / "large.log"
+-            path.write_bytes(b"x" * 50000)
+-            self.assertLessEqual(len(pipeline.tail(path).encode()), 12000)
+-
+-    def test_status_does_not_export_entire_dataset(self):
+-        import json
+-        rows = [{"image": "image.jpg", "url": "https://example.org/" + "x" * 600} for _ in range(5000)]
+-        def fake_load(path, default=None):
+-            if Path(path).name == "data_manifest.json":
+-                return {"records": rows, "counts": {"train": 5000}, "sources": []}
+-            return default
+-        with patch.object(pipeline, "load", side_effect=fake_load):
+-            result = pipeline.status()
+-        self.assertFalse("records" in result["dataset"], "대시보드 상태에는 전체 데이터 레코드를 포함하면 안 됩니다.")
+-        self.assertLess(len(json.dumps(result)), 100000)
+-
+-
+-if __name__ == "__main__":
+-    unittest.main()
+--- previous/tests/test_training.py
++++ current/tests/test_training.py
+@@ -1,200 +0,0 @@
+-"""분할 누출, 잘못된 라벨, 중단 재개와 모델 선택을 확인합니다."""
+-import importlib
+-import json
+-import sys
+-import tempfile
+-import threading
+-import unittest
+-from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+-from pathlib import Path
+-
+-ROOT = Path(__file__).resolve().parents[1]
+-sys.path.insert(0, str(ROOT))
+-
+-
+-class TrainingTests(unittest.TestCase):
+-    def setUp(self):
+-        self.assertTrue((ROOT / "prepare_training.py").is_file(), "데이터 준비 기능이 아직 없습니다.")
+-        self.assertTrue((ROOT / "train_pipeline.py").is_file(), "학습 파이프라인이 아직 없습니다.")
+-        self.data = importlib.import_module("prepare_training")
+-        self.train = importlib.import_module("train_pipeline")
+-
+-    def test_label_rejects_nonfinite_and_outside_box(self):
+-        # NaN이나 이미지 바깥 상자를 허용하는 변경을 탐지합니다.
+-        for text in ["0 nan .5 .1 .1", "0 .98 .5 .2 .2", "1 .5 .5 .2 .2", "0 .5 .5 0 .2"]:
+-            with self.subTest(text=text), self.assertRaises(ValueError):
+-                self.data.validate_yolo(text)
+-        self.assertEqual(self.data.validate_yolo("0 .5 .5 .2 .4\n"), [[0, .5, .5, .2, .4]])
+-
+-    def test_seven_decimal_label_rounding_preserves_original_values(self):
+-        text = "0 0.3706140 0.2953750 0.7412281 0.5907500"
+-        self.assertEqual(self.data.validate_yolo(text), [[0, .3706140, .2953750, .7412281, .5907500]])
+-        with self.assertRaises(ValueError):
+-            self.data.validate_yolo("0 0.37060 0.2953750 0.7412281 0.5907500")
+-
+-    def test_coco_clips_valid_partial_box(self):
+-        self.assertEqual(self.data.coco_to_yolo({"width": 100, "height": 100}, [{"bbox": [-10, 10, 40, 20]}]),
+-                         [[0, .15, .2, .3, .2]])
+-
+-    def test_coco_rejects_invalid_geometry(self):
+-        for box in [[0, 0, -1, 10], [200, 0, 10, 10], [0, 0, float("inf"), 5]]:
+-            with self.subTest(box=box), self.assertRaises(ValueError):
+-                self.data.coco_to_yolo({"width": 100, "height": 100}, [{"bbox": box}])
+-
+-    def test_group_keeps_gopro_chapters_together(self):
+-        a = self.data.group_key("street", {"path": "/datasets/Chiangrai_2021/piles/GH010132_009.jpg"})
+-        b = self.data.group_key("street", {"path": "/datasets/Chiangrai_2021/plastic/GH020132_999.jpg"})
+-        self.assertEqual(a, b)
+-        self.assertNotEqual(a, self.data.group_key("street", {"path": "/datasets/Ubon_2022/GH010132_009.jpg"}))
+-
+-    def test_prior_identity_uses_source_id_not_reencoded_bytes(self):
+-        rows = [{"source": "pLitterStreet", "image": "/old/plitter_42.jpg", "sha256": "old-jpeg"},
+-                {"source": "pLitterStreet", "image": "/old/street_99.jpg", "sha256": "other-jpeg"},
+-                {"source": "SALSA", "image": "/old/salsa_13.jpg"}]
+-        self.assertEqual(self.data.prior_street_ids(rows), {"42", "99"})
+-        with self.assertRaises(ValueError):
+-            self.data.prior_street_ids([{"source": "pLitterStreet", "image": "unknown.jpg"}])
+-
+-    def test_groups_do_not_cross_splits_and_seen_groups_stay_training(self):
+-        records = [{"id": str(i), "group": "g" + str(i // 2)} for i in range(80)]
+-        out = self.data.split_groups(records, seen_groups={"g0", "g1"}, seed=20261028)
+-        groups = {}
+-        for row in out:
+-            groups.setdefault(row["group"], set()).add(row["split"])
+-        self.assertTrue(all(len(s) == 1 for s in groups.values()))
+-        self.assertEqual(groups["g0"], {"train"})
+-        self.assertEqual({r["split"] for r in out}, {"train", "external_val", "external_test"})
+-        self.assertEqual(out, self.data.split_groups(list(reversed(records)), {"g0", "g1"}, 20261028))
+-
+-    def test_duplicate_filter_prioritizes_holdout(self):
+-        protected = [{"sha256": "held", "signature": "0000000000000000"}]
+-        rows = [{"id": "same", "sha256": "held", "signature": "ffffffffffffffff"},
+-                {"id": "near", "sha256": "other", "signature": "0000000000000001"},
+-                {"id": "new", "sha256": "new", "signature": "ffffffffffffffff"}]
+-        accepted, rejected = self.data.deduplicate(rows, protected)
+-        self.assertEqual([r["id"] for r in accepted], ["new"])
+-        self.assertEqual({r["id"] for r in rejected}, {"same", "near"})
+-
+-    def test_budget_survives_restart(self):
+-        with tempfile.TemporaryDirectory() as td:
+-            self.data.DownloadBudget(Path(td), limit=10).charge(7)
+-            budget = self.data.DownloadBudget(Path(td), limit=10)
+-            with self.assertRaises(ValueError):
+-                budget.charge(4)
+-            self.assertEqual(budget.used, 7)
+-
+-    def test_concurrent_requests_cannot_overbook_budget(self):
+-        with tempfile.TemporaryDirectory() as td:
+-            budget = self.data.DownloadBudget(Path(td), limit=10)
+-            budget.reserve(7)
+-            with self.assertRaises(ValueError):
+-                budget.reserve(4)
+-            budget.charge(5, reserved=True)
+-            budget.release(2)
+-            budget.charge(4)
+-            self.assertEqual(budget.used, 9)
+-
+-    def test_downloader_resumes_only_matching_etag(self):
+-        payload = b"cleanview-data" * 80
+-        class Handler(BaseHTTPRequestHandler):
+-            def log_message(self, *_):
+-                pass
+-            def do_HEAD(self):
+-                self.send_response(200)
+-                self.send_header("Content-Length", str(len(payload)))
+-                self.send_header("ETag", '"fixture-v1"')
+-                self.end_headers()
+-            def do_GET(self):
+-                start = int(self.headers.get("Range", "bytes=0-").split("=")[1].split("-")[0])
+-                self.send_response(206 if start else 200)
+-                self.send_header("Content-Length", str(len(payload) - start))
+-                self.send_header("ETag", '"fixture-v1"')
+-                if start:
+-                    self.send_header("Content-Range", f"bytes {start}-{len(payload)-1}/{len(payload)}")
+-                self.end_headers()
+-                self.wfile.write(payload[start:])
+-        server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+-        thread = threading.Thread(target=server.serve_forever, daemon=True)
+-        thread.start()
+-        try:
+-            with tempfile.TemporaryDirectory() as td:
+-                root = Path(td)
+-                destination = root / "image.bin"
+-                url = f"http://127.0.0.1:{server.server_port}/data"
+-                destination.with_suffix(".bin.part").write_bytes(payload[:100])
+-                self.data.atomic_json(destination.with_suffix(".bin.part.json"), {"url": url, "etag": '"fixture-v1"', "size": len(payload)})
+-                budget = self.data.DownloadBudget(root, limit=2000)
+-                self.data.download(url, destination, budget)
+-                self.assertEqual(destination.read_bytes(), payload)
+-                self.assertEqual(budget.used, len(payload) - 100)
+-                self.data.download(url, destination, budget)
+-                self.assertEqual(budget.used, len(payload) - 100)
+-        finally:
+-            server.shutdown()
+-            server.server_close()
+-            thread.join()
+-
+-    def test_corrupt_image_is_rejected(self):
+-        with tempfile.TemporaryDirectory() as td:
+-            p = Path(td) / "bad.jpg"
+-            p.write_bytes(b"not a jpeg")
+-            with self.assertRaises(ValueError):
+-                self.data.image_info(p)
+-
+-    def test_frozen_manifest_cannot_be_replaced(self):
+-        with tempfile.TemporaryDirectory() as td:
+-            p = Path(td) / "frozen.json"
+-            self.data.freeze_manifest(p, {"records": [{"sha256": "original"}]})
+-            with self.assertRaises(ValueError):
+-                self.data.freeze_manifest(p, {"records": [{"sha256": "changed"}]})
+-            self.assertEqual(json.loads(p.read_text())["records"][0]["sha256"], "original")
+-
+-    def test_baseline_is_retained_when_new_model_is_worse_or_tied(self):
+-        baseline = {"name": "baseline", "operating": {"precision": .7, "recall": .6, "f1": .646, "threshold": .2}, "metrics": {"metrics/mAP50(B)": .65}}
+-        worse = {"name": "new", "operating": {"precision": .9, "recall": .5, "f1": .643, "threshold": .1}, "metrics": {"metrics/mAP50(B)": .8}}
+-        self.assertEqual(self.train.choose_candidate([baseline, worse])["name"], "baseline")
+-        tie = {**baseline, "name": "tie"}
+-        self.assertEqual(self.train.choose_candidate([baseline, tie])["name"], "baseline")
+-
+-    def test_resume_refuses_different_dataset(self):
+-        with tempfile.TemporaryDirectory() as td:
+-            root = Path(td)
+-            (root / "weights").mkdir()
+-            (root / "weights/last.pt").write_bytes(b"checkpoint")
+-            self.data.atomic_json(root / "run_contract.json", {"manifest_sha256": "old"})
+-            with self.assertRaises(ValueError):
+-                self.train.resume_decision(root, {"manifest_sha256": "new"})
+-
+-    def test_resume_completed_run_does_not_restart(self):
+-        with tempfile.TemporaryDirectory() as td:
+-            root = Path(td)
+-            self.data.atomic_json(root / "run_contract.json", {"manifest_sha256": "same"})
+-            self.data.atomic_json(root / "phase_complete.json", {"done": True})
+-            self.assertEqual(self.train.resume_decision(root, {"manifest_sha256": "same"}), "complete")
+-
+-    def test_checkpoint_requires_explicit_resume(self):
+-        with tempfile.TemporaryDirectory() as td:
+-            root = Path(td)
+-            (root / "weights").mkdir()
+-            (root / "weights/last.pt").write_bytes(b"checkpoint")
+-            self.data.atomic_json(root / "run_contract.json", {"manifest_sha256": "same"})
+-            with self.assertRaises(ValueError):
+-                self.train.resume_decision(root, {"manifest_sha256": "same"}, allow_resume=False)
+-
+-    def test_average_precision_penalizes_earlier_false_positive(self):
+-        self.assertEqual(self.train.average_precision([(.9, [True])], 1, 0), 1.0)
+-        self.assertEqual(self.train.average_precision([(.95, [False]), (.9, [True])], 1, 0), .5)
+-
+-    def test_matching_cannot_count_same_object_twice(self):
+-        predictions = [[0, 0, 10, 10, .9], [0, 0, 10, 10, .8]]
+-        self.assertEqual(self.train.match_predictions(predictions, [[0, 0, 10, 10]], .5), [True, False])
+-
+-    def test_threshold_selection_uses_validation_counts(self):
+-        selected = self.train.select_threshold({"tp": [8, 9], "fp": [2, 9], "fn": [2, 1]}, [.5, .1])
+-        self.assertEqual(selected["threshold"], .5)
+-        self.assertAlmostEqual(selected["precision"], .8)
+-        self.assertAlmostEqual(selected["recall"], .8)
+-
+-
+-if __name__ == "__main__":
+-    unittest.main()
+--- previous/train_pipeline.py
++++ current/train_pipeline.py
+@@ -1,256 +0,0 @@
+-"""검증에서 기존 모델과 추가 학습 모델을 비교하고 고정 테스트를 한 번 평가합니다."""
+-import csv
+-import hashlib
+-import json
+-import math
+-import time
+-from pathlib import Path
+-
+-from prepare_training import (ARCHIVE, ROOT, TRAINING, SEED, atomic_json, freeze_manifest,
+-                              load, prepare, sha256_file, validate_yolo, verify_records)
+-
+-THRESHOLDS = [.05, .1, .15, .17, .2, .25, .3, .35, .4, .45, .5, .55, .6, .65, .7, .75, .8, .9]
+-
+-
+-def select_threshold(counts, thresholds):
+-    choices = []
+-    for index, threshold in enumerate(thresholds):
+-        tp, fp, fn = (int(counts[key][index]) for key in ("tp", "fp", "fn"))
+-        precision = tp / (tp + fp) if tp + fp else 0.0
+-        recall = tp / (tp + fn) if tp + fn else 0.0
+-        f1 = 2 * precision * recall / (precision + recall) if precision + recall else 0.0
+-        choices.append({"threshold": threshold, "precision": precision, "recall": recall,
+-                        "f1": f1, "tp": tp, "fp": fp, "fn": fn, "iou": .5})
+-    if not choices:
+-        raise ValueError("선택할 검증 임계값이 없습니다.")
+-    return max(choices, key=lambda c: (min(c["precision"], c["recall"]), c["f1"]))
+-
+-
+-def choose_candidate(results):
+-    if not results:
+-        raise ValueError("비교할 검증 결과가 없습니다.")
+-    # 호출자는 기존 선택을 먼저 전달합니다. 동점이면 기존 모델을 보존합니다.
+-    return max(results, key=lambda r: (min(r["operating"]["precision"], r["operating"]["recall"]),
+-                                      r["operating"]["f1"], r["metrics"]["metrics/mAP50(B)"]))
+-
+-
+-def resume_decision(directory, contract, allow_resume=True):
+-    directory = Path(directory)
+-    saved = directory / "run_contract.json"
+-    if saved.exists() and load(saved) != contract:
+-        raise ValueError("checkpoint의 데이터·학습 조건이 현재 명세와 다릅니다.")
+-    if (directory / "phase_complete.json").exists():
+-        if not saved.exists():
+-            raise ValueError("완료 학습의 원래 계약이 없습니다.")
+-        return "complete"
+-    if (directory / "weights/last.pt").exists():
+-        if not saved.exists():
+-            raise ValueError("원래 계약 없는 checkpoint는 자동 재개할 수 없습니다.")
+-        if not allow_resume:
+-            raise ValueError("중단 checkpoint가 있습니다. 재개를 명시적으로 선택하세요.")
+-        return "resume"
+-    return "new"
+-
+-
+-def iou(left, right):
+-    intersection = max(0, min(left[2], right[2]) - max(left[0], right[0])) * max(0, min(left[3], right[3]) - max(left[1], right[1]))
+-    area_left = max(0, left[2] - left[0]) * max(0, left[3] - left[1])
+-    area_right = max(0, right[2] - right[0]) * max(0, right[3] - right[1])
+-    union = area_left + area_right - intersection
+-    return intersection / union if union else 0.0
+-
+-
+-def nms(predictions):
+-    pending = sorted(predictions, key=lambda r: r[4], reverse=True)
+-    selected = []
+-    for row in pending:
+-        if all(iou(row, old) <= .5 for old in selected):
+-            selected.append(row)
+-        if len(selected) >= 300:
+-            break
+-    return selected
+-
+-
+-def match_predictions(predictions, targets, threshold):
+-    used, matches = set(), []
+-    for prediction in predictions:
+-        choices = [(iou(prediction, target), index) for index, target in enumerate(targets) if index not in used]
+-        overlap, index = max(choices, default=(0.0, -1))
+-        matched = overlap >= threshold
+-        matches.append(matched)
+-        if matched:
+-            used.add(index)
+-    return matches
+-
+-
+-def average_precision(rows, targets, column):
+-    if not targets:
+-        return 0.0
+-    ordered = sorted(rows, key=lambda r: r[0], reverse=True)
+-    tp, points = 0, []
+-    for index, (_, matches) in enumerate(ordered):
+-        tp += int(matches[column])
+-        points.append((tp / targets, tp / (index + 1)))
+-    # 단일 클래스, 신뢰도 순 일대일 IoU 매칭의 101점 보간 AP입니다.
+-    return sum(max((p for r, p in points if r >= step / 100), default=0.0) for step in range(101)) / 101
+-
+-
+-def evaluate(weights, records, out, notify, threshold=None):
+-    from ultralytics import YOLO
+-    import torch
+-    out = Path(out)
+-    out.mkdir(parents=True, exist_ok=True)
+-    contract = {"weights": {str(p): sha256_file(p) for p in weights},
+-                "images": {r["id"]: [r["sha256"], r["label_sha256"]] for r in records},
+-                "imgsz": 1280, "nms_iou": .5, "max_det": 300,
+-                "operating_threshold": threshold, "evaluator": "greedy confidence IoU, 101-point interpolated AP v1"}
+-    freeze_manifest(out / "contract.json", contract)
+-    if (out / "metrics.json").exists():
+-        return load(out / "metrics.json")
+-    models = [YOLO(str(p)) for p in weights]
+-    if any(len(model.names) != 1 or model.names[0] != "trash" for model in models):
+-        raise ValueError("단일 trash 클래스 가중치가 아닙니다.")
+-    scored, total_targets = [], 0
+-    for index, record in enumerate(records):
+-        cached = out / "predictions" / (record["id"] + ".json")
+-        if cached.exists():
+-            predictions = load(cached)
+-        else:
+-            predictions = []
+-            for model in models:
+-                result = model.predict(record["image"], imgsz=1280, conf=.001, iou=.5,
+-                                       max_det=300, device=0, verbose=False)[0]
+-                predictions += result.boxes.data[:, :5].detach().cpu().tolist()
+-            predictions = nms(predictions)
+-            atomic_json(cached, predictions)
+-        labels = validate_yolo(Path(record["label"]).read_text(encoding="utf-8"))
+-        w, h = record["width"], record["height"]
+-        targets = [[(x - bw / 2) * w, (y - bh / 2) * h, (x + bw / 2) * w, (y + bh / 2) * h]
+-                   for _, x, y, bw, bh in labels]
+-        total_targets += len(targets)
+-        matches = [match_predictions(predictions, targets, .5 + offset * .05) for offset in range(10)]
+-        scored += [(row[4], [matches[offset][j] for offset in range(10)]) for j, row in enumerate(predictions)]
+-        if index % 10 == 0:
+-            notify(stage=f"검증·평가 {out.name}", evaluated=index + 1, evaluation_images=len(records))
+-    candidates = THRESHOLDS if threshold is None else [threshold]
+-    counts = {"tp": [], "fp": [], "fn": []}
+-    for conf in candidates:
+-        chosen = [matches[0] for score, matches in scored if score >= conf]
+-        tp = sum(chosen)
+-        counts["tp"].append(tp)
+-        counts["fp"].append(len(chosen) - tp)
+-        counts["fn"].append(total_targets - tp)
+-    result = {"weights": list(map(str, weights)), "policy": "full", "images": len(records), "imgsz": 1280,
+-              "operating": select_threshold(counts, candidates),
+-              "metrics": {"metrics/mAP50(B)": average_precision(scored, total_targets, 0),
+-                          "metrics/mAP50-95(B)": sum(average_precision(scored, total_targets, k) for k in range(10)) / 10},
+-              "evaluator": contract["evaluator"], "threshold_source": "validation only"}
+-    atomic_json(out / "metrics.json", result)
+-    del models
+-    torch.cuda.empty_cache()
+-    return result
+-
+-
+-def run(job, notify=lambda **kw: None, resume=False):
+-    from ultralytics import YOLO
+-    import torch
+-    TRAINING.mkdir(parents=True, exist_ok=True)
+-    status = {"job": job, "epoch": 0, "epochs": 180}
+-    def progress(**kwargs):
+-        status.update(kwargs, updated=time.time())
+-        atomic_json(TRAINING / "status.json", status)
+-        notify(**kwargs)
+-    if (TRAINING / "final.json").exists():
+-        progress(stage="완료한 결과 재사용")
+-        final = load(TRAINING / "final.json")
+-        publish_selection(final)
+-        return final
+-    manifest = prepare(notify=progress)
+-    manifest_hash = sha256_file(TRAINING / "data_manifest.json")
+-    progress(stage="검증 기준과 추가 학습 조건 고정", **manifest["counts"])
+-    reference = load(ARCHIVE / "final.json")["selected"]
+-    baseline = [ARCHIVE / Path(p).relative_to("/root/환경 PBL/trash_round3") for p in reference["weights"]]
+-    initial = ARCHIVE / "runs/yolo26l_p2_focus/weights/best.pt"
+-    directory = TRAINING / "runs/yolo26l_p2_extra"
+-    contract = {"manifest_sha256": manifest_hash, "initial_sha256": sha256_file(initial), "seed": SEED,
+-                "pipeline_sha256": sha256_file(Path(__file__)),
+-                "preparation_sha256": sha256_file(ROOT / "prepare_training.py"),
+-                "epochs": 180, "patience": 35, "imgsz": 1280, "batch": 2, "optimizer": "AdamW",
+-                "selection": "maximize min(precision,recall), then F1, then AP50; baseline wins ties"}
+-    mode = resume_decision(directory, contract, allow_resume=resume)
+-    directory.mkdir(parents=True, exist_ok=True)
+-    freeze_manifest(directory / "run_contract.json", contract)
+-    if mode != "complete":
+-        last = directory / "weights/last.pt"
+-        resuming = mode == "resume"
+-        if resuming:
+-            checkpoint = torch.load(last, map_location="cpu", weights_only=False)
+-            epoch = int(checkpoint.get("epoch", -1))
+-            del checkpoint
+-            if epoch < 0:
+-                if (directory / "weights/best.pt").exists() and (directory / "results.csv").exists():
+-                    mode = "complete"
+-                else:
+-                    raise ValueError("정리된 checkpoint에 완료 결과가 없습니다.")
+-        if mode != "complete":
+-            model = YOLO(str(last if resuming else initial))
+-            def epoch_end(trainer):
+-                metrics = {str(k): float(v) for k, v in trainer.metrics.items()}
+-                progress(stage="YOLO26l-P2 추가 학습", epoch=trainer.epoch + 1, epochs=180,
+-                         precision=metrics.get("metrics/precision(B)"), recall=metrics.get("metrics/recall(B)"),
+-                         map50=metrics.get("metrics/mAP50(B)"), metrics=metrics)
+-            model.add_callback("on_fit_epoch_end", epoch_end)
+-            progress(stage="checkpoint 재개" if resuming else "YOLO26l-P2 추가 학습 시작")
+-            if resuming:
+-                model.train(resume=True, device=0)
+-            else:
+-                model.train(data=str(TRAINING / "dataset.yaml"), project=str(TRAINING / "runs"),
+-                            name=directory.name, exist_ok=True, epochs=180, patience=35, imgsz=1280,
+-                            batch=2, device=0, workers=4, cache=False, amp=True, seed=SEED,
+-                            optimizer="AdamW", lr0=.00015, lrf=.05, cos_lr=True, warmup_epochs=3,
+-                            mosaic=.5, close_mosaic=15, scale=.5, translate=.1, fliplr=.5, degrees=5,
+-                            plots=True, save=True, deterministic=True)
+-            del model
+-            torch.cuda.empty_cache()
+-        best = directory / "weights/best.pt"
+-        if not best.is_file():
+-            raise ValueError("완료 학습 가중치가 없습니다.")
+-        atomic_json(directory / "phase_complete.json", {"best_sha256": sha256_file(best), "completed": time.time()})
+-    best = directory / "weights/best.pt"
+-    if sha256_file(best) != load(directory / "phase_complete.json")["best_sha256"]:
+-        raise ValueError("완료 학습 모델이 기록된 해시와 다릅니다.")
+-    verify_records(manifest["records"])
+-    validation = [r for r in manifest["records"] if r["split"] == "val"]
+-    historical_test = [r for r in manifest["records"] if r["split"] == "test"]
+-    results = []
+-    for name, weights in [("baseline_ensemble", baseline), ("baseline_l_p2", [initial]), ("additional_l_p2", [best])]:
+-        result = evaluate(weights, validation, TRAINING / "evaluation" / name, progress)
+-        result["name"] = name
+-        results.append(result)
+-        atomic_json(TRAINING / "validation_comparison.json", results)
+-    selected = choose_candidate(results)
+-    freeze_manifest(TRAINING / "selection.json", selected)
+-    # 테스트 계약을 선택 직후 고정합니다. 이후 선택이나 임계값이 바뀌면 재평가를 차단합니다.
+-    test_contract = {"selected": selected, "manifest_sha256": manifest_hash,
+-                     "protocol": "historical benchmark; no tuning on test; cached per-image predictions"}
+-    freeze_manifest(TRAINING / "test_contract.json", test_contract)
+-    progress(stage="선택 완료 · 과거 고정 테스트 최종 평가")
+-    test = evaluate(selected["weights"], historical_test, TRAINING / "evaluation/test_final", progress,
+-                    threshold=selected["operating"]["threshold"])
+-    target = test["operating"]["precision"] >= .9 and test["operating"]["recall"] >= .9
+-    final = {"selected": selected, "test": test, "target_met": target, "manifest_sha256": manifest_hash,
+-             "test_protocol": manifest["test_protocol"], "external_test": None,
+-             "baseline_retained": selected["name"] != "additional_l_p2", "finished": time.time(),
+-             "metric_limit": "AP evaluator and 1280 input differ from round3; compare candidates within this run"}
+-    publish_selection(final)
+-    atomic_json(TRAINING / "final.json", final)
+-    progress(stage="학습·비교·고정 평가 완료", target_met=target, precision=test["operating"]["precision"],
+-             recall=test["operating"]["recall"], map50=test["metrics"]["metrics/mAP50(B)"])
+-    return final
+-
+-
+-def publish_selection(final):
+-    selected = final["selected"]
+-    atomic_json(ROOT / "work/selected_model.json", {"weights": selected["weights"][0], "ensemble": selected["weights"],
+-                "policy": "full", "imgsz": selected["imgsz"], "conf": selected["operating"]["threshold"],
+-                "source": selected["name"], "test": final["test"], "target_met": final["target_met"]})
+--- previous/verify_sources.py
++++ current/verify_sources.py
+@@ -1,15 +0,0 @@
+-"""소스의 UTF-8·문법과 납품 파일 존재를 검사합니다."""
+-import ast
+-from pathlib import Path
+-
+-root = Path(__file__).resolve().parent
+-paths = list(root.glob("*.py")) + list((root / "tests").glob("*.py"))
+-for path in paths:
+-    text = path.read_text(encoding="utf-8", errors="strict")
+-    if "\ufffd" in text:
+-        raise ValueError(f"대체문자 발견: {path}")
+-    ast.parse(text, filename=str(path))
+-for name in ["pipeline.py", "gpu_worker.py", "dashboard.py", "launcher.py", "prepare_training.py", "train_pipeline.py", "web/index.html", "실행.bat", "사용안내.txt"]:
+-    if not (root / name).is_file():
+-        raise FileNotFoundError(name)
+-print(f"소스 {len(paths)}개 UTF-8·문법 및 필수 파일 검사 통과")
+--- previous/web/app.js
++++ current/web/app.js
+@@ -1,75 +0,0 @@
+-'use strict';
+-const token = new URLSearchParams(location.search).get('token') || '';
+-const $ = id => document.getElementById(id);
+-let state = {}, loading = false, pending = false, resultKey = null;
+-const asset = path => '/asset?token=' + encodeURIComponent(token) + '&path=' + encodeURIComponent(path);
+-function message(value) { $('message').textContent = value; }
+-async function api(name, data) {
+-  const controller = new AbortController(), timer = setTimeout(() => controller.abort(), 65000);
+-  try {
+-    const response = await fetch('/api/' + name, {method: data === undefined ? 'GET' : 'POST', headers: {'X-Token': token, 'X-CSRF-Token': token, 'Content-Type': 'application/json'}, body: data === undefined ? undefined : JSON.stringify(data), signal: controller.signal});
+-    const value = await response.json();
+-    if (!response.ok || !value.ok) throw Error(value.error || '요청을 처리하지 못했습니다.');
+-    return value.data;
+-  } finally { clearTimeout(timer); }
+-}
+-function textNode(tag, value) { const element = document.createElement(tag); element.textContent = value; return element; }
+-function metric(value) { return typeof value === 'number' && Number.isFinite(value) ? (value * 100).toFixed(1) + '%' : '미측정'; }
+-function curves(history) {
+-  const canvas = $('curves'), context = canvas.getContext('2d'), width = canvas.width, height = canvas.height;
+-  context.clearRect(0, 0, width, height); context.font = '700 13px Nanum'; context.fillStyle = '#64778a';
+-  for (let i = 0; i <= 4; i++) { const y = 20 + i * 45; context.strokeStyle = '#e1e8ee'; context.beginPath(); context.moveTo(48, y); context.lineTo(width - 15, y); context.stroke(); context.fillText((100 - i * 25) + '%', 5, y + 4); }
+-  if (!Array.isArray(history) || !history.length) { context.fillText('에포크별 실측 데이터가 아직 없습니다.', 300, 110); return; }
+-  [['precision', '#2770b1'], ['recall', '#21866c'], ['map50', '#dc8a35']].forEach(([key, color]) => {
+-    context.strokeStyle = color; context.lineWidth = 2; context.beginPath(); let active = false;
+-    history.forEach((row, i) => { const value = row[key]; if (typeof value !== 'number' || !Number.isFinite(value)) { active = false; return; } const x = 48 + i * (width - 65) / Math.max(1, history.length - 1), y = 200 - Math.max(0, Math.min(1, value)) * 180; if (active) context.lineTo(x, y); else context.moveTo(x, y); active = true; }); context.stroke();
+-  });
+-  context.fillStyle = '#64778a'; context.fillText('에포크 ' + history[0].epoch, 48, 222); context.fillText('에포크 ' + history[history.length - 1].epoch, width - 120, 222);
+-}
+-function render() {
+-  const jobs = Array.isArray(state.jobs) ? state.jobs : [], training = state.training || {};
+-  const metrics = state.metrics || state.selection?.test?.operating || {};
+-  $('precision').textContent = metric(metrics.precision); $('recall').textContent = metric(metrics.recall);
+-  $('map50').textContent = metric(metrics.map50 ?? state.selection?.test?.metrics?.['metrics/mAP50(B)']);
+-  $('metricNote').textContent = '목표 P·R 각각 90% · 평가 구분: ' + (metrics.split || '상태 원문 확인') + ' · 객체 탐지 지표이며 투기 행동 정확도와 구분합니다.';
+-  const names = {failed: '실패', interrupted: '중단', complete: '완료', running: '실행 중', queued: '대기', starting: '시작 중'};
+-  const progress = [names[training.state] || training.state, training.job ? '최신 작업 ' + training.job : null,
+-    training.stage ? '마지막 단계: ' + training.stage : null];
+-  if (training.epoch != null) progress.push('현재 작업 에포크 ' + training.epoch + (training.epochs ? ' / ' + training.epochs : ''));
+-  if (training.images != null) progress.push('이미지 ' + training.images + '장');
+-  if (training.downloaded_bytes != null) progress.push('다운로드 ' + (training.downloaded_bytes / 1024 ** 2).toFixed(1) + 'MB');
+-  if (training.progress != null) progress.push('진행 ' + training.progress + '%');
+-  $('trainingState').textContent = progress.filter(value => value !== undefined && value !== null && value !== '').join(' · ') || '작업 대기';
+-  if (['failed', 'interrupted'].includes(training.state)) {
+-    message('최신 학습 작업 ' + (names[training.state] || training.state) + ': ' + (training.error || '작업 로그를 확인해 주세요.') + '\n현재 작업은 진행 중이 아닙니다. 오류 원인을 확인하고 검증을 통과한 뒤에만 체크포인트 재개를 진행하세요.');
+-  }
+-  const historyContext = training.history_context;
+-  const legend = document.querySelector('.legend');
+-  if (legend) legend.textContent = (historyContext ? '보존된 실행 ' + historyContext.run + ' · ' + (historyContext.phase_complete ? '학습 단계 완료 기록 있음' : '학습 단계 완료 미확인') + ' · CSV 마지막 에포크 ' + (historyContext.last_epoch ?? '없음') + ' · 최신 작업의 진행률과 별개입니다. ' : '') + '파랑 정밀도 · 초록 재현율 · 주황 mAP50';
+-  curves(training.history || state.history || []);
+-  $('raw').textContent = JSON.stringify(state, null, 2);
+-  const newResultKey = JSON.stringify(jobs.filter(job => job.kind === 'detect' && job.result).map(job => [job.id, job.result]));
+-  const updateResults = newResultKey !== resultKey;
+-  $('jobs').replaceChildren();
+-  if (updateResults) { $('results').replaceChildren(); resultKey = newResultKey; }
+-  jobs.forEach(job => {
+-    const card = document.createElement('article'); card.append(textNode('p', (job.kind || '작업') + ' · ' + (job.state || '') + ' · ' + (job.stage || '') + (job.epoch ? ' · ' + job.epoch + '/' + job.epochs : '')));
+-    if (job.error) card.append(textNode('p', job.error));
+-    if (job.log) { const button = textNode('button', '이 작업 로그'); button.className = 'secondary'; button.onclick = () => { $('log').textContent = job.log; $('logInfo').textContent = '상태 응답에 포함된 로그 끝부분 · 전체 파일은 아래 경로에서 확인'; if (/^[A-Za-z0-9_-]+$/.test(job.id || '')) $('logPath').value = 'jobs/' + job.id + '.log'; }; card.append(button); }
+-    $('jobs').append(card);
+-    if (updateResults && job.kind === 'detect' && job.result) { const result = document.createElement('article'); result.append(textNode('p', job.id || '탐지 결과')); const video = document.createElement('video'); video.controls = true; video.preload = 'metadata'; video.src = asset(job.result); result.append(video); const link = textNode('a', '결과 파일 열기'); link.href = asset(job.result); link.target = '_blank'; link.rel = 'noopener'; result.append(link); $('results').append(result); }
+-  });
+-  if (!$('results').children.length) $('results').textContent = '아직 완료된 탐지 결과가 없습니다.';
+-  const busy = jobs.some(job => ['running', 'queued', 'starting'].includes(job.state));
+-  $('train').disabled = pending || busy; $('detect').disabled = pending || !$('videos').value;
+-}
+-async function refresh() { if (loading) return; loading = true; try { state = await api('status'); render(); } catch (error) { message(error.message); } finally { loading = false; } }
+-async function videos() { try { const result = await api('videos'), list = Array.isArray(result) ? result : result.videos || [], previous = $('videos').value; $('videos').replaceChildren(new Option('영상 선택', '')); list.forEach(video => $('videos').add(new Option(video.name || video.path, video.path))); if (list.some(video => video.path === previous)) $('videos').value = previous; render(); } catch (error) { message(error.message); } }
+-async function probe() { const path = $('videos').value; render(); if (!path) return; try { const data = await api('probe', {path}); $('probe').textContent = JSON.stringify(data, null, 2); if (data.preview) $('previewImage').src = asset(data.preview); if (path.replaceAll('\\', '/').includes('/work/uploads/')) $('preview').src = asset(path); else $('preview').removeAttribute('src'); } catch (error) { message(error.message); } }
+-async function start(action, params) { if (pending) return; pending = true; render(); try { await api(action, params); message(action === 'train' ? '추가 학습 요청을 전달했습니다.' : '영상 탐지 요청을 전달했습니다.'); } catch (error) { message(error.message); } finally { pending = false; await refresh(); } }
+-async function loadLog() { try { const data = await api('log?path=' + encodeURIComponent($('logPath').value)); $('log').textContent = data.text; $('logInfo').textContent = '원본 ' + data.original_bytes + '바이트 · 표시 ' + data.captured_bytes + '바이트' + (data.truncated ? ' · 앞부분 생략' : ' · 전체'); } catch (error) { message(error.message); } }
+-$('reload').onclick = videos; $('videos').onchange = probe; $('logButton').onclick = loadLog;
+-$('detect').onclick = () => start('detect', {path: $('videos').value});
+-$('train').onclick = () => start('train', {resume: $('resume').checked});
+-$('upload').onchange = async () => { const file = $('upload').files[0]; if (!file) return; if (file.size > 4 * 1024 ** 3) { message('4GB 이하 영상을 선택해 주세요.'); return; } try { message('영상을 가져오는 중입니다.'); const response = await fetch('/api/upload', {method: 'POST', headers: {'X-Token': token, 'X-CSRF-Token': token, 'X-Filename': encodeURIComponent(file.name)}, body: file}); const result = await response.json(); if (!response.ok || !result.ok) throw Error(result.error); await videos(); $('videos').value = result.data.path; await probe(); message('영상 가져오기를 마쳤습니다.'); } catch (error) { message(error.message); } };
+-refresh(); videos(); setInterval(refresh, 8000);
+--- previous/web/fonts/OFL.txt
++++ current/web/fonts/OFL.txt
+@@ -1,96 +0,0 @@
+-Copyright (c) 2010, NHN Corporation (http://www.nhncorp.com),
+-with Reserved Font Name Nanum, Naver Nanum, NanumGothic, Naver 
+-NanumGothic, NanumMyeongjo, Naver NanumMyeongjo, NanumBrush, Naver
+-NanumBrush, NanumPen, Naver NanumPen.
+-
+-This Font Software is licensed under the SIL Open Font License, Version 1.1.
+-This license is copied below, and is also available with a FAQ at:
+-http://scripts.sil.org/OFL
+-
+-
+------------------------------------------------------------
+-SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007
+------------------------------------------------------------
+-
+-PREAMBLE
+-The goals of the Open Font License (OFL) are to stimulate worldwide
+-development of collaborative font projects, to support the font creation
+-efforts of academic and linguistic communities, and to provide a free and
+-open framework in which fonts may be shared and improved in partnership
+-with others.
+-
+-The OFL allows the licensed fonts to be used, studied, modified and
+-redistributed freely as long as they are not sold by themselves. The
+-fonts, including any derivative works, can be bundled, embedded, 
+-redistributed and/or sold with any software provided that any reserved
+-names are not used by derivative works. The fonts and derivatives,
+-however, cannot be released under any other type of license. The
+-requirement for fonts to remain under this license does not apply
+-to any document created using the fonts or their derivatives.
+-
+-DEFINITIONS
+-"Font Software" refers to the set of files released by the Copyright
+-Holder(s) under this license and clearly marked as such. This may
+-include source files, build scripts and documentation.
+-
+-"Reserved Font Name" refers to any names specified as such after the
+-copyright statement(s).
+-
+-"Original Version" refers to the collection of Font Software components as
+-distributed by the Copyright Holder(s).
+-
+-"Modified Version" refers to any derivative made by adding to, deleting,
+-or substituting -- in part or in whole -- any of the components of the
+-Original Version, by changing formats or by porting the Font Software to a
+-new environment.
+-
+-"Author" refers to any designer, engineer, programmer, technical
+-writer or other person who contributed to the Font Software.
+-
+-PERMISSION & CONDITIONS
+-Permission is hereby granted, free of charge, to any person obtaining
+-a copy of the Font Software, to use, study, copy, merge, embed, modify,
+-redistribute, and sell modified and unmodified copies of the Font
+-Software, subject to the following conditions:
+-
+-1) Neither the Font Software nor any of its individual components,
+-in Original or Modified Versions, may be sold by itself.
+-
+-2) Original or Modified Versions of the Font Software may be bundled,
+-redistributed and/or sold with any software, provided that each copy
+-contains the above copyright notice and this license. These can be
+-included either as stand-alone text files, human-readable headers or
+-in the appropriate machine-readable metadata fields within text or
+-binary files as long as those fields can be easily viewed by the user.
+-
+-3) No Modified Version of the Font Software may use the Reserved Font
+-Name(s) unless explicit written permission is granted by the corresponding
+-Copyright Holder. This restriction only applies to the primary font name as
+-presented to the users.
+-
+-4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font
+-Software shall not be used to promote, endorse or advertise any
+-Modified Version, except to acknowledge the contribution(s) of the
+-Copyright Holder(s) and the Author(s) or with their explicit written
+-permission.
+-
+-5) The Font Software, modified or unmodified, in part or in whole,
+-must be distributed entirely under this license, and must not be
+-distributed under any other license. The requirement for fonts to
+-remain under this license does not apply to any document created
+-using the Font Software.
+-
+-TERMINATION
+-This license becomes null and void if any of the above conditions are
+-not met.
+-
+-DISCLAIMER
+-THE FONT SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF
+-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT
+-OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE
+-COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+-INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL
+-DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+-FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
+-OTHER DEALINGS IN THE FONT SOFTWARE.
+--- previous/web/index.html
++++ current/web/index.html
+@@ -1,7 +0,0 @@
+-<!doctype html>
+-<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>클린뷰 · 탐지와 학습</title><link rel="stylesheet" href="/style.css"></head>
+-<body><header><span class="brand">클린뷰 <small>5차</small></span><span class="badge">이 PC에서 독립 실행</span></header>
+-<main><h1>영상에서 시작해, 성능까지 확인하세요.</h1><p class="lead">Codex를 닫아도 작업은 이어집니다. 학습은 아래 시작 버튼을 눌렀을 때만 실행합니다.</p><p id="message" role="status"></p>
+-<div class="grid"><section><div class="title"><h2>01 영상 탐지</h2><button id="reload" class="secondary">목록 새로고침</button></div><label for="videos">보관된 영상</label><select id="videos"><option value="">영상 선택</option></select><label class="upload" for="upload">새 영상 가져오기 · 최대 4GB<input id="upload" type="file" accept="video/*"></label><img id="previewImage" alt="선택 영상 첫 프레임"><video id="preview" controls preload="metadata"></video><pre id="probe">영상을 고르면 정보를 확인합니다.</pre><p>서버에서 검증 선택한 모델을 사용합니다.</p><button id="detect">선택 영상 탐지 시작</button></section>
+-<section><h2>02 탐지 결과</h2><div id="results" class="empty">아직 완료된 탐지 결과가 없습니다.</div></section>
+-<section class="wide"><div class="title"><h2>03 학습과 평가</h2><span id="trainingState" class="badge">상태 확인 중</span></div><div class="metrics"><div>정밀도 P<strong id="precision">미측정</strong></div><div>재현율 R<strong id="recall">미측정</strong></div><div>mAP50<strong id="map50">미측정</strong></div></div><p id="metricNote">목표 P·R 각각 90% · 실측 결과가 있을 때 표시합니다.</p><canvas id="curves" width="960" height="230" aria-label="에포크별 정밀도·재현율·mAP50 추이"></canvas><p class="legend">파랑 정밀도 · 초록 재현율 · 주황 mAP50</p><p>학습 에포크와 분할은 사전에 고정한 학습 계획을 따릅니다.</p><label><input id="resume" type="checkbox"> 마지막 체크포인트에서 재개</label><button id="train">추가 학습 시작</button><div id="jobs"></div><details><summary>실제 상태·평가 원문</summary><pre id="raw"></pre></details><label for="logPath">작업 로그 · work 내부 상대 경로</label><input id="logPath" value="logs/train.log"><button id="logButton" class="secondary">로그 읽기</button><p id="logInfo"></p><pre id="log">로그는 최대 64KB를 표시합니다.</pre></section></div><footer>영상·모델·결과는 PC와 Docker에 보관됩니다. 로컬 접속 토큰은 Codex 사용 한도와 무관합니다.</footer></main><script src="/app.js"></script></body></html>
+--- previous/web/style.css
++++ current/web/style.css
+@@ -1,2 +0,0 @@
+-@font-face{font-family:Nanum;src:url('/fonts/NanumGothic-Bold.ttf') format('truetype');font-weight:700;font-display:swap}*{box-sizing:border-box}body{margin:0;background:#f3f5f8;color:#172a3b;font:700 15px/1.65 Nanum,'Malgun Gothic',sans-serif}button,input,select{font:inherit}header{background:#fff;border-bottom:1px solid #dde5ed;padding:20px 5%;display:flex;justify-content:space-between;align-items:center}.brand{font-size:24px}.brand small{font-size:13px;color:#588275;margin-left:8px}.badge{background:#e8f3ee;color:#286751;padding:5px 12px;border-radius:18px;font-size:12px}main{max-width:1450px;margin:36px auto;padding:0 30px}h1{font-size:30px;margin-bottom:6px}.lead{color:#617487;margin-bottom:28px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}section{background:white;border:1px solid #e0e7ed;border-radius:18px;padding:25px;min-width:0}.wide{grid-column:1/-1}h2{font-size:19px;margin:0 0 20px}.title{display:flex;justify-content:space-between;gap:15px;align-items:baseline}label{display:block;margin:15px 0 6px;color:#536577}input:not([type=checkbox]),select{width:100%;border:1px solid #cbd7e0;padding:10px;border-radius:8px;background:#fff;color:#172a3b}button{border:0;background:#196d63;color:white;padding:11px 18px;border-radius:8px;cursor:pointer;margin:10px 0}button:disabled{opacity:.45;cursor:wait}.secondary{background:#eaf0f5;color:#354e62}.upload{padding:15px;border:1px dashed #91aba6;border-radius:10px;background:#f4faf7}input[type=file]{margin-top:8px}video{width:100%;max-height:400px;background:#13232c;border-radius:10px;margin-top:15px}video:not([src]){display:none}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f3f6f9;padding:14px;border-radius:8px;max-height:320px;overflow:auto;font:700 12px/1.7 Nanum,sans-serif}.empty{color:#718391;min-height:180px;display:grid;align-content:center}.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.metrics>div{padding:20px;background:#f1f6f8;border-radius:12px;color:#587080}.metrics strong{display:block;font-size:31px;color:#153947;margin-top:8px}canvas{width:100%;height:230px;background:#f9fbfc;border:1px solid #e6edf2;border-radius:10px}.legend,#metricNote,footer{font-size:12px;color:#64778a}#message:not(:empty){background:#fff2d8;border:1px solid #e9c76d;padding:12px;border-radius:8px}article{border-top:1px solid #e1e8ee;padding-top:15px;margin-top:14px}a{color:#196d63}footer{padding:28px 0}@media(max-width:850px){.grid{grid-template-columns:1fr}.wide{grid-column:auto}main{padding:0 15px}h1{font-size:24px}.metrics{gap:6px}.metrics>div{padding:10px}.metrics strong{font-size:22px}}
+-img#previewImage{width:100%;max-height:400px;object-fit:contain;border-radius:10px;margin-top:15px}img#previewImage:not([src]){display:none}
+--- previous/사용안내.txt
++++ current/사용안내.txt
+@@ -1,28 +0,0 @@
+-클린뷰 5차 · 독립 실행 안내
+-
+-1. Docker Desktop과 GPU 작업 환경을 준비한 뒤 실행.bat을 더블클릭합니다.
+-   화면은 127.0.0.1에서만 열립니다. API 키나 Codex 토큰을 사용하지 않습니다.
+-   주소의 로컬 접속 토큰은 이 PC의 접근 보호용이며 Codex 한도·비용과 무관합니다.
+-   주소와 work/session.json을 다른 사람에게 공유하지 마세요.
+-2. 영상을 선택하거나 가져온 다음 탐지 시작을 누릅니다. 업로드는 최대 4GB입니다.
+-   브라우저에서 재생하지 못하는 코덱은 미리보기가 제한될 수 있습니다.
+-3. 추가 학습은 명시적으로 시작 버튼을 누를 때만 실행합니다.
+-   실행 중인 작업은 중복 시작하지 않으며 실패 원문을 화면에 표시합니다.
+-   화면을 닫아도 독립 학습 프로세스는 계속됩니다. PC·Docker 종료 시 계산은 멈춥니다.
+-4. 성능은 실제 평가값만 표시합니다. 정밀도·재현율 각각 90%는 목표입니다.
+-   객체 탐지 수치는 CCTV 투기 행동 판단의 정확도와 다릅니다.
+-5. 로그는 work 내부 허용 폴더에서 끝부분 최대 64KB를 읽습니다.
+-   원본 바이트 수·표시 바이트 수·생략 여부를 함께 표시합니다.
+-
+-명령 실행: Python launcher.py --no-browser --port 0
+-숨김 독립 실행: Python launcher.py --hidden --no-browser
+-읽기 전용 루프백 확인: Python launcher.py --self-test
+-실행 중 주소와 프로세스 ID: work/session.json
+-정지: 해당 PID를 작업 관리자에서 종료합니다. 학습 프로세스는 별개입니다.
+-
+-실행기는 프로젝트 runtime/python.exe, 그다음 현재 사용자 Codex 번들 Python을 찾습니다.
+-둘 다 없으면 소스 실행용 Python 런타임을 준비해야 합니다. Codex 앱 연결이나 로그인은 실행에 필요하지 않습니다.
+-CleanView5.exe는 Python 런타임을 내장합니다. EXE 옆 _internal·web·GPU 작업 소스·환경파일을 유지하세요.
+-EXE 의존성 확인: Python build_exe.py
+-프로젝트 전용 work/buildenv에서 EXE를 빌드했습니다. 실제 패키지 버전은 work/build-requirements.lock.txt에 기록합니다.
+-이전 차수와 원본은 보존하며 새 업로드·결과는 5차/work에 저장합니다.
+--- previous/실행.bat
++++ current/실행.bat
+@@ -1,18 +0,0 @@
+-@echo off
+-chcp 65001 >nul
+-setlocal
+-cd /d "%~dp0"
+-if exist "%~dp0CleanView5.exe" (
+-  start "" "%~dp0CleanView5.exe" --hidden
+-  exit /b 0
+-)
+-set "PBL_PY=%~dp0runtime\python.exe"
+-if not exist "%PBL_PY%" set "PBL_PY=%USERPROFILE%\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe"
+-if not exist "%PBL_PY%" (
+-  echo 실행 가능한 Python이 없습니다. 사용안내.txt의 런타임 경로를 확인해 주세요.
+-  pause
+-  exit /b 1
+-)
+-"%PBL_PY%" -B -X utf8 "%~dp0launcher.py" --hidden
+-if errorlevel 1 pause
+-endlocal
