@@ -1,0 +1,126 @@
+# 이전 도커 실험 → 최종/3차: 공개 파일 비교
+
+비교 기준: Git HEAD `a2c73e4faf0790798be51ec735950e7efc34a7f5`의 `이전 도커 실험/`와 `최종/3차/`를 각각 상대 경로로 맞춥니다. 이름이 다른 파일은 추가·삭제로 표시하며 내용상의 계보나 성능 향상을 뜻하지 않습니다.
+
+서로 다른 목적의 폴더도 경로와 바이트를 비교한 결과입니다.
+추가 62개, 수정 0개, 삭제 53개, 동일 0개입니다.
+
+[텍스트 전체 차이](docker-to-3.patch) · 바이너리와 민감 가능 파일은 원문을 복제하지 않고 아래에 크기와 SHA-256을 기록합니다.
+
+| 상태 | 상대 경로 | 이전 크기 / SHA-256 | 이후 크기 / SHA-256 | 처리 |
+|---|---|---|---|---|
+| 삭제 | `3차실험/trash_round3/app/backend.py` | 6031 / cae87033e58cebc3affd122ea6d5070c28456ad45d22a9f740c59b4d3237a32c | — | 텍스트 패치 |
+| 삭제 | `3차실험/trash_round3/app/build_windows.ps1` | 1179 / 079be8abbd81cbc3d3ca55942542fbaccefd6677de7f5ad7c562e2678dca7169 | — | 텍스트 패치 |
+| 삭제 | `3차실험/trash_round3/app/data_pipeline.py` | 14165 / 7c553ecdcbc642a56958e484a52a9d956e962859cd241f3e09fd3a781cff69c2 | — | 텍스트 패치 |
+| 삭제 | `3차실험/trash_round3/app/detector.py` | 8444 / 4d103a0595078bc3b2445120336eb1dd9a8d94cf9cc1fc361f9b87f4b2e29a06 | — | 텍스트 패치 |
+| 삭제 | `3차실험/trash_round3/app/finish_on_exit.py` | 5623 / eb4478d0783925299cef53efc447e0d39d1461617a913e6425fb072debe2adef | — | 텍스트 패치 |
+| 삭제 | `3차실험/trash_round3/app/fonts/OFL.txt` | 4534 / eeacf16032901d0ed0456876ec77b8f0fda6b3fecec7d972f8543eb602e6c30f | — | 텍스트 패치 |
+| 삭제 | `3차실험/trash_round3/app/index.html` | 19908 / e3d3239455975f52975358733a3f258aa11239ebbe4e6b84355388ab98c559a8 | — | 텍스트 패치 |
+| 삭제 | `3차실험/trash_round3/app/inference.py` | 6096 / 458ac4b4cc27e11eeeabaf540f0407e2d06551074eccfa0548d18a3bf5342f40 | — | 텍스트 패치 |
+| 삭제 | `3차실험/trash_round3/app/launcher.py` | 8942 / 4ce840506dcb2cdf257f5d463a0afa180701818110fda3065a6725435a9c5bc2 | — | 텍스트 패치 |
+| 삭제 | `3차실험/trash_round3/app/make_report.py` | 9373 / 3ce368fc16fdaa232195d36f3fc1f537bf9b6f0ee22bb5888b1b1ea1d8c35c8b | — | 텍스트 패치 |
+| 삭제 | `3차실험/trash_round3/app/requirements-docker.txt` | 188 / 6126e7b39491351259a2e6c9e91cc54889b8804f3c2124623989b9a7acec6de2 | — | 텍스트 패치 |
+| 삭제 | `3차실험/trash_round3/app/selected_model.json` | 1224 / af3aaf0828885a094eb4322ff4de28a5d9efaf4751dbaaeb5fbc5f1c9eeb7776 | — | 텍스트 패치 |
+| 삭제 | `3차실험/trash_round3/app/state/jobs/20261013_060956_6d373b.json` | 3080 / d18a6285d2c7174704534a8a140e30eaa55f8f53bcda9476f5e5071f83312188 | — | 바이너리 또는 데이터·실행 상태·민감 가능 내용: 원문 제외 |
+| 삭제 | `3차실험/trash_round3/app/state/jobs/20261019_084945_fe574d.json` | 1006 / 6172cd4d35687a75e25a68108e27df70c02fedc3dbcdf436182f02ab31b52913 | — | 바이너리 또는 데이터·실행 상태·민감 가능 내용: 원문 제외 |
+| 삭제 | `3차실험/trash_round3/app/train_round3.py` | 7638 / f98b4c83c3924d16b7e16f96a0b0d8284862e10b34d7f17ad0699975a315922c | — | 텍스트 패치 |
+| 삭제 | `3차실험/trash_round3/app/사용설명.txt` | 3170 / baaee433a7f0cc9aa9409598aa7ad5f15114baf15bc08b2d55d6b8732e0517b2 | — | 텍스트 패치 |
+| 삭제 | `3차실험/trash_round3/data/reference/data.yaml` | 142 / a7dcd1daec7db9d6a523390a6b517b14747b70793ac90f3f43ec4d45f223a437 | — | 바이너리 또는 데이터·실행 상태·민감 가능 내용: 원문 제외 |
+| 삭제 | `3차실험/trash_round3/data/taco/.gitignore` | 13 / 55b0116910a7e6957faecf53884148584d8051be53a6f2afd49515229db76e7d | — | 바이너리 또는 데이터·실행 상태·민감 가능 내용: 원문 제외 |
+| 삭제 | `3차실험/trash_round3/data/taco/LICENSE` | 1074 / 2280878a21e4c4a9ff18e232c78182ac1300b3fd3641a1db1b503d1e2b7d4443 | — | 바이너리 또는 데이터·실행 상태·민감 가능 내용: 원문 제외 |
+| 삭제 | `3차실험/trash_round3/data/taco/README.md` | 4475 / 26800c1d7a5588b6bc72045e2dba27172ec6aaa7cf781793271d341e72417bec | — | 바이너리 또는 데이터·실행 상태·민감 가능 내용: 원문 제외 |
+| 삭제 | `3차실험/trash_round3/data/taco/demo.ipynb` | 14785 / 02e2854effb9c1a07780278efa10a3061fb06a15ce92deee83a6f161d8086b75 | — | 바이너리 또는 데이터·실행 상태·민감 가능 내용: 원문 제외 |
+| 삭제 | `3차실험/trash_round3/data/taco/detector/config.py` | 9084 / 5f4f5090e1f9a1a4b0fb0c452b97d9f5e3417ba1d4b2c3f2ecfbe500e80cfd0c | — | 바이너리 또는 데이터·실행 상태·민감 가능 내용: 원문 제외 |
+| 삭제 | `3차실험/trash_round3/data/taco/detector/dataset.py` | 9614 / 13e5cc880ba6108c40ad3084b1e864a75ba3c9a4394f855f0ae729315efa8c3d | — | 바이너리 또는 데이터·실행 상태·민감 가능 내용: 원문 제외 |
+| 삭제 | `3차실험/trash_round3/data/taco/detector/detector.ipynb` | 36991 / 7e3225d1b463f4be5b8ae7d43734036bd36604644a25d03c88f3922a5102f155 | — | 바이너리 또는 데이터·실행 상태·민감 가능 내용: 원문 제외 |
+| 삭제 | `3차실험/trash_round3/data/taco/detector/detector.py` | 14722 / 2624bc20bb86f658623bd0644e9e976bd9044d510becfa367282c3c72650a7c0 | — | 바이너리 또는 데이터·실행 상태·민감 가능 내용: 원문 제외 |
+| 삭제 | `3차실험/trash_round3/data/taco/detector/inspect_data.ipynb` | 29797 / 426e908ef2e5d4b56e6584732908f2d152861fa0f857f8113fbb9e4b61345d6c | — | 바이너리 또는 데이터·실행 상태·민감 가능 내용: 원문 제외 |
+| 삭제 | `3차실험/trash_round3/data/taco/detector/model.py` | 129707 / 22763d986cfd313f9e4754b2d1ce4d3a65c548ce2306784df7aa4586bd436195 | — | 바이너리 또는 데이터·실행 상태·민감 가능 내용: 원문 제외 |
+| 삭제 | `3차실험/trash_round3/data/taco/detector/split_dataset.py` | 3352 / 88c8709509c78c1a5a2df4a89efa7fd4f78da35ddfe44587e4606a7f299915d7 | — | 바이너리 또는 데이터·실행 상태·민감 가능 내용: 원문 제외 |
+| 삭제 | `3차실험/trash_round3/data/taco/detector/utils.py` | 41325 / 923e63ca0bb5b0ea24e35ac7d92924b8af3f4962d264632c1d4183545e7deb67 | — | 바이너리 또는 데이터·실행 상태·민감 가능 내용: 원문 제외 |
+| 삭제 | `3차실험/trash_round3/data/taco/detector/visualize.py` | 19056 / 105acdca43660da41f468bf493d7d20810ba03a66c1eda22a1ac781813440de3 | — | 바이너리 또는 데이터·실행 상태·민감 가능 내용: 원문 제외 |
+| 삭제 | `3차실험/trash_round3/data/taco/download.py` | 1751 / 10d629fb23c35d6263ee6de28854523446d814f0bca2649c91d06d53b06b4f6d | — | 바이너리 또는 데이터·실행 상태·민감 가능 내용: 원문 제외 |
+| 삭제 | `3차실험/trash_round3/data/taco/requirements.txt` | 71 / 67ff2b90239ea339c9c902cad67ef8d2915f9303eca75bc6eff702b7b8865f06 | — | 바이너리 또는 데이터·실행 상태·민감 가능 내용: 원문 제외 |
+| 삭제 | `3차실험/trash_round3/data_focus.yaml` | 221 / 0e1f7da67d5cc80f09be8077b9854a754543bbb7f38c3e391dfce41f80acc9ba | — | 텍스트 패치 |
+| 삭제 | `3차실험/trash_round3/data_mix.yaml` | 219 / 4c1ea91fd476a6686ac2791ef3b5967e908ca292a9a20d3acf6e1c6c552da1bc | — | 텍스트 패치 |
+| 삭제 | `3차실험/trash_round3/experiment_plan.json` | 1903 / c9a858af27077a7c3cf5dec2bb61c058eb5cc36a514607fba52f97428a79cb7f | — | 텍스트 패치 |
+| 삭제 | `3차실험/trash_round3/external_archive_check.json` | 247 / 7e9e8cd9118a89c7ed8cc8e47a7202da3d78e97139d11ff7f30afcea12c0d719 | — | 텍스트 패치 |
+| 삭제 | `3차실험/trash_round3/final.json` | 3852 / 49c5a966ea943b8129cae37b5191afeb14a051553cbbe4a3da4d8b0a86d6d6d2 | — | 텍스트 패치 |
+| 삭제 | `3차실험/trash_round3/model_memory_smoke.json` | 465 / 74ec5111ea9963917403d6e1c255c10a3c5876ecdb1379edae1992b77b647c89 | — | 텍스트 패치 |
+| 삭제 | `3차실험/trash_round3/runs/yolo26l_p2_focus/args.yaml` | 1803 / 0ed338726c19262a846463119fe96b11d15610d9a9a491d43bb95860c77a7071 | — | 텍스트 패치 |
+| 삭제 | `3차실험/trash_round3/runs/yolo26l_p2_mix/args.yaml` | 1746 / b86771d7af6a5d303fcc996ba3cd74c8325c04bdb9c30e04193f2d00ee2c891f | — | 텍스트 패치 |
+| 삭제 | `3차실험/trash_round3/runs/yolo26x_focus/args.yaml` | 1794 / 9478edbe7eb4c68f5b784dabbc78984641a38432512a9f1c96719fc0ddc3a4bb | — | 텍스트 패치 |
+| 삭제 | `3차실험/trash_round3/runs/yolo26x_mix/args.yaml` | 1844 / 4733141ab402169d5e6548e157e790d9706a1917470dd04ed2e76cc64ba07a79 | — | 텍스트 패치 |
+| 삭제 | `3차실험/trash_round3/selection.json` | 871 / 8aac3f2c567658f08fea7e5e0060445975779fcc4f3ef67c1636bcfcb82a4289 | — | 텍스트 패치 |
+| 삭제 | `3차실험/trash_round3/sources/attribution.json` | 421 / 2ca82d02ef41efb7138826ae7113084a390873f26a12b12a26c8d2d023ac076f | — | 텍스트 패치 |
+| 삭제 | `3차실험/trash_round3/sources/excluded.json` | 1026 / 070624d0a1eca4b6f7f3e22e81f3c6acae9dd5ce68681099be67baa8597ae7bb | — | 텍스트 패치 |
+| 삭제 | `3차실험/trash_round3/sources/salsa/attribution.json` | 725 / 7d01cc2ba06fdb58f15d448e092bc54175e4032539e7d943741edf13fd6f0655 | — | 텍스트 패치 |
+| 삭제 | `3차실험/trash_round3/validation_comparison.json` | 12234 / 0907e1e67cc39da800c8f148200ee01212dee83d135648ae9b722c17e06f6030 | — | 텍스트 패치 |
+| 추가 | `_작업/check_external_archive.py` | — | 1584 / 09f2665df1f9115c0364fe50b22d5d1ce4ac0ec0286ea06bd4f1bfddf0f82460 | 텍스트 패치 |
+| 추가 | `_작업/check_models.py` | — | 1826 / ead897fe2d66c1dbb7a96bf932339c16c02de68988204c39aa623cf4cd04c36b | 텍스트 패치 |
+| 추가 | `_작업/check_report_contract.py` | — | 1545 / c70b880e207996c61c30dd6a635205ce5161d4e398419bcb10d665aee0ef0b60 | 텍스트 패치 |
+| 추가 | `_작업/cleanup_ready.json` | — | 264 / 89b052e4d2e5fac3939bea8915fd324ba21ee3d7f2a5876936671b61b13e3ac7 | 텍스트 패치 |
+| 추가 | `_작업/completion_once/state.json` | — | 237 / 372c498546deb3b8c1ae4e22954753126e69e6898f7e9a0e8cebde03ef21dfde | 텍스트 패치 |
+| 추가 | `_작업/migrate_inputs.py` | — | 2033 / 60d9a5d5eeede5b8ecd1d413ee46d0f1379e31722e43983446f9a1aaf40b0974 | 텍스트 패치 |
+| 추가 | `_작업/save_results_now.py` | — | 3118 / 8e29ca0e9dd33e017b9f4953a001a806a08082bbd73368c60c364064993ec429 | 텍스트 패치 |
+| 추가 | `_작업/wait_code.py` | — | 1547 / ff4737226aac77c20d99d94db9d20dd3d316dc285d6ed077de8fbc83ba64402d | 텍스트 패치 |
+| 추가 | `결과저장.json` | — | 58266 / 65927d0fff5975b6ee6fa845ceec4a344ade18bb2c67a1e76a89070f0b272274 | 텍스트 패치 |
+| 추가 | `데이터/reference/data.yaml` | — | 142 / a7dcd1daec7db9d6a523390a6b517b14747b70793ac90f3f43ec4d45f223a437 | 바이너리 또는 데이터·실행 상태·민감 가능 내용: 원문 제외 |
+| 추가 | `데이터/taco/.gitignore` | — | 13 / 55b0116910a7e6957faecf53884148584d8051be53a6f2afd49515229db76e7d | 바이너리 또는 데이터·실행 상태·민감 가능 내용: 원문 제외 |
+| 추가 | `데이터/taco/LICENSE` | — | 1074 / 2280878a21e4c4a9ff18e232c78182ac1300b3fd3641a1db1b503d1e2b7d4443 | 바이너리 또는 데이터·실행 상태·민감 가능 내용: 원문 제외 |
+| 추가 | `데이터/taco/README.md` | — | 4475 / 26800c1d7a5588b6bc72045e2dba27172ec6aaa7cf781793271d341e72417bec | 바이너리 또는 데이터·실행 상태·민감 가능 내용: 원문 제외 |
+| 추가 | `데이터/taco/demo.ipynb` | — | 14785 / 02e2854effb9c1a07780278efa10a3061fb06a15ce92deee83a6f161d8086b75 | 바이너리 또는 데이터·실행 상태·민감 가능 내용: 원문 제외 |
+| 추가 | `데이터/taco/detector/config.py` | — | 9084 / 5f4f5090e1f9a1a4b0fb0c452b97d9f5e3417ba1d4b2c3f2ecfbe500e80cfd0c | 바이너리 또는 데이터·실행 상태·민감 가능 내용: 원문 제외 |
+| 추가 | `데이터/taco/detector/dataset.py` | — | 9614 / 13e5cc880ba6108c40ad3084b1e864a75ba3c9a4394f855f0ae729315efa8c3d | 바이너리 또는 데이터·실행 상태·민감 가능 내용: 원문 제외 |
+| 추가 | `데이터/taco/detector/detector.ipynb` | — | 36991 / 7e3225d1b463f4be5b8ae7d43734036bd36604644a25d03c88f3922a5102f155 | 바이너리 또는 데이터·실행 상태·민감 가능 내용: 원문 제외 |
+| 추가 | `데이터/taco/detector/detector.py` | — | 14722 / 2624bc20bb86f658623bd0644e9e976bd9044d510becfa367282c3c72650a7c0 | 바이너리 또는 데이터·실행 상태·민감 가능 내용: 원문 제외 |
+| 추가 | `데이터/taco/detector/inspect_data.ipynb` | — | 29797 / 426e908ef2e5d4b56e6584732908f2d152861fa0f857f8113fbb9e4b61345d6c | 바이너리 또는 데이터·실행 상태·민감 가능 내용: 원문 제외 |
+| 추가 | `데이터/taco/detector/model.py` | — | 129707 / 22763d986cfd313f9e4754b2d1ce4d3a65c548ce2306784df7aa4586bd436195 | 바이너리 또는 데이터·실행 상태·민감 가능 내용: 원문 제외 |
+| 추가 | `데이터/taco/detector/split_dataset.py` | — | 3352 / 88c8709509c78c1a5a2df4a89efa7fd4f78da35ddfe44587e4606a7f299915d7 | 바이너리 또는 데이터·실행 상태·민감 가능 내용: 원문 제외 |
+| 추가 | `데이터/taco/detector/utils.py` | — | 41325 / 923e63ca0bb5b0ea24e35ac7d92924b8af3f4962d264632c1d4183545e7deb67 | 바이너리 또는 데이터·실행 상태·민감 가능 내용: 원문 제외 |
+| 추가 | `데이터/taco/detector/visualize.py` | — | 19056 / 105acdca43660da41f468bf493d7d20810ba03a66c1eda22a1ac781813440de3 | 바이너리 또는 데이터·실행 상태·민감 가능 내용: 원문 제외 |
+| 추가 | `데이터/taco/download.py` | — | 1751 / 10d629fb23c35d6263ee6de28854523446d814f0bca2649c91d06d53b06b4f6d | 바이너리 또는 데이터·실행 상태·민감 가능 내용: 원문 제외 |
+| 추가 | `데이터/taco/requirements.txt` | — | 71 / 67ff2b90239ea339c9c902cad67ef8d2915f9303eca75bc6eff702b7b8865f06 | 바이너리 또는 데이터·실행 상태·민감 가능 내용: 원문 제외 |
+| 삭제 | `불법투기탐지/FINAL-GARBAGE-DETECTION-1/README.dataset.txt` | 168 / eace1bbddec309c19306976cda10924471af80b59e7e42128ea373d9fc3d0eda | — | 텍스트 패치 |
+| 삭제 | `불법투기탐지/FINAL-GARBAGE-DETECTION-1/README.roboflow.txt` | 1276 / 92b364818ceb76dc0d3997f80faf3e4e0c24468da8d85132576d7a9e3f693df1 | — | 텍스트 패치 |
+| 삭제 | `불법투기탐지/FINAL-GARBAGE-DETECTION-1/data.yaml` | 340 / d0a638bee3fde372ecd5b318d4ec65241950d502356029a9228d31b4aeb0d2b2 | — | 텍스트 패치 |
+| 삭제 | `불법투기탐지/illegal_dumping_detector.ipynb` | 42255 / 92e4cef88b263b8c9b9ee64d4a89cc647600d19969c2048dd72c6376e7bbdc6e | — | 텍스트 패치 |
+| 삭제 | `불법투기탐지/runs/detect/dumping_runs/train-2/args.yaml` | 1643 / 23279d1b63adafe6d6794edad9209abf4f9abaf7f8e0472f4f4647b7cca33c0f | — | 텍스트 패치 |
+| 삭제 | `불법투기탐지/runs/detect/dumping_runs/train-3/args.yaml` | 1643 / 9061c7dc29c69d4e49b61ec48b1f8d5aa3adaa6a1b78710b0806286421aaeb25 | — | 텍스트 패치 |
+| 추가 | `실행기록/selected_model.json` | — | 1224 / af3aaf0828885a094eb4322ff4de28a5d9efaf4751dbaaeb5fbc5f1c9eeb7776 | 텍스트 패치 |
+| 추가 | `실행기록/state/jobs/20261013_060956_6d373b.json` | — | 3080 / d18a6285d2c7174704534a8a140e30eaa55f8f53bcda9476f5e5071f83312188 | 바이너리 또는 데이터·실행 상태·민감 가능 내용: 원문 제외 |
+| 추가 | `실험기록/yolo26l_p2_focus/args.yaml` | — | 1803 / 0ed338726c19262a846463119fe96b11d15610d9a9a491d43bb95860c77a7071 | 텍스트 패치 |
+| 추가 | `실험기록/yolo26l_p2_focus/phase_complete.json` | — | 209 / 163cf2d79a2f46ac9fbffd130f71db96172a2517432d07c7a84edb20afb107ec | 텍스트 패치 |
+| 추가 | `실험기록/yolo26l_p2_mix/args.yaml` | — | 1746 / b86771d7af6a5d303fcc996ba3cd74c8325c04bdb9c30e04193f2d00ee2c891f | 텍스트 패치 |
+| 추가 | `실험기록/yolo26l_p2_mix/phase_complete.json` | — | 206 / 5970aeed97fbe25c50b08ede86557ecbbbb2333dd6cfd23717c46ff0a4d14018 | 텍스트 패치 |
+| 추가 | `실험기록/yolo26x_focus/args.yaml` | — | 1794 / 9478edbe7eb4c68f5b784dabbc78984641a38432512a9f1c96719fc0ddc3a4bb | 텍스트 패치 |
+| 추가 | `실험기록/yolo26x_focus/phase_complete.json` | — | 203 / 060287a1fcb1f39269a0d05fb07fb6429a5b951210d82d184dbd8970ee893b77 | 텍스트 패치 |
+| 추가 | `실험기록/yolo26x_mix/args.yaml` | — | 1844 / 4733141ab402169d5e6548e157e790d9706a1917470dd04ed2e76cc64ba07a79 | 텍스트 패치 |
+| 추가 | `실험기록/yolo26x_mix/phase_complete.json` | — | 200 / 0a57c1a75de63d030d7b90a1feb1af564e1e903e8be91994f6838d9f10f7789c | 텍스트 패치 |
+| 추가 | `실험설정/data_focus.yaml` | — | 221 / 0e1f7da67d5cc80f09be8077b9854a754543bbb7f38c3e391dfce41f80acc9ba | 텍스트 패치 |
+| 추가 | `실험설정/data_mix.yaml` | — | 219 / 4c1ea91fd476a6686ac2791ef3b5967e908ca292a9a20d3acf6e1c6c552da1bc | 텍스트 패치 |
+| 추가 | `실험설정/experiment_plan.json` | — | 1903 / c9a858af27077a7c3cf5dec2bb61c058eb5cc36a514607fba52f97428a79cb7f | 텍스트 패치 |
+| 추가 | `실험설정/external_archive_check.json` | — | 247 / 7e9e8cd9118a89c7ed8cc8e47a7202da3d78e97139d11ff7f30afcea12c0d719 | 텍스트 패치 |
+| 추가 | `실험설정/final.json` | — | 3852 / 49c5a966ea943b8129cae37b5191afeb14a051553cbbe4a3da4d8b0a86d6d6d2 | 텍스트 패치 |
+| 추가 | `실험설정/model_memory_smoke.json` | — | 465 / 74ec5111ea9963917403d6e1c255c10a3c5876ecdb1379edae1992b77b647c89 | 텍스트 패치 |
+| 추가 | `실험설정/selection.json` | — | 871 / 8aac3f2c567658f08fea7e5e0060445975779fcc4f3ef67c1636bcfcb82a4289 | 텍스트 패치 |
+| 추가 | `실험설정/validation_comparison.json` | — | 12234 / 0907e1e67cc39da800c8f148200ee01212dee83d135648ae9b722c17e06f6030 | 텍스트 패치 |
+| 추가 | `저장현황.txt` | — | 339 / 85b5d5b7d0512a5f17dd107abf84ee947e1df9821169a06e5a14488488d7399f | 텍스트 패치 |
+| 추가 | `출처/attribution.json` | — | 421 / 2ca82d02ef41efb7138826ae7113084a390873f26a12b12a26c8d2d023ac076f | 텍스트 패치 |
+| 추가 | `출처/excluded.json` | — | 1026 / 070624d0a1eca4b6f7f3e22e81f3c6acae9dd5ce68681099be67baa8597ae7bb | 텍스트 패치 |
+| 추가 | `출처/salsa/attribution.json` | — | 725 / 7d01cc2ba06fdb58f15d448e092bc54175e4032539e7d943741edf13fd6f0655 | 텍스트 패치 |
+| 추가 | `클린뷰/backend.py` | — | 6031 / cae87033e58cebc3affd122ea6d5070c28456ad45d22a9f740c59b4d3237a32c | 텍스트 패치 |
+| 추가 | `클린뷰/build_windows.ps1` | — | 1179 / 079be8abbd81cbc3d3ca55942542fbaccefd6677de7f5ad7c562e2678dca7169 | 텍스트 패치 |
+| 추가 | `클린뷰/data_pipeline.py` | — | 14165 / 7c553ecdcbc642a56958e484a52a9d956e962859cd241f3e09fd3a781cff69c2 | 텍스트 패치 |
+| 추가 | `클린뷰/detector.py` | — | 8444 / 4d103a0595078bc3b2445120336eb1dd9a8d94cf9cc1fc361f9b87f4b2e29a06 | 텍스트 패치 |
+| 추가 | `클린뷰/finalize_round3.py` | — | 9293 / b9e1d9642740ad8d1c4eeb938f6233f154449d776946d71b7b3f236332460787 | 텍스트 패치 |
+| 추가 | `클린뷰/finish_on_exit.py` | — | 6400 / 9a5b5fc191252ebef92bf3389a6e1797e969a283d3ccec4b6491ed498a74c39b | 텍스트 패치 |
+| 추가 | `클린뷰/fonts/OFL.txt` | — | 4534 / eeacf16032901d0ed0456876ec77b8f0fda6b3fecec7d972f8543eb602e6c30f | 텍스트 패치 |
+| 추가 | `클린뷰/index.html` | — | 19908 / e3d3239455975f52975358733a3f258aa11239ebbe4e6b84355388ab98c559a8 | 텍스트 패치 |
+| 추가 | `클린뷰/inference.py` | — | 6096 / 458ac4b4cc27e11eeeabaf540f0407e2d06551074eccfa0548d18a3bf5342f40 | 텍스트 패치 |
+| 추가 | `클린뷰/launcher.py` | — | 8942 / 4ce840506dcb2cdf257f5d463a0afa180701818110fda3065a6725435a9c5bc2 | 텍스트 패치 |
+| 추가 | `클린뷰/make_report.py` | — | 9373 / 3ce368fc16fdaa232195d36f3fc1f537bf9b6f0ee22bb5888b1b1ea1d8c35c8b | 텍스트 패치 |
+| 추가 | `클린뷰/requirements-docker.txt` | — | 188 / 6126e7b39491351259a2e6c9e91cc54889b8804f3c2124623989b9a7acec6de2 | 텍스트 패치 |
+| 추가 | `클린뷰/train_round3.py` | — | 7638 / f98b4c83c3924d16b7e16f96a0b0d8284862e10b34d7f17ad0699975a315922c | 텍스트 패치 |
+| 추가 | `클린뷰/verification.json` | — | 612 / e98705a0091f6f6da1e0277d6cfa694604a71bb8387ff79e7853d6fde9b36ee9 | 텍스트 패치 |
+| 추가 | `클린뷰/사용설명.txt` | — | 2566 / b13ea9096a5006c6517199d775a5c589a4693715dce3ce8bdf17130393a816c4 | 텍스트 패치 |

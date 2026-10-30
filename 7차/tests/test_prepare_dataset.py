@@ -6,10 +6,14 @@ import io
 import http.server
 import json
 import os
+import errno
 import tempfile
 import threading
 import unittest
+import urllib.error
+import urllib.request
 import zipfile
+from contextlib import contextmanager
 from pathlib import Path
 from unittest.mock import patch
 from PIL import Image, ImageDraw
@@ -18,6 +22,37 @@ if importlib.util.find_spec('prepare_dataset'):
     import prepare_dataset as data
 else:
     data = None
+
+
+@contextmanager
+def range_server(content, behavior=lambda attempt: {}):
+    """실제 작은 HTTP 응답으로 중단·서버 오류·범위 위반을 재현합니다."""
+    calls=[]
+    class Handler(http.server.BaseHTTPRequestHandler):
+        def log_message(self,*args):pass
+        def do_GET(self):
+            start,end=map(int,self.headers['Range'].removeprefix('bytes=').split('-'))
+            calls.append((start,end))
+            reply=behavior(len(calls))
+            status=reply.get('status',206)
+            self.send_response(status)
+            if status==206:
+                self.send_header('Content-Range',reply.get('range',f'bytes {start}-{end}/{len(content)}'))
+            if 'retry_after' in reply:self.send_header('Retry-After',reply['retry_after'])
+            self.send_header('Content-Length',str(end-start+1 if status==206 else 0))
+            self.end_headers()
+            if status==206:
+                self.wfile.write(reply.get('body',content[start:end+1]))
+                self.wfile.flush()
+            if reply.get('stall'):threading.Event().wait(reply['stall'])
+            self.close_connection=True
+    server=http.server.ThreadingHTTPServer(('127.0.0.1',0),Handler)
+    thread=threading.Thread(target=lambda:server.serve_forever(poll_interval=.01),daemon=True)
+    thread.start()
+    try:
+        yield f'http://127.0.0.1:{server.server_port}/file',calls
+    finally:
+        server.shutdown();server.server_close();thread.join()
 
 
 class PreparationTests(unittest.TestCase):
@@ -251,15 +286,112 @@ class PreparationTests(unittest.TestCase):
             spec={'url':f'http://127.0.0.1:{server.server_port}/file','size':len(content),'md5':hashlib.md5(content).hexdigest()}
             budget=data.DownloadBudget(self.root/'budget',limit=100,minimum_free=0)
             target=self.root/'source.zip'
-            with self.assertRaises(ValueError):data.download(spec,target,budget)
-            self.assertEqual(budget.used,4)
-            self.assertEqual(target.with_suffix('.zip.part').read_bytes(),content[:4])
-            data.download(spec,target,budget)
+            with patch.object(data.time,'sleep'):
+                data.download(spec,target,budget)
             self.assertEqual(target.read_bytes(),content)
             self.assertEqual(budget.used,len(content))
             self.assertEqual(calls,[(0,len(content)-1),(4,len(content)-1)])
         finally:
             server.shutdown();server.server_close();thread.join()
+
+    def test_timeout_after_body_prefix_resumes_from_saved_disk_bytes(self):
+        content=b'official-bytes'
+        progress=[]
+        with range_server(content,lambda attempt:{'body':content[:4],'stall':.15} if attempt==1 else {}) as (url,calls):
+            spec={'url':url,'size':14,'md5':hashlib.md5(content).hexdigest()}
+            budget=data.DownloadBudget(self.root/'budget',limit=100,minimum_free=0,notify=lambda **value:progress.append(value))
+            target=self.root/'timeout.zip'
+            def short_request(url,headers=None):
+                return urllib.request.urlopen(urllib.request.Request(url,headers=headers or {}),timeout=.05)
+            with patch.object(data,'open_request',side_effect=short_request),patch.object(data.time,'sleep'):
+                data.download(spec,target,budget)
+            self.assertEqual(calls,[(0,13),(4,13)])
+            self.assertEqual(target.read_bytes(),content)
+            self.assertEqual(budget.used,14)
+            self.assertEqual(data.DownloadBudget(self.root/'budget',limit=100,minimum_free=0).used,14)
+            retries=[value for value in progress if value.get('retry_wait_seconds',0)>0]
+            self.assertEqual(len(retries),1)
+            self.assertEqual(retries[0]['downloaded_bytes'],4)
+            self.assertIn('TimeoutError',retries[0]['retry_reason'])
+            self.assertIsNone(progress[-1]['retry_reason'])
+            self.assertEqual(progress[-1]['retry_wait_seconds'],0)
+
+    def test_http_429_and_503_retry_after_is_bounded_before_success(self):
+        content=b'official-bytes'
+        for status in (429,503):
+            with self.subTest(status=status),range_server(content,lambda attempt:{'status':status,'retry_after':'120'} if attempt==1 else {}) as (url,calls):
+                spec={'url':url,'size':14,'md5':hashlib.md5(content).hexdigest()}
+                budget=data.DownloadBudget(self.root/str(status),limit=100,minimum_free=0)
+                target=self.root/(str(status)+'.zip')
+                with patch.object(data.time,'sleep') as sleep:
+                    data.download(spec,target,budget)
+                self.assertEqual(calls,[(0,13),(0,13)])
+                self.assertEqual(target.read_bytes(),content)
+                self.assertEqual(budget.used,14)
+                self.assertEqual(sleep.call_args_list[0].args,(60,))
+
+    def test_invalid_content_range_is_not_retried(self):
+        content=b'official-bytes'
+        with range_server(content,lambda attempt:{'range':'bytes 1-13/14'}) as (url,calls):
+            spec={'url':url,'size':14,'md5':hashlib.md5(content).hexdigest()}
+            budget=data.DownloadBudget(self.root/'budget',limit=100,minimum_free=0)
+            with patch.object(data.time,'sleep') as sleep,self.assertRaisesRegex(ValueError,'범위'):
+                data.download(spec,self.root/'range.zip',budget)
+            self.assertEqual(calls,[(0,13)])
+            self.assertEqual(budget.used,0)
+            sleep.assert_not_called()
+
+    def test_budget_overrun_is_rejected_before_request_without_retry(self):
+        content=b'official-bytes'
+        with range_server(content) as (url,calls):
+            spec={'url':url,'size':14,'md5':hashlib.md5(content).hexdigest()}
+            budget=data.DownloadBudget(self.root/'budget',limit=12,minimum_free=0)
+            with patch.object(data.time,'sleep') as sleep,self.assertRaisesRegex(ValueError,'예산'):
+                data.download(spec,self.root/'budget.zip',budget)
+            self.assertEqual(calls,[])
+            self.assertEqual(budget.used,0)
+            sleep.assert_not_called()
+
+    def test_retry_exhaustion_preserves_prefix_and_charged_failed_transfer(self):
+        content=b'official-bytes'
+        progress=[]
+        with range_server(content,lambda attempt:{'body':content[:4]} if attempt==1 else {'status':503}) as (url,calls):
+            spec={'url':url,'size':14,'md5':hashlib.md5(content).hexdigest()}
+            budget=data.DownloadBudget(self.root/'budget',limit=100,minimum_free=0,notify=lambda **value:progress.append(value))
+            target=self.root/'exhaust.zip'
+            with patch.object(data.time,'sleep') as sleep,self.assertRaises(urllib.error.HTTPError):
+                data.download(spec,target,budget)
+            self.assertFalse(target.exists())
+            self.assertEqual(target.with_suffix('.zip.part').read_bytes(),b'offi')
+            self.assertEqual(budget.used,4)
+            self.assertEqual(data.DownloadBudget(self.root/'budget',limit=100,minimum_free=0).used,4)
+            self.assertEqual(calls,[(0,13)]+[(4,13)]*6)
+            self.assertEqual([call.args[0] for call in sleep.call_args_list],[2,4,8,16,32,60])
+            self.assertEqual(len([value for value in progress if value.get('retry_wait_seconds',0)>0]),6)
+            self.assertIn('한도 초과',progress[-1]['stage'])
+            self.assertIn('HTTPError',progress[-1]['retry_reason'])
+
+    def test_received_bytes_remain_charged_when_disk_write_check_fails(self):
+        content=b'official-bytes'
+        with range_server(content) as (url,calls):
+            spec={'url':url,'size':14,'md5':hashlib.md5(content).hexdigest()}
+            budget=data.DownloadBudget(self.root/'budget',limit=100,minimum_free=0)
+            with patch.object(budget,'space',side_effect=[None,None,OSError(errno.ENOSPC,'검사용 공간 부족')]),patch.object(data.time,'sleep') as sleep:
+                with self.assertRaises(OSError):data.download(spec,self.root/'disk.zip',budget)
+            self.assertEqual(calls,[(0,13)])
+            self.assertEqual(budget.used,14)
+            self.assertEqual(data.DownloadBudget(self.root/'budget',limit=100,minimum_free=0).used,14)
+            sleep.assert_not_called()
+
+    def test_http_403_is_not_retried(self):
+        content=b'official-bytes'
+        with range_server(content,lambda attempt:{'status':403}) as (url,calls):
+            spec={'url':url,'size':14,'md5':hashlib.md5(content).hexdigest()}
+            budget=data.DownloadBudget(self.root/'budget',limit=100,minimum_free=0)
+            with patch.object(data.time,'sleep') as sleep,self.assertRaises(urllib.error.HTTPError):
+                data.download(spec,self.root/'denied.zip',budget)
+            self.assertEqual(calls,[(0,13)])
+            sleep.assert_not_called()
 
     def test_wrong_zip_crc_is_not_extracted_as_success(self):
         archive=self.root/'crc.zip'

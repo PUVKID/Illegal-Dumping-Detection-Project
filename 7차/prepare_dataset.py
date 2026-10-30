@@ -1,13 +1,18 @@
 """공식 원자료를 보존하고 별도 정규화 사본·고정 분할을 준비합니다."""
 import argparse
 import collections
+import email.utils
+import errno
 import hashlib
+import http.client
 import io
 import json
 import math
 import os
 import re
 import shutil
+import socket
+import ssl
 import stat
 import time
 import urllib.error
@@ -226,6 +231,43 @@ def open_request(url, headers=None):
     return urllib.request.urlopen(request,timeout=40)
 
 
+class _DownloadRetry(Exception):
+    """통신 경계에서 확인한 일시 오류만 재시도 경로로 전달합니다."""
+    def __init__(self, error):
+        super().__init__(str(error))
+        self.error = error
+
+
+def _temporary_download_error(error):
+    if isinstance(error,urllib.error.HTTPError):
+        return error.code==429 or 500<=error.code<=599
+    if isinstance(error,urllib.error.URLError):
+        return _temporary_download_error(error.reason)
+    if isinstance(error,(TimeoutError,ConnectionError,http.client.IncompleteRead,ssl.SSLEOFError)):
+        return True
+    if isinstance(error,socket.gaierror):
+        return error.errno==socket.EAI_AGAIN
+    return isinstance(error,OSError) and error.errno in {
+        errno.ETIMEDOUT,errno.ECONNRESET,errno.ECONNABORTED,errno.ECONNREFUSED,
+        errno.EPIPE,errno.ENETUNREACH,errno.EHOSTUNREACH,
+    }
+
+
+def _download_retry_delay(error, attempt):
+    delay = min(60,2**(attempt+1))
+    if isinstance(error,urllib.error.HTTPError):
+        value = error.headers.get('Retry-After','').strip()
+        try:
+            if re.fullmatch(r'[0-9]+',value):
+                requested = float(value)
+            else:
+                requested = email.utils.parsedate_to_datetime(value).timestamp()-time.time()
+            delay = min(60,max(delay,requested))
+        except (ValueError,TypeError,OverflowError):
+            pass
+    return delay
+
+
 def download(spec, target, budget):
     from worker import file_lock
     target=Path(target)
@@ -286,27 +328,69 @@ def _download(spec, target, budget):
     atomic_json(metadata,identity)
     while start < spec['size']:
         end = min(spec['size'],start+4*1024*1024)-1
-        if budget.used+end-start+1 > budget.limit:
-            raise ValueError('남은 전송 예산이 부족합니다.')
-        deadline = time.monotonic()+40
-        with open_request(spec['url'],{'Range':f'bytes={start}-{end}'}) as response:
-            if response.status != 206 or response.headers.get('Content-Range') != f'bytes {start}-{end}/{spec["size"]}':
-                raise ValueError('서버가 원본 범위 요청을 보존하지 않았습니다.')
+        for attempt in range(7):
+            # 실패 때 닫힌 스트림의 실제 저장량을 다시 확인하고 같은 범위의 나머지만 받습니다.
+            saved = partial.stat().st_size if partial.exists() else 0
+            if saved!=start or load(metadata)!=identity:
+                raise ValueError('재시도 전 부분 파일 크기·원자료 계약이 변경됐습니다.')
             remaining = end-start+1
-            with partial.open('ab') as stream:
-                while remaining:
-                    if time.monotonic() > deadline:
-                        raise TimeoutError('개별 범위 요청 40초를 초과했습니다.')
-                    budget.space(min(256*1024,remaining)+8192)
-                    block = response.read(min(256*1024,remaining))
-                    if not block:
-                        raise ValueError('부분 전송이 중간에 끊겼습니다.')
-                    budget.charge(len(block))
-                    budget.space(len(block)+8192)
-                    stream.write(block)
-                    remaining -= len(block)
-                    start += len(block)
-        budget.notify(stage='공식 원자료 다운로드',source=spec.get('source'),file=target.name,downloaded_bytes=start,file_bytes=spec['size'])
+            if not remaining:break
+            if budget.used+remaining > budget.limit:
+                raise ValueError('남은 전송 예산이 부족합니다.')
+            deadline = time.monotonic()+40
+            try:
+                try:
+                    response = open_request(spec['url'],{'Range':f'bytes={start}-{end}'})
+                except (OSError,http.client.HTTPException) as error:
+                    if isinstance(error,urllib.error.HTTPError):error.close()
+                    if _temporary_download_error(error):raise _DownloadRetry(error) from error
+                    raise
+                with response:
+                    if response.status != 206 or response.headers.get('Content-Range') != f'bytes {start}-{end}/{spec["size"]}':
+                        raise ValueError('서버가 원본 범위 요청을 보존하지 않았습니다.')
+                    with partial.open('ab') as stream:
+                        while remaining:
+                            if time.monotonic() > deadline:
+                                raise _DownloadRetry(TimeoutError('개별 범위 요청 40초를 초과했습니다.'))
+                            budget.space(min(256*1024,remaining)+8192)
+                            interrupted = None
+                            try:
+                                # 한 번에 반환 가능한 본문을 받아 timeout 직전의 일부 수신도 보존합니다.
+                                block = response.read1(min(256*1024,remaining))
+                            except http.client.IncompleteRead as error:
+                                block,interrupted = error.partial,error
+                            except (OSError,http.client.HTTPException) as error:
+                                if _temporary_download_error(error):raise _DownloadRetry(error) from error
+                                raise
+                            if not block:
+                                raise _DownloadRetry(interrupted or EOFError('부분 전송이 중간에 끊겼습니다.'))
+                            budget.charge(len(block))
+                            if len(block)>remaining:
+                                raise ValueError('수신 본문이 요청한 원본 범위를 초과했습니다.')
+                            budget.space(len(block)+8192)
+                            stream.write(block)
+                            remaining -= len(block)
+                            start += len(block)
+                            if interrupted:raise _DownloadRetry(interrupted) from interrupted
+                break
+            except _DownloadRetry as failure:
+                saved = partial.stat().st_size if partial.exists() else 0
+                if saved!=start or load(metadata)!=identity:
+                    raise ValueError('실패 수신 후 부분 파일 크기·원자료 계약이 변경됐습니다.') from failure
+                reason = type(failure.error).__name__+': '+str(failure.error)
+                if attempt==6:
+                    budget.notify(stage='공식 원자료 수신 재시도 한도 초과: '+reason,
+                                  source=spec.get('source'),file=target.name,downloaded_bytes=start,
+                                  file_bytes=spec['size'],retry_reason=reason,retry_attempt=6,retry_limit=6)
+                    raise failure.error from failure
+                delay = _download_retry_delay(failure.error,attempt)
+                budget.notify(stage=f'공식 원자료 수신 재시도 {attempt+1}/6: '+reason,
+                              source=spec.get('source'),file=target.name,downloaded_bytes=start,
+                              file_bytes=spec['size'],retry_reason=reason,retry_attempt=attempt+1,
+                              retry_limit=6,retry_wait_seconds=delay)
+                time.sleep(delay)
+        budget.notify(stage='공식 원자료 다운로드',source=spec.get('source'),file=target.name,
+                      downloaded_bytes=start,file_bytes=spec['size'],retry_reason=None,retry_attempt=0,retry_wait_seconds=0)
     if partial.stat().st_size != spec['size'] or digest_file(partial,'md5') != spec['md5']:
         raise ValueError('완성 원자료의 공식 MD5가 일치하지 않습니다.')
     partial.replace(target)

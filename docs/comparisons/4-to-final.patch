@@ -1,0 +1,202 @@
+--- 최종/4차/_작업/make_frame.py
++++ /dev/null
+@@ -1,31 +1,0 @@
+-import base64,json,subprocess
+-from pathlib import Path
+-code=r'''
+-import sys,json,io,base64,cv2,pathlib
+-from ultralytics import YOLO
+-from PIL import Image,ImageDraw,ImageFont,ImageFilter
+-r=pathlib.Path('/root/환경 PBL/trash_round3');sys.path.insert(0,str(r/'app'))
+-from inference import predict
+-s=json.loads((r/'app/selected_model.json').read_text())
+-v=sorted((r/'videos').glob('*.mp4'))[0];cap=cv2.VideoCapture(str(v));ok,frame=cap.read();cap.release();assert ok
+-pred=predict([YOLO(w) for w in s['ensemble']],frame,policy=s['policy'],conf=s['conf'],device=0)
+-person=YOLO(str(r/'pretrained/yolov8n.pt')).predict(frame,classes=[0],conf=.25,imgsz=960,device=0,verbose=False)[0].boxes.xyxy.cpu().tolist()
+-im=Image.fromarray(cv2.cvtColor(frame,cv2.COLOR_BGR2RGB));draw=ImageDraw.Draw(im)
+-font=ImageFont.truetype(str(r/'app/fonts/NanumGothic-Bold.ttf'),26)
+-for b in person:
+- x1,y1,x2,y2=map(int,b);crop=(max(0,x1),max(0,y1),min(im.width,x2),min(im.height,y1+int((y2-y1)*.4)))
+- if crop[2]>crop[0] and crop[3]>crop[1]:im.paste(im.crop(crop).filter(ImageFilter.GaussianBlur(18)),crop)
+-draw=ImageDraw.Draw(im)
+-for b in person:draw.rectangle(list(map(int,b)),outline='#20B35A',width=4)
+-for b,c in zip(pred['bboxes'].tolist(),pred['conf'].tolist()):
+- x1,y1,x2,y2=map(int,b);draw.rectangle((x1,y1,x2,y2),outline='#1882DF',width=4);draw.text((x1,max(4,y1-32)),f'쓰레기 {c:.2f}',font=font,fill='#1882DF',stroke_width=1,stroke_fill='white')
+-draw.rectangle((8,8,1220,54),fill='white');draw.text((18,15),'최종 앙상블 · 단일 프레임 기능 확인 · 투기 사건 판정 결과 아님',font=font,fill='#243448')
+-out=io.BytesIO();im.save(out,format='PNG')
+-print(json.dumps({'video':v.name,'time_sec':0,'trash':len(pred['bboxes']),'people':len(person),'test_metrics_recomputed':False,'image_base64':base64.b64encode(out.getvalue()).decode()}))
+-'''
+-p=subprocess.run(['docker','exec','-i','2026-2','python','-'],input=code.encode(),capture_output=True,check=True)
+-result=json.loads(p.stdout.decode().splitlines()[-1]);raw=result.pop('image_base64')
+-here=Path(__file__).resolve().parent/'자료'
+-(here/'최종모델_CCTV_프레임.png').write_bytes(base64.b64decode(raw))
+-(here/'프레임_확인.json').write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf-8')
+-print(json.dumps(result,ensure_ascii=False))
+--- 최종/4차/_작업/render_with_word.py
++++ /dev/null
+@@ -1,17 +1,0 @@
+-"""Use the packaged document rasterizer with native Word PDF conversion on Windows."""
+-import importlib.util, os, subprocess, sys
+-from pathlib import Path
+-SKILL=Path('C:/Users/PUVKID/.codex/plugins/cache/openai-primary-runtime/documents/26.1013.11914/skills/documents')
+-HERE=Path(__file__).resolve().parent
+-POPPLER=Path('C:/Users/PUVKID/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/poppler/Library/bin')
+-os.environ['PATH']=str(POPPLER)+os.pathsep+os.environ.get('PATH','')
+-spec=importlib.util.spec_from_file_location('packaged_render_docx',SKILL/'render_docx.py')
+-renderer=importlib.util.module_from_spec(spec);spec.loader.exec_module(renderer)
+-def native_word(doc_path,user_profile,convert_tmp_dir,stem,verbose=False):
+-    pdf=Path(convert_tmp_dir)/(stem+'.pdf')
+-    p=subprocess.run(['pwsh.exe','-NoProfile','-File',str(HERE/'word_render.ps1'),'-InputDocx',doc_path,'-OutputPdf',str(pdf)],capture_output=True,text=True)
+-    log=p.stdout+'\n'+p.stderr
+-    if p.returncode or not pdf.is_file():return '',log
+-    return str(pdf),log
+-renderer.convert_to_pdf=native_word
+-renderer.main()
+--- 최종/4차/_작업/word_render.ps1
++++ /dev/null
+@@ -1,15 +1,0 @@
+-param([string]$InputDocx,[string]$OutputPdf)
+-$wordRenderer = $null
+-$wordDocument = $null
+-try {
+-  $wordRenderer = New-Object -ComObject Word.Application
+-  $wordRenderer.Visible = $false
+-  $wordRenderer.DisplayAlerts = 0
+-  $wordDocument = $wordRenderer.Documents.Open($InputDocx, $false, $true, $false)
+-  $wordDocument.Repaginate()
+-  $wordDocument.ExportAsFixedFormat($OutputPdf, 17)
+-  Write-Output ('Exported pages: '+$wordDocument.ComputeStatistics(2))
+-} finally {
+-  if ($wordDocument) { $wordDocument.Close(0); [void][Runtime.InteropServices.Marshal]::ReleaseComObject($wordDocument) }
+-  if ($wordRenderer) { $wordRenderer.Quit(); [void][Runtime.InteropServices.Marshal]::ReleaseComObject($wordRenderer) }
+-}
+--- 최종/4차/_작업/자료/프레임_확인.json
++++ /dev/null
+@@ -1,7 +1,0 @@
+-{
+-  "video": "C_3_10_smp_su_08-27_18-28-00_a_set_DF1.mp4",
+-  "time_sec": 0,
+-  "trash": 2,
+-  "people": 0,
+-  "test_metrics_recomputed": false
+-}
+\ No newline at end of file
+--- /dev/null
++++ 최종/최종/성능보고서/3차_최종보고서.html
+@@ -1,0 +1,7 @@
++<!doctype html><html lang="ko"><meta charset="utf-8"><title>클린뷰 3차 최종 보고서</title><style>@font-face{font-family:Nanum;src:url(fonts/NanumGothic-Bold.ttf);font-weight:700}*{box-sizing:border-box;font-family:Nanum,sans-serif;font-weight:700}body{max-width:1080px;margin:40px auto;padding:0 25px;color:#243448;background:#f7f9fb;line-height:1.8}h1{color:#107d71}section{background:white;border:1px solid #e2e7ed;border-radius:16px;padding:25px;margin:20px 0}table{border-collapse:collapse;width:100%}td,th{text-align:left;padding:10px;border-bottom:1px solid #e7ebee}img{max-width:100%;display:block;margin:20px auto}.note{color:#68788b}code{word-break:break-all}</style>
++    <h1>클린뷰 · 3차 최종 학습 보고서</h1><p>정밀도·재현율 90% 목표: <b>미달성</b></p>
++    <section><h2>실제 고정 테스트 성능</h2><table><tr><th>지표</th><th>측정값</th></tr><tr><td>정밀도</td><td>61.36%</td></tr><tr><td>재현율</td><td>65.83%</td></tr><tr><td>F1</td><td>63.52%</td></tr><tr><td>mAP50</td><td>67.31%</td></tr><tr><td>mAP50–95</td><td>45.70%</td></tr></table><p>테스트 150장 · IoU 0.50 · 신뢰도 0.17 (검증에서 선택) · 탐지 방식 full</p><img src="최종성능.png"><p class="note">정밀도·재현율은 검증에서 선택한 고정 신뢰도에서 재매칭하여 계산했습니다. mAP는 전체 신뢰도 곡선으로 계산합니다. 분류 정확도나 CCTV 투기 행동 정확도를 뜻하지 않습니다.</p></section>
++    <section><h2>학습과 모델 선택</h2><p>YOLO26x와 YOLO26l-P2의 사전학습 가중치에서 시작했습니다. 추가 데이터 학습 뒤 쓰레기 범주와 작은 물체에 집중해 미세 조정했습니다. 검증셋에서 단독·앙상블, 일반·확대 탐지를 비교했습니다.</p><table><tr><th>새 학습 모델</th><th>완료 epoch</th></tr><tr><td>yolo26x_mix</td><td>160</td></tr><tr><td>yolo26x_focus</td><td>33</td></tr><tr><td>yolo26l_p2_mix</td><td>180</td></tr><tr><td>yolo26l_p2_focus</td><td>39</td></tr></table><p>최종 선택: ensemble / full</p><table><tr><th>모델</th><th>방식</th><th>검증 정밀도</th><th>검증 재현율</th><th>검증 mAP50</th></tr><tr><td>yolo26x_mix</td><td>full</td><td>59.10%</td><td>58.19%</td><td>59.94%</td></tr><tr><td>yolo26x_mix</td><td>tiles2</td><td>57.39%</td><td>56.84%</td><td>59.47%</td></tr><tr><td>yolo26x_mix</td><td>tiles3</td><td>54.76%</td><td>54.34%</td><td>57.01%</td></tr><tr><td>yolo26x_focus</td><td>full</td><td>59.43%</td><td>60.12%</td><td>60.88%</td></tr><tr><td>yolo26x_focus</td><td>tiles2</td><td>57.73%</td><td>56.84%</td><td>59.85%</td></tr><tr><td>yolo26x_focus</td><td>tiles3</td><td>53.58%</td><td>53.37%</td><td>55.56%</td></tr><tr><td>yolo26l_p2_mix</td><td>full</td><td>61.07%</td><td>61.66%</td><td>62.99%</td></tr><tr><td>yolo26l_p2_mix</td><td>tiles2</td><td>58.28%</td><td>57.61%</td><td>62.46%</td></tr><tr><td>yolo26l_p2_mix</td><td>tiles3</td><td>55.75%</td><td>55.11%</td><td>58.44%</td></tr><tr><td>yolo26l_p2_focus</td><td>full</td><td>60.39%</td><td>59.92%</td><td>61.40%</td></tr><tr><td>yolo26l_p2_focus</td><td>tiles2</td><td>58.22%</td><td>58.00%</td><td>60.31%</td></tr><tr><td>yolo26l_p2_focus</td><td>tiles3</td><td>54.60%</td><td>54.91%</td><td>56.58%</td></tr><tr><td>ensemble</td><td>full</td><td>62.33%</td><td>61.85%</td><td>63.74%</td></tr><tr><td>ensemble</td><td>tiles3</td><td>54.78%</td><td>54.14%</td><td>57.04%</td></tr></table><img src="학습곡선.png"><img src="검증임계값.png"></section>
++    <section><h2>데이터와 검증</h2><p>기존 학습 1200장, SALSA/OpenLitterMap 1243장, 추가 TACO 1232장, 도로변 pLitterStreet 1999장, 작은 물체 확대 2936장. 확대 사진은 학습 분할의 사진에서만 만들었습니다.</p><p>검증 150장과 테스트 150장의 사진 정체성과 정답을 유지했습니다. 기존 축소본의 SHA-256과 복원한 원본 사진의 SHA-256을 모두 고정했습니다. 이번 평가는 원본 해상도를 사용하므로 이전의 축소 입력 성능과 동일 조건 비교가 아닙니다. 추가 사진은 원본 URL과 pHash 중복 검사를 거쳐 학습에만 넣었습니다. 모든 유사 장면을 완벽히 배제했다는 뜻은 아닙니다.</p><p><a href="https://github.com/alinacherkas/salsa">SALSA 출처와 라이선스</a> · 원본 출처·이미지별 라이선스·중복 제외 내역은 출처 폴더에 보관했습니다.</p></section>
++    <section><h2>테스트 곡선과 오류 개수</h2><img src="테스트곡선.png"><img src="탐지개수.png"><p>정밀도·재현율 목표를 달성하지 못했다면 위 수치가 실제 결과입니다. 더 높은 목표에는 추가 라벨 검수와 실제 CCTV 환경의 정답 데이터가 필요할 수 있습니다.</p></section>
++    <section><h2>CCTV 앱과 자료 위치</h2><p>물체가 남는 시간, 기존 물체 제외, 주변 사람 이탈 규칙을 적용합니다. 행동 정답 라벨이 없는 CCTV에서는 투기 행동 정확도를 계산하지 않았습니다. </p><p>바탕화면: 월요일 PBL / 3차. 필요한 원본과 영상은 3차로 이동했고, 이전 폴더는 휴지통으로 정리했습니다. 최종 모델, 학습 로그, 데이터 출처, 평가 원자료와 코드가 포함됩니다.</p><p>최종 모델 SHA-256: <code>{&#x27;/root/환경 PBL/trash_round3/runs/yolo26x_focus/weights/best.pt&#x27;: &#x27;9891bbff735b57f1617ff7ab660244a464581b9fa702b0c1b09f28f478ef44b3&#x27;, &#x27;/root/환경 PBL/trash_round3/runs/yolo26l_p2_focus/weights/best.pt&#x27;: &#x27;f527db785a84ae44d22aeadf5318422b5991a6fc6ca3e0dc65c55cbffce1eb3c&#x27;}</code></p></section></html>
+\ No newline at end of file
+--- /dev/null
++++ 최종/최종/성능보고서/fonts/OFL.txt
+@@ -1,0 +1,96 @@
++Copyright (c) 2010, NHN Corporation (http://www.nhncorp.com),
++with Reserved Font Name Nanum, Naver Nanum, NanumGothic, Naver 
++NanumGothic, NanumMyeongjo, Naver NanumMyeongjo, NanumBrush, Naver
++NanumBrush, NanumPen, Naver NanumPen.
++
++This Font Software is licensed under the SIL Open Font License, Version 1.1.
++This license is copied below, and is also available with a FAQ at:
++http://scripts.sil.org/OFL
++
++
++-----------------------------------------------------------
++SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007
++-----------------------------------------------------------
++
++PREAMBLE
++The goals of the Open Font License (OFL) are to stimulate worldwide
++development of collaborative font projects, to support the font creation
++efforts of academic and linguistic communities, and to provide a free and
++open framework in which fonts may be shared and improved in partnership
++with others.
++
++The OFL allows the licensed fonts to be used, studied, modified and
++redistributed freely as long as they are not sold by themselves. The
++fonts, including any derivative works, can be bundled, embedded, 
++redistributed and/or sold with any software provided that any reserved
++names are not used by derivative works. The fonts and derivatives,
++however, cannot be released under any other type of license. The
++requirement for fonts to remain under this license does not apply
++to any document created using the fonts or their derivatives.
++
++DEFINITIONS
++"Font Software" refers to the set of files released by the Copyright
++Holder(s) under this license and clearly marked as such. This may
++include source files, build scripts and documentation.
++
++"Reserved Font Name" refers to any names specified as such after the
++copyright statement(s).
++
++"Original Version" refers to the collection of Font Software components as
++distributed by the Copyright Holder(s).
++
++"Modified Version" refers to any derivative made by adding to, deleting,
++or substituting -- in part or in whole -- any of the components of the
++Original Version, by changing formats or by porting the Font Software to a
++new environment.
++
++"Author" refers to any designer, engineer, programmer, technical
++writer or other person who contributed to the Font Software.
++
++PERMISSION & CONDITIONS
++Permission is hereby granted, free of charge, to any person obtaining
++a copy of the Font Software, to use, study, copy, merge, embed, modify,
++redistribute, and sell modified and unmodified copies of the Font
++Software, subject to the following conditions:
++
++1) Neither the Font Software nor any of its individual components,
++in Original or Modified Versions, may be sold by itself.
++
++2) Original or Modified Versions of the Font Software may be bundled,
++redistributed and/or sold with any software, provided that each copy
++contains the above copyright notice and this license. These can be
++included either as stand-alone text files, human-readable headers or
++in the appropriate machine-readable metadata fields within text or
++binary files as long as those fields can be easily viewed by the user.
++
++3) No Modified Version of the Font Software may use the Reserved Font
++Name(s) unless explicit written permission is granted by the corresponding
++Copyright Holder. This restriction only applies to the primary font name as
++presented to the users.
++
++4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font
++Software shall not be used to promote, endorse or advertise any
++Modified Version, except to acknowledge the contribution(s) of the
++Copyright Holder(s) and the Author(s) or with their explicit written
++permission.
++
++5) The Font Software, modified or unmodified, in part or in whole,
++must be distributed entirely under this license, and must not be
++distributed under any other license. The requirement for fonts to
++remain under this license does not apply to any document created
++using the Font Software.
++
++TERMINATION
++This license becomes null and void if any of the above conditions are
++not met.
++
++DISCLAIMER
++THE FONT SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
++EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF
++MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT
++OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE
++COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
++INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL
++DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
++FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
++OTHER DEALINGS IN THE FONT SOFTWARE.
+--- /dev/null
++++ 최종/최종/성능보고서/최종성능.csv
+@@ -1,0 +1,6 @@
++﻿지표,비율,퍼센트,평가조건
++정밀도,0.6135957066189625,61.35957066189624,고정 테스트 150장 / 신뢰도는 검증에서 선택
++재현율,0.6583493282149712,65.83493282149712,고정 테스트 150장 / 신뢰도는 검증에서 선택
++F1,0.6351851851851852,63.51851851851852,고정 테스트 150장 / 신뢰도는 검증에서 선택
++mAP50,0.6730610113280037,67.30610113280036,고정 테스트 150장 / 신뢰도는 검증에서 선택
++mAP50–95,0.45698670867102936,45.69867086710293,고정 테스트 150장 / 신뢰도는 검증에서 선택
