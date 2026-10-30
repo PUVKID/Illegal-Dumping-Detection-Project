@@ -12,6 +12,7 @@
 | [5차](5차/) | [대시보드·추가 학습](docs/versions/round-5.md) | [최종/최종 → 5차](docs/comparisons/final-to-5.md) |
 | [6차/변경전_5차](6차/변경전_5차/) | [5차의 변경 전 부분 보존본](docs/versions/round-6.md) | [5차의 대응 파일과 비교](docs/comparisons/5-to-6-snapshot.md) |
 | [7차](7차/) | [대규모 자료 추가 학습 코드](docs/versions/round-7.md) | [5차 → 7차](docs/comparisons/5-to-7.md); 6차는 부분 보존본 |
+| [8차](8차/) | [원래 클린뷰 복원·한국 시각·7차 상태 연결](docs/versions/round-8.md) | [7차 → 8차](docs/comparisons/7-to-8.md); 화면 원본5차와 비교도 포함 |
 | [이전 도커 실험](이전%20도커%20실험/) | [이전 실험 보관](docs/versions/docker-experiment.md) | [최종/3차와 비교](docs/comparisons/docker-to-3.md); 시간 순서 근거 없음 |
 | [최종](최종/) | [하위 자료 보관 폴더](docs/versions/final-container.md) | 상위 컨테이너로 별도 차수가 아닙니다 |
 

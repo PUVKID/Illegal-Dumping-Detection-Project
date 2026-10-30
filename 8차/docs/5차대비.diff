@@ -1,0 +1,789 @@
+--- 5차/dashboard.py
++++ 8차/dashboard.py
+@@ -1,244 +1,55 @@
+-"""Codex와 독립 실행되는 루프백 전용 대시보드입니다."""
+-import json
+-import mimetypes
+-import os
++"""원래 루프백 HTTP 보안과 영상 저장 경계를 유지하는 8차 서버입니다."""
+ from pathlib import Path
++import re
+ import secrets
+-import subprocess
+-import sys
+-import tempfile
+-import uuid
+-from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+-from urllib.parse import parse_qs, unquote, urlsplit
++from http.server import ThreadingHTTPServer
++import pipeline
+ 
+-LOG_LIMIT = 64 * 1024
+-MAX_UPLOAD = 4 * 1024**3
+-VIDEO_EXT = {'.mp4', '.avi', '.mov', '.mkv', '.m4v', '.webm'}
+-ROOT = Path(sys.executable).resolve().parent if getattr(sys, 'frozen', False) else Path(__file__).resolve().parent
++ROOT = Path(__file__).resolve().parent
++original = pipeline.load_module('cleanview_round5_dashboard', pipeline.PREVIOUS / 'dashboard.py')
+ 
+ 
+-class Dashboard:
+-    def __init__(self, root, token):
++class Dashboard(original.Dashboard):
++    def __init__(self, root, token, previous=pipeline.PREVIOUS, training=pipeline.TRAINING_ROOT):
++        super().__init__(previous, token)
++        # 영상 작업 경계는 5차 work에 고정하고 화면 소스만 8차로 분리합니다.
+         self.root = Path(root).resolve()
+-        self.work = self.root / 'work'
+-        self.token = token
+-        for name in ('uploads', 'results', 'logs'):
+-            (self.work / name).mkdir(parents=True, exist_ok=True)
++        self.training_root = Path(training).resolve()
+ 
+     def pipeline(self, action, params):
+-        argv = ([sys.executable, '--pipeline'] if getattr(sys, 'frozen', False) else
+-                [sys.executable, '-B', '-X', 'utf8', str(self.root / 'pipeline.py')])
+-        argv += ['--action', action, '--params', json.dumps(params, ensure_ascii=False)]
+-        # 출력은 임시 파일로 받아 메모리에 무제한 누적하지 않습니다.
+-        with tempfile.TemporaryFile() as output, tempfile.TemporaryFile() as errors:
+-            result = subprocess.run(argv, cwd=str(self.root), shell=False, stdout=output,
+-                                    stderr=errors, timeout=15 if action == 'status' else 60,
+-                                    creationflags=getattr(subprocess, 'CREATE_NO_WINDOW', 0))
+-            output.seek(0, 2)
+-            size = output.tell()
+-            if size > 2 * 1024**2:
+-                raise RuntimeError('파이프라인 JSON 응답이 2MB 상한을 넘었습니다.')
+-            output.seek(0)
+-            raw = output.read()
+-            errors.seek(0, 2)
+-            errors.seek(max(0, errors.tell() - LOG_LIMIT))
+-            error = errors.read().decode('utf-8', errors='replace')
+-        try:
+-            value = json.loads(raw.decode('utf-8'))
+-        except (ValueError, UnicodeError) as exc:
+-            raise RuntimeError('파이프라인 JSON 응답이 잘못되었습니다. ' + error[-2000:]) from exc
+-        if not isinstance(value, dict) or not isinstance(value.get('ok'), bool):
+-            raise RuntimeError('파이프라인 JSON 응답 형식이 잘못되었습니다.')
+-        if result.returncode or not value['ok']:
+-            raise RuntimeError(str(value.get('error') or error or f'종료 코드 {result.returncode}'))
+-        return value.get('data')
+-
+-    def confined(self, value, areas):
+-        if not isinstance(value, str) or not value:
+-            raise ValueError('파일 경로가 필요합니다.')
+-        path = Path(value)
+-        if not path.is_absolute():
+-            path = self.work / path
+-        path = path.resolve()
+-        if not any(path.is_relative_to((self.work / area).resolve()) for area in areas):
+-            raise ValueError('허용된 작업 폴더 밖의 경로입니다.')
+-        if not path.is_file():
+-            raise ValueError('파일이 없습니다.')
+-        return path
++        return pipeline.action(action, params)
+ 
+     def log(self, value):
+-        path = self.confined(value, ('logs', 'results', 'jobs', 'training'))
+-        if path.suffix.lower() not in ('.log', '.txt'):
+-            raise ValueError('로그 파일만 읽을 수 있습니다.')
+-        size = path.stat().st_size
+-        with path.open('rb') as stream:
+-            stream.seek(max(0, size - LOG_LIMIT))
+-            raw = stream.read(LOG_LIMIT)
+-        # 잘린 첫 UTF-8 문자만 제거하고 원본의 잘못된 바이트는 오류로 알립니다.
+-        if size > LOG_LIMIT:
+-            while raw and raw[0] & 0xC0 == 0x80:
+-                raw = raw[1:]
+-        text = raw.decode('utf-8')
+-        return {'text': text, 'original_bytes': size, 'captured_bytes': len(raw),
+-                'truncated': size > len(raw)}
++        if isinstance(value, str) and value.startswith('round7/'):
++            match = re.fullmatch(r'round7/jobs/([A-Za-z0-9_-]{1,100})\.log', value)
++            if not match:
++                raise ValueError('7차 로그는 등록된 작업 ID만 허용합니다.')
++            job = match.group(1)
++            records = pipeline.job_records(self.training_root / 'work')
++            if not any(row['id'] == job for row in records):
++                raise ValueError('등록되지 않은 작업 로그입니다.')
++            base = (self.training_root / 'work/jobs').resolve()
++            path = (base / (job + '.log')).resolve()
++            if path.parent != base or not path.is_file():
++                raise ValueError('허용되지 않은 작업 로그입니다.')
++            size = path.stat().st_size
++            with path.open('rb') as stream:
++                stream.seek(max(0, size - original.LOG_LIMIT))
++                raw = stream.read(original.LOG_LIMIT)
++            if size > original.LOG_LIMIT:
++                while raw and raw[0] & 0xC0 == 0x80:
++                    raw = raw[1:]
++            return {'text': raw.decode('utf-8'), 'original_bytes': size,
++                    'captured_bytes': len(raw), 'truncated': size > len(raw)}
++        return super().log(value)
+ 
+ 
+-class Handler(BaseHTTPRequestHandler):
+-    def setup(self):
+-        super().setup()
+-        self.connection.settimeout(60)
+-
+-    def log_message(self, *_):
+-        pass
+-
+-    def reply(self, value, status=200, content_type='application/json; charset=utf-8'):
+-        raw = value if isinstance(value, bytes) else json.dumps(value, ensure_ascii=False).encode('utf-8')
+-        self.send_response(status)
+-        self.send_header('Content-Type', content_type)
+-        self.send_header('Content-Length', str(len(raw)))
+-        self.send_header('Cache-Control', 'no-store')
+-        self.send_header('X-Content-Type-Options', 'nosniff')
+-        self.send_header('Referrer-Policy', 'no-referrer')
+-        self.send_header('Content-Security-Policy', "default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' blob:; media-src 'self' blob:; font-src 'self'; frame-ancestors 'none'")
+-        self.end_headers()
+-        self.wfile.write(raw)
+-
+-    def authorized(self, mutation=False):
+-        expected = f'127.0.0.1:{self.server.server_port}'
+-        if self.headers.get('Host') != expected:
+-            return False
+-        query = parse_qs(urlsplit(self.path).query)
+-        token = self.headers.get('X-Token') or query.get('token', [''])[0]
+-        if not secrets.compare_digest(token, self.server.app.token):
+-            return False
+-        if mutation:
+-            if not secrets.compare_digest(self.headers.get('X-CSRF-Token', ''), self.server.app.token):
+-                return False
+-            if self.headers.get('Origin') != f'http://{expected}':
+-                return False
+-        return True
+-
+-    def sendfile(self, path):
+-        size = path.stat().st_size
+-        start, end, status = 0, size - 1, 200
+-        requested = self.headers.get('Range')
+-        if requested:
+-            try:
+-                if not requested.startswith('bytes=') or ',' in requested:
+-                    raise ValueError()
+-                first, last = requested[6:].split('-')
+-                if first:
+-                    start = int(first)
+-                    end = min(size - 1, int(last)) if last else size - 1
+-                else:
+-                    length = int(last)
+-                    if length <= 0:
+-                        raise ValueError()
+-                    start = max(0, size - length)
+-                if start < 0 or start > end or start >= size:
+-                    raise ValueError()
+-                status = 206
+-            except ValueError:
+-                self.reply({'ok': False, 'error': '유효하지 않은 파일 범위입니다.'}, 416)
+-                return
+-        self.send_response(status)
+-        self.send_header('Content-Type', mimetypes.guess_type(path.name)[0] or 'application/octet-stream')
+-        self.send_header('Content-Length', str(max(0, end - start + 1)))
+-        self.send_header('Accept-Ranges', 'bytes')
+-        self.send_header('X-Content-Type-Options', 'nosniff')
+-        self.send_header('Referrer-Policy', 'no-referrer')
+-        self.send_header('Cache-Control', 'no-store')
+-        if status == 206:
+-            self.send_header('Content-Range', f'bytes {start}-{end}/{size}')
+-        self.end_headers()
+-        with path.open('rb') as stream:
+-            stream.seek(start)
+-            remaining = end - start + 1
+-            while remaining > 0:
+-                chunk = stream.read(min(1024 * 1024, remaining))
+-                if not chunk:
+-                    break
+-                self.wfile.write(chunk)
+-                remaining -= len(chunk)
+-
+-    def do_GET(self):
+-        if not self.authorized():
+-            self.reply({'ok': False, 'error': '로컬 접속 토큰이 필요합니다.'}, 403)
+-            return
+-        url = urlsplit(self.path)
+-        query = parse_qs(url.query)
+-        try:
+-            if url.path == '/api/health':
+-                self.reply({'ok': True, 'data': {'service': 'cleanview-dashboard', 'pid': os.getpid()}})
+-            elif url.path in ('/api/status', '/api/videos'):
+-                self.reply({'ok': True, 'data': self.server.app.pipeline(url.path.rsplit('/', 1)[1], {})})
+-            elif url.path == '/api/log':
+-                self.reply({'ok': True, 'data': self.server.app.log(query.get('path', [''])[0])})
+-            elif url.path == '/asset':
+-                self.sendfile(self.server.app.confined(query.get('path', [''])[0], ('uploads', 'results')))
+-            elif url.path in ('/', '/app.js', '/style.css', '/fonts/NanumGothic-Bold.ttf'):
+-                name = 'index.html' if url.path == '/' else url.path[1:]
+-                path = self.server.app.root / 'web' / name
+-                if name in ('index.html', 'style.css'):
+-                    content = path.read_text(encoding='utf-8')
+-                    for asset in ('/style.css', '/app.js', '/fonts/NanumGothic-Bold.ttf'):
+-                        content = content.replace(asset, asset + '?token=' + self.server.app.token)
+-                    self.reply(content.encode('utf-8'), content_type='text/html; charset=utf-8' if name == 'index.html' else 'text/css; charset=utf-8')
+-                else:
+-                    self.sendfile(path)
+-            else:
+-                self.reply({'ok': False, 'error': '없는 주소입니다.'}, 404)
+-        except (ValueError, OSError, UnicodeError) as exc:
+-            self.reply({'ok': False, 'error': str(exc)}, 400)
+-        except (RuntimeError, subprocess.SubprocessError) as exc:
+-            self.reply({'ok': False, 'error': str(exc)}, 502)
+-
+-    def do_POST(self):
+-        if not self.authorized(mutation=True):
+-            self.reply({'ok': False, 'error': '토큰·요청 출처를 확인해 주세요.'}, 403)
+-            return
+-        try:
+-            if self.headers.get('Transfer-Encoding'):
+-                raise ValueError('Content-Length가 있는 요청만 허용합니다.')
+-            length = int(self.headers.get('Content-Length', '0'))
+-            route = urlsplit(self.path).path
+-            if route == '/api/upload':
+-                if not 0 < length <= MAX_UPLOAD:
+-                    raise ValueError('영상은 0 초과 4GB 이하만 업로드할 수 있습니다.')
+-                suffix = Path(unquote(self.headers.get('X-Filename', ''))).suffix.lower()
+-                if suffix not in VIDEO_EXT:
+-                    raise ValueError('지원하지 않는 영상 확장자입니다.')
+-                destination = self.server.app.work / 'uploads' / (uuid.uuid4().hex + suffix)
+-                try:
+-                    with destination.open('xb') as output:
+-                        remaining = length
+-                        while remaining:
+-                            chunk = self.rfile.read(min(1024 * 1024, remaining))
+-                            if not chunk:
+-                                raise ValueError('영상 업로드가 중단되었습니다.')
+-                            output.write(chunk)
+-                            remaining -= len(chunk)
+-                except Exception:
+-                    destination.unlink(missing_ok=True)
+-                    raise
+-                self.reply({'ok': True, 'data': {'path': str(destination), 'name': destination.name}})
+-                return
+-            if not 0 < length <= 64 * 1024:
+-                raise ValueError('JSON 요청은 64KB 이하이어야 합니다.')
+-            params = json.loads(self.rfile.read(length).decode('utf-8'))
+-            if not isinstance(params, dict):
+-                raise ValueError('JSON 객체가 필요합니다.')
+-            if route not in ('/api/probe', '/api/detect', '/api/train'):
+-                self.reply({'ok': False, 'error': '없는 주소입니다.'}, 404)
+-                return
+-            self.reply({'ok': True, 'data': self.server.app.pipeline(route.rsplit('/', 1)[1], params)})
+-        except (ValueError, OSError, UnicodeError) as exc:
+-            self.reply({'ok': False, 'error': str(exc)}, 400)
+-        except (RuntimeError, subprocess.SubprocessError) as exc:
+-            self.reply({'ok': False, 'error': str(exc)}, 502)
++Handler = original.Handler
+ 
+ 
+ def create_server(root=ROOT, port=0, token=None):
+     server = ThreadingHTTPServer(('127.0.0.1', port), Handler)
+     server.app = Dashboard(root, token or secrets.token_urlsafe(32))
+-    return server
++    # 실행 세션은 8차에만 기록하며 5차 원본 세션은 덮어쓰지 않습니다.
++    (Path(root) / 'work').mkdir(exist_ok=True)
++    return server
+--- 5차/pipeline.py
++++ 8차/pipeline.py
+@@ -1,194 +1,134 @@
+-"""D 드라이브의 앱과 기존 GPU 컨테이너를 연결합니다."""
+-import argparse
+-import json
+-import os
+-import subprocess
+-import sys
+-import time
+-from pathlib import Path
+-
+-ROOT = (Path(sys.executable).resolve().parent if getattr(sys, "frozen", False)
+-        else Path(__file__).resolve().parent)
+-PROJECT = ROOT.parent
+-WORK = ROOT / "work"
+-CONTAINER = "2026"
+-REMOTE = "/workspace/2026/월요일 PBL/5차"
+-PYTHON = "/opt/venvs/torch/bin/python"
+-ARCHIVE = PROJECT / "이전 도커 실험/3차실험/trash_round3"
+-VIDEO_ROOTS = [WORK / "uploads", PROJECT / "최종/3차/테스트영상", ARCHIVE / "videos"]
+-EXTENSIONS = {".mp4", ".avi", ".mov", ".mkv", ".m4v"}
+-
+-
+-def load(path, default=None):
+-    try:
+-        return json.loads(Path(path).read_text(encoding="utf-8"))
+-    except FileNotFoundError:
+-        return default
+-
+-
+-def remote_path(path):
+-    resolved = Path(path).resolve()
+-    base = Path("D:/2026").resolve()
+-    return "/workspace/2026/" + resolved.relative_to(base).as_posix()
+-
+-
+-def local_paths(value):
+-    if isinstance(value, dict):
+-        return {k: local_paths(v) for k, v in value.items()}
+-    if isinstance(value, list):
+-        return [local_paths(v) for v in value]
+-    if isinstance(value, str) and value.startswith("/workspace/2026/"):
+-        return str(Path("D:/2026") / value.removeprefix("/workspace/2026/"))
+-    return value
+-
+-
+-def video_path(value):
+-    p = Path(value).resolve(strict=True)
+-    if not p.is_file() or p.suffix.lower() not in EXTENSIONS:
+-        raise ValueError("지원하는 영상 파일을 선택하세요.")
+-    if not any(p.is_relative_to(root.resolve()) for root in VIDEO_ROOTS):
+-        raise ValueError("허용된 영상 폴더가 아닙니다.")
+-    if not p.stat().st_size:
+-        raise ValueError("0바이트 영상은 처리할 수 없습니다.")
+-    return p
+-
+-
+-def docker_call(arguments, timeout=25):
+-    flags = subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0
+-    p = subprocess.run(["docker", "exec", CONTAINER, PYTHON, *arguments],
+-                       capture_output=True, timeout=timeout, creationflags=flags)
+-    if p.returncode:
+-        message = p.stderr.decode("utf-8", errors="replace")[-3500:]
+-        raise RuntimeError(message or "Docker 실행에 실패했습니다. Docker Desktop과 2026 컨테이너를 확인하세요.")
+-    output = p.stdout.decode("utf-8").strip()
+-    result = json.loads(output)
+-    if not result.get("ok"):
+-        raise RuntimeError(result.get("error", "GPU 작업 오류"))
+-    return local_paths(result["data"])
+-
+-
+-def tail(path, maximum=12000):
+-    if not path or not Path(path).is_file():
+-        return ""
+-    with Path(path).open("rb") as stream:
+-        stream.seek(max(0, Path(path).stat().st_size - maximum))
+-        return stream.read(maximum).decode("utf-8", errors="replace")
+-
+-
+-def history():
+-    import csv
+-    files = sorted((WORK / "training/runs").glob("*/results.csv"), key=lambda p: p.stat().st_mtime)
+-    if not files:
+-        return []
+-    with files[-1].open(encoding="utf-8") as stream:
+-        rows = list(csv.DictReader(stream))
+-    result = []
+-    for row in rows:
+-        row = {k.strip(): v for k, v in row.items()}
+-        try:
+-            result.append({"epoch": int(float(row["epoch"])),
+-                           "precision": float(row.get("metrics/precision(B)", 0)),
+-                           "recall": float(row.get("metrics/recall(B)", 0)),
+-                           "map50": float(row.get("metrics/mAP50(B)", 0)),
+-                           "loss": float(row.get("train/box_loss", 0))})
+-        except (KeyError, ValueError):
+-            continue
+-    return result
+-
+-
+-def status():
+-    jobs = [load(p, {}) for p in (WORK / "jobs").glob("*.json")]
+-    # 화면은 로컬 파일을 읽고, 실행 중 작업의 생존 여부만 30초 간격으로 확인합니다.
+-    check = load(WORK / "container_check.json", {})
+-    if any(j.get("state") in {"queued", "running"} for j in jobs) and time.time() - check.get("checked", 0) >= 30:
+-        try:
+-            docker_call([REMOTE + "/gpu_worker.py", "--action", "status"], timeout=6)
+-            check = {"checked": time.time(), "error": None}
+-            jobs = [load(p, {}) for p in (WORK / "jobs").glob("*.json")]
+-        except (RuntimeError, OSError, subprocess.SubprocessError) as error:
+-            check = {"checked": time.time(), "error": "Docker 연결 확인: " + str(error)}
+-        temporary = WORK / f"container_check.{os.getpid()}.tmp"
+-        temporary.write_text(json.dumps(check, ensure_ascii=False), encoding="utf-8")
+-        temporary.replace(WORK / "container_check.json")
+-    if check.get("error"):
+-        for job in jobs:
+-            if job.get("state") in {"queued", "running"}:
+-                job.update(error=check["error"])
+-    jobs = sorted(jobs, key=lambda j: j.get("created", 0), reverse=True)
+-    for job in jobs[:20]:
+-        job["log"] = tail(WORK / "jobs" / (job.get("id", "") + ".log"))
+-    final = load(WORK / "training/final.json") or load(ARCHIVE / "final.json", {})
+-    test = final.get("test", {})
+-    operating = test.get("operating", {})
+-    ap = test.get("metrics", {})
+-    metrics = {"precision": operating.get("precision"), "recall": operating.get("recall"),
+-               "map50": ap.get("metrics/mAP50(B)", ap.get("map50")),
+-               "map50_95": ap.get("metrics/mAP50-95(B)", ap.get("map50_95")),
+-               "split": "5차 최종 테스트" if (WORK / "training/final.json").is_file() else "3차 과거 테스트 150장",
+-               "target_met": final.get("target_met", False)}
+-    training_job = next((j for j in jobs if j.get("kind") == "train"), {})
+-    progress = load(WORK / "training/status.json", {})
+-    # 진행 파일은 같은 작업의 부가 정보이며 작업의 최종 상태를 덮어쓰지 않습니다.
+-    training = dict(progress) if training_job and progress.get("job") == training_job.get("id") else {}
+-    if training_job:
+-        for key in ("state", "error", "updated", "stage", "epoch", "epochs", "progress"):
+-            if key in training_job:
+-                training[key] = training_job[key]
+-        training.update(job=training_job["id"], id=training_job["id"],
+-                        state=training_job.get("state"), error=training_job.get("error"),
+-                        updated=training_job.get("updated"))
+-    # 보존된 곡선은 최신 작업의 진행률이 아닙니다. 실행 폴더와 완료 증거를 따로 표시합니다.
+-    training["history"] = history()
+-    training["log"] = training_job.get("log", "")
+-    runs = sorted((WORK / "training/runs").glob("*/results.csv"), key=lambda p: p.stat().st_mtime)
+-    if runs:
+-        completed = load(runs[-1].parent / "phase_complete.json", {})
+-        training["history_context"] = {"run": runs[-1].parent.name,
+-                                       "source": str(runs[-1]),
+-                                       "phase_complete": bool(completed.get("completed")),
+-                                       "phase_completed_at": completed.get("completed"),
+-                                       "last_epoch": training["history"][-1]["epoch"] if training["history"] else None}
+-    manifest = load(WORK / "training/data_manifest.json", {})
+-    dataset = {key: manifest[key] for key in ("counts", "sources", "download_bytes", "test_protocol", "external_test", "near_duplicate", "created") if key in manifest}
+-    dataset["manifest_path"] = str(WORK / "training/data_manifest.json")
+-    return local_paths({"jobs": jobs[:20], "selection": load(WORK / "selected_model.json", {}),
+-                        "metrics": metrics, "training": training,
+-                        "dataset": dataset,
+-                        "container": CONTAINER, "project": str(ROOT),
+-                        "independent": True, "note": "Codex/API 토큰 없이 이 PC의 Docker GPU에서 실행됩니다."})
+-
+-
+-def action(name, params):
+-    if not isinstance(params, dict):
+-        raise ValueError("설정은 JSON 객체여야 합니다.")
+-    if name == "status":
+-        return status()
+-    if name == "videos":
+-        # 같은 보존 영상을 두 번 나열하지 않고 대표 폴더를 사용합니다.
+-        stored = next((p for p in VIDEO_ROOTS[1:] if p.is_dir() and any(p.iterdir())), None)
+-        folders = [VIDEO_ROOTS[0]] + ([stored] if stored else [])
+-        return [{"path": str(p.resolve()), "name": p.name, "bytes": p.stat().st_size}
+-                for folder in folders if folder.exists()
+-                for p in sorted(folder.rglob("*")) if p.is_file() and p.suffix.lower() in EXTENSIONS]
+-    if name in {"probe", "detect"}:
+-        params = {**params, "path": remote_path(video_path(params.get("path", "")))}
+-    if name not in {"probe", "detect", "train", "health"}:
+-        raise ValueError("지원하지 않는 작업입니다.")
+-    return docker_call([REMOTE + "/gpu_worker.py", "--action", name,
+-                        "--params", json.dumps(params, ensure_ascii=False)], timeout=25)
+-
+-
+-def main():
+-    parser = argparse.ArgumentParser()
+-    parser.add_argument("--action", required=True)
+-    parser.add_argument("--params", default="{}")
+-    args = parser.parse_args()
+-    try:
+-        result = {"ok": True, "data": action(args.action, json.loads(args.params))}
+-    except Exception as error:
+-        result = {"ok": False, "error": str(error)}
+-    print(json.dumps(result, ensure_ascii=False, allow_nan=False))
+-
+-
+-if __name__ == "__main__":
+-    main()
++"""5차 영상 파이프라인을 보존하며 7차 상태만 읽는 8차 어댑터입니다."""
++import csv
++from datetime import datetime, timedelta, timezone
++import importlib.util
++import json
++import math
++from pathlib import Path
++import re
++import time
++
++ROOT = Path(__file__).resolve().parent
++PREVIOUS = ROOT.parent / '5차'
++TRAINING_ROOT = ROOT.parent / '7차'
++ACTIVE = {'running', 'queued', 'starting'}
++KST = timezone(timedelta(hours=9), 'Asia/Seoul')
++
++
++def load_module(name, path):
++    spec = importlib.util.spec_from_file_location(name, path)
++    module = importlib.util.module_from_spec(spec)
++    spec.loader.exec_module(module)
++    return module
++
++
++legacy = load_module('cleanview_round5_pipeline', PREVIOUS / 'pipeline.py')
++
++
++def read(path, default=None):
++    try:
++        value = json.loads(Path(path).read_text(encoding='utf-8'))
++    except FileNotFoundError:
++        return default
++    return value
++
++
++def kst(value):
++    if not isinstance(value, (int, float)) or isinstance(value, bool) or not math.isfinite(value):
++        return None
++    return datetime.fromtimestamp(value, KST).strftime('%Y-%m-%d %H:%M:%S') + ' 한국 시각 (Asia/Seoul)'
++
++
++def job_records(work):
++    values = []
++    for path in (work / 'jobs').glob('*.json'):
++        value = read(path)
++        if not isinstance(value, dict) or not re.fullmatch(r'[A-Za-z0-9_-]{1,100}', value.get('id', '')) or path.stem != value['id']:
++            raise ValueError('작업 기록 ID와 파일명이 일치하지 않습니다.')
++        values.append(value)
++    return sorted(values, key=lambda row: row.get('created', 0), reverse=True)
++
++
++def histories(work, candidates):
++    result = []
++    for candidate in candidates:
++        name = candidate['name']
++        if not re.fullmatch(r'[A-Za-z0-9_-]+', name):
++            raise ValueError('학습 후보 이름이 잘못됐습니다.')
++        path = work / 'training/runs' / name / 'results.csv'
++        rows = []
++        if path.is_file():
++            with path.open(encoding='utf-8', newline='') as stream:
++                for raw in csv.DictReader(stream):
++                    raw = {key.strip(): value for key, value in raw.items()}
++                    row = {'epoch': int(float(raw['epoch']))}
++                    for key, column in [('precision', 'metrics/precision(B)'), ('recall', 'metrics/recall(B)'), ('map50', 'metrics/mAP50(B)')]:
++                        value = raw.get(column)
++                        number = float(value) if value not in (None, '') else None
++                        if number is not None and not math.isfinite(number):
++                            raise ValueError('학습 곡선에 유효하지 않은 값이 있습니다.')
++                        row[key] = number
++                    rows.append(row)
++        result.append({'run': name, 'history': rows, 'source': str(path) if path.is_file() else None,
++                       'phase_complete': (path.parent / 'phase_complete.json').is_file()})
++    return result
++
++
++def status(root=TRAINING_ROOT, previous=PREVIOUS, now=None):
++    now = time.time() if now is None else now
++    work = Path(root) / 'work'
++    jobs = job_records(work)
++    current = next((row for row in jobs if row.get('kind') == 'train'), {})
++    training = dict(current)
++    training['job'] = current.get('id')
++    stage = current.get('stage', '')
++    training['phase'] = ('GPU 학습' if stage.startswith(('학습 ', '새 후보 학습', 'checkpoint 재개')) else
++                         '평가' if '평가' in stage or '테스트 완료' in stage else '자료 준비')
++    training['downloaded_bytes'] = current.get('downloaded_bytes', current.get('download_bytes'))
++    observed = current.get('updated', current.get('created'))
++    delay = max(0, now - observed) if isinstance(observed, (int, float)) and not isinstance(observed, bool) else None
++    training.update(observed_kst=kst(observed), delay_seconds=round(delay, 1) if delay is not None else None,
++                    stale=delay is None or delay > 120, live_process_verified=False)
++    config = read(Path(root) / 'configs/training.json', {})
++    training['runs'] = histories(work, config.get('candidates', []))
++    training['history'] = []
++    final = read(work / 'training/final.json', {})
++    primary = final.get('test', {})
++    operating = primary.get('operating', {})
++    metrics = {'precision': operating.get('precision'), 'recall': operating.get('recall'),
++               'map50': primary.get('metrics', {}).get('AP50'),
++               'split': '7차 고정 테스트' if primary else '7차 최종 평가 미측정'}
++    display_jobs = []
++    for job in jobs[:20]:
++        job = dict(job)
++        job['log_path'] = 'round7/jobs/' + job['id'] + '.log'
++        display_jobs.append(job)
++    # 영상 탐지 결과만 기존 작업에서 가져오며 이전 학습 수치와 혼합하지 않습니다.
++    display_jobs += [legacy.local_paths(row) for row in job_records(Path(previous) / 'work')
++                     if row.get('kind') == 'detect'][:20]
++    return {'jobs': display_jobs, 'training': training, 'metrics': metrics,
++            'dataset': read(work / 'training/data_manifest.json', {}).get('counts', {}),
++            'contracts': {'experiment': (work / 'training/experiment_contract.json').is_file(),
++                          'selection': (work / 'training/selection.json').is_file(),
++                          'test': (work / 'training/test_contract.json').is_file()},
++            'busy': any(row.get('state') in ACTIVE for row in jobs), 'now_kst': kst(now),
++            'project': '8차 클린뷰 · 7차 학습 연결',
++            'note': '작업 JSON의 마지막 저장 관측입니다. 현재 프로세스 생존을 보장하지 않습니다. 영상 탐지는 기존 5차 검증 모델을 사용합니다.'}
++
++
++def action(name, params):
++    if not isinstance(params, dict):
++        raise ValueError('설정은 JSON 객체여야 합니다.')
++    if name == 'status':
++        return status()
++    if name == 'train':
++        if set(params) - {'resume'} or type(params.get('resume', False)) is not bool:
++            raise ValueError('resume은 명시적 참 또는 거짓만 허용합니다.')
++        if status()['busy']:
++            raise ValueError('7차 자료 준비 또는 학습 작업이 이미 진행 중입니다.')
++        # 중복 시작 최종 판단은 컨테이너의 원래 worker 잠금이 수행합니다.
++        return legacy.docker_call(['/workspace/2026/월요일 PBL/7차/worker.py', '--action', 'train',
++                                   '--params', json.dumps(params)], timeout=25)
++    if name in {'videos', 'probe', 'detect'}:
++        return legacy.action(name, params)
++    raise ValueError('지원하지 않는 작업입니다.')
+--- 5차/web/index.html
++++ 8차/web/index.html
+@@ -1,7 +1,7 @@
+-<!doctype html>
+-<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>클린뷰 · 탐지와 학습</title><link rel="stylesheet" href="/style.css"></head>
+-<body><header><span class="brand">클린뷰 <small>5차</small></span><span class="badge">이 PC에서 독립 실행</span></header>
+-<main><h1>영상에서 시작해, 성능까지 확인하세요.</h1><p class="lead">Codex를 닫아도 작업은 이어집니다. 학습은 아래 시작 버튼을 눌렀을 때만 실행합니다.</p><p id="message" role="status"></p>
+-<div class="grid"><section><div class="title"><h2>01 영상 탐지</h2><button id="reload" class="secondary">목록 새로고침</button></div><label for="videos">보관된 영상</label><select id="videos"><option value="">영상 선택</option></select><label class="upload" for="upload">새 영상 가져오기 · 최대 4GB<input id="upload" type="file" accept="video/*"></label><img id="previewImage" alt="선택 영상 첫 프레임"><video id="preview" controls preload="metadata"></video><pre id="probe">영상을 고르면 정보를 확인합니다.</pre><p>서버에서 검증 선택한 모델을 사용합니다.</p><button id="detect">선택 영상 탐지 시작</button></section>
+-<section><h2>02 탐지 결과</h2><div id="results" class="empty">아직 완료된 탐지 결과가 없습니다.</div></section>
+-<section class="wide"><div class="title"><h2>03 학습과 평가</h2><span id="trainingState" class="badge">상태 확인 중</span></div><div class="metrics"><div>정밀도 P<strong id="precision">미측정</strong></div><div>재현율 R<strong id="recall">미측정</strong></div><div>mAP50<strong id="map50">미측정</strong></div></div><p id="metricNote">목표 P·R 각각 90% · 실측 결과가 있을 때 표시합니다.</p><canvas id="curves" width="960" height="230" aria-label="에포크별 정밀도·재현율·mAP50 추이"></canvas><p class="legend">파랑 정밀도 · 초록 재현율 · 주황 mAP50</p><p>학습 에포크와 분할은 사전에 고정한 학습 계획을 따릅니다.</p><label><input id="resume" type="checkbox"> 마지막 체크포인트에서 재개</label><button id="train">추가 학습 시작</button><div id="jobs"></div><details><summary>실제 상태·평가 원문</summary><pre id="raw"></pre></details><label for="logPath">작업 로그 · work 내부 상대 경로</label><input id="logPath" value="logs/train.log"><button id="logButton" class="secondary">로그 읽기</button><p id="logInfo"></p><pre id="log">로그는 최대 64KB를 표시합니다.</pre></section></div><footer>영상·모델·결과는 PC와 Docker에 보관됩니다. 로컬 접속 토큰은 Codex 사용 한도와 무관합니다.</footer></main><script src="/app.js"></script></body></html>
++<!doctype html>
++<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>클린뷰 · 탐지와 학습</title><link rel="stylesheet" href="/style.css"></head>
++<body><header><span class="brand">클린뷰 <small>8차</small></span><span class="badge">이 PC에서 독립 실행</span></header>
++<main><h1>영상에서 시작해, 성능까지 확인하세요.</h1><p class="lead">기존 클린뷰 화면에서 7차 독립 작업을 확인합니다. 실행기와 화면 조회는 학습을 시작하지 않습니다.</p><p id="message" role="status"></p>
++<div class="grid"><section><div class="title"><h2>01 영상 탐지</h2><button id="reload" class="secondary">목록 새로고침</button></div><label for="videos">보관된 영상</label><select id="videos"><option value="">영상 선택</option></select><label class="upload" for="upload">새 영상 가져오기 · 최대 4GB<input id="upload" type="file" accept="video/*"></label><img id="previewImage" alt="선택 영상 첫 프레임"><video id="preview" controls preload="metadata"></video><pre id="probe">영상을 고르면 정보를 확인합니다.</pre><p>영상 탐지는 보존된 5차 검증 모델을 사용합니다. 아래 7차 학습 성능과 구분합니다.</p><button id="detect">선택 영상 탐지 시작</button></section>
++<section><h2>02 탐지 결과</h2><div id="results" class="empty">아직 완료된 탐지 결과가 없습니다.</div></section>
++<section class="wide"><div class="title"><h2>03 학습과 평가</h2><span id="trainingState" class="badge">상태 확인 중</span></div><p id="observation"></p><div class="metrics"><div>정밀도 P<strong id="precision">미측정</strong></div><div>재현율 R<strong id="recall">미측정</strong></div><div>mAP50<strong id="map50">미측정</strong></div></div><p id="metricNote">목표 P·R 각각 90% · 실측 결과가 있을 때 표시합니다.</p><p>후보 1 · diverse_coco26l · 7차 실측 곡선</p><canvas id="curves" width="960" height="230" aria-label="에포크별 정밀도·재현율·mAP50 추이"></canvas><p>후보 2 · small_l_p2 · 7차 실측 곡선</p><canvas id="curves2" width="960" height="230" aria-label="두 번째 후보의 에포크별 실측 추이"></canvas><p class="legend">파랑 정밀도 · 초록 재현율 · 주황 mAP50</p><p>학습 에포크와 분할은 사전에 고정한 학습 계획을 따릅니다.</p><label><input id="resume" type="checkbox"> 마지막 체크포인트에서 재개</label><button id="train">추가 학습 시작</button><div id="jobs"></div><details><summary>실제 상태·평가 원문</summary><pre id="raw"></pre></details><label for="logPath">작업 로그 · 7차는 round7/jobs/작업ID.log만 허용</label><input id="logPath" value=""><button id="logButton" class="secondary">로그 읽기</button><p id="logInfo"></p><pre id="log">로그는 최대 64KB를 표시합니다.</pre></section></div><footer>영상·모델·결과는 PC와 Docker에 보관됩니다. 로컬 접속 토큰은 Codex 사용 한도와 무관합니다.</footer></main><script src="/app.js"></script></body></html>
+--- 5차/web/app.js
++++ 8차/web/app.js
+@@ -1,75 +1,78 @@
+-'use strict';
+-const token = new URLSearchParams(location.search).get('token') || '';
+-const $ = id => document.getElementById(id);
+-let state = {}, loading = false, pending = false, resultKey = null;
+-const asset = path => '/asset?token=' + encodeURIComponent(token) + '&path=' + encodeURIComponent(path);
+-function message(value) { $('message').textContent = value; }
+-async function api(name, data) {
+-  const controller = new AbortController(), timer = setTimeout(() => controller.abort(), 65000);
+-  try {
+-    const response = await fetch('/api/' + name, {method: data === undefined ? 'GET' : 'POST', headers: {'X-Token': token, 'X-CSRF-Token': token, 'Content-Type': 'application/json'}, body: data === undefined ? undefined : JSON.stringify(data), signal: controller.signal});
+-    const value = await response.json();
+-    if (!response.ok || !value.ok) throw Error(value.error || '요청을 처리하지 못했습니다.');
+-    return value.data;
+-  } finally { clearTimeout(timer); }
+-}
+-function textNode(tag, value) { const element = document.createElement(tag); element.textContent = value; return element; }
+-function metric(value) { return typeof value === 'number' && Number.isFinite(value) ? (value * 100).toFixed(1) + '%' : '미측정'; }
+-function curves(history) {
+-  const canvas = $('curves'), context = canvas.getContext('2d'), width = canvas.width, height = canvas.height;
+-  context.clearRect(0, 0, width, height); context.font = '700 13px Nanum'; context.fillStyle = '#64778a';
+-  for (let i = 0; i <= 4; i++) { const y = 20 + i * 45; context.strokeStyle = '#e1e8ee'; context.beginPath(); context.moveTo(48, y); context.lineTo(width - 15, y); context.stroke(); context.fillText((100 - i * 25) + '%', 5, y + 4); }
+-  if (!Array.isArray(history) || !history.length) { context.fillText('에포크별 실측 데이터가 아직 없습니다.', 300, 110); return; }
+-  [['precision', '#2770b1'], ['recall', '#21866c'], ['map50', '#dc8a35']].forEach(([key, color]) => {
+-    context.strokeStyle = color; context.lineWidth = 2; context.beginPath(); let active = false;
+-    history.forEach((row, i) => { const value = row[key]; if (typeof value !== 'number' || !Number.isFinite(value)) { active = false; return; } const x = 48 + i * (width - 65) / Math.max(1, history.length - 1), y = 200 - Math.max(0, Math.min(1, value)) * 180; if (active) context.lineTo(x, y); else context.moveTo(x, y); active = true; }); context.stroke();
+-  });
+-  context.fillStyle = '#64778a'; context.fillText('에포크 ' + history[0].epoch, 48, 222); context.fillText('에포크 ' + history[history.length - 1].epoch, width - 120, 222);
+-}
+-function render() {
+-  const jobs = Array.isArray(state.jobs) ? state.jobs : [], training = state.training || {};
+-  const metrics = state.metrics || state.selection?.test?.operating || {};
+-  $('precision').textContent = metric(metrics.precision); $('recall').textContent = metric(metrics.recall);
+-  $('map50').textContent = metric(metrics.map50 ?? state.selection?.test?.metrics?.['metrics/mAP50(B)']);
+-  $('metricNote').textContent = '목표 P·R 각각 90% · 평가 구분: ' + (metrics.split || '상태 원문 확인') + ' · 객체 탐지 지표이며 투기 행동 정확도와 구분합니다.';
+-  const names = {failed: '실패', interrupted: '중단', complete: '완료', running: '실행 중', queued: '대기', starting: '시작 중'};
+-  const progress = [names[training.state] || training.state, training.job ? '최신 작업 ' + training.job : null,
+-    training.stage ? '마지막 단계: ' + training.stage : null];
+-  if (training.epoch != null) progress.push('현재 작업 에포크 ' + training.epoch + (training.epochs ? ' / ' + training.epochs : ''));
+-  if (training.images != null) progress.push('이미지 ' + training.images + '장');
+-  if (training.downloaded_bytes != null) progress.push('다운로드 ' + (training.downloaded_bytes / 1024 ** 2).toFixed(1) + 'MB');
+-  if (training.progress != null) progress.push('진행 ' + training.progress + '%');
+-  $('trainingState').textContent = progress.filter(value => value !== undefined && value !== null && value !== '').join(' · ') || '작업 대기';
+-  if (['failed', 'interrupted'].includes(training.state)) {
+-    message('최신 학습 작업 ' + (names[training.state] || training.state) + ': ' + (training.error || '작업 로그를 확인해 주세요.') + '\n현재 작업은 진행 중이 아닙니다. 오류 원인을 확인하고 검증을 통과한 뒤에만 체크포인트 재개를 진행하세요.');
+-  }
+-  const historyContext = training.history_context;
+-  const legend = document.querySelector('.legend');
+-  if (legend) legend.textContent = (historyContext ? '보존된 실행 ' + historyContext.run + ' · ' + (historyContext.phase_complete ? '학습 단계 완료 기록 있음' : '학습 단계 완료 미확인') + ' · CSV 마지막 에포크 ' + (historyContext.last_epoch ?? '없음') + ' · 최신 작업의 진행률과 별개입니다. ' : '') + '파랑 정밀도 · 초록 재현율 · 주황 mAP50';
+-  curves(training.history || state.history || []);
+-  $('raw').textContent = JSON.stringify(state, null, 2);
+-  const newResultKey = JSON.stringify(jobs.filter(job => job.kind === 'detect' && job.result).map(job => [job.id, job.result]));
+-  const updateResults = newResultKey !== resultKey;
+-  $('jobs').replaceChildren();
+-  if (updateResults) { $('results').replaceChildren(); resultKey = newResultKey; }
+-  jobs.forEach(job => {
+-    const card = document.createElement('article'); card.append(textNode('p', (job.kind || '작업') + ' · ' + (job.state || '') + ' · ' + (job.stage || '') + (job.epoch ? ' · ' + job.epoch + '/' + job.epochs : '')));
+-    if (job.error) card.append(textNode('p', job.error));
+-    if (job.log) { const button = textNode('button', '이 작업 로그'); button.className = 'secondary'; button.onclick = () => { $('log').textContent = job.log; $('logInfo').textContent = '상태 응답에 포함된 로그 끝부분 · 전체 파일은 아래 경로에서 확인'; if (/^[A-Za-z0-9_-]+$/.test(job.id || '')) $('logPath').value = 'jobs/' + job.id + '.log'; }; card.append(button); }
+-    $('jobs').append(card);
+-    if (updateResults && job.kind === 'detect' && job.result) { const result = document.createElement('article'); result.append(textNode('p', job.id || '탐지 결과')); const video = document.createElement('video'); video.controls = true; video.preload = 'metadata'; video.src = asset(job.result); result.append(video); const link = textNode('a', '결과 파일 열기'); link.href = asset(job.result); link.target = '_blank'; link.rel = 'noopener'; result.append(link); $('results').append(result); }
+-  });
+-  if (!$('results').children.length) $('results').textContent = '아직 완료된 탐지 결과가 없습니다.';
+-  const busy = jobs.some(job => ['running', 'queued', 'starting'].includes(job.state));
+-  $('train').disabled = pending || busy; $('detect').disabled = pending || !$('videos').value;
+-}
+-async function refresh() { if (loading) return; loading = true; try { state = await api('status'); render(); } catch (error) { message(error.message); } finally { loading = false; } }
+-async function videos() { try { const result = await api('videos'), list = Array.isArray(result) ? result : result.videos || [], previous = $('videos').value; $('videos').replaceChildren(new Option('영상 선택', '')); list.forEach(video => $('videos').add(new Option(video.name || video.path, video.path))); if (list.some(video => video.path === previous)) $('videos').value = previous; render(); } catch (error) { message(error.message); } }
+-async function probe() { const path = $('videos').value; render(); if (!path) return; try { const data = await api('probe', {path}); $('probe').textContent = JSON.stringify(data, null, 2); if (data.preview) $('previewImage').src = asset(data.preview); if (path.replaceAll('\\', '/').includes('/work/uploads/')) $('preview').src = asset(path); else $('preview').removeAttribute('src'); } catch (error) { message(error.message); } }
+-async function start(action, params) { if (pending) return; pending = true; render(); try { await api(action, params); message(action === 'train' ? '추가 학습 요청을 전달했습니다.' : '영상 탐지 요청을 전달했습니다.'); } catch (error) { message(error.message); } finally { pending = false; await refresh(); } }
+-async function loadLog() { try { const data = await api('log?path=' + encodeURIComponent($('logPath').value)); $('log').textContent = data.text; $('logInfo').textContent = '원본 ' + data.original_bytes + '바이트 · 표시 ' + data.captured_bytes + '바이트' + (data.truncated ? ' · 앞부분 생략' : ' · 전체'); } catch (error) { message(error.message); } }
+-$('reload').onclick = videos; $('videos').onchange = probe; $('logButton').onclick = loadLog;
+-$('detect').onclick = () => start('detect', {path: $('videos').value});
+-$('train').onclick = () => start('train', {resume: $('resume').checked});
+-$('upload').onchange = async () => { const file = $('upload').files[0]; if (!file) return; if (file.size > 4 * 1024 ** 3) { message('4GB 이하 영상을 선택해 주세요.'); return; } try { message('영상을 가져오는 중입니다.'); const response = await fetch('/api/upload', {method: 'POST', headers: {'X-Token': token, 'X-CSRF-Token': token, 'X-Filename': encodeURIComponent(file.name)}, body: file}); const result = await response.json(); if (!response.ok || !result.ok) throw Error(result.error); await videos(); $('videos').value = result.data.path; await probe(); message('영상 가져오기를 마쳤습니다.'); } catch (error) { message(error.message); } };
+-refresh(); videos(); setInterval(refresh, 8000);
++'use strict';
++const token = new URLSearchParams(location.search).get('token') || '';
++const $ = id => document.getElementById(id);
++let state = {}, loading = false, pending = false, resultKey = null;
++const asset = path => '/asset?token=' + encodeURIComponent(token) + '&path=' + encodeURIComponent(path);
++function message(value) { $('message').textContent = value; }
++async function api(name, data) {
++  const controller = new AbortController(), timer = setTimeout(() => controller.abort(), 65000);
++  try {
++    const response = await fetch('/api/' + name, {method: data === undefined ? 'GET' : 'POST', headers: {'X-Token': token, 'X-CSRF-Token': token, 'Content-Type': 'application/json'}, body: data === undefined ? undefined : JSON.stringify(data), signal: controller.signal});
++    const value = await response.json();
++    if (!response.ok || !value.ok) throw Error(value.error || '요청을 처리하지 못했습니다.');
++    return value.data;
++  } finally { clearTimeout(timer); }
++}
++function textNode(tag, value) { const element = document.createElement(tag); element.textContent = value; return element; }
++function metric(value) { return typeof value === 'number' && Number.isFinite(value) ? (value * 100).toFixed(1) + '%' : '미측정'; }
++function curves(history, id = 'curves') {
++  const canvas = $(id), context = canvas.getContext('2d'), width = canvas.width, height = canvas.height;
++  context.clearRect(0, 0, width, height); context.font = '700 13px Nanum'; context.fillStyle = '#64778a';
++  for (let i = 0; i <= 4; i++) { const y = 20 + i * 45; context.strokeStyle = '#e1e8ee'; context.beginPath(); context.moveTo(48, y); context.lineTo(width - 15, y); context.stroke(); context.fillText((100 - i * 25) + '%', 5, y + 4); }
++  if (!Array.isArray(history) || !history.length) { context.fillText('에포크별 실측 데이터가 아직 없습니다.', 300, 110); return; }
++  [['precision', '#2770b1'], ['recall', '#21866c'], ['map50', '#dc8a35']].forEach(([key, color]) => {
++    context.strokeStyle = color; context.lineWidth = 2; context.beginPath(); let active = false;
++    history.forEach((row, i) => { const value = row[key]; if (typeof value !== 'number' || !Number.isFinite(value)) { active = false; return; } const x = 48 + i * (width - 65) / Math.max(1, history.length - 1), y = 200 - Math.max(0, Math.min(1, value)) * 180; if (active) context.lineTo(x, y); else context.moveTo(x, y); active = true; }); context.stroke();
++  });
++  context.fillStyle = '#64778a'; context.fillText('에포크 ' + history[0].epoch, 48, 222); context.fillText('에포크 ' + history[history.length - 1].epoch, width - 120, 222);
++}
++function render() {
++  const jobs = Array.isArray(state.jobs) ? state.jobs : [], training = state.training || {};
++  const metrics = state.metrics || state.selection?.test?.operating || {};
++  $('precision').textContent = metric(metrics.precision); $('recall').textContent = metric(metrics.recall);
++  $('map50').textContent = metric(metrics.map50 ?? state.selection?.test?.metrics?.['metrics/mAP50(B)']);
++  $('metricNote').textContent = '목표 P·R 각각 90% · 평가 구분: ' + (metrics.split || '상태 원문 확인') + ' · 객체 탐지 지표이며 투기 행동 정확도와 구분합니다.';
++  const names = {failed: '실패', interrupted: '중단', complete: '완료', running: '실행 중', queued: '대기', starting: '시작 중'};
++  const progress = [names[training.state] || training.state, training.job ? '최신 작업 ' + training.job : null,
++    training.stage ? '마지막 단계: ' + training.stage : null];
++  if (training.epoch != null) progress.push('현재 작업 에포크 ' + training.epoch + (training.epochs ? ' / ' + training.epochs : ''));
++  if (training.images != null) progress.push('이미지 ' + training.images + '장');
++  if (training.downloaded_bytes != null) progress.push('다운로드 ' + (training.downloaded_bytes / 1024 ** 2).toFixed(1) + 'MB');
++  if (training.progress != null) progress.push('진행 ' + training.progress + '%');
++  $('trainingState').textContent = progress.filter(value => value !== undefined && value !== null && value !== '').join(' · ') || '작업 대기';
++  if (['failed', 'interrupted'].includes(training.state)) {
++    message('최신 학습 작업 ' + (names[training.state] || training.state) + ': ' + (training.error || '작업 로그를 확인해 주세요.') + '\n현재 작업은 진행 중이 아닙니다. 오류 원인을 확인하고 검증을 통과한 뒤에만 체크포인트 재개를 진행하세요.');
++  }
++  const historyContext = training.history_context;
++  $('observation').textContent = '현재 조회: ' + (state.now_kst || '확인 불가') + ' · 마지막 관측: ' + (training.observed_kst || '자료 없음') + ' · 갱신 지연 ' + (training.delay_seconds == null ? '확인 불가' : training.delay_seconds + '초') + (training.stale ? ' · 오래된 관측 자료' : '') + ' · 단계 구분: ' + (training.phase || '미확인') + ' · 프로세스 생존 별도 확인 필요';
++  const legend = document.querySelector('.legend');
++  if (legend) legend.textContent = (historyContext ? '보존된 실행 ' + historyContext.run + ' · ' + (historyContext.phase_complete ? '학습 단계 완료 기록 있음' : '학습 단계 완료 미확인') + ' · CSV 마지막 에포크 ' + (historyContext.last_epoch ?? '없음') + ' · 최신 작업의 진행률과 별개입니다. ' : '') + '파랑 정밀도 · 초록 재현율 · 주황 mAP50';
++  const runs = training.runs || [];
++  curves(runs[0]?.history || []); curves(runs[1]?.history || [], 'curves2');
++  if (legend) legend.textContent = '7차 각 후보의 실측 CSV만 표시합니다. 파랑 정밀도 · 초록 재현율 · 주황 mAP50 · 최종 테스트 성능과 구분합니다.';
++  $('raw').textContent = JSON.stringify(state, null, 2);
++  const newResultKey = JSON.stringify(jobs.filter(job => job.kind === 'detect' && job.result).map(job => [job.id, job.result]));
++  const updateResults = newResultKey !== resultKey;
++  $('jobs').replaceChildren();
++  if (updateResults) { $('results').replaceChildren(); resultKey = newResultKey; }
++  jobs.forEach(job => {
++    const card = document.createElement('article'); card.append(textNode('p', (job.kind || '작업') + ' · ' + (job.state || '') + ' · ' + (job.stage || '') + (job.epoch ? ' · ' + job.epoch + '/' + job.epochs : '')));
++    if (job.error) card.append(textNode('p', job.error));
++    if (job.log || job.log_path) { const button = textNode('button', '이 작업 로그'); button.className = 'secondary'; button.onclick = () => { $('log').textContent = job.log || '아래 로그 읽기를 눌러 이 작업의 끝부분을 조회하세요.'; $('logInfo').textContent = '상태 응답에 포함된 로그 끝부분 · 전체 파일은 아래 경로에서 확인'; if (/^[A-Za-z0-9_-]+$/.test(job.id || '')) $('logPath').value = job.log_path || 'jobs/' + job.id + '.log'; }; card.append(button); }
++    $('jobs').append(card);
++    if (updateResults && job.kind === 'detect' && job.result) { const result = document.createElement('article'); result.append(textNode('p', job.id || '탐지 결과')); const video = document.createElement('video'); video.controls = true; video.preload = 'metadata'; video.src = asset(job.result); result.append(video); const link = textNode('a', '결과 파일 열기'); link.href = asset(job.result); link.target = '_blank'; link.rel = 'noopener'; result.append(link); $('results').append(result); }
++  });
++  if (!$('results').children.length) $('results').textContent = '아직 완료된 탐지 결과가 없습니다.';
++  const busy = state.busy || jobs.some(job => ['running', 'queued', 'starting'].includes(job.state));
++  $('train').disabled = pending || busy; $('detect').disabled = pending || !$('videos').value;
++}
++async function refresh() { if (loading) return; loading = true; try { state = await api('status'); render(); } catch (error) { message(error.message); } finally { loading = false; } }
++async function videos() { try { const result = await api('videos'), list = Array.isArray(result) ? result : result.videos || [], previous = $('videos').value; $('videos').replaceChildren(new Option('영상 선택', '')); list.forEach(video => $('videos').add(new Option(video.name || video.path, video.path))); if (list.some(video => video.path === previous)) $('videos').value = previous; render(); } catch (error) { message(error.message); } }
++async function probe() { const path = $('videos').value; render(); if (!path) return; try { const data = await api('probe', {path}); $('probe').textContent = JSON.stringify(data, null, 2); if (data.preview) $('previewImage').src = asset(data.preview); if (path.replaceAll('\\', '/').includes('/work/uploads/')) $('preview').src = asset(path); else $('preview').removeAttribute('src'); } catch (error) { message(error.message); } }
++async function start(action, params) { if (pending) return; pending = true; render(); try { await api(action, params); message(action === 'train' ? '추가 학습 요청을 전달했습니다.' : '영상 탐지 요청을 전달했습니다.'); } catch (error) { message(error.message); } finally { pending = false; await refresh(); } }
++async function loadLog() { try { const data = await api('log?path=' + encodeURIComponent($('logPath').value)); $('log').textContent = data.text; $('logInfo').textContent = '원본 ' + data.original_bytes + '바이트 · 표시 ' + data.captured_bytes + '바이트' + (data.truncated ? ' · 앞부분 생략' : ' · 전체'); } catch (error) { message(error.message); } }
++$('reload').onclick = videos; $('videos').onchange = probe; $('logButton').onclick = loadLog;
++$('detect').onclick = () => start('detect', {path: $('videos').value});
++$('train').onclick = () => start('train', {resume: $('resume').checked});
++$('upload').onchange = async () => { const file = $('upload').files[0]; if (!file) return; if (file.size > 4 * 1024 ** 3) { message('4GB 이하 영상을 선택해 주세요.'); return; } try { message('영상을 가져오는 중입니다.'); const response = await fetch('/api/upload', {method: 'POST', headers: {'X-Token': token, 'X-CSRF-Token': token, 'X-Filename': encodeURIComponent(file.name)}, body: file}); const result = await response.json(); if (!response.ok || !result.ok) throw Error(result.error); await videos(); $('videos').value = result.data.path; await probe(); message('영상 가져오기를 마쳤습니다.'); } catch (error) { message(error.message); } };
++refresh(); videos(); setInterval(refresh, 8000);
