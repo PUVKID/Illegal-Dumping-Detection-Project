@@ -11,6 +11,7 @@
 | [6차](../6%EC%B0%A8) | 5 | [🔎 비교](folder-comparisons/step-7.md) |
 | [7차](../7%EC%B0%A8) | 15 | [🔎 비교](folder-comparisons/step-8.md) |
 | [8차](../8%EC%B0%A8) | 17 | [🔎 비교](folder-comparisons/step-9.md) |
+| [9차](../9차/) | 2 | [🔎 비교](comparisons/8-to-9.md) |
 | [이전 도커 실험](../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98) | 53 | [🔎 비교](folder-comparisons/step-10.md) |
 
 현재 수량은 각 보존 폴더의 전체 공개 파일을 셉니다. 별도 자료 묶음 사이의 같은 파일도 각 경로에서 보존합니다.

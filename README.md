@@ -19,7 +19,7 @@
 
 ## 🗂️ 차수별 개발 흐름
 
-[**📖 1차부터 8차·최종까지 보기 →**](docs/REVISION_INDEX.md)
+[**📖 1차부터 9차·최종까지 보기 →**](docs/REVISION_INDEX.md)
 
 # 공개 차수와 비교
 
@@ -27,7 +27,7 @@
 
 | 공개 경로 | 자료 설명 | 바로 앞 자료와 공개 파일 비교 |
 |---|---|---|
-| [1차](1차/) | [단일 클래스 탐지 노트북](docs/versions/stage-1.md) | 이전 차수 근거 없음 |
+| [1차](1차/) | [단일 클래스 탐지 노트북](docs/versions/stage-1.md) | [이전 차수 근거 없음](docs/comparisons/initial.md) |
 | [2차](2차/) | [봉투·낱개와 영상 후보](docs/versions/stage-2.md) | [1차 → 2차](docs/comparisons/1-to-2.md) |
 | [최종/3차](최종/3차/) | [학습·검증·영상 실행](docs/versions/stage-3.md) | [2차 → 3차](docs/comparisons/2-to-3.md) |
 | [최종/4차](최종/4차/) | [프레임·문서 작업](docs/versions/stage-4.md) | [3차 → 4차](docs/comparisons/3-to-4.md) |
@@ -36,8 +36,9 @@
 | [6차/변경전_5차](6차/변경전_5차/) | [5차의 변경 전 부분 보존본](docs/versions/round-6.md) | [5차의 대응 파일과 비교](docs/comparisons/5-to-6-snapshot.md) |
 | [7차](7차/) | [대규모 자료 추가 학습 코드](docs/versions/round-7.md) | [5차 → 7차](docs/comparisons/5-to-7.md); 6차는 부분 보존본 |
 | [8차](8차/) | [원래 클린뷰 복원·한국 시각·7차 상태 연결](docs/versions/round-8.md) | [7차 → 8차](docs/comparisons/7-to-8.md); 화면 원본5차와 비교도 포함 |
+| [9차](9차/) | [7차 수신 재개 운영 기록](docs/versions/round-9.md) | [8차 → 9차](docs/comparisons/8-to-9.md) |
 | [이전 도커 실험](이전%20도커%20실험/) | [이전 실험 보관](docs/versions/docker-experiment.md) | [최종/3차와 비교](docs/comparisons/docker-to-3.md); 시간 순서 근거 없음 |
-| [최종](최종/) | [하위 자료 보관 폴더](docs/versions/final-container.md) | 상위 컨테이너로 별도 차수가 아닙니다 |
+| [최종](최종/) | [하위 자료 보관 폴더](docs/versions/final-container.md) | [상위 컨테이너로 별도 차수가 아닙니다](docs/comparisons/final-container.md) |
 
 
 
