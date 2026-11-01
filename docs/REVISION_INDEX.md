@@ -41,6 +41,7 @@
 | **7차** | [📁 검수 자료](../7%EC%B0%A8) | [📖 정리 내용](publication-review/item-5.md) · [🔎 파일 비교](publication-review/공개파일변경.json) |
 | **8차** | [📁 검수 자료](../8%EC%B0%A8) | [📖 정리 내용](publication-review/item-6.md) · [🔎 파일 비교](publication-review/공개파일변경.json) |
 | **9차** | [📁 검수 자료](../9%EC%B0%A8) | [📖 정리 내용](publication-review/item-8.md) · [🔎 파일 비교](publication-review/공개파일변경.json) |
+| **10차** | [📁 검수 자료](../10%EC%B0%A8) | [📖 정리 내용](publication-review/item-9.md) · [🔎 파일 비교](publication-review/공개파일변경.json) |
 | **최종** | [📁 검수 자료](../%EC%B5%9C%EC%A2%85) | [📖 정리 내용](publication-review/item-7.md) · [🔎 파일 비교](publication-review/공개파일변경.json) |
 
 </details>
