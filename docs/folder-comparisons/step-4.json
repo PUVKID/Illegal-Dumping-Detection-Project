@@ -1,6 +1,6 @@
 {
   "group": "최종/4차",
-  "current_files": 5,
+  "current_files": 4,
   "changes": [
     {
       "path": "_작업/make_frame.py",
@@ -13,22 +13,22 @@
       "comparison": "UTF-8 전체 텍스트"
     },
     {
-      "path": "_작업/render_with_word.py",
+      "path": "_작업/render_with_word.py.PUBLIC-NOTE.md",
       "change": "추가",
       "before": null,
       "after": {
-        "bytes": 1103,
-        "sha256": "f5fabcc898141375bb1fe365589f9a73afd3e16e2857744adeb01199d8b5ac8b"
+        "bytes": 212,
+        "sha256": "7e5f1609e4321fdcd9d1eeac422ddfb255f421fd3ee538705483b665913be030"
       },
       "comparison": "UTF-8 전체 텍스트"
     },
     {
-      "path": "_작업/word_render.ps1",
+      "path": "_작업/word_render.ps1.PUBLIC-NOTE.md",
       "change": "추가",
       "before": null,
       "after": {
-        "bytes": 710,
-        "sha256": "6cb0aec045c4af6d94846755a5c80ceb8ef0496d5927cc9f2ee2a2f16f552e69"
+        "bytes": 212,
+        "sha256": "7e5f1609e4321fdcd9d1eeac422ddfb255f421fd3ee538705483b665913be030"
       },
       "comparison": "UTF-8 전체 텍스트"
     },
@@ -41,16 +41,6 @@
         "sha256": "abca8a817f4f791fcdfb047de7d3221a5b25b950494ba49e39631b0e4fb7445c"
       },
       "comparison": "UTF-8 전체 텍스트"
-    },
-    {
-      "path": "지능정보시스템_불법쓰레기탐지_2팀_곽윤석_시나리오추가.docx",
-      "change": "추가",
-      "before": null,
-      "after": {
-        "bytes": 3509205,
-        "sha256": "a331b1e9788fb497131e32114be2db022dd106fe59b12401518e16bbb91b5a97"
-      },
-      "comparison": "바이너리 크기·SHA-256"
     },
     {
       "path": "_작업/check_external_archive.py",
@@ -674,21 +664,17 @@
     }
   ],
   "current_file_hashes": {
-    "지능정보시스템_불법쓰레기탐지_2팀_곽윤석_시나리오추가.docx": {
-      "bytes": 3509205,
-      "sha256": "a331b1e9788fb497131e32114be2db022dd106fe59b12401518e16bbb91b5a97"
-    },
     "_작업/make_frame.py": {
       "bytes": 2315,
       "sha256": "b5e0647dd781d0087d6c7c3c2d084056106e4dc9ff5e1ee0a6bd794f48969dd1"
     },
-    "_작업/render_with_word.py": {
-      "bytes": 1103,
-      "sha256": "f5fabcc898141375bb1fe365589f9a73afd3e16e2857744adeb01199d8b5ac8b"
+    "_작업/render_with_word.py.PUBLIC-NOTE.md": {
+      "bytes": 212,
+      "sha256": "7e5f1609e4321fdcd9d1eeac422ddfb255f421fd3ee538705483b665913be030"
     },
-    "_작업/word_render.ps1": {
-      "bytes": 710,
-      "sha256": "6cb0aec045c4af6d94846755a5c80ceb8ef0496d5927cc9f2ee2a2f16f552e69"
+    "_작업/word_render.ps1.PUBLIC-NOTE.md": {
+      "bytes": 212,
+      "sha256": "7e5f1609e4321fdcd9d1eeac422ddfb255f421fd3ee538705483b665913be030"
     },
     "_작업/자료/프레임_확인.json": {
       "bytes": 147,

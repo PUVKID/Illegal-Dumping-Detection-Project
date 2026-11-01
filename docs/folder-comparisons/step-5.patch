@@ -149,44 +149,18 @@
 -(here/'최종모델_CCTV_프레임.png').write_bytes(base64.b64decode(raw))
 -(here/'프레임_확인.json').write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf-8')
 -print(json.dumps(result,ensure_ascii=False))
---- previous/_작업/render_with_word.py
-+++ current/_작업/render_with_word.py
-@@ -1,17 +0,0 @@
--"""Use the packaged document rasterizer with native Word PDF conversion on Windows."""
--import importlib.util, os, subprocess, sys
--from pathlib import Path
--SKILL=Path('C:/Users/PUVKID/.codex/plugins/cache/openai-primary-runtime/documents/26.1013.11914/skills/documents')
--HERE=Path(__file__).resolve().parent
--POPPLER=Path('C:/Users/PUVKID/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/poppler/Library/bin')
--os.environ['PATH']=str(POPPLER)+os.pathsep+os.environ.get('PATH','')
--spec=importlib.util.spec_from_file_location('packaged_render_docx',SKILL/'render_docx.py')
--renderer=importlib.util.module_from_spec(spec);spec.loader.exec_module(renderer)
--def native_word(doc_path,user_profile,convert_tmp_dir,stem,verbose=False):
--    pdf=Path(convert_tmp_dir)/(stem+'.pdf')
--    p=subprocess.run(['pwsh.exe','-NoProfile','-File',str(HERE/'word_render.ps1'),'-InputDocx',doc_path,'-OutputPdf',str(pdf)],capture_output=True,text=True)
--    log=p.stdout+'\n'+p.stderr
--    if p.returncode or not pdf.is_file():return '',log
--    return str(pdf),log
--renderer.convert_to_pdf=native_word
--renderer.main()
---- previous/_작업/word_render.ps1
-+++ current/_작업/word_render.ps1
-@@ -1,15 +0,0 @@
--param([string]$InputDocx,[string]$OutputPdf)
--$wordRenderer = $null
--$wordDocument = $null
--try {
--  $wordRenderer = New-Object -ComObject Word.Application
--  $wordRenderer.Visible = $false
--  $wordRenderer.DisplayAlerts = 0
--  $wordDocument = $wordRenderer.Documents.Open($InputDocx, $false, $true, $false)
--  $wordDocument.Repaginate()
--  $wordDocument.ExportAsFixedFormat($OutputPdf, 17)
--  Write-Output ('Exported pages: '+$wordDocument.ComputeStatistics(2))
--} finally {
--  if ($wordDocument) { $wordDocument.Close(0); [void][Runtime.InteropServices.Marshal]::ReleaseComObject($wordDocument) }
--  if ($wordRenderer) { $wordRenderer.Quit(); [void][Runtime.InteropServices.Marshal]::ReleaseComObject($wordRenderer) }
--}
+--- previous/_작업/render_with_word.py.PUBLIC-NOTE.md
++++ current/_작업/render_with_word.py.PUBLIC-NOTE.md
+@@ -1,3 +0,0 @@
+-# 공개 자료 안내
+-
+-개인 환경에 고정된 과거 운영 보조 도구는 공개 자료에서 제외했습니다. 실험의 학습·추론 코드는 해당 차수 폴더에서 확인할 수 있습니다.
+--- previous/_작업/word_render.ps1.PUBLIC-NOTE.md
++++ current/_작업/word_render.ps1.PUBLIC-NOTE.md
+@@ -1,3 +0,0 @@
+-# 공개 자료 안내
+-
+-개인 환경에 고정된 과거 운영 보조 도구는 공개 자료에서 제외했습니다. 실험의 학습·추론 코드는 해당 차수 폴더에서 확인할 수 있습니다.
 --- previous/_작업/자료/프레임_확인.json
 +++ current/_작업/자료/프레임_확인.json
 @@ -1,7 +0,0 @@

@@ -43,12 +43,12 @@
       "comparison": "UTF-8 전체 텍스트"
     },
     {
-      "path": "3차실험/trash_round3/app/finish_on_exit.py",
+      "path": "3차실험/trash_round3/app/finish_on_exit.py.PUBLIC-NOTE.md",
       "change": "추가",
       "before": null,
       "after": {
-        "bytes": 5623,
-        "sha256": "eb4478d0783925299cef53efc447e0d39d1461617a913e6425fb072debe2adef"
+        "bytes": 212,
+        "sha256": "7e5f1609e4321fdcd9d1eeac422ddfb255f421fd3ee538705483b665913be030"
       },
       "comparison": "UTF-8 전체 텍스트"
     },
@@ -756,9 +756,9 @@
       "bytes": 8444,
       "sha256": "4d103a0595078bc3b2445120336eb1dd9a8d94cf9cc1fc361f9b87f4b2e29a06"
     },
-    "3차실험/trash_round3/app/finish_on_exit.py": {
-      "bytes": 5623,
-      "sha256": "eb4478d0783925299cef53efc447e0d39d1461617a913e6425fb072debe2adef"
+    "3차실험/trash_round3/app/finish_on_exit.py.PUBLIC-NOTE.md": {
+      "bytes": 212,
+      "sha256": "7e5f1609e4321fdcd9d1eeac422ddfb255f421fd3ee538705483b665913be030"
     },
     "3차실험/trash_round3/app/index.html": {
       "bytes": 19908,

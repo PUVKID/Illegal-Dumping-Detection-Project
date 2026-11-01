@@ -1,5 +1,5 @@
---- 7차/README.md
-+++ 8차/README.md
+--- previous/README.md
++++ current/README.md
 @@ -1,29 +1,18 @@
 -# 7차 대규모 자료 기반 추가 학습
 +# 8차 · 원래 클린뷰 복원과 7차 진행 상태 연결
@@ -41,8 +41,8 @@
 -
 -현재문서는데이터준비와학습개시코드를설명합니다. 전량수신·장기학습완료또는90%목표달성보고서가아닙니다. 이후실측값은별도로기록합니다. 기존라이선스는보존하며새라이선스를임의부여하지않습니다.
 +[앞으로 유지할 대시보드 구성 기준](docs/대시보드기준.md)을 확정했습니다. 5차 화면 비교 패치는 설치 원본과 새 화면의 공통 코드 파일을 대상으로 원본 행 바이트를 보존합니다. 원본 CRLF의 CR이 패치에 포함되는 것은 비교 자료이며 제품 공백 오류와 구분합니다.
---- 7차/configs/protected_sources.json
-+++ 8차/configs/protected_sources.json
+--- previous/configs/protected_sources.json
++++ current/configs/protected_sources.json
 @@ -1,12 +0,0 @@
 -{
 -  "checked_kst": "2026-10-30T07:17:00+09:00",
@@ -56,8 +56,8 @@
 -    {"path":"/workspace/2026/월요일 PBL/5차/train_pipeline.py","sha256":"9d490e15b082c480fd2e9f41873c018ad383ad600d2fe2fac5897523edc13ea8"}
 -  ]
 -}
---- 7차/configs/training.json
-+++ 8차/configs/training.json
+--- previous/configs/training.json
++++ current/configs/training.json
 @@ -1,19 +0,0 @@
 -{
 -  "seed": 20261030,
@@ -78,8 +78,8 @@
 -  "download_limit_bytes": 107374182400,
 -  "minimum_disk_free_bytes": 107374182400
 -}
---- 7차/dashboard.py
-+++ 8차/dashboard.py
+--- previous/dashboard.py
++++ current/dashboard.py
 @@ -0,0 +1,55 @@
 +"""원래 루프백 HTTP 보안과 영상 저장 경계를 유지하는 8차 서버입니다."""
 +from pathlib import Path
@@ -136,8 +136,8 @@
 +    # 실행 세션은 8차에만 기록하며 5차 원본 세션은 덮어쓰지 않습니다.
 +    (Path(root) / 'work').mkdir(exist_ok=True)
 +    return server
---- 7차/docs/5차대비.diff
-+++ 8차/docs/5차대비.diff
+--- previous/docs/5차대비.diff
++++ current/docs/5차대비.diff
 @@ -0,0 +1,789 @@
 +--- 5차/dashboard.py
 ++++ 8차/dashboard.py
@@ -928,8 +928,8 @@
 ++$('train').onclick = () => start('train', {resume: $('resume').checked});
 ++$('upload').onchange = async () => { const file = $('upload').files[0]; if (!file) return; if (file.size > 4 * 1024 ** 3) { message('4GB 이하 영상을 선택해 주세요.'); return; } try { message('영상을 가져오는 중입니다.'); const response = await fetch('/api/upload', {method: 'POST', headers: {'X-Token': token, 'X-CSRF-Token': token, 'X-Filename': encodeURIComponent(file.name)}, body: file}); const result = await response.json(); if (!response.ok || !result.ok) throw Error(result.error); await videos(); $('videos').value = result.data.path; await probe(); message('영상 가져오기를 마쳤습니다.'); } catch (error) { message(error.message); } };
 ++refresh(); videos(); setInterval(refresh, 8000);
---- 7차/docs/original_sources.json
-+++ 8차/docs/original_sources.json
+--- previous/docs/original_sources.json
++++ current/docs/original_sources.json
 @@ -0,0 +1,16 @@
 +{
 +  "5차/dashboard.py": "b14ca511e6a35f3a6afefde576e6e5833173618e37d45c78b40fda38e3e87de8",
@@ -947,8 +947,8 @@
 +  "7차/configs/protected_sources.json": "6158cda1bcb6521f2dfa6b0f5000d1ba18e781181a82fcb14d846af825331c21",
 +  "7차/configs/training.json": "e64cdc187c260564f13206f21f632d65b3e2d67b021a12bffc36aefbb0535401"
 +}
---- 7차/docs/대시보드기준.md
-+++ 8차/docs/대시보드기준.md
+--- previous/docs/대시보드기준.md
++++ current/docs/대시보드기준.md
 @@ -0,0 +1,12 @@
 +# 이 프로젝트의 고정 대시보드 기준
 +
@@ -962,8 +962,8 @@
 +- 루프백 HTTP 앱의 인증·CSRF·Host·파일 경로 제한을 유지합니다. 로컬 접속 토큰은 Codex 사용 한도와 별개이고, 토큰과 세션은 공개하지 않습니다.
 +
 +현재 배포 소스는 8차, 영상 처리 기반은 5차, 진행 중인 학습은 7차입니다. 화면 기준을 유지한다는 것은 모든 학습의 90% 성능 달성이나 과거 결과의 현재 성능 전환을 뜻하지 않습니다.
---- 7차/docs/설계.md
-+++ 8차/docs/설계.md
+--- previous/docs/설계.md
++++ current/docs/설계.md
 @@ -0,0 +1,6 @@
 +# 요구와 성공 조건
 +2026-10-30 사용자는 UTC 마지막관측 표기의 의미를 확인하고 원래 쓰던 대시보드와 같게 복원하라고 요청했습니다. 5차 web의 레이아웃/나눔고딕Bold/영상업로드·목록·미리보기·결과/학습평가카드/곡선/로그를 재사용합니다. 7차의 독립 다운로드·학습은 계속 실행 중이며 상태·카운트·새평가만 연결합니다. 아직없는7차 성능은 미측정으로 표시하고 기존5차 수치로 대체하지 않습니다. 마지막관측은 한국시각을 명시하고 현재시각 및 갱신지연을 구분합니다.
@@ -971,8 +971,8 @@
 +기존 클린뷰의 루프백 웹 애플리케이션을 실행하며 file:// 상태HTML을 프록시로 제공하는 방식은 사용하지 않습니다. 정식 서버는 기존 토큰·CSRF·허용 범위 경로 검증과 원래 영상 기능을 유지합니다. 기존5차 코드·7차 데이터 준비계약을 수정하지 않고8차 어댑터에서 연결합니다. 7차가활성일때 중복학습버튼/서버요청차단을 유지하며 페이지조회만으로 학습을 시작하지 않습니다. 원래영상기능은5차 파이프라인을 재사용하고영상·결과 경로를 엄격하게구분합니다. UI에서는 새작업 학습전단계와GPU학습을 구분합니다.
 +
 +검증: 현재7차 JSON과API응답 값일치, UTC→KST변환, 누락/오래된/failed상태, 중복학습방지, 인증·CSRF·파일경로차단, 기존영상목록/미리보기, 브라우저UI상태확인. 장기학습완료/90%달성과 구분합니다. 구현소스동결후 별도verifier검사,로컬공개변경기록저장→GitHub8차추가/README차수표/이전5차화면대비실제diff→원격확인→별도영수증까지 완료기준입니다.
---- 7차/docs/이전검증분석.md
-+++ 8차/docs/이전검증분석.md
+--- previous/docs/이전검증분석.md
++++ current/docs/이전검증분석.md
 @@ -1,17 +0,0 @@
 -# 5차 검증 캐시에서 확인한 다음 실험 근거
 -
@@ -991,8 +991,8 @@
 -baseline l-P2의 놓친253상자 중 전체 저장 예측(conf≥.001)에 IoU.5 후보가 있지만 선택 신뢰도보다 낮은 경우는118개였습니다. 나머지는 IoU.1도 없는 경우86개, IoU.1~.5인 경우49개였습니다. 이는 각 GT에 대한 최대 겹침을 본 진단이며 같은 예측을 공유하는 객체 등 때문에 완전한 원인 분해가 아닙니다. 신뢰도를 낮추면 오탐도 늘어나므로 수치만으로90/90을 보장할 수 없습니다.
 -
 -이에 따라 새 출처의 큰 객체 사진을 작은 객체 개선 자료라고 단정하지 않고, 실제 source/size 검증을 보고합니다. 전체 pLitter 범위를 추가하되 TACO/PlastOPol 노출을 보호하고 train 전용 작은 객체 crop과 분할 추론을 검증에서 비교합니다. 기존보다 큰 모델과 epoch 수를 무제한 늘리는 방식은 사용하지 않습니다.
---- 7차/docs/출처와실험계약.md
-+++ 8차/docs/출처와실험계약.md
+--- previous/docs/출처와실험계약.md
++++ current/docs/출처와실험계약.md
 @@ -1,54 +0,0 @@
 -# 자료 출처와 고정 평가 계약
 -
@@ -1048,8 +1048,8 @@
 -## 검증 명령
 -
 -정식 검사는 실제root에서 `python -B -X utf8 -m unittest discover -s tests -v`와 `python -B -X utf8 verify_sources.py`입니다. 각각60초, 합계120초로 부모가 등록한 명세를 사용합니다. 실제 데이터 한 장 검사는 `docker exec -w "/workspace/2026/월요일 PBL/7차" 2026 /opt/venvs/torch/bin/python -B -X utf8 prepare_dataset.py --smoke`입니다. 이는 기존 TACO 원본·라벨과 새 정규화 사본을 검사하며 네트워크 수신이나 GPU 학습은 하지 않습니다. 장기 원자료 수신과 학습 시작은 부모의 독립 검증 뒤 worker에서 수행합니다.
---- 7차/launcher.py
-+++ 8차/launcher.py
+--- previous/launcher.py
++++ current/launcher.py
 @@ -0,0 +1,107 @@
 +"""독립 대시보드 실행기입니다. 학습은 자동 시작하지 않습니다."""
 +import argparse
@@ -1158,8 +1158,8 @@
 +
 +if __name__ == '__main__':
 +    main()
---- 7차/pipeline.py
-+++ 8차/pipeline.py
+--- previous/pipeline.py
++++ current/pipeline.py
 @@ -0,0 +1,134 @@
 +"""5차 영상 파이프라인을 보존하며 7차 상태만 읽는 8차 어댑터입니다."""
 +import csv
@@ -1295,8 +1295,8 @@
 +    if name in {'videos', 'probe', 'detect'}:
 +        return legacy.action(name, params)
 +    raise ValueError('지원하지 않는 작업입니다.')
---- 7차/prepare_dataset.py
-+++ 8차/prepare_dataset.py
+--- previous/prepare_dataset.py
++++ current/prepare_dataset.py
 @@ -1,801 +0,0 @@
 -"""공식 원자료를 보존하고 별도 정규화 사본·고정 분할을 준비합니다."""
 -import argparse
@@ -2099,8 +2099,8 @@
 -    if args.smoke:print(json.dumps(smoke(),ensure_ascii=False))
 -    elif args.prepare:prepare(notify=lambda **kw:print(json.dumps(kw,ensure_ascii=False),flush=True))
 -    else:parser.error('실제 수신·변환에는 --prepare, 한 장 검사에는 --smoke가 필요합니다.')
---- 7차/tests/test_adapter.py
-+++ 8차/tests/test_adapter.py
+--- previous/tests/test_adapter.py
++++ current/tests/test_adapter.py
 @@ -0,0 +1,195 @@
 +"""상태 출처와 시각·중복 시작·원래 HTTP 경계를 회귀 검사합니다."""
 +import http.client
@@ -2297,8 +2297,8 @@
 +
 +if __name__ == '__main__':
 +    unittest.main()
---- 7차/tests/test_prepare_dataset.py
-+++ 8차/tests/test_prepare_dataset.py
+--- previous/tests/test_prepare_dataset.py
++++ current/tests/test_prepare_dataset.py
 @@ -1,406 +0,0 @@
 -"""원본 보존·예산·분할 누출·좌표 변환의 실패 경로를 검사합니다."""
 -import hashlib
@@ -2706,8 +2706,8 @@
 -
 -if __name__ == '__main__':
 -    unittest.main()
---- 7차/tests/test_train_pipeline.py
-+++ 8차/tests/test_train_pipeline.py
+--- previous/tests/test_train_pipeline.py
++++ current/tests/test_train_pipeline.py
 @@ -1,97 +0,0 @@
 -"""검증 선택·예측 좌표·재개 계약·고정 테스트의 경계를 검사합니다."""
 -import importlib.util
@@ -2806,8 +2806,8 @@
 -
 -
 -if __name__=='__main__':unittest.main()
---- 7차/tests/test_worker.py
-+++ 8차/tests/test_worker.py
+--- previous/tests/test_worker.py
++++ current/tests/test_worker.py
 @@ -1,209 +0,0 @@
 -"""독립 작업의 중복 배제·상태·명시 재개 계약을 검사합니다."""
 -import importlib.util
@@ -3018,8 +3018,8 @@
 -
 -if __name__ == '__main__':
 -    unittest.main()
---- 7차/train_pipeline.py
-+++ 8차/train_pipeline.py
+--- previous/train_pipeline.py
++++ current/train_pipeline.py
 @@ -1,394 +0,0 @@
 -"""학습 시간을 제한하고 검증에서 모델·추론을 선택한 뒤 고정 테스트를 평가합니다."""
 -import collections
@@ -3415,8 +3415,8 @@
 -    for row in load(ROOT/'configs/protected_sources.json')['files']:
 -        if sha256_file(local(row['path']))!=row['sha256']:
 -            raise ValueError('보존 모델·이전 소스 해시가 다릅니다: '+row['path'])
---- 7차/verify_sources.py
-+++ 8차/verify_sources.py
+--- previous/verify_sources.py
++++ current/verify_sources.py
 @@ -1,30 +1,36 @@
 -"""소스 UTF-8·구문·실제 진입점·기존 모델 보존을 검사합니다."""
 -import ast
@@ -3484,8 +3484,8 @@
 +
 +if __name__ == '__main__':
 +    main()
---- 7차/web/app.js
-+++ 8차/web/app.js
+--- previous/web/app.js
++++ current/web/app.js
 @@ -0,0 +1,78 @@
 +'use strict';
 +const token = new URLSearchParams(location.search).get('token') || '';
@@ -3565,8 +3565,8 @@
 +$('train').onclick = () => start('train', {resume: $('resume').checked});
 +$('upload').onchange = async () => { const file = $('upload').files[0]; if (!file) return; if (file.size > 4 * 1024 ** 3) { message('4GB 이하 영상을 선택해 주세요.'); return; } try { message('영상을 가져오는 중입니다.'); const response = await fetch('/api/upload', {method: 'POST', headers: {'X-Token': token, 'X-CSRF-Token': token, 'X-Filename': encodeURIComponent(file.name)}, body: file}); const result = await response.json(); if (!response.ok || !result.ok) throw Error(result.error); await videos(); $('videos').value = result.data.path; await probe(); message('영상 가져오기를 마쳤습니다.'); } catch (error) { message(error.message); } };
 +refresh(); videos(); setInterval(refresh, 8000);
---- 7차/web/fonts/OFL.txt
-+++ 8차/web/fonts/OFL.txt
+--- previous/web/fonts/OFL.txt
++++ current/web/fonts/OFL.txt
 @@ -0,0 +1,96 @@
 +Copyright (c) 2010, NHN Corporation (http://www.nhncorp.com),
 +with Reserved Font Name Nanum, Naver Nanum, NanumGothic, Naver 
@@ -3664,8 +3664,8 @@
 +DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 +FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
 +OTHER DEALINGS IN THE FONT SOFTWARE.
---- 7차/web/index.html
-+++ 8차/web/index.html
+--- previous/web/index.html
++++ current/web/index.html
 @@ -0,0 +1,7 @@
 +<!doctype html>
 +<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>클린뷰 · 탐지와 학습</title><link rel="stylesheet" href="/style.css"></head>
@@ -3674,13 +3674,13 @@
 +<div class="grid"><section><div class="title"><h2>01 영상 탐지</h2><button id="reload" class="secondary">목록 새로고침</button></div><label for="videos">보관된 영상</label><select id="videos"><option value="">영상 선택</option></select><label class="upload" for="upload">새 영상 가져오기 · 최대 4GB<input id="upload" type="file" accept="video/*"></label><img id="previewImage" alt="선택 영상 첫 프레임"><video id="preview" controls preload="metadata"></video><pre id="probe">영상을 고르면 정보를 확인합니다.</pre><p>영상 탐지는 보존된 5차 검증 모델을 사용합니다. 아래 7차 학습 성능과 구분합니다.</p><button id="detect">선택 영상 탐지 시작</button></section>
 +<section><h2>02 탐지 결과</h2><div id="results" class="empty">아직 완료된 탐지 결과가 없습니다.</div></section>
 +<section class="wide"><div class="title"><h2>03 학습과 평가</h2><span id="trainingState" class="badge">상태 확인 중</span></div><p id="observation"></p><div class="metrics"><div>정밀도 P<strong id="precision">미측정</strong></div><div>재현율 R<strong id="recall">미측정</strong></div><div>mAP50<strong id="map50">미측정</strong></div></div><p id="metricNote">목표 P·R 각각 90% · 실측 결과가 있을 때 표시합니다.</p><p>후보 1 · diverse_coco26l · 7차 실측 곡선</p><canvas id="curves" width="960" height="230" aria-label="에포크별 정밀도·재현율·mAP50 추이"></canvas><p>후보 2 · small_l_p2 · 7차 실측 곡선</p><canvas id="curves2" width="960" height="230" aria-label="두 번째 후보의 에포크별 실측 추이"></canvas><p class="legend">파랑 정밀도 · 초록 재현율 · 주황 mAP50</p><p>학습 에포크와 분할은 사전에 고정한 학습 계획을 따릅니다.</p><label><input id="resume" type="checkbox"> 마지막 체크포인트에서 재개</label><button id="train">추가 학습 시작</button><div id="jobs"></div><details><summary>실제 상태·평가 원문</summary><pre id="raw"></pre></details><label for="logPath">작업 로그 · 7차는 round7/jobs/작업ID.log만 허용</label><input id="logPath" value=""><button id="logButton" class="secondary">로그 읽기</button><p id="logInfo"></p><pre id="log">로그는 최대 64KB를 표시합니다.</pre></section></div><footer>영상·모델·결과는 PC와 Docker에 보관됩니다. 로컬 접속 토큰은 Codex 사용 한도와 무관합니다.</footer></main><script src="/app.js"></script></body></html>
---- 7차/web/style.css
-+++ 8차/web/style.css
+--- previous/web/style.css
++++ current/web/style.css
 @@ -0,0 +1,2 @@
 +@font-face{font-family:Nanum;src:url('/fonts/NanumGothic-Bold.ttf') format('truetype');font-weight:700;font-display:swap}*{box-sizing:border-box}body{margin:0;background:#f3f5f8;color:#172a3b;font:700 15px/1.65 Nanum,'Malgun Gothic',sans-serif}button,input,select{font:inherit}header{background:#fff;border-bottom:1px solid #dde5ed;padding:20px 5%;display:flex;justify-content:space-between;align-items:center}.brand{font-size:24px}.brand small{font-size:13px;color:#588275;margin-left:8px}.badge{background:#e8f3ee;color:#286751;padding:5px 12px;border-radius:18px;font-size:12px}main{max-width:1450px;margin:36px auto;padding:0 30px}h1{font-size:30px;margin-bottom:6px}.lead{color:#617487;margin-bottom:28px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}section{background:white;border:1px solid #e0e7ed;border-radius:18px;padding:25px;min-width:0}.wide{grid-column:1/-1}h2{font-size:19px;margin:0 0 20px}.title{display:flex;justify-content:space-between;gap:15px;align-items:baseline}label{display:block;margin:15px 0 6px;color:#536577}input:not([type=checkbox]),select{width:100%;border:1px solid #cbd7e0;padding:10px;border-radius:8px;background:#fff;color:#172a3b}button{border:0;background:#196d63;color:white;padding:11px 18px;border-radius:8px;cursor:pointer;margin:10px 0}button:disabled{opacity:.45;cursor:wait}.secondary{background:#eaf0f5;color:#354e62}.upload{padding:15px;border:1px dashed #91aba6;border-radius:10px;background:#f4faf7}input[type=file]{margin-top:8px}video{width:100%;max-height:400px;background:#13232c;border-radius:10px;margin-top:15px}video:not([src]){display:none}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f3f6f9;padding:14px;border-radius:8px;max-height:320px;overflow:auto;font:700 12px/1.7 Nanum,sans-serif}.empty{color:#718391;min-height:180px;display:grid;align-content:center}.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.metrics>div{padding:20px;background:#f1f6f8;border-radius:12px;color:#587080}.metrics strong{display:block;font-size:31px;color:#153947;margin-top:8px}canvas{width:100%;height:230px;background:#f9fbfc;border:1px solid #e6edf2;border-radius:10px}.legend,#metricNote,footer{font-size:12px;color:#64778a}#message:not(:empty){background:#fff2d8;border:1px solid #e9c76d;padding:12px;border-radius:8px}article{border-top:1px solid #e1e8ee;padding-top:15px;margin-top:14px}a{color:#196d63}footer{padding:28px 0}@media(max-width:850px){.grid{grid-template-columns:1fr}.wide{grid-column:auto}main{padding:0 15px}h1{font-size:24px}.metrics{gap:6px}.metrics>div{padding:10px}.metrics strong{font-size:22px}}
 +img#previewImage{width:100%;max-height:400px;object-fit:contain;border-radius:10px;margin-top:15px}img#previewImage:not([src]){display:none}
---- 7차/worker.py
-+++ 8차/worker.py
+--- previous/worker.py
++++ current/worker.py
 @@ -1,231 +0,0 @@
 -"""준비와 GPU 학습을 Codex 없이 이어 실행하는 독립 작업자입니다."""
 -import argparse
@@ -3913,8 +3913,8 @@
 -
 -if __name__ == '__main__':
 -    main()
---- 7차/변경기록.md
-+++ 8차/변경기록.md
+--- previous/변경기록.md
++++ current/변경기록.md
 @@ -0,0 +1,21 @@
 +# 8차 변경 기록
 +
@@ -3937,8 +3937,8 @@
 +수리 1 구현자 실검사: 같은 8차 cwd에서 unittest discover 23개 통과, verify_sources.py 배포 15파일·원본 의존 14개 통과, Node --check 통과로 각 종료 코드 0입니다. 실데이터 상태 조회의 기존 두 결과 경로는 D:/2026 아래 기존 5차 results 파일로 변환됐고 두 파일의 존재를 직접 확인했습니다. HTTP Range 206 검사는 임시 결과 파일에 대한 실제 요청이며, 제품 서버의 보존 영상 재생 재확인은 부모의 재시작·UI 검사에서 별도로 수행합니다.
 +
 +추가 확정 기준: 현재 클린뷰를 이후 차수에도 유지하도록 docs/대시보드기준.md에 기록했습니다. 제품 배치와 실행 코드는 변경하지 않았습니다. 비교 문서는 CRLF 변환이 있던 이전본을 비공개 증거에 보존하고 원본 바이트의 LF 경계와 CR을 그대로 사용해 재생성했습니다. 7차 기준은 지정 Git 커밋의 blob을 직접 읽고, 5차 화면 비교는 설치 원본의 공통 화면 코드 파일을 직접 읽습니다. 공개 패치에 포함된 원본 CR은 정확한 비교 자료의 일부이므로 제품 소스의 불필요한 공백 오류와 구분합니다.
---- 7차/사용안내.md
-+++ 8차/사용안내.md
+--- previous/사용안내.md
++++ current/사용안내.md
 @@ -0,0 +1,11 @@
 +# 8차 클린뷰 사용 안내
 +
@@ -3951,8 +3951,8 @@
 +원래 영상 업로드·목록·첫 프레임·영상 재생·탐지 결과 기능을 유지합니다. 업로드는 4GB 이하이며 토큰·요청 출처·CSRF를 검증합니다. 7차 로그는 등록 작업의 `round7/jobs/작업ID.log`만 최대 64KB 끝부분을 읽습니다. 잘린 여부와 원본·표시 바이트 수를 함께 표시합니다.
 +
 +5차와 7차를 같은 상위 프로젝트 폴더에 보존해야 합니다. 8차는 해당 원본을 읽기 전용으로 불러오는 어댑터이며 단독 복사본으로 동작하지 않습니다. 데이터·가중치·실행 로그·토큰·개인 지침은 공개 배포 대상이 아닙니다. 학습 완료나 목표 P·R 각각 90% 달성은 보장하지 않습니다.
---- 7차/사용안내.txt
-+++ 8차/사용안내.txt
+--- previous/사용안내.txt
++++ current/사용안내.txt
 @@ -1,27 +0,0 @@
 -7차 대규모 자료 준비·학습 독립 실행
 -
@@ -3981,8 +3981,8 @@
 -기존 1~6차 모델과 데이터를 변경하지 않으며 테스트 지표로 모델을 튜닝하지 않습니다.
 -정밀도·재현율 각각 90%는 목표입니다. 작업 시작·다운로드 완료만으로 달성했다고 표시하지 않습니다.
 -이 안내와 실행 파일은 장기 학습이 실제 시작됐다는 증거가 아닙니다. 실제 상태와 로그를 확인하세요.
---- 7차/학습상태.bat
-+++ 8차/학습상태.bat
+--- previous/학습상태.bat
++++ current/학습상태.bat
 @@ -1,13 +0,0 @@
 -@echo off
 -chcp 65001 >nul
@@ -3997,8 +3997,8 @@
 -if exist "%~dp0work\학습상태.html" start "" "%~dp0work\학습상태.html"
 -echo 상세 오류와 전체 로그는 work\jobs 폴더에 보존합니다.
 -endlocal
---- 7차/학습실행.bat
-+++ 8차/학습실행.bat
+--- previous/학습실행.bat
++++ current/학습실행.bat
 @@ -1,16 +0,0 @@
 -@echo off
 -chcp 65001 >nul

@@ -5,8 +5,8 @@
 | [1차](../1%EC%B0%A8) | 1 | [🔎 비교](folder-comparisons/step-1.md) |
 | [2차](../2%EC%B0%A8) | 1 | [🔎 비교](folder-comparisons/step-2.md) |
 | [최종/3차](../%EC%B5%9C%EC%A2%85/3%EC%B0%A8) | 62 | [🔎 비교](folder-comparisons/step-3.md) |
-| [최종/4차](../%EC%B5%9C%EC%A2%85/4%EC%B0%A8) | 5 | [🔎 비교](folder-comparisons/step-4.md) |
-| [최종/최종](../%EC%B5%9C%EC%A2%85/%EC%B5%9C%EC%A2%85) | 10 | [🔎 비교](folder-comparisons/step-5.md) |
+| [최종/4차](../%EC%B5%9C%EC%A2%85/4%EC%B0%A8) | 4 | [🔎 비교](folder-comparisons/step-4.md) |
+| [최종/최종](../%EC%B5%9C%EC%A2%85/%EC%B5%9C%EC%A2%85) | 9 | [🔎 비교](folder-comparisons/step-5.md) |
 | [5차](../5%EC%B0%A8) | 23 | [🔎 비교](folder-comparisons/step-6.md) |
 | [6차](../6%EC%B0%A8) | 5 | [🔎 비교](folder-comparisons/step-7.md) |
 | [7차](../7%EC%B0%A8) | 15 | [🔎 비교](folder-comparisons/step-8.md) |

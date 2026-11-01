@@ -41,9 +41,11 @@
 | [최종](최종/) | [하위 자료 보관 폴더](docs/versions/final-container.md) | [상위 컨테이너로 별도 차수가 아닙니다](docs/comparisons/final-container.md) |
 
 
-
-
 <a name="overview"></a>
+
+## 👨‍💻 제가 구현한 부분
+
+쓰레기 객체 탐지 데이터 준비와 학습·평가, 영상 추론 및 실험 결과 정리 코드를 작성했습니다. 차수별 코드와 지표를 연결해 제가 구현한 내용을 확인할 수 있도록 정리합니다.
 
 ## ✨ 주요 개발 내용
 
@@ -271,3 +273,23 @@ python launcher.py --no-browser
 
 
 [**🔎 주석·공백·문서·보고서를 포함한 전체 공개 파일 비교 →**](docs/FOLDER_COMPARISONS.md)
+
+
+[**🔎 주석·공백·문서·보고서를 포함한 전체 공개 파일 비교 →**](docs/FOLDER_COMPARISONS.md)
+
+
+<details>
+<summary>🧹 공개 자료 정리 기록</summary>
+
+| 검수 대상 | 연결 자료 | 상세·이번 비교 |
+| :--- | :--- | :--- |
+| **1차** | [📁 검수 자료](1%EC%B0%A8) | [📖 정리 내용](docs/publication-review/item-1.md) · [🔎 파일 비교](docs/publication-review/공개파일변경.json) |
+| **2차** | [📁 검수 자료](2%EC%B0%A8) | [📖 정리 내용](docs/publication-review/item-2.md) · [🔎 파일 비교](docs/publication-review/공개파일변경.json) |
+| **5차** | [📁 검수 자료](5%EC%B0%A8) | [📖 정리 내용](docs/publication-review/item-3.md) · [🔎 파일 비교](docs/publication-review/공개파일변경.json) |
+| **6차** | [📁 검수 자료](6%EC%B0%A8) | [📖 정리 내용](docs/publication-review/item-4.md) · [🔎 파일 비교](docs/publication-review/공개파일변경.json) |
+| **7차** | [📁 검수 자료](7%EC%B0%A8) | [📖 정리 내용](docs/publication-review/item-5.md) · [🔎 파일 비교](docs/publication-review/공개파일변경.json) |
+| **8차** | [📁 검수 자료](8%EC%B0%A8) | [📖 정리 내용](docs/publication-review/item-6.md) · [🔎 파일 비교](docs/publication-review/공개파일변경.json) |
+| **9차** | [📁 검수 자료](9%EC%B0%A8) | [📖 정리 내용](docs/publication-review/item-8.md) · [🔎 파일 비교](docs/publication-review/공개파일변경.json) |
+| **최종** | [📁 검수 자료](%EC%B5%9C%EC%A2%85) | [📖 정리 내용](docs/publication-review/item-7.md) · [🔎 파일 비교](docs/publication-review/공개파일변경.json) |
+
+</details>

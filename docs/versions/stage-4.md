@@ -24,6 +24,6 @@
 
 - [최종/4차/_작업/make_frame.py](../../%EC%B5%9C%EC%A2%85/4%EC%B0%A8/_%EC%9E%91%EC%97%85/make_frame.py) · `pred=predict` · 11
 - [최종/4차/_작업/make_frame.py](../../%EC%B5%9C%EC%A2%85/4%EC%B0%A8/_%EC%9E%91%EC%97%85/make_frame.py) · `test_metrics_recomputed` · 24
-- [최종/4차/_작업/render_with_word.py](../../%EC%B5%9C%EC%A2%85/4%EC%B0%A8/_%EC%9E%91%EC%97%85/render_with_word.py) · `def native_word` · 10
+- [최종/4차/_작업/render_with_word.py](../../%EC%B5%9C%EC%A2%85/4%EC%B0%A8/_%EC%9E%91%EC%97%85/render_with_word.py.PUBLIC-NOTE.md) · `def native_word` · 10
 
 셀 번호는 0부터, 소스 행 번호와 PDF 쪽 번호는 1부터 셉니다. 

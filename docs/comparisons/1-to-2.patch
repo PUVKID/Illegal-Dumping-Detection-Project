@@ -1,6 +1,6 @@
---- /dev/null
-+++ 2차/illegal_dumping_detector.ipynb
-@@ -1,0 +1,940 @@
+--- previous/illegal_dumping_detector.ipynb
++++ current/illegal_dumping_detector.ipynb
+@@ -0,0 +1,940 @@
 +{
 + "cells": [
 +  {
@@ -941,9 +941,9 @@
 + "nbformat": 4,
 + "nbformat_minor": 5
 +}
---- 1차/illegal_dumping_trash_all_new_datasets.ipynb
-+++ /dev/null
-@@ -1,2219 +1,0 @@
+--- previous/illegal_dumping_trash_all_new_datasets.ipynb
++++ current/illegal_dumping_trash_all_new_datasets.ipynb
+@@ -1,2219 +0,0 @@
 -{
 - "cells": [
 -  {

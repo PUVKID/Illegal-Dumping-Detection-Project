@@ -321,16 +321,6 @@
       },
       "after": null,
       "comparison": "바이너리 크기·SHA-256"
-    },
-    {
-      "path": "지능정보시스템_불법쓰레기탐지_2팀_최종보고서.docx",
-      "change": "이전에만 존재",
-      "before": {
-        "bytes": 3509205,
-        "sha256": "a331b1e9788fb497131e32114be2db022dd106fe59b12401518e16bbb91b5a97"
-      },
-      "after": null,
-      "comparison": "바이너리 크기·SHA-256"
     }
   ],
   "current_file_hashes": {
