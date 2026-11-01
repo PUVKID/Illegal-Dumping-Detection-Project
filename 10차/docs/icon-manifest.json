@@ -1,0 +1,47 @@
+[
+  {
+    "file": "web/icons/flask-conical.svg",
+    "url": "https://raw.githubusercontent.com/lucide-icons/lucide/0.468.0/icons/flask-conical.svg",
+    "sha256": "a2ce857c159bef4c128a6d9f0b6dcbd6504ecf1a2a670ee220efd14fd032b561"
+  },
+  {
+    "file": "web/icons/video.svg",
+    "url": "https://raw.githubusercontent.com/lucide-icons/lucide/0.468.0/icons/video.svg",
+    "sha256": "d4fb6587f282c1152b953fe9494cd8ccafdf1e9f44957fbb7fe8dc7af0457597"
+  },
+  {
+    "file": "web/icons/chart-no-axes-column.svg",
+    "url": "https://raw.githubusercontent.com/lucide-icons/lucide/0.468.0/icons/chart-no-axes-column.svg",
+    "sha256": "4276b34a07295ac22ebb09687bdec9cb9683547bf8d56969166e19a6a13fbdd7"
+  },
+  {
+    "file": "web/icons/notebook-text.svg",
+    "url": "https://raw.githubusercontent.com/lucide-icons/lucide/0.468.0/icons/notebook-text.svg",
+    "sha256": "f4fd882aaa00be2d0459bd72d44f2b6f4f59bf2786cc415efff69a51b74ab630"
+  },
+  {
+    "file": "web/icons/refresh-cw.svg",
+    "url": "https://raw.githubusercontent.com/lucide-icons/lucide/0.468.0/icons/refresh-cw.svg",
+    "sha256": "2e10dd403c85a24f163d59fc6151aa21147fe9402e1305dfc8979208caee8944"
+  },
+  {
+    "file": "web/icons/cpu.svg",
+    "url": "https://raw.githubusercontent.com/lucide-icons/lucide/0.468.0/icons/cpu.svg",
+    "sha256": "6fb8cf8edbbbaa4b6a47ddbcc6879e8d2166613c663b93db0ac1fde566515362"
+  },
+  {
+    "file": "web/icons/clock-3.svg",
+    "url": "https://raw.githubusercontent.com/lucide-icons/lucide/0.468.0/icons/clock-3.svg",
+    "sha256": "21007df4799ad0c90e1833e35abc4fab1a7efe19f8bf7b63bbb61dd63360c405"
+  },
+  {
+    "file": "web/icons/chevrons-right.svg",
+    "url": "https://raw.githubusercontent.com/lucide-icons/lucide/0.468.0/icons/chevrons-right.svg",
+    "sha256": "3491f9fe180bf75a058d480f32a0d26ff6a97c6c9a70315c77df7c6b75329d91"
+  },
+  {
+    "file": "web/icons/LICENSE",
+    "url": "https://raw.githubusercontent.com/lucide-icons/lucide/0.468.0/LICENSE",
+    "sha256": "1e7290b35280a048667bbf0ebabac1c7fd52a75300e8b2946ac165715997f2bc"
+  }
+]
