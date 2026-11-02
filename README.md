@@ -17,6 +17,24 @@
 
 </div>
 
+<a name="implementation-details"></a>
+
+## 🧩 데이터·학습·화면·복구·보고서를 나눈 구성
+
+초기1·2차는 데이터 준비와 탐지 실험 노트북입니다. 최종/3차는 `data_pipeline.py`·`train_round3.py`·`inference.py`로 데이터·학습·추론을 나누고 `backend.py`·`launcher.py`와 화면을 연결합니다. 최종/4차는 기존 앙상블의 단일 프레임 확인 도구, 최종/최종은 HTML·CSV 성능보고서입니다. 자료 종류가 달라 동일한 학습 실행 절차를 적용하지 않습니다.
+
+7차의 `prepare_dataset.py`·`train_pipeline.py`·`worker.py`는 출처·준비·후보 학습을 연결합니다. training.json의 seed는20261030, 후보당6시간, GPU 여유18,000MiB·대기7,200초, 체크포인트 여유8GiB입니다. diverse_coco26l 후보는 이미지960·batch4·60epoch·patience12·lr0=0.0005, small_l_p2는1280·batch2·45epoch·patience12·lr0=0.0001을 구성합니다. 값은 계획이며 실제 완료 에폭과 다릅니다.
+
+검증 선택은 TACO의 min(precision,recall)·F1과 PlastOPol의 min(precision,recall)·AP50 순서를 사용하고 동률에는 기준 모델을 유지합니다. full/full_grid3 정책을 검토하며 평가 이미지1280·conf floor0.001·NMS IoU0.5·최대1000개 탐지를 설정합니다. 다운로드·최소 여유 공간은 각각100GiB입니다. 기존 평가와 독립 외부 평가의 출처·분할을 함께 읽어야 합니다.
+
+8·10차 화면은7차 작업 상태를 읽어 현재 단계·대기·오류·재시도를 표시합니다. 9차는 상태 파일 교체 권한 오류 뒤 수신 재개의 기록,11차는 원래7차의 동결16파일을 확인하는 복구 도구입니다.12차는 실험 종료·결과/가중치 해시를 확인하고 report_core·report_outputs·watcher로 Word/PDF를 만드는 후처리 구성입니다. 화면이나 복구 도구 실행이 학습 완료를 뜻하지 않습니다.
+
+3차 최종 보고서의 고정 테스트150장·conf0.17·IoU0.50·ensemble/full 조건에서는 정밀도61.36%·재현율65.83%·F1 63.52%·mAP50 67.31%·mAP50–95 45.70%를 기록했습니다. 목표90%와 구분하며, 객체 탐지 수치는 CCTV 투기 행동 판정 정확도가 아닙니다. 단일 프레임 그림 역시 행동 판정이나 시험 지표 재계산 결과가 아닙니다.
+
+[🗂️ 각 차수의 코드·조건·관측·전체 비교](docs/REVISION_INDEX.md)
+
+
+
 ## 🗂️ 차수별 개발 흐름
 
 [**📖 1차부터 12차·최종까지 보기 →**](docs/REVISION_INDEX.md)
@@ -25,23 +43,23 @@
 
 비교는 공개 저장소의 각 하위 폴더를 상대 경로로 맞춘 실제 바이트 기준이며 용도가 다른 자료 사이의 차이는 성능 변화를 뜻하지 않습니다. 데이터·실행 상태 등 민감 가능 자료는 원문을 비교 패치에 복제하지 않고 크기와 해시로 표시합니다. 6차는 5차 전체가 아닌 변경 전 일부 파일을 보존합니다. 7차 비교는 아래 문서에 적힌 기준 커밋 시점입니다.
 
-| 차수 | 자료 폴더 | 설명 | 직전 비교 |
+| 차수·자료 | 자료 폴더·원본 | 상세 설명 | 직전 비교·범위 |
 |---|---|---|---|
-| 1차 | [폴더](1차/) | [단일 클래스 탐지 노트북](docs/versions/stage-1.md) | [이전 번호 차수 근거 없음](docs/comparisons/initial.md) |
-| 2차 | [폴더](2차/) | [봉투·낱개와 영상 후보](docs/versions/stage-2.md) | [1차 → 2차](docs/comparisons/1-to-2.md) |
-| 최종/3차 | [폴더](최종/3차/) | [학습·검증·영상 실행](docs/versions/stage-3.md) | [2차 → 최종/3차](docs/comparisons/2-to-3.md) |
-| 최종/4차 | [폴더](최종/4차/) | [프레임·문서 작업](docs/versions/stage-4.md) | [최종/3차 → 최종/4차](docs/comparisons/3-to-4.md) |
-| 최종/최종 | [폴더](최종/최종/) | [3차 성능보고서·배포 사용안내](docs/versions/stage-5.md) | [최종/4차 → 최종/최종](docs/comparisons/4-to-final.md) |
-| 5차 | [폴더](5차/) | [대시보드·추가 학습](docs/versions/round-5.md) | [최종/최종 → 5차](docs/comparisons/final-to-5.md) |
-| 6차 | [폴더](6차/변경전_5차/) | [5차의 변경 전 부분 보존본](docs/versions/round-6.md) | [5차 → 6차](docs/comparisons/5-to-6-snapshot.md); 일부 파일 보존본 |
-| 7차 | [폴더](7차/) | [대규모 자료 추가 학습 코드](docs/versions/round-7.md) | [5차 → 7차](docs/comparisons/5-to-7.md); 6차는 부분 보존본 |
-| 8차 | [폴더](8차/) | [원래 클린뷰 복원·한국 시각·7차 상태 연결](docs/versions/round-8.md) | [7차 → 8차](docs/comparisons/7-to-8.md) |
-| 9차 | [폴더](9차/) | [7차 수신 재개 운영 기록](docs/versions/round-9.md) | [8차 → 9차](docs/comparisons/8-to-9.md) |
-| 10차 | [폴더](10차/) | [실제 상태와 단계별 움직임을 연결한 입체 대시보드](docs/versions/round-10.md) | [9차 → 10차](docs/comparisons/9-to-10.md) · [8차 화면과 비교](docs/comparisons/8-to-10.md) |
-| 11차 | [폴더](11차/) | [고정 실험 계약 수신 복구](docs/versions/round-11.md) | [10차 → 11차](docs/comparisons/10-to-11.md) |
-| 12차 | [폴더](12차/) | [실험 완료 후 보고서 생성 도구](docs/versions/round-12.md) | [11차 → 12차](docs/comparisons/11-to-12.md) |
-| 이전 도커 실험 | [폴더](이전 도커 실험/) | [이전 실험 보관](docs/versions/docker-experiment.md) | [정확한 차수 순서의 근거 없음](docs/comparisons/docker-to-3.md) |
-| 최종 | [폴더](최종/) | [하위 자료 보관 폴더](docs/versions/final-container.md) | [상위 컨테이너이며 독립 차수 아님](docs/comparisons/final-container.md) |
+| 1차 | [자료 폴더](1%EC%B0%A8) | [상세 설명](docs/versions/stage-1.md) | [전체 비교·범위](docs/comparisons/initial.md) |
+| 2차 | [자료 폴더](2%EC%B0%A8) | [상세 설명](docs/versions/stage-2.md) | [전체 비교·범위](docs/comparisons/1-to-2.md) |
+| 최종/3차 | [자료 폴더](%EC%B5%9C%EC%A2%85/3%EC%B0%A8) | [상세 설명](docs/versions/stage-3.md) | [전체 비교·범위](docs/comparisons/2-to-3.md) |
+| 최종/4차 | [자료 폴더](%EC%B5%9C%EC%A2%85/4%EC%B0%A8) | [상세 설명](docs/versions/stage-4.md) | [전체 비교·범위](docs/comparisons/3-to-4.md) |
+| 최종/최종 | [자료 폴더](%EC%B5%9C%EC%A2%85/%EC%B5%9C%EC%A2%85) | [상세 설명](docs/versions/stage-5.md) | [전체 비교·범위](docs/comparisons/4-to-final.md) |
+| 5차 | [자료 폴더](5%EC%B0%A8) | [상세 설명](docs/versions/round-5.md) | [전체 비교·범위](docs/comparisons/final-to-5.md) |
+| 6차 | [자료 폴더](6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8) | [상세 설명](docs/versions/round-6.md) | [전체 비교·범위](docs/comparisons/5-to-6-snapshot.md) |
+| 7차 | [자료 폴더](7%EC%B0%A8) | [상세 설명](docs/versions/round-7.md) | [전체 비교·범위](docs/comparisons/5-to-7.md) |
+| 8차 | [자료 폴더](8%EC%B0%A8) | [상세 설명](docs/versions/round-8.md) | [전체 비교·범위](docs/comparisons/7-to-8.md) |
+| 9차 | [자료 폴더](9%EC%B0%A8) | [상세 설명](docs/versions/round-9.md) | [전체 비교·범위](docs/comparisons/8-to-9.md) |
+| 10차 | [자료 폴더](10%EC%B0%A8) | [상세 설명](docs/versions/round-10.md) | [전체 비교·범위](docs/comparisons/9-to-10.md) |
+| 11차 | [자료 폴더](11%EC%B0%A8) | [상세 설명](docs/versions/round-11.md) | [전체 비교·범위](docs/comparisons/10-to-11.md) |
+| 이전 도커 실험 | [자료 폴더](%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98) | [상세 설명](docs/versions/docker-experiment.md) | [전체 비교·범위](docs/comparisons/docker-to-3.md) |
+| 최종 | [자료 폴더](%EC%B5%9C%EC%A2%85) | [상세 설명](docs/versions/final-container.md) | [전체 비교·범위](docs/comparisons/final-container.md) |
+| 12차 | [자료 폴더](12%EC%B0%A8) | [상세 설명](docs/versions/round-12.md) | [전체 비교·범위](docs/comparisons/11-to-12.md) |
 
 
 ## 🖥️ 현재 실험을 보여 주는 10차 대시보드
