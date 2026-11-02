@@ -1,0 +1,7 @@
+{
+  "schema":1,
+  "input_reference":{"relative_path":{"sha256":"64자리 소문자 16진수","bytes":"0 이상 정수"}},
+  "completion_receipt":{"schema":1,"job_id":"비공개 지정 작업","state":"complete 또는 incomplete_report","output_dir":"프로젝트 기준 실제 납품 폴더 상대 경로","finished_kst":"시간대 포함 관측 시각","outputs":{"최종보고서.docx":{"sha256":"64자리 소문자 16진수","bytes":"양의 정수"},"최종보고서.pdf":{"sha256":"64자리 소문자 16진수","bytes":"양의 정수"}},"rendered_pages":"양의 정수","human_visual_review":false,"input_final_sha256":"완료 시 final.json 해시, 미완료 시 null"},
+  "privacy":"운영 작업 식별자와 작성자 및 절대 경로와 영수증은 비공개 work에만 저장한다.",
+  "completion_rule":"지정 작업 complete, 작업 result와 final 동일, 세 테스트와 선택 및 실험 계약 일치, manifest와 코드 및 가중치 SHA 대조, 예측 재구성 TP/FP/FN 정합, 공식 동일 원고 PDF 렌더 이후 두 파일만 신규 저장한다."
+}

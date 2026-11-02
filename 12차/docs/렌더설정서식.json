@@ -1,0 +1,8 @@
+{
+  "approved": false,
+  "python": "확인된 번들 Python 실행 파일",
+  "helper": "공식 문서 render_docx.py의 실제 경로",
+  "helper_sha256": "검토한 공식 도구의 SHA-256",
+  "soffice": "사용이 명시적으로 허용된 실제 LibreOffice 실행 파일",
+  "approval_basis": "운영자가 검토한 렌더 환경의 사용 근거"
+}

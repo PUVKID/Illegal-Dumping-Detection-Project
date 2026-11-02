@@ -1,0 +1,12 @@
+{
+  "schema": 1,
+  "project_root": "프로젝트의 실제 절대 경로",
+  "job_id": "지정할 기존 작업 식별자",
+  "author": "작성자",
+  "output_dir": "최종/새로운_마지막실험_보고서",
+  "support_dir": "12차/work/비공개_후처리",
+  "font": "10차/web/fonts/NanumGothic-Bold.ttf",
+  "deliver_formats": ["docx", "pdf"],
+  "renderer_config": "검토한 비공개 렌더 설정의 실제 경로",
+  "marker": {"node": "확인된 번들 Node 실행 파일", "script": "공식 저작 마커 파일"}
+}

@@ -1,0 +1,2577 @@
+--- 11차/README.md
++++ 12차/README.md
+@@ -1,23 +1,13 @@
+-# 🛠️ 11차 · 고정 실험 계약을 보존하는 다운로드 복구
++# 마지막 실험의 Word와 PDF 보고서
+ 
+-[복구 설계와 한계](docs/복구설계.md) · [실행기](recover.py) · [회귀 검사](tests/test_recover.py) · [변경 기록](변경기록.md)
++이미 진행 중인 지정 실험 하나가 끝나면 동결된 결과를 대조하고 작성자의 관점으로 최종 보고서를 만든다. 두 후보 학습과 검증 선택 및 세 고정 테스트는 기존 실험의 범위이다. 이 도구는 학습을 시작하거나 재개하지 않으며 데이터를 다운로드하지 않는다.
+ 
+-7차의 PlastOPol 원자료 수신이 4MiB 범위의 40초 경과 제한과 재시도 소진으로 멈춘 문제를 다룹니다. 제한에는 본문 읽기와 원장·상태 쓰기 시간이 함께 포함됐습니다. 현재의 작은 범위 응답 성공만으로 과거 실패가 네트워크 한 가지 원인이라고 단정하지 않습니다.
++최종 납품은 같은 원고의 **DOCX와 PDF 두 개**이다. 그래프와 CSV 및 페이지 렌더와 검증 영수증은 비공개 지원 자료로 보관한다. 데이터와 모델은 복사하지 않고 위치와 SHA-256만 기록한다. 실험이 실패하거나 중단되면 성능을 채우지 않은 미완료 보고서로 구분한다.
+ 
+-7차 코드 16개와 준비·원자료·학습 계약을 보존합니다. 새 실행기에서만 원자료 수신을 먼저 수행하고, 공식 크기·MD5·SHA-256 확인이 끝나면 원래 7차 준비·학습 함수를 호출합니다. 이미 받은 파일·부분 파일·전송 원장·체크포인트를 초기화하지 않습니다.
++보고서는 개발 알고리즘과 자료 출처 및 분할과 전처리와 실제 epoch 기록과 검증 비교 및 선택 조건과 고정 테스트의 P/R/F1·자체 AP·TP/FP/FN 및 작은 객체 성능을 다룬다. TN은 객체 탐지에서 정의하지 않는다. 정밀도와 재현율 각각 90% 목표는 별도로 판정한다. 과거 TACO 테스트를 새로운 독립 평가라고 부르지 않고 CCTV 투기 행동 정확도를 만들지 않는다.
+ 
+-## 🔄 수신과 상태
++운영 설정은 비공개 `work`에 둔다. `docs/계획서식.json`을 참고하여 지정 작업과 저자 및 새 출력 위치를 설정한다. `watcher.py --plan 비공개계획.json`은 60초마다 해당 작업만 안전 공유 읽기로 확인한다. 동일 작업 잠금과 완료 영수증으로 중복 생성을 막으며 기존 출력은 덮어쓰지 않는다. 검증한 운영 계획으로 가동한다.
+ 
+-범위는 64KiB에서 시작합니다. 10초 미만이면 최대 두 배로 늘리되 원래 상한 4MiB를 넘지 않고, 20초 이상이거나 진행 중 자발적으로 범위를 닫으면 줄입니다. 실제 수신량은 매번 기존 원장에 합산하며, 화면 통지만 약 2초 간격으로 합칩니다. 재시도와 해제는 즉시 전달합니다. 실제 통신 오류는 진행 유무와 관계없이 최대 6회만 재시도합니다.
++Word는 공식 문서 도구로 렌더한다. 현재 허용된 렌더 설정이 없으면 `blocked_renderer`로 중단하고 최종 납품을 만들지 않는다. 초안 저장이나 자동 렌더가 미래의 인간 시각 검토를 뜻하지 않는다. 공개 소스에는 실제 작업 식별자와 저자 설정 및 개인 경로와 인증값을 포함하지 않는다.
+ 
+-공식 범위·크기·MD5·SHA·100GiB 전송 예산·100GiB 잔여 공간 검사를 유지합니다. 원장이나 디스크 반영이 불확실하면 요청 전에 남긴 `.recovery-pending.json`을 보존하고 자동 재개를 차단합니다. 기록을 감사하지 않고 삭제하거나 원장을 추정 값으로 갱신하지 않습니다.
+-
+-## 🚀 실행 조건
+-
+-실제 시작은 독립 검증 후 같은 Docker Linux에서 수행합니다. 고정 7차 작업자만 `--pipeline`으로 허용하며 `--start`가 새 작업을 만들고 기존 작업자의 중복 잠금·실패 기록을 사용합니다. 원래 화면은 같은 7차 작업 상태를 읽습니다. 이 저장소만으로 데이터·모델·GPU 환경이 설치되지는 않습니다.
+-
+-```text
+-python -B -X utf8 11차/recover.py --pipeline 7차/worker.py --start
+-```
+-
+-동결 검사는 `verify_sources.py --expected-digest <독립 검토한 고정값>`으로 실행합니다. `--print-digest`는 후보 계산이며 검증 영수증이 아닙니다. 실제 실행 인자·검사 결과·원격 반영은 별도 기록으로 확인해야 합니다. 이 차수의 작성만으로 다운로드·학습 완료나 정밀도·재현율 각각 90% 달성을 뜻하지 않습니다.
++검사는 `python -B -X utf8 -m unittest discover -s tests -v`와 `python -B -X utf8 verify_sources.py`이다. 실제 환경에서 확인한 Python 실행 파일을 사용한다. 가상 제어 사례는 실제 성능으로 인용할 수 없다.
+--- /dev/null
++++ 12차/ROUTING-LESSONS.md
+@@ -0,0 +1,7 @@
++# 보고서의 결과 정합성과 문서 변환
++
++- JSON 사전의 저장 순서는 주평가 계약이 아니다. 주목표는 historical_taco의 명시적 키로 판정하며 다른 테스트의 위치가 바뀌어도 같은 결과여야 한다.
++- 선택한 모델과 테스트의 입력 크기, 신뢰도, NMS, 최대 탐지 수 및 평가기는 동결 설정과 같아야 한다. 가중치와 데이터 및 코드의 SHA-256이 다르면 완료 보고서를 만들지 않는다.
++- 완료 epoch와 계획 epoch는 선택된 best checkpoint의 epoch를 뜻하지 않는다. 선택 epoch의 근거가 없으면 미확인으로 표시한다.
++- 실패와 중단 및 오래된 진행 기록은 정상 완료가 아니다. 실제 측정되지 않은 성능과 목표 달성 여부를 만들지 않는다.
++- Word와 PDF는 같은 원고여야 한다. 표와 그래프를 문서 안에 포함하고 CSV와 페이지 PNG는 별도 지원 자료로 구분한다. 변환 뒤 모든 페이지의 글자와 표 및 그림 배치를 확인한다.
+--- /dev/null
++++ 12차/docs/source_contract.json
+@@ -0,0 +1,28 @@
++{
++  "schema": 1,
++  "round7_originals": {
++    "configs/protected_sources.json": "6158cda1bcb6521f2dfa6b0f5000d1ba18e781181a82fcb14d846af825331c21",
++    "configs/training.json": "e64cdc187c260564f13206f21f632d65b3e2d67b021a12bffc36aefbb0535401",
++    "docs/구현계획.md": "6341644185da59914dcb218361b2a76818d4a376baa8de558845f72da01087c0",
++    "docs/설계.md": "9502c8fe816b2f38fa3ff88f05b692e5a051a264e64a32c69fe094f5645d6e1a",
++    "docs/이전검증분석.md": "cf1e22da1eff8566dee1498258ef8a63f5bbd9b22a9438b5f540a9d57fea3687",
++    "docs/출처와실험계약.md": "dadc2a49f013a7d00e753315d40fb2e56f0d51698fadb48df43285cae2edaacb",
++    "prepare_dataset.py": "5b555b1c597734072be12ab46b1c0f9a74f4dbb3a84144cb3ba9c7e74fc19ced",
++    "tests/test_prepare_dataset.py": "152270ec6a95dfbc121a764a9f1dce0a55daf69822519005817714a4e3450afb",
++    "tests/test_train_pipeline.py": "1fab15d83877161fe96e036f30f32e049da4c38c7a88dc1ddf59b7be50f17ff3",
++    "tests/test_worker.py": "dc153070d5a01565adeb3473420eed79e02e69d156640bbad2119ae873d7e1d7",
++    "train_pipeline.py": "03979d8a9f43457cd0b3f8ba0e2f4e8910ee99627be91a6e1e96b6b58a0ae4aa",
++    "verify_sources.py": "8d486ac1ca00571675cee9db5cfc278cc4e0e4f6e8c83fecda618c34a202dbdd",
++    "worker.py": "2bac26a2ab4c837dfb075ef014c1f4ef4ac9ea76d0ad26b2ce64c97b02306194",
++    "사용안내.txt": "a087656951b5ef0f9f70542299d0974f03ea0e1dfad63912c0f733464f4e8646",
++    "학습상태.bat": "9abdb4ef09839135f09f53c5572ccc49ba97af51fb2d40065905a34899a1f6d6",
++    "학습실행.bat": "45410e9a232d114e99a0bf4a6da12128f15c2ccf3741efb2aff5d3db87c759a8"
++  },
++  "dependencies": {
++    "10차/safe_io.py": "2f2e4c1bbf131c868a0fc7ba76fa0f0e4c525e8fed63fc46f76dfa887c6df75a",
++    "10차/web/fonts/NanumGothic-Bold.ttf": "f96298f9fb18e364d2370f4c3ce948ac67a2b61af992d7234bc15c42b033c674",
++    "11차/recover.py": "ec4d0d2c33fc036bd6c9c5064f74d5e0ad469a76a3a716568dd11e7ce5ae69ee"
++  },
++  "narrative_sha256": "a32107c5d5f166b7a764906c90cf1f9371b9394664c0abde1eef42a19173c285",
++  "baseline_basis": "7차는 기존11차의 불변 원본16개 manifest를 그대로 사용. 의존성은 읽기 전용 연결 직전의 실제 파일을 별도 고정. 본문은 담당자의 제공 해시로 대조."
++}
+--- /dev/null
++++ 12차/docs/결과해시스키마.json
+@@ -0,0 +1,7 @@
++{
++  "schema":1,
++  "input_reference":{"relative_path":{"sha256":"64자리 소문자 16진수","bytes":"0 이상 정수"}},
++  "completion_receipt":{"schema":1,"job_id":"비공개 지정 작업","state":"complete 또는 incomplete_report","output_dir":"프로젝트 기준 실제 납품 폴더 상대 경로","finished_kst":"시간대 포함 관측 시각","outputs":{"최종보고서.docx":{"sha256":"64자리 소문자 16진수","bytes":"양의 정수"},"최종보고서.pdf":{"sha256":"64자리 소문자 16진수","bytes":"양의 정수"}},"rendered_pages":"양의 정수","human_visual_review":false,"input_final_sha256":"완료 시 final.json 해시, 미완료 시 null"},
++  "privacy":"운영 작업 식별자와 작성자 및 절대 경로와 영수증은 비공개 work에만 저장한다.",
++  "completion_rule":"지정 작업 complete, 작업 result와 final 동일, 세 테스트와 선택 및 실험 계약 일치, manifest와 코드 및 가중치 SHA 대조, 예측 재구성 TP/FP/FN 정합, 공식 동일 원고 PDF 렌더 이후 두 파일만 신규 저장한다."
++}
+--- /dev/null
++++ 12차/docs/계획서식.json
+@@ -0,0 +1,12 @@
++{
++  "schema": 1,
++  "project_root": "프로젝트의 실제 절대 경로",
++  "job_id": "지정할 기존 작업 식별자",
++  "author": "작성자",
++  "output_dir": "최종/새로운_마지막실험_보고서",
++  "support_dir": "12차/work/비공개_후처리",
++  "font": "10차/web/fonts/NanumGothic-Bold.ttf",
++  "deliver_formats": ["docx", "pdf"],
++  "renderer_config": "검토한 비공개 렌더 설정의 실제 경로",
++  "marker": {"node": "확인된 번들 Node 실행 파일", "script": "공식 저작 마커 파일"}
++}
+--- /dev/null
++++ 12차/docs/렌더설정서식.json
+@@ -0,0 +1,8 @@
++{
++  "approved": false,
++  "python": "확인된 번들 Python 실행 파일",
++  "helper": "공식 문서 render_docx.py의 실제 경로",
++  "helper_sha256": "검토한 공식 도구의 SHA-256",
++  "soffice": "사용이 명시적으로 허용된 실제 LibreOffice 실행 파일",
++  "approval_basis": "운영자가 검토한 렌더 환경의 사용 근거"
++}
+--- 11차/docs/복구설계.md
++++ /dev/null
+@@ -1,27 +0,0 @@
+-# 11차 복구 설계
+-
+-## 요구와 확인된 원인
+-
+-사용자가 오류를 확인하고 이어서 진행하라고 요청했습니다. 공식 원자료의 현재 부분 파일과 원장·기존 모델·평가·준비 계약을 보존해야 합니다. 7차 실패는 다운로드 범위의 40초 경과 검사에서 발생했으며 최대 6회 재시도가 소진됐습니다. 경과에는 연결·수신뿐 아니라 디스크 여유 확인, 원장 atomic 교체와 여러 작업 상태 저장이 포함됩니다. 실제 `read1`은 최대 요청 길이보다 작은 본문을 여러 번 반환합니다. 과거 네트워크와 상태 쓰기 각각의 시간 비율은 남은 자료만으로 확정하지 않았습니다.
+-
+-7차 준비 계약은 준비 코드 전체 해시를 고정합니다. 따라서 그 파일을 고치거나 계약을 현재 해시로 갱신하는 대신 별도 실행기에서 수신만 보완합니다. `original-baseline.json`은 변경 전 7차 제품 16개를 고정하며, 운영 이력과 실행 자료를 제품 소스로 합산하지 않습니다.
+-
+-## 단일 작업과 기존 계약
+-
+-시작은 기존 작업자의 시작 잠금·작업 정리·실행 잠금을 거칩니다. 실제 명령에는 고정 7차 작업자 경로와 작업 ID가 들어가며, 실제 진입점은 11차라는 사실과 해시·인자를 작업과 복구 영수증에 명시합니다. 프로세스 생존 판정은 기존 작업자와 같은 계약을 사용하며 서버 신원 인증으로 확대하지 않습니다.
+-
+-실행 중에는 원래 `worker.execute`가 전체 실행 잠금과 실패 상태·로그를 관리합니다. 그 프로세스의 `train_pipeline.run`에만 수신 후 원래 함수를 호출하는 연결을 두고 종료 시 복원합니다. 파일의 구현·준비·분할·평가 함수와 불변 계약은 변경하지 않습니다. 준비 계약 전체와 공식 원자료 명세를 먼저 대조하고, 기존 사전 전송 영수증도 수신 전에 정확히 한 번 합산·재검사합니다.
+-
+-수신기는 같은 Linux 파일 잠금, `.part`와 `.part.json`, 원장을 사용합니다. 64KiB부터 시작해 10초 미만 성공이면 증가, 20초 이상이나 경과에 따른 자발적 분할이면 감소하며 상한은 기존 4MiB입니다. 각 범위에는 40초 경과 확인과 소켓 40초 timeout을 유지합니다. 운영체제의 블로킹 I/O를 정확히 40초에 강제 종료한다는 보장은 아닙니다. 네트워크·EOF·부분 본문의 실제 오류는 진행이 있어도 제한된 재시도에 포함합니다. 실제 진행을 보존한 자발적 경과 분할만 다음 범위로 나눕니다.
+-
+-수신 본문은 원장에 먼저 계상하고 디스크에 씁니다. 원장·상태·디스크 오류는 통신 재시도로 처리하지 않습니다. 요청 전 불확실 표식을 영속하며 실제 저장 위치와 원장의 반영을 확인한 뒤에만 해제합니다. 표식이 남으면 다음 11차 실행은 감사 필요 오류로 멈춥니다. 운영체제 전체 쓰기 실패까지 복구하거나 표식을 모르는 원래 7차 CLI의 수동 실행까지 차단한다고 주장하지 않습니다. 그런 경계에서는 원장·부분 파일·실패 작업을 직접 감사해야 합니다.
+-
+-## 성공 조건과 검사
+-
+-- 공식 범위 응답, 실제 저장 위치, 부분 본문과 실패 전송 계상, 최대 6회 통신 재시도, 제한된 Retry-After가 일치해야 합니다.
+-- 진행하는 느린 범위는 부분 파일을 보존해 나누고, 무진행·잘못된 범위·4xx·손상·예산·디스크·원장·통지 오류는 숨기지 않습니다.
+-- 완료 파일의 공식 크기·MD5와 전체 SHA-256을 검사하고 기존 verified 영수증과 호환되어야 합니다. ZIP CRC와 데이터 분할은 원래 준비 함수가 후속 검사합니다.
+-- 중복 실행·기동 실패·자식 종료·위조 경로·계약 오염을 회귀 검사하고 원래 함수를 성공 전에 호출하지 않아야 합니다.
+-- 전체 11차 제품 7개의 엄격 UTF-8·구문과 외부 고정 canonical 해시, 7차 원본 16개를 검사합니다. 비공개 운영 evidence와 실행 work는 동결 제품과 구분합니다.
+-
+-TDD의 통제 실패와 구현·검증 결과는 비공개 증거에 보존합니다. 테스트 통과는 실제 대용량 수신·GPU 학습 완료나 모든 오류 부재를 보장하지 않습니다. 실제 시작은 독립 검증과 부모 조율 뒤 수행합니다.
+--- /dev/null
++++ 12차/docs/설계.md
+@@ -0,0 +1,27 @@
++# 마지막 실험의 보고서와 단일 완료 후 처리
++
++## 범위와 성공 조건
++
++진행 중인 지정 작업 하나만 읽는다. 학습과 다운로드 및 작업 상태를 변경하는 기능을 만들지 않는다. 7차와 10차 및 11차의 소스와 결과는 읽기 전용이다. 고정 본문은 별도 담당자가 작성한 report_sections.json을 사용한다.
++
++정상 완료에는 지정 작업의 complete 상태와 작업에 저장된 result 및 final.json의 일치, 세 고정 테스트와 선택 계약, 데이터 manifest와 원본 코드 및 선택 가중치의 SHA-256 일치가 모두 필요하다. 과거 결과나 오래된 상태 및 Docker 중단을 완료로 간주하지 않는다. 실패 및 중단은 실제 오류와 미측정을 설명하는 별도 미완료 보고서로 남긴다.
++
++## 읽기와 저장
++
++10차 safe_io.py의 안전 공유 읽기를 동적으로 불러 JSON과 텍스트를 읽는다. 지정 job 파일만 60초 간격으로 관찰하며 별도의 학습 명령이나 Codex 및 언어 모델 API는 호출하지 않는다. 운영 설정과 저자 및 작업 식별자는 비공개 work에 둔다. 프로세스 잠금과 완료 영수증으로 중복 실행을 막는다. 기존 결과 경로가 있으면 덮어쓰지 않는다.
++
++납품 폴더에는 Word와 같은 원고에서 변환한 PDF 두 파일만 저장한다. CSV와 차트 PNG 및 페이지 검토 자료는 12차 work의 비공개 지원 자료이다. HTML과 별도 원문 Markdown을 생성하지 않는다. 데이터와 가중치는 복사하지 않으며 위치와 해시만 기록한다. 실제 모델 결과의 PR 및 F1 곡선은 보존된 예측과 정답의 기존 일대일 IoU 매칭을 이용한다. 완료 epoch와 선택 checkpoint epoch를 구분하고 근거가 없으면 선택 epoch를 미확인으로 쓴다. TN은 객체 탐지에서 정의되지 않는다고 명시한다.
++
++## 문서와 검증
++
++나눔고딕 Bold를 적용하고 작성자의 관점으로 개발과 결과를 설명한다. 실제 정밀도와 재현율 목표는 각각 판정한다. 자체 AP와 공식 COCO API를 구분하며 CCTV 행동 정확도나 10차 영상 탐지의 새 가중치 적용을 주장하지 않는다. 제어 사례는 가상 결과임을 모든 출력에 표시한다.
++
++검토한 명시적 렌더 설정으로 DOCX를 같은 원고의 PDF와 페이지 이미지로 변환한다. 설정이 없으면 blocked_renderer로 멈춘다. 현재 제어 사례의 모든 페이지를 시각 검사하고 실제 종료 후 자동 생성은 정합성 검사와 렌더 결과를 기록한다. 자동 렌더를 미래의 인간 시각 검토로 표현하지 않는다.
++
++## 수리 1의 완료 계약 보완
++
++독립 검토에서 테스트 사전의 첫 값으로 주목표를 판단하는 순서 의존을 확인했다. 주목표는 historical_taco 키로 명시한다. JSON 저장 순서가 달라도 같은 판정이어야 한다. 선택된 모델 및 각 테스트의 입력 크기와 confidence 하한 및 NMS IoU와 최대 탐지 수 및 평가기와 고정 프로토콜을 실제 7차 설정과 대조한다. 제어 사례는 각 항목 오염과 다른 테스트를 앞에 둔 순서를 재현하며 기대값을 완화하지 않는다.
++
++## 완료 영수증 재사용
++
++기존 영수증은 같은 지정 작업과 실제 출력 위치에 묶여야 한다. 정확히 두 문서의 존재와 경로 및 양의 크기와 SHA-256을 다시 확인한다. 정상 완료의 경우 현재 작업에 저장된 결과와 final.json의 일치 및 영수증의 최종 입력 해시도 대조한다. 파일 누락과 변경 및 입력 불일치는 blocked_invalid_receipt로 기록하며 기존 결과를 덮어쓰거나 실험을 다시 실행하지 않는다.
+--- /dev/null
++++ 12차/docs/요구사항.md
+@@ -0,0 +1,9 @@
++# 마지막 실험의 완료 후 보고서 생성
++
++이미 진행 중인 지정 실험의 두 후보 학습과 검증 및 고정 테스트를 마지막으로 수행한다. 기존 데이터와 모델 및 계약과 실행 중인 프로세스를 보존하고 추가 데이터나 후보 실험을 시작하지 않는다. 보고서는 저자의 프로젝트 수행 관점으로 서술하되 확인되지 않은 개인 수행이나 성능을 만들지 않는다.
++
++지정 작업의 정상 완료와 최종 결과 및 세 테스트와 선택 가중치 해시가 일치할 때 한 번만 Word 문서와 해당 Word에서 변환한 동일 내용의 PDF 두 파일만 생성한다. 표와 그래프는 두 문서 안에 포함하며 CSV와 PNG 및 렌더링 검증 자료는 내부 작업 폴더에만 보존한다. 실패 및 중단은 완료로 취급하지 않으며 실제 상태와 미측정 항목을 명시한다. 기록된 동결 실험을 다시 학습하거나 테스트 임계값을 조정하지 않는다.
++
++본문은 개발 내용과 데이터 출처 및 권리와 전처리와 학습 및 검증 선택과 최종 성능 및 한계를 구체적으로 다룬다. 정밀도와 재현율 각각 90퍼센트 목표 달성 여부는 실제 결과로 판정한다. 자체 AP는 공식 COCO API와 구분하며 기존 평가와 조건이 다르면 동일 조건 개선율을 만들지 않는다. CCTV 투기 행동의 정답이 없으면 행동 정확도를 계산했다고 쓰지 않는다.
++
++보고서와 작은 표 및 그림만 새 최종 하위 폴더에 저장하고 원본이나 모델을 중복 복사하지 않는다. 나눔고딕 Bold를 사용하며 기존 결과를 덮어쓰지 않는다. Word는 제공된 문서 도구로 렌더링해 현재 제어 사례의 모든 페이지를 시각 검사하고 실제 종료 후에도 렌더링 및 정합성 검사를 수행한다. 미래의 인간 시각 검토를 이미 수행한 것으로 표현하지 않는다. 로컬 완료 후 처리기는 Codex나 언어 모델의 반복 호출 없이 실행한다.
+--- 11차/original-baseline.json
++++ /dev/null
+@@ -1,18 +0,0 @@
+-{
+-  "configs/protected_sources.json": "6158cda1bcb6521f2dfa6b0f5000d1ba18e781181a82fcb14d846af825331c21",
+-  "configs/training.json": "e64cdc187c260564f13206f21f632d65b3e2d67b021a12bffc36aefbb0535401",
+-  "docs/구현계획.md": "6341644185da59914dcb218361b2a76818d4a376baa8de558845f72da01087c0",
+-  "docs/설계.md": "9502c8fe816b2f38fa3ff88f05b692e5a051a264e64a32c69fe094f5645d6e1a",
+-  "docs/이전검증분석.md": "cf1e22da1eff8566dee1498258ef8a63f5bbd9b22a9438b5f540a9d57fea3687",
+-  "docs/출처와실험계약.md": "dadc2a49f013a7d00e753315d40fb2e56f0d51698fadb48df43285cae2edaacb",
+-  "prepare_dataset.py": "5b555b1c597734072be12ab46b1c0f9a74f4dbb3a84144cb3ba9c7e74fc19ced",
+-  "tests/test_prepare_dataset.py": "152270ec6a95dfbc121a764a9f1dce0a55daf69822519005817714a4e3450afb",
+-  "tests/test_train_pipeline.py": "1fab15d83877161fe96e036f30f32e049da4c38c7a88dc1ddf59b7be50f17ff3",
+-  "tests/test_worker.py": "dc153070d5a01565adeb3473420eed79e02e69d156640bbad2119ae873d7e1d7",
+-  "train_pipeline.py": "03979d8a9f43457cd0b3f8ba0e2f4e8910ee99627be91a6e1e96b6b58a0ae4aa",
+-  "verify_sources.py": "8d486ac1ca00571675cee9db5cfc278cc4e0e4f6e8c83fecda618c34a202dbdd",
+-  "worker.py": "2bac26a2ab4c837dfb075ef014c1f4ef4ac9ea76d0ad26b2ce64c97b02306194",
+-  "사용안내.txt": "a087656951b5ef0f9f70542299d0974f03ea0e1dfad63912c0f733464f4e8646",
+-  "학습상태.bat": "9abdb4ef09839135f09f53c5572ccc49ba97af51fb2d40065905a34899a1f6d6",
+-  "학습실행.bat": "45410e9a232d114e99a0bf4a6da12128f15c2ccf3741efb2aff5d3db87c759a8"
+-}
+--- 11차/recover.py
++++ /dev/null
+@@ -1,322 +0,0 @@
+-"""7차 계약을 보존하며 작은 범위의 원자료 수신을 앞에 연결합니다."""
+-import argparse
+-import hashlib
+-import http.client
+-import importlib
+-import json
+-import os
+-from pathlib import Path
+-import subprocess
+-import sys
+-import time
+-import traceback
+-import uuid
+-
+-ROOT = Path(__file__).resolve().parent
+-ORIGINAL = ROOT.parent / '7차'
+-MIN_RANGE = 64 * 1024
+-MAX_RANGE = 4 * 1024 * 1024
+-
+-
+-def validate_pipeline(value):
+-    path = Path(value)
+-    if path.is_symlink() or path.resolve() != (ORIGINAL / 'worker.py').resolve():
+-        raise ValueError('고정된 7차 작업자 경로만 허용합니다.')
+-    return path.resolve()
+-
+-
+-def verify_original():
+-    baseline = json.loads((ROOT / 'original-baseline.json').read_text(encoding='utf-8'))
+-    for name, expected in baseline.items():
+-        path = ORIGINAL / name
+-        if path.is_symlink() or hashlib.sha256(path.read_bytes()).hexdigest() != expected:
+-            raise ValueError('7차 고정 원본이 변경됐습니다: ' + name)
+-    return baseline
+-
+-
+-def originals():
+-    verify_original()
+-    sys.path.insert(0, str(ORIGINAL))
+-    modules = tuple(importlib.import_module(name) for name in ('worker', 'prepare_dataset', 'train_pipeline'))
+-    for module in modules:
+-        if Path(module.__file__).resolve().parent != ORIGINAL.resolve():
+-            raise ValueError('다른 프로젝트의 모듈은 실행할 수 없습니다.')
+-    return modules
+-
+-
+-class Progress:
+-    """원장 합산은 매 본문마다 유지하고 화면 쓰기만 합칩니다."""
+-    def __init__(self, notify, clock=time.monotonic):
+-        self.notify, self.clock = notify, clock
+-        self.latest = {}
+-        self.last = float('-inf')
+-    def __call__(self, force=False, **changes):
+-        retry_transition = 'retry_reason' in changes and (changes['retry_reason'] is not None or self.latest.get('retry_reason') is not None)
+-        stage_transition = 'stage' in changes and changes['stage'] != self.latest.get('stage')
+-        self.latest.update(changes)
+-        now = self.clock()
+-        if force or retry_transition or stage_transition or now - self.last >= 2:
+-            self.notify(**self.latest)
+-            self.last = now
+-
+-
+-class NetworkRetry(Exception):
+-    """연결·본문 읽기 경계의 실제 일시 오류만 나타냅니다."""
+-    def __init__(self, error):
+-        self.error = error
+-
+-
+-class Receiver:
+-    def __init__(self, data, worker, notify, clock=time.monotonic, sleep=time.sleep, opener=None):
+-        self.data, self.worker, self.notify = data, worker, notify
+-        self.clock, self.sleep = clock, sleep
+-        self.opener = opener or data.open_request
+-    def emit(self, **event):
+-        self.notify(event)
+-    def network_open(self, spec, start, end):
+-        try:
+-            return self.opener(spec['url'], {'Range': f'bytes={start}-{end}'})
+-        except (OSError, http.client.HTTPException) as error:
+-            if isinstance(error, self.data.urllib.error.HTTPError):
+-                error.close()
+-            if self.data._temporary_download_error(error):
+-                raise NetworkRetry(error) from error
+-            raise
+-    def receive(self, spec, target, budget):
+-        target = Path(target)
+-        lock = target.with_name(target.name + '.receiving.lock')
+-        partial = target.with_suffix(target.suffix + '.part')
+-        metadata = target.with_suffix(target.suffix + '.part.json')
+-        marker = target.with_suffix(target.suffix + '.recovery-pending.json')
+-        for path in (target, partial, metadata, marker, lock):
+-            if path.is_symlink() or getattr(path, 'is_junction', lambda: False)():
+-                raise ValueError('수신 경로의 연결 파일을 허용하지 않습니다.')
+-        with self.worker.file_lock(lock, blocking=False):
+-            identity = {key: spec[key] for key in ('url', 'size', 'md5')}
+-            if marker.exists():
+-                raise ValueError('이전 수신의 원장·디스크 반영이 불확실합니다. 복구 기록 감사가 필요합니다.')
+-            if target.exists():
+-                self.finish(spec, target)
+-                return target
+-            if partial.exists() and (not metadata.exists() or self.data.load(metadata) != identity):
+-                raise ValueError('부분 파일의 공식 원자료 계약이 다릅니다.')
+-            start = partial.stat().st_size if partial.exists() else 0
+-            if start > spec['size']:
+-                raise ValueError('부분 파일이 공식 원본보다 큽니다.')
+-            budget.space(spec['size'] - start + 8192)
+-            self.data.atomic_json(metadata, identity)
+-            chunk_size = MIN_RANGE
+-            while start < spec['size']:
+-                end = min(spec['size'], start + chunk_size) - 1
+-                for attempt in range(7):
+-                    if start > end:
+-                        self.emit(retry_reason=None, retry_attempt=0, retry_wait_seconds=0)
+-                        break
+-                    saved = partial.stat().st_size if partial.exists() else 0
+-                    if saved != start or self.data.load(metadata) != identity:
+-                        raise ValueError('수신 중 부분 파일·계약이 변경됐습니다.')
+-                    if budget.used + end - start + 1 > budget.limit:
+-                        raise ValueError('남은 전송 예산이 부족합니다.')
+-                    # 요청 전 불확실 구간을 기록합니다. 원장·상태·디스크 오류면 지우지 않습니다.
+-                    self.data.atomic_json(marker, {'identity': identity, 'start': start, 'end': end,
+-                        'ledger_before_bytes': budget.used,
+-                        'ledger_before_sha256': self.data.sha256_file(budget.path) if budget.path.exists() else None})
+-                    began = self.clock()
+-                    range_start = start
+-                    split = False
+-                    failure = None
+-                    try:
+-                        with self.network_open(spec, start, end) as response:
+-                            if response.status != 206 or response.headers.get('Content-Range') != f'bytes {start}-{end}/{spec["size"]}':
+-                                raise ValueError('공식 범위 응답이 요청과 다릅니다.')
+-                            with partial.open('ab') as stream:
+-                                while start <= end:
+-                                    if self.clock() - began >= 40:
+-                                        if start > range_start:
+-                                            split = True
+-                                            break
+-                                        raise NetworkRetry(TimeoutError('진행 없는 범위가 40초를 초과했습니다.'))
+-                                    budget.space(min(256 * 1024, end - start + 1) + 8192)
+-                                    interrupted = None
+-                                    try:
+-                                        block = response.read1(min(256 * 1024, end - start + 1))
+-                                    except http.client.IncompleteRead as error:
+-                                        block, interrupted = error.partial, error
+-                                    except (OSError, http.client.HTTPException) as error:
+-                                        if self.data._temporary_download_error(error):
+-                                            raise NetworkRetry(error) from error
+-                                        raise
+-                                    if not block:
+-                                        raise NetworkRetry(interrupted or EOFError('범위 본문이 중간에 끝났습니다.'))
+-                                    # 이 아래의 원장·통지·디스크 오류는 네트워크 재시도로 잡지 않습니다.
+-                                    budget.charge(len(block))
+-                                    if len(block) > end - start + 1:
+-                                        raise ValueError('수신 본문이 공식 범위를 넘었습니다.')
+-                                    budget.space(len(block) + 8192)
+-                                    if stream.write(block) != len(block):
+-                                        raise OSError('부분 파일을 모두 기록하지 못했습니다.')
+-                                    start += len(block)
+-                                    self.emit(stage='공식 원자료 작은 범위 복구 수신', source=spec.get('source'), file=target.name,
+-                                        downloaded_bytes=start, file_bytes=spec['size'], range_bytes=chunk_size)
+-                                    if interrupted:
+-                                        raise NetworkRetry(interrupted) from interrupted
+-                    except NetworkRetry as error:
+-                        failure = error.error
+-                    # 정상 닫힘과 실제 저장 위치·원장 확인 뒤에만 불확실 표식을 해제합니다.
+-                    if (partial.stat().st_size if partial.exists() else 0) != start:
+-                        raise ValueError('닫힌 부분 파일의 실제 저장량이 다릅니다.')
+-                    if budget.path.exists() and self.data.load(budget.path)['download_bytes'] != budget.used:
+-                        raise ValueError('실제 전송 원장이 메모리 계상과 다릅니다.')
+-                    marker.unlink()
+-                    if failure is not None:
+-                        self.emit(stage='공식 원자료 복구 재시도' if attempt < 6 else '공식 원자료 복구 재시도 한도 초과',
+-                            source=spec.get('source'), file=target.name, downloaded_bytes=start, file_bytes=spec['size'],
+-                            retry_reason=type(failure).__name__ + ': ' + str(failure), retry_attempt=min(attempt + 1, 6),
+-                            retry_limit=6, retry_wait_seconds=self.data._download_retry_delay(failure, attempt) if attempt < 6 else 0)
+-                        if attempt == 6:
+-                            raise failure
+-                        if start <= end:
+-                            self.sleep(self.data._download_retry_delay(failure, attempt))
+-                        continue
+-                    elapsed = self.clock() - began
+-                    if split or elapsed >= 20:
+-                        chunk_size = max(MIN_RANGE, chunk_size // 2)
+-                    elif elapsed < 10:
+-                        chunk_size = min(MAX_RANGE, chunk_size * 2)
+-                    self.emit(source=spec.get('source'), file=target.name, downloaded_bytes=start, file_bytes=spec['size'],
+-                        retry_reason=None, retry_attempt=0, retry_wait_seconds=0)
+-                    break
+-            if partial.stat().st_size != spec['size'] or self.data.digest_file(partial, 'md5') != spec['md5']:
+-                raise ValueError('완성 원자료의 공식 크기·MD5가 다릅니다.')
+-            partial.replace(target)
+-            self.finish(spec, target)
+-            return target
+-    def finish(self, spec, target):
+-        if target.stat().st_size != spec['size'] or self.data.digest_file(target, 'md5') != spec['md5']:
+-            raise ValueError('기존 원자료의 공식 크기·MD5가 다릅니다.')
+-        self.data.freeze(target.with_suffix(target.suffix + '.verified.json'),
+-            {**{key: spec[key] for key in ('url', 'size', 'md5')}, 'sha256': self.data.sha256_file(target)})
+-
+-
+-def entry_evidence():
+-    return {'entry': str(Path(__file__).resolve()), 'entry_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+-        'argv': list(sys.orig_argv), 'original_baseline': verify_original(), 'recovery': '작은 범위 원자료 수신 후 원래 7차 준비·학습 호출'}
+-
+-
+-def verify_contract(data):
+-    expected = {'source_files': data.SOURCE_FILES, 'normalization': data.NORMALIZATION, 'seed': data.SEED,
+-        'preparation_sha256': data.sha256_file(data.__file__),
+-        'previous_manifest_sha256': data.sha256_file(data.PREVIOUS / 'data_manifest.json'),
+-        'config_sha256': data.sha256_file(data.ROOT / 'configs/training.json'),
+-        'protected_sources_sha256': data.sha256_file(data.ROOT / 'configs/protected_sources.json'),
+-        'prior_additional_manifest_sha256': data.sha256_file(data.ARCHIVE / 'sources/additional_manifest.json')}
+-    if data.load(data.TRAINING / 'preparation_contract.json') != expected:
+-        raise ValueError('원래 준비 계약과 보존 입력이 다릅니다. 계약을 갱신하지 않습니다.')
+-    if data.load(data.SOURCES / 'source_contract.json') != {'files': data.SOURCE_FILES, 'license_evidence': 'evidence/공식데이터출처.json'}:
+-        raise ValueError('고정 공식 원자료 계약이 다릅니다.')
+-
+-
+-def import_frozen_prefetch(data, worker, budget):
+-    budget.import_prefetch(data.WORK / 'preflight/download_ledger.json')
+-    spec = next(row for row in data.SOURCE_FILES if row['name'] == 'images.zip')
+-    target = data.SOURCES / 'downloads/images.zip'
+-    with worker.file_lock(target.with_name(target.name + '.receiving.lock'), blocking=False):
+-        prefetch = data.WORK / 'prefetch'
+-        state = data.load(prefetch / 'status.json') if (prefetch / 'status.json').exists() else {}
+-        if state.get('state') == 'running':
+-            raise ValueError('기존 사전 수신 상태가 실행 중입니다.')
+-        budget.import_prefetch(prefetch / 'download_ledger.json')
+-        if state.get('state') == 'complete':
+-            receipt = data.load(prefetch / 'complete.json')
+-            if (any(state.get(key) != value for key, value in receipt.items())
+-                    or receipt['expected_bytes'] != spec['size'] or receipt['md5'] != spec['md5']
+-                    or receipt['url'] != spec['url'] or data.local(receipt['path']).resolve() != target.resolve()
+-                    or int(data.load(prefetch / 'download_ledger.json')['download_bytes']) != receipt['download_bytes']
+-                    or not target.exists() or data.sha256_file(target) != receipt['sha256']):
+-                raise ValueError('동결 사전 수신 영수증과 공식 자료가 다릅니다.')
+-
+-
+-def prefetch_then_run(job, notify, resume, original_run, data, worker):
+-    if resume is not True:
+-        raise ValueError('기존 계약의 명시적 재개만 허용합니다.')
+-    evidence = entry_evidence()
+-    verify_contract(data)
+-    progress = Progress(notify)
+-    budget = data.DownloadBudget(data.SOURCES, notify=progress)
+-    import_frozen_prefetch(data, worker, budget)
+-    receiver = Receiver(data, worker, lambda event: progress(**event))
+-    files = []
+-    for spec in data.SOURCE_FILES:
+-        destination = data.SOURCES / 'downloads' / spec['name']
+-        partial = destination.with_suffix(destination.suffix + '.part')
+-        observed = destination.stat().st_size if destination.exists() else partial.stat().st_size if partial.exists() else 0
+-        progress(force=True, stage='11차 원자료 복구·기존 계약 확인', source=spec['source'], file=spec['name'],
+-            downloaded_bytes=observed, file_bytes=spec['size'], retry_reason=None, retry_attempt=0, retry_wait_seconds=0)
+-        target = receiver.receive(spec, destination, budget)
+-        files.append({'name': spec['name'], 'receipt': data.load(target.with_suffix(target.suffix + '.verified.json'))})
+-    data.atomic_json(ROOT / 'work' / 'receipts' / (worker.identity(job) + '.json'),
+-        {'job': job, **evidence, 'files': files, 'download_bytes': budget.used, 'observed_at': time.time()})
+-    progress(force=True, stage='복구 원자료 검증 완료·원래 7차 준비로 연결', retry_reason=None, retry_attempt=0, retry_wait_seconds=0)
+-    return original_run(job, notify=notify, resume=True)
+-
+-
+-def execute(job, pipeline):
+-    validate_pipeline(pipeline)
+-    worker, data, training = originals()
+-    original_run = training.run
+-    def wrapped(current_job, notify, resume):
+-        training.verify_models()
+-        return prefetch_then_run(current_job, notify, resume, original_run, data, worker)
+-    training.run = wrapped
+-    try:
+-        worker.execute(job)
+-    finally:
+-        training.run = original_run
+-
+-
+-def start(pipeline):
+-    validate_pipeline(pipeline)
+-    worker, data, training = originals()
+-    if os.name != 'posix':
+-        raise ValueError('실제 복구는 동일 Docker Linux에서 실행해야 합니다.')
+-    with worker.file_lock(worker.WORK / 'jobs/start.lock'):
+-        worker._reconcile()
+-        if any(value.get('state') in worker.ACTIVE for value in worker.jobs()):
+-            raise ValueError('준비 또는 학습 작업이 이미 진행 중입니다.')
+-        with worker.file_lock(worker.WORK / 'run.lock', blocking=False):
+-            pass
+-        job = time.strftime('%Y%m%d_%H%M%S') + '_' + uuid.uuid4().hex[:8]
+-        argv = [sys.executable, '-u', '-B', '-X', 'utf8', str(ROOT / 'recover.py'), '--pipeline', str(validate_pipeline(pipeline)), '--worker', job]
+-        evidence = entry_evidence()
+-        evidence['argv'] = argv
+-        worker.save(worker.WORK / 'jobs' / (job + '.json'), {'id': job, 'kind': 'train', 'state': 'queued',
+-            'params': {'resume': True}, 'created': time.time(), 'stage': '11차 원자료 복구 시작 대기', 'recovery': evidence})
+-        try:
+-            with (worker.WORK / 'jobs' / (job + '.log')).open('ab') as log:
+-                child = subprocess.Popen(argv, cwd=str(ORIGINAL), stdin=subprocess.DEVNULL, stdout=log,
+-                    stderr=subprocess.STDOUT, shell=False, start_new_session=True)
+-            worker._update(job, pid=child.pid)
+-        except Exception as error:
+-            with (worker.WORK / 'jobs' / (job + '.log')).open('a', encoding='utf-8') as log:
+-                log.write(traceback.format_exc())
+-                log.flush()
+-            worker._update(job, state='failed', error=str(error), finished=time.time())
+-            raise
+-        return {'job': job, 'pid': child.pid, 'state': 'queued'}
+-
+-
+-def main():
+-    parser = argparse.ArgumentParser(description='고정 7차 원본과 계약을 보존하는 복구 실행기')
+-    parser.add_argument('--pipeline', required=True)
+-    choice = parser.add_mutually_exclusive_group(required=True)
+-    choice.add_argument('--start', action='store_true')
+-    choice.add_argument('--worker')
+-    args = parser.parse_args()
+-    if args.start:
+-        print(json.dumps(start(args.pipeline), ensure_ascii=False))
+-    else:
+-        execute(args.worker, args.pipeline)
+-
+-
+-if __name__ == '__main__':
+-    main()
+--- /dev/null
++++ 12차/report_core.py
+@@ -0,0 +1,305 @@
++"""학습을 실행하지 않고 보존된 실험 결과와 해시를 검증합니다."""
++from collections import Counter
++import csv
++import hashlib
++import importlib.util
++import math
++from pathlib import Path
++import re
++
++TEST_SPLITS = {'historical_taco': 'historical_test', 'new_plastopol': 'test',
++               'source_heldout_uav': 'external_test'}
++EVALUATOR = 'single-class confidence-greedy IoU; 101-point interpolated AP; v2'
++TEST_PROTOCOL = 'freeze model, tiles and threshold before tests; no test tuning; per-image prediction cache'
++SECTIONS = ('overview', 'problem', 'development', 'architecture', 'dataset', 'preprocess',
++            'training', 'selection', 'results', 'analysis', 'application', 'limits', 'conclusion')
++
++
++def safe_reader(project):
++    """공유 삭제 핸들을 사용한 기존 읽기를 원본 수정 없이 불러옵니다."""
++    path = Path(project) / '10차' / 'safe_io.py'
++    spec = importlib.util.spec_from_file_location('report_safe_io', path)
++    module = importlib.util.module_from_spec(spec)
++    spec.loader.exec_module(module)
++    return module
++
++
++def digest(path):
++    result = hashlib.sha256()
++    with Path(path).open('rb') as stream:
++        for block in iter(lambda: stream.read(1024 * 1024), b''):
++            result.update(block)
++    return result.hexdigest()
++
++
++def confined(path, project):
++    project = Path(project).resolve()
++    path = Path(path).resolve()
++    if not path.is_relative_to(project):
++        raise ValueError('근거 파일이 지정 프로젝트 경계를 벗어났습니다.')
++    return path
++
++
++def local_path(value, project):
++    """기존 Docker 경로를 지정 프로젝트 안의 실제 파일로 대응합니다."""
++    project = Path(project).resolve()
++    value = str(value)
++    portable_prefix = '/workspace/2026/' + project.name + '/'
++    if value.startswith(portable_prefix):
++        path = project / value[len(portable_prefix):]
++    elif value.startswith('/root/환경 PBL/trash_round3/'):
++        path = project / '이전 도커 실험/3차실험/trash_round3' / value.removeprefix('/root/환경 PBL/trash_round3/')
++    elif Path(value).is_absolute():
++        path = Path(value)
++    else:
++        path = project / value
++    return confined(path, project)
++
++
++def relative(path, project):
++    return confined(path, project).relative_to(Path(project).resolve()).as_posix()
++
++
++def job_path(project, job_id):
++    if not isinstance(job_id, str) or not re.fullmatch(r'[A-Za-z0-9_-]{1,100}', job_id):
++        raise ValueError('허용되지 않는 작업 ID입니다.')
++    return Path(project) / '7차/work/jobs' / (job_id + '.json')
++
++
++def decision(job, job_id):
++    if job is None:
++        return 'missing'
++    if not isinstance(job, dict) or job.get('id') != job_id or job.get('kind') != 'train':
++        raise ValueError('지정 작업의 식별자 또는 종류가 일치하지 않습니다.')
++    state = job.get('state')
++    if state in ('queued', 'running'):
++        return 'waiting'
++    if state in ('failed', 'interrupted'):
++        return 'incomplete'
++    if state == 'complete':
++        return 'validate'
++    raise ValueError('알 수 없는 작업 상태입니다.')
++
++
++def numeric(value, name, lower=0, upper=1):
++    if type(value) not in (int, float) or not math.isfinite(value) or not lower <= value <= upper:
++        raise ValueError('잘못된 수치: ' + name)
++    return value
++
++
++def validate_result(row):
++    op = row['operating']
++    for key in ('tp', 'fp', 'fn'):
++        if type(op.get(key)) is not int or op[key] < 0:
++            raise ValueError('TP/FP/FN은 음수가 아닌 정수여야 합니다.')
++    tp, fp, fn = (op[k] for k in ('tp', 'fp', 'fn'))
++    precision = tp / (tp + fp) if tp + fp else 0.0
++    recall = tp / (tp + fn) if tp + fn else 0.0
++    f1 = 2 * precision * recall / (precision + recall) if precision + recall else 0.0
++    for key, expected in (('precision', precision), ('recall', recall), ('f1', f1)):
++        if not math.isclose(numeric(op[key], key), expected, abs_tol=1e-9):
++            raise ValueError('성능과 혼동 수가 일치하지 않습니다: ' + key)
++    numeric(op['threshold'], 'threshold')
++    if op.get('iou') != .5:
++        raise ValueError('고정 IoU .5 계약이 아닙니다.')
++    for key in ('AP50', 'AP50_95'):
++        numeric(row['metrics'][key], key)
++    if type(row.get('images')) is not int or row['images'] <= 0:
++        raise ValueError('실제 평가 이미지 수가 없습니다.')
++    return precision >= .9 and recall >= .9
++
++
++def verify_hash(path, expected, refs, project):
++    if not isinstance(expected, str) or not re.fullmatch('[a-f0-9]{64}', expected):
++        raise ValueError('SHA-256 형식이 잘못됐습니다.')
++    path = confined(path, project)
++    actual = digest(path)
++    if actual != expected:
++        raise ValueError('근거 파일 SHA-256 불일치: ' + relative(path, project))
++    refs[relative(path, project)] = {'sha256': actual, 'bytes': path.stat().st_size}
++
++
++def validate_bundle(project, job, read_json):
++    """완료 상태와 결과 및 모든 동결 계약이 함께 맞을 때만 반환합니다."""
++    project = Path(project).resolve()
++    training = project / '7차/work/training'
++    if job.get('state') != 'complete':
++        raise ValueError('정상 완료 작업만 성공 보고서를 만들 수 있습니다.')
++    final = read_json(training / 'final.json')
++    if not isinstance(final, dict) or job.get('result') != final:
++        raise ValueError('작업 결과와 최종 결과가 일치하지 않습니다.')
++    manifest = read_json(training / 'data_manifest.json')
++    experiment = read_json(training / 'experiment_contract.json')
++    selection = read_json(training / 'selection.json')
++    test_contract = read_json(training / 'test_contract.json')
++    comparison = read_json(training / 'validation_comparison.json')
++    config = read_json(project / '7차/configs/training.json')
++    if selection != final['selected'] or test_contract['selected'] != selection or test_contract['experiment'] != experiment:
++        raise ValueError('선택 및 테스트 계약이 최종 결과와 다릅니다.')
++    if selection not in comparison:
++        raise ValueError('검증 비교표에 선택된 모델이 없습니다.')
++    if test_contract.get('protocol') != TEST_PROTOCOL:
++        raise ValueError('고정 테스트의 프로토콜이 다릅니다.')
++    if (selection.get('imgsz') != config['evaluation_imgsz']
++            or selection.get('policy') not in config['validation_policies']
++            or selection.get('evaluator') != EVALUATOR):
++        raise ValueError('선택된 모델의 추론 및 평가 설정이 고정 명세와 다릅니다.')
++    if set(final['tests']) != set(TEST_SPLITS):
++        raise ValueError('세 고정 테스트가 모두 있어야 합니다.')
++    if final.get('test') != final['tests']['historical_taco']:
++        raise ValueError('주평가 결과가 과거 TACO와 일치하지 않습니다.')
++    refs = {}
++    if final['manifest_sha256'] != experiment['manifest_sha256']:
++        raise ValueError('최종 manifest 계약이 다릅니다.')
++    verify_hash(training / 'data_manifest.json', final['manifest_sha256'], refs, project)
++    for key, filename in (('config_sha256', 'configs/training.json'),
++                          ('pipeline_sha256', 'train_pipeline.py'),
++                          ('preparation_sha256', 'prepare_dataset.py'),
++                          ('protected_sources_sha256', 'configs/protected_sources.json')):
++        verify_hash(project / '7차' / filename, experiment[key], refs, project)
++    if final['counts'] != manifest['counts']:
++        raise ValueError('데이터 집계와 manifest가 다릅니다.')
++    selected_weights = selection['weights_sha256']
++    if set(selection['weights']) != set(selected_weights):
++        raise ValueError('선택 가중치와 해시 목록이 다릅니다.')
++    for value, sha in selected_weights.items():
++        verify_hash(local_path(value, project), sha, refs, project)
++    validate_result(selection)
++    for name, split in TEST_SPLITS.items():
++        result = final['tests'][name]
++        validate_result(result)
++        if (result['weights_sha256'] != selected_weights or result['weights'] != selection['weights']
++                or result['policy'] != selection['policy'] or result['imgsz'] != selection['imgsz']
++                or result.get('evaluator') != EVALUATOR
++                or result['operating']['threshold'] != selection['operating']['threshold']):
++            raise ValueError('테스트가 선택된 모델과 추론 계약을 따르지 않습니다: ' + name)
++        records = [r for r in manifest['records'] if r['split'] == split]
++        if result['images'] != len(records):
++            raise ValueError('평가 이미지 수와 고정 분할이 다릅니다: ' + name)
++        evaluation = training / 'evaluation/tests' / name
++        if read_json(evaluation / 'metrics.json') != result:
++            raise ValueError('테스트 평가 파일과 최종 결과가 다릅니다: ' + name)
++        contract = read_json(evaluation / 'contract.json')
++        expected_settings = {'weights':selected_weights,'policy':selection['policy'],
++                             'threshold':selection['operating']['threshold'],
++                             'imgsz':config['evaluation_imgsz'],'conf_floor':config['evaluation_conf_floor'],
++                             'nms_iou':config['evaluation_nms_iou'],'max_det':config['evaluation_max_det'],
++                             'evaluator':EVALUATOR}
++        if any(contract.get(key) != expected for key,expected in expected_settings.items()):
++            raise ValueError('평가 동결 계약이 다릅니다: ' + name)
++        expected_images = {r['id']: [r['sha256'], r['label_sha256']] for r in records}
++        if contract['images'] != expected_images:
++            raise ValueError('평가 이미지 해시 목록이 manifest와 다릅니다: ' + name)
++        for row in records:
++            verify_hash(local_path(row['label'], project), row['label_sha256'], refs, project)
++        for size in ('small', 'medium', 'large'):
++            size_row = result['sizes'][size]
++            # 크기별 AP는 없으므로 P/R/F1과 혼동 수만 검사합니다.
++            validate_result({'operating': size_row, 'metrics': result['metrics'], 'images': result['images']})
++    targets = {name:validate_result(value) for name,value in final['tests'].items()}
++    if (final.get('target_met') != targets['historical_taco']
++            or final.get('all_test_targets_met') != all(targets.values())):
++        raise ValueError('기록된 목표 판정과 실제 정밀도·재현율이 다릅니다.')
++    for file in ('final.json', 'experiment_contract.json', 'selection.json', 'test_contract.json', 'validation_comparison.json'):
++        path = training / file
++        refs[relative(path, project)] = {'sha256': digest(path), 'bytes': path.stat().st_size}
++    return {'final': final, 'manifest': manifest, 'comparison': comparison, 'references': refs}
++
++
++def iou(a, b):
++    intersection = max(0, min(a[2], b[2]) - max(a[0], b[0])) * max(0, min(a[3], b[3]) - max(a[1], b[1]))
++    union = max(0, a[2] - a[0]) * max(0, a[3] - a[1]) + max(0, b[2] - b[0]) * max(0, b[3] - b[1]) - intersection
++    return intersection / union if union else 0.0
++
++
++def match_rows(predictions, targets):
++    """7차와 같은 신뢰도 내림차순 탐욕 매칭이며 새 추론을 하지 않습니다."""
++    used = set()
++    flags = [False] * len(predictions)
++    for index in sorted(range(len(predictions)), key=lambda i: predictions[i][4], reverse=True):
++        overlap, identity = max(((iou(predictions[index], box), j) for j, box in enumerate(targets)
++                                 if j not in used), default=(0, -1))
++        if overlap >= .5:
++            flags[index] = True
++            used.add(identity)
++    return [(float(p[4]), flags[i]) for i, p in enumerate(predictions)]
++
++
++def curve_points(scored, total):
++    ordered = sorted(scored, key=lambda row: row[0], reverse=True)
++    points = []
++    tp = 0
++    for index, (threshold, matched) in enumerate(ordered):
++        tp += int(matched)
++        if index + 1 < len(ordered) and ordered[index + 1][0] == threshold:
++            continue
++        p = tp / (index + 1)
++        r = tp / total if total else 0.0
++        points.append({'threshold': threshold, 'precision': p, 'recall': r,
++                       'f1': 2 * p * r / (p + r) if p + r else 0.0,
++                       'tp': tp, 'fp': index + 1 - tp, 'fn': total - tp})
++    return points
++
++
++def reconstruct_curves(project, bundle, reader):
++    curves = {}
++    training = Path(project) / '7차/work/training'
++    for name, split in TEST_SPLITS.items():
++        scored, total = [], 0
++        for row in bundle['manifest']['records']:
++            if row['split'] != split:
++                continue
++            targets = []
++            for line in reader.safe_read_text(local_path(row['label'], project)).split('\n'):
++                if not line.strip():
++                    continue
++                values = list(map(float, line.split()))
++                if len(values) != 5 or values[0] != 0 or not all(math.isfinite(v) for v in values):
++                    raise ValueError('고정 정답 라벨 형식이 잘못됐습니다.')
++                _, x, y, w, h = values
++                targets.append([(x-w/2)*row['width'], (y-h/2)*row['height'],
++                                (x+w/2)*row['width'], (y+h/2)*row['height']])
++            predictions = reader.safe_read_json(training / 'evaluation/tests' / name / 'predictions' / (row['id'] + '.json'))
++            if not isinstance(predictions, list) or any(len(p) != 5 or not all(math.isfinite(v) for v in p) for p in predictions):
++                raise ValueError('고정 예측 캐시 형식이 잘못됐습니다.')
++            scored.extend(match_rows(predictions, targets))
++            total += len(targets)
++        points = curve_points(scored, total)
++        op = bundle['final']['tests'][name]['operating']
++        chosen = [matched for threshold, matched in scored if threshold >= op['threshold']]
++        if (sum(chosen), len(chosen) - sum(chosen), total - sum(chosen)) != tuple(op[k] for k in ('tp', 'fp', 'fn')):
++            raise ValueError('예측에서 재구성한 TP/FP/FN이 최종 결과와 다릅니다: ' + name)
++        curves[name] = points
++    return curves
++
++
++def source_splits(manifest):
++    counts = Counter((r['source'], r['split'], bool(r.get('augmentation'))) for r in manifest['records'])
++    return [{'source': source, 'split': split, 'augmentation': aug, 'images': count}
++            for (source, split, aug), count in sorted(counts.items())]
++
++
++def epoch_rows(path, read_text):
++    rows = []
++    for raw in csv.DictReader(read_text(path).split('\n')):
++        row = {key.strip(): value.strip() for key, value in raw.items() if key is not None}
++        values = {}
++        for key, value in row.items():
++            try:
++                number = float(value)
++            except ValueError:
++                continue
++            if math.isfinite(number):
++                values[key] = number
++        if 'epoch' in values:
++            rows.append(values)
++    return rows
++
++
++def load_sections(path, read_json):
++    data = read_json(path)
++    if tuple(row['id'] for row in data['sections']) != SECTIONS:
++        raise ValueError('보고서 고정 본문의 절 구성이 계약과 다릅니다.')
++    if not all(row['paragraphs'] and all(isinstance(p, str) and p.strip() for p in row['paragraphs']) for row in data['sections']):
++        raise ValueError('보고서 본문 문단이 비었습니다.')
++    return data
+--- /dev/null
++++ 12차/report_outputs.py
+@@ -0,0 +1,276 @@
++"""검증된 결과로 Word 초안과 비공개 표·그림을 만듭니다."""
++import csv
++from datetime import datetime, timezone
++import hashlib
++import json
++from pathlib import Path
++import subprocess
++
++from PIL import Image, ImageDraw, ImageFont
++from docx import Document
++from docx.shared import Mm, Pt, RGBColor
++from docx.oxml import OxmlElement
++from docx.oxml.ns import qn
++
++from report_core import source_splits
++
++LABELS = {'historical_taco': '과거 TACO 고정 테스트', 'new_plastopol': 'PlastOPol 고정 테스트',
++          'source_heldout_uav': 'UAVVaste 외부 출처 테스트'}
++
++
++def write_json(path, value):
++    Path(path).write_text(json.dumps(value, ensure_ascii=False, allow_nan=False, indent=2) + '\n', encoding='utf-8')
++
++
++def percent(value):
++    return '미측정' if value is None else f'{value * 100:.2f}%'
++
++
++def csv_file(path, rows, headers):
++    with Path(path).open('w', encoding='utf-8-sig', newline='') as stream:
++        writer = csv.DictWriter(stream, fieldnames=headers)
++        writer.writeheader()
++        writer.writerows({k: row.get(k) for k in headers} for row in rows)
++
++
++def plot(path, title, series, font_path, x_label, y_label, x_max=1., y_max=1.):
++    """축과 단위 및 범례가 있는 정적 그래프를 별도 분석 도구 없이 그립니다."""
++    image = Image.new('RGB', (1500, 870), 'white')
++    draw = ImageDraw.Draw(image)
++    font = ImageFont.truetype(str(font_path), 25)
++    title_font = ImageFont.truetype(str(font_path), 34)
++    draw.text((95, 26), title, font=title_font, fill='#111827')
++    left, top, width, height = 125, 110, 1260, 565
++    for i in range(6):
++        t = i / 5
++        y = top + height * (1-t)
++        x = left + width * t
++        draw.line((left, y, left+width, y), fill='#dbe2e0', width=2)
++        draw.text((35, y-13), f'{t*y_max:.2f}', font=font, fill='#374151')
++        draw.text((x-18, top+height+15), f'{t*x_max:.2f}', font=font, fill='#374151')
++    draw.line((left, top, left, top+height, left+width, top+height), fill='#374151', width=3)
++    draw.text((left, 78), y_label, font=font, fill='#374151')
++    draw.text((left+width-240, top+height+57), x_label, font=font, fill='#374151')
++    colors = ['#07865f', '#2563eb', '#b45309', '#7c3aed']
++    for i, (name, points) in enumerate(series):
++        color = colors[i % len(colors)]
++        positions = [(left+max(0,min(1,x/x_max))*width, top+(1-max(0,min(1,y/y_max)))*height)
++                     for x, y in points]
++        if len(positions) > 1:
++            draw.line(positions, fill=color, width=4)
++        if len(positions) == 1:
++            x, y = positions[0]
++            draw.ellipse((x-5,y-5,x+5,y+5), fill=color)
++        lx = 115 + (i % 2) * 650
++        ly = 775 + (i // 2) * 38
++        draw.line((lx, ly+14, lx+40, ly+14), fill=color, width=5)
++        draw.text((lx+53, ly), name, font=font, fill='#374151')
++    if not any(points for _, points in series):
++        draw.text((510, 360), '측정된 곡선 없음', font=title_font, fill='#6b7280')
++    image.save(path)
++
++
++def table(document, headers, rows, widths=None):
++    item = document.add_table(rows=1, cols=len(headers))
++    item.autofit = False
++    if widths:
++        for column, grid, width in zip(item.columns,item._tbl.tblGrid.gridCol_lst,widths):
++            column.width=Mm(width)
++            grid.w=Mm(width)
++    for i, text in enumerate(headers):
++        item.rows[0].cells[i].text = str(text)
++    repeat = OxmlElement('w:tblHeader')
++    item.rows[0]._tr.get_or_add_trPr().append(repeat)
++    for row in rows:
++        cells = item.add_row().cells
++        for i, text in enumerate(row):
++            cells[i].text = str(text)
++    for row in item.rows:
++        for i, cell in enumerate(row.cells):
++            if widths:
++                cell.width = Mm(widths[i])
++            for paragraph in cell.paragraphs:
++                paragraph.paragraph_format.space_after = Pt(4)
++                paragraph.paragraph_format.space_before = Pt(4)
++                for run in paragraph.runs:
++                    run.font.size = Pt(9)
++            props = cell._tc.get_or_add_tcPr()
++            borders = OxmlElement('w:tcBorders')
++            for side in ('top', 'left', 'bottom', 'right'):
++                edge = OxmlElement('w:' + side)
++                for key, val in (('val','single'),('sz','4'),('color','D9D9D9')):
++                    edge.set(qn('w:'+key), val)
++                borders.append(edge)
++            props.append(borders)
++    for cell in item.rows[0].cells:
++        fill = OxmlElement('w:shd')
++        fill.set(qn('w:fill'), 'F0F3F2')
++        cell._tc.get_or_add_tcPr().append(fill)
++    document.add_paragraph()
++
++
++def create_docx(path, sections, bundle, curves, epochs, support, font_path, author='작성자', fixture=False, failure=None):
++    """저작 전 마커는 이 함수를 호출하는 진입점에서 실행해야 합니다."""
++    support = Path(support)
++    support.mkdir(parents=True, exist_ok=True)
++    document = Document()
++    sec = document.sections[0]
++    sec.page_width, sec.page_height = Mm(210), Mm(297)
++    sec.top_margin, sec.bottom_margin = Mm(20), Mm(19)
++    sec.left_margin = sec.right_margin = Mm(19)
++    style_ids={'Normal','Title','Heading1','Heading2','TitleChar','Heading1Char','Heading2Char'}
++    for style in document.styles:
++        if style.style_id not in style_ids:
++            continue
++        style.font.name = 'NanumGothic'
++        style.font.bold = True
++        style.font.color.rgb = RGBColor.from_string('111827')
++        fonts=style._element.get_or_add_rPr().rFonts
++        for attribute in list(fonts.attrib):
++            if attribute.rsplit('}',1)[-1].lower().endswith('theme'):
++                del fonts.attrib[attribute]
++        for script in ('ascii','hAnsi','eastAsia','cs'):
++            fonts.set(qn('w:'+script),'NanumGothic')
++    # 기본 문서 양식의 제목 장식선을 제거하고 검은 제목만 남깁니다.
++    title_props=document.styles['Title']._element.find(qn('w:pPr'))
++    if title_props is not None:
++        for border in list(title_props.findall(qn('w:pBdr'))):
++            title_props.remove(border)
++    normal = document.styles['Normal']
++    normal.font.size = Pt(10)
++    normal.paragraph_format.line_spacing = 1.25
++    normal.paragraph_format.space_after = Pt(6)
++    document.styles['Title'].font.size = Pt(23)
++    document.styles['Heading 1'].font.size = Pt(15)
++    document.styles['Heading 2'].font.size = Pt(12)
++    footer = sec.footer.paragraphs[0]
++    footer.alignment = 2
++    field = OxmlElement('w:fldSimple')
++    field.set(qn('w:instr'), 'PAGE')
++    footer._p.append(field)
++    document.add_heading(sections['title'], 0)
++    document.add_paragraph('최종 실험 보고서' if not failure else '실험 미완료 보고서')
++    document.add_paragraph('작성자 ' + author)
++    document.add_paragraph('작성일 ' + datetime.now().astimezone().strftime('%Y년 %m월 %d일'))
++    if fixture:
++        document.add_paragraph('가상 결과를 사용한 제어 사례입니다. 아래 수치는 실제 실험 성능이 아니며 최종 결과로 사용할 수 없습니다.')
++    document.add_paragraph('이 보고서는 진행 중이던 마지막 실험의 동결 기록을 설명한다. 추가 학습이나 새로운 데이터 수신을 실행하지 않는다.')
++    if failure:
++        document.add_heading('확인한 미완료 상태', 1)
++        document.add_paragraph('지정 실험이 정상 완료되지 않아 성능과 목표 달성 여부를 확정하지 않았다. 받은 자료와 기존 결과는 보존한다.')
++        table(document, ['항목', '관측값'], [('상태', failure['state']), ('단계', failure.get('stage','미확인')),
++                                        ('오류 원문', failure.get('error') or '기록 없음'), ('성능 및 목표', '미측정')], [35,137])
++    final = bundle['final'] if bundle else None
++    tests = final['tests'] if final else {}
++    charts = []
++    if final:
++        rows = []
++        for name, result in tests.items():
++            op = result['operating']
++            rows.append(dict(test=name, **op, AP50=result['metrics']['AP50'], AP50_95=result['metrics']['AP50_95']))
++            csv_file(support / (name+'_curve.csv'), curves[name], ['threshold','precision','recall','f1','tp','fp','fn'])
++        csv_file(support / 'test_metrics.csv', rows, ['test','precision','recall','f1','tp','fp','fn','threshold','AP50','AP50_95'])
++        splits = source_splits(bundle['manifest'])
++        csv_file(support / 'source_splits.csv', splits, ['source','split','augmentation','images'])
++        pr = support / 'precision_recall.png'
++        plot(pr, '고정 테스트의 정밀도 재현율 곡선', [(LABELS[k],[(r['recall'],r['precision']) for r in v]) for k,v in curves.items()],font_path,'재현율','정밀도')
++        f1 = support / 'f1_threshold.png'
++        plot(f1, '고정 테스트의 신뢰도별 F1', [(LABELS[k],[(r['threshold'],r['f1']) for r in v]) for k,v in curves.items()],font_path,'신뢰도 임계값','F1')
++        charts = [pr,f1]
++    for section in sections['sections']:
++        document.add_heading(section['title'], 1)
++        for paragraph in section['paragraphs']:
++            document.add_paragraph(paragraph)
++        sid = section['id']
++        if not final:
++            if sid in ('dataset','training','selection','results','analysis','conclusion'):
++                document.add_paragraph('이 절의 실제 결과는 미측정이다. 정상 완료 결과와 동결 해시를 확인하지 못했으므로 성능 수치를 채우지 않았다.')
++            continue
++        if sid == 'overview':
++            op = tests['historical_taco']['operating']
++            document.add_paragraph(f"과거 TACO 고정 테스트의 정밀도는 {percent(op['precision'])}, 재현율은 {percent(op['recall'])}, F1은 {percent(op['f1'])}였다. 정밀도 90% 목표는 {'달성' if op['precision']>=.9 else '미달'}했고 재현율 90% 목표는 {'달성' if op['recall']>=.9 else '미달'}했다. 이 결과를 다른 출처나 CCTV 행동 인식 전체의 정확도로 해석하지 않았다.")
++        elif sid == 'dataset':
++            table(document,['출처','분할','종류','이미지 수'],[(r['source'],r['split'],'증강' if r['augmentation'] else '원본',r['images']) for r in source_splits(bundle['manifest'])],[42,61,29,40])
++            document.add_paragraph('원본 이미지와 train 전용 crop 및 반복 학습 노출 수는 서로 다른 집계이다. 고정 manifest의 집계를 아래에 보존하였다.')
++            table(document,['항목','고정 집계'],[(k,json.dumps(v,ensure_ascii=False)) for k,v in final['counts'].items()],[64,108])
++        elif sid == 'training':
++            if not epochs:
++                document.add_paragraph('읽을 수 있는 실제 epoch 기록이 없어 학습 곡선과 완료 epoch는 미확인으로 남겼다.')
++            for name, rows in epochs.items():
++                document.add_heading(name, 2)
++                document.add_paragraph(f"실제 CSV 기록은 {len(rows)}개이며 마지막 기록 epoch는 {int(rows[-1]['epoch']) if rows else '미확인'}이다. 이는 계획 epoch 또는 선택된 best checkpoint의 epoch와 다르다.")
++                keys = [k for k in ('metrics/precision(B)','metrics/recall(B)','metrics/mAP50(B)') if any(k in r for r in rows)]
++                path_chart = support / (name+'_epochs.png')
++                plot(path_chart, name+' 실제 epoch 기록', [(key,[(r['epoch'],r[key]) for r in rows if key in r]) for key in keys],font_path,'실제 epoch','학습 중 validation 값',max([r['epoch'] for r in rows],default=1))
++                document.add_picture(str(path_chart), width=Mm(168))
++                charts.append(path_chart)
++        elif sid == 'selection':
++            selected = final['selected']
++            document.add_paragraph(f"선택된 후보는 {selected['name']}이며 추론 방식은 {selected['policy']}, 입력 크기는 {selected['imgsz']}px, 고정 신뢰도는 {selected['operating']['threshold']:.6g}이다. 임계값은 검증에서만 정했고 테스트 곡선을 이용해 다시 조정하지 않았다.")
++            document.add_paragraph('선택 checkpoint의 epoch는 현재 동결 결과에 명시되지 않아 미확인이다. 마지막 CSV epoch를 best epoch로 대체하지 않았다. baseline이 선택된 경우 두 신규 후보의 epoch를 해당 baseline의 epoch로 표시하지 않았다.')
++            table(document,['검증 후보','TACO P','TACO R','F1','PlastOPol R'],[(r['name'],percent(r['operating']['precision']),percent(r['operating']['recall']),percent(r['operating']['f1']),percent(r.get('plastopol',{}).get('operating',{}).get('recall'))) for r in bundle['comparison']],[56,29,29,29,29])
++        elif sid == 'results':
++            table(document,['고정 테스트','P','R','F1','자체 AP50'],[(LABELS[k],percent(r['operating']['precision']),percent(r['operating']['recall']),percent(r['operating']['f1']),percent(r['metrics']['AP50'])) for k,r in tests.items()],[58,28,28,28,30])
++            table(document,['고정 테스트','TP','FP','FN','TN'],[(LABELS[k],r['operating']['tp'],r['operating']['fp'],r['operating']['fn'],'정의하지 않음') for k,r in tests.items()],[62,23,23,23,41])
++            document.add_paragraph('TP는 올바르게 대응한 쓰레기 상자, FP는 대응 정답이 없는 예측, FN은 놓친 정답이다. 객체 탐지에는 배경의 모든 가능한 상자를 세는 유한한 TN 정의가 없으므로 일반 분류 혼동행렬의 TN과 전체 accuracy를 계산하지 않았다.')
++            for chart in charts[:2]:
++                document.add_picture(str(chart), width=Mm(168))
++            document.add_paragraph('PR과 신뢰도별 F1은 보존된 예측과 정답의 IoU .5 일대일 탐욕 매칭으로 재구성했다. 새로운 추론 또는 테스트 임계값 선택을 하지 않았다. AP는 7차 자체 101점 보간 지표이며 공식 COCO API AP가 아니다.')
++        elif sid == 'analysis':
++            table(document,['테스트와 크기','P','R','TP','FP','FN'],[(LABELS[k]+' / '+size,percent(v['precision']),percent(v['recall']),v['tp'],v['fp'],v['fn']) for k,r in tests.items() for size,v in r['sizes'].items()],[67,26,26,18,18,17])
++            document.add_paragraph('작은 객체는 종횡비를 보존해 긴 변을 1280으로 맞춘 좌표에서 면적 32² 미만, 중간은 96² 미만, 큰 객체는 그 이상이다. 공식 COCO APs와 같지 않다. 정답과 예측 크기 기준이 달라 크기별 정밀도의 의미도 전체 지표와 구분한다.')
++            table(document,['테스트','음성 이미지','음성 FP','이미지당 FP'],[(LABELS[k],r['negative_images'],r['negative_false_positives'],'미측정' if r['false_positives_per_negative_image'] is None else f"{r['false_positives_per_negative_image']:.4f}") for k,r in tests.items()],[65,35,30,42])
++        elif sid == 'limits':
++            for limit in final.get('limits',[]):
++                document.add_paragraph('동결 기록의 한계: '+limit)
++            document.add_paragraph('10차 영상 탐지는 보존된 5차 경로를 사용하므로 이 보고서의 선택 모델이 해당 영상 기능에 자동 적용됐다고 주장하지 않는다. 투기 행동 정답을 별도로 평가하지 않아 행동 정확도는 미측정이다.')
++        elif sid == 'conclusion':
++            for k,r in tests.items():
++                op=r['operating']
++                document.add_paragraph(f"{LABELS[k]}에서 정밀도 90%는 {'달성' if op['precision']>=.9 else '미달'}, 재현율 90%는 {'달성' if op['recall']>=.9 else '미달'}이다. 이후 추가 후보 학습이나 추가 데이터 수신 없이 이번 실험을 마무리한다.")
++    document.add_heading('참고 자료',1)
++    for ref in sections.get('references',[]):
++        document.add_paragraph(ref['title']+' '+ref['url'])
++    if bundle:
++        document.add_heading('재현을 위한 파일 대응',1)
++        document.add_paragraph('데이터와 가중치 파일은 중복 복사하지 않았다. 아래 위치는 프로젝트 기준 상대 경로이며 SHA-256으로 같은 파일인지 대조한다. 모든 개별 정답 파일의 해시는 비공개 검증 영수증에 보존하였다.')
++        for name, info in bundle['references'].items():
++            if '/labels/' not in name:
++                document.add_paragraph(name+'\nSHA-256 '+info['sha256'])
++    document.core_properties.author = author
++    document.core_properties.title = sections['title']
++    document.core_properties.subject = '가상 결과 제어 사례' if fixture else ('미완료 실험' if failure else '고정 실험 결과')
++    document.save(path)
++    receipt = {'fixture':fixture,'document_state':'draft_render_pending','render_status':'blocked',
++               'human_visual_review':False,'reason':'허용된 렌더러와 전체 페이지 시각 검토가 아직 필요합니다.',
++               'docx_sha256':hashlib.sha256(Path(path).read_bytes()).hexdigest()}
++    write_json(support/'generation_receipt.json',receipt)
++    return receipt
++
++
++def render_document(docx, support, config):
++    """검토한 명시적 렌더 설정 없이는 실행하지 않습니다."""
++    if not config or config.get('approved') is not True:
++        raise RuntimeError('문서 렌더 환경의 명시적 승인 전에는 최종 납품을 준비하지 않습니다.')
++    python = Path(config['python']).resolve()
++    helper = Path(config['helper']).resolve()
++    soffice = Path(config['soffice']).resolve()
++    if not all(p.is_file() for p in (python,helper,soffice)):
++        raise ValueError('렌더 설정의 실제 실행 파일이 없습니다.')
++    if config.get('helper_sha256') != hashlib.sha256(helper.read_bytes()).hexdigest():
++        raise ValueError('검토한 렌더 도구 해시가 다릅니다.')
++    import os
++    env = os.environ.copy()
++    env['PATH'] = str(soffice.parent)+os.pathsep+env.get('PATH','')
++    command = [str(python),'-B','-X','utf8',str(helper),str(Path(docx).resolve()),'--output_dir',str(Path(support).resolve()),'--emit_pdf']
++    result = subprocess.run(command, shell=False, cwd=str(Path(docx).resolve().parent),env=env,capture_output=True,timeout=180)
++    write_json(Path(support)/'renderer_receipt.json',{'argv':command,'exit_code':result.returncode,
++                'stdout':result.stdout.decode('utf-8','replace')[-24000:], 'stderr':result.stderr.decode('utf-8','replace')[-24000:],
++                'human_visual_review':False})
++    if result.returncode:
++        raise RuntimeError('공식 문서 렌더 명령이 실패했습니다. 비공개 렌더 영수증을 확인하세요.')
++    pdf = Path(support)/(Path(docx).stem+'.pdf')
++    pages = sorted(Path(support).glob('page-*.png'))
++    if not pdf.is_file() or not pdf.stat().st_size or not pages:
++        raise RuntimeError('PDF 또는 전체 페이지 렌더 결과가 없습니다.')
++    return pdf,pages
+--- /dev/null
++++ 12차/report_sections.json
+@@ -0,0 +1,136 @@
++{
++  "title": "불법투기 탐지를 위한 객체 탐지 모델 개발과 고정 평가",
++  "sections": [
++    {
++      "id": "overview",
++      "title": "연구 개요",
++      "paragraphs": [
++        "본 프로젝트에서는 환경 영상에서 쓰레기로 보이는 객체를 탐지하고 사람이 검토할 장면을 정리하는 시스템을 개발하였다. 기존에 보존한 탐지 모델과 자료 분할을 출발점으로 삼아 다양한 출처의 영상을 준비하고 두 학습 후보를 비교하는 최종 실험을 구성하였다. 자료 확보, 데이터 검증, 학습, 모델 선택, 고정 테스트와 결과 확인이 서로 연결되도록 설계하였다.",
++        "이번 보고서는 객체 탐지의 성능과 시스템의 실행 과정을 설명한다. 객체가 탐지되었다는 사실만으로 사람이 물건을 버린 의도나 법적 위반을 판정하지 않는다. CCTV 영상에 투기 행동의 정답이 없는 경우 행동 인식 정확도는 계산하지 않으며, 화면에서 확인한 영상 재생 기능도 새 모델의 성능 결과와 구분한다."
++      ]
++    },
++    {
++      "id": "problem",
++      "title": "문제 정의와 목표",
++      "paragraphs": [
++        "야외 환경의 쓰레기는 크기와 모양이 다양하고 배경과 겹치거나 화면에서 작은 영역을 차지한다. 같은 물체라도 촬영 높이, 거리, 조명과 가림에 따라 외형이 달라진다. 이에 단순히 영상 한 장의 탐지 결과만 나열하기보다 서로 다른 자료에서 모델을 비교하고 오류의 양상을 함께 확인할 필요가 있었다.",
++        "주요 목표는 교집합 대비 합집합 비율 IoU 0.5를 기준으로 과거에 평가한 TACO 고정 테스트에서 정밀도와 재현율이 각각 90%에 도달하는지를 확인하는 것이다. 이는 사전에 정한 목표이며 실험을 실행했다는 사실만으로 달성한 결과가 아니다. 출처별 테스트와 평가 조건을 함께 제시하여 한 자료의 수치를 모든 환경의 성능으로 확대하지 않는다."
++      ]
++    },
++    {
++      "id": "development",
++      "title": "프로젝트 개발 과정",
++      "paragraphs": [
++        "초기에는 공개 쓰레기 자료를 이용한 탐지 학습과 영상 처리 절차를 노트북으로 구성하였다. 이후 자료 준비와 학습, 추론, 영상 처리, 사용자 화면을 구분하고 기존 모델과 평가 결과를 보존하였다. 이전 실험에서 검증 자료의 작은 객체 누락과 오탐을 살펴본 결과는 후속 실험의 설계 근거로 사용하되 단일 원인이나 개선 효과를 확정하지 않았다.",
++        "최종 실험에서는 기존 자료와 모델을 덮어쓰지 않고 추가 출처를 확보해 고정된 분할과 학습 계획에 연결하였다. 대용량 수신이 제한 시간과 재시도 소진으로 중단된 문제는 별도의 복구 실행기를 마련해 다루었다. 이 복구는 시스템의 안정적인 실행을 위한 개발이며 탐지 성능의 향상을 입증하는 실험 결과가 아니다."
++      ]
++    },
++    {
++      "id": "architecture",
++      "title": "시스템 구성과 실행 흐름",
++      "paragraphs": [
++        "시스템은 원자료 수신과 검증, 데이터 변환과 분할, 후보별 학습, 검증 선택, 고정 테스트, 결과 저장의 단계로 구성하였다. 각 단계는 작업 상태를 기록하며 기존 작업자의 잠금과 상태 처리 경계를 사용한다. 학습 후보, 입력 크기, 시간 예산과 평가 설정은 실행 전에 고정해 다른 설정의 결과가 섞이지 않도록 하였다.",
++        "자료 수신 복구기는 기존 준비 코드의 해시와 실험 계약을 바꾸지 않고 수신을 앞단에서 보완한다. 수신 범위와 전송량을 기록하고 원장이나 디스크 반영이 불확실하면 자동 재개를 차단하여 확인하도록 하였다. 공식 원자료의 크기와 무결성을 확인한 뒤 기존 준비·학습 절차로 이어지도록 설계하였다."
++      ]
++    },
++    {
++      "id": "dataset",
++      "title": "자료 출처와 구성",
++      "paragraphs": [
++        "자료는 기존에 보존한 TACO 분할과 공개 pLitterStreet, PlastOPol, UAVVaste를 사용하도록 구성하였다. pLitterStreet는 도로 주변 자료의 학습 범위를 확장하는 데 사용하고, PlastOPol은 공식 분할을 출발점으로 학습과 검증·테스트를 구성한다. UAVVaste는 학습과 검증에 사용하지 않는 항공 시점의 외부 출처 테스트로 보관한다.",
++        "각 자료의 원제작자, 공식 저장소와 이용 조건은 참고문헌에 남겼다. 공개 자료의 촬영과 원래 주석 제작을 본 프로젝트에서 직접 수행했다고 가정하지 않는다. 출처마다 상자의 정의와 촬영 조건이 다르므로 단일 쓰레기 클래스로 대응할 때 쓰레기통을 제외하고 개별 객체와 묶음 주석이 섞이는 한계를 함께 기록한다."
++      ]
++    },
++    {
++      "id": "preprocess",
++      "title": "자료 검증과 전처리",
++      "paragraphs": [
++        "원본을 그대로 보존하면서 공식 파일 크기와 MD5, 실제 SHA-256을 확인하고 압축 자료의 CRC를 검사하도록 하였다. 이미지와 라벨의 해시를 별도로 기록하고 학습에는 RGB JPEG 정규화 사본을 사용한다. 사본은 품질과 표본화 설정을 고정하고 EXIF 정보를 제거하되 픽셀을 임의로 회전하지 않으며, 주석 크기와 저장 픽셀 크기가 맞는지 확인한다.",
++        "동일 원본 해시, 촬영 그룹과 64비트 지각 해시의 근접도를 이용하여 연결 그룹을 만들고 분할 간 누출을 줄이도록 하였다. 평가 자료와 연결된 학습 후보가 있으면 평가 분할을 우선한다. 작은 객체를 위한 잘라낸 이미지는 학습 분할에서만 생성하며 부모 이미지와 분할을 기록한다. 유효한 원본 수, 잘라낸 수와 반복 노출 수는 서로 다른 수량으로 보고한다."
++      ]
++    },
++    {
++      "id": "training",
++      "title": "학습 구성",
++      "paragraphs": [
++        "기존 선택 모델을 비교 기준으로 보존하고 두 개의 새 후보를 학습하도록 구성하였다. 하나는 COCO 사전학습 YOLO26l을 입력 크기 960과 배치 4로 사용하며 최대 60 에포크를 적용한다. 다른 하나는 보존된 작은 객체용 l-P2 모델을 입력 크기 1280과 배치 2로 미세 조정하며 최대 45 에포크를 적용한다.",
++        "두 후보의 학습 루프에는 각각 누적 6시간 예산과 조기 종료 대기값 12를 설정하였다. 에포크 상한은 별도 콜백으로 확인한다. 시간 제한은 배치와 검증 경계에서 확인되며 최종 검증과 체크포인트 저장에는 시간이 더 들 수 있다. 다운로드, 자료 준비와 독립 평가는 이 학습 시간에 포함하지 않는다."
++      ]
++    },
++    {
++      "id": "selection",
++      "title": "검증과 모델 선택",
++      "paragraphs": [
++        "기존 기준 모델과 새 후보를 같은 평가 절차에서 비교한다. 전체 이미지 추론과 전체 이미지에 겹치는 타일 추론을 더하는 정책을 검증 자료에서 비교하고, 신뢰도는 TACO 검증 자료에서만 선택한다. 후보 순위는 TACO 검증의 정밀도와 재현율 중 작은 값, F1, 같은 신뢰도를 적용한 PlastOPol 검증 결과와 AP50 순으로 판단하며 완전 동점에서는 기존 모델을 우선한다.",
++        "모델, 추론 정책과 신뢰도를 선택한 뒤 테스트 전에 계약을 고정한다. 과거 TACO 테스트, 새 PlastOPol 테스트와 UAVVaste 외부 테스트는 각각 별도로 평가한다. 테스트 결과를 보고 같은 테스트에 맞춰 모델이나 임계값을 다시 조정하지 않으며, 중단 후에는 고정된 계약과 예측 기록을 확인해 남은 평가를 이어가도록 하였다."
++      ]
++    },
++    {
++      "id": "results",
++      "title": "평가 지표와 결과 해석",
++      "paragraphs": [
++        "정밀도는 탐지한 객체 중 정답과 일치한 비율이고 재현율은 정답 객체 중 찾아낸 비율이다. 본 평가기는 단일 클래스 예측을 신뢰도 순으로 정렬하고 정답과 일대일로 매칭한다. 운영 정밀도와 재현율은 IoU 0.5에서 계산하며 정밀도와 재현율이 모두 목표 이상인지 각각 확인한다.",
++        "평균 정밀도는 자체 구현한 101점 보간 방식으로 계산한다. 이 수치는 공식 COCO API의 평가 결과나 다른 도구의 기본 검증 수치와 같은 것으로 표기하지 않는다. 출처별 결과와 작은·중간·큰 객체의 분포를 함께 해석하고, 실제로 기록되지 않은 결과는 수치나 성공 판정으로 만들지 않는다."
++      ]
++    },
++    {
++      "id": "analysis",
++      "title": "비교와 오류 분석",
++      "paragraphs": [
++        "오탐과 미탐을 함께 살피기 위해 정답 상자와 예측 상자의 겹침, 신뢰도 및 객체 크기를 구분한다. 신뢰도를 낮추면 더 많은 정답 후보를 찾을 가능성과 함께 오탐이 늘어날 수 있으므로 한 지표만으로 운영 조건을 정하지 않는다. 출처별 촬영 조건과 주석 정의의 차이도 결과 해석에 반영한다.",
++        "음성 이미지 수가 없을 때 음성 이미지당 오탐률은 계산 불가로 남긴다. 이를 0으로 바꾸거나 음성 장면에서의 성능이 검증된 것으로 해석하지 않는다. 기존 5차와 이번 실험은 입력 정규화나 평가 조건이 다를 수 있으므로 같은 조건의 비교가 확보되지 않은 상태에서 개선율을 산출하지 않는다."
++      ]
++    },
++    {
++      "id": "application",
++      "title": "대시보드와 활용 범위",
++      "paragraphs": [
++        "대시보드에서는 다운로드, 자료 준비, GPU 학습, 검증, 최종 평가를 입체 모형과 단계별 상태로 보여 주도록 구성하였다. 현재 파일의 수신 진행과 전체 실험 완료를 구분하고, 기록이 없거나 오래된 경우에는 미측정과 갱신 지연을 표시한다. 영상 탐지, 성능 분석과 작업 기록 화면을 연결하여 사용자가 현재 작업과 다음 단계를 살펴볼 수 있다.",
++        "화면은 나눔고딕 Bold와 밝은 화면 구성을 사용하며 실제 상태에 따라 표시를 갱신한다. 로컬 서버의 루프백 바인딩, 세션 인증, 요청 검증과 파일 경계를 유지한다. 기존 영상 탐지 기능은 보존된 5차 경로를 사용하므로 새 실험에서 선택될 모델이 영상 탐지에 자동 적용되었다고 단정하지 않는다.",
++        "기존 영상 경로는 5차 작업자를 통해 보존된 3차 탐지기를 호출한다. 탐지기는 쓰레기 상자와 별도의 사람 상자를 프레임마다 얻고, 연속된 쓰레기 상자의 IoU가 0.25를 넘으면 기존 추적에 연결한다. 정지 기준 상자와의 IoU가 0.55보다 작아지면 정지 시간을 다시 세며, 초기 기준 구간의 지속 물체는 기존 물체로 구분한다. 신규 물체가 기본 설정상 20초 이상 정지하고 가까운 사람의 마지막 관측으로부터 5초가 지나면 검토 후보를 기록한다. 초기 기준 구간의 기본값은 10초이며 각 시간은 설정 가능하다. 선택한 관심 구역이 있으면 상자의 하단 중심이 다각형 안에 있는지도 확인한다. 이 규칙은 사람과 물체의 화면상 근접 및 시간 조건이며 소유 관계나 실제 투기 의도를 입증하지 않는다."
++      ]
++    },
++    {
++      "id": "limits",
++      "title": "자료와 일반화의 한계",
++      "paragraphs": [
++        "과거 TACO 테스트 150장은 이미 이전 평가에서 사용한 이력이 있으므로 완전히 새로운 독립 테스트가 아니다. PlastOPol은 공식 분할과 이미지 근접 중복을 통제하지만 촬영 장소나 세션의 완전한 독립성은 확인되지 않았다. 일부 과거 사진의 실파일이 없어 모든 과거 자료와의 지각적 근접 중복 부재를 보장할 수 없다.",
++        "UAVVaste는 항공 시점의 외부 출처 테스트이므로 그 결과를 CCTV의 실제 투기 행동 정확도로 일반화하지 않는다. 단일 클래스에는 서로 다른 크기와 의미의 쓰레기 주석이 포함되며 현장의 날씨, 카메라 위치와 객체 밀도도 다를 수 있다. 실제 운영 적용 전에는 대상 현장의 권한과 별도 검증 자료를 갖춰 확인해야 한다."
++      ]
++    },
++    {
++      "id": "conclusion",
++      "title": "결론과 검증 범위",
++      "paragraphs": [
++        "본 프로젝트에서는 기존 실험과 자료의 보존을 전제로 출처별 데이터 준비, 두 후보의 학습, 검증에 의한 선택과 고정 테스트를 연결하였다. 자료 원본과 정규화 사본, 학습용 증강과 평가 자료, 과거 기준과 새로운 외부 출처를 구분하여 재현과 해석에 필요한 근거를 남기도록 하였다.",
++        "최종 판단은 실제로 저장된 선택 결과와 각 테스트의 정밀도·재현율 및 평가 조건을 함께 확인한 뒤 내린다. 목표 미달이나 미측정 항목이 있으면 그대로 보고하며 결과를 바탕으로 테스트 조건을 변경하지 않는다. 이 보고서의 정적 설명은 설계와 구현 범위를 기록하며, 실제로 측정되지 않은 성능을 대신하지 않는다."
++      ]
++    }
++  ],
++  "references": [
++    {
++      "title": "Proença, Pedro F. 및 Simões, Pedro. TACO: Trash Annotations in Context for Litter Detection",
++      "url": "https://arxiv.org/abs/2003.06975"
++    },
++    {
++      "title": "Mandhati, Sriram Reddy; Deshapriya, Lakmal; Mendis, Chatura Lavanga; Gunasekara, Kavinda; Yrle, Frank; Chaksan, Angsana. pLitterStreet",
++      "url": "https://zenodo.org/records/8288500"
++    },
++    {
++      "title": "Córdova, Manuel; Pinto, Allan; Hellevik, Christina Carrozzo; Alaliyat, Saleh Abdel Afou; Hameed, Ibrahim A.; Pedrini, Helio; da Silva Torres, Ricardo. PlastOPol",
++      "url": "https://zenodo.org/records/5829156"
++    },
++    {
++      "title": "Córdova 등. PlastOPol 데이터셋 제작자와 자료 설명, Wageningen University & Research",
++      "url": "https://research.wur.nl/en/datasets/plastopol-a-dataset-for-litter-detection/"
++    },
++    {
++      "title": "Kraft, Marek; Piechocki, Mateusz; Ptak, Bartosz; Walas, Krzysztof. UAVVaste dataset",
++      "url": "https://zenodo.org/records/8214061"
++    },
++    {
++      "title": "PUTvision. UAVVaste 공식 저장소",
++      "url": "https://github.com/PUTvision/UAVVaste"
++    }
++  ]
++}
+--- /dev/null
++++ 12차/tests/fixtures.py
+@@ -0,0 +1,86 @@
++"""보고서 검사용 합성 자료이며 실제 실험 결과가 아닙니다."""
++import copy
++import hashlib
++import json
++from pathlib import Path
++
++
++def save(path, data):
++    path.parent.mkdir(parents=True, exist_ok=True)
++    path.write_text(json.dumps(data, ensure_ascii=False, allow_nan=False), encoding='utf-8')
++
++
++def sha(path):
++    return hashlib.sha256(path.read_bytes()).hexdigest()
++
++
++def fixture(root):
++    root = Path(root)
++    train = root / '7차/work/training'
++    model = train / 'runs/fixture/weights/best.pt'
++    model.parent.mkdir(parents=True)
++    model.write_bytes(b'fixture-only-not-a-model')
++    paths = ['configs/training.json', 'train_pipeline.py', 'prepare_dataset.py', 'configs/protected_sources.json']
++    for file in paths:
++        p = root / '7차' / file
++        p.parent.mkdir(parents=True, exist_ok=True)
++        p.write_text('{}', encoding='utf-8')
++    config = {'evaluation_imgsz':1280,'evaluation_conf_floor':.001,
++              'evaluation_nms_iou':.5,'evaluation_max_det':1000,
++              'validation_policies':['full','full_grid3']}
++    save(root/'7차/configs/training.json',config)
++    records = []
++    names = {'historical_taco': 'historical_test', 'new_plastopol': 'test', 'source_heldout_uav': 'external_test'}
++    for name, split in names.items():
++        label = train / 'labels' / (name + '.txt')
++        label.parent.mkdir(exist_ok=True)
++        label.write_text('0 0.5 0.5 0.2 0.2\n', encoding='utf-8')
++        records.append({'id': name, 'source': name, 'split': split, 'label': str(label),
++                        'label_sha256': sha(label), 'sha256': 'a'*64, 'width': 100, 'height': 100})
++    manifest = {'counts': {'original_images': 3}, 'records': records, 'limits': ['합성 자료']}
++    save(train / 'data_manifest.json', manifest)
++    op = {'precision': .5, 'recall': 1., 'f1': 2/3, 'tp': 1, 'fp': 1, 'fn': 0, 'threshold': .2, 'iou': .5}
++    empty = {'precision': 0., 'recall': 0., 'f1': 0., 'tp': 0, 'fp': 0, 'fn': 0, 'threshold': .2, 'iou': .5}
++    result = {'operating': op, 'metrics': {'AP50': 1., 'AP50_95': 1.}, 'images': 1,
++              'weights': [str(model)], 'weights_sha256': {str(model): sha(model)},
++              'policy': 'full', 'imgsz': 1280, 'evaluator':'single-class confidence-greedy IoU; 101-point interpolated AP; v2',
++              'sizes': {'small': op, 'medium': empty, 'large': empty},
++              'negative_images': 0, 'negative_false_positives': 0, 'false_positives_per_negative_image': None}
++    selected = dict(copy.deepcopy(result), name='fixture_full')
++    comparison = [selected]
++    save(train / 'validation_comparison.json', comparison)
++    save(train / 'selection.json', selected)
++    experiment = dict(zip(['config_sha256', 'pipeline_sha256', 'preparation_sha256', 'protected_sources_sha256'],
++                          [sha(root / '7차' / p) for p in paths]))
++    experiment['manifest_sha256'] = sha(train / 'data_manifest.json')
++    save(train / 'experiment_contract.json', experiment)
++    save(train / 'test_contract.json', {'experiment': experiment, 'selected': selected,
++         'protocol':'freeze model, tiles and threshold before tests; no test tuning; per-image prediction cache'})
++    for row in records:
++        directory = train / 'evaluation/tests' / row['id']
++        save(directory / 'metrics.json', result)
++        save(directory / 'contract.json', {'weights': selected['weights_sha256'], 'policy': 'full', 'threshold': .2,
++                                           'imgsz':1280,'conf_floor':.001,'nms_iou':.5,'max_det':1000,
++                                           'evaluator':result['evaluator'],
++                                           'images': {row['id']: [row['sha256'], row['label_sha256']]}})
++        save(directory / 'predictions' / (row['id'] + '.json'), [[40,40,60,60,.8], [0,0,10,10,.3]])
++    final = {'selected': selected, 'tests': {name: copy.deepcopy(result) for name in names},
++             'test': result, 'target_met': False, 'all_test_targets_met': False,
++             'manifest_sha256': experiment['manifest_sha256'], 'counts': manifest['counts'], 'finished': 1700000000,
++             'limits': ['합성 제어 사례이며 실제 성능이 아닙니다.']}
++    save(train / 'final.json', final)
++    job = {'id': 'fixture_job', 'kind': 'train', 'state': 'complete', 'result': final, 'updated': 1700000000}
++    return job
++
++
++class Reader:
++    @staticmethod
++    def safe_read_json(path, default=None):
++        try:
++            return json.loads(Path(path).read_text(encoding='utf-8'))
++        except FileNotFoundError:
++            return default
++
++    @staticmethod
++    def safe_read_text(path, encoding='utf-8'):
++        return Path(path).read_text(encoding=encoding)
+--- /dev/null
++++ 12차/tests/make_fixture.py
+@@ -0,0 +1,34 @@
++"""문서 품질 점검용 합성 결과만 생성하며 운영 작업을 읽지 않습니다."""
++import argparse
++from pathlib import Path
++import sys
++
++ROOT = Path(__file__).resolve().parents[1]
++sys.path.insert(0, str(ROOT))
++from fixtures import fixture, Reader
++from report_core import validate_bundle, reconstruct_curves, load_sections
++from report_outputs import create_docx
++
++
++def main():
++    parser = argparse.ArgumentParser()
++    parser.add_argument('--output', required=True)
++    parser.add_argument('--font', required=True)
++    parser.add_argument('--author', default='작성자')
++    args = parser.parse_args()
++    output = Path(args.output).resolve()
++    output.mkdir(parents=True, exist_ok=False)
++    project = output/'synthetic_project'
++    job = fixture(project)
++    bundle = validate_bundle(project, job, Reader.safe_read_json)
++    curves = reconstruct_curves(project, bundle, Reader)
++    epochs = {'fixture_candidate': [{'epoch': i,'metrics/precision(B)':.2+i*.1,'metrics/recall(B)':.25+i*.08,'metrics/mAP50(B)':.2+i*.05} for i in range(1,5)]}
++    sections = load_sections(ROOT/'report_sections.json', Reader.safe_read_json)
++    receipt = create_docx(output/'가상결과_보고서_편집초안.docx',sections,bundle,curves,epochs,
++                          output/'support',args.font,args.author,fixture=True)
++    print('가상 결과 Word 편집초안 저장, 렌더 미완료:', output)
++    print(receipt)
++
++
++if __name__ == '__main__':
++    main()
+--- /dev/null
++++ 12차/tests/test_outputs.py
+@@ -0,0 +1,63 @@
++"""문서의 실측·가상 구분과 렌더 차단을 검사합니다."""
++from pathlib import Path
++import sys
++import tempfile
++import unittest
++from zipfile import ZipFile
++
++ROOT=Path(__file__).resolve().parents[1]
++sys.path.insert(0,str(ROOT))
++from report_outputs import percent, render_document, create_docx
++
++
++class OutputContract(unittest.TestCase):
++    def test_missing_value_is_not_zero(self):
++        self.assertEqual(percent(None),'미측정')
++        self.assertEqual(percent(0),'0.00%')
++
++    def test_unapproved_renderer_never_executes(self):
++        with self.assertRaisesRegex(RuntimeError,'승인'):
++            render_document('not-created.docx','not-created',None)
++
++    def test_fixture_docx_labels_fake_values(self):
++        # 별도 저작 없이 현재 저작한 제어 사례를 검사합니다.
++        path=ROOT/'work/fixture_docx_v1/가상결과_보고서_편집초안.docx'
++        if not path.exists():
++            self.skipTest('비공개 시각 검토용 사례는 공개 배포에 포함하지 않습니다.')
++        with ZipFile(path) as archive:
++            text=archive.read('word/document.xml').decode('utf-8')
++        self.assertIn('가상 결과',text)
++        self.assertIn('실제 실험 성능이 아니며',text)
++        self.assertIn('정의하지 않음',text)
++        self.assertIn('선택 checkpoint의 epoch',text)
++        self.assertIn('미확인',text)
++
++    def test_author_setting_is_separate_from_static_narrative(self):
++        from docx import Document
++        narrative={'title':'가상 보고서','sections':[], 'references':[]}
++        with tempfile.TemporaryDirectory() as directory:
++            output=Path(directory)/'draft.docx'
++            create_docx(output,narrative,None,{}, {},Path(directory)/'support',None,
++                        author='가상 작성자',fixture=True,failure={'state':'failed','stage':'제어 사례'})
++            document=Document(output)
++            self.assertEqual(document.core_properties.author,'가상 작성자')
++            self.assertTrue(any('가상 작성자' in p.text for p in document.paragraphs))
++            self.assertNotIn('author',narrative)
++
++    def test_document_styles_and_table_grid_follow_explicit_layout(self):
++        from docx import Document
++        from docx.oxml.ns import qn
++        from docx.shared import Mm
++        with tempfile.TemporaryDirectory() as directory:
++            output=Path(directory)/'draft.docx'
++            create_docx(output,{'title':'가상 보고서','sections':[]},None,{}, {},
++                        Path(directory)/'support',None,failure={'state':'failed'})
++            document=Document(output)
++            self.assertIsNone(document.styles['Title']._element.find(qn('w:pPr')).find(qn('w:pBdr')))
++            for name in ('Normal','Title','Heading 1','Heading 2'):
++                fonts=document.styles[name]._element.rPr.rFonts
++                self.assertFalse(any(k.rsplit('}',1)[-1].lower().endswith('theme') for k in fonts.attrib))
++                self.assertEqual(fonts.get(qn('w:eastAsia')),'NanumGothic')
++            widths=[col.w for col in document.tables[0]._tbl.tblGrid.gridCol_lst]
++            self.assertLess(abs(widths[0]-Mm(35)),1000)
++            self.assertLess(abs(widths[1]-Mm(137)),1000)
+--- 11차/tests/test_recover.py
++++ /dev/null
+@@ -1,445 +0,0 @@
+-"""작은 공식 범위 수신과 기존 작업자 연결의 실패 경로를 검사합니다."""
+-import contextlib
+-import hashlib
+-import importlib.util
+-import io
+-import json
+-import os
+-from pathlib import Path
+-import socket
+-import shutil
+-import signal
+-import subprocess
+-import sys
+-import tempfile
+-import threading
+-import time
+-import unittest
+-from types import SimpleNamespace
+-from unittest.mock import patch
+-from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+-
+-ROOT = Path(__file__).resolve().parents[1]
+-sys.path.insert(0, str(ROOT))
+-sys.path.insert(0, str(ROOT.parent / '7차'))
+-import prepare_dataset as data
+-import worker
+-
+-
+-@contextlib.contextmanager
+-def server(content, behavior=lambda number: {}):
+-    calls = []
+-    class Handler(BaseHTTPRequestHandler):
+-        def do_GET(self):
+-            start, end = map(int, self.headers['Range'].split('=')[1].split('-'))
+-            calls.append((start, end))
+-            reply = behavior(len(calls))
+-            self.send_response(reply.get('status', 206))
+-            self.send_header('Content-Range', reply.get('range', f'bytes {start}-{end}/{len(content)}'))
+-            if 'retry_after' in reply:
+-                self.send_header('Retry-After', reply['retry_after'])
+-            self.end_headers()
+-            try:
+-                self.wfile.write(reply.get('body', content[start:end + 1]))
+-                self.wfile.flush()
+-            except (BrokenPipeError, ConnectionResetError):
+-                pass
+-        def log_message(self, *args):
+-            pass
+-    service = ThreadingHTTPServer(('127.0.0.1', 0), Handler)
+-    thread = threading.Thread(target=service.serve_forever, daemon=True)
+-    thread.start()
+-    try:
+-        yield f'http://127.0.0.1:{service.server_port}/fixture', calls
+-    finally:
+-        service.shutdown()
+-        service.server_close()
+-        thread.join(2)
+-
+-
+-class Clock:
+-    def __init__(self):
+-        self.value = 0
+-    def __call__(self):
+-        return self.value
+-
+-
+-class Response:
+-    def __init__(self, body, start, end, total, clock=None, step=0, failure=None):
+-        self.body = io.BytesIO(body)
+-        self.status = 206
+-        self.headers = {'Content-Range': f'bytes {start}-{end}/{total}'}
+-        self.clock, self.step, self.failure = clock, step, failure
+-    def __enter__(self):
+-        return self
+-    def __exit__(self, *args):
+-        self.close()
+-    def close(self):
+-        self.body.close()
+-    def read1(self, count):
+-        if self.clock:
+-            self.clock.value += self.step
+-        if self.failure:
+-            error, self.failure = self.failure, None
+-            raise error
+-        return self.body.read(min(count, 1024))
+-
+-
+-class RecoveryTests(unittest.TestCase):
+-    def setUp(self):
+-        if not (ROOT / 'recover.py').is_file():
+-            self.fail('작은 범위 복구 수신기와 원본 작업자 연결이 아직 구현되지 않았습니다.')
+-        import recover
+-        self.r = recover
+-        self.temporary = tempfile.TemporaryDirectory()
+-        self.addCleanup(self.temporary.cleanup)
+-        self.folder = Path(self.temporary.name)
+-        self.content = '공식 원자료 대신 사용하는 고정 검사 본문'.encode('utf-8') * 1600
+-        self.events = []
+-        self.sleeps = []
+-        self.budget = data.DownloadBudget(self.folder, limit=2**24, minimum_free=0)
+-        self.target = self.folder / 'sample.zip'
+-    def spec(self, url):
+-        return {'url': url, 'size': len(self.content), 'md5': hashlib.md5(self.content).hexdigest(), 'source': 'fixture', 'name': 'sample.zip'}
+-    def receiver(self, **kwargs):
+-        return self.r.Receiver(data, worker, self.events.append, sleep=self.sleeps.append, **kwargs)
+-    def test_small_ranges_complete_and_verified_receipt(self):
+-        with server(self.content) as (url, calls):
+-            self.receiver().receive(self.spec(url), self.target, self.budget)
+-        self.assertEqual(self.target.read_bytes(), self.content)
+-        self.assertEqual(self.budget.used, len(self.content))
+-        self.assertGreater(len(calls), 1)
+-        self.assertTrue(all(end - start + 1 <= 4 * 1024 * 1024 for start, end in calls))
+-        receipt = data.load(self.target.with_suffix('.zip.verified.json'))
+-        self.assertEqual(receipt['sha256'], hashlib.sha256(self.content).hexdigest())
+-    def test_resume_preserves_existing_prefix(self):
+-        with server(self.content) as (url, calls):
+-            spec = self.spec(url)
+-            self.target.with_suffix('.zip.part').write_bytes(self.content[:1234])
+-            data.atomic_json(self.target.with_suffix('.zip.part.json'), {key: spec[key] for key in ('url', 'size', 'md5')})
+-            self.receiver().receive(spec, self.target, self.budget)
+-        self.assertEqual(calls[0][0], 1234)
+-        self.assertEqual(self.target.read_bytes(), self.content)
+-        self.assertEqual(self.budget.used, len(self.content) - 1234)
+-    def test_short_body_retries_saved_offset(self):
+-        with server(self.content, lambda number: {'body': self.content[:1234]} if number == 1 else {}) as (url, calls):
+-            self.receiver().receive(self.spec(url), self.target, self.budget)
+-        self.assertEqual(calls[1][0], 1234)
+-        self.assertEqual(self.target.read_bytes(), self.content)
+-        self.assertTrue(self.sleeps)
+-    def test_slow_progress_splits_range_without_retry_exhaustion(self):
+-        clock = Clock()
+-        calls = []
+-        def open_fixture(url, headers):
+-            start, end = map(int, headers['Range'].split('=')[1].split('-'))
+-            calls.append((start, end))
+-            return Response(self.content[start:end + 1], start, end, len(self.content), clock, 21)
+-        self.receiver(clock=clock, opener=open_fixture).receive(self.spec('https://fixture.invalid/sample'), self.target, self.budget)
+-        self.assertEqual(self.target.read_bytes(), self.content)
+-        self.assertEqual(self.budget.used, len(self.content))
+-        self.assertEqual(self.sleeps, [])
+-        self.assertGreater(len(calls), 7)
+-    def test_timeout_without_progress_exhausts_six_retries(self):
+-        calls = []
+-        def unavailable(url, headers):
+-            calls.append(headers)
+-            raise TimeoutError('검사용 연결 시간 초과')
+-        with self.assertRaises(TimeoutError):
+-            self.receiver(opener=unavailable).receive(self.spec('https://fixture.invalid/sample'), self.target, self.budget)
+-        self.assertEqual(len(calls), 7)
+-        self.assertEqual(self.sleeps, [2, 4, 8, 16, 32, 60])
+-        self.assertFalse(self.target.exists())
+-    def test_partial_timeout_keeps_received_bytes(self):
+-        calls = []
+-        def interrupted(url, headers):
+-            start, end = map(int, headers['Range'].split('=')[1].split('-'))
+-            calls.append(start)
+-            if len(calls) == 1:
+-                import http.client
+-                return Response(b'', start, end, len(self.content), failure=http.client.IncompleteRead(self.content[:17], end - start + 1))
+-            return Response(self.content[start:end + 1], start, end, len(self.content))
+-        self.receiver(opener=interrupted).receive(self.spec('https://fixture.invalid/sample'), self.target, self.budget)
+-        self.assertEqual(calls[1], 17)
+-        self.assertEqual(self.target.read_bytes(), self.content)
+-        self.assertEqual(self.budget.used, len(self.content))
+-    def test_wrong_range_is_fatal(self):
+-        with server(self.content, lambda number: {'range': 'bytes 1-2/3'}) as (url, calls):
+-            with self.assertRaises(ValueError):
+-                self.receiver().receive(self.spec(url), self.target, self.budget)
+-        self.assertEqual(len(calls), 1)
+-        self.assertEqual(self.sleeps, [])
+-    def test_http_403_is_fatal(self):
+-        with server(self.content, lambda number: {'status': 403}) as (url, calls):
+-            with self.assertRaises(Exception):
+-                self.receiver().receive(self.spec(url), self.target, self.budget)
+-        self.assertEqual(len(calls), 1)
+-        self.assertEqual(self.sleeps, [])
+-    def test_retry_after_is_bounded(self):
+-        with server(self.content, lambda number: {'status': 503, 'retry_after': '120'} if number == 1 else {}) as (url, calls):
+-            self.receiver().receive(self.spec(url), self.target, self.budget)
+-        self.assertEqual(self.sleeps[0], 60)
+-    def test_budget_fails_before_request(self):
+-        self.budget.limit = 1
+-        with server(self.content) as (url, calls):
+-            with self.assertRaises(ValueError):
+-                self.receiver().receive(self.spec(url), self.target, self.budget)
+-        self.assertEqual(calls, [])
+-    def test_ledger_failure_is_not_retried(self):
+-        original = data.atomic_json
+-        def ledger_only(path, value):
+-            if Path(path) == self.budget.path:
+-                raise OSError('본문 수신 뒤 원장 쓰기 실패')
+-            return original(path, value)
+-        with server(self.content) as (url, calls), patch.object(data, 'atomic_json', side_effect=ledger_only):
+-            with self.assertRaises(OSError):
+-                self.receiver().receive(self.spec(url), self.target, self.budget)
+-        self.assertEqual(len(calls), 1)
+-        self.assertGreater(self.budget.used, 0)
+-        self.assertEqual(self.target.with_suffix('.zip.part').stat().st_size, 0)
+-        self.assertTrue(self.target.with_suffix('.zip.recovery-pending.json').exists())
+-        self.assertEqual(self.sleeps, [])
+-    def test_notify_failure_is_not_retried(self):
+-        def failed(event):
+-            raise OSError('상태 통지 쓰기 실패')
+-        with server(self.content) as (url, calls):
+-            with self.assertRaises(OSError):
+-                self.r.Receiver(data, worker, failed, sleep=self.sleeps.append).receive(self.spec(url), self.target, self.budget)
+-        self.assertEqual(self.sleeps, [])
+-    def test_metadata_mismatch_preserves_prefix(self):
+-        self.target.with_suffix('.zip.part').write_bytes(b'keep')
+-        data.atomic_json(self.target.with_suffix('.zip.part.json'), {'url': 'https://other.invalid'})
+-        with self.assertRaises(ValueError):
+-            self.receiver().receive(self.spec('https://fixture.invalid/sample'), self.target, self.budget)
+-        self.assertEqual(self.target.with_suffix('.zip.part').read_bytes(), b'keep')
+-    def test_wrong_md5_keeps_partial_and_no_success_receipt(self):
+-        with server(self.content) as (url, calls):
+-            spec = self.spec(url)
+-            spec['md5'] = '0' * 32
+-            with self.assertRaises(ValueError):
+-                self.receiver().receive(spec, self.target, self.budget)
+-        self.assertEqual(self.target.with_suffix('.zip.part').read_bytes(), self.content)
+-        self.assertFalse(self.target.exists())
+-        self.assertFalse(self.target.with_suffix('.zip.verified.json').exists())
+-    def test_existing_verified_file_not_downloaded(self):
+-        self.target.write_bytes(self.content)
+-        with server(self.content) as (url, calls):
+-            self.receiver().receive(self.spec(url), self.target, self.budget)
+-        self.assertEqual(calls, [])
+-        self.assertEqual(self.budget.used, 0)
+-    def test_throttle_preserves_latest_progress_and_clears_retry(self):
+-        clock = Clock()
+-        sent = []
+-        progress = self.r.Progress(lambda **event: sent.append(event), clock=clock)
+-        for number in range(100):
+-            progress(download_bytes=number)
+-        self.assertEqual(len(sent), 1)
+-        clock.value = 3
+-        progress(downloaded_bytes=9, retry_reason=None, retry_attempt=0, retry_wait_seconds=0)
+-        self.assertEqual(sent[-1]['download_bytes'], 99)
+-        self.assertIsNone(sent[-1]['retry_reason'])
+-
+-    def test_retry_stage_and_clear_are_immediate_inside_throttle_window(self):
+-        clock = Clock()
+-        sent = []
+-        progress = self.r.Progress(lambda **event: sent.append(event), clock=clock)
+-        progress(stage='본문 수신', download_bytes=1)
+-        progress(stage='재시도 대기', retry_reason='TimeoutError', retry_attempt=1, retry_wait_seconds=60)
+-        self.assertEqual(sent[-1]['stage'], '재시도 대기')
+-        progress(stage='본문 수신', retry_reason=None, retry_attempt=0, retry_wait_seconds=0)
+-        self.assertIsNone(sent[-1]['retry_reason'])
+-        progress(stage='원자료 해시 검증')
+-        self.assertEqual(sent[-1]['stage'], '원자료 해시 검증')
+-    def test_pipeline_path_rejects_forged_target(self):
+-        with self.assertRaises(ValueError):
+-            self.r.validate_pipeline(self.folder / 'worker.py')
+-        self.assertEqual(self.r.validate_pipeline(ROOT.parent / '7차/worker.py'), (ROOT.parent / '7차/worker.py').resolve())
+-
+-    def test_entry_evidence_preserves_real_interpreter_flags(self):
+-        code = "import sys,json;sys.path.insert(0," + repr(str(ROOT)) + ");import recover;print(json.dumps(recover.entry_evidence()['argv']))"
+-        argv = [sys.executable, '-B', '-X', 'utf8', '-c', code]
+-        result = subprocess.run(argv, cwd=ROOT.parent, capture_output=True, timeout=10)
+-        self.assertEqual(result.returncode, 0, result.stderr.decode('utf-8', 'replace'))
+-        self.assertEqual(json.loads(result.stdout), argv)
+-    def test_original_baseline_matches_real_files(self):
+-        self.r.verify_original()
+-    def test_original_contract_mismatch_is_rejected_without_rebase(self):
+-        with patch.object(self.r, 'ORIGINAL', self.folder):
+-            with self.assertRaises((ValueError, FileNotFoundError)):
+-                self.r.verify_original()
+-    def test_receiving_lock_blocks_duplicate_receiver(self):
+-        if sys.platform == 'win32':
+-            self.skipTest('동일 Linux flock은 Docker에서 검사합니다.')
+-        lock = self.target.with_name(self.target.name + '.receiving.lock')
+-        with worker.file_lock(lock, blocking=False):
+-            with self.assertRaises(RuntimeError):
+-                self.receiver().receive(self.spec('https://fixture.invalid/sample'), self.target, self.budget)
+-
+-    def test_full_boundary_incomplete_read_never_requests_reversed_range(self):
+-        import http.client
+-        content = b'fixture'
+-        calls = []
+-        def response(url, headers):
+-            start, end = map(int, headers['Range'].split('=')[1].split('-'))
+-            self.assertLessEqual(start, end)
+-            calls.append((start, end))
+-            return Response(b'', start, end, len(content), failure=http.client.IncompleteRead(content, 1))
+-        spec = {'url': 'https://fixture.invalid', 'size': 7, 'md5': hashlib.md5(content).hexdigest()}
+-        self.receiver(opener=response).receive(spec, self.target, self.budget)
+-        self.assertEqual(calls, [(0, 6)])
+-        self.assertEqual(self.target.read_bytes(), content)
+-
+-    def test_fast_ranges_grow_but_never_exceed_original_four_mib(self):
+-        content = b'x' * (9 * 1024 * 1024)
+-        calls = []
+-        def response(url, headers):
+-            start, end = map(int, headers['Range'].split('=')[1].split('-'))
+-            calls.append((start, end))
+-            result = Response(content[start:end + 1], start, end, len(content))
+-            result.read1 = result.body.read
+-            return result
+-        spec = {'url': 'https://fixture.invalid', 'size': len(content), 'md5': hashlib.md5(content).hexdigest()}
+-        self.receiver(opener=response).receive(spec, self.target, self.budget)
+-        sizes = [end - start + 1 for start, end in calls]
+-        self.assertEqual(sizes[:3], [65536, 131072, 262144])
+-        self.assertEqual(max(sizes), 4194304)
+-        self.assertEqual(self.target.read_bytes(), content)
+-
+-    def test_uncertain_previous_charge_blocks_new_network_and_preserves_marker(self):
+-        marker = self.target.with_suffix('.zip.recovery-pending.json')
+-        marker.write_text('{"audit":"required"}', encoding='utf-8')
+-        with server(self.content) as (url, calls):
+-            with self.assertRaisesRegex(ValueError, '감사'):
+-                self.receiver().receive(self.spec(url), self.target, self.budget)
+-        self.assertEqual(calls, [])
+-        self.assertTrue(marker.exists())
+-
+-    def test_prefetch_ledgers_import_once_and_changed_receipt_is_rejected(self):
+-        work = self.folder / 'work'
+-        for name, count in [('preflight', 10), ('prefetch', 20)]:
+-            data.atomic_json(work / name / 'download_ledger.json', {'download_bytes': count})
+-        fake = SimpleNamespace(WORK=work, SOURCES=work / 'sources', SOURCE_FILES=[{'name': 'images.zip'}],
+-            load=data.load, local=data.local, sha256_file=data.sha256_file)
+-        budget = data.DownloadBudget(fake.SOURCES, limit=100, minimum_free=0)
+-        self.r.import_frozen_prefetch(fake, worker, budget)
+-        self.r.import_frozen_prefetch(fake, worker, budget)
+-        self.assertEqual(budget.used, 30)
+-        self.assertEqual(data.load(budget.path)['download_bytes'], 30)
+-        data.atomic_json(work / 'prefetch/download_ledger.json', {'download_bytes': 21})
+-        with self.assertRaises(ValueError):
+-            self.r.import_frozen_prefetch(fake, worker, budget)
+-        self.assertEqual(budget.used, 30)
+-
+-    def test_contract_mismatch_prevents_original_run(self):
+-        original_calls = []
+-        with patch.object(self.r, 'verify_contract', side_effect=ValueError('검사용 계약 불일치')):
+-            with self.assertRaises(ValueError):
+-                self.r.prefetch_then_run('fixture', lambda **kw: None, True,
+-                    lambda *args, **kw: original_calls.append(args), data, worker)
+-        self.assertEqual(original_calls, [])
+-
+-    def test_ledger_failure_prevents_original_run(self):
+-        fake = SimpleNamespace(SOURCES=self.folder, SOURCE_FILES=[self.spec('https://fixture.invalid/sample')],
+-            DownloadBudget=lambda *args, **kw: self.budget, open_request=data.open_request)
+-        original_calls = []
+-        with patch.object(self.r, 'verify_contract'), patch.object(self.r, 'import_frozen_prefetch'), \
+-                patch.object(self.r.Receiver, 'receive', side_effect=OSError('본문 계상 실패')):
+-            with self.assertRaises(OSError):
+-                self.r.prefetch_then_run('fixture', lambda **kw: None, True,
+-                    lambda *args, **kw: original_calls.append(args), fake, worker)
+-        self.assertEqual(original_calls, [])
+-
+-    def pipeline_fixture(self):
+-        base = self.folder / 'pipeline'
+-        original = base / '7차'
+-        recovery = base / '11차'
+-        baseline = json.loads((ROOT / 'original-baseline.json').read_text(encoding='utf-8'))
+-        for name in baseline:
+-            destination = original / name
+-            destination.parent.mkdir(parents=True, exist_ok=True)
+-            shutil.copy2(ROOT.parent / '7차' / name, destination)
+-        recovery.mkdir()
+-        for name in ('recover.py', 'original-baseline.json'):
+-            shutil.copy2(ROOT / name, recovery / name)
+-        return original, recovery
+-
+-    @unittest.skipIf(sys.platform == 'win32', '실제 시작은 Docker Linux에서만 허용합니다.')
+-    def test_start_failure_persists_failed_job_and_log(self):
+-        original, recovery = self.pipeline_fixture()
+-        with patch.object(self.r, 'ORIGINAL', original), patch.object(self.r, 'ROOT', recovery), \
+-                patch.object(self.r, 'originals', return_value=(worker, data, None)), \
+-                patch.object(worker, 'WORK', original / 'work'), patch.object(worker, 'ROOT', original), \
+-                patch.object(self.r.subprocess, 'Popen', side_effect=OSError('검사용 기동 실패')):
+-            with self.assertRaises(OSError):
+-                self.r.start(original / 'worker.py')
+-            job = worker.jobs()[0]
+-            self.assertEqual(job['state'], 'failed')
+-            self.assertIn('기동 실패', job['error'])
+-            self.assertIn('기동 실패', (worker.WORK / 'jobs' / (job['id'] + '.log')).read_text(encoding='utf-8'))
+-
+-    @unittest.skipIf(sys.platform == 'win32', '동일 Linux 실행 잠금은 Docker에서 검사합니다.')
+-    def test_global_run_lock_prevents_new_job(self):
+-        original, recovery = self.pipeline_fixture()
+-        with patch.object(self.r, 'ORIGINAL', original), patch.object(self.r, 'ROOT', recovery), \
+-                patch.object(self.r, 'originals', return_value=(worker, data, None)), \
+-                patch.object(worker, 'WORK', original / 'work'), patch.object(worker, 'ROOT', original):
+-            with worker.file_lock(worker.WORK / 'run.lock', blocking=False):
+-                with self.assertRaises(RuntimeError):
+-                    self.r.start(original / 'worker.py')
+-            self.assertEqual(worker.jobs(), [])
+-
+-    @unittest.skipIf(sys.platform == 'win32', '별도 Linux 자식과 실제 상태 기록은 Docker에서 검사합니다.')
+-    def test_actual_child_failure_records_state_before_returning_to_user(self):
+-        original, recovery = self.pipeline_fixture()
+-        result = subprocess.run([sys.executable, '-B', '-X', 'utf8', str(recovery / 'recover.py'),
+-            '--pipeline', str(original / 'worker.py'), '--start'], cwd=ROOT.parent, capture_output=True, timeout=15)
+-        self.assertEqual(result.returncode, 0, result.stderr.decode('utf-8', 'replace'))
+-        launched = json.loads(result.stdout)
+-        job_path = original / 'work/jobs' / (launched['job'] + '.json')
+-        try:
+-            deadline = time.monotonic() + 10
+-            while time.monotonic() < deadline:
+-                job = data.load(job_path)
+-                if job['state'] == 'failed':
+-                    break
+-                time.sleep(.1)
+-            self.assertEqual(job['state'], 'failed')
+-            self.assertTrue(job['error'])
+-            self.assertTrue(job_path.with_suffix('.log').read_text(encoding='utf-8').strip())
+-            self.assertEqual(Path(job['recovery']['entry']).name, 'recover.py')
+-            self.assertIn(str(original / 'worker.py'), job['recovery']['argv'])
+-        finally:
+-            # failed JSON 뒤의 publish가 끝날 때까지 fixture 소유 PID만 기다립니다.
+-            process = Path('/proc') / str(launched['pid'])
+-            def alive():
+-                try:
+-                    if (process / 'stat').read_text().rsplit(') ', 1)[1].split()[0] in {'Z', 'X'}:
+-                        return False
+-                    command = (process / 'cmdline').read_bytes().split(b'\0')
+-                    return str(recovery / 'recover.py').encode() in command and launched['job'].encode() in command
+-                except (FileNotFoundError, ProcessLookupError):
+-                    return False
+-            deadline = time.monotonic() + 5
+-            while alive() and time.monotonic() < deadline:
+-                time.sleep(.05)
+-            if alive():
+-                os.kill(launched['pid'], signal.SIGTERM)
+-                deadline = time.monotonic() + 2
+-                while alive() and time.monotonic() < deadline:
+-                    time.sleep(.05)
+-                if alive():
+-                    os.kill(launched['pid'], signal.SIGKILL)
+-                    deadline = time.monotonic() + 2
+-                    while alive() and time.monotonic() < deadline:
+-                        time.sleep(.05)
+-            self.assertFalse(alive(), 'fixture 자식 종료 전 임시 폴더를 정리할 수 없습니다.')
+-
+-    def test_dead_or_mismatched_child_is_reconciled_as_interrupted(self):
+-        with patch.object(worker, 'WORK', self.folder / 'work'), patch.object(worker, 'ROOT', ROOT.parent / '7차'):
+-            worker.save(worker.WORK / 'jobs/fixture.json', {'id': 'fixture', 'kind': 'train', 'state': 'queued',
+-                'created': time.time(), 'pid': os.getpid(), 'params': {'resume': True}})
+-            worker._reconcile()
+-            self.assertEqual(worker.read(worker.WORK / 'jobs/fixture.json')['state'], 'interrupted')
+-
+-
+-if __name__ == '__main__':
+-    unittest.main()
+--- /dev/null
++++ 12차/tests/test_report.py
+@@ -0,0 +1,162 @@
++"""실제 학습 없이 고정 결과의 완료 판정과 보고서 정합성을 검사합니다."""
++import importlib.util
++from pathlib import Path
++import sys
++import unittest
++import copy
++import tempfile
++from fixtures import fixture, Reader, save
++
++ROOT = Path(__file__).resolve().parents[1]
++sys.path.insert(0, str(ROOT))
++
++
++class CompletionContract(unittest.TestCase):
++    def test_completion_module_is_available(self):
++        self.assertIsNotNone(importlib.util.find_spec('report_core'),
++                             '지정 작업과 동결 결과를 검증하는 모듈이 필요합니다.')
++
++    def test_running_never_completes_from_age(self):
++        from report_core import decision
++        self.assertEqual(decision({'id': 'x', 'kind': 'train', 'state': 'running', 'updated': 0}, 'x'), 'waiting')
++
++    def test_missing_is_not_complete(self):
++        from report_core import decision
++        self.assertEqual(decision(None, 'x'), 'missing')
++
++    def test_wrong_job_rejected(self):
++        from report_core import decision
++        with self.assertRaises(ValueError):
++            decision({'id': 'other', 'kind': 'train', 'state': 'complete'}, 'x')
++
++    def test_failed_and_interrupted_are_incomplete(self):
++        from report_core import decision
++        for state in ('failed', 'interrupted'):
++            self.assertEqual(decision({'id': 'x', 'kind': 'train', 'state': state}, 'x'), 'incomplete')
++
++    def test_job_path_rejects_traversal(self):
++        from report_core import job_path
++        with self.assertRaises(ValueError):
++            job_path(ROOT, '../other')
++
++    def test_path_rejects_external_reference(self):
++        from report_core import local_path
++        with self.assertRaises(ValueError):
++            local_path('../outside.pt', ROOT)
++
++    def test_docker_reference_maps_to_project(self):
++        from report_core import local_path
++        self.assertEqual(local_path('/workspace/2026/' + ROOT.name + '/7차/a', ROOT), ROOT / '7차/a')
++
++
++class BundleContract(unittest.TestCase):
++    def setUp(self):
++        self.temp = tempfile.TemporaryDirectory()
++        self.addCleanup(self.temp.cleanup)
++        self.project = Path(self.temp.name)
++        self.job = fixture(self.project)
++
++    def validate(self):
++        from report_core import validate_bundle
++        return validate_bundle(self.project, self.job, Reader.safe_read_json)
++
++    def test_validated_fixture_not_live_performance(self):
++        self.assertEqual(len(self.validate()['final']['tests']), 3)
++
++    def test_complete_requires_final_file(self):
++        (self.project / '7차/work/training/final.json').unlink()
++        with self.assertRaises(ValueError):
++            self.validate()
++
++    def test_result_job_mismatch_rejected(self):
++        self.job['result'] = {}
++        with self.assertRaises(ValueError):
++            self.validate()
++
++    def test_weight_tamper_rejected(self):
++        model = next(iter(self.job['result']['selected']['weights_sha256']))
++        Path(model).write_bytes(b'changed')
++        with self.assertRaisesRegex(ValueError, 'SHA-256'):
++            self.validate()
++
++    def test_source_contract_tamper_rejected(self):
++        (self.project / '7차/train_pipeline.py').write_text('changed', encoding='utf-8')
++        with self.assertRaisesRegex(ValueError, 'SHA-256'):
++            self.validate()
++
++    def test_missing_third_test_rejected(self):
++        final = self.job['result']
++        del final['tests']['source_heldout_uav']
++        save(self.project / '7차/work/training/final.json', final)
++        with self.assertRaisesRegex(ValueError, '세 고정'):
++            self.validate()
++
++    def test_curves_reconstruct_fixed_prediction_counts(self):
++        from report_core import reconstruct_curves
++        curves = reconstruct_curves(self.project, self.validate(), Reader)
++        self.assertEqual(curves['historical_taco'][-1]['fp'], 1)
++        self.assertEqual(curves['historical_taco'][0]['recall'], 1)
++
++    def test_prediction_tamper_is_not_silent(self):
++        from report_core import reconstruct_curves
++        bundle = self.validate()
++        save(self.project / '7차/work/training/evaluation/tests/historical_taco/predictions/historical_taco.json', [])
++        with self.assertRaisesRegex(ValueError, 'TP/FP/FN'):
++            reconstruct_curves(self.project, bundle, Reader)
++
++    def test_primary_target_is_independent_of_json_order(self):
++        final=self.job['result']
++        auxiliary=copy.deepcopy(final['tests']['new_plastopol'])
++        auxiliary['operating'].update(precision=1.,recall=1.,f1=1.,fp=0)
++        auxiliary['sizes']['small']=copy.deepcopy(auxiliary['operating'])
++        final['tests']['new_plastopol']=auxiliary
++        final['tests']={name:final['tests'][name] for name in ('new_plastopol','source_heldout_uav','historical_taco')}
++        save(self.project/'7차/work/training/evaluation/tests/new_plastopol/metrics.json',auxiliary)
++        save(self.project/'7차/work/training/final.json',final)
++        self.assertFalse(self.validate()['final']['target_met'])
++
++    def test_evaluation_parameters_must_match_frozen_config(self):
++        for key in ('imgsz','conf_floor','nms_iou','max_det','evaluator'):
++            with self.subTest(key=key):
++                path=self.project/'7차/work/training/evaluation/tests/historical_taco/contract.json'
++                contract=Reader.safe_read_json(path)
++                original=copy.deepcopy(contract)
++                contract[key]='tampered'
++                save(path,contract)
++                with self.assertRaises(ValueError):
++                    self.validate()
++                save(path,original)
++
++
++class AnalysisContract(unittest.TestCase):
++    def test_confusion_numeric_consistency(self):
++        from report_core import validate_result
++        with self.assertRaisesRegex(ValueError, '일치'):
++            validate_result({'operating': {'tp': 1, 'fp': 1, 'fn': 0, 'precision': 1., 'recall': 1., 'f1': 1.}})
++
++    def test_equal_confidence_grouped_for_pr(self):
++        from report_core import curve_points
++        points = curve_points([(.5, True), (.5, False)], 1)
++        self.assertEqual(len(points), 1)
++        self.assertEqual(points[0]['precision'], .5)
++
++    def test_greedy_matching_duplicate_is_fp(self):
++        from report_core import match_rows
++        matched = match_rows([[0,0,10,10,.9],[0,0,10,10,.8]], [[0,0,10,10]])
++        self.assertEqual(matched, [(.9, True), (.8, False)])
++
++    def test_epoch_csv_is_actual_not_planned(self):
++        from report_core import epoch_rows
++        rows = epoch_rows(None, lambda _: 'epoch, metrics/precision(B)\n1,0.2\n2,0.4\n')
++        self.assertEqual(len(rows), 2)
++        self.assertEqual(rows[-1]['epoch'], 2)
++
++    def test_report_outputs_module_is_available(self):
++        self.assertIsNotNone(importlib.util.find_spec('report_outputs'), '검증된 표·그림·문서 생성기가 필요합니다.')
++
++    def test_watcher_module_is_available(self):
++        self.assertIsNotNone(importlib.util.find_spec('watcher'), '단일 작업 전용 완료 후 처리기가 필요합니다.')
++
++
++if __name__ == '__main__':
++    unittest.main()
+--- /dev/null
++++ 12차/tests/test_watcher.py
+@@ -0,0 +1,133 @@
++"""운영 작업 없이 1회 생성과 불완료 및 보안 경계를 검사합니다."""
++from pathlib import Path
++import sys
++import tempfile
++import unittest
++
++ROOT = Path(__file__).resolve().parents[1]
++sys.path.insert(0,str(ROOT))
++from fixtures import fixture, Reader, save
++from watcher import process_once, publish_pair, validate_plan, watch_lock
++
++
++class WatcherContract(unittest.TestCase):
++    def setUp(self):
++        self.temp = tempfile.TemporaryDirectory()
++        self.addCleanup(self.temp.cleanup)
++        self.project = Path(self.temp.name)
++        self.job = fixture(self.project)
++        self.plan = {'schema':1,'project_root':str(self.project),'job_id':'fixture_job',
++                     'output_dir':'최종/fixture','support_dir':'12차/work/fixture',
++                     'deliver_formats':['docx','pdf'],'author':'작성자','font':'font.ttf',
++                     'marker':{},'renderer_config':str(self.project/'renderer.json')}
++        self.job_file = self.project/'7차/work/jobs/fixture_job.json'
++        save(self.job_file,self.job)
++
++    def test_running_never_calls_authoring_or_renderer(self):
++        self.job['state']='running'
++        save(self.job_file,self.job)
++        def forbidden(*args):
++            self.fail('진행 중에는 문서 저작이나 렌더를 호출할 수 없습니다.')
++        result=process_once(self.plan,Reader,forbidden,forbidden)
++        self.assertEqual(result['state'],'waiting')
++        self.assertFalse((self.project/'최종').exists())
++
++    def test_stale_running_remains_running(self):
++        self.job.update(state='running',updated=1)
++        save(self.job_file,self.job)
++        result=process_once(self.plan,Reader)
++        self.assertEqual(result['state'],'waiting')
++        self.assertTrue(result['stale'])
++        self.assertEqual(result['process_liveness'],'미검증')
++
++    def test_complete_without_renderer_stays_blocked(self):
++        result=process_once(self.plan,Reader)
++        self.assertEqual(result['state'],'blocked_renderer')
++        self.assertFalse((self.project/'최종').exists())
++
++    def test_failed_does_not_use_past_success_metrics(self):
++        self.job.update(state='failed',error='합성 오류')
++        save(self.job_file,self.job)
++        result=process_once(self.plan,Reader)
++        self.assertEqual(result['job_state'],'failed')
++        self.assertEqual(result['state'],'blocked_renderer')
++
++    def test_existing_output_is_never_overwritten(self):
++        target=self.project/'최종/fixture'
++        target.mkdir(parents=True)
++        (target/'old.txt').write_text('preserve',encoding='utf-8')
++        with self.assertRaises(FileExistsError):
++            process_once(self.plan,Reader)
++        self.assertEqual((target/'old.txt').read_text(encoding='utf-8'),'preserve')
++
++    def test_completed_receipt_prevents_repeated_generation(self):
++        support=self.project/'12차/work/fixture'
++        from report_core import digest
++        docx=self.project/'draft.docx';docx.write_bytes(b'fixture docx')
++        pdf=self.project/'same.pdf';pdf.write_bytes(b'fixture pdf')
++        outputs=publish_pair(docx,pdf,self.project/'최종/fixture')
++        receipt={'job_id':'fixture_job','state':'complete','outputs':outputs,'output_dir':'최종/fixture',
++                 'input_final_sha256':digest(self.project/'7차/work/training/final.json')}
++        save(support/'completion_receipt.json',receipt)
++        self.assertEqual(process_once(self.plan,Reader),receipt)
++
++    def test_receipt_without_output_files_is_rejected(self):
++        save(self.project/'12차/work/fixture/completion_receipt.json',
++             {'job_id':'fixture_job','state':'complete','outputs':{}})
++        with self.assertRaises(ValueError):
++            process_once(self.plan,Reader)
++        self.assertFalse((self.project/'최종').exists())
++
++    def test_changed_output_is_not_reused(self):
++        self.test_completed_receipt_prevents_repeated_generation()
++        (self.project/'최종/fixture/최종보고서.pdf').write_bytes(b'changed')
++        with self.assertRaises(ValueError):
++            process_once(self.plan,Reader)
++
++    def test_changed_final_is_not_reused(self):
++        self.test_completed_receipt_prevents_repeated_generation()
++        final=self.job['result'];final['finished']=1700000100
++        save(self.project/'7차/work/training/final.json',final)
++        with self.assertRaises(ValueError):
++            process_once(self.plan,Reader)
++
++    def test_other_output_directory_is_not_reused(self):
++        self.test_completed_receipt_prevents_repeated_generation()
++        self.plan['output_dir']='최종/other'
++        with self.assertRaises(ValueError):
++            process_once(self.plan,Reader)
++
++    def test_lock_rejects_second_observer(self):
++        path=self.project/'observer.lock'
++        with watch_lock(path):
++            with self.assertRaises(RuntimeError):
++                with watch_lock(path):
++                    self.fail('중복 관찰 잠금이 허용됐습니다.')
++
++    def test_lock_releases_after_exception(self):
++        path=self.project/'observer.lock'
++        with self.assertRaises(ValueError):
++            with watch_lock(path):
++                raise ValueError('제어 오류')
++        with watch_lock(path):
++            self.assertTrue(path.exists())
++
++    def test_output_contains_exactly_docx_and_pdf(self):
++        docx=self.project/'draft.docx'
++        pdf=self.project/'same.pdf'
++        docx.write_bytes(b'fixture docx')
++        pdf.write_bytes(b'fixture same-source pdf')
++        target=self.project/'최종/pair'
++        result=publish_pair(docx,pdf,target)
++        self.assertEqual(set(result),{'최종보고서.docx','최종보고서.pdf'})
++        self.assertEqual(len(list(target.iterdir())),2)
++
++    def test_plan_rejects_html_delivery(self):
++        self.plan['deliver_formats']=['docx','pdf','html']
++        with self.assertRaises(ValueError):
++            validate_plan(self.plan)
++
++    def test_plan_rejects_external_support(self):
++        self.plan['support_dir']='../outside'
++        with self.assertRaises(ValueError):
++            validate_plan(self.plan)
+--- 11차/verify_sources.py
++++ 12차/verify_sources.py
+@@ -1,56 +1,64 @@
+-"""외부에서 고정한 11차 전체 해시와 7차 원본 불변을 검사합니다."""
+-import argparse
++"""배포 파일과 엄격 UTF-8 및 보존한 원본 해시를 검사합니다."""
+ import ast
+ import hashlib
++import importlib.util
+ import json
+ from pathlib import Path
+-import re
+ 
+ ROOT = Path(__file__).resolve().parent
+-PRODUCTS = ('README.md', 'docs/복구설계.md', 'original-baseline.json', 'recover.py', 'tests/test_recover.py', 'verify_sources.py', '변경기록.md')
++PUBLIC_FILES = (
++    'report_core.py','report_outputs.py','watcher.py','verify_sources.py','report_sections.json',
++    'README.md','변경기록.md','ROUTING-LESSONS.md','docs/설계.md','docs/요구사항.md',
++    'docs/계획서식.json','docs/렌더설정서식.json','docs/source_contract.json','docs/결과해시스키마.json',
++    'tests/fixtures.py','tests/test_report.py','tests/test_watcher.py','tests/test_outputs.py','tests/make_fixture.py')
+ 
+ 
+-def snapshot():
+-    files = {}
+-    for name in PRODUCTS:
+-        path = ROOT / name
+-        if path.is_symlink() or getattr(path, 'is_junction', lambda: False)():
+-            raise ValueError('제품 파일의 링크를 허용하지 않습니다.')
+-        raw = path.read_bytes()
+-        text = raw.decode('utf-8', errors='strict')
+-        if '\ufffd' in text:
+-            raise ValueError('대체 문자가 있습니다: ' + name)
+-        if path.suffix == '.py':
+-            ast.parse(text, filename=name)
+-        elif path.suffix == '.json':
+-            json.loads(text)
+-        files[name] = {'bytes': len(raw), 'sha256': hashlib.sha256(raw).hexdigest()}
+-    for path in ROOT.rglob('*'):
+-        relative = path.relative_to(ROOT)
+-        if relative.parts[0] in {'evidence', 'work'} or '__pycache__' in relative.parts:
+-            continue
+-        if path.is_symlink() or getattr(path, 'is_junction', lambda: False)():
+-            raise ValueError('제품 경로의 링크를 허용하지 않습니다.')
+-        if path.is_file() and relative.as_posix() not in files:
+-            raise ValueError('동결 목록에 없는 제품 파일입니다: ' + relative.as_posix())
+-    canonical = json.dumps(files, ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode('utf-8')
+-    return files, hashlib.sha256(canonical).hexdigest()
++def sha(path):
++    return hashlib.sha256(path.read_bytes()).hexdigest()
+ 
+ 
+-def main():
+-    parser = argparse.ArgumentParser(description='11차 동결 해시·엄격 UTF-8·구문·7차 원본 불변 검사')
+-    choice = parser.add_mutually_exclusive_group(required=True)
+-    choice.add_argument('--expected-digest')
+-    choice.add_argument('--print-digest', action='store_true')
+-    args = parser.parse_args()
+-    files, digest = snapshot()
+-    import recover
+-    baseline = recover.verify_original()
+-    if args.expected_digest and (not re.fullmatch(r'[0-9a-f]{64}', args.expected_digest) or digest != args.expected_digest):
+-        raise ValueError('외부 검사 명세에 고정한 11차 해시와 다릅니다.')
+-    print(json.dumps({'mode': '동결 후보 계산' if args.print_digest else '외부 고정값 검증', 'digest': digest,
+-        'checked_sources': len(files), 'original_files': len(baseline), 'files': files, 'utf8': 'strict', 'syntax': 'pass'}, ensure_ascii=False))
++def strict_json(text):
++    def unique(pairs):
++        result={}
++        for key,value in pairs:
++            if key in result:
++                raise ValueError('중복 JSON 키: '+key)
++            result[key]=value
++        return result
++    def reject(value):
++        raise ValueError('비유한 JSON 수치: '+value)
++    return json.loads(text,object_pairs_hook=unique,parse_constant=reject)
+ 
+ 
+-if __name__ == '__main__':
+-    main()
++def verify():
++    text_count=0
++    for name in PUBLIC_FILES:
++        path=ROOT/name
++        if not path.is_file():
++            raise ValueError('필수 공개 파일 없음: '+name)
++        text=path.read_bytes().decode('utf-8',errors='strict')
++        if '\ufffd' in text:
++            raise ValueError('대체 문자 포함: '+name)
++        text_count+=1
++        if path.suffix=='.py':
++            ast.parse(text,filename=name)
++        elif path.suffix=='.json':
++            strict_json(text)
++    contract=strict_json((ROOT/'docs/source_contract.json').read_text(encoding='utf-8'))
++    originals=contract['round7_originals']
++    for name,expected in originals.items():
++        if sha(ROOT.parent/'7차'/name)!=expected:
++            raise ValueError('7차 원본 불변 위반: '+name)
++    for name,expected in contract['dependencies'].items():
++        if sha(ROOT.parent/name)!=expected:
++            raise ValueError('고정 의존 파일 불일치: '+name)
++    if sha(ROOT/'report_sections.json')!=contract['narrative_sha256']:
++        raise ValueError('별도 담당자가 동결한 본문이 변경됐습니다.')
++    for name in ('docx','PIL','pdf2image'):
++        if importlib.util.find_spec(name) is None:
++            raise ValueError('필수 문서 의존 모듈 없음: '+name)
++    print(f'공개 파일 {text_count}개 엄격 UTF-8·구문 검사, 7차 원본 {len(originals)}개와 의존 {len(contract["dependencies"])}개 해시 대조 통과. 렌더 성공 판정은 별도입니다.')
++
++
++if __name__=='__main__':
++    verify()
+--- /dev/null
++++ 12차/watcher.py
+@@ -0,0 +1,212 @@
++"""지정 작업 하나만 관찰하며 학습을 시작하거나 재개하지 않습니다."""
++import argparse
++from contextlib import contextmanager
++from datetime import datetime
++import hashlib
++import json
++import os
++from pathlib import Path
++import shutil
++import subprocess
++import time
++
++from report_core import (confined, decision, digest, epoch_rows, job_path, load_sections,
++                         reconstruct_curves, relative, safe_reader, validate_bundle)
++from report_outputs import create_docx, render_document, write_json
++
++ROOT = Path(__file__).resolve().parent
++INTERVAL_SECONDS = 60
++
++
++@contextmanager
++def watch_lock(path):
++    """프로세스가 종료되면 운영체제가 해제하는 단일 관찰 잠금입니다."""
++    path = Path(path)
++    path.parent.mkdir(parents=True, exist_ok=True)
++    with path.open('a+b') as stream:
++        if stream.tell() == 0:
++            stream.write(b'\0')
++            stream.flush()
++        stream.seek(0)
++        acquired = False
++        try:
++            if os.name == 'nt':
++                import msvcrt
++                msvcrt.locking(stream.fileno(), msvcrt.LK_NBLCK, 1)
++            else:
++                import fcntl
++                fcntl.flock(stream.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
++            acquired = True
++        except OSError as error:
++            raise RuntimeError('같은 지정 작업의 보고서 관찰자가 이미 실행 중입니다.') from error
++        try:
++            yield
++        finally:
++            if acquired:
++                stream.seek(0)
++                if os.name == 'nt':
++                    import msvcrt
++                    msvcrt.locking(stream.fileno(), msvcrt.LK_UNLCK, 1)
++                else:
++                    import fcntl
++                    fcntl.flock(stream.fileno(), fcntl.LOCK_UN)
++
++
++def validate_plan(plan):
++    if plan.get('schema') != 1:
++        raise ValueError('지원하지 않는 비공개 계획 형식입니다.')
++    project = Path(plan['project_root']).resolve()
++    job_path(project, plan['job_id'])
++    output = confined(project / plan['output_dir'], project)
++    support = confined(project / plan['support_dir'], project)
++    if not output.is_relative_to(project / '최종'):
++        raise ValueError('납품 위치는 프로젝트 최종 폴더 안이어야 합니다.')
++    if not support.is_relative_to(project / '12차/work'):
++        raise ValueError('비공개 지원 자료는 12차 work 안이어야 합니다.')
++    if output == project / '최종' or output == support:
++        raise ValueError('기존 최종 폴더를 직접 덮어쓸 수 없습니다.')
++    if plan.get('deliver_formats') != ['docx', 'pdf']:
++        raise ValueError('최종 납품은 Word와 같은 원고 PDF 두 개만 허용합니다.')
++    if not isinstance(plan.get('author'), str) or not plan['author'].strip():
++        raise ValueError('비공개 계획에 작성자를 지정해야 합니다.')
++    return project, output, support
++
++
++def mark_authoring(config):
++    node = Path(config['node']).resolve()
++    script = Path(config['script']).resolve()
++    if not node.is_file() or not script.is_file():
++        raise ValueError('저작 마커의 실제 Node 또는 스크립트가 없습니다.')
++    result = subprocess.run([str(node),str(script),'--operation-kind','create',
++                             '--expected-output-count','1','--output-format','docx'],
++                            shell=False,cwd=str(ROOT.parent),capture_output=True,timeout=30)
++    if result.returncode:
++        raise RuntimeError('문서 저작 마커 실패: '+result.stderr.decode('utf-8','replace')[-4000:])
++
++
++def publish_pair(docx, pdf, output):
++    """검증된 같은 원고 두 파일만 신규 납품 폴더에 저장합니다."""
++    output = Path(output)
++    output.mkdir(parents=True, exist_ok=False)
++    shutil.copy2(docx, output / '최종보고서.docx')
++    shutil.copy2(pdf, output / '최종보고서.pdf')
++    if {p.name for p in output.iterdir()} != {'최종보고서.docx', '최종보고서.pdf'}:
++        raise RuntimeError('최종 납품 폴더의 파일 구성이 두 형식과 다릅니다.')
++    return {p.name: {'sha256':digest(p),'bytes':p.stat().st_size} for p in output.iterdir()}
++
++
++def verify_receipt(receipt, plan, project, output, reader):
++    """운영 영수증만으로 완료를 믿지 않고 실제 두 파일과 입력을 대조합니다."""
++    expected_names={'최종보고서.docx','최종보고서.pdf'}
++    if (receipt.get('job_id')!=plan['job_id'] or receipt.get('state') not in ('complete','incomplete_report')
++            or receipt.get('output_dir')!=relative(output,project)
++            or set(receipt.get('outputs',{}))!=expected_names):
++        raise ValueError('기존 완료 영수증의 작업·출력 위치·파일 목록이 다릅니다.')
++    if not output.is_dir() or {p.name for p in output.iterdir()}!=expected_names:
++        raise ValueError('완료 영수증에 해당하는 실제 두 보고서 파일이 없습니다.')
++    for name in expected_names:
++        path=output/name
++        expected=receipt['outputs'][name]
++        if (not path.is_file() or path.resolve().parent!=output.resolve()
++                or type(expected.get('bytes')) is not int or expected['bytes']<=0
++                or path.stat().st_size!=expected['bytes'] or digest(path)!=expected.get('sha256')):
++            raise ValueError('완료 보고서의 경로·크기·SHA-256이 영수증과 다릅니다.')
++    job=reader.safe_read_json(job_path(project,plan['job_id']))
++    state=decision(job,plan['job_id'])
++    if receipt['state']=='complete':
++        final=reader.safe_read_json(project/'7차/work/training/final.json')
++        if (state!='validate' or not isinstance(final,dict) or job.get('result')!=final
++                or digest(project/'7차/work/training/final.json')!=receipt.get('input_final_sha256')):
++            raise ValueError('완료 보고서의 지정 작업 및 최종 입력 바인딩이 다릅니다.')
++    elif state!='incomplete' or receipt.get('input_final_sha256') is not None:
++        raise ValueError('미완료 보고서와 현재 지정 작업의 상태가 다릅니다.')
++    return receipt
++
++
++def process_once(plan, reader=None, marker=mark_authoring, renderer=render_document):
++    project, output, support = validate_plan(plan)
++    reader = reader or safe_reader(project)
++    support.mkdir(parents=True, exist_ok=True)
++    receipt_path = support/'completion_receipt.json'
++    previous = reader.safe_read_json(receipt_path)
++    if previous:
++        try:
++            return verify_receipt(previous,plan,project,output,reader)
++        except ValueError as error:
++            write_json(support/'watch_status.json',{'state':'blocked_invalid_receipt','error':str(error),
++                       'observed_kst':datetime.now().astimezone().isoformat(),'training_action':'없음'})
++            raise
++    if output.exists():
++        raise FileExistsError('기존 최종 결과는 덮어쓰지 않습니다.')
++    job = reader.safe_read_json(job_path(project, plan['job_id']))
++    status = decision(job, plan['job_id'])
++    now = time.time()
++    observation = {'job_id':plan['job_id'],'observed_kst':datetime.now().astimezone().isoformat(),
++                   'state':status,'job_state':job.get('state') if job else None,
++                   'age_seconds':max(0,now-job.get('updated',now)) if job else None,
++                   'process_liveness':'미검증','training_action':'없음'}
++    observation['stale'] = observation['age_seconds'] is not None and observation['age_seconds'] > 300
++    write_json(support/'watch_status.json',observation)
++    if status in ('waiting','missing'):
++        return observation
++    # 성공 보고서는 해시·세 테스트·예측 정합성 검증이 끝난 뒤에만 작성합니다.
++    bundle = validate_bundle(project,job,reader.safe_read_json) if status == 'validate' else None
++    curves = reconstruct_curves(project,bundle,reader) if bundle else {}
++    sections = load_sections(ROOT/'report_sections.json',reader.safe_read_json)
++    epochs = {}
++    if bundle:
++        for directory in sorted((project/'7차/work/training/runs').glob('*')):
++            csv_path = directory/'results.csv'
++            if csv_path.is_file():
++                epochs[directory.name] = epoch_rows(csv_path,reader.safe_read_text)
++    renderer_config = reader.safe_read_json(Path(plan['renderer_config'])) if plan.get('renderer_config') else None
++    if renderer_config is None or renderer_config.get('approved') is not True:
++        observation.update(state='blocked_renderer',reason='허용된 Word/PDF 렌더 설정을 기다립니다.')
++        write_json(support/'watch_status.json',observation)
++        return observation
++    # 저작 마커는 실제 DOCX 작성 직전에 이 생성 작업에서 한 번 호출합니다.
++    marker(plan['marker'])
++    docx = support/'최종보고서_편집원본.docx'
++    create_docx(docx,sections,bundle,curves,epochs,support/'analysis',
++                confined(project/plan['font'],project),author=plan['author'],failure=job if not bundle else None)
++    if bundle:
++        write_json(support/'input_hashes.json',bundle['references'])
++    pdf,pages = renderer(docx,support/'render',renderer_config)
++    hashes = publish_pair(docx,pdf,output)
++    receipt = {'schema':1,'job_id':plan['job_id'],'state':'complete' if bundle else 'incomplete_report',
++               'output_dir':relative(output,project),
++               'finished_kst':datetime.now().astimezone().isoformat(),'outputs':hashes,
++               'rendered_pages':len(pages),'human_visual_review':False,
++               'qa':'정합성 검사와 자동 렌더 완료. 미래 인간 시각 검토를 수행했다고 주장하지 않습니다.',
++               'input_final_sha256':digest(project/'7차/work/training/final.json') if bundle else None}
++    write_json(receipt_path,receipt)
++    return receipt
++
++
++def main():
++    parser = argparse.ArgumentParser(description='지정된 마지막 실험의 완료 후 보고서 생성')
++    parser.add_argument('--plan',required=True,help='비공개 계획 JSON')
++    parser.add_argument('--once',action='store_true',help='한 번 읽고 종료하며 학습은 실행하지 않음')
++    args = parser.parse_args()
++    # 최초 계획은 고정 운영 파일이므로 다른 프로세스가 교체하지 않는 사본만 사용합니다.
++    plan = json.loads(Path(args.plan).read_text(encoding='utf-8'))
++    project,_,support = validate_plan(plan)
++    reader = safe_reader(project)
++    lock = ROOT/'work'/('watch_'+hashlib.sha256(plan['job_id'].encode()).hexdigest()[:20]+'.lock')
++    with watch_lock(lock):
++        while True:
++            try:
++                result = process_once(plan,reader)
++            except Exception as error:
++                support.mkdir(parents=True,exist_ok=True)
++                write_json(support/'postprocess_failure.json',{'kst':datetime.now().astimezone().isoformat(),
++                           'error':str(error),'exception':type(error).__name__,'training_action':'없음'})
++                raise
++            print(json.dumps(result,ensure_ascii=False,allow_nan=False),flush=True)
++            if args.once or result['state'] in ('complete','incomplete_report','blocked_renderer'):
++                break
++            time.sleep(INTERVAL_SECONDS)
++
++
++if __name__ == '__main__':
++    main()
+--- 11차/변경기록.md
++++ 12차/변경기록.md
+@@ -1,29 +1,34 @@
+-# 📝 11차 공개 변경 기록
++# 마지막 실험 보고서 도구의 변경 기록
+ 
+-## 2026-11-02 · 고정 실험 계약을 보존하는 복구 실행기
++진행 중인 한 실험을 마지막으로 마무리하고 저자의 관점으로 개발과 결과를 설명하는 Word 및 같은 원고 PDF 보고서를 만들기 위한 새 후처리 도구이다. 학습과 다운로드 및 평가의 기존 코드는 수정하지 않는다.
+ 
+-7차 원자료 수신의 범위 경과 제한과 재시도 소진을 다루기 위해 별도 실행기를 추가했습니다. 이번 구현은 7차·10차 제품 코드를 수정하거나 준비·학습 계약을 현재 값으로 갱신하지 않습니다. 기존 파일·부분 파일·원장·모델·체크포인트를 보존합니다.
++## 추가한 파일
+ 
+-## 📁 추가 파일 7개
++- report_core.py: 지정 작업 판정, 원본·manifest·선택 가중치 해시와 세 테스트 및 평가 계약 대조, 고정 예측 기반 PR/F1 분석, 실제 epoch CSV 읽기.
++- report_outputs.py: 작성자 관점 본문과 실제 표 및 그래프를 포함한 Word 초안, 명시적으로 허용된 공식 렌더 설정을 이용한 같은 원고 PDF 변환. CSV 및 PNG는 비공개 지원 자료로만 저장.
++- watcher.py: 60초 간격 지정 작업 읽기, 10차 안전 공유 읽기 사용, 단일 잠금과 완료 영수증, 기존 결과 덮어쓰기 거부, 학습 실행 기능 없음.
++- report_sections.json: 별도 문서 담당자가 동결한 고정 설명. 실제 수치는 생성기가 검증 뒤 삽입하며 이 파일의 작성과 동결 소유를 보존.
++- verify_sources.py 및 tests의 다섯 파일: 엄격 UTF-8·구문·공개 파일·7차 원본 불변·고정 의존성 검사, 합성 자료의 완료·실패·오염·순서·중복 생성 회귀, 시제품 문서 작성 도구.
++- README.md, ROUTING-LESSONS.md 및 docs의 설계·요구사항·비공개 계획 서식·렌더 설정 서식·원본 계약·결과 해시 스키마.
+ 
+-| 파일 | 내용 |
+-|---|---|
+-| [recover.py](recover.py) | 기존 작업 잠금·상태·실패 기록에 작은 범위 수신을 앞단으로 연결하는 실행기 |
+-| [original-baseline.json](original-baseline.json) | 변경 전 7차 제품 16개의 고정 SHA-256 |
+-| [verify_sources.py](verify_sources.py) | 11차 전체 제품의 외부 고정 해시·엄격 UTF-8·구문 및 7차 원본 불변 검사 |
+-| [tests/test_recover.py](tests/test_recover.py) | 범위 수신·부분 실패·예산·불확실 기록·잠금·기동·자식 종료·계약 회귀 검사 |
+-| [docs/복구설계.md](docs/복구설계.md) | 요구·확인된 실패 경계·구현 계약·성공 조건과 한계 |
+-| [README.md](README.md) | 기능과 실행 조건·원자료 보존·검증 안내 |
+-| [변경기록.md](변경기록.md) | 이번 추가 파일과 실제 검사 결과 |
++## 이전 차수와의 차이
+ 
+-## 🔄 수신 계약
++11차는 기존 자료 수신을 복구하고 7차 준비와 학습에 연결하는 실행기이다. 12차는 자료를 수신하거나 학습을 실행하지 않으며 기존 작업의 종료 후 문서만 작성한다. 기존 7차와 10차 및 11차 제품 파일은 변경하지 않는다. 새 차수의 전체 공개 파일은 verify_sources.py의 PUBLIC_FILES에 명시한다.
+ 
+-64KiB부터 4MiB 이내에서 실제 완료 시간에 따라 범위를 조정합니다. 원장에는 매 수신을 합산하고 일반 화면 갱신만 약 2초 간격으로 합칩니다. 단계·재시도 진입·원인 해제는 즉시 알립니다. 실제 통신 오류는 최대 6회 재시도하고, 오류 없이 진행한 범위의 경과 제한만 저장 위치를 보존해 다음 범위로 나눕니다.
++최초 요구의 HTML·Markdown·CSV·PNG 납품은 사용자의 최종 Word·PDF 지정에 따라 구현하지 않았다. 최종 폴더에는 정확히 두 문서만 저장하며 분석 및 렌더 지원 파일은 비공개 폴더에 둔다.
+ 
+-공식 범위 응답·크기·MD5·SHA-256·전송 100GiB·잔여 공간 100GiB를 유지합니다. 원장·통지·디스크 쓰기 실패는 재시도로 숨기지 않으며 요청 전 불확실 표식이 남으면 자동 재개를 차단합니다. 공식 원자료를 모두 검증한 뒤 원래 7차 준비·분할·학습·평가 함수를 호출합니다.
++## 검증과 제한
+ 
+-## ✅ 실제 검증과 남은 범위
++수리 1에서는 JSON 키 저장 순서와 주목표 판정의 불필요한 의존을 명시적 historical_taco 참조로 고쳤다. 평가 입력 크기·confidence 하한·NMS·최대 탐지 수·평가기·프로토콜도 원래 계약과 대조한다. 38개 단위 검사가 통과했으며 통제 RED 및 명령 경로 오류는 비공개 evidence에 보존한다. 원본 불변·소스 검사는 최종 동결 시 별도 실행한다.
+ 
+-새 회귀 검사 32개를 Docker Linux에서 모두 통과했습니다. Windows에서는 같은 32개 중 Linux 실행 전용 4개를 생략하고 나머지를 통과했습니다. 본문 수신 뒤 원장만 실패시키는 검사, 최대 재시도·느린 진행 분할·완성 MD5 실패·기동 오류·자식 종료·중복 실행·위조 경로·사전 원장 중복 합산 방지·실제 인터프리터 실행 인자 보존을 포함합니다. 이 검사에는 인공 본문과 임시 작업을 사용했습니다.
++공개 기술 교훈은 결과 정합성과 문서 변환의 확인 사항만 남겼으며 내부 운영 조율과 비공개 정보는 제외했다. 작성자 설정 회귀에는 가상의 식별자만 사용한다. 시제품 렌더에서 확인한 기본 제목 장식선을 제거하고 명시 글꼴과 충돌하는 테마 글꼴 속성을 정리했으며 표의 실제 열 격자를 지정한 폭과 일치시켰다. 기존 시제품 및 9쪽 렌더는 내부 이력으로 보존하고 새 시제품을 별도로 검토한다.
+ 
+-실제 대용량 복구 수신과 학습 시작은 독립 검증 뒤에 실행할 예정입니다. 다운로드·학습 완료, 새 최종 성능과 정밀도·재현율 각각 90% 달성은 아직 확인되지 않았습니다. 기존 실험의 결과와 새 검사 결과를 혼합하지 않습니다.
++완료 영수증 재사용 시 실제 출력 두 파일과 납품 위치 및 크기·SHA-256을 확인한다. 정상 완료는 현재 작업 결과와 최종 입력 해시까지 다시 묶는다. 보고서 누락과 변경 및 최종 입력 불일치가 있으면 완료를 반환하지 않고 오류를 기록하며 기존 결과를 보존한다.
++
++최종 수리 묶음은 44개 단위 검사와 공개 19개 파일의 엄격 UTF-8·구문 및 원본 해시 검사를 통과했다. 새 가상 결과 시제품의 Word에서 동일 원고 PDF와 8쪽 페이지 이미지를 생성하고 모든 페이지의 본문·표·차트·페이지 번호를 직접 확인했다. 자동 생성기가 사용하는 렌더 함수에서도 같은 시제품의 8쪽 변환을 확인했다. 이는 제어 사례의 문서 검사이며 실제 실험 성능이나 미래 결과 문서의 인간 검토를 뜻하지 않는다.
++
++구체 Word 시제품은 합성 결과임을 표시한 편집 초안이다. 허용된 LibreOffice 렌더 경로가 확인되기 전에는 최종 DOCX/PDF 납품 또는 전체 페이지 시각 품질 통과를 주장하지 않는다. 선택 checkpoint의 epoch는 원래 결과에 명시되지 않아 미확인으로 보고하며 완료 epoch를 대신 쓰지 않는다. 실제 실험 완료와 정밀도·재현율 90% 달성을 미리 주장하지 않는다.
++
++## 공개 제외
++
++실제 작업 식별자와 저자 운영 설정, 프로세스 정보와 접속·인증값, 원자료와 모델 및 가중치, 비공개 로그, 시제품과 내부 CSV·PNG·렌더·영수증은 공개 코드에서 제외한다. 실제 최종 보고서는 별도의 공개 범위 검토와 독립 검증 및 반영 확인을 거친다.
