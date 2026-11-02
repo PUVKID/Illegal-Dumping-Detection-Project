@@ -19,6 +19,7 @@
 | 8차 | [폴더](../8차/) | [원래 클린뷰 복원·한국 시각·7차 상태 연결](../docs/versions/round-8.md) | [7차 → 8차](../docs/comparisons/7-to-8.md) |
 | 9차 | [폴더](../9차/) | [7차 수신 재개 운영 기록](../docs/versions/round-9.md) | [8차 → 9차](../docs/comparisons/8-to-9.md) |
 | 10차 | [폴더](../10차/) | [실제 상태와 단계별 움직임을 연결한 입체 대시보드](../docs/versions/round-10.md) | [9차 → 10차](../docs/comparisons/9-to-10.md) · [8차 화면과 비교](../docs/comparisons/8-to-10.md) |
+| 11차 | [폴더](../11차/) | [고정 실험 계약 수신 복구](versions/round-11.md) | [10차 → 11차](comparisons/10-to-11.md) |
 | 이전 도커 실험 | [폴더](../이전 도커 실험/) | [이전 실험 보관](../docs/versions/docker-experiment.md) | [정확한 차수 순서의 근거 없음](../docs/comparisons/docker-to-3.md) |
 | 최종 | [폴더](../최종/) | [하위 자료 보관 폴더](../docs/versions/final-container.md) | [상위 컨테이너이며 독립 차수 아님](../docs/comparisons/final-container.md) |
 

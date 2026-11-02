@@ -19,7 +19,7 @@
 
 ## 🗂️ 차수별 개발 흐름
 
-[**📖 1차부터 10차·최종까지 보기 →**](docs/REVISION_INDEX.md)
+[**📖 1차부터 11차·최종까지 보기 →**](docs/REVISION_INDEX.md)
 
 # 공개 차수와 비교
 
@@ -38,6 +38,7 @@
 | 8차 | [폴더](8차/) | [원래 클린뷰 복원·한국 시각·7차 상태 연결](docs/versions/round-8.md) | [7차 → 8차](docs/comparisons/7-to-8.md) |
 | 9차 | [폴더](9차/) | [7차 수신 재개 운영 기록](docs/versions/round-9.md) | [8차 → 9차](docs/comparisons/8-to-9.md) |
 | 10차 | [폴더](10차/) | [실제 상태와 단계별 움직임을 연결한 입체 대시보드](docs/versions/round-10.md) | [9차 → 10차](docs/comparisons/9-to-10.md) · [8차 화면과 비교](docs/comparisons/8-to-10.md) |
+| 11차 | [폴더](11차/) | [고정 실험 계약 수신 복구](docs/versions/round-11.md) | [10차 → 11차](docs/comparisons/10-to-11.md) |
 | 이전 도커 실험 | [폴더](이전 도커 실험/) | [이전 실험 보관](docs/versions/docker-experiment.md) | [정확한 차수 순서의 근거 없음](docs/comparisons/docker-to-3.md) |
 | 최종 | [폴더](최종/) | [하위 자료 보관 폴더](docs/versions/final-container.md) | [상위 컨테이너이며 독립 차수 아님](docs/comparisons/final-container.md) |
 
@@ -303,3 +304,9 @@ python launcher.py --no-browser
 | **최종** | [📁 검수 자료](%EC%B5%9C%EC%A2%85) | [📖 정리 내용](docs/publication-review/item-7.md) · [🔎 파일 비교](docs/publication-review/공개파일변경.json) |
 
 </details>
+
+## 🛠️ 11차 수신 복구
+
+[복구 도구](11차/README.md) · [공개 변경 기록](docs/changes/2026-11-02-11차복구.md) · [10차와 비교](docs/comparisons/10-to-11.md)
+
+**실행 범위:** 원래 7차 동결 설치 환경을 대상으로 합니다. 공개 저장소만 복제하면 16개 원본 기준 검사에 실패할 수 있습니다. 공개 사본에는 원래 `docs/구현계획.md`, `docs/설계.md` 두 문서가 없고 `tests/test_worker.py`는 원본 CRLF와 공개 LF의 바이트가 다릅니다. 원래 기준 파일이 필요하며 기준 해시를 새 값으로 갱신해 우회하지 않습니다. 현재 로컬 설치에서 기준 16개가 맞는 것과 공개 복제본의 완전성을 구분합니다.

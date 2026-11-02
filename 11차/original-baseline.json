@@ -1,0 +1,18 @@
+{
+  "configs/protected_sources.json": "6158cda1bcb6521f2dfa6b0f5000d1ba18e781181a82fcb14d846af825331c21",
+  "configs/training.json": "e64cdc187c260564f13206f21f632d65b3e2d67b021a12bffc36aefbb0535401",
+  "docs/구현계획.md": "6341644185da59914dcb218361b2a76818d4a376baa8de558845f72da01087c0",
+  "docs/설계.md": "9502c8fe816b2f38fa3ff88f05b692e5a051a264e64a32c69fe094f5645d6e1a",
+  "docs/이전검증분석.md": "cf1e22da1eff8566dee1498258ef8a63f5bbd9b22a9438b5f540a9d57fea3687",
+  "docs/출처와실험계약.md": "dadc2a49f013a7d00e753315d40fb2e56f0d51698fadb48df43285cae2edaacb",
+  "prepare_dataset.py": "5b555b1c597734072be12ab46b1c0f9a74f4dbb3a84144cb3ba9c7e74fc19ced",
+  "tests/test_prepare_dataset.py": "152270ec6a95dfbc121a764a9f1dce0a55daf69822519005817714a4e3450afb",
+  "tests/test_train_pipeline.py": "1fab15d83877161fe96e036f30f32e049da4c38c7a88dc1ddf59b7be50f17ff3",
+  "tests/test_worker.py": "dc153070d5a01565adeb3473420eed79e02e69d156640bbad2119ae873d7e1d7",
+  "train_pipeline.py": "03979d8a9f43457cd0b3f8ba0e2f4e8910ee99627be91a6e1e96b6b58a0ae4aa",
+  "verify_sources.py": "8d486ac1ca00571675cee9db5cfc278cc4e0e4f6e8c83fecda618c34a202dbdd",
+  "worker.py": "2bac26a2ab4c837dfb075ef014c1f4ef4ac9ea76d0ad26b2ce64c97b02306194",
+  "사용안내.txt": "a087656951b5ef0f9f70542299d0974f03ea0e1dfad63912c0f733464f4e8646",
+  "학습상태.bat": "9abdb4ef09839135f09f53c5572ccc49ba97af51fb2d40065905a34899a1f6d6",
+  "학습실행.bat": "45410e9a232d114e99a0bf4a6da12128f15c2ccf3741efb2aff5d3db87c759a8"
+}

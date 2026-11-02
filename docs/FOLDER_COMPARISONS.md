@@ -15,4 +15,5 @@
 | **8차** | 17 | [🔎 보기](folder-comparisons/step-9.md) |
 | **9차** | 2 | [🔎 보기](comparisons/8-to-9.md) |
 | **10차** | 38 | [🔎 9차와 전체 비교](comparisons/9-to-10.md) · [8차 화면과 비교](comparisons/8-to-10.md) |
+| **11차** | 7 | [🔎 보기](comparisons/10-to-11.md) |
 | **이전 도커 실험** | 53 | [🔎 보기](folder-comparisons/step-10.md) |
