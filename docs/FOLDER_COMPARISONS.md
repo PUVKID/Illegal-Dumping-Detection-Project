@@ -8,7 +8,7 @@
 | **2차** | 1 | [🔎 보기](folder-comparisons/step-2.md) |
 | **최종/3차** | 62 | [🔎 보기](folder-comparisons/step-3.md) |
 | **최종/4차** | 4 | [🔎 보기](folder-comparisons/step-4.md) |
-| **최종/최종** | 9 | [🔎 보기](folder-comparisons/step-5.md) |
+| **최종/최종** | 10 | [🔎 보기](folder-comparisons/step-5.md) |
 | **5차** | 23 | [🔎 보기](folder-comparisons/step-6.md) |
 | **6차** | 5 | [🔎 보기](folder-comparisons/step-7.md) |
 | **7차** | 15 | [🔎 보기](folder-comparisons/step-8.md) |
@@ -18,3 +18,5 @@
 | **11차** | 7 | [🔎 보기](comparisons/10-to-11.md) |
 | **12차** | 19 | [🔎 보기](comparisons/11-to-12.md) |
 | **이전 도커 실험** | 53 | [🔎 보기](folder-comparisons/step-10.md) |
+
+[📦 최종 배포 사용안내 추가와 전체 문서 비교](changes/2026-11-02-배포사용안내.md)

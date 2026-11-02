@@ -12,7 +12,7 @@
 | 2차 | [폴더](../2차/) | [봉투·낱개와 영상 후보](../docs/versions/stage-2.md) | [1차 → 2차](../docs/comparisons/1-to-2.md) |
 | 최종/3차 | [폴더](../최종/3차/) | [학습·검증·영상 실행](../docs/versions/stage-3.md) | [2차 → 최종/3차](../docs/comparisons/2-to-3.md) |
 | 최종/4차 | [폴더](../최종/4차/) | [프레임·문서 작업](../docs/versions/stage-4.md) | [최종/3차 → 최종/4차](../docs/comparisons/3-to-4.md) |
-| 최종/최종 | [폴더](../최종/최종/) | [3차 성능보고서](../docs/versions/stage-5.md) | [최종/4차 → 최종/최종](../docs/comparisons/4-to-final.md) |
+| 최종/최종 | [폴더](../최종/최종/) | [3차 성능보고서·배포 사용안내](../docs/versions/stage-5.md) | [최종/4차 → 최종/최종](../docs/comparisons/4-to-final.md) |
 | 5차 | [폴더](../5차/) | [대시보드·추가 학습](../docs/versions/round-5.md) | [최종/최종 → 5차](../docs/comparisons/final-to-5.md) |
 | 6차 | [폴더](../6차/변경전_5차/) | [5차의 변경 전 부분 보존본](../docs/versions/round-6.md) | [5차 → 6차](../docs/comparisons/5-to-6-snapshot.md); 일부 파일 보존본 |
 | 7차 | [폴더](../7차/) | [대규모 자료 추가 학습 코드](../docs/versions/round-7.md) | [5차 → 7차](../docs/comparisons/5-to-7.md); 6차는 부분 보존본 |
@@ -32,3 +32,7 @@
 
 
 
+
+## 📦 최종 배포 사용안내
+
+기존 최종 보고서와 함께 [사용안내 원문](../최종/최종/사용안내.txt)을 확인할 수 있습니다. Docker 환경·클린뷰 실행·결과 위치를 안내하는 기존 문서이며, [문서 추가 기록](changes/2026-11-02-배포사용안내.md)과 [이번 전체 텍스트 비교](comparisons/2026-11-02-deployment-guide.patch)를 함께 연결합니다. 제품의 새 개발 차수나 새 실험 결과를 추가한 것은 아닙니다.

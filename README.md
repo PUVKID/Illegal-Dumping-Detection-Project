@@ -31,7 +31,7 @@
 | 2차 | [폴더](2차/) | [봉투·낱개와 영상 후보](docs/versions/stage-2.md) | [1차 → 2차](docs/comparisons/1-to-2.md) |
 | 최종/3차 | [폴더](최종/3차/) | [학습·검증·영상 실행](docs/versions/stage-3.md) | [2차 → 최종/3차](docs/comparisons/2-to-3.md) |
 | 최종/4차 | [폴더](최종/4차/) | [프레임·문서 작업](docs/versions/stage-4.md) | [최종/3차 → 최종/4차](docs/comparisons/3-to-4.md) |
-| 최종/최종 | [폴더](최종/최종/) | [3차 성능보고서](docs/versions/stage-5.md) | [최종/4차 → 최종/최종](docs/comparisons/4-to-final.md) |
+| 최종/최종 | [폴더](최종/최종/) | [3차 성능보고서·배포 사용안내](docs/versions/stage-5.md) | [최종/4차 → 최종/최종](docs/comparisons/4-to-final.md) |
 | 5차 | [폴더](5차/) | [대시보드·추가 학습](docs/versions/round-5.md) | [최종/최종 → 5차](docs/comparisons/final-to-5.md) |
 | 6차 | [폴더](6차/변경전_5차/) | [5차의 변경 전 부분 보존본](docs/versions/round-6.md) | [5차 → 6차](docs/comparisons/5-to-6-snapshot.md); 일부 파일 보존본 |
 | 7차 | [폴더](7차/) | [대규모 자료 추가 학습 코드](docs/versions/round-7.md) | [5차 → 7차](docs/comparisons/5-to-7.md); 6차는 부분 보존본 |
@@ -304,3 +304,7 @@ python launcher.py --no-browser
 지정된 실험이 끝난 뒤 동결 결과를 확인하고 Word와 같은 원고 PDF를 만드는 후처리 도구입니다. 실제 성능·목표 달성은 실험의 측정 결과로 판정하며, 공개된 고정 본문은 실제 최종 보고서가 아닙니다.
 
 기존 7차 동결 설치 환경이 필요합니다. 공개 저장소에는 기준 문서 두 개가 없고 검사 파일 하나의 줄바꿈 바이트가 달라 단독 복제본만으로 원본 해시 검사를 통과하지 못할 수 있습니다. 기준 해시를 현재 값으로 바꾸어 우회하지 않으며, 10차 안전 읽기와 글꼴 및 11차 복구 코드의 고정 의존성도 확인합니다.
+
+## 📦 최종 배포 사용안내
+
+기존 최종 보고서와 함께 [사용안내 원문](최종/최종/사용안내.txt)을 확인할 수 있습니다. Docker 환경·클린뷰 실행·결과 위치를 안내하는 기존 문서이며, [문서 추가 기록](docs/changes/2026-11-02-배포사용안내.md)과 [이번 전체 텍스트 비교](docs/comparisons/2026-11-02-deployment-guide.patch)를 함께 연결합니다. 제품의 새 개발 차수나 새 실험 결과를 추가한 것은 아닙니다.
