@@ -46,7 +46,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 
 #### LEVEL 1 · 소스에서 제공하는 CLI 옵션
 
-| 진입 소스 · 정의된 옵션 이름 |
+| 내용 |
 | --- |
 | **진입 소스:** [watcher.py](../../12%EC%B0%A8/watcher.py)<br>**정의된 옵션 이름:** `--plan`, `--once` |
 | **진입 소스:** [make_fixture.py](../../12%EC%B0%A8/tests/make_fixture.py)<br>**정의된 옵션 이름:** `--output`, `--font`, `--author` |
@@ -61,7 +61,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 
 #### LEVEL 1 · [report_core.py](../../12%EC%B0%A8/report_core.py)
 
-| 정의 · 소스에 적힌 역할 |
+| 내용 |
 | --- |
 | **정의:** [`safe_reader`](../../12%EC%B0%A8/report_core.py#L18)<br>**소스에 적힌 역할:** 공유 삭제 핸들을 사용한 기존 읽기를 원본 수정 없이 불러옵니다. |
 | **정의:** [`local_path`](../../12%EC%B0%A8/report_core.py#L43)<br>**소스에 적힌 역할:** 기존 Docker 경로를 지정 프로젝트 안의 실제 파일로 대응합니다. |
@@ -180,7 +180,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 
 #### LEVEL 1 · [report_outputs.py](../../12%EC%B0%A8/report_outputs.py)
 
-| 정의 · 소스에 적힌 역할 |
+| 내용 |
 | --- |
 | **정의:** [`plot`](../../12%EC%B0%A8/report_outputs.py#L36)<br>**소스에 적힌 역할:** 축과 단위 및 범례가 있는 정적 그래프를 별도 분석 도구 없이 그립니다. |
 | **정의:** [`create_docx`](../../12%EC%B0%A8/report_outputs.py#L112)<br>**소스에 적힌 역할:** 저작 전 마커는 이 함수를 호출하는 진입점에서 실행해야 합니다. |
@@ -215,7 +215,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 #### LEVEL 1 · [verify_sources.py](../../12%EC%B0%A8/verify_sources.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT`](../../12%EC%B0%A8/verify_sources.py#L8)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 
@@ -226,13 +226,13 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 
 #### LEVEL 1 · [watcher.py](../../12%EC%B0%A8/watcher.py)
 
-| 정의 · 소스에 적힌 역할 |
+| 내용 |
 | --- |
 | **정의:** [`watch_lock`](../../12%EC%B0%A8/watcher.py#L22)<br>**소스에 적힌 역할:** 프로세스가 종료되면 운영체제가 해제하는 단일 관찰 잠금입니다. |
 | **정의:** [`publish_pair`](../../12%EC%B0%A8/watcher.py#L87)<br>**소스에 적힌 역할:** 검증된 같은 원고 두 파일만 신규 납품 폴더에 저장합니다. |
 | **정의:** [`verify_receipt`](../../12%EC%B0%A8/watcher.py#L98)<br>**소스에 적힌 역할:** 운영 영수증만으로 완료를 믿지 않고 실제 두 파일과 입력을 대조합니다. |
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`--plan`](../../12%EC%B0%A8/watcher.py#L188)<br>**코드의 선언:** `required=True; help='비공개 계획 JSON'` |
 | **설정·옵션:** [`--once`](../../12%EC%B0%A8/watcher.py#L189)<br>**코드의 선언:** `action='store_true'; help='한 번 읽고 종료하며 학습은 실행하지 않음'` |
@@ -357,7 +357,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 
 #### LEVEL 2 · 소스에서 제공하는 CLI 옵션
 
-| 진입 소스 · 정의된 옵션 이름 |
+| 내용 |
 | --- |
 | **진입 소스:** [watcher.py](../../12%EC%B0%A8/watcher.py)<br>**정의된 옵션 이름:** `--plan`, `--once` |
 | **진입 소스:** [make_fixture.py](../../12%EC%B0%A8/tests/make_fixture.py)<br>**정의된 옵션 이름:** `--output`, `--font`, `--author` |
@@ -372,7 +372,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 
 #### LEVEL 2 · [report_core.py](../../12%EC%B0%A8/report_core.py)
 
-| 정의 · 소스에 적힌 역할 |
+| 내용 |
 | --- |
 | **정의:** [`safe_reader`](../../12%EC%B0%A8/report_core.py#L18)<br>**소스에 적힌 역할:** 공유 삭제 핸들을 사용한 기존 읽기를 원본 수정 없이 불러옵니다. |
 | **정의:** [`local_path`](../../12%EC%B0%A8/report_core.py#L43)<br>**소스에 적힌 역할:** 기존 Docker 경로를 지정 프로젝트 안의 실제 파일로 대응합니다. |
@@ -491,7 +491,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 
 #### LEVEL 2 · [report_outputs.py](../../12%EC%B0%A8/report_outputs.py)
 
-| 정의 · 소스에 적힌 역할 |
+| 내용 |
 | --- |
 | **정의:** [`plot`](../../12%EC%B0%A8/report_outputs.py#L36)<br>**소스에 적힌 역할:** 축과 단위 및 범례가 있는 정적 그래프를 별도 분석 도구 없이 그립니다. |
 | **정의:** [`create_docx`](../../12%EC%B0%A8/report_outputs.py#L112)<br>**소스에 적힌 역할:** 저작 전 마커는 이 함수를 호출하는 진입점에서 실행해야 합니다. |
@@ -526,7 +526,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 #### LEVEL 2 · [verify_sources.py](../../12%EC%B0%A8/verify_sources.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT`](../../12%EC%B0%A8/verify_sources.py#L8)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 
@@ -537,13 +537,13 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 
 #### LEVEL 2 · [watcher.py](../../12%EC%B0%A8/watcher.py)
 
-| 정의 · 소스에 적힌 역할 |
+| 내용 |
 | --- |
 | **정의:** [`watch_lock`](../../12%EC%B0%A8/watcher.py#L22)<br>**소스에 적힌 역할:** 프로세스가 종료되면 운영체제가 해제하는 단일 관찰 잠금입니다. |
 | **정의:** [`publish_pair`](../../12%EC%B0%A8/watcher.py#L87)<br>**소스에 적힌 역할:** 검증된 같은 원고 두 파일만 신규 납품 폴더에 저장합니다. |
 | **정의:** [`verify_receipt`](../../12%EC%B0%A8/watcher.py#L98)<br>**소스에 적힌 역할:** 운영 영수증만으로 완료를 믿지 않고 실제 두 파일과 입력을 대조합니다. |
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`--plan`](../../12%EC%B0%A8/watcher.py#L188)<br>**코드의 선언:** `required=True; help='비공개 계획 JSON'` |
 | **설정·옵션:** [`--once`](../../12%EC%B0%A8/watcher.py#L189)<br>**코드의 선언:** `action='store_true'; help='한 번 읽고 종료하며 학습은 실행하지 않음'` |
@@ -633,7 +633,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 
 #### LEVEL 3 · 소스에서 제공하는 CLI 옵션
 
-| 진입 소스 · 정의된 옵션 이름 |
+| 내용 |
 | --- |
 | **진입 소스:** [watcher.py](../../12%EC%B0%A8/watcher.py)<br>**정의된 옵션 이름:** `--plan`, `--once` |
 | **진입 소스:** [make_fixture.py](../../12%EC%B0%A8/tests/make_fixture.py)<br>**정의된 옵션 이름:** `--output`, `--font`, `--author` |
@@ -648,7 +648,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 
 #### LEVEL 3 · [report_core.py](../../12%EC%B0%A8/report_core.py)
 
-| 정의 · 소스에 적힌 역할 |
+| 내용 |
 | --- |
 | **정의:** [`safe_reader`](../../12%EC%B0%A8/report_core.py#L18)<br>**소스에 적힌 역할:** 공유 삭제 핸들을 사용한 기존 읽기를 원본 수정 없이 불러옵니다. |
 | **정의:** [`local_path`](../../12%EC%B0%A8/report_core.py#L43)<br>**소스에 적힌 역할:** 기존 Docker 경로를 지정 프로젝트 안의 실제 파일로 대응합니다. |
@@ -767,7 +767,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 
 #### LEVEL 3 · [report_outputs.py](../../12%EC%B0%A8/report_outputs.py)
 
-| 정의 · 소스에 적힌 역할 |
+| 내용 |
 | --- |
 | **정의:** [`plot`](../../12%EC%B0%A8/report_outputs.py#L36)<br>**소스에 적힌 역할:** 축과 단위 및 범례가 있는 정적 그래프를 별도 분석 도구 없이 그립니다. |
 | **정의:** [`create_docx`](../../12%EC%B0%A8/report_outputs.py#L112)<br>**소스에 적힌 역할:** 저작 전 마커는 이 함수를 호출하는 진입점에서 실행해야 합니다. |
@@ -802,7 +802,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 #### LEVEL 3 · [verify_sources.py](../../12%EC%B0%A8/verify_sources.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT`](../../12%EC%B0%A8/verify_sources.py#L8)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 
@@ -813,13 +813,13 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 
 #### LEVEL 3 · [watcher.py](../../12%EC%B0%A8/watcher.py)
 
-| 정의 · 소스에 적힌 역할 |
+| 내용 |
 | --- |
 | **정의:** [`watch_lock`](../../12%EC%B0%A8/watcher.py#L22)<br>**소스에 적힌 역할:** 프로세스가 종료되면 운영체제가 해제하는 단일 관찰 잠금입니다. |
 | **정의:** [`publish_pair`](../../12%EC%B0%A8/watcher.py#L87)<br>**소스에 적힌 역할:** 검증된 같은 원고 두 파일만 신규 납품 폴더에 저장합니다. |
 | **정의:** [`verify_receipt`](../../12%EC%B0%A8/watcher.py#L98)<br>**소스에 적힌 역할:** 운영 영수증만으로 완료를 믿지 않고 실제 두 파일과 입력을 대조합니다. |
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`--plan`](../../12%EC%B0%A8/watcher.py#L188)<br>**코드의 선언:** `required=True; help='비공개 계획 JSON'` |
 | **설정·옵션:** [`--once`](../../12%EC%B0%A8/watcher.py#L189)<br>**코드의 선언:** `action='store_true'; help='한 번 읽고 종료하며 학습은 실행하지 않음'` |
@@ -939,7 +939,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 
 ### LEVEL 4 · 이 차수 구현의 실제 근거
 
-| 파일 · 원문에 정의된 역할·구성 |
+| 내용 |
 | --- |
 | **파일:** [report_core.py](../../12%EC%B0%A8/report_core.py)<br>**원문에 정의된 역할·구성:** 학습을 실행하지 않고 보존된 실험 결과와 해시를 검증합니다. |
 | **파일:** [report_outputs.py](../../12%EC%B0%A8/report_outputs.py)<br>**원문에 정의된 역할·구성:** 검증된 결과로 Word 초안과 비공개 표·그림을 만듭니다. |
@@ -972,7 +972,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 
 #### LEVEL 4 · 소스에서 제공하는 CLI 옵션
 
-| 진입 소스 · 정의된 옵션 이름 |
+| 내용 |
 | --- |
 | **진입 소스:** [watcher.py](../../12%EC%B0%A8/watcher.py)<br>**정의된 옵션 이름:** `--plan`, `--once` |
 | **진입 소스:** [make_fixture.py](../../12%EC%B0%A8/tests/make_fixture.py)<br>**정의된 옵션 이름:** `--output`, `--font`, `--author` |
@@ -987,7 +987,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 
 #### LEVEL 4 · [report_core.py](../../12%EC%B0%A8/report_core.py)
 
-| 정의 · 소스에 적힌 역할 |
+| 내용 |
 | --- |
 | **정의:** [`safe_reader`](../../12%EC%B0%A8/report_core.py#L18)<br>**소스에 적힌 역할:** 공유 삭제 핸들을 사용한 기존 읽기를 원본 수정 없이 불러옵니다. |
 | **정의:** [`local_path`](../../12%EC%B0%A8/report_core.py#L43)<br>**소스에 적힌 역할:** 기존 Docker 경로를 지정 프로젝트 안의 실제 파일로 대응합니다. |
@@ -1106,7 +1106,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 
 #### LEVEL 4 · [report_outputs.py](../../12%EC%B0%A8/report_outputs.py)
 
-| 정의 · 소스에 적힌 역할 |
+| 내용 |
 | --- |
 | **정의:** [`plot`](../../12%EC%B0%A8/report_outputs.py#L36)<br>**소스에 적힌 역할:** 축과 단위 및 범례가 있는 정적 그래프를 별도 분석 도구 없이 그립니다. |
 | **정의:** [`create_docx`](../../12%EC%B0%A8/report_outputs.py#L112)<br>**소스에 적힌 역할:** 저작 전 마커는 이 함수를 호출하는 진입점에서 실행해야 합니다. |
@@ -1141,7 +1141,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 #### LEVEL 4 · [verify_sources.py](../../12%EC%B0%A8/verify_sources.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT`](../../12%EC%B0%A8/verify_sources.py#L8)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 
@@ -1152,13 +1152,13 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 
 #### LEVEL 4 · [watcher.py](../../12%EC%B0%A8/watcher.py)
 
-| 정의 · 소스에 적힌 역할 |
+| 내용 |
 | --- |
 | **정의:** [`watch_lock`](../../12%EC%B0%A8/watcher.py#L22)<br>**소스에 적힌 역할:** 프로세스가 종료되면 운영체제가 해제하는 단일 관찰 잠금입니다. |
 | **정의:** [`publish_pair`](../../12%EC%B0%A8/watcher.py#L87)<br>**소스에 적힌 역할:** 검증된 같은 원고 두 파일만 신규 납품 폴더에 저장합니다. |
 | **정의:** [`verify_receipt`](../../12%EC%B0%A8/watcher.py#L98)<br>**소스에 적힌 역할:** 운영 영수증만으로 완료를 믿지 않고 실제 두 파일과 입력을 대조합니다. |
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`--plan`](../../12%EC%B0%A8/watcher.py#L188)<br>**코드의 선언:** `required=True; help='비공개 계획 JSON'` |
 | **설정·옵션:** [`--once`](../../12%EC%B0%A8/watcher.py#L189)<br>**코드의 선언:** `action='store_true'; help='한 번 읽고 종료하며 학습은 실행하지 않음'` |
@@ -1305,7 +1305,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 <a name="-실제-자료-구성"></a>
 ## 실제 자료 구성
 
-| 경로 · 자료 종류 |
+| 내용 |
 | --- |
 | **경로:** [docs/](../../12%EC%B0%A8/docs)<br>**자료 종류:** 하위 자료 폴더 |
 | **경로:** [tests/](../../12%EC%B0%A8/tests)<br>**자료 종류:** 하위 자료 폴더 |
@@ -1321,7 +1321,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 <a name="-주요-모듈과-코드-읽기"></a>
 ## 주요 모듈과 코드 읽기
 
-| 파일 · 원문에 정의된 역할·구성 |
+| 내용 |
 | --- |
 | **파일:** [report_core.py](../../12%EC%B0%A8/report_core.py)<br>**원문에 정의된 역할·구성:** 학습을 실행하지 않고 보존된 실험 결과와 해시를 검증합니다. |
 | **파일:** [report_outputs.py](../../12%EC%B0%A8/report_outputs.py)<br>**원문에 정의된 역할·구성:** 검증된 결과로 Word 초안과 비공개 표·그림을 만듭니다. |
@@ -1345,7 +1345,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 <a name="️-소스에서-제공하는-cli-옵션"></a>
 ### 소스에서 제공하는 CLI 옵션
 
-| 진입 소스 · 정의된 옵션 이름 |
+| 내용 |
 | --- |
 | **진입 소스:** [watcher.py](../../12%EC%B0%A8/watcher.py)<br>**정의된 옵션 이름:** `--plan`, `--once` |
 | **진입 소스:** [make_fixture.py](../../12%EC%B0%A8/tests/make_fixture.py)<br>**정의된 옵션 이름:** `--output`, `--font`, `--author` |
@@ -1360,7 +1360,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 
 ### [report_core.py](../../12%EC%B0%A8/report_core.py)
 
-| 정의 · 소스에 적힌 역할 |
+| 내용 |
 | --- |
 | **정의:** [`safe_reader`](../../12%EC%B0%A8/report_core.py#L18)<br>**소스에 적힌 역할:** 공유 삭제 핸들을 사용한 기존 읽기를 원본 수정 없이 불러옵니다. |
 | **정의:** [`local_path`](../../12%EC%B0%A8/report_core.py#L43)<br>**소스에 적힌 역할:** 기존 Docker 경로를 지정 프로젝트 안의 실제 파일로 대응합니다. |
@@ -1479,7 +1479,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 
 ### [report_outputs.py](../../12%EC%B0%A8/report_outputs.py)
 
-| 정의 · 소스에 적힌 역할 |
+| 내용 |
 | --- |
 | **정의:** [`plot`](../../12%EC%B0%A8/report_outputs.py#L36)<br>**소스에 적힌 역할:** 축과 단위 및 범례가 있는 정적 그래프를 별도 분석 도구 없이 그립니다. |
 | **정의:** [`create_docx`](../../12%EC%B0%A8/report_outputs.py#L112)<br>**소스에 적힌 역할:** 저작 전 마커는 이 함수를 호출하는 진입점에서 실행해야 합니다. |
@@ -1514,7 +1514,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 ### [verify_sources.py](../../12%EC%B0%A8/verify_sources.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT`](../../12%EC%B0%A8/verify_sources.py#L8)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 
@@ -1525,13 +1525,13 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 
 ### [watcher.py](../../12%EC%B0%A8/watcher.py)
 
-| 정의 · 소스에 적힌 역할 |
+| 내용 |
 | --- |
 | **정의:** [`watch_lock`](../../12%EC%B0%A8/watcher.py#L22)<br>**소스에 적힌 역할:** 프로세스가 종료되면 운영체제가 해제하는 단일 관찰 잠금입니다. |
 | **정의:** [`publish_pair`](../../12%EC%B0%A8/watcher.py#L87)<br>**소스에 적힌 역할:** 검증된 같은 원고 두 파일만 신규 납품 폴더에 저장합니다. |
 | **정의:** [`verify_receipt`](../../12%EC%B0%A8/watcher.py#L98)<br>**소스에 적힌 역할:** 운영 영수증만으로 완료를 믿지 않고 실제 두 파일과 입력을 대조합니다. |
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`--plan`](../../12%EC%B0%A8/watcher.py#L188)<br>**코드의 선언:** `required=True; help='비공개 계획 JSON'` |
 | **설정·옵션:** [`--once`](../../12%EC%B0%A8/watcher.py#L189)<br>**코드의 선언:** `action='store_true'; help='한 번 읽고 종료하며 학습은 실행하지 않음'` |

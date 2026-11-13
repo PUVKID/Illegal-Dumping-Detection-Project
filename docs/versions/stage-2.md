@@ -227,7 +227,7 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 
 ### LEVEL 4 · 이 차수 구현의 실제 근거
 
-| 파일 · 원문에 정의된 역할·구성 |
+| 내용 |
 | --- |
 | **파일:** [illegal_dumping_detector.ipynb](../../2%EC%B0%A8/illegal_dumping_detector.ipynb)<br>**원문에 정의된 역할·구성:** 노트북 31개 셀 |
 
@@ -349,7 +349,7 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 <a name="-실제-자료-구성"></a>
 ## 실제 자료 구성
 
-| 경로 · 자료 종류 |
+| 내용 |
 | --- |
 | **경로:** [README.md](../../2%EC%B0%A8/README.md)<br>**자료 종류:** MD 파일 |
 | **경로:** [illegal_dumping_detector.ipynb](../../2%EC%B0%A8/illegal_dumping_detector.ipynb)<br>**자료 종류:** IPYNB 파일 |
@@ -357,7 +357,7 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 <a name="-주요-모듈과-코드-읽기"></a>
 ## 주요 모듈과 코드 읽기
 
-| 파일 · 원문에 정의된 역할·구성 |
+| 내용 |
 | --- |
 | **파일:** [illegal_dumping_detector.ipynb](../../2%EC%B0%A8/illegal_dumping_detector.ipynb)<br>**원문에 정의된 역할·구성:** 노트북 31개 셀 |
 

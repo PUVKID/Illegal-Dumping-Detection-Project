@@ -64,7 +64,7 @@ python -B -X utf8 11차/recover.py --pipeline 7차/worker.py --start
 
 #### LEVEL 1 · 소스에서 제공하는 CLI 옵션
 
-| 진입 소스 · 정의된 옵션 이름 |
+| 내용 |
 | --- |
 | **진입 소스:** [recover.py](../../11%EC%B0%A8/recover.py)<br>**정의된 옵션 이름:** `--pipeline`, `--start`, `--worker` |
 | **진입 소스:** [verify_sources.py](../../11%EC%B0%A8/verify_sources.py)<br>**정의된 옵션 이름:** `--expected-digest`, `--print-digest` |
@@ -79,20 +79,22 @@ python -B -X utf8 11차/recover.py --pipeline 7차/worker.py --start
 
 #### LEVEL 1 · [recover.py](../../11%EC%B0%A8/recover.py)
 
-| 정의 · 소스에 적힌 역할 |
+| 내용 |
 | --- |
 | **정의:** [`Progress`](../../11%EC%B0%A8/recover.py#L47)<br>**소스에 적힌 역할:** 원장 합산은 매 본문마다 유지하고 화면 쓰기만 합칩니다. |
 | **정의:** [`NetworkRetry`](../../11%EC%B0%A8/recover.py#L63)<br>**소스에 적힌 역할:** 연결·본문 읽기 경계의 실제 일시 오류만 나타냅니다. |
 
-| 설정·옵션 · 코드의 선언 |
+**표 항목:** 설정·옵션 · 코드의 선언
+
+| 내용 |
 | --- |
 | **설정·옵션:** [`--pipeline`](../../11%EC%B0%A8/recover.py#L310)<br>**코드의 선언:** `required=True` |
 | **설정·옵션:** [`--start`](../../11%EC%B0%A8/recover.py#L312)<br>**코드의 선언:** `action='store_true'` |
-| [`--worker`](../../11%EC%B0%A8/recover.py#L313) | `` |
-| [`ROOT`](../../11%EC%B0%A8/recover.py#L15) | `정의=Path(__file__).resolve().parent` |
-| [`ORIGINAL`](../../11%EC%B0%A8/recover.py#L16) | `정의=ROOT.parent / '7차'` |
-| [`MIN_RANGE`](../../11%EC%B0%A8/recover.py#L17) | `정의=64 * 1024` |
-| [`MAX_RANGE`](../../11%EC%B0%A8/recover.py#L18) | `정의=4 * 1024 * 1024` |
+| **설정·옵션:** [`--worker`](../../11%EC%B0%A8/recover.py#L313)<br>**코드의 선언:** `` |
+| **설정·옵션:** [`ROOT`](../../11%EC%B0%A8/recover.py#L15)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
+| **설정·옵션:** [`ORIGINAL`](../../11%EC%B0%A8/recover.py#L16)<br>**코드의 선언:** `정의=ROOT.parent / '7차'` |
+| **설정·옵션:** [`MIN_RANGE`](../../11%EC%B0%A8/recover.py#L17)<br>**코드의 선언:** `정의=64 * 1024` |
+| **설정·옵션:** [`MAX_RANGE`](../../11%EC%B0%A8/recover.py#L18)<br>**코드의 선언:** `정의=4 * 1024 * 1024` |
 
 **거부 조건:** [`path.is_symlink() or path.resolve() != (ORIGINAL / 'worker.py').resolve()`](../../11%EC%B0%A8/recover.py#L23)
 
@@ -299,7 +301,7 @@ python -B -X utf8 11차/recover.py --pipeline 7차/worker.py --start
 
 #### LEVEL 2 · 소스에서 제공하는 CLI 옵션
 
-| 진입 소스 · 정의된 옵션 이름 |
+| 내용 |
 | --- |
 | **진입 소스:** [recover.py](../../11%EC%B0%A8/recover.py)<br>**정의된 옵션 이름:** `--pipeline`, `--start`, `--worker` |
 | **진입 소스:** [verify_sources.py](../../11%EC%B0%A8/verify_sources.py)<br>**정의된 옵션 이름:** `--expected-digest`, `--print-digest` |
@@ -314,20 +316,22 @@ python -B -X utf8 11차/recover.py --pipeline 7차/worker.py --start
 
 #### LEVEL 2 · [recover.py](../../11%EC%B0%A8/recover.py)
 
-| 정의 · 소스에 적힌 역할 |
+| 내용 |
 | --- |
 | **정의:** [`Progress`](../../11%EC%B0%A8/recover.py#L47)<br>**소스에 적힌 역할:** 원장 합산은 매 본문마다 유지하고 화면 쓰기만 합칩니다. |
 | **정의:** [`NetworkRetry`](../../11%EC%B0%A8/recover.py#L63)<br>**소스에 적힌 역할:** 연결·본문 읽기 경계의 실제 일시 오류만 나타냅니다. |
 
-| 설정·옵션 · 코드의 선언 |
+**표 항목:** 설정·옵션 · 코드의 선언
+
+| 내용 |
 | --- |
 | **설정·옵션:** [`--pipeline`](../../11%EC%B0%A8/recover.py#L310)<br>**코드의 선언:** `required=True` |
 | **설정·옵션:** [`--start`](../../11%EC%B0%A8/recover.py#L312)<br>**코드의 선언:** `action='store_true'` |
-| [`--worker`](../../11%EC%B0%A8/recover.py#L313) | `` |
-| [`ROOT`](../../11%EC%B0%A8/recover.py#L15) | `정의=Path(__file__).resolve().parent` |
-| [`ORIGINAL`](../../11%EC%B0%A8/recover.py#L16) | `정의=ROOT.parent / '7차'` |
-| [`MIN_RANGE`](../../11%EC%B0%A8/recover.py#L17) | `정의=64 * 1024` |
-| [`MAX_RANGE`](../../11%EC%B0%A8/recover.py#L18) | `정의=4 * 1024 * 1024` |
+| **설정·옵션:** [`--worker`](../../11%EC%B0%A8/recover.py#L313)<br>**코드의 선언:** `` |
+| **설정·옵션:** [`ROOT`](../../11%EC%B0%A8/recover.py#L15)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
+| **설정·옵션:** [`ORIGINAL`](../../11%EC%B0%A8/recover.py#L16)<br>**코드의 선언:** `정의=ROOT.parent / '7차'` |
+| **설정·옵션:** [`MIN_RANGE`](../../11%EC%B0%A8/recover.py#L17)<br>**코드의 선언:** `정의=64 * 1024` |
+| **설정·옵션:** [`MAX_RANGE`](../../11%EC%B0%A8/recover.py#L18)<br>**코드의 선언:** `정의=4 * 1024 * 1024` |
 
 **거부 조건:** [`path.is_symlink() or path.resolve() != (ORIGINAL / 'worker.py').resolve()`](../../11%EC%B0%A8/recover.py#L23)
 
@@ -503,7 +507,7 @@ python -B -X utf8 11차/recover.py --pipeline 7차/worker.py --start
 
 #### LEVEL 3 · 소스에서 제공하는 CLI 옵션
 
-| 진입 소스 · 정의된 옵션 이름 |
+| 내용 |
 | --- |
 | **진입 소스:** [recover.py](../../11%EC%B0%A8/recover.py)<br>**정의된 옵션 이름:** `--pipeline`, `--start`, `--worker` |
 | **진입 소스:** [verify_sources.py](../../11%EC%B0%A8/verify_sources.py)<br>**정의된 옵션 이름:** `--expected-digest`, `--print-digest` |
@@ -518,20 +522,22 @@ python -B -X utf8 11차/recover.py --pipeline 7차/worker.py --start
 
 #### LEVEL 3 · [recover.py](../../11%EC%B0%A8/recover.py)
 
-| 정의 · 소스에 적힌 역할 |
+| 내용 |
 | --- |
 | **정의:** [`Progress`](../../11%EC%B0%A8/recover.py#L47)<br>**소스에 적힌 역할:** 원장 합산은 매 본문마다 유지하고 화면 쓰기만 합칩니다. |
 | **정의:** [`NetworkRetry`](../../11%EC%B0%A8/recover.py#L63)<br>**소스에 적힌 역할:** 연결·본문 읽기 경계의 실제 일시 오류만 나타냅니다. |
 
-| 설정·옵션 · 코드의 선언 |
+**표 항목:** 설정·옵션 · 코드의 선언
+
+| 내용 |
 | --- |
 | **설정·옵션:** [`--pipeline`](../../11%EC%B0%A8/recover.py#L310)<br>**코드의 선언:** `required=True` |
 | **설정·옵션:** [`--start`](../../11%EC%B0%A8/recover.py#L312)<br>**코드의 선언:** `action='store_true'` |
-| [`--worker`](../../11%EC%B0%A8/recover.py#L313) | `` |
-| [`ROOT`](../../11%EC%B0%A8/recover.py#L15) | `정의=Path(__file__).resolve().parent` |
-| [`ORIGINAL`](../../11%EC%B0%A8/recover.py#L16) | `정의=ROOT.parent / '7차'` |
-| [`MIN_RANGE`](../../11%EC%B0%A8/recover.py#L17) | `정의=64 * 1024` |
-| [`MAX_RANGE`](../../11%EC%B0%A8/recover.py#L18) | `정의=4 * 1024 * 1024` |
+| **설정·옵션:** [`--worker`](../../11%EC%B0%A8/recover.py#L313)<br>**코드의 선언:** `` |
+| **설정·옵션:** [`ROOT`](../../11%EC%B0%A8/recover.py#L15)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
+| **설정·옵션:** [`ORIGINAL`](../../11%EC%B0%A8/recover.py#L16)<br>**코드의 선언:** `정의=ROOT.parent / '7차'` |
+| **설정·옵션:** [`MIN_RANGE`](../../11%EC%B0%A8/recover.py#L17)<br>**코드의 선언:** `정의=64 * 1024` |
+| **설정·옵션:** [`MAX_RANGE`](../../11%EC%B0%A8/recover.py#L18)<br>**코드의 선언:** `정의=4 * 1024 * 1024` |
 
 **거부 조건:** [`path.is_symlink() or path.resolve() != (ORIGINAL / 'worker.py').resolve()`](../../11%EC%B0%A8/recover.py#L23)
 
@@ -707,7 +713,7 @@ python -B -X utf8 11차/recover.py --pipeline 7차/worker.py --start
 
 ### LEVEL 4 · 이 차수 구현의 실제 근거
 
-| 파일 · 원문에 정의된 역할·구성 |
+| 내용 |
 | --- |
 | **파일:** [recover.py](../../11%EC%B0%A8/recover.py)<br>**원문에 정의된 역할·구성:** 7차 계약을 보존하며 작은 범위의 원자료 수신을 앞에 연결합니다. |
 | **파일:** [verify_sources.py](../../11%EC%B0%A8/verify_sources.py)<br>**원문에 정의된 역할·구성:** 외부에서 고정한 11차 전체 해시와 7차 원본 불변을 검사합니다. |
@@ -756,7 +762,7 @@ python -B -X utf8 11차/recover.py --pipeline 7차/worker.py --start
 
 #### LEVEL 4 · 소스에서 제공하는 CLI 옵션
 
-| 진입 소스 · 정의된 옵션 이름 |
+| 내용 |
 | --- |
 | **진입 소스:** [recover.py](../../11%EC%B0%A8/recover.py)<br>**정의된 옵션 이름:** `--pipeline`, `--start`, `--worker` |
 | **진입 소스:** [verify_sources.py](../../11%EC%B0%A8/verify_sources.py)<br>**정의된 옵션 이름:** `--expected-digest`, `--print-digest` |
@@ -771,20 +777,22 @@ python -B -X utf8 11차/recover.py --pipeline 7차/worker.py --start
 
 #### LEVEL 4 · [recover.py](../../11%EC%B0%A8/recover.py)
 
-| 정의 · 소스에 적힌 역할 |
+| 내용 |
 | --- |
 | **정의:** [`Progress`](../../11%EC%B0%A8/recover.py#L47)<br>**소스에 적힌 역할:** 원장 합산은 매 본문마다 유지하고 화면 쓰기만 합칩니다. |
 | **정의:** [`NetworkRetry`](../../11%EC%B0%A8/recover.py#L63)<br>**소스에 적힌 역할:** 연결·본문 읽기 경계의 실제 일시 오류만 나타냅니다. |
 
-| 설정·옵션 · 코드의 선언 |
+**표 항목:** 설정·옵션 · 코드의 선언
+
+| 내용 |
 | --- |
 | **설정·옵션:** [`--pipeline`](../../11%EC%B0%A8/recover.py#L310)<br>**코드의 선언:** `required=True` |
 | **설정·옵션:** [`--start`](../../11%EC%B0%A8/recover.py#L312)<br>**코드의 선언:** `action='store_true'` |
-| [`--worker`](../../11%EC%B0%A8/recover.py#L313) | `` |
-| [`ROOT`](../../11%EC%B0%A8/recover.py#L15) | `정의=Path(__file__).resolve().parent` |
-| [`ORIGINAL`](../../11%EC%B0%A8/recover.py#L16) | `정의=ROOT.parent / '7차'` |
-| [`MIN_RANGE`](../../11%EC%B0%A8/recover.py#L17) | `정의=64 * 1024` |
-| [`MAX_RANGE`](../../11%EC%B0%A8/recover.py#L18) | `정의=4 * 1024 * 1024` |
+| **설정·옵션:** [`--worker`](../../11%EC%B0%A8/recover.py#L313)<br>**코드의 선언:** `` |
+| **설정·옵션:** [`ROOT`](../../11%EC%B0%A8/recover.py#L15)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
+| **설정·옵션:** [`ORIGINAL`](../../11%EC%B0%A8/recover.py#L16)<br>**코드의 선언:** `정의=ROOT.parent / '7차'` |
+| **설정·옵션:** [`MIN_RANGE`](../../11%EC%B0%A8/recover.py#L17)<br>**코드의 선언:** `정의=64 * 1024` |
+| **설정·옵션:** [`MAX_RANGE`](../../11%EC%B0%A8/recover.py#L18)<br>**코드의 선언:** `정의=4 * 1024 * 1024` |
 
 **거부 조건:** [`path.is_symlink() or path.resolve() != (ORIGINAL / 'worker.py').resolve()`](../../11%EC%B0%A8/recover.py#L23)
 
@@ -987,7 +995,7 @@ python -B -X utf8 11차/recover.py --pipeline 7차/worker.py --start
 <a name="-실제-자료-구성"></a>
 ## 실제 자료 구성
 
-| 경로 · 자료 종류 |
+| 내용 |
 | --- |
 | **경로:** [docs/](../../11%EC%B0%A8/docs)<br>**자료 종류:** 하위 자료 폴더 |
 | **경로:** [tests/](../../11%EC%B0%A8/tests)<br>**자료 종류:** 하위 자료 폴더 |
@@ -1000,7 +1008,7 @@ python -B -X utf8 11차/recover.py --pipeline 7차/worker.py --start
 <a name="-주요-모듈과-코드-읽기"></a>
 ## 주요 모듈과 코드 읽기
 
-| 파일 · 원문에 정의된 역할·구성 |
+| 내용 |
 | --- |
 | **파일:** [recover.py](../../11%EC%B0%A8/recover.py)<br>**원문에 정의된 역할·구성:** 7차 계약을 보존하며 작은 범위의 원자료 수신을 앞에 연결합니다. |
 | **파일:** [verify_sources.py](../../11%EC%B0%A8/verify_sources.py)<br>**원문에 정의된 역할·구성:** 외부에서 고정한 11차 전체 해시와 7차 원본 불변을 검사합니다. |
@@ -1043,7 +1051,7 @@ python -B -X utf8 11차/recover.py --pipeline 7차/worker.py --start
 <a name="️-소스에서-제공하는-cli-옵션"></a>
 ### 소스에서 제공하는 CLI 옵션
 
-| 진입 소스 · 정의된 옵션 이름 |
+| 내용 |
 | --- |
 | **진입 소스:** [recover.py](../../11%EC%B0%A8/recover.py)<br>**정의된 옵션 이름:** `--pipeline`, `--start`, `--worker` |
 | **진입 소스:** [verify_sources.py](../../11%EC%B0%A8/verify_sources.py)<br>**정의된 옵션 이름:** `--expected-digest`, `--print-digest` |
@@ -1058,20 +1066,22 @@ python -B -X utf8 11차/recover.py --pipeline 7차/worker.py --start
 
 ### [recover.py](../../11%EC%B0%A8/recover.py)
 
-| 정의 · 소스에 적힌 역할 |
+| 내용 |
 | --- |
 | **정의:** [`Progress`](../../11%EC%B0%A8/recover.py#L47)<br>**소스에 적힌 역할:** 원장 합산은 매 본문마다 유지하고 화면 쓰기만 합칩니다. |
 | **정의:** [`NetworkRetry`](../../11%EC%B0%A8/recover.py#L63)<br>**소스에 적힌 역할:** 연결·본문 읽기 경계의 실제 일시 오류만 나타냅니다. |
 
-| 설정·옵션 · 코드의 선언 |
+**표 항목:** 설정·옵션 · 코드의 선언
+
+| 내용 |
 | --- |
 | **설정·옵션:** [`--pipeline`](../../11%EC%B0%A8/recover.py#L310)<br>**코드의 선언:** `required=True` |
 | **설정·옵션:** [`--start`](../../11%EC%B0%A8/recover.py#L312)<br>**코드의 선언:** `action='store_true'` |
-| [`--worker`](../../11%EC%B0%A8/recover.py#L313) | `` |
-| [`ROOT`](../../11%EC%B0%A8/recover.py#L15) | `정의=Path(__file__).resolve().parent` |
-| [`ORIGINAL`](../../11%EC%B0%A8/recover.py#L16) | `정의=ROOT.parent / '7차'` |
-| [`MIN_RANGE`](../../11%EC%B0%A8/recover.py#L17) | `정의=64 * 1024` |
-| [`MAX_RANGE`](../../11%EC%B0%A8/recover.py#L18) | `정의=4 * 1024 * 1024` |
+| **설정·옵션:** [`--worker`](../../11%EC%B0%A8/recover.py#L313)<br>**코드의 선언:** `` |
+| **설정·옵션:** [`ROOT`](../../11%EC%B0%A8/recover.py#L15)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
+| **설정·옵션:** [`ORIGINAL`](../../11%EC%B0%A8/recover.py#L16)<br>**코드의 선언:** `정의=ROOT.parent / '7차'` |
+| **설정·옵션:** [`MIN_RANGE`](../../11%EC%B0%A8/recover.py#L17)<br>**코드의 선언:** `정의=64 * 1024` |
+| **설정·옵션:** [`MAX_RANGE`](../../11%EC%B0%A8/recover.py#L18)<br>**코드의 선언:** `정의=4 * 1024 * 1024` |
 
 **거부 조건:** [`path.is_symlink() or path.resolve() != (ORIGINAL / 'worker.py').resolve()`](../../11%EC%B0%A8/recover.py#L23)
 

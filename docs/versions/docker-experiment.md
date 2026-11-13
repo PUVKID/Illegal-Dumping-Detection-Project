@@ -83,7 +83,7 @@ matplotlib
 #### LEVEL 1 · [3차실험/trash_round3/app/backend.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L6)<br>**코드의 선언:** `정의=BASE / 'trash_round3'` |
 | **설정·옵션:** [`APP`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L7)<br>**코드의 선언:** `정의=ROOT / 'app'` |
@@ -131,7 +131,7 @@ matplotlib
 #### LEVEL 1 · [3차실험/trash_round3/app/data_pipeline.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/data_pipeline.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`REF`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/data_pipeline.py#L9)<br>**코드의 선언:** `정의=ROOT/'data/reference'` |
 | **설정·옵션:** [`FULL`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/data_pipeline.py#L10)<br>**코드의 선언:** `정의=ROOT/'data/full'` |
@@ -221,7 +221,7 @@ matplotlib
 #### LEVEL 1 · [3차실험/trash_round3/app/make_report.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/make_report.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`APP`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/make_report.py#L10)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 | **설정·옵션:** [`OUT`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/make_report.py#L11)<br>**코드의 선언:** `정의=ROOT/'report'` |
@@ -297,7 +297,7 @@ matplotlib
 #### LEVEL 1 · [3차실험/trash_round3/data/taco/detector/visualize.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/data/taco/detector/visualize.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT_DIR`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/data/taco/detector/visualize.py#L25)<br>**코드의 선언:** `정의=os.path.abspath("../")` |
 
@@ -415,7 +415,7 @@ matplotlib
 #### LEVEL 2 · [3차실험/trash_round3/app/backend.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L6)<br>**코드의 선언:** `정의=BASE / 'trash_round3'` |
 | **설정·옵션:** [`APP`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L7)<br>**코드의 선언:** `정의=ROOT / 'app'` |
@@ -463,7 +463,7 @@ matplotlib
 #### LEVEL 2 · [3차실험/trash_round3/app/data_pipeline.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/data_pipeline.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`REF`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/data_pipeline.py#L9)<br>**코드의 선언:** `정의=ROOT/'data/reference'` |
 | **설정·옵션:** [`FULL`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/data_pipeline.py#L10)<br>**코드의 선언:** `정의=ROOT/'data/full'` |
@@ -553,7 +553,7 @@ matplotlib
 #### LEVEL 2 · [3차실험/trash_round3/app/make_report.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/make_report.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`APP`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/make_report.py#L10)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 | **설정·옵션:** [`OUT`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/make_report.py#L11)<br>**코드의 선언:** `정의=ROOT/'report'` |
@@ -629,7 +629,7 @@ matplotlib
 #### LEVEL 2 · [3차실험/trash_round3/data/taco/detector/visualize.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/data/taco/detector/visualize.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT_DIR`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/data/taco/detector/visualize.py#L25)<br>**코드의 선언:** `정의=os.path.abspath("../")` |
 
@@ -716,7 +716,7 @@ matplotlib
 #### LEVEL 3 · [3차실험/trash_round3/app/backend.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L6)<br>**코드의 선언:** `정의=BASE / 'trash_round3'` |
 | **설정·옵션:** [`APP`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L7)<br>**코드의 선언:** `정의=ROOT / 'app'` |
@@ -764,7 +764,7 @@ matplotlib
 #### LEVEL 3 · [3차실험/trash_round3/app/data_pipeline.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/data_pipeline.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`REF`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/data_pipeline.py#L9)<br>**코드의 선언:** `정의=ROOT/'data/reference'` |
 | **설정·옵션:** [`FULL`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/data_pipeline.py#L10)<br>**코드의 선언:** `정의=ROOT/'data/full'` |
@@ -854,7 +854,7 @@ matplotlib
 #### LEVEL 3 · [3차실험/trash_round3/app/make_report.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/make_report.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`APP`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/make_report.py#L10)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 | **설정·옵션:** [`OUT`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/make_report.py#L11)<br>**코드의 선언:** `정의=ROOT/'report'` |
@@ -930,7 +930,7 @@ matplotlib
 #### LEVEL 3 · [3차실험/trash_round3/data/taco/detector/visualize.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/data/taco/detector/visualize.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT_DIR`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/data/taco/detector/visualize.py#L25)<br>**코드의 선언:** `정의=os.path.abspath("../")` |
 
@@ -1097,7 +1097,7 @@ matplotlib
 #### LEVEL 4 · [3차실험/trash_round3/app/backend.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L6)<br>**코드의 선언:** `정의=BASE / 'trash_round3'` |
 | **설정·옵션:** [`APP`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L7)<br>**코드의 선언:** `정의=ROOT / 'app'` |
@@ -1145,7 +1145,7 @@ matplotlib
 #### LEVEL 4 · [3차실험/trash_round3/app/data_pipeline.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/data_pipeline.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`REF`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/data_pipeline.py#L9)<br>**코드의 선언:** `정의=ROOT/'data/reference'` |
 | **설정·옵션:** [`FULL`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/data_pipeline.py#L10)<br>**코드의 선언:** `정의=ROOT/'data/full'` |
@@ -1235,7 +1235,7 @@ matplotlib
 #### LEVEL 4 · [3차실험/trash_round3/app/make_report.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/make_report.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`APP`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/make_report.py#L10)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 | **설정·옵션:** [`OUT`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/make_report.py#L11)<br>**코드의 선언:** `정의=ROOT/'report'` |
@@ -1311,7 +1311,7 @@ matplotlib
 #### LEVEL 4 · [3차실험/trash_round3/data/taco/detector/visualize.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/data/taco/detector/visualize.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT_DIR`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/data/taco/detector/visualize.py#L25)<br>**코드의 선언:** `정의=os.path.abspath("../")` |
 
@@ -1406,7 +1406,7 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 <a name="-실제-자료-구성"></a>
 ## 실제 자료 구성
 
-| 경로 · 자료 종류 |
+| 내용 |
 | --- |
 | **경로:** [3차실험/](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98)<br>**자료 종류:** 하위 자료 폴더 |
 | **경로:** [불법투기탐지/](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/%EB%B6%88%EB%B2%95%ED%88%AC%EA%B8%B0%ED%83%90%EC%A7%80)<br>**자료 종류:** 하위 자료 폴더 |
@@ -1506,7 +1506,7 @@ matplotlib
 ### [3차실험/trash_round3/app/backend.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L6)<br>**코드의 선언:** `정의=BASE / 'trash_round3'` |
 | **설정·옵션:** [`APP`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L7)<br>**코드의 선언:** `정의=ROOT / 'app'` |
@@ -1554,7 +1554,7 @@ matplotlib
 ### [3차실험/trash_round3/app/data_pipeline.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/data_pipeline.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`REF`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/data_pipeline.py#L9)<br>**코드의 선언:** `정의=ROOT/'data/reference'` |
 | **설정·옵션:** [`FULL`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/data_pipeline.py#L10)<br>**코드의 선언:** `정의=ROOT/'data/full'` |
@@ -1644,7 +1644,7 @@ matplotlib
 ### [3차실험/trash_round3/app/make_report.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/make_report.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`APP`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/make_report.py#L10)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 | **설정·옵션:** [`OUT`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/make_report.py#L11)<br>**코드의 선언:** `정의=ROOT/'report'` |
@@ -1720,7 +1720,7 @@ matplotlib
 ### [3차실험/trash_round3/data/taco/detector/visualize.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/data/taco/detector/visualize.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT_DIR`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/data/taco/detector/visualize.py#L25)<br>**코드의 선언:** `정의=os.path.abspath("../")` |
 

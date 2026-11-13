@@ -58,7 +58,7 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 #### LEVEL 1 · 소스에서 제공하는 CLI 옵션
 
-| 진입 소스 · 정의된 옵션 이름 |
+| 내용 |
 | --- |
 | **진입 소스:** [prepare_dataset.py](../../7%EC%B0%A8/prepare_dataset.py)<br>**정의된 옵션 이름:** `--prepare`, `--smoke` |
 | **진입 소스:** [worker.py](../../7%EC%B0%A8/worker.py)<br>**정의된 옵션 이름:** `--action`, `--params`, `--worker` |
@@ -73,7 +73,7 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 #### LEVEL 1 · [prepare_dataset.py](../../7%EC%B0%A8/prepare_dataset.py)
 
-| 정의 · 소스에 적힌 역할 |
+| 내용 |
 | --- |
 | **정의:** [`_DownloadRetry`](../../7%EC%B0%A8/prepare_dataset.py#L234)<br>**소스에 적힌 역할:** 통신 경계에서 확인한 일시 오류만 재시도 경로로 전달합니다. |
 
@@ -387,7 +387,7 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 #### LEVEL 1 · [verify_sources.py](../../7%EC%B0%A8/verify_sources.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT`](../../7%EC%B0%A8/verify_sources.py#L6)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 
@@ -403,15 +403,17 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 #### LEVEL 1 · [worker.py](../../7%EC%B0%A8/worker.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+**표 항목:** 설정·옵션 · 코드의 선언
+
+| 내용 |
 | --- |
 | **설정·옵션:** [`--action`](../../7%EC%B0%A8/worker.py#L210)<br>**코드의 선언:** `choices=['train', 'status']` |
 | **설정·옵션:** [`--params`](../../7%EC%B0%A8/worker.py#L211)<br>**코드의 선언:** `default='{}'` |
-| [`--worker`](../../7%EC%B0%A8/worker.py#L212) | `` |
-| [`ROOT`](../../7%EC%B0%A8/worker.py#L15) | `정의=Path(__file__).resolve().parent` |
-| [`WORK`](../../7%EC%B0%A8/worker.py#L16) | `정의=ROOT / 'work'` |
-| [`PROC`](../../7%EC%B0%A8/worker.py#L17) | `정의=Path('/proc')` |
-| [`ACTIVE`](../../7%EC%B0%A8/worker.py#L18) | `정의={'queued', 'running'}` |
+| **설정·옵션:** [`--worker`](../../7%EC%B0%A8/worker.py#L212)<br>**코드의 선언:** `` |
+| **설정·옵션:** [`ROOT`](../../7%EC%B0%A8/worker.py#L15)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
+| **설정·옵션:** [`WORK`](../../7%EC%B0%A8/worker.py#L16)<br>**코드의 선언:** `정의=ROOT / 'work'` |
+| **설정·옵션:** [`PROC`](../../7%EC%B0%A8/worker.py#L17)<br>**코드의 선언:** `정의=Path('/proc')` |
+| **설정·옵션:** [`ACTIVE`](../../7%EC%B0%A8/worker.py#L18)<br>**코드의 선언:** `정의={'queued', 'running'}` |
 
 **거부 조건:** [`not isinstance(value, str) or not re.fullmatch(r'[A-Za-z0-9_-]{1,100}', value)`](../../7%EC%B0%A8/worker.py#L22)
 
@@ -523,7 +525,7 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 #### LEVEL 2 · 소스에서 제공하는 CLI 옵션
 
-| 진입 소스 · 정의된 옵션 이름 |
+| 내용 |
 | --- |
 | **진입 소스:** [prepare_dataset.py](../../7%EC%B0%A8/prepare_dataset.py)<br>**정의된 옵션 이름:** `--prepare`, `--smoke` |
 | **진입 소스:** [worker.py](../../7%EC%B0%A8/worker.py)<br>**정의된 옵션 이름:** `--action`, `--params`, `--worker` |
@@ -538,7 +540,7 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 #### LEVEL 2 · [prepare_dataset.py](../../7%EC%B0%A8/prepare_dataset.py)
 
-| 정의 · 소스에 적힌 역할 |
+| 내용 |
 | --- |
 | **정의:** [`_DownloadRetry`](../../7%EC%B0%A8/prepare_dataset.py#L234)<br>**소스에 적힌 역할:** 통신 경계에서 확인한 일시 오류만 재시도 경로로 전달합니다. |
 
@@ -852,7 +854,7 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 #### LEVEL 2 · [verify_sources.py](../../7%EC%B0%A8/verify_sources.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT`](../../7%EC%B0%A8/verify_sources.py#L6)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 
@@ -868,15 +870,17 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 #### LEVEL 2 · [worker.py](../../7%EC%B0%A8/worker.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+**표 항목:** 설정·옵션 · 코드의 선언
+
+| 내용 |
 | --- |
 | **설정·옵션:** [`--action`](../../7%EC%B0%A8/worker.py#L210)<br>**코드의 선언:** `choices=['train', 'status']` |
 | **설정·옵션:** [`--params`](../../7%EC%B0%A8/worker.py#L211)<br>**코드의 선언:** `default='{}'` |
-| [`--worker`](../../7%EC%B0%A8/worker.py#L212) | `` |
-| [`ROOT`](../../7%EC%B0%A8/worker.py#L15) | `정의=Path(__file__).resolve().parent` |
-| [`WORK`](../../7%EC%B0%A8/worker.py#L16) | `정의=ROOT / 'work'` |
-| [`PROC`](../../7%EC%B0%A8/worker.py#L17) | `정의=Path('/proc')` |
-| [`ACTIVE`](../../7%EC%B0%A8/worker.py#L18) | `정의={'queued', 'running'}` |
+| **설정·옵션:** [`--worker`](../../7%EC%B0%A8/worker.py#L212)<br>**코드의 선언:** `` |
+| **설정·옵션:** [`ROOT`](../../7%EC%B0%A8/worker.py#L15)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
+| **설정·옵션:** [`WORK`](../../7%EC%B0%A8/worker.py#L16)<br>**코드의 선언:** `정의=ROOT / 'work'` |
+| **설정·옵션:** [`PROC`](../../7%EC%B0%A8/worker.py#L17)<br>**코드의 선언:** `정의=Path('/proc')` |
+| **설정·옵션:** [`ACTIVE`](../../7%EC%B0%A8/worker.py#L18)<br>**코드의 선언:** `정의={'queued', 'running'}` |
 
 **거부 조건:** [`not isinstance(value, str) or not re.fullmatch(r'[A-Za-z0-9_-]{1,100}', value)`](../../7%EC%B0%A8/worker.py#L22)
 
@@ -957,7 +961,7 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 #### LEVEL 3 · 소스에서 제공하는 CLI 옵션
 
-| 진입 소스 · 정의된 옵션 이름 |
+| 내용 |
 | --- |
 | **진입 소스:** [prepare_dataset.py](../../7%EC%B0%A8/prepare_dataset.py)<br>**정의된 옵션 이름:** `--prepare`, `--smoke` |
 | **진입 소스:** [worker.py](../../7%EC%B0%A8/worker.py)<br>**정의된 옵션 이름:** `--action`, `--params`, `--worker` |
@@ -972,7 +976,7 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 #### LEVEL 3 · [prepare_dataset.py](../../7%EC%B0%A8/prepare_dataset.py)
 
-| 정의 · 소스에 적힌 역할 |
+| 내용 |
 | --- |
 | **정의:** [`_DownloadRetry`](../../7%EC%B0%A8/prepare_dataset.py#L234)<br>**소스에 적힌 역할:** 통신 경계에서 확인한 일시 오류만 재시도 경로로 전달합니다. |
 
@@ -1286,7 +1290,7 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 #### LEVEL 3 · [verify_sources.py](../../7%EC%B0%A8/verify_sources.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT`](../../7%EC%B0%A8/verify_sources.py#L6)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 
@@ -1302,15 +1306,17 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 #### LEVEL 3 · [worker.py](../../7%EC%B0%A8/worker.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+**표 항목:** 설정·옵션 · 코드의 선언
+
+| 내용 |
 | --- |
 | **설정·옵션:** [`--action`](../../7%EC%B0%A8/worker.py#L210)<br>**코드의 선언:** `choices=['train', 'status']` |
 | **설정·옵션:** [`--params`](../../7%EC%B0%A8/worker.py#L211)<br>**코드의 선언:** `default='{}'` |
-| [`--worker`](../../7%EC%B0%A8/worker.py#L212) | `` |
-| [`ROOT`](../../7%EC%B0%A8/worker.py#L15) | `정의=Path(__file__).resolve().parent` |
-| [`WORK`](../../7%EC%B0%A8/worker.py#L16) | `정의=ROOT / 'work'` |
-| [`PROC`](../../7%EC%B0%A8/worker.py#L17) | `정의=Path('/proc')` |
-| [`ACTIVE`](../../7%EC%B0%A8/worker.py#L18) | `정의={'queued', 'running'}` |
+| **설정·옵션:** [`--worker`](../../7%EC%B0%A8/worker.py#L212)<br>**코드의 선언:** `` |
+| **설정·옵션:** [`ROOT`](../../7%EC%B0%A8/worker.py#L15)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
+| **설정·옵션:** [`WORK`](../../7%EC%B0%A8/worker.py#L16)<br>**코드의 선언:** `정의=ROOT / 'work'` |
+| **설정·옵션:** [`PROC`](../../7%EC%B0%A8/worker.py#L17)<br>**코드의 선언:** `정의=Path('/proc')` |
+| **설정·옵션:** [`ACTIVE`](../../7%EC%B0%A8/worker.py#L18)<br>**코드의 선언:** `정의={'queued', 'running'}` |
 
 **거부 조건:** [`not isinstance(value, str) or not re.fullmatch(r'[A-Za-z0-9_-]{1,100}', value)`](../../7%EC%B0%A8/worker.py#L22)
 
@@ -1397,7 +1403,7 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 
 ### LEVEL 4 · 이 차수 구현의 실제 근거
 
-| 파일 · 원문에 정의된 역할·구성 |
+| 내용 |
 | --- |
 | **파일:** [worker.py](../../7%EC%B0%A8/worker.py)<br>**원문에 정의된 역할·구성:** 준비와 GPU 학습을 Codex 없이 이어 실행하는 독립 작업자입니다. |
 | **파일:** [prepare_dataset.py](../../7%EC%B0%A8/prepare_dataset.py)<br>**원문에 정의된 역할·구성:** 공식 원자료를 보존하고 별도 정규화 사본·고정 분할을 준비합니다. |
@@ -1444,7 +1450,7 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 #### LEVEL 4 · 소스에서 제공하는 CLI 옵션
 
-| 진입 소스 · 정의된 옵션 이름 |
+| 내용 |
 | --- |
 | **진입 소스:** [prepare_dataset.py](../../7%EC%B0%A8/prepare_dataset.py)<br>**정의된 옵션 이름:** `--prepare`, `--smoke` |
 | **진입 소스:** [worker.py](../../7%EC%B0%A8/worker.py)<br>**정의된 옵션 이름:** `--action`, `--params`, `--worker` |
@@ -1459,7 +1465,7 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 #### LEVEL 4 · [prepare_dataset.py](../../7%EC%B0%A8/prepare_dataset.py)
 
-| 정의 · 소스에 적힌 역할 |
+| 내용 |
 | --- |
 | **정의:** [`_DownloadRetry`](../../7%EC%B0%A8/prepare_dataset.py#L234)<br>**소스에 적힌 역할:** 통신 경계에서 확인한 일시 오류만 재시도 경로로 전달합니다. |
 
@@ -1773,7 +1779,7 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 #### LEVEL 4 · [verify_sources.py](../../7%EC%B0%A8/verify_sources.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT`](../../7%EC%B0%A8/verify_sources.py#L6)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 
@@ -1789,15 +1795,17 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 #### LEVEL 4 · [worker.py](../../7%EC%B0%A8/worker.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+**표 항목:** 설정·옵션 · 코드의 선언
+
+| 내용 |
 | --- |
 | **설정·옵션:** [`--action`](../../7%EC%B0%A8/worker.py#L210)<br>**코드의 선언:** `choices=['train', 'status']` |
 | **설정·옵션:** [`--params`](../../7%EC%B0%A8/worker.py#L211)<br>**코드의 선언:** `default='{}'` |
-| [`--worker`](../../7%EC%B0%A8/worker.py#L212) | `` |
-| [`ROOT`](../../7%EC%B0%A8/worker.py#L15) | `정의=Path(__file__).resolve().parent` |
-| [`WORK`](../../7%EC%B0%A8/worker.py#L16) | `정의=ROOT / 'work'` |
-| [`PROC`](../../7%EC%B0%A8/worker.py#L17) | `정의=Path('/proc')` |
-| [`ACTIVE`](../../7%EC%B0%A8/worker.py#L18) | `정의={'queued', 'running'}` |
+| **설정·옵션:** [`--worker`](../../7%EC%B0%A8/worker.py#L212)<br>**코드의 선언:** `` |
+| **설정·옵션:** [`ROOT`](../../7%EC%B0%A8/worker.py#L15)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
+| **설정·옵션:** [`WORK`](../../7%EC%B0%A8/worker.py#L16)<br>**코드의 선언:** `정의=ROOT / 'work'` |
+| **설정·옵션:** [`PROC`](../../7%EC%B0%A8/worker.py#L17)<br>**코드의 선언:** `정의=Path('/proc')` |
+| **설정·옵션:** [`ACTIVE`](../../7%EC%B0%A8/worker.py#L18)<br>**코드의 선언:** `정의={'queued', 'running'}` |
 
 **거부 조건:** [`not isinstance(value, str) or not re.fullmatch(r'[A-Za-z0-9_-]{1,100}', value)`](../../7%EC%B0%A8/worker.py#L22)
 
@@ -1911,7 +1919,7 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 <a name="-실제-자료-구성"></a>
 ## 실제 자료 구성
 
-| 경로 · 자료 종류 |
+| 내용 |
 | --- |
 | **경로:** [configs/](../../7%EC%B0%A8/configs)<br>**자료 종류:** 하위 자료 폴더 |
 | **경로:** [docs/](../../7%EC%B0%A8/docs)<br>**자료 종류:** 하위 자료 폴더 |
@@ -1928,7 +1936,7 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 <a name="-주요-모듈과-코드-읽기"></a>
 ## 주요 모듈과 코드 읽기
 
-| 파일 · 원문에 정의된 역할·구성 |
+| 내용 |
 | --- |
 | **파일:** [worker.py](../../7%EC%B0%A8/worker.py)<br>**원문에 정의된 역할·구성:** 준비와 GPU 학습을 Codex 없이 이어 실행하는 독립 작업자입니다. |
 | **파일:** [prepare_dataset.py](../../7%EC%B0%A8/prepare_dataset.py)<br>**원문에 정의된 역할·구성:** 공식 원자료를 보존하고 별도 정규화 사본·고정 분할을 준비합니다. |
@@ -1967,7 +1975,7 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 <a name="️-소스에서-제공하는-cli-옵션"></a>
 ### 소스에서 제공하는 CLI 옵션
 
-| 진입 소스 · 정의된 옵션 이름 |
+| 내용 |
 | --- |
 | **진입 소스:** [prepare_dataset.py](../../7%EC%B0%A8/prepare_dataset.py)<br>**정의된 옵션 이름:** `--prepare`, `--smoke` |
 | **진입 소스:** [worker.py](../../7%EC%B0%A8/worker.py)<br>**정의된 옵션 이름:** `--action`, `--params`, `--worker` |
@@ -1982,7 +1990,7 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 ### [prepare_dataset.py](../../7%EC%B0%A8/prepare_dataset.py)
 
-| 정의 · 소스에 적힌 역할 |
+| 내용 |
 | --- |
 | **정의:** [`_DownloadRetry`](../../7%EC%B0%A8/prepare_dataset.py#L234)<br>**소스에 적힌 역할:** 통신 경계에서 확인한 일시 오류만 재시도 경로로 전달합니다. |
 
@@ -2296,7 +2304,7 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 ### [verify_sources.py](../../7%EC%B0%A8/verify_sources.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT`](../../7%EC%B0%A8/verify_sources.py#L6)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 
@@ -2312,15 +2320,17 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 ### [worker.py](../../7%EC%B0%A8/worker.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+**표 항목:** 설정·옵션 · 코드의 선언
+
+| 내용 |
 | --- |
 | **설정·옵션:** [`--action`](../../7%EC%B0%A8/worker.py#L210)<br>**코드의 선언:** `choices=['train', 'status']` |
 | **설정·옵션:** [`--params`](../../7%EC%B0%A8/worker.py#L211)<br>**코드의 선언:** `default='{}'` |
-| [`--worker`](../../7%EC%B0%A8/worker.py#L212) | `` |
-| [`ROOT`](../../7%EC%B0%A8/worker.py#L15) | `정의=Path(__file__).resolve().parent` |
-| [`WORK`](../../7%EC%B0%A8/worker.py#L16) | `정의=ROOT / 'work'` |
-| [`PROC`](../../7%EC%B0%A8/worker.py#L17) | `정의=Path('/proc')` |
-| [`ACTIVE`](../../7%EC%B0%A8/worker.py#L18) | `정의={'queued', 'running'}` |
+| **설정·옵션:** [`--worker`](../../7%EC%B0%A8/worker.py#L212)<br>**코드의 선언:** `` |
+| **설정·옵션:** [`ROOT`](../../7%EC%B0%A8/worker.py#L15)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
+| **설정·옵션:** [`WORK`](../../7%EC%B0%A8/worker.py#L16)<br>**코드의 선언:** `정의=ROOT / 'work'` |
+| **설정·옵션:** [`PROC`](../../7%EC%B0%A8/worker.py#L17)<br>**코드의 선언:** `정의=Path('/proc')` |
+| **설정·옵션:** [`ACTIVE`](../../7%EC%B0%A8/worker.py#L18)<br>**코드의 선언:** `정의={'queued', 'running'}` |
 
 **거부 조건:** [`not isinstance(value, str) or not re.fullmatch(r'[A-Za-z0-9_-]{1,100}', value)`](../../7%EC%B0%A8/worker.py#L22)
 

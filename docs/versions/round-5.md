@@ -42,7 +42,7 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 
 #### LEVEL 1 · 소스에서 제공하는 CLI 옵션
 
-| 진입 소스 · 정의된 옵션 이름 |
+| 내용 |
 | --- |
 | **진입 소스:** [build_exe.py](../../5%EC%B0%A8/build_exe.py)<br>**정의된 옵션 이름:** `--build` |
 | **진입 소스:** [gpu_worker.py](../../5%EC%B0%A8/gpu_worker.py)<br>**정의된 옵션 이름:** `--action`, `--params`, `--worker` |
@@ -61,11 +61,11 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 #### LEVEL 1 · [build_exe.py](../../5%EC%B0%A8/build_exe.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`--build`](../../5%EC%B0%A8/build_exe.py#L13)<br>**코드의 선언:** `action='store_true'; help='확인만 하지 않고 실제 EXE를 빌드합니다.'` |
 
-| 거부 조건 · 오류 메시지 |
+| 내용 |
 | --- |
 | **거부 조건:** [`not available`](../../5%EC%B0%A8/build_exe.py#L19)<br>**오류 메시지:** 빌드하려면 별도로 PyInstaller를 준비해야 합니다. 자동 설치하지 않습니다. |
 
@@ -242,14 +242,14 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 #### LEVEL 1 · [launcher.py](../../5%EC%B0%A8/launcher.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`--no-browser`](../../5%EC%B0%A8/launcher.py#L55)<br>**코드의 선언:** `action='store_true'` |
 | **설정·옵션:** [`--port`](../../5%EC%B0%A8/launcher.py#L56)<br>**코드의 선언:** `type=int; default=0` |
 | **설정·옵션:** [`--self-test`](../../5%EC%B0%A8/launcher.py#L57)<br>**코드의 선언:** `action='store_true'` |
 | **설정·옵션:** [`--hidden`](../../5%EC%B0%A8/launcher.py#L58)<br>**코드의 선언:** `action='store_true'` |
 
-| 거부 조건 · 오류 메시지 |
+| 내용 |
 | --- |
 | **거부 조건:** [`response.status != 200`](../../5%EC%B0%A8/launcher.py#L20)<br>**오류 메시지:** 루프백 상태 검사에 실패했습니다. |
 
@@ -325,7 +325,7 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 #### LEVEL 1 · [prepare_training.py](../../5%EC%B0%A8/prepare_training.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`--prepare`](../../5%EC%B0%A8/prepare_training.py#L552)<br>**코드의 선언:** `action="store_true"; required=True` |
 | **설정·옵션:** [`ROOT`](../../5%EC%B0%A8/prepare_training.py#L22)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
@@ -579,7 +579,7 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 
 #### LEVEL 2 · 소스에서 제공하는 CLI 옵션
 
-| 진입 소스 · 정의된 옵션 이름 |
+| 내용 |
 | --- |
 | **진입 소스:** [build_exe.py](../../5%EC%B0%A8/build_exe.py)<br>**정의된 옵션 이름:** `--build` |
 | **진입 소스:** [gpu_worker.py](../../5%EC%B0%A8/gpu_worker.py)<br>**정의된 옵션 이름:** `--action`, `--params`, `--worker` |
@@ -598,11 +598,11 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 #### LEVEL 2 · [build_exe.py](../../5%EC%B0%A8/build_exe.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`--build`](../../5%EC%B0%A8/build_exe.py#L13)<br>**코드의 선언:** `action='store_true'; help='확인만 하지 않고 실제 EXE를 빌드합니다.'` |
 
-| 거부 조건 · 오류 메시지 |
+| 내용 |
 | --- |
 | **거부 조건:** [`not available`](../../5%EC%B0%A8/build_exe.py#L19)<br>**오류 메시지:** 빌드하려면 별도로 PyInstaller를 준비해야 합니다. 자동 설치하지 않습니다. |
 
@@ -779,14 +779,14 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 #### LEVEL 2 · [launcher.py](../../5%EC%B0%A8/launcher.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`--no-browser`](../../5%EC%B0%A8/launcher.py#L55)<br>**코드의 선언:** `action='store_true'` |
 | **설정·옵션:** [`--port`](../../5%EC%B0%A8/launcher.py#L56)<br>**코드의 선언:** `type=int; default=0` |
 | **설정·옵션:** [`--self-test`](../../5%EC%B0%A8/launcher.py#L57)<br>**코드의 선언:** `action='store_true'` |
 | **설정·옵션:** [`--hidden`](../../5%EC%B0%A8/launcher.py#L58)<br>**코드의 선언:** `action='store_true'` |
 
-| 거부 조건 · 오류 메시지 |
+| 내용 |
 | --- |
 | **거부 조건:** [`response.status != 200`](../../5%EC%B0%A8/launcher.py#L20)<br>**오류 메시지:** 루프백 상태 검사에 실패했습니다. |
 
@@ -862,7 +862,7 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 #### LEVEL 2 · [prepare_training.py](../../5%EC%B0%A8/prepare_training.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`--prepare`](../../5%EC%B0%A8/prepare_training.py#L552)<br>**코드의 선언:** `action="store_true"; required=True` |
 | **설정·옵션:** [`ROOT`](../../5%EC%B0%A8/prepare_training.py#L22)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
@@ -1085,7 +1085,7 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 
 #### LEVEL 3 · 소스에서 제공하는 CLI 옵션
 
-| 진입 소스 · 정의된 옵션 이름 |
+| 내용 |
 | --- |
 | **진입 소스:** [build_exe.py](../../5%EC%B0%A8/build_exe.py)<br>**정의된 옵션 이름:** `--build` |
 | **진입 소스:** [gpu_worker.py](../../5%EC%B0%A8/gpu_worker.py)<br>**정의된 옵션 이름:** `--action`, `--params`, `--worker` |
@@ -1104,11 +1104,11 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 #### LEVEL 3 · [build_exe.py](../../5%EC%B0%A8/build_exe.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`--build`](../../5%EC%B0%A8/build_exe.py#L13)<br>**코드의 선언:** `action='store_true'; help='확인만 하지 않고 실제 EXE를 빌드합니다.'` |
 
-| 거부 조건 · 오류 메시지 |
+| 내용 |
 | --- |
 | **거부 조건:** [`not available`](../../5%EC%B0%A8/build_exe.py#L19)<br>**오류 메시지:** 빌드하려면 별도로 PyInstaller를 준비해야 합니다. 자동 설치하지 않습니다. |
 
@@ -1285,14 +1285,14 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 #### LEVEL 3 · [launcher.py](../../5%EC%B0%A8/launcher.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`--no-browser`](../../5%EC%B0%A8/launcher.py#L55)<br>**코드의 선언:** `action='store_true'` |
 | **설정·옵션:** [`--port`](../../5%EC%B0%A8/launcher.py#L56)<br>**코드의 선언:** `type=int; default=0` |
 | **설정·옵션:** [`--self-test`](../../5%EC%B0%A8/launcher.py#L57)<br>**코드의 선언:** `action='store_true'` |
 | **설정·옵션:** [`--hidden`](../../5%EC%B0%A8/launcher.py#L58)<br>**코드의 선언:** `action='store_true'` |
 
-| 거부 조건 · 오류 메시지 |
+| 내용 |
 | --- |
 | **거부 조건:** [`response.status != 200`](../../5%EC%B0%A8/launcher.py#L20)<br>**오류 메시지:** 루프백 상태 검사에 실패했습니다. |
 
@@ -1368,7 +1368,7 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 #### LEVEL 3 · [prepare_training.py](../../5%EC%B0%A8/prepare_training.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`--prepare`](../../5%EC%B0%A8/prepare_training.py#L552)<br>**코드의 선언:** `action="store_true"; required=True` |
 | **설정·옵션:** [`ROOT`](../../5%EC%B0%A8/prepare_training.py#L22)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
@@ -1613,7 +1613,7 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 
 ### LEVEL 4 · 이 차수 구현의 실제 근거
 
-| 파일 · 원문에 정의된 역할·구성 |
+| 내용 |
 | --- |
 | **파일:** [build_exe.py](../../5%EC%B0%A8/build_exe.py)<br>**원문에 정의된 역할·구성:** PyInstaller 의존성 확인과 사용자가 선택한 빌드를 수행합니다. |
 | **파일:** [dashboard.py](../../5%EC%B0%A8/dashboard.py)<br>**원문에 정의된 역할·구성:** Codex와 독립 실행되는 루프백 전용 대시보드입니다. |
@@ -1646,7 +1646,7 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 
 #### LEVEL 4 · 소스에서 제공하는 CLI 옵션
 
-| 진입 소스 · 정의된 옵션 이름 |
+| 내용 |
 | --- |
 | **진입 소스:** [build_exe.py](../../5%EC%B0%A8/build_exe.py)<br>**정의된 옵션 이름:** `--build` |
 | **진입 소스:** [gpu_worker.py](../../5%EC%B0%A8/gpu_worker.py)<br>**정의된 옵션 이름:** `--action`, `--params`, `--worker` |
@@ -1665,11 +1665,11 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 #### LEVEL 4 · [build_exe.py](../../5%EC%B0%A8/build_exe.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`--build`](../../5%EC%B0%A8/build_exe.py#L13)<br>**코드의 선언:** `action='store_true'; help='확인만 하지 않고 실제 EXE를 빌드합니다.'` |
 
-| 거부 조건 · 오류 메시지 |
+| 내용 |
 | --- |
 | **거부 조건:** [`not available`](../../5%EC%B0%A8/build_exe.py#L19)<br>**오류 메시지:** 빌드하려면 별도로 PyInstaller를 준비해야 합니다. 자동 설치하지 않습니다. |
 
@@ -1846,14 +1846,14 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 #### LEVEL 4 · [launcher.py](../../5%EC%B0%A8/launcher.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`--no-browser`](../../5%EC%B0%A8/launcher.py#L55)<br>**코드의 선언:** `action='store_true'` |
 | **설정·옵션:** [`--port`](../../5%EC%B0%A8/launcher.py#L56)<br>**코드의 선언:** `type=int; default=0` |
 | **설정·옵션:** [`--self-test`](../../5%EC%B0%A8/launcher.py#L57)<br>**코드의 선언:** `action='store_true'` |
 | **설정·옵션:** [`--hidden`](../../5%EC%B0%A8/launcher.py#L58)<br>**코드의 선언:** `action='store_true'` |
 
-| 거부 조건 · 오류 메시지 |
+| 내용 |
 | --- |
 | **거부 조건:** [`response.status != 200`](../../5%EC%B0%A8/launcher.py#L20)<br>**오류 메시지:** 루프백 상태 검사에 실패했습니다. |
 
@@ -1929,7 +1929,7 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 #### LEVEL 4 · [prepare_training.py](../../5%EC%B0%A8/prepare_training.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`--prepare`](../../5%EC%B0%A8/prepare_training.py#L552)<br>**코드의 선언:** `action="store_true"; required=True` |
 | **설정·옵션:** [`ROOT`](../../5%EC%B0%A8/prepare_training.py#L22)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
@@ -2201,7 +2201,7 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 <a name="-실제-자료-구성"></a>
 ## 실제 자료 구성
 
-| 경로 · 자료 종류 |
+| 내용 |
 | --- |
 | **경로:** [docs/](../../5%EC%B0%A8/docs)<br>**자료 종류:** 하위 자료 폴더 |
 | **경로:** [tests/](../../5%EC%B0%A8/tests)<br>**자료 종류:** 하위 자료 폴더 |
@@ -2222,7 +2222,7 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 <a name="-주요-모듈과-코드-읽기"></a>
 ## 주요 모듈과 코드 읽기
 
-| 파일 · 원문에 정의된 역할·구성 |
+| 내용 |
 | --- |
 | **파일:** [build_exe.py](../../5%EC%B0%A8/build_exe.py)<br>**원문에 정의된 역할·구성:** PyInstaller 의존성 확인과 사용자가 선택한 빌드를 수행합니다. |
 | **파일:** [dashboard.py](../../5%EC%B0%A8/dashboard.py)<br>**원문에 정의된 역할·구성:** Codex와 독립 실행되는 루프백 전용 대시보드입니다. |
@@ -2246,7 +2246,7 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 <a name="️-소스에서-제공하는-cli-옵션"></a>
 ### 소스에서 제공하는 CLI 옵션
 
-| 진입 소스 · 정의된 옵션 이름 |
+| 내용 |
 | --- |
 | **진입 소스:** [build_exe.py](../../5%EC%B0%A8/build_exe.py)<br>**정의된 옵션 이름:** `--build` |
 | **진입 소스:** [gpu_worker.py](../../5%EC%B0%A8/gpu_worker.py)<br>**정의된 옵션 이름:** `--action`, `--params`, `--worker` |
@@ -2265,11 +2265,11 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 ### [build_exe.py](../../5%EC%B0%A8/build_exe.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`--build`](../../5%EC%B0%A8/build_exe.py#L13)<br>**코드의 선언:** `action='store_true'; help='확인만 하지 않고 실제 EXE를 빌드합니다.'` |
 
-| 거부 조건 · 오류 메시지 |
+| 내용 |
 | --- |
 | **거부 조건:** [`not available`](../../5%EC%B0%A8/build_exe.py#L19)<br>**오류 메시지:** 빌드하려면 별도로 PyInstaller를 준비해야 합니다. 자동 설치하지 않습니다. |
 
@@ -2446,14 +2446,14 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 ### [launcher.py](../../5%EC%B0%A8/launcher.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`--no-browser`](../../5%EC%B0%A8/launcher.py#L55)<br>**코드의 선언:** `action='store_true'` |
 | **설정·옵션:** [`--port`](../../5%EC%B0%A8/launcher.py#L56)<br>**코드의 선언:** `type=int; default=0` |
 | **설정·옵션:** [`--self-test`](../../5%EC%B0%A8/launcher.py#L57)<br>**코드의 선언:** `action='store_true'` |
 | **설정·옵션:** [`--hidden`](../../5%EC%B0%A8/launcher.py#L58)<br>**코드의 선언:** `action='store_true'` |
 
-| 거부 조건 · 오류 메시지 |
+| 내용 |
 | --- |
 | **거부 조건:** [`response.status != 200`](../../5%EC%B0%A8/launcher.py#L20)<br>**오류 메시지:** 루프백 상태 검사에 실패했습니다. |
 
@@ -2529,7 +2529,7 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 ### [prepare_training.py](../../5%EC%B0%A8/prepare_training.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`--prepare`](../../5%EC%B0%A8/prepare_training.py#L552)<br>**코드의 선언:** `action="store_true"; required=True` |
 | **설정·옵션:** [`ROOT`](../../5%EC%B0%A8/prepare_training.py#L22)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |

@@ -60,7 +60,7 @@ Windows의 상태 파일 읽기는 삭제 공유를 허용하도록 구성해 �
 
 #### LEVEL 1 · 소스에서 제공하는 CLI 옵션
 
-| 진입 소스 · 정의된 옵션 이름 |
+| 내용 |
 | --- |
 | **진입 소스:** [launcher.py](../../10%EC%B0%A8/launcher.py)<br>**정의된 옵션 이름:** `--no-browser`, `--port`, `--self-test`, `--hidden` |
 
@@ -91,21 +91,21 @@ Windows의 상태 파일 읽기는 삭제 공유를 허용하도록 구성해 �
 #### LEVEL 1 · [launcher.py](../../10%EC%B0%A8/launcher.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`--no-browser`](../../10%EC%B0%A8/launcher.py#L56)<br>**코드의 선언:** `action='store_true'` |
 | **설정·옵션:** [`--port`](../../10%EC%B0%A8/launcher.py#L57)<br>**코드의 선언:** `type=int; default=0` |
 | **설정·옵션:** [`--self-test`](../../10%EC%B0%A8/launcher.py#L58)<br>**코드의 선언:** `action='store_true'` |
 | **설정·옵션:** [`--hidden`](../../10%EC%B0%A8/launcher.py#L59)<br>**코드의 선언:** `action='store_true'` |
 
-| 거부 조건 · 오류 메시지 |
+| 내용 |
 | --- |
 | **거부 조건:** [`response.status != 200`](../../10%EC%B0%A8/launcher.py#L21)<br>**오류 메시지:** 루프백 상태 검사에 실패했습니다. |
 
 #### LEVEL 1 · [pipeline.py](../../10%EC%B0%A8/pipeline.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT`](../../10%EC%B0%A8/pipeline.py#L7)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 | **설정·옵션:** [`PREVIOUS`](../../10%EC%B0%A8/pipeline.py#L8)<br>**코드의 선언:** `정의=ROOT.parent / '5차'` |
@@ -127,19 +127,19 @@ Windows의 상태 파일 읽기는 삭제 공유를 허용하도록 구성해 �
 
 #### LEVEL 1 · [safe_io.py](../../10%EC%B0%A8/safe_io.py)
 
-| 정의 · 소스에 적힌 역할 |
+| 내용 |
 | --- |
 | **정의:** [`safe_read_text`](../../10%EC%B0%A8/safe_io.py#L53)<br>**소스에 적힌 역할:** 기존 호출자의 경로 검증을 유지하며 엄격하게 텍스트를 읽습니다. |
 | **정의:** [`safe_read_json`](../../10%EC%B0%A8/safe_io.py#L63)<br>**소스에 적힌 역할:** 파일이 없을 때만 기본값을 반환하고 해독·JSON·접근 오류는 전파합니다. |
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`_WINDOWS`](../../10%EC%B0%A8/safe_io.py#L8)<br>**코드의 선언:** `정의=os.name == 'nt'` |
 
 #### LEVEL 1 · [verify_sources.py](../../10%EC%B0%A8/verify_sources.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT`](../../10%EC%B0%A8/verify_sources.py#L8)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 
@@ -226,7 +226,7 @@ Windows의 상태 파일 읽기는 삭제 공유를 허용하도록 구성해 �
 
 #### LEVEL 2 · 소스에서 제공하는 CLI 옵션
 
-| 진입 소스 · 정의된 옵션 이름 |
+| 내용 |
 | --- |
 | **진입 소스:** [launcher.py](../../10%EC%B0%A8/launcher.py)<br>**정의된 옵션 이름:** `--no-browser`, `--port`, `--self-test`, `--hidden` |
 
@@ -257,21 +257,21 @@ Windows의 상태 파일 읽기는 삭제 공유를 허용하도록 구성해 �
 #### LEVEL 2 · [launcher.py](../../10%EC%B0%A8/launcher.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`--no-browser`](../../10%EC%B0%A8/launcher.py#L56)<br>**코드의 선언:** `action='store_true'` |
 | **설정·옵션:** [`--port`](../../10%EC%B0%A8/launcher.py#L57)<br>**코드의 선언:** `type=int; default=0` |
 | **설정·옵션:** [`--self-test`](../../10%EC%B0%A8/launcher.py#L58)<br>**코드의 선언:** `action='store_true'` |
 | **설정·옵션:** [`--hidden`](../../10%EC%B0%A8/launcher.py#L59)<br>**코드의 선언:** `action='store_true'` |
 
-| 거부 조건 · 오류 메시지 |
+| 내용 |
 | --- |
 | **거부 조건:** [`response.status != 200`](../../10%EC%B0%A8/launcher.py#L21)<br>**오류 메시지:** 루프백 상태 검사에 실패했습니다. |
 
 #### LEVEL 2 · [pipeline.py](../../10%EC%B0%A8/pipeline.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT`](../../10%EC%B0%A8/pipeline.py#L7)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 | **설정·옵션:** [`PREVIOUS`](../../10%EC%B0%A8/pipeline.py#L8)<br>**코드의 선언:** `정의=ROOT.parent / '5차'` |
@@ -293,19 +293,19 @@ Windows의 상태 파일 읽기는 삭제 공유를 허용하도록 구성해 �
 
 #### LEVEL 2 · [safe_io.py](../../10%EC%B0%A8/safe_io.py)
 
-| 정의 · 소스에 적힌 역할 |
+| 내용 |
 | --- |
 | **정의:** [`safe_read_text`](../../10%EC%B0%A8/safe_io.py#L53)<br>**소스에 적힌 역할:** 기존 호출자의 경로 검증을 유지하며 엄격하게 텍스트를 읽습니다. |
 | **정의:** [`safe_read_json`](../../10%EC%B0%A8/safe_io.py#L63)<br>**소스에 적힌 역할:** 파일이 없을 때만 기본값을 반환하고 해독·JSON·접근 오류는 전파합니다. |
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`_WINDOWS`](../../10%EC%B0%A8/safe_io.py#L8)<br>**코드의 선언:** `정의=os.name == 'nt'` |
 
 #### LEVEL 2 · [verify_sources.py](../../10%EC%B0%A8/verify_sources.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT`](../../10%EC%B0%A8/verify_sources.py#L8)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 
@@ -353,7 +353,7 @@ Windows의 상태 파일 읽기는 삭제 공유를 허용하도록 구성해 �
 
 #### LEVEL 3 · 소스에서 제공하는 CLI 옵션
 
-| 진입 소스 · 정의된 옵션 이름 |
+| 내용 |
 | --- |
 | **진입 소스:** [launcher.py](../../10%EC%B0%A8/launcher.py)<br>**정의된 옵션 이름:** `--no-browser`, `--port`, `--self-test`, `--hidden` |
 
@@ -384,21 +384,21 @@ Windows의 상태 파일 읽기는 삭제 공유를 허용하도록 구성해 �
 #### LEVEL 3 · [launcher.py](../../10%EC%B0%A8/launcher.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`--no-browser`](../../10%EC%B0%A8/launcher.py#L56)<br>**코드의 선언:** `action='store_true'` |
 | **설정·옵션:** [`--port`](../../10%EC%B0%A8/launcher.py#L57)<br>**코드의 선언:** `type=int; default=0` |
 | **설정·옵션:** [`--self-test`](../../10%EC%B0%A8/launcher.py#L58)<br>**코드의 선언:** `action='store_true'` |
 | **설정·옵션:** [`--hidden`](../../10%EC%B0%A8/launcher.py#L59)<br>**코드의 선언:** `action='store_true'` |
 
-| 거부 조건 · 오류 메시지 |
+| 내용 |
 | --- |
 | **거부 조건:** [`response.status != 200`](../../10%EC%B0%A8/launcher.py#L21)<br>**오류 메시지:** 루프백 상태 검사에 실패했습니다. |
 
 #### LEVEL 3 · [pipeline.py](../../10%EC%B0%A8/pipeline.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT`](../../10%EC%B0%A8/pipeline.py#L7)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 | **설정·옵션:** [`PREVIOUS`](../../10%EC%B0%A8/pipeline.py#L8)<br>**코드의 선언:** `정의=ROOT.parent / '5차'` |
@@ -420,19 +420,19 @@ Windows의 상태 파일 읽기는 삭제 공유를 허용하도록 구성해 �
 
 #### LEVEL 3 · [safe_io.py](../../10%EC%B0%A8/safe_io.py)
 
-| 정의 · 소스에 적힌 역할 |
+| 내용 |
 | --- |
 | **정의:** [`safe_read_text`](../../10%EC%B0%A8/safe_io.py#L53)<br>**소스에 적힌 역할:** 기존 호출자의 경로 검증을 유지하며 엄격하게 텍스트를 읽습니다. |
 | **정의:** [`safe_read_json`](../../10%EC%B0%A8/safe_io.py#L63)<br>**소스에 적힌 역할:** 파일이 없을 때만 기본값을 반환하고 해독·JSON·접근 오류는 전파합니다. |
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`_WINDOWS`](../../10%EC%B0%A8/safe_io.py#L8)<br>**코드의 선언:** `정의=os.name == 'nt'` |
 
 #### LEVEL 3 · [verify_sources.py](../../10%EC%B0%A8/verify_sources.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT`](../../10%EC%B0%A8/verify_sources.py#L8)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 
@@ -508,7 +508,7 @@ Python 검사 52개·JavaScript 검사 21개와 소스 검사를 통과했습니
 
 ### LEVEL 4 · 이 차수 구현의 실제 근거
 
-| 파일 · 원문에 정의된 역할·구성 |
+| 내용 |
 | --- |
 | **파일:** [dashboard.py](../../10%EC%B0%A8/dashboard.py)<br>**원문에 정의된 역할·구성:** 8차 인증·영상 경계를 상속하고 명시한 로컬 3D 모듈만 제공합니다. |
 | **파일:** [launcher.py](../../10%EC%B0%A8/launcher.py)<br>**원문에 정의된 역할·구성:** 독립 대시보드 실행기입니다. 학습은 자동 시작하지 않습니다. |
@@ -550,7 +550,7 @@ Windows의 상태 파일 읽기는 삭제 공유를 허용하도록 구성해 �
 
 #### LEVEL 4 · 소스에서 제공하는 CLI 옵션
 
-| 진입 소스 · 정의된 옵션 이름 |
+| 내용 |
 | --- |
 | **진입 소스:** [launcher.py](../../10%EC%B0%A8/launcher.py)<br>**정의된 옵션 이름:** `--no-browser`, `--port`, `--self-test`, `--hidden` |
 
@@ -581,21 +581,21 @@ Windows의 상태 파일 읽기는 삭제 공유를 허용하도록 구성해 �
 #### LEVEL 4 · [launcher.py](../../10%EC%B0%A8/launcher.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`--no-browser`](../../10%EC%B0%A8/launcher.py#L56)<br>**코드의 선언:** `action='store_true'` |
 | **설정·옵션:** [`--port`](../../10%EC%B0%A8/launcher.py#L57)<br>**코드의 선언:** `type=int; default=0` |
 | **설정·옵션:** [`--self-test`](../../10%EC%B0%A8/launcher.py#L58)<br>**코드의 선언:** `action='store_true'` |
 | **설정·옵션:** [`--hidden`](../../10%EC%B0%A8/launcher.py#L59)<br>**코드의 선언:** `action='store_true'` |
 
-| 거부 조건 · 오류 메시지 |
+| 내용 |
 | --- |
 | **거부 조건:** [`response.status != 200`](../../10%EC%B0%A8/launcher.py#L21)<br>**오류 메시지:** 루프백 상태 검사에 실패했습니다. |
 
 #### LEVEL 4 · [pipeline.py](../../10%EC%B0%A8/pipeline.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT`](../../10%EC%B0%A8/pipeline.py#L7)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 | **설정·옵션:** [`PREVIOUS`](../../10%EC%B0%A8/pipeline.py#L8)<br>**코드의 선언:** `정의=ROOT.parent / '5차'` |
@@ -617,19 +617,19 @@ Windows의 상태 파일 읽기는 삭제 공유를 허용하도록 구성해 �
 
 #### LEVEL 4 · [safe_io.py](../../10%EC%B0%A8/safe_io.py)
 
-| 정의 · 소스에 적힌 역할 |
+| 내용 |
 | --- |
 | **정의:** [`safe_read_text`](../../10%EC%B0%A8/safe_io.py#L53)<br>**소스에 적힌 역할:** 기존 호출자의 경로 검증을 유지하며 엄격하게 텍스트를 읽습니다. |
 | **정의:** [`safe_read_json`](../../10%EC%B0%A8/safe_io.py#L63)<br>**소스에 적힌 역할:** 파일이 없을 때만 기본값을 반환하고 해독·JSON·접근 오류는 전파합니다. |
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`_WINDOWS`](../../10%EC%B0%A8/safe_io.py#L8)<br>**코드의 선언:** `정의=os.name == 'nt'` |
 
 #### LEVEL 4 · [verify_sources.py](../../10%EC%B0%A8/verify_sources.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT`](../../10%EC%B0%A8/verify_sources.py#L8)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 
@@ -732,7 +732,7 @@ Windows의 상태 파일 읽기는 삭제 공유를 허용하도록 구성해 �
 <a name="-실제-자료-구성"></a>
 ## 실제 자료 구성
 
-| 경로 · 자료 종류 |
+| 내용 |
 | --- |
 | **경로:** [design/](../../10%EC%B0%A8/design)<br>**자료 종류:** 하위 자료 폴더 |
 | **경로:** [docs/](../../10%EC%B0%A8/docs)<br>**자료 종류:** 하위 자료 폴더 |
@@ -751,7 +751,7 @@ Windows의 상태 파일 읽기는 삭제 공유를 허용하도록 구성해 �
 <a name="-주요-모듈과-코드-읽기"></a>
 ## 주요 모듈과 코드 읽기
 
-| 파일 · 원문에 정의된 역할·구성 |
+| 내용 |
 | --- |
 | **파일:** [dashboard.py](../../10%EC%B0%A8/dashboard.py)<br>**원문에 정의된 역할·구성:** 8차 인증·영상 경계를 상속하고 명시한 로컬 3D 모듈만 제공합니다. |
 | **파일:** [launcher.py](../../10%EC%B0%A8/launcher.py)<br>**원문에 정의된 역할·구성:** 독립 대시보드 실행기입니다. 학습은 자동 시작하지 않습니다. |
@@ -786,7 +786,7 @@ Windows의 상태 파일 읽기는 삭제 공유를 허용하도록 구성해 �
 <a name="️-소스에서-제공하는-cli-옵션"></a>
 ### 소스에서 제공하는 CLI 옵션
 
-| 진입 소스 · 정의된 옵션 이름 |
+| 내용 |
 | --- |
 | **진입 소스:** [launcher.py](../../10%EC%B0%A8/launcher.py)<br>**정의된 옵션 이름:** `--no-browser`, `--port`, `--self-test`, `--hidden` |
 
@@ -817,21 +817,21 @@ Windows의 상태 파일 읽기는 삭제 공유를 허용하도록 구성해 �
 ### [launcher.py](../../10%EC%B0%A8/launcher.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`--no-browser`](../../10%EC%B0%A8/launcher.py#L56)<br>**코드의 선언:** `action='store_true'` |
 | **설정·옵션:** [`--port`](../../10%EC%B0%A8/launcher.py#L57)<br>**코드의 선언:** `type=int; default=0` |
 | **설정·옵션:** [`--self-test`](../../10%EC%B0%A8/launcher.py#L58)<br>**코드의 선언:** `action='store_true'` |
 | **설정·옵션:** [`--hidden`](../../10%EC%B0%A8/launcher.py#L59)<br>**코드의 선언:** `action='store_true'` |
 
-| 거부 조건 · 오류 메시지 |
+| 내용 |
 | --- |
 | **거부 조건:** [`response.status != 200`](../../10%EC%B0%A8/launcher.py#L21)<br>**오류 메시지:** 루프백 상태 검사에 실패했습니다. |
 
 ### [pipeline.py](../../10%EC%B0%A8/pipeline.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT`](../../10%EC%B0%A8/pipeline.py#L7)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 | **설정·옵션:** [`PREVIOUS`](../../10%EC%B0%A8/pipeline.py#L8)<br>**코드의 선언:** `정의=ROOT.parent / '5차'` |
@@ -853,19 +853,19 @@ Windows의 상태 파일 읽기는 삭제 공유를 허용하도록 구성해 �
 
 ### [safe_io.py](../../10%EC%B0%A8/safe_io.py)
 
-| 정의 · 소스에 적힌 역할 |
+| 내용 |
 | --- |
 | **정의:** [`safe_read_text`](../../10%EC%B0%A8/safe_io.py#L53)<br>**소스에 적힌 역할:** 기존 호출자의 경로 검증을 유지하며 엄격하게 텍스트를 읽습니다. |
 | **정의:** [`safe_read_json`](../../10%EC%B0%A8/safe_io.py#L63)<br>**소스에 적힌 역할:** 파일이 없을 때만 기본값을 반환하고 해독·JSON·접근 오류는 전파합니다. |
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`_WINDOWS`](../../10%EC%B0%A8/safe_io.py#L8)<br>**코드의 선언:** `정의=os.name == 'nt'` |
 
 ### [verify_sources.py](../../10%EC%B0%A8/verify_sources.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT`](../../10%EC%B0%A8/verify_sources.py#L8)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 

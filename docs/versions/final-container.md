@@ -163,7 +163,7 @@ matplotlib
 #### LEVEL 1 · [3차/데이터/taco/detector/visualize.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%EB%8D%B0%EC%9D%B4%ED%84%B0/taco/detector/visualize.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT_DIR`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%EB%8D%B0%EC%9D%B4%ED%84%B0/taco/detector/visualize.py#L25)<br>**코드의 선언:** `정의=os.path.abspath("../")` |
 
@@ -178,7 +178,7 @@ matplotlib
 #### LEVEL 1 · [3차/클린뷰/backend.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L6)<br>**코드의 선언:** `정의=BASE / 'trash_round3'` |
 | **설정·옵션:** [`APP`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L7)<br>**코드의 선언:** `정의=ROOT / 'app'` |
@@ -226,7 +226,7 @@ matplotlib
 #### LEVEL 1 · [3차/클린뷰/data_pipeline.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/data_pipeline.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`REF`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/data_pipeline.py#L9)<br>**코드의 선언:** `정의=ROOT/'data/reference'` |
 | **설정·옵션:** [`FULL`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/data_pipeline.py#L10)<br>**코드의 선언:** `정의=ROOT/'data/full'` |
@@ -259,7 +259,7 @@ matplotlib
 #### LEVEL 1 · [3차/클린뷰/finalize_round3.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`--prepare`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L113)<br>**코드의 선언:** `action='store_true'` |
 | **설정·옵션:** [`SOURCE`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L4)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
@@ -271,7 +271,7 @@ matplotlib
 #### LEVEL 1 · [3차/클린뷰/finish_on_exit.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`SOURCE`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L5)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 | **설정·옵션:** [`DEST`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L6)<br>**코드의 선언:** `정의=SOURCE.parent` |
@@ -339,7 +339,7 @@ matplotlib
 #### LEVEL 1 · [3차/클린뷰/make_report.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/make_report.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`APP`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/make_report.py#L10)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 | **설정·옵션:** [`OUT`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/make_report.py#L11)<br>**코드의 선언:** `정의=ROOT/'report'` |
@@ -523,7 +523,7 @@ matplotlib
 #### LEVEL 2 · [3차/데이터/taco/detector/visualize.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%EB%8D%B0%EC%9D%B4%ED%84%B0/taco/detector/visualize.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT_DIR`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%EB%8D%B0%EC%9D%B4%ED%84%B0/taco/detector/visualize.py#L25)<br>**코드의 선언:** `정의=os.path.abspath("../")` |
 
@@ -538,7 +538,7 @@ matplotlib
 #### LEVEL 2 · [3차/클린뷰/backend.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L6)<br>**코드의 선언:** `정의=BASE / 'trash_round3'` |
 | **설정·옵션:** [`APP`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L7)<br>**코드의 선언:** `정의=ROOT / 'app'` |
@@ -586,7 +586,7 @@ matplotlib
 #### LEVEL 2 · [3차/클린뷰/data_pipeline.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/data_pipeline.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`REF`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/data_pipeline.py#L9)<br>**코드의 선언:** `정의=ROOT/'data/reference'` |
 | **설정·옵션:** [`FULL`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/data_pipeline.py#L10)<br>**코드의 선언:** `정의=ROOT/'data/full'` |
@@ -619,7 +619,7 @@ matplotlib
 #### LEVEL 2 · [3차/클린뷰/finalize_round3.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`--prepare`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L113)<br>**코드의 선언:** `action='store_true'` |
 | **설정·옵션:** [`SOURCE`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L4)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
@@ -631,7 +631,7 @@ matplotlib
 #### LEVEL 2 · [3차/클린뷰/finish_on_exit.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`SOURCE`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L5)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 | **설정·옵션:** [`DEST`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L6)<br>**코드의 선언:** `정의=SOURCE.parent` |
@@ -699,7 +699,7 @@ matplotlib
 #### LEVEL 2 · [3차/클린뷰/make_report.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/make_report.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`APP`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/make_report.py#L10)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 | **설정·옵션:** [`OUT`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/make_report.py#L11)<br>**코드의 선언:** `정의=ROOT/'report'` |
@@ -848,7 +848,7 @@ matplotlib
 #### LEVEL 3 · [3차/데이터/taco/detector/visualize.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%EB%8D%B0%EC%9D%B4%ED%84%B0/taco/detector/visualize.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT_DIR`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%EB%8D%B0%EC%9D%B4%ED%84%B0/taco/detector/visualize.py#L25)<br>**코드의 선언:** `정의=os.path.abspath("../")` |
 
@@ -863,7 +863,7 @@ matplotlib
 #### LEVEL 3 · [3차/클린뷰/backend.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L6)<br>**코드의 선언:** `정의=BASE / 'trash_round3'` |
 | **설정·옵션:** [`APP`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L7)<br>**코드의 선언:** `정의=ROOT / 'app'` |
@@ -911,7 +911,7 @@ matplotlib
 #### LEVEL 3 · [3차/클린뷰/data_pipeline.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/data_pipeline.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`REF`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/data_pipeline.py#L9)<br>**코드의 선언:** `정의=ROOT/'data/reference'` |
 | **설정·옵션:** [`FULL`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/data_pipeline.py#L10)<br>**코드의 선언:** `정의=ROOT/'data/full'` |
@@ -944,7 +944,7 @@ matplotlib
 #### LEVEL 3 · [3차/클린뷰/finalize_round3.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`--prepare`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L113)<br>**코드의 선언:** `action='store_true'` |
 | **설정·옵션:** [`SOURCE`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L4)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
@@ -956,7 +956,7 @@ matplotlib
 #### LEVEL 3 · [3차/클린뷰/finish_on_exit.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`SOURCE`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L5)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 | **설정·옵션:** [`DEST`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L6)<br>**코드의 선언:** `정의=SOURCE.parent` |
@@ -1024,7 +1024,7 @@ matplotlib
 #### LEVEL 3 · [3차/클린뷰/make_report.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/make_report.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`APP`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/make_report.py#L10)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 | **설정·옵션:** [`OUT`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/make_report.py#L11)<br>**코드의 선언:** `정의=ROOT/'report'` |
@@ -1264,7 +1264,7 @@ matplotlib
 #### LEVEL 4 · [3차/데이터/taco/detector/visualize.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%EB%8D%B0%EC%9D%B4%ED%84%B0/taco/detector/visualize.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT_DIR`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%EB%8D%B0%EC%9D%B4%ED%84%B0/taco/detector/visualize.py#L25)<br>**코드의 선언:** `정의=os.path.abspath("../")` |
 
@@ -1279,7 +1279,7 @@ matplotlib
 #### LEVEL 4 · [3차/클린뷰/backend.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L6)<br>**코드의 선언:** `정의=BASE / 'trash_round3'` |
 | **설정·옵션:** [`APP`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L7)<br>**코드의 선언:** `정의=ROOT / 'app'` |
@@ -1327,7 +1327,7 @@ matplotlib
 #### LEVEL 4 · [3차/클린뷰/data_pipeline.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/data_pipeline.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`REF`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/data_pipeline.py#L9)<br>**코드의 선언:** `정의=ROOT/'data/reference'` |
 | **설정·옵션:** [`FULL`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/data_pipeline.py#L10)<br>**코드의 선언:** `정의=ROOT/'data/full'` |
@@ -1360,7 +1360,7 @@ matplotlib
 #### LEVEL 4 · [3차/클린뷰/finalize_round3.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`--prepare`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L113)<br>**코드의 선언:** `action='store_true'` |
 | **설정·옵션:** [`SOURCE`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L4)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
@@ -1372,7 +1372,7 @@ matplotlib
 #### LEVEL 4 · [3차/클린뷰/finish_on_exit.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`SOURCE`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L5)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 | **설정·옵션:** [`DEST`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L6)<br>**코드의 선언:** `정의=SOURCE.parent` |
@@ -1440,7 +1440,7 @@ matplotlib
 #### LEVEL 4 · [3차/클린뷰/make_report.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/make_report.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`APP`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/make_report.py#L10)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 | **설정·옵션:** [`OUT`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/make_report.py#L11)<br>**코드의 선언:** `정의=ROOT/'report'` |
@@ -1535,7 +1535,7 @@ matplotlib
 <a name="-실제-자료-구성"></a>
 ## 실제 자료 구성
 
-| 경로 · 자료 종류 |
+| 내용 |
 | --- |
 | **경로:** [3차/](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8)<br>**자료 종류:** 하위 자료 폴더 |
 | **경로:** [4차/](../../%EC%B5%9C%EC%A2%85/4%EC%B0%A8)<br>**자료 종류:** 하위 자료 폴더 |
@@ -1708,7 +1708,7 @@ matplotlib
 ### [3차/데이터/taco/detector/visualize.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%EB%8D%B0%EC%9D%B4%ED%84%B0/taco/detector/visualize.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT_DIR`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%EB%8D%B0%EC%9D%B4%ED%84%B0/taco/detector/visualize.py#L25)<br>**코드의 선언:** `정의=os.path.abspath("../")` |
 
@@ -1723,7 +1723,7 @@ matplotlib
 ### [3차/클린뷰/backend.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L6)<br>**코드의 선언:** `정의=BASE / 'trash_round3'` |
 | **설정·옵션:** [`APP`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L7)<br>**코드의 선언:** `정의=ROOT / 'app'` |
@@ -1771,7 +1771,7 @@ matplotlib
 ### [3차/클린뷰/data_pipeline.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/data_pipeline.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`REF`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/data_pipeline.py#L9)<br>**코드의 선언:** `정의=ROOT/'data/reference'` |
 | **설정·옵션:** [`FULL`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/data_pipeline.py#L10)<br>**코드의 선언:** `정의=ROOT/'data/full'` |
@@ -1804,7 +1804,7 @@ matplotlib
 ### [3차/클린뷰/finalize_round3.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`--prepare`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L113)<br>**코드의 선언:** `action='store_true'` |
 | **설정·옵션:** [`SOURCE`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L4)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
@@ -1816,7 +1816,7 @@ matplotlib
 ### [3차/클린뷰/finish_on_exit.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`SOURCE`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L5)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 | **설정·옵션:** [`DEST`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L6)<br>**코드의 선언:** `정의=SOURCE.parent` |
@@ -1884,7 +1884,7 @@ matplotlib
 ### [3차/클린뷰/make_report.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/make_report.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`APP`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/make_report.py#L10)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 | **설정·옵션:** [`OUT`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/make_report.py#L11)<br>**코드의 선언:** `정의=ROOT/'report'` |

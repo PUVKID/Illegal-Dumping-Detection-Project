@@ -42,7 +42,7 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 
 #### LEVEL 1 · 소스에서 제공하는 CLI 옵션
 
-| 진입 소스 · 정의된 옵션 이름 |
+| 내용 |
 | --- |
 | **진입 소스:** [build_exe.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py)<br>**정의된 옵션 이름:** `--build` |
 | **진입 소스:** [pipeline.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/pipeline.py)<br>**정의된 옵션 이름:** `--action`, `--params` |
@@ -58,11 +58,11 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 #### LEVEL 1 · [build_exe.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`--build`](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py#L13)<br>**코드의 선언:** `action='store_true'; help='확인만 하지 않고 실제 EXE를 빌드합니다.'` |
 
-| 거부 조건 · 오류 메시지 |
+| 내용 |
 | --- |
 | **거부 조건:** [`not available`](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py#L19)<br>**오류 메시지:** 빌드하려면 별도로 PyInstaller를 준비해야 합니다. 자동 설치하지 않습니다. |
 
@@ -194,7 +194,7 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 
 #### LEVEL 2 · 소스에서 제공하는 CLI 옵션
 
-| 진입 소스 · 정의된 옵션 이름 |
+| 내용 |
 | --- |
 | **진입 소스:** [build_exe.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py)<br>**정의된 옵션 이름:** `--build` |
 | **진입 소스:** [pipeline.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/pipeline.py)<br>**정의된 옵션 이름:** `--action`, `--params` |
@@ -210,11 +210,11 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 #### LEVEL 2 · [build_exe.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`--build`](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py#L13)<br>**코드의 선언:** `action='store_true'; help='확인만 하지 않고 실제 EXE를 빌드합니다.'` |
 
-| 거부 조건 · 오류 메시지 |
+| 내용 |
 | --- |
 | **거부 조건:** [`not available`](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py#L19)<br>**오류 메시지:** 빌드하려면 별도로 PyInstaller를 준비해야 합니다. 자동 설치하지 않습니다. |
 
@@ -317,7 +317,7 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 
 #### LEVEL 3 · 소스에서 제공하는 CLI 옵션
 
-| 진입 소스 · 정의된 옵션 이름 |
+| 내용 |
 | --- |
 | **진입 소스:** [build_exe.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py)<br>**정의된 옵션 이름:** `--build` |
 | **진입 소스:** [pipeline.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/pipeline.py)<br>**정의된 옵션 이름:** `--action`, `--params` |
@@ -333,11 +333,11 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 #### LEVEL 3 · [build_exe.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`--build`](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py#L13)<br>**코드의 선언:** `action='store_true'; help='확인만 하지 않고 실제 EXE를 빌드합니다.'` |
 
-| 거부 조건 · 오류 메시지 |
+| 내용 |
 | --- |
 | **거부 조건:** [`not available`](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py#L19)<br>**오류 메시지:** 빌드하려면 별도로 PyInstaller를 준비해야 합니다. 자동 설치하지 않습니다. |
 
@@ -461,7 +461,7 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 
 ### LEVEL 4 · 이 차수 구현의 실제 근거
 
-| 파일 · 원문에 정의된 역할·구성 |
+| 내용 |
 | --- |
 | **파일:** [build_exe.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py)<br>**원문에 정의된 역할·구성:** PyInstaller 의존성 확인과 사용자가 선택한 빌드를 수행합니다. |
 | **파일:** [pipeline.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/pipeline.py)<br>**원문에 정의된 역할·구성:** D 드라이브의 앱과 기존 GPU 컨테이너를 연결합니다. |
@@ -489,7 +489,7 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 
 #### LEVEL 4 · 소스에서 제공하는 CLI 옵션
 
-| 진입 소스 · 정의된 옵션 이름 |
+| 내용 |
 | --- |
 | **진입 소스:** [build_exe.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py)<br>**정의된 옵션 이름:** `--build` |
 | **진입 소스:** [pipeline.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/pipeline.py)<br>**정의된 옵션 이름:** `--action`, `--params` |
@@ -505,11 +505,11 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 #### LEVEL 4 · [build_exe.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`--build`](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py#L13)<br>**코드의 선언:** `action='store_true'; help='확인만 하지 않고 실제 EXE를 빌드합니다.'` |
 
-| 거부 조건 · 오류 메시지 |
+| 내용 |
 | --- |
 | **거부 조건:** [`not available`](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py#L19)<br>**오류 메시지:** 빌드하려면 별도로 PyInstaller를 준비해야 합니다. 자동 설치하지 않습니다. |
 
@@ -659,7 +659,7 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 <a name="-실제-자료-구성"></a>
 ## 실제 자료 구성
 
-| 경로 · 자료 종류 |
+| 내용 |
 | --- |
 | **경로:** [tests/](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/tests)<br>**자료 종류:** 하위 자료 폴더 |
 | **경로:** [web/](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/web)<br>**자료 종류:** 하위 자료 폴더 |
@@ -670,7 +670,7 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 <a name="-주요-모듈과-코드-읽기"></a>
 ## 주요 모듈과 코드 읽기
 
-| 파일 · 원문에 정의된 역할·구성 |
+| 내용 |
 | --- |
 | **파일:** [build_exe.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py)<br>**원문에 정의된 역할·구성:** PyInstaller 의존성 확인과 사용자가 선택한 빌드를 수행합니다. |
 | **파일:** [pipeline.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/pipeline.py)<br>**원문에 정의된 역할·구성:** D 드라이브의 앱과 기존 GPU 컨테이너를 연결합니다. |
@@ -689,7 +689,7 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 <a name="️-소스에서-제공하는-cli-옵션"></a>
 ### 소스에서 제공하는 CLI 옵션
 
-| 진입 소스 · 정의된 옵션 이름 |
+| 내용 |
 | --- |
 | **진입 소스:** [build_exe.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py)<br>**정의된 옵션 이름:** `--build` |
 | **진입 소스:** [pipeline.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/pipeline.py)<br>**정의된 옵션 이름:** `--action`, `--params` |
@@ -705,11 +705,11 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 ### [build_exe.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`--build`](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py#L13)<br>**코드의 선언:** `action='store_true'; help='확인만 하지 않고 실제 EXE를 빌드합니다.'` |
 
-| 거부 조건 · 오류 메시지 |
+| 내용 |
 | --- |
 | **거부 조건:** [`not available`](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py#L19)<br>**오류 메시지:** 빌드하려면 별도로 PyInstaller를 준비해야 합니다. 자동 설치하지 않습니다. |
 

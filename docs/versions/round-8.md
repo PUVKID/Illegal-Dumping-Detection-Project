@@ -42,7 +42,7 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 
 #### LEVEL 1 · 소스에서 제공하는 CLI 옵션
 
-| 진입 소스 · 정의된 옵션 이름 |
+| 내용 |
 | --- |
 | **진입 소스:** [launcher.py](../../8%EC%B0%A8/launcher.py)<br>**정의된 옵션 이름:** `--no-browser`, `--port`, `--self-test`, `--hidden` |
 
@@ -57,7 +57,7 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 #### LEVEL 1 · [dashboard.py](../../8%EC%B0%A8/dashboard.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT`](../../8%EC%B0%A8/dashboard.py#L8)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 
@@ -77,21 +77,21 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 #### LEVEL 1 · [launcher.py](../../8%EC%B0%A8/launcher.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`--no-browser`](../../8%EC%B0%A8/launcher.py#L55)<br>**코드의 선언:** `action='store_true'` |
 | **설정·옵션:** [`--port`](../../8%EC%B0%A8/launcher.py#L56)<br>**코드의 선언:** `type=int; default=0` |
 | **설정·옵션:** [`--self-test`](../../8%EC%B0%A8/launcher.py#L57)<br>**코드의 선언:** `action='store_true'` |
 | **설정·옵션:** [`--hidden`](../../8%EC%B0%A8/launcher.py#L58)<br>**코드의 선언:** `action='store_true'` |
 
-| 거부 조건 · 오류 메시지 |
+| 내용 |
 | --- |
 | **거부 조건:** [`response.status != 200`](../../8%EC%B0%A8/launcher.py#L20)<br>**오류 메시지:** 루프백 상태 검사에 실패했습니다. |
 
 #### LEVEL 1 · [pipeline.py](../../8%EC%B0%A8/pipeline.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT`](../../8%EC%B0%A8/pipeline.py#L11)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 | **설정·옵션:** [`PREVIOUS`](../../8%EC%B0%A8/pipeline.py#L12)<br>**코드의 선언:** `정의=ROOT.parent / '5차'` |
@@ -127,7 +127,7 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 #### LEVEL 1 · [verify_sources.py](../../8%EC%B0%A8/verify_sources.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT`](../../8%EC%B0%A8/verify_sources.py#L7)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 
@@ -196,7 +196,7 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 
 #### LEVEL 2 · 소스에서 제공하는 CLI 옵션
 
-| 진입 소스 · 정의된 옵션 이름 |
+| 내용 |
 | --- |
 | **진입 소스:** [launcher.py](../../8%EC%B0%A8/launcher.py)<br>**정의된 옵션 이름:** `--no-browser`, `--port`, `--self-test`, `--hidden` |
 
@@ -211,7 +211,7 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 #### LEVEL 2 · [dashboard.py](../../8%EC%B0%A8/dashboard.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT`](../../8%EC%B0%A8/dashboard.py#L8)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 
@@ -231,21 +231,21 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 #### LEVEL 2 · [launcher.py](../../8%EC%B0%A8/launcher.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`--no-browser`](../../8%EC%B0%A8/launcher.py#L55)<br>**코드의 선언:** `action='store_true'` |
 | **설정·옵션:** [`--port`](../../8%EC%B0%A8/launcher.py#L56)<br>**코드의 선언:** `type=int; default=0` |
 | **설정·옵션:** [`--self-test`](../../8%EC%B0%A8/launcher.py#L57)<br>**코드의 선언:** `action='store_true'` |
 | **설정·옵션:** [`--hidden`](../../8%EC%B0%A8/launcher.py#L58)<br>**코드의 선언:** `action='store_true'` |
 
-| 거부 조건 · 오류 메시지 |
+| 내용 |
 | --- |
 | **거부 조건:** [`response.status != 200`](../../8%EC%B0%A8/launcher.py#L20)<br>**오류 메시지:** 루프백 상태 검사에 실패했습니다. |
 
 #### LEVEL 2 · [pipeline.py](../../8%EC%B0%A8/pipeline.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT`](../../8%EC%B0%A8/pipeline.py#L11)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 | **설정·옵션:** [`PREVIOUS`](../../8%EC%B0%A8/pipeline.py#L12)<br>**코드의 선언:** `정의=ROOT.parent / '5차'` |
@@ -281,7 +281,7 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 #### LEVEL 2 · [verify_sources.py](../../8%EC%B0%A8/verify_sources.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT`](../../8%EC%B0%A8/verify_sources.py#L7)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 
@@ -319,7 +319,7 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 
 #### LEVEL 3 · 소스에서 제공하는 CLI 옵션
 
-| 진입 소스 · 정의된 옵션 이름 |
+| 내용 |
 | --- |
 | **진입 소스:** [launcher.py](../../8%EC%B0%A8/launcher.py)<br>**정의된 옵션 이름:** `--no-browser`, `--port`, `--self-test`, `--hidden` |
 
@@ -334,7 +334,7 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 #### LEVEL 3 · [dashboard.py](../../8%EC%B0%A8/dashboard.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT`](../../8%EC%B0%A8/dashboard.py#L8)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 
@@ -354,21 +354,21 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 #### LEVEL 3 · [launcher.py](../../8%EC%B0%A8/launcher.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`--no-browser`](../../8%EC%B0%A8/launcher.py#L55)<br>**코드의 선언:** `action='store_true'` |
 | **설정·옵션:** [`--port`](../../8%EC%B0%A8/launcher.py#L56)<br>**코드의 선언:** `type=int; default=0` |
 | **설정·옵션:** [`--self-test`](../../8%EC%B0%A8/launcher.py#L57)<br>**코드의 선언:** `action='store_true'` |
 | **설정·옵션:** [`--hidden`](../../8%EC%B0%A8/launcher.py#L58)<br>**코드의 선언:** `action='store_true'` |
 
-| 거부 조건 · 오류 메시지 |
+| 내용 |
 | --- |
 | **거부 조건:** [`response.status != 200`](../../8%EC%B0%A8/launcher.py#L20)<br>**오류 메시지:** 루프백 상태 검사에 실패했습니다. |
 
 #### LEVEL 3 · [pipeline.py](../../8%EC%B0%A8/pipeline.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT`](../../8%EC%B0%A8/pipeline.py#L11)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 | **설정·옵션:** [`PREVIOUS`](../../8%EC%B0%A8/pipeline.py#L12)<br>**코드의 선언:** `정의=ROOT.parent / '5차'` |
@@ -404,7 +404,7 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 #### LEVEL 3 · [verify_sources.py](../../8%EC%B0%A8/verify_sources.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT`](../../8%EC%B0%A8/verify_sources.py#L7)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 
@@ -464,7 +464,7 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 
 ### LEVEL 4 · 이 차수 구현의 실제 근거
 
-| 파일 · 원문에 정의된 역할·구성 |
+| 내용 |
 | --- |
 | **파일:** [dashboard.py](../../8%EC%B0%A8/dashboard.py)<br>**원문에 정의된 역할·구성:** 원래 루프백 HTTP 보안과 영상 저장 경계를 유지하는 8차 서버입니다. |
 | **파일:** [launcher.py](../../8%EC%B0%A8/launcher.py)<br>**원문에 정의된 역할·구성:** 독립 대시보드 실행기입니다. 학습은 자동 시작하지 않습니다. |
@@ -493,7 +493,7 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 
 #### LEVEL 4 · 소스에서 제공하는 CLI 옵션
 
-| 진입 소스 · 정의된 옵션 이름 |
+| 내용 |
 | --- |
 | **진입 소스:** [launcher.py](../../8%EC%B0%A8/launcher.py)<br>**정의된 옵션 이름:** `--no-browser`, `--port`, `--self-test`, `--hidden` |
 
@@ -508,7 +508,7 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 #### LEVEL 4 · [dashboard.py](../../8%EC%B0%A8/dashboard.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT`](../../8%EC%B0%A8/dashboard.py#L8)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 
@@ -528,21 +528,21 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 #### LEVEL 4 · [launcher.py](../../8%EC%B0%A8/launcher.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`--no-browser`](../../8%EC%B0%A8/launcher.py#L55)<br>**코드의 선언:** `action='store_true'` |
 | **설정·옵션:** [`--port`](../../8%EC%B0%A8/launcher.py#L56)<br>**코드의 선언:** `type=int; default=0` |
 | **설정·옵션:** [`--self-test`](../../8%EC%B0%A8/launcher.py#L57)<br>**코드의 선언:** `action='store_true'` |
 | **설정·옵션:** [`--hidden`](../../8%EC%B0%A8/launcher.py#L58)<br>**코드의 선언:** `action='store_true'` |
 
-| 거부 조건 · 오류 메시지 |
+| 내용 |
 | --- |
 | **거부 조건:** [`response.status != 200`](../../8%EC%B0%A8/launcher.py#L20)<br>**오류 메시지:** 루프백 상태 검사에 실패했습니다. |
 
 #### LEVEL 4 · [pipeline.py](../../8%EC%B0%A8/pipeline.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT`](../../8%EC%B0%A8/pipeline.py#L11)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 | **설정·옵션:** [`PREVIOUS`](../../8%EC%B0%A8/pipeline.py#L12)<br>**코드의 선언:** `정의=ROOT.parent / '5차'` |
@@ -578,7 +578,7 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 #### LEVEL 4 · [verify_sources.py](../../8%EC%B0%A8/verify_sources.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT`](../../8%EC%B0%A8/verify_sources.py#L7)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 
@@ -665,7 +665,7 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 <a name="-실제-자료-구성"></a>
 ## 실제 자료 구성
 
-| 경로 · 자료 종류 |
+| 내용 |
 | --- |
 | **경로:** [docs/](../../8%EC%B0%A8/docs)<br>**자료 종류:** 하위 자료 폴더 |
 | **경로:** [tests/](../../8%EC%B0%A8/tests)<br>**자료 종류:** 하위 자료 폴더 |
@@ -681,7 +681,7 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 <a name="-주요-모듈과-코드-읽기"></a>
 ## 주요 모듈과 코드 읽기
 
-| 파일 · 원문에 정의된 역할·구성 |
+| 내용 |
 | --- |
 | **파일:** [dashboard.py](../../8%EC%B0%A8/dashboard.py)<br>**원문에 정의된 역할·구성:** 원래 루프백 HTTP 보안과 영상 저장 경계를 유지하는 8차 서버입니다. |
 | **파일:** [launcher.py](../../8%EC%B0%A8/launcher.py)<br>**원문에 정의된 역할·구성:** 독립 대시보드 실행기입니다. 학습은 자동 시작하지 않습니다. |
@@ -701,7 +701,7 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 <a name="️-소스에서-제공하는-cli-옵션"></a>
 ### 소스에서 제공하는 CLI 옵션
 
-| 진입 소스 · 정의된 옵션 이름 |
+| 내용 |
 | --- |
 | **진입 소스:** [launcher.py](../../8%EC%B0%A8/launcher.py)<br>**정의된 옵션 이름:** `--no-browser`, `--port`, `--self-test`, `--hidden` |
 
@@ -716,7 +716,7 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 ### [dashboard.py](../../8%EC%B0%A8/dashboard.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT`](../../8%EC%B0%A8/dashboard.py#L8)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 
@@ -736,21 +736,21 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 ### [launcher.py](../../8%EC%B0%A8/launcher.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`--no-browser`](../../8%EC%B0%A8/launcher.py#L55)<br>**코드의 선언:** `action='store_true'` |
 | **설정·옵션:** [`--port`](../../8%EC%B0%A8/launcher.py#L56)<br>**코드의 선언:** `type=int; default=0` |
 | **설정·옵션:** [`--self-test`](../../8%EC%B0%A8/launcher.py#L57)<br>**코드의 선언:** `action='store_true'` |
 | **설정·옵션:** [`--hidden`](../../8%EC%B0%A8/launcher.py#L58)<br>**코드의 선언:** `action='store_true'` |
 
-| 거부 조건 · 오류 메시지 |
+| 내용 |
 | --- |
 | **거부 조건:** [`response.status != 200`](../../8%EC%B0%A8/launcher.py#L20)<br>**오류 메시지:** 루프백 상태 검사에 실패했습니다. |
 
 ### [pipeline.py](../../8%EC%B0%A8/pipeline.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT`](../../8%EC%B0%A8/pipeline.py#L11)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 | **설정·옵션:** [`PREVIOUS`](../../8%EC%B0%A8/pipeline.py#L12)<br>**코드의 선언:** `정의=ROOT.parent / '5차'` |
@@ -786,7 +786,7 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 ### [verify_sources.py](../../8%EC%B0%A8/verify_sources.py)
 
 
-| 설정·옵션 · 코드의 선언 |
+| 내용 |
 | --- |
 | **설정·옵션:** [`ROOT`](../../8%EC%B0%A8/verify_sources.py#L7)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 
