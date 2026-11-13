@@ -161,9 +161,9 @@ matplotlib
 #### LEVEL 1 · [데이터/taco/detector/visualize.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%EB%8D%B0%EC%9D%B4%ED%84%B0/taco/detector/visualize.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`ROOT_DIR`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%EB%8D%B0%EC%9D%B4%ED%84%B0/taco/detector/visualize.py#L25) | `정의=os.path.abspath("../")` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`ROOT_DIR`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%EB%8D%B0%EC%9D%B4%ED%84%B0/taco/detector/visualize.py#L25)<br>**코드의 선언:** `정의=os.path.abspath("../")` |
 
 #### LEVEL 1 · [데이터/taco/download.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%EB%8D%B0%EC%9D%B4%ED%84%B0/taco/download.py)
 
@@ -176,13 +176,13 @@ matplotlib
 #### LEVEL 1 · [클린뷰/backend.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`ROOT`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L6) | `정의=BASE / 'trash_round3'` |
-| [`APP`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L7) | `정의=ROOT / 'app'` |
-| [`STATE`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L8) | `정의=APP / 'state'` |
-| [`JOBS`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L9) | `정의=STATE / 'jobs'` |
-| [`VIDEO_EXT`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L10) | `정의={'.mp4', '.avi', '.mov', '.mkv', '.m4v'}` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`ROOT`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L6)<br>**코드의 선언:** `정의=BASE / 'trash_round3'` |
+| **설정·옵션:** [`APP`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L7)<br>**코드의 선언:** `정의=ROOT / 'app'` |
+| **설정·옵션:** [`STATE`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L8)<br>**코드의 선언:** `정의=APP / 'state'` |
+| **설정·옵션:** [`JOBS`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L9)<br>**코드의 선언:** `정의=STATE / 'jobs'` |
+| **설정·옵션:** [`VIDEO_EXT`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L10)<br>**코드의 선언:** `정의={'.mp4', '.avi', '.mov', '.mkv', '.m4v'}` |
 
 **거부 조건:** [`not any(p.is_relative_to(r.resolve()) for r in [ROOT/'videos',APP/'uploads'])`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L52)
 
@@ -224,11 +224,11 @@ matplotlib
 #### LEVEL 1 · [클린뷰/data_pipeline.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/data_pipeline.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`REF`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/data_pipeline.py#L9) | `정의=ROOT/'data/reference'` |
-| [`FULL`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/data_pipeline.py#L10) | `정의=ROOT/'data/full'` |
-| [`SEED`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/data_pipeline.py#L11) | `정의=20261013` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`REF`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/data_pipeline.py#L9)<br>**코드의 선언:** `정의=ROOT/'data/reference'` |
+| **설정·옵션:** [`FULL`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/data_pipeline.py#L10)<br>**코드의 선언:** `정의=ROOT/'data/full'` |
+| **설정·옵션:** [`SEED`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/data_pipeline.py#L11)<br>**코드의 선언:** `정의=20261013` |
 
 #### LEVEL 1 · [클린뷰/detector.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/detector.py)
 
@@ -257,25 +257,25 @@ matplotlib
 #### LEVEL 1 · [클린뷰/finalize_round3.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`--prepare`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L113) | `action='store_true'` |
-| [`SOURCE`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L4) | `정의=Path(__file__).resolve().parent` |
-| [`DESKTOP`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L5) | `정의=SOURCE.parents[1]` |
-| [`DEST`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L6) | `정의=DESKTOP/'3차'` |
-| [`JOB`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L9) | `정의='20261013_060956_6d373b'` |
-| [`FLAGS`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L10) | `정의=subprocess.CREATE_NO_WINDOW if os.name=='nt' else 0` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`--prepare`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L113)<br>**코드의 선언:** `action='store_true'` |
+| **설정·옵션:** [`SOURCE`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L4)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
+| **설정·옵션:** [`DESKTOP`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L5)<br>**코드의 선언:** `정의=SOURCE.parents[1]` |
+| **설정·옵션:** [`DEST`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L6)<br>**코드의 선언:** `정의=DESKTOP/'3차'` |
+| **설정·옵션:** [`JOB`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L9)<br>**코드의 선언:** `정의='20261013_060956_6d373b'` |
+| **설정·옵션:** [`FLAGS`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L10)<br>**코드의 선언:** `정의=subprocess.CREATE_NO_WINDOW if os.name=='nt' else 0` |
 
 #### LEVEL 1 · [클린뷰/finish_on_exit.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`SOURCE`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L5) | `정의=Path(__file__).resolve().parent` |
-| [`DEST`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L6) | `정의=SOURCE.parent` |
-| [`WORK`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L7) | `정의=DEST / '_작업' / 'completion_once'` |
-| [`JOB`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L8) | `정의='20261013_060956_6d373b'` |
-| [`FLAGS`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L10) | `정의=subprocess.CREATE_NO_WINDOW` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`SOURCE`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L5)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
+| **설정·옵션:** [`DEST`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L6)<br>**코드의 선언:** `정의=SOURCE.parent` |
+| **설정·옵션:** [`WORK`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L7)<br>**코드의 선언:** `정의=DEST / '_작업' / 'completion_once'` |
+| **설정·옵션:** [`JOB`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L8)<br>**코드의 선언:** `정의='20261013_060956_6d373b'` |
+| **설정·옵션:** [`FLAGS`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L10)<br>**코드의 선언:** `정의=subprocess.CREATE_NO_WINDOW` |
 
 #### LEVEL 1 · [클린뷰/launcher.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/launcher.py)
 
@@ -337,10 +337,10 @@ matplotlib
 #### LEVEL 1 · [클린뷰/make_report.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/make_report.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`APP`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/make_report.py#L10) | `정의=Path(__file__).resolve().parent` |
-| [`OUT`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/make_report.py#L11) | `정의=ROOT/'report'` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`APP`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/make_report.py#L10)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
+| **설정·옵션:** [`OUT`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/make_report.py#L11)<br>**코드의 선언:** `정의=ROOT/'report'` |
 
 </details>
 
@@ -353,11 +353,18 @@ matplotlib
 
 precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함께 읽습니다. 객체 탐지, 영상 사건 후보, 실제 투기 행위 판단은 다른 평가 대상입니다. 목표 90%와 완료된 시험 성적을 구분합니다.
 
-| 상황 | 확인할 내용 |
-|---|---|
-| 학습 또는 화면이 시작되지 않음 | 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다. |
-| 원본 계약 검사 실패 | 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다. |
-| 지표 해석이 어려움 | 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다. |
+**상황:** 학습 또는 화면이 시작되지 않음
+
+**확인할 내용:** 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다.
+
+**상황:** 원본 계약 검사 실패
+
+**확인할 내용:** 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다.
+
+**상황:** 지표 해석이 어려움
+
+**확인할 내용:** 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다.
+
 
 [자료 폴더](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8) · [직전 비교·자료 범위](../comparisons/2-to-3.md) · [이 차수의 원래 전체 상세](#reading-level-5)
 
@@ -378,11 +385,18 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 
 ### LEVEL 2 · 입력에서 출력으로
 
-| 단계 | 내용 |
-|---|---|
-| 입력 | 쓰레기 영상·라벨·모델·선택한 차수 설정 |
-| 처리 | 자료 준비·모델/영상 처리·평가 또는 상태 표시 |
-| 출력 | 탐지 후보·평가 지표·화면·보고서 |
+**단계:** 입력
+
+**내용:** 쓰레기 영상·라벨·모델·선택한 차수 설정
+
+**단계:** 처리
+
+**내용:** 자료 준비·모델/영상 처리·평가 또는 상태 표시
+
+**단계:** 출력
+
+**내용:** 탐지 후보·평가 지표·화면·보고서
+
 
 입력·처리·출력은 위의 같은 자료 흐름을 다른 단계에서 읽는 기준입니다. 처리 조건과 출력의 의미를 함께 확인합니다.
 
@@ -512,9 +526,9 @@ matplotlib
 #### LEVEL 2 · [데이터/taco/detector/visualize.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%EB%8D%B0%EC%9D%B4%ED%84%B0/taco/detector/visualize.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`ROOT_DIR`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%EB%8D%B0%EC%9D%B4%ED%84%B0/taco/detector/visualize.py#L25) | `정의=os.path.abspath("../")` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`ROOT_DIR`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%EB%8D%B0%EC%9D%B4%ED%84%B0/taco/detector/visualize.py#L25)<br>**코드의 선언:** `정의=os.path.abspath("../")` |
 
 #### LEVEL 2 · [데이터/taco/download.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%EB%8D%B0%EC%9D%B4%ED%84%B0/taco/download.py)
 
@@ -527,13 +541,13 @@ matplotlib
 #### LEVEL 2 · [클린뷰/backend.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`ROOT`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L6) | `정의=BASE / 'trash_round3'` |
-| [`APP`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L7) | `정의=ROOT / 'app'` |
-| [`STATE`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L8) | `정의=APP / 'state'` |
-| [`JOBS`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L9) | `정의=STATE / 'jobs'` |
-| [`VIDEO_EXT`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L10) | `정의={'.mp4', '.avi', '.mov', '.mkv', '.m4v'}` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`ROOT`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L6)<br>**코드의 선언:** `정의=BASE / 'trash_round3'` |
+| **설정·옵션:** [`APP`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L7)<br>**코드의 선언:** `정의=ROOT / 'app'` |
+| **설정·옵션:** [`STATE`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L8)<br>**코드의 선언:** `정의=APP / 'state'` |
+| **설정·옵션:** [`JOBS`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L9)<br>**코드의 선언:** `정의=STATE / 'jobs'` |
+| **설정·옵션:** [`VIDEO_EXT`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L10)<br>**코드의 선언:** `정의={'.mp4', '.avi', '.mov', '.mkv', '.m4v'}` |
 
 **거부 조건:** [`not any(p.is_relative_to(r.resolve()) for r in [ROOT/'videos',APP/'uploads'])`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L52)
 
@@ -575,11 +589,11 @@ matplotlib
 #### LEVEL 2 · [클린뷰/data_pipeline.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/data_pipeline.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`REF`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/data_pipeline.py#L9) | `정의=ROOT/'data/reference'` |
-| [`FULL`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/data_pipeline.py#L10) | `정의=ROOT/'data/full'` |
-| [`SEED`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/data_pipeline.py#L11) | `정의=20261013` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`REF`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/data_pipeline.py#L9)<br>**코드의 선언:** `정의=ROOT/'data/reference'` |
+| **설정·옵션:** [`FULL`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/data_pipeline.py#L10)<br>**코드의 선언:** `정의=ROOT/'data/full'` |
+| **설정·옵션:** [`SEED`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/data_pipeline.py#L11)<br>**코드의 선언:** `정의=20261013` |
 
 #### LEVEL 2 · [클린뷰/detector.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/detector.py)
 
@@ -608,25 +622,25 @@ matplotlib
 #### LEVEL 2 · [클린뷰/finalize_round3.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`--prepare`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L113) | `action='store_true'` |
-| [`SOURCE`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L4) | `정의=Path(__file__).resolve().parent` |
-| [`DESKTOP`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L5) | `정의=SOURCE.parents[1]` |
-| [`DEST`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L6) | `정의=DESKTOP/'3차'` |
-| [`JOB`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L9) | `정의='20261013_060956_6d373b'` |
-| [`FLAGS`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L10) | `정의=subprocess.CREATE_NO_WINDOW if os.name=='nt' else 0` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`--prepare`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L113)<br>**코드의 선언:** `action='store_true'` |
+| **설정·옵션:** [`SOURCE`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L4)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
+| **설정·옵션:** [`DESKTOP`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L5)<br>**코드의 선언:** `정의=SOURCE.parents[1]` |
+| **설정·옵션:** [`DEST`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L6)<br>**코드의 선언:** `정의=DESKTOP/'3차'` |
+| **설정·옵션:** [`JOB`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L9)<br>**코드의 선언:** `정의='20261013_060956_6d373b'` |
+| **설정·옵션:** [`FLAGS`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L10)<br>**코드의 선언:** `정의=subprocess.CREATE_NO_WINDOW if os.name=='nt' else 0` |
 
 #### LEVEL 2 · [클린뷰/finish_on_exit.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`SOURCE`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L5) | `정의=Path(__file__).resolve().parent` |
-| [`DEST`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L6) | `정의=SOURCE.parent` |
-| [`WORK`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L7) | `정의=DEST / '_작업' / 'completion_once'` |
-| [`JOB`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L8) | `정의='20261013_060956_6d373b'` |
-| [`FLAGS`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L10) | `정의=subprocess.CREATE_NO_WINDOW` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`SOURCE`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L5)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
+| **설정·옵션:** [`DEST`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L6)<br>**코드의 선언:** `정의=SOURCE.parent` |
+| **설정·옵션:** [`WORK`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L7)<br>**코드의 선언:** `정의=DEST / '_작업' / 'completion_once'` |
+| **설정·옵션:** [`JOB`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L8)<br>**코드의 선언:** `정의='20261013_060956_6d373b'` |
+| **설정·옵션:** [`FLAGS`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L10)<br>**코드의 선언:** `정의=subprocess.CREATE_NO_WINDOW` |
 
 #### LEVEL 2 · [클린뷰/launcher.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/launcher.py)
 
@@ -688,10 +702,10 @@ matplotlib
 #### LEVEL 2 · [클린뷰/make_report.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/make_report.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`APP`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/make_report.py#L10) | `정의=Path(__file__).resolve().parent` |
-| [`OUT`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/make_report.py#L11) | `정의=ROOT/'report'` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`APP`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/make_report.py#L10)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
+| **설정·옵션:** [`OUT`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/make_report.py#L11)<br>**코드의 선언:** `정의=ROOT/'report'` |
 
 </details>
 
@@ -699,11 +713,18 @@ matplotlib
 
 precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함께 읽습니다. 객체 탐지, 영상 사건 후보, 실제 투기 행위 판단은 다른 평가 대상입니다. 목표 90%와 완료된 시험 성적을 구분합니다.
 
-| 상황 | 확인할 내용 |
-|---|---|
-| 학습 또는 화면이 시작되지 않음 | 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다. |
-| 원본 계약 검사 실패 | 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다. |
-| 지표 해석이 어려움 | 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다. |
+**상황:** 학습 또는 화면이 시작되지 않음
+
+**확인할 내용:** 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다.
+
+**상황:** 원본 계약 검사 실패
+
+**확인할 내용:** 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다.
+
+**상황:** 지표 해석이 어려움
+
+**확인할 내용:** 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다.
+
 
 [자료 폴더](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8) · [직전 비교·자료 범위](../comparisons/2-to-3.md) · [이 차수의 원래 전체 상세](#reading-level-5)
 
@@ -833,9 +854,9 @@ matplotlib
 #### LEVEL 3 · [데이터/taco/detector/visualize.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%EB%8D%B0%EC%9D%B4%ED%84%B0/taco/detector/visualize.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`ROOT_DIR`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%EB%8D%B0%EC%9D%B4%ED%84%B0/taco/detector/visualize.py#L25) | `정의=os.path.abspath("../")` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`ROOT_DIR`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%EB%8D%B0%EC%9D%B4%ED%84%B0/taco/detector/visualize.py#L25)<br>**코드의 선언:** `정의=os.path.abspath("../")` |
 
 #### LEVEL 3 · [데이터/taco/download.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%EB%8D%B0%EC%9D%B4%ED%84%B0/taco/download.py)
 
@@ -848,13 +869,13 @@ matplotlib
 #### LEVEL 3 · [클린뷰/backend.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`ROOT`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L6) | `정의=BASE / 'trash_round3'` |
-| [`APP`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L7) | `정의=ROOT / 'app'` |
-| [`STATE`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L8) | `정의=APP / 'state'` |
-| [`JOBS`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L9) | `정의=STATE / 'jobs'` |
-| [`VIDEO_EXT`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L10) | `정의={'.mp4', '.avi', '.mov', '.mkv', '.m4v'}` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`ROOT`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L6)<br>**코드의 선언:** `정의=BASE / 'trash_round3'` |
+| **설정·옵션:** [`APP`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L7)<br>**코드의 선언:** `정의=ROOT / 'app'` |
+| **설정·옵션:** [`STATE`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L8)<br>**코드의 선언:** `정의=APP / 'state'` |
+| **설정·옵션:** [`JOBS`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L9)<br>**코드의 선언:** `정의=STATE / 'jobs'` |
+| **설정·옵션:** [`VIDEO_EXT`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L10)<br>**코드의 선언:** `정의={'.mp4', '.avi', '.mov', '.mkv', '.m4v'}` |
 
 **거부 조건:** [`not any(p.is_relative_to(r.resolve()) for r in [ROOT/'videos',APP/'uploads'])`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L52)
 
@@ -896,11 +917,11 @@ matplotlib
 #### LEVEL 3 · [클린뷰/data_pipeline.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/data_pipeline.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`REF`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/data_pipeline.py#L9) | `정의=ROOT/'data/reference'` |
-| [`FULL`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/data_pipeline.py#L10) | `정의=ROOT/'data/full'` |
-| [`SEED`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/data_pipeline.py#L11) | `정의=20261013` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`REF`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/data_pipeline.py#L9)<br>**코드의 선언:** `정의=ROOT/'data/reference'` |
+| **설정·옵션:** [`FULL`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/data_pipeline.py#L10)<br>**코드의 선언:** `정의=ROOT/'data/full'` |
+| **설정·옵션:** [`SEED`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/data_pipeline.py#L11)<br>**코드의 선언:** `정의=20261013` |
 
 #### LEVEL 3 · [클린뷰/detector.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/detector.py)
 
@@ -929,25 +950,25 @@ matplotlib
 #### LEVEL 3 · [클린뷰/finalize_round3.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`--prepare`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L113) | `action='store_true'` |
-| [`SOURCE`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L4) | `정의=Path(__file__).resolve().parent` |
-| [`DESKTOP`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L5) | `정의=SOURCE.parents[1]` |
-| [`DEST`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L6) | `정의=DESKTOP/'3차'` |
-| [`JOB`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L9) | `정의='20261013_060956_6d373b'` |
-| [`FLAGS`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L10) | `정의=subprocess.CREATE_NO_WINDOW if os.name=='nt' else 0` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`--prepare`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L113)<br>**코드의 선언:** `action='store_true'` |
+| **설정·옵션:** [`SOURCE`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L4)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
+| **설정·옵션:** [`DESKTOP`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L5)<br>**코드의 선언:** `정의=SOURCE.parents[1]` |
+| **설정·옵션:** [`DEST`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L6)<br>**코드의 선언:** `정의=DESKTOP/'3차'` |
+| **설정·옵션:** [`JOB`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L9)<br>**코드의 선언:** `정의='20261013_060956_6d373b'` |
+| **설정·옵션:** [`FLAGS`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L10)<br>**코드의 선언:** `정의=subprocess.CREATE_NO_WINDOW if os.name=='nt' else 0` |
 
 #### LEVEL 3 · [클린뷰/finish_on_exit.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`SOURCE`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L5) | `정의=Path(__file__).resolve().parent` |
-| [`DEST`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L6) | `정의=SOURCE.parent` |
-| [`WORK`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L7) | `정의=DEST / '_작업' / 'completion_once'` |
-| [`JOB`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L8) | `정의='20261013_060956_6d373b'` |
-| [`FLAGS`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L10) | `정의=subprocess.CREATE_NO_WINDOW` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`SOURCE`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L5)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
+| **설정·옵션:** [`DEST`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L6)<br>**코드의 선언:** `정의=SOURCE.parent` |
+| **설정·옵션:** [`WORK`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L7)<br>**코드의 선언:** `정의=DEST / '_작업' / 'completion_once'` |
+| **설정·옵션:** [`JOB`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L8)<br>**코드의 선언:** `정의='20261013_060956_6d373b'` |
+| **설정·옵션:** [`FLAGS`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L10)<br>**코드의 선언:** `정의=subprocess.CREATE_NO_WINDOW` |
 
 #### LEVEL 3 · [클린뷰/launcher.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/launcher.py)
 
@@ -1009,10 +1030,10 @@ matplotlib
 #### LEVEL 3 · [클린뷰/make_report.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/make_report.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`APP`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/make_report.py#L10) | `정의=Path(__file__).resolve().parent` |
-| [`OUT`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/make_report.py#L11) | `정의=ROOT/'report'` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`APP`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/make_report.py#L10)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
+| **설정·옵션:** [`OUT`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/make_report.py#L11)<br>**코드의 선언:** `정의=ROOT/'report'` |
 
 </details>
 
@@ -1023,21 +1044,35 @@ matplotlib
 3. 해당 차수의 실행 안내에 따라 처리하거나 이미 생성된 결과를 읽습니다.
 4. 결과의 자료 출처·분할·선택 정책·측정 범위를 함께 확인합니다.
 
-| 단계 | 내용 |
-|---|---|
-| 입력 | 쓰레기 영상·라벨·모델·선택한 차수 설정 |
-| 처리 | 자료 준비·모델/영상 처리·평가 또는 상태 표시 |
-| 출력 | 탐지 후보·평가 지표·화면·보고서 |
+**단계:** 입력
+
+**내용:** 쓰레기 영상·라벨·모델·선택한 차수 설정
+
+**단계:** 처리
+
+**내용:** 자료 준비·모델/영상 처리·평가 또는 상태 표시
+
+**단계:** 출력
+
+**내용:** 탐지 후보·평가 지표·화면·보고서
+
 
 ### LEVEL 3 · 결과와 실패를 확인하기
 
 precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함께 읽습니다. 객체 탐지, 영상 사건 후보, 실제 투기 행위 판단은 다른 평가 대상입니다. 목표 90%와 완료된 시험 성적을 구분합니다.
 
-| 상황 | 확인할 내용 |
-|---|---|
-| 학습 또는 화면이 시작되지 않음 | 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다. |
-| 원본 계약 검사 실패 | 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다. |
-| 지표 해석이 어려움 | 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다. |
+**상황:** 학습 또는 화면이 시작되지 않음
+
+**확인할 내용:** 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다.
+
+**상황:** 원본 계약 검사 실패
+
+**확인할 내용:** 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다.
+
+**상황:** 지표 해석이 어려움
+
+**확인할 내용:** 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다.
+
 
 ### LEVEL 3 · 실행 전 대조할 차수 조건
 
@@ -1105,11 +1140,18 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 **원문에 정의된 역할·구성:** 소스 본문과 설정을 함께 읽는 구성요소
 
 
-| 단계 | 내용 |
-|---|---|
-| 입력 | 쓰레기 영상·라벨·모델·선택한 차수 설정 |
-| 처리 | 자료 준비·모델/영상 처리·평가 또는 상태 표시 |
-| 출력 | 탐지 후보·평가 지표·화면·보고서 |
+**단계:** 입력
+
+**내용:** 쓰레기 영상·라벨·모델·선택한 차수 설정
+
+**단계:** 처리
+
+**내용:** 자료 준비·모델/영상 처리·평가 또는 상태 표시
+
+**단계:** 출력
+
+**내용:** 탐지 후보·평가 지표·화면·보고서
+
 
 ### LEVEL 4 · 조건·변경·결과를 함께 검토하기
 
@@ -1232,9 +1274,9 @@ matplotlib
 #### LEVEL 4 · [데이터/taco/detector/visualize.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%EB%8D%B0%EC%9D%B4%ED%84%B0/taco/detector/visualize.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`ROOT_DIR`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%EB%8D%B0%EC%9D%B4%ED%84%B0/taco/detector/visualize.py#L25) | `정의=os.path.abspath("../")` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`ROOT_DIR`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%EB%8D%B0%EC%9D%B4%ED%84%B0/taco/detector/visualize.py#L25)<br>**코드의 선언:** `정의=os.path.abspath("../")` |
 
 #### LEVEL 4 · [데이터/taco/download.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%EB%8D%B0%EC%9D%B4%ED%84%B0/taco/download.py)
 
@@ -1247,13 +1289,13 @@ matplotlib
 #### LEVEL 4 · [클린뷰/backend.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`ROOT`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L6) | `정의=BASE / 'trash_round3'` |
-| [`APP`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L7) | `정의=ROOT / 'app'` |
-| [`STATE`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L8) | `정의=APP / 'state'` |
-| [`JOBS`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L9) | `정의=STATE / 'jobs'` |
-| [`VIDEO_EXT`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L10) | `정의={'.mp4', '.avi', '.mov', '.mkv', '.m4v'}` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`ROOT`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L6)<br>**코드의 선언:** `정의=BASE / 'trash_round3'` |
+| **설정·옵션:** [`APP`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L7)<br>**코드의 선언:** `정의=ROOT / 'app'` |
+| **설정·옵션:** [`STATE`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L8)<br>**코드의 선언:** `정의=APP / 'state'` |
+| **설정·옵션:** [`JOBS`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L9)<br>**코드의 선언:** `정의=STATE / 'jobs'` |
+| **설정·옵션:** [`VIDEO_EXT`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L10)<br>**코드의 선언:** `정의={'.mp4', '.avi', '.mov', '.mkv', '.m4v'}` |
 
 **거부 조건:** [`not any(p.is_relative_to(r.resolve()) for r in [ROOT/'videos',APP/'uploads'])`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L52)
 
@@ -1295,11 +1337,11 @@ matplotlib
 #### LEVEL 4 · [클린뷰/data_pipeline.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/data_pipeline.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`REF`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/data_pipeline.py#L9) | `정의=ROOT/'data/reference'` |
-| [`FULL`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/data_pipeline.py#L10) | `정의=ROOT/'data/full'` |
-| [`SEED`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/data_pipeline.py#L11) | `정의=20261013` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`REF`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/data_pipeline.py#L9)<br>**코드의 선언:** `정의=ROOT/'data/reference'` |
+| **설정·옵션:** [`FULL`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/data_pipeline.py#L10)<br>**코드의 선언:** `정의=ROOT/'data/full'` |
+| **설정·옵션:** [`SEED`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/data_pipeline.py#L11)<br>**코드의 선언:** `정의=20261013` |
 
 #### LEVEL 4 · [클린뷰/detector.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/detector.py)
 
@@ -1328,25 +1370,25 @@ matplotlib
 #### LEVEL 4 · [클린뷰/finalize_round3.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`--prepare`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L113) | `action='store_true'` |
-| [`SOURCE`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L4) | `정의=Path(__file__).resolve().parent` |
-| [`DESKTOP`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L5) | `정의=SOURCE.parents[1]` |
-| [`DEST`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L6) | `정의=DESKTOP/'3차'` |
-| [`JOB`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L9) | `정의='20261013_060956_6d373b'` |
-| [`FLAGS`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L10) | `정의=subprocess.CREATE_NO_WINDOW if os.name=='nt' else 0` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`--prepare`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L113)<br>**코드의 선언:** `action='store_true'` |
+| **설정·옵션:** [`SOURCE`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L4)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
+| **설정·옵션:** [`DESKTOP`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L5)<br>**코드의 선언:** `정의=SOURCE.parents[1]` |
+| **설정·옵션:** [`DEST`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L6)<br>**코드의 선언:** `정의=DESKTOP/'3차'` |
+| **설정·옵션:** [`JOB`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L9)<br>**코드의 선언:** `정의='20261013_060956_6d373b'` |
+| **설정·옵션:** [`FLAGS`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L10)<br>**코드의 선언:** `정의=subprocess.CREATE_NO_WINDOW if os.name=='nt' else 0` |
 
 #### LEVEL 4 · [클린뷰/finish_on_exit.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`SOURCE`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L5) | `정의=Path(__file__).resolve().parent` |
-| [`DEST`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L6) | `정의=SOURCE.parent` |
-| [`WORK`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L7) | `정의=DEST / '_작업' / 'completion_once'` |
-| [`JOB`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L8) | `정의='20261013_060956_6d373b'` |
-| [`FLAGS`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L10) | `정의=subprocess.CREATE_NO_WINDOW` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`SOURCE`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L5)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
+| **설정·옵션:** [`DEST`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L6)<br>**코드의 선언:** `정의=SOURCE.parent` |
+| **설정·옵션:** [`WORK`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L7)<br>**코드의 선언:** `정의=DEST / '_작업' / 'completion_once'` |
+| **설정·옵션:** [`JOB`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L8)<br>**코드의 선언:** `정의='20261013_060956_6d373b'` |
+| **설정·옵션:** [`FLAGS`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L10)<br>**코드의 선언:** `정의=subprocess.CREATE_NO_WINDOW` |
 
 #### LEVEL 4 · [클린뷰/launcher.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/launcher.py)
 
@@ -1408,20 +1450,27 @@ matplotlib
 #### LEVEL 4 · [클린뷰/make_report.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/make_report.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`APP`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/make_report.py#L10) | `정의=Path(__file__).resolve().parent` |
-| [`OUT`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/make_report.py#L11) | `정의=ROOT/'report'` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`APP`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/make_report.py#L10)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
+| **설정·옵션:** [`OUT`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/make_report.py#L11)<br>**코드의 선언:** `정의=ROOT/'report'` |
 
 </details>
 
 precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함께 읽습니다. 객체 탐지, 영상 사건 후보, 실제 투기 행위 판단은 다른 평가 대상입니다. 목표 90%와 완료된 시험 성적을 구분합니다.
 
-| 상황 | 확인할 내용 |
-|---|---|
-| 학습 또는 화면이 시작되지 않음 | 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다. |
-| 원본 계약 검사 실패 | 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다. |
-| 지표 해석이 어려움 | 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다. |
+**상황:** 학습 또는 화면이 시작되지 않음
+
+**확인할 내용:** 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다.
+
+**상황:** 원본 계약 검사 실패
+
+**확인할 내용:** 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다.
+
+**상황:** 지표 해석이 어려움
+
+**확인할 내용:** 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다.
+
 
 ### LEVEL 4 · 재현과 전체 비교
 
@@ -1473,11 +1522,18 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 <a name="-입력처리출력"></a>
 ## 입력·처리·출력
 
-| 단계 | 내용 |
-|---|---|
-| 입력 | 쓰레기 영상·라벨·모델·선택한 차수 설정 |
-| 처리 | 자료 준비·모델/영상 처리·평가 또는 상태 표시 |
-| 출력 | 탐지 후보·평가 지표·화면·보고서 |
+**단계:** 입력
+
+**내용:** 쓰레기 영상·라벨·모델·선택한 차수 설정
+
+**단계:** 처리
+
+**내용:** 자료 준비·모델/영상 처리·평가 또는 상태 표시
+
+**단계:** 출력
+
+**내용:** 탐지 후보·평가 지표·화면·보고서
+
 
 <a name="usage"></a>
 
@@ -1494,18 +1550,18 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 <a name="-실제-자료-구성"></a>
 ## 실제 자료 구성
 
-| 경로 | 자료 종류 |
-|---|---|
-| [_작업/](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/_%EC%9E%91%EC%97%85) | 하위 자료 폴더 |
-| [데이터/](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%EB%8D%B0%EC%9D%B4%ED%84%B0) | 하위 자료 폴더 |
-| [실행기록/](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%EC%8B%A4%ED%96%89%EA%B8%B0%EB%A1%9D) | 하위 자료 폴더 |
-| [실험기록/](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%EC%8B%A4%ED%97%98%EA%B8%B0%EB%A1%9D) | 하위 자료 폴더 |
-| [실험설정/](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%EC%8B%A4%ED%97%98%EC%84%A4%EC%A0%95) | 하위 자료 폴더 |
-| [출처/](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%EC%B6%9C%EC%B2%98) | 하위 자료 폴더 |
-| [클린뷰/](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0) | 하위 자료 폴더 |
-| [README.md](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/README.md) | MD 파일 |
-| [결과저장.json](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%EA%B2%B0%EA%B3%BC%EC%A0%80%EC%9E%A5.json) | JSON 파일 |
-| [저장현황.txt](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%EC%A0%80%EC%9E%A5%ED%98%84%ED%99%A9.txt) | TXT 파일 |
+| 경로 · 자료 종류 |
+| --- |
+| **경로:** [_작업/](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/_%EC%9E%91%EC%97%85)<br>**자료 종류:** 하위 자료 폴더 |
+| **경로:** [데이터/](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%EB%8D%B0%EC%9D%B4%ED%84%B0)<br>**자료 종류:** 하위 자료 폴더 |
+| **경로:** [실행기록/](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%EC%8B%A4%ED%96%89%EA%B8%B0%EB%A1%9D)<br>**자료 종류:** 하위 자료 폴더 |
+| **경로:** [실험기록/](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%EC%8B%A4%ED%97%98%EA%B8%B0%EB%A1%9D)<br>**자료 종류:** 하위 자료 폴더 |
+| **경로:** [실험설정/](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%EC%8B%A4%ED%97%98%EC%84%A4%EC%A0%95)<br>**자료 종류:** 하위 자료 폴더 |
+| **경로:** [출처/](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%EC%B6%9C%EC%B2%98)<br>**자료 종류:** 하위 자료 폴더 |
+| **경로:** [클린뷰/](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0)<br>**자료 종류:** 하위 자료 폴더 |
+| **경로:** [README.md](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/README.md)<br>**자료 종류:** MD 파일 |
+| **경로:** [결과저장.json](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%EA%B2%B0%EA%B3%BC%EC%A0%80%EC%9E%A5.json)<br>**자료 종류:** JSON 파일 |
+| **경로:** [저장현황.txt](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%EC%A0%80%EC%9E%A5%ED%98%84%ED%99%A9.txt)<br>**자료 종류:** TXT 파일 |
 
 <a name="-주요-모듈과-코드-읽기"></a>
 ## 주요 모듈과 코드 읽기
@@ -1673,9 +1729,9 @@ matplotlib
 ### [데이터/taco/detector/visualize.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%EB%8D%B0%EC%9D%B4%ED%84%B0/taco/detector/visualize.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`ROOT_DIR`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%EB%8D%B0%EC%9D%B4%ED%84%B0/taco/detector/visualize.py#L25) | `정의=os.path.abspath("../")` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`ROOT_DIR`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%EB%8D%B0%EC%9D%B4%ED%84%B0/taco/detector/visualize.py#L25)<br>**코드의 선언:** `정의=os.path.abspath("../")` |
 
 ### [데이터/taco/download.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%EB%8D%B0%EC%9D%B4%ED%84%B0/taco/download.py)
 
@@ -1688,13 +1744,13 @@ matplotlib
 ### [클린뷰/backend.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`ROOT`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L6) | `정의=BASE / 'trash_round3'` |
-| [`APP`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L7) | `정의=ROOT / 'app'` |
-| [`STATE`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L8) | `정의=APP / 'state'` |
-| [`JOBS`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L9) | `정의=STATE / 'jobs'` |
-| [`VIDEO_EXT`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L10) | `정의={'.mp4', '.avi', '.mov', '.mkv', '.m4v'}` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`ROOT`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L6)<br>**코드의 선언:** `정의=BASE / 'trash_round3'` |
+| **설정·옵션:** [`APP`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L7)<br>**코드의 선언:** `정의=ROOT / 'app'` |
+| **설정·옵션:** [`STATE`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L8)<br>**코드의 선언:** `정의=APP / 'state'` |
+| **설정·옵션:** [`JOBS`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L9)<br>**코드의 선언:** `정의=STATE / 'jobs'` |
+| **설정·옵션:** [`VIDEO_EXT`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L10)<br>**코드의 선언:** `정의={'.mp4', '.avi', '.mov', '.mkv', '.m4v'}` |
 
 **거부 조건:** [`not any(p.is_relative_to(r.resolve()) for r in [ROOT/'videos',APP/'uploads'])`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/backend.py#L52)
 
@@ -1736,11 +1792,11 @@ matplotlib
 ### [클린뷰/data_pipeline.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/data_pipeline.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`REF`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/data_pipeline.py#L9) | `정의=ROOT/'data/reference'` |
-| [`FULL`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/data_pipeline.py#L10) | `정의=ROOT/'data/full'` |
-| [`SEED`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/data_pipeline.py#L11) | `정의=20261013` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`REF`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/data_pipeline.py#L9)<br>**코드의 선언:** `정의=ROOT/'data/reference'` |
+| **설정·옵션:** [`FULL`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/data_pipeline.py#L10)<br>**코드의 선언:** `정의=ROOT/'data/full'` |
+| **설정·옵션:** [`SEED`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/data_pipeline.py#L11)<br>**코드의 선언:** `정의=20261013` |
 
 ### [클린뷰/detector.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/detector.py)
 
@@ -1769,25 +1825,25 @@ matplotlib
 ### [클린뷰/finalize_round3.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`--prepare`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L113) | `action='store_true'` |
-| [`SOURCE`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L4) | `정의=Path(__file__).resolve().parent` |
-| [`DESKTOP`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L5) | `정의=SOURCE.parents[1]` |
-| [`DEST`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L6) | `정의=DESKTOP/'3차'` |
-| [`JOB`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L9) | `정의='20261013_060956_6d373b'` |
-| [`FLAGS`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L10) | `정의=subprocess.CREATE_NO_WINDOW if os.name=='nt' else 0` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`--prepare`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L113)<br>**코드의 선언:** `action='store_true'` |
+| **설정·옵션:** [`SOURCE`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L4)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
+| **설정·옵션:** [`DESKTOP`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L5)<br>**코드의 선언:** `정의=SOURCE.parents[1]` |
+| **설정·옵션:** [`DEST`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L6)<br>**코드의 선언:** `정의=DESKTOP/'3차'` |
+| **설정·옵션:** [`JOB`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L9)<br>**코드의 선언:** `정의='20261013_060956_6d373b'` |
+| **설정·옵션:** [`FLAGS`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finalize_round3.py#L10)<br>**코드의 선언:** `정의=subprocess.CREATE_NO_WINDOW if os.name=='nt' else 0` |
 
 ### [클린뷰/finish_on_exit.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`SOURCE`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L5) | `정의=Path(__file__).resolve().parent` |
-| [`DEST`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L6) | `정의=SOURCE.parent` |
-| [`WORK`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L7) | `정의=DEST / '_작업' / 'completion_once'` |
-| [`JOB`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L8) | `정의='20261013_060956_6d373b'` |
-| [`FLAGS`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L10) | `정의=subprocess.CREATE_NO_WINDOW` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`SOURCE`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L5)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
+| **설정·옵션:** [`DEST`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L6)<br>**코드의 선언:** `정의=SOURCE.parent` |
+| **설정·옵션:** [`WORK`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L7)<br>**코드의 선언:** `정의=DEST / '_작업' / 'completion_once'` |
+| **설정·옵션:** [`JOB`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L8)<br>**코드의 선언:** `정의='20261013_060956_6d373b'` |
+| **설정·옵션:** [`FLAGS`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/finish_on_exit.py#L10)<br>**코드의 선언:** `정의=subprocess.CREATE_NO_WINDOW` |
 
 ### [클린뷰/launcher.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/launcher.py)
 
@@ -1849,10 +1905,10 @@ matplotlib
 ### [클린뷰/make_report.py](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/make_report.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`APP`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/make_report.py#L10) | `정의=Path(__file__).resolve().parent` |
-| [`OUT`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/make_report.py#L11) | `정의=ROOT/'report'` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`APP`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/make_report.py#L10)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
+| **설정·옵션:** [`OUT`](../../%EC%B5%9C%EC%A2%85/3%EC%B0%A8/%ED%81%B4%EB%A6%B0%EB%B7%B0/make_report.py#L11)<br>**코드의 선언:** `정의=ROOT/'report'` |
 
 </details>
 
@@ -1866,11 +1922,18 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 <a name="️-제약과-문제-해결"></a>
 ## 제약과 문제 해결
 
-| 상황 | 확인할 내용 |
-|---|---|
-| 학습 또는 화면이 시작되지 않음 | 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다. |
-| 원본 계약 검사 실패 | 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다. |
-| 지표 해석이 어려움 | 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다. |
+**상황:** 학습 또는 화면이 시작되지 않음
+
+**확인할 내용:** 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다.
+
+**상황:** 원본 계약 검사 실패
+
+**확인할 내용:** 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다.
+
+**상황:** 지표 해석이 어려움
+
+**확인할 내용:** 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다.
+
 
 <a name="changes"></a>
 

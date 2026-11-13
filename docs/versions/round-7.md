@@ -58,10 +58,10 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 #### LEVEL 1 · 소스에서 제공하는 CLI 옵션
 
-| 진입 소스 | 정의된 옵션 이름 |
-|---|---|
-| [prepare_dataset.py](../../7%EC%B0%A8/prepare_dataset.py) | `--prepare`, `--smoke` |
-| [worker.py](../../7%EC%B0%A8/worker.py) | `--action`, `--params`, `--worker` |
+| 진입 소스 · 정의된 옵션 이름 |
+| --- |
+| **진입 소스:** [prepare_dataset.py](../../7%EC%B0%A8/prepare_dataset.py)<br>**정의된 옵션 이름:** `--prepare`, `--smoke` |
+| **진입 소스:** [worker.py](../../7%EC%B0%A8/worker.py)<br>**정의된 옵션 이름:** `--action`, `--params`, `--worker` |
 
 각 옵션의 기본값·필수값·부작용은 해당 main과 인자 정의를 함께 확인합니다.
 
@@ -73,9 +73,9 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 #### LEVEL 1 · [prepare_dataset.py](../../7%EC%B0%A8/prepare_dataset.py)
 
-| 정의 | 소스에 적힌 역할 |
-|---|---|
-| [`_DownloadRetry`](../../7%EC%B0%A8/prepare_dataset.py#L234) | 통신 경계에서 확인한 일시 오류만 재시도 경로로 전달합니다. |
+| 정의 · 소스에 적힌 역할 |
+| --- |
+| **정의:** [`_DownloadRetry`](../../7%EC%B0%A8/prepare_dataset.py#L234)<br>**소스에 적힌 역할:** 통신 경계에서 확인한 일시 오류만 재시도 경로로 전달합니다. |
 
 **설정·옵션:** [`--prepare`](../../7%EC%B0%A8/prepare_dataset.py#L796)
 
@@ -387,9 +387,9 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 #### LEVEL 1 · [verify_sources.py](../../7%EC%B0%A8/verify_sources.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`ROOT`](../../7%EC%B0%A8/verify_sources.py#L6) | `정의=Path(__file__).resolve().parent` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`ROOT`](../../7%EC%B0%A8/verify_sources.py#L6)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 
 **거부 조건:** [`config['download_limit_bytes']!=100*1024**3 or config['minimum_disk_free_bytes']!=100*1024**3`](../../7%EC%B0%A8/verify_sources.py#L23)
 
@@ -403,10 +403,10 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 #### LEVEL 1 · [worker.py](../../7%EC%B0%A8/worker.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`--action`](../../7%EC%B0%A8/worker.py#L210) | `choices=['train', 'status']` |
-| [`--params`](../../7%EC%B0%A8/worker.py#L211) | `default='{}'` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`--action`](../../7%EC%B0%A8/worker.py#L210)<br>**코드의 선언:** `choices=['train', 'status']` |
+| **설정·옵션:** [`--params`](../../7%EC%B0%A8/worker.py#L211)<br>**코드의 선언:** `default='{}'` |
 | [`--worker`](../../7%EC%B0%A8/worker.py#L212) | `` |
 | [`ROOT`](../../7%EC%B0%A8/worker.py#L15) | `정의=Path(__file__).resolve().parent` |
 | [`WORK`](../../7%EC%B0%A8/worker.py#L16) | `정의=ROOT / 'work'` |
@@ -453,11 +453,18 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함께 읽습니다. 객체 탐지, 영상 사건 후보, 실제 투기 행위 판단은 다른 평가 대상입니다. 목표 90%와 완료된 시험 성적을 구분합니다.
 
-| 상황 | 확인할 내용 |
-|---|---|
-| 학습 또는 화면이 시작되지 않음 | 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다. |
-| 원본 계약 검사 실패 | 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다. |
-| 지표 해석이 어려움 | 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다. |
+**상황:** 학습 또는 화면이 시작되지 않음
+
+**확인할 내용:** 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다.
+
+**상황:** 원본 계약 검사 실패
+
+**확인할 내용:** 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다.
+
+**상황:** 지표 해석이 어려움
+
+**확인할 내용:** 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다.
+
 
 [자료 폴더](../../7%EC%B0%A8) · [직전 비교·자료 범위](../comparisons/5-to-7.md) · [이 차수의 원래 전체 상세](#reading-level-5)
 
@@ -472,11 +479,18 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 
 ### LEVEL 2 · 입력에서 출력으로
 
-| 단계 | 내용 |
-|---|---|
-| 입력 | 쓰레기 영상·라벨·모델·선택한 차수 설정 |
-| 처리 | 자료 준비·모델/영상 처리·평가 또는 상태 표시 |
-| 출력 | 탐지 후보·평가 지표·화면·보고서 |
+**단계:** 입력
+
+**내용:** 쓰레기 영상·라벨·모델·선택한 차수 설정
+
+**단계:** 처리
+
+**내용:** 자료 준비·모델/영상 처리·평가 또는 상태 표시
+
+**단계:** 출력
+
+**내용:** 탐지 후보·평가 지표·화면·보고서
+
 
 입력·처리·출력은 위의 같은 자료 흐름을 다른 단계에서 읽는 기준입니다. 처리 조건과 출력의 의미를 함께 확인합니다.
 
@@ -509,10 +523,10 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 #### LEVEL 2 · 소스에서 제공하는 CLI 옵션
 
-| 진입 소스 | 정의된 옵션 이름 |
-|---|---|
-| [prepare_dataset.py](../../7%EC%B0%A8/prepare_dataset.py) | `--prepare`, `--smoke` |
-| [worker.py](../../7%EC%B0%A8/worker.py) | `--action`, `--params`, `--worker` |
+| 진입 소스 · 정의된 옵션 이름 |
+| --- |
+| **진입 소스:** [prepare_dataset.py](../../7%EC%B0%A8/prepare_dataset.py)<br>**정의된 옵션 이름:** `--prepare`, `--smoke` |
+| **진입 소스:** [worker.py](../../7%EC%B0%A8/worker.py)<br>**정의된 옵션 이름:** `--action`, `--params`, `--worker` |
 
 각 옵션의 기본값·필수값·부작용은 해당 main과 인자 정의를 함께 확인합니다.
 
@@ -524,9 +538,9 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 #### LEVEL 2 · [prepare_dataset.py](../../7%EC%B0%A8/prepare_dataset.py)
 
-| 정의 | 소스에 적힌 역할 |
-|---|---|
-| [`_DownloadRetry`](../../7%EC%B0%A8/prepare_dataset.py#L234) | 통신 경계에서 확인한 일시 오류만 재시도 경로로 전달합니다. |
+| 정의 · 소스에 적힌 역할 |
+| --- |
+| **정의:** [`_DownloadRetry`](../../7%EC%B0%A8/prepare_dataset.py#L234)<br>**소스에 적힌 역할:** 통신 경계에서 확인한 일시 오류만 재시도 경로로 전달합니다. |
 
 **설정·옵션:** [`--prepare`](../../7%EC%B0%A8/prepare_dataset.py#L796)
 
@@ -838,9 +852,9 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 #### LEVEL 2 · [verify_sources.py](../../7%EC%B0%A8/verify_sources.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`ROOT`](../../7%EC%B0%A8/verify_sources.py#L6) | `정의=Path(__file__).resolve().parent` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`ROOT`](../../7%EC%B0%A8/verify_sources.py#L6)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 
 **거부 조건:** [`config['download_limit_bytes']!=100*1024**3 or config['minimum_disk_free_bytes']!=100*1024**3`](../../7%EC%B0%A8/verify_sources.py#L23)
 
@@ -854,10 +868,10 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 #### LEVEL 2 · [worker.py](../../7%EC%B0%A8/worker.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`--action`](../../7%EC%B0%A8/worker.py#L210) | `choices=['train', 'status']` |
-| [`--params`](../../7%EC%B0%A8/worker.py#L211) | `default='{}'` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`--action`](../../7%EC%B0%A8/worker.py#L210)<br>**코드의 선언:** `choices=['train', 'status']` |
+| **설정·옵션:** [`--params`](../../7%EC%B0%A8/worker.py#L211)<br>**코드의 선언:** `default='{}'` |
 | [`--worker`](../../7%EC%B0%A8/worker.py#L212) | `` |
 | [`ROOT`](../../7%EC%B0%A8/worker.py#L15) | `정의=Path(__file__).resolve().parent` |
 | [`WORK`](../../7%EC%B0%A8/worker.py#L16) | `정의=ROOT / 'work'` |
@@ -899,11 +913,18 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함께 읽습니다. 객체 탐지, 영상 사건 후보, 실제 투기 행위 판단은 다른 평가 대상입니다. 목표 90%와 완료된 시험 성적을 구분합니다.
 
-| 상황 | 확인할 내용 |
-|---|---|
-| 학습 또는 화면이 시작되지 않음 | 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다. |
-| 원본 계약 검사 실패 | 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다. |
-| 지표 해석이 어려움 | 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다. |
+**상황:** 학습 또는 화면이 시작되지 않음
+
+**확인할 내용:** 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다.
+
+**상황:** 원본 계약 검사 실패
+
+**확인할 내용:** 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다.
+
+**상황:** 지표 해석이 어려움
+
+**확인할 내용:** 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다.
+
 
 [자료 폴더](../../7%EC%B0%A8) · [직전 비교·자료 범위](../comparisons/5-to-7.md) · [이 차수의 원래 전체 상세](#reading-level-5)
 
@@ -936,10 +957,10 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 #### LEVEL 3 · 소스에서 제공하는 CLI 옵션
 
-| 진입 소스 | 정의된 옵션 이름 |
-|---|---|
-| [prepare_dataset.py](../../7%EC%B0%A8/prepare_dataset.py) | `--prepare`, `--smoke` |
-| [worker.py](../../7%EC%B0%A8/worker.py) | `--action`, `--params`, `--worker` |
+| 진입 소스 · 정의된 옵션 이름 |
+| --- |
+| **진입 소스:** [prepare_dataset.py](../../7%EC%B0%A8/prepare_dataset.py)<br>**정의된 옵션 이름:** `--prepare`, `--smoke` |
+| **진입 소스:** [worker.py](../../7%EC%B0%A8/worker.py)<br>**정의된 옵션 이름:** `--action`, `--params`, `--worker` |
 
 각 옵션의 기본값·필수값·부작용은 해당 main과 인자 정의를 함께 확인합니다.
 
@@ -951,9 +972,9 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 #### LEVEL 3 · [prepare_dataset.py](../../7%EC%B0%A8/prepare_dataset.py)
 
-| 정의 | 소스에 적힌 역할 |
-|---|---|
-| [`_DownloadRetry`](../../7%EC%B0%A8/prepare_dataset.py#L234) | 통신 경계에서 확인한 일시 오류만 재시도 경로로 전달합니다. |
+| 정의 · 소스에 적힌 역할 |
+| --- |
+| **정의:** [`_DownloadRetry`](../../7%EC%B0%A8/prepare_dataset.py#L234)<br>**소스에 적힌 역할:** 통신 경계에서 확인한 일시 오류만 재시도 경로로 전달합니다. |
 
 **설정·옵션:** [`--prepare`](../../7%EC%B0%A8/prepare_dataset.py#L796)
 
@@ -1265,9 +1286,9 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 #### LEVEL 3 · [verify_sources.py](../../7%EC%B0%A8/verify_sources.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`ROOT`](../../7%EC%B0%A8/verify_sources.py#L6) | `정의=Path(__file__).resolve().parent` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`ROOT`](../../7%EC%B0%A8/verify_sources.py#L6)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 
 **거부 조건:** [`config['download_limit_bytes']!=100*1024**3 or config['minimum_disk_free_bytes']!=100*1024**3`](../../7%EC%B0%A8/verify_sources.py#L23)
 
@@ -1281,10 +1302,10 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 #### LEVEL 3 · [worker.py](../../7%EC%B0%A8/worker.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`--action`](../../7%EC%B0%A8/worker.py#L210) | `choices=['train', 'status']` |
-| [`--params`](../../7%EC%B0%A8/worker.py#L211) | `default='{}'` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`--action`](../../7%EC%B0%A8/worker.py#L210)<br>**코드의 선언:** `choices=['train', 'status']` |
+| **설정·옵션:** [`--params`](../../7%EC%B0%A8/worker.py#L211)<br>**코드의 선언:** `default='{}'` |
 | [`--worker`](../../7%EC%B0%A8/worker.py#L212) | `` |
 | [`ROOT`](../../7%EC%B0%A8/worker.py#L15) | `정의=Path(__file__).resolve().parent` |
 | [`WORK`](../../7%EC%B0%A8/worker.py#L16) | `정의=ROOT / 'work'` |
@@ -1329,21 +1350,35 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 3. 해당 차수의 실행 안내에 따라 처리하거나 이미 생성된 결과를 읽습니다.
 4. 결과의 자료 출처·분할·선택 정책·측정 범위를 함께 확인합니다.
 
-| 단계 | 내용 |
-|---|---|
-| 입력 | 쓰레기 영상·라벨·모델·선택한 차수 설정 |
-| 처리 | 자료 준비·모델/영상 처리·평가 또는 상태 표시 |
-| 출력 | 탐지 후보·평가 지표·화면·보고서 |
+**단계:** 입력
+
+**내용:** 쓰레기 영상·라벨·모델·선택한 차수 설정
+
+**단계:** 처리
+
+**내용:** 자료 준비·모델/영상 처리·평가 또는 상태 표시
+
+**단계:** 출력
+
+**내용:** 탐지 후보·평가 지표·화면·보고서
+
 
 ### LEVEL 3 · 결과와 실패를 확인하기
 
 precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함께 읽습니다. 객체 탐지, 영상 사건 후보, 실제 투기 행위 판단은 다른 평가 대상입니다. 목표 90%와 완료된 시험 성적을 구분합니다.
 
-| 상황 | 확인할 내용 |
-|---|---|
-| 학습 또는 화면이 시작되지 않음 | 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다. |
-| 원본 계약 검사 실패 | 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다. |
-| 지표 해석이 어려움 | 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다. |
+**상황:** 학습 또는 화면이 시작되지 않음
+
+**확인할 내용:** 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다.
+
+**상황:** 원본 계약 검사 실패
+
+**확인할 내용:** 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다.
+
+**상황:** 지표 해석이 어려움
+
+**확인할 내용:** 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다.
+
 
 ### LEVEL 3 · 실행 전 대조할 차수 조건
 
@@ -1362,21 +1397,28 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 
 ### LEVEL 4 · 이 차수 구현의 실제 근거
 
-| 파일 | 원문에 정의된 역할·구성 |
-|---|---|
-| [worker.py](../../7%EC%B0%A8/worker.py) | 준비와 GPU 학습을 Codex 없이 이어 실행하는 독립 작업자입니다. |
-| [prepare_dataset.py](../../7%EC%B0%A8/prepare_dataset.py) | 공식 원자료를 보존하고 별도 정규화 사본·고정 분할을 준비합니다. |
-| [train_pipeline.py](../../7%EC%B0%A8/train_pipeline.py) | 학습 시간을 제한하고 검증에서 모델·추론을 선택한 뒤 고정 테스트를 평가합니다. |
-| [verify_sources.py](../../7%EC%B0%A8/verify_sources.py) | 소스 UTF-8·구문·실제 진입점·기존 모델 보존을 검사합니다. |
-| [tests/test_prepare_dataset.py](../../7%EC%B0%A8/tests/test_prepare_dataset.py) | 원본 보존·예산·분할 누출·좌표 변환의 실패 경로를 검사합니다. |
-| [tests/test_train_pipeline.py](../../7%EC%B0%A8/tests/test_train_pipeline.py) | 검증 선택·예측 좌표·재개 계약·고정 테스트의 경계를 검사합니다. |
-| [tests/test_worker.py](../../7%EC%B0%A8/tests/test_worker.py) | 독립 작업의 중복 배제·상태·명시 재개 계약을 검사합니다. |
+| 파일 · 원문에 정의된 역할·구성 |
+| --- |
+| **파일:** [worker.py](../../7%EC%B0%A8/worker.py)<br>**원문에 정의된 역할·구성:** 준비와 GPU 학습을 Codex 없이 이어 실행하는 독립 작업자입니다. |
+| **파일:** [prepare_dataset.py](../../7%EC%B0%A8/prepare_dataset.py)<br>**원문에 정의된 역할·구성:** 공식 원자료를 보존하고 별도 정규화 사본·고정 분할을 준비합니다. |
+| **파일:** [train_pipeline.py](../../7%EC%B0%A8/train_pipeline.py)<br>**원문에 정의된 역할·구성:** 학습 시간을 제한하고 검증에서 모델·추론을 선택한 뒤 고정 테스트를 평가합니다. |
+| **파일:** [verify_sources.py](../../7%EC%B0%A8/verify_sources.py)<br>**원문에 정의된 역할·구성:** 소스 UTF-8·구문·실제 진입점·기존 모델 보존을 검사합니다. |
+| **파일:** [tests/test_prepare_dataset.py](../../7%EC%B0%A8/tests/test_prepare_dataset.py)<br>**원문에 정의된 역할·구성:** 원본 보존·예산·분할 누출·좌표 변환의 실패 경로를 검사합니다. |
+| **파일:** [tests/test_train_pipeline.py](../../7%EC%B0%A8/tests/test_train_pipeline.py)<br>**원문에 정의된 역할·구성:** 검증 선택·예측 좌표·재개 계약·고정 테스트의 경계를 검사합니다. |
+| **파일:** [tests/test_worker.py](../../7%EC%B0%A8/tests/test_worker.py)<br>**원문에 정의된 역할·구성:** 독립 작업의 중복 배제·상태·명시 재개 계약을 검사합니다. |
 
-| 단계 | 내용 |
-|---|---|
-| 입력 | 쓰레기 영상·라벨·모델·선택한 차수 설정 |
-| 처리 | 자료 준비·모델/영상 처리·평가 또는 상태 표시 |
-| 출력 | 탐지 후보·평가 지표·화면·보고서 |
+**단계:** 입력
+
+**내용:** 쓰레기 영상·라벨·모델·선택한 차수 설정
+
+**단계:** 처리
+
+**내용:** 자료 준비·모델/영상 처리·평가 또는 상태 표시
+
+**단계:** 출력
+
+**내용:** 탐지 후보·평가 지표·화면·보고서
+
 
 ### LEVEL 4 · 조건·변경·결과를 함께 검토하기
 
@@ -1402,10 +1444,10 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 #### LEVEL 4 · 소스에서 제공하는 CLI 옵션
 
-| 진입 소스 | 정의된 옵션 이름 |
-|---|---|
-| [prepare_dataset.py](../../7%EC%B0%A8/prepare_dataset.py) | `--prepare`, `--smoke` |
-| [worker.py](../../7%EC%B0%A8/worker.py) | `--action`, `--params`, `--worker` |
+| 진입 소스 · 정의된 옵션 이름 |
+| --- |
+| **진입 소스:** [prepare_dataset.py](../../7%EC%B0%A8/prepare_dataset.py)<br>**정의된 옵션 이름:** `--prepare`, `--smoke` |
+| **진입 소스:** [worker.py](../../7%EC%B0%A8/worker.py)<br>**정의된 옵션 이름:** `--action`, `--params`, `--worker` |
 
 각 옵션의 기본값·필수값·부작용은 해당 main과 인자 정의를 함께 확인합니다.
 
@@ -1417,9 +1459,9 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 #### LEVEL 4 · [prepare_dataset.py](../../7%EC%B0%A8/prepare_dataset.py)
 
-| 정의 | 소스에 적힌 역할 |
-|---|---|
-| [`_DownloadRetry`](../../7%EC%B0%A8/prepare_dataset.py#L234) | 통신 경계에서 확인한 일시 오류만 재시도 경로로 전달합니다. |
+| 정의 · 소스에 적힌 역할 |
+| --- |
+| **정의:** [`_DownloadRetry`](../../7%EC%B0%A8/prepare_dataset.py#L234)<br>**소스에 적힌 역할:** 통신 경계에서 확인한 일시 오류만 재시도 경로로 전달합니다. |
 
 **설정·옵션:** [`--prepare`](../../7%EC%B0%A8/prepare_dataset.py#L796)
 
@@ -1731,9 +1773,9 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 #### LEVEL 4 · [verify_sources.py](../../7%EC%B0%A8/verify_sources.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`ROOT`](../../7%EC%B0%A8/verify_sources.py#L6) | `정의=Path(__file__).resolve().parent` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`ROOT`](../../7%EC%B0%A8/verify_sources.py#L6)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 
 **거부 조건:** [`config['download_limit_bytes']!=100*1024**3 or config['minimum_disk_free_bytes']!=100*1024**3`](../../7%EC%B0%A8/verify_sources.py#L23)
 
@@ -1747,10 +1789,10 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 #### LEVEL 4 · [worker.py](../../7%EC%B0%A8/worker.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`--action`](../../7%EC%B0%A8/worker.py#L210) | `choices=['train', 'status']` |
-| [`--params`](../../7%EC%B0%A8/worker.py#L211) | `default='{}'` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`--action`](../../7%EC%B0%A8/worker.py#L210)<br>**코드의 선언:** `choices=['train', 'status']` |
+| **설정·옵션:** [`--params`](../../7%EC%B0%A8/worker.py#L211)<br>**코드의 선언:** `default='{}'` |
 | [`--worker`](../../7%EC%B0%A8/worker.py#L212) | `` |
 | [`ROOT`](../../7%EC%B0%A8/worker.py#L15) | `정의=Path(__file__).resolve().parent` |
 | [`WORK`](../../7%EC%B0%A8/worker.py#L16) | `정의=ROOT / 'work'` |
@@ -1790,11 +1832,18 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함께 읽습니다. 객체 탐지, 영상 사건 후보, 실제 투기 행위 판단은 다른 평가 대상입니다. 목표 90%와 완료된 시험 성적을 구분합니다.
 
-| 상황 | 확인할 내용 |
-|---|---|
-| 학습 또는 화면이 시작되지 않음 | 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다. |
-| 원본 계약 검사 실패 | 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다. |
-| 지표 해석이 어려움 | 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다. |
+**상황:** 학습 또는 화면이 시작되지 않음
+
+**확인할 내용:** 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다.
+
+**상황:** 원본 계약 검사 실패
+
+**확인할 내용:** 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다.
+
+**상황:** 지표 해석이 어려움
+
+**확인할 내용:** 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다.
+
 
 ### LEVEL 4 · 재현과 전체 비교
 
@@ -1834,11 +1883,18 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 <a name="-입력처리출력"></a>
 ## 입력·처리·출력
 
-| 단계 | 내용 |
-|---|---|
-| 입력 | 쓰레기 영상·라벨·모델·선택한 차수 설정 |
-| 처리 | 자료 준비·모델/영상 처리·평가 또는 상태 표시 |
-| 출력 | 탐지 후보·평가 지표·화면·보고서 |
+**단계:** 입력
+
+**내용:** 쓰레기 영상·라벨·모델·선택한 차수 설정
+
+**단계:** 처리
+
+**내용:** 자료 준비·모델/영상 처리·평가 또는 상태 표시
+
+**단계:** 출력
+
+**내용:** 탐지 후보·평가 지표·화면·보고서
+
 
 <a name="usage"></a>
 
@@ -1855,32 +1911,32 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 <a name="-실제-자료-구성"></a>
 ## 실제 자료 구성
 
-| 경로 | 자료 종류 |
-|---|---|
-| [configs/](../../7%EC%B0%A8/configs) | 하위 자료 폴더 |
-| [docs/](../../7%EC%B0%A8/docs) | 하위 자료 폴더 |
-| [tests/](../../7%EC%B0%A8/tests) | 하위 자료 폴더 |
-| [README.md](../../7%EC%B0%A8/README.md) | MD 파일 |
-| [prepare_dataset.py](../../7%EC%B0%A8/prepare_dataset.py) | PY 파일 |
-| [train_pipeline.py](../../7%EC%B0%A8/train_pipeline.py) | PY 파일 |
-| [verify_sources.py](../../7%EC%B0%A8/verify_sources.py) | PY 파일 |
-| [worker.py](../../7%EC%B0%A8/worker.py) | PY 파일 |
-| [사용안내.txt](../../7%EC%B0%A8/%EC%82%AC%EC%9A%A9%EC%95%88%EB%82%B4.txt) | TXT 파일 |
-| [학습상태.bat](../../7%EC%B0%A8/%ED%95%99%EC%8A%B5%EC%83%81%ED%83%9C.bat) | BAT 파일 |
-| [학습실행.bat](../../7%EC%B0%A8/%ED%95%99%EC%8A%B5%EC%8B%A4%ED%96%89.bat) | BAT 파일 |
+| 경로 · 자료 종류 |
+| --- |
+| **경로:** [configs/](../../7%EC%B0%A8/configs)<br>**자료 종류:** 하위 자료 폴더 |
+| **경로:** [docs/](../../7%EC%B0%A8/docs)<br>**자료 종류:** 하위 자료 폴더 |
+| **경로:** [tests/](../../7%EC%B0%A8/tests)<br>**자료 종류:** 하위 자료 폴더 |
+| **경로:** [README.md](../../7%EC%B0%A8/README.md)<br>**자료 종류:** MD 파일 |
+| **경로:** [prepare_dataset.py](../../7%EC%B0%A8/prepare_dataset.py)<br>**자료 종류:** PY 파일 |
+| **경로:** [train_pipeline.py](../../7%EC%B0%A8/train_pipeline.py)<br>**자료 종류:** PY 파일 |
+| **경로:** [verify_sources.py](../../7%EC%B0%A8/verify_sources.py)<br>**자료 종류:** PY 파일 |
+| **경로:** [worker.py](../../7%EC%B0%A8/worker.py)<br>**자료 종류:** PY 파일 |
+| **경로:** [사용안내.txt](../../7%EC%B0%A8/%EC%82%AC%EC%9A%A9%EC%95%88%EB%82%B4.txt)<br>**자료 종류:** TXT 파일 |
+| **경로:** [학습상태.bat](../../7%EC%B0%A8/%ED%95%99%EC%8A%B5%EC%83%81%ED%83%9C.bat)<br>**자료 종류:** BAT 파일 |
+| **경로:** [학습실행.bat](../../7%EC%B0%A8/%ED%95%99%EC%8A%B5%EC%8B%A4%ED%96%89.bat)<br>**자료 종류:** BAT 파일 |
 
 <a name="-주요-모듈과-코드-읽기"></a>
 ## 주요 모듈과 코드 읽기
 
-| 파일 | 원문에 정의된 역할·구성 |
-|---|---|
-| [worker.py](../../7%EC%B0%A8/worker.py) | 준비와 GPU 학습을 Codex 없이 이어 실행하는 독립 작업자입니다. |
-| [prepare_dataset.py](../../7%EC%B0%A8/prepare_dataset.py) | 공식 원자료를 보존하고 별도 정규화 사본·고정 분할을 준비합니다. |
-| [train_pipeline.py](../../7%EC%B0%A8/train_pipeline.py) | 학습 시간을 제한하고 검증에서 모델·추론을 선택한 뒤 고정 테스트를 평가합니다. |
-| [verify_sources.py](../../7%EC%B0%A8/verify_sources.py) | 소스 UTF-8·구문·실제 진입점·기존 모델 보존을 검사합니다. |
-| [tests/test_prepare_dataset.py](../../7%EC%B0%A8/tests/test_prepare_dataset.py) | 원본 보존·예산·분할 누출·좌표 변환의 실패 경로를 검사합니다. |
-| [tests/test_train_pipeline.py](../../7%EC%B0%A8/tests/test_train_pipeline.py) | 검증 선택·예측 좌표·재개 계약·고정 테스트의 경계를 검사합니다. |
-| [tests/test_worker.py](../../7%EC%B0%A8/tests/test_worker.py) | 독립 작업의 중복 배제·상태·명시 재개 계약을 검사합니다. |
+| 파일 · 원문에 정의된 역할·구성 |
+| --- |
+| **파일:** [worker.py](../../7%EC%B0%A8/worker.py)<br>**원문에 정의된 역할·구성:** 준비와 GPU 학습을 Codex 없이 이어 실행하는 독립 작업자입니다. |
+| **파일:** [prepare_dataset.py](../../7%EC%B0%A8/prepare_dataset.py)<br>**원문에 정의된 역할·구성:** 공식 원자료를 보존하고 별도 정규화 사본·고정 분할을 준비합니다. |
+| **파일:** [train_pipeline.py](../../7%EC%B0%A8/train_pipeline.py)<br>**원문에 정의된 역할·구성:** 학습 시간을 제한하고 검증에서 모델·추론을 선택한 뒤 고정 테스트를 평가합니다. |
+| **파일:** [verify_sources.py](../../7%EC%B0%A8/verify_sources.py)<br>**원문에 정의된 역할·구성:** 소스 UTF-8·구문·실제 진입점·기존 모델 보존을 검사합니다. |
+| **파일:** [tests/test_prepare_dataset.py](../../7%EC%B0%A8/tests/test_prepare_dataset.py)<br>**원문에 정의된 역할·구성:** 원본 보존·예산·분할 누출·좌표 변환의 실패 경로를 검사합니다. |
+| **파일:** [tests/test_train_pipeline.py](../../7%EC%B0%A8/tests/test_train_pipeline.py)<br>**원문에 정의된 역할·구성:** 검증 선택·예측 좌표·재개 계약·고정 테스트의 경계를 검사합니다. |
+| **파일:** [tests/test_worker.py](../../7%EC%B0%A8/tests/test_worker.py)<br>**원문에 정의된 역할·구성:** 독립 작업의 중복 배제·상태·명시 재개 계약을 검사합니다. |
 
 <a name="setup"></a>
 
@@ -1911,10 +1967,10 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 <a name="️-소스에서-제공하는-cli-옵션"></a>
 ### 소스에서 제공하는 CLI 옵션
 
-| 진입 소스 | 정의된 옵션 이름 |
-|---|---|
-| [prepare_dataset.py](../../7%EC%B0%A8/prepare_dataset.py) | `--prepare`, `--smoke` |
-| [worker.py](../../7%EC%B0%A8/worker.py) | `--action`, `--params`, `--worker` |
+| 진입 소스 · 정의된 옵션 이름 |
+| --- |
+| **진입 소스:** [prepare_dataset.py](../../7%EC%B0%A8/prepare_dataset.py)<br>**정의된 옵션 이름:** `--prepare`, `--smoke` |
+| **진입 소스:** [worker.py](../../7%EC%B0%A8/worker.py)<br>**정의된 옵션 이름:** `--action`, `--params`, `--worker` |
 
 각 옵션의 기본값·필수값·부작용은 해당 main과 인자 정의를 함께 확인합니다.
 
@@ -1926,9 +1982,9 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 ### [prepare_dataset.py](../../7%EC%B0%A8/prepare_dataset.py)
 
-| 정의 | 소스에 적힌 역할 |
-|---|---|
-| [`_DownloadRetry`](../../7%EC%B0%A8/prepare_dataset.py#L234) | 통신 경계에서 확인한 일시 오류만 재시도 경로로 전달합니다. |
+| 정의 · 소스에 적힌 역할 |
+| --- |
+| **정의:** [`_DownloadRetry`](../../7%EC%B0%A8/prepare_dataset.py#L234)<br>**소스에 적힌 역할:** 통신 경계에서 확인한 일시 오류만 재시도 경로로 전달합니다. |
 
 **설정·옵션:** [`--prepare`](../../7%EC%B0%A8/prepare_dataset.py#L796)
 
@@ -2240,9 +2296,9 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 ### [verify_sources.py](../../7%EC%B0%A8/verify_sources.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`ROOT`](../../7%EC%B0%A8/verify_sources.py#L6) | `정의=Path(__file__).resolve().parent` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`ROOT`](../../7%EC%B0%A8/verify_sources.py#L6)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
 
 **거부 조건:** [`config['download_limit_bytes']!=100*1024**3 or config['minimum_disk_free_bytes']!=100*1024**3`](../../7%EC%B0%A8/verify_sources.py#L23)
 
@@ -2256,10 +2312,10 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 ### [worker.py](../../7%EC%B0%A8/worker.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`--action`](../../7%EC%B0%A8/worker.py#L210) | `choices=['train', 'status']` |
-| [`--params`](../../7%EC%B0%A8/worker.py#L211) | `default='{}'` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`--action`](../../7%EC%B0%A8/worker.py#L210)<br>**코드의 선언:** `choices=['train', 'status']` |
+| **설정·옵션:** [`--params`](../../7%EC%B0%A8/worker.py#L211)<br>**코드의 선언:** `default='{}'` |
 | [`--worker`](../../7%EC%B0%A8/worker.py#L212) | `` |
 | [`ROOT`](../../7%EC%B0%A8/worker.py#L15) | `정의=Path(__file__).resolve().parent` |
 | [`WORK`](../../7%EC%B0%A8/worker.py#L16) | `정의=ROOT / 'work'` |
@@ -2307,11 +2363,18 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 <a name="️-제약과-문제-해결"></a>
 ## 제약과 문제 해결
 
-| 상황 | 확인할 내용 |
-|---|---|
-| 학습 또는 화면이 시작되지 않음 | 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다. |
-| 원본 계약 검사 실패 | 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다. |
-| 지표 해석이 어려움 | 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다. |
+**상황:** 학습 또는 화면이 시작되지 않음
+
+**확인할 내용:** 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다.
+
+**상황:** 원본 계약 검사 실패
+
+**확인할 내용:** 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다.
+
+**상황:** 지표 해석이 어려움
+
+**확인할 내용:** 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다.
+
 
 <a name="changes"></a>
 

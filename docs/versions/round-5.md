@@ -42,13 +42,13 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 
 #### LEVEL 1 · 소스에서 제공하는 CLI 옵션
 
-| 진입 소스 | 정의된 옵션 이름 |
-|---|---|
-| [build_exe.py](../../5%EC%B0%A8/build_exe.py) | `--build` |
-| [gpu_worker.py](../../5%EC%B0%A8/gpu_worker.py) | `--action`, `--params`, `--worker` |
-| [launcher.py](../../5%EC%B0%A8/launcher.py) | `--no-browser`, `--port`, `--self-test`, `--hidden` |
-| [pipeline.py](../../5%EC%B0%A8/pipeline.py) | `--action`, `--params` |
-| [prepare_training.py](../../5%EC%B0%A8/prepare_training.py) | `--prepare` |
+| 진입 소스 · 정의된 옵션 이름 |
+| --- |
+| **진입 소스:** [build_exe.py](../../5%EC%B0%A8/build_exe.py)<br>**정의된 옵션 이름:** `--build` |
+| **진입 소스:** [gpu_worker.py](../../5%EC%B0%A8/gpu_worker.py)<br>**정의된 옵션 이름:** `--action`, `--params`, `--worker` |
+| **진입 소스:** [launcher.py](../../5%EC%B0%A8/launcher.py)<br>**정의된 옵션 이름:** `--no-browser`, `--port`, `--self-test`, `--hidden` |
+| **진입 소스:** [pipeline.py](../../5%EC%B0%A8/pipeline.py)<br>**정의된 옵션 이름:** `--action`, `--params` |
+| **진입 소스:** [prepare_training.py](../../5%EC%B0%A8/prepare_training.py)<br>**정의된 옵션 이름:** `--prepare` |
 
 각 옵션의 기본값·필수값·부작용은 해당 main과 인자 정의를 함께 확인합니다.
 
@@ -61,13 +61,13 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 #### LEVEL 1 · [build_exe.py](../../5%EC%B0%A8/build_exe.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`--build`](../../5%EC%B0%A8/build_exe.py#L13) | `action='store_true'; help='확인만 하지 않고 실제 EXE를 빌드합니다.'` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`--build`](../../5%EC%B0%A8/build_exe.py#L13)<br>**코드의 선언:** `action='store_true'; help='확인만 하지 않고 실제 EXE를 빌드합니다.'` |
 
-| 거부 조건 | 오류 메시지 |
-|---|---|
-| [`not available`](../../5%EC%B0%A8/build_exe.py#L19) | 빌드하려면 별도로 PyInstaller를 준비해야 합니다. 자동 설치하지 않습니다. |
+| 거부 조건 · 오류 메시지 |
+| --- |
+| **거부 조건:** [`not available`](../../5%EC%B0%A8/build_exe.py#L19)<br>**오류 메시지:** 빌드하려면 별도로 PyInstaller를 준비해야 합니다. 자동 설치하지 않습니다. |
 
 #### LEVEL 1 · [dashboard.py](../../5%EC%B0%A8/dashboard.py)
 
@@ -242,16 +242,16 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 #### LEVEL 1 · [launcher.py](../../5%EC%B0%A8/launcher.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`--no-browser`](../../5%EC%B0%A8/launcher.py#L55) | `action='store_true'` |
-| [`--port`](../../5%EC%B0%A8/launcher.py#L56) | `type=int; default=0` |
-| [`--self-test`](../../5%EC%B0%A8/launcher.py#L57) | `action='store_true'` |
-| [`--hidden`](../../5%EC%B0%A8/launcher.py#L58) | `action='store_true'` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`--no-browser`](../../5%EC%B0%A8/launcher.py#L55)<br>**코드의 선언:** `action='store_true'` |
+| **설정·옵션:** [`--port`](../../5%EC%B0%A8/launcher.py#L56)<br>**코드의 선언:** `type=int; default=0` |
+| **설정·옵션:** [`--self-test`](../../5%EC%B0%A8/launcher.py#L57)<br>**코드의 선언:** `action='store_true'` |
+| **설정·옵션:** [`--hidden`](../../5%EC%B0%A8/launcher.py#L58)<br>**코드의 선언:** `action='store_true'` |
 
-| 거부 조건 | 오류 메시지 |
-|---|---|
-| [`response.status != 200`](../../5%EC%B0%A8/launcher.py#L20) | 루프백 상태 검사에 실패했습니다. |
+| 거부 조건 · 오류 메시지 |
+| --- |
+| **거부 조건:** [`response.status != 200`](../../5%EC%B0%A8/launcher.py#L20)<br>**오류 메시지:** 루프백 상태 검사에 실패했습니다. |
 
 #### LEVEL 1 · [pipeline.py](../../5%EC%B0%A8/pipeline.py)
 
@@ -325,16 +325,16 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 #### LEVEL 1 · [prepare_training.py](../../5%EC%B0%A8/prepare_training.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`--prepare`](../../5%EC%B0%A8/prepare_training.py#L552) | `action="store_true"; required=True` |
-| [`ROOT`](../../5%EC%B0%A8/prepare_training.py#L22) | `정의=Path(__file__).resolve().parent` |
-| [`ARCHIVE`](../../5%EC%B0%A8/prepare_training.py#L23) | `정의=ROOT.parent / "이전 도커 실험/3차실험/trash_round3"` |
-| [`TRAINING`](../../5%EC%B0%A8/prepare_training.py#L24) | `정의=ROOT / "work/training"` |
-| [`SEED`](../../5%EC%B0%A8/prepare_training.py#L25) | `정의=20261028` |
-| [`MAX_BYTES`](../../5%EC%B0%A8/prepare_training.py#L26) | `정의=20 * 1024 ** 3` |
-| [`STREET_SIZE`](../../5%EC%B0%A8/prepare_training.py#L28) | `정의=13728630001` |
-| [`_ERROR_LOCK`](../../5%EC%B0%A8/prepare_training.py#L29) | `정의=threading.Lock()` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`--prepare`](../../5%EC%B0%A8/prepare_training.py#L552)<br>**코드의 선언:** `action="store_true"; required=True` |
+| **설정·옵션:** [`ROOT`](../../5%EC%B0%A8/prepare_training.py#L22)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
+| **설정·옵션:** [`ARCHIVE`](../../5%EC%B0%A8/prepare_training.py#L23)<br>**코드의 선언:** `정의=ROOT.parent / "이전 도커 실험/3차실험/trash_round3"` |
+| **설정·옵션:** [`TRAINING`](../../5%EC%B0%A8/prepare_training.py#L24)<br>**코드의 선언:** `정의=ROOT / "work/training"` |
+| **설정·옵션:** [`SEED`](../../5%EC%B0%A8/prepare_training.py#L25)<br>**코드의 선언:** `정의=20261028` |
+| **설정·옵션:** [`MAX_BYTES`](../../5%EC%B0%A8/prepare_training.py#L26)<br>**코드의 선언:** `정의=20 * 1024 ** 3` |
+| **설정·옵션:** [`STREET_SIZE`](../../5%EC%B0%A8/prepare_training.py#L28)<br>**코드의 선언:** `정의=13728630001` |
+| **설정·옵션:** [`_ERROR_LOCK`](../../5%EC%B0%A8/prepare_training.py#L29)<br>**코드의 선언:** `정의=threading.Lock()` |
 
 **거부 조건:** [`not all(math.isfinite(n) and n &gt; 0 for n in (width, height))`](../../5%EC%B0%A8/prepare_training.py#L72)
 
@@ -525,11 +525,18 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 
 precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함께 읽습니다. 객체 탐지, 영상 사건 후보, 실제 투기 행위 판단은 다른 평가 대상입니다. 목표 90%와 완료된 시험 성적을 구분합니다.
 
-| 상황 | 확인할 내용 |
-|---|---|
-| 학습 또는 화면이 시작되지 않음 | 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다. |
-| 원본 계약 검사 실패 | 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다. |
-| 지표 해석이 어려움 | 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다. |
+**상황:** 학습 또는 화면이 시작되지 않음
+
+**확인할 내용:** 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다.
+
+**상황:** 원본 계약 검사 실패
+
+**확인할 내용:** 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다.
+
+**상황:** 지표 해석이 어려움
+
+**확인할 내용:** 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다.
+
 
 [자료 폴더](../../5%EC%B0%A8) · [직전 비교·자료 범위](../comparisons/final-to-5.md) · [이 차수의 원래 전체 상세](#reading-level-5)
 
@@ -544,11 +551,18 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 
 ### LEVEL 2 · 입력에서 출력으로
 
-| 단계 | 내용 |
-|---|---|
-| 입력 | 쓰레기 영상·라벨·모델·선택한 차수 설정 |
-| 처리 | 자료 준비·모델/영상 처리·평가 또는 상태 표시 |
-| 출력 | 탐지 후보·평가 지표·화면·보고서 |
+**단계:** 입력
+
+**내용:** 쓰레기 영상·라벨·모델·선택한 차수 설정
+
+**단계:** 처리
+
+**내용:** 자료 준비·모델/영상 처리·평가 또는 상태 표시
+
+**단계:** 출력
+
+**내용:** 탐지 후보·평가 지표·화면·보고서
+
 
 입력·처리·출력은 위의 같은 자료 흐름을 다른 단계에서 읽는 기준입니다. 처리 조건과 출력의 의미를 함께 확인합니다.
 
@@ -565,13 +579,13 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 
 #### LEVEL 2 · 소스에서 제공하는 CLI 옵션
 
-| 진입 소스 | 정의된 옵션 이름 |
-|---|---|
-| [build_exe.py](../../5%EC%B0%A8/build_exe.py) | `--build` |
-| [gpu_worker.py](../../5%EC%B0%A8/gpu_worker.py) | `--action`, `--params`, `--worker` |
-| [launcher.py](../../5%EC%B0%A8/launcher.py) | `--no-browser`, `--port`, `--self-test`, `--hidden` |
-| [pipeline.py](../../5%EC%B0%A8/pipeline.py) | `--action`, `--params` |
-| [prepare_training.py](../../5%EC%B0%A8/prepare_training.py) | `--prepare` |
+| 진입 소스 · 정의된 옵션 이름 |
+| --- |
+| **진입 소스:** [build_exe.py](../../5%EC%B0%A8/build_exe.py)<br>**정의된 옵션 이름:** `--build` |
+| **진입 소스:** [gpu_worker.py](../../5%EC%B0%A8/gpu_worker.py)<br>**정의된 옵션 이름:** `--action`, `--params`, `--worker` |
+| **진입 소스:** [launcher.py](../../5%EC%B0%A8/launcher.py)<br>**정의된 옵션 이름:** `--no-browser`, `--port`, `--self-test`, `--hidden` |
+| **진입 소스:** [pipeline.py](../../5%EC%B0%A8/pipeline.py)<br>**정의된 옵션 이름:** `--action`, `--params` |
+| **진입 소스:** [prepare_training.py](../../5%EC%B0%A8/prepare_training.py)<br>**정의된 옵션 이름:** `--prepare` |
 
 각 옵션의 기본값·필수값·부작용은 해당 main과 인자 정의를 함께 확인합니다.
 
@@ -584,13 +598,13 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 #### LEVEL 2 · [build_exe.py](../../5%EC%B0%A8/build_exe.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`--build`](../../5%EC%B0%A8/build_exe.py#L13) | `action='store_true'; help='확인만 하지 않고 실제 EXE를 빌드합니다.'` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`--build`](../../5%EC%B0%A8/build_exe.py#L13)<br>**코드의 선언:** `action='store_true'; help='확인만 하지 않고 실제 EXE를 빌드합니다.'` |
 
-| 거부 조건 | 오류 메시지 |
-|---|---|
-| [`not available`](../../5%EC%B0%A8/build_exe.py#L19) | 빌드하려면 별도로 PyInstaller를 준비해야 합니다. 자동 설치하지 않습니다. |
+| 거부 조건 · 오류 메시지 |
+| --- |
+| **거부 조건:** [`not available`](../../5%EC%B0%A8/build_exe.py#L19)<br>**오류 메시지:** 빌드하려면 별도로 PyInstaller를 준비해야 합니다. 자동 설치하지 않습니다. |
 
 #### LEVEL 2 · [dashboard.py](../../5%EC%B0%A8/dashboard.py)
 
@@ -765,16 +779,16 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 #### LEVEL 2 · [launcher.py](../../5%EC%B0%A8/launcher.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`--no-browser`](../../5%EC%B0%A8/launcher.py#L55) | `action='store_true'` |
-| [`--port`](../../5%EC%B0%A8/launcher.py#L56) | `type=int; default=0` |
-| [`--self-test`](../../5%EC%B0%A8/launcher.py#L57) | `action='store_true'` |
-| [`--hidden`](../../5%EC%B0%A8/launcher.py#L58) | `action='store_true'` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`--no-browser`](../../5%EC%B0%A8/launcher.py#L55)<br>**코드의 선언:** `action='store_true'` |
+| **설정·옵션:** [`--port`](../../5%EC%B0%A8/launcher.py#L56)<br>**코드의 선언:** `type=int; default=0` |
+| **설정·옵션:** [`--self-test`](../../5%EC%B0%A8/launcher.py#L57)<br>**코드의 선언:** `action='store_true'` |
+| **설정·옵션:** [`--hidden`](../../5%EC%B0%A8/launcher.py#L58)<br>**코드의 선언:** `action='store_true'` |
 
-| 거부 조건 | 오류 메시지 |
-|---|---|
-| [`response.status != 200`](../../5%EC%B0%A8/launcher.py#L20) | 루프백 상태 검사에 실패했습니다. |
+| 거부 조건 · 오류 메시지 |
+| --- |
+| **거부 조건:** [`response.status != 200`](../../5%EC%B0%A8/launcher.py#L20)<br>**오류 메시지:** 루프백 상태 검사에 실패했습니다. |
 
 #### LEVEL 2 · [pipeline.py](../../5%EC%B0%A8/pipeline.py)
 
@@ -848,16 +862,16 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 #### LEVEL 2 · [prepare_training.py](../../5%EC%B0%A8/prepare_training.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`--prepare`](../../5%EC%B0%A8/prepare_training.py#L552) | `action="store_true"; required=True` |
-| [`ROOT`](../../5%EC%B0%A8/prepare_training.py#L22) | `정의=Path(__file__).resolve().parent` |
-| [`ARCHIVE`](../../5%EC%B0%A8/prepare_training.py#L23) | `정의=ROOT.parent / "이전 도커 실험/3차실험/trash_round3"` |
-| [`TRAINING`](../../5%EC%B0%A8/prepare_training.py#L24) | `정의=ROOT / "work/training"` |
-| [`SEED`](../../5%EC%B0%A8/prepare_training.py#L25) | `정의=20261028` |
-| [`MAX_BYTES`](../../5%EC%B0%A8/prepare_training.py#L26) | `정의=20 * 1024 ** 3` |
-| [`STREET_SIZE`](../../5%EC%B0%A8/prepare_training.py#L28) | `정의=13728630001` |
-| [`_ERROR_LOCK`](../../5%EC%B0%A8/prepare_training.py#L29) | `정의=threading.Lock()` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`--prepare`](../../5%EC%B0%A8/prepare_training.py#L552)<br>**코드의 선언:** `action="store_true"; required=True` |
+| **설정·옵션:** [`ROOT`](../../5%EC%B0%A8/prepare_training.py#L22)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
+| **설정·옵션:** [`ARCHIVE`](../../5%EC%B0%A8/prepare_training.py#L23)<br>**코드의 선언:** `정의=ROOT.parent / "이전 도커 실험/3차실험/trash_round3"` |
+| **설정·옵션:** [`TRAINING`](../../5%EC%B0%A8/prepare_training.py#L24)<br>**코드의 선언:** `정의=ROOT / "work/training"` |
+| **설정·옵션:** [`SEED`](../../5%EC%B0%A8/prepare_training.py#L25)<br>**코드의 선언:** `정의=20261028` |
+| **설정·옵션:** [`MAX_BYTES`](../../5%EC%B0%A8/prepare_training.py#L26)<br>**코드의 선언:** `정의=20 * 1024 ** 3` |
+| **설정·옵션:** [`STREET_SIZE`](../../5%EC%B0%A8/prepare_training.py#L28)<br>**코드의 선언:** `정의=13728630001` |
+| **설정·옵션:** [`_ERROR_LOCK`](../../5%EC%B0%A8/prepare_training.py#L29)<br>**코드의 선언:** `정의=threading.Lock()` |
 
 **거부 조건:** [`not all(math.isfinite(n) and n &gt; 0 for n in (width, height))`](../../5%EC%B0%A8/prepare_training.py#L72)
 
@@ -1043,11 +1057,18 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 
 precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함께 읽습니다. 객체 탐지, 영상 사건 후보, 실제 투기 행위 판단은 다른 평가 대상입니다. 목표 90%와 완료된 시험 성적을 구분합니다.
 
-| 상황 | 확인할 내용 |
-|---|---|
-| 학습 또는 화면이 시작되지 않음 | 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다. |
-| 원본 계약 검사 실패 | 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다. |
-| 지표 해석이 어려움 | 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다. |
+**상황:** 학습 또는 화면이 시작되지 않음
+
+**확인할 내용:** 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다.
+
+**상황:** 원본 계약 검사 실패
+
+**확인할 내용:** 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다.
+
+**상황:** 지표 해석이 어려움
+
+**확인할 내용:** 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다.
+
 
 [자료 폴더](../../5%EC%B0%A8) · [직전 비교·자료 범위](../comparisons/final-to-5.md) · [이 차수의 원래 전체 상세](#reading-level-5)
 
@@ -1064,13 +1085,13 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 
 #### LEVEL 3 · 소스에서 제공하는 CLI 옵션
 
-| 진입 소스 | 정의된 옵션 이름 |
-|---|---|
-| [build_exe.py](../../5%EC%B0%A8/build_exe.py) | `--build` |
-| [gpu_worker.py](../../5%EC%B0%A8/gpu_worker.py) | `--action`, `--params`, `--worker` |
-| [launcher.py](../../5%EC%B0%A8/launcher.py) | `--no-browser`, `--port`, `--self-test`, `--hidden` |
-| [pipeline.py](../../5%EC%B0%A8/pipeline.py) | `--action`, `--params` |
-| [prepare_training.py](../../5%EC%B0%A8/prepare_training.py) | `--prepare` |
+| 진입 소스 · 정의된 옵션 이름 |
+| --- |
+| **진입 소스:** [build_exe.py](../../5%EC%B0%A8/build_exe.py)<br>**정의된 옵션 이름:** `--build` |
+| **진입 소스:** [gpu_worker.py](../../5%EC%B0%A8/gpu_worker.py)<br>**정의된 옵션 이름:** `--action`, `--params`, `--worker` |
+| **진입 소스:** [launcher.py](../../5%EC%B0%A8/launcher.py)<br>**정의된 옵션 이름:** `--no-browser`, `--port`, `--self-test`, `--hidden` |
+| **진입 소스:** [pipeline.py](../../5%EC%B0%A8/pipeline.py)<br>**정의된 옵션 이름:** `--action`, `--params` |
+| **진입 소스:** [prepare_training.py](../../5%EC%B0%A8/prepare_training.py)<br>**정의된 옵션 이름:** `--prepare` |
 
 각 옵션의 기본값·필수값·부작용은 해당 main과 인자 정의를 함께 확인합니다.
 
@@ -1083,13 +1104,13 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 #### LEVEL 3 · [build_exe.py](../../5%EC%B0%A8/build_exe.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`--build`](../../5%EC%B0%A8/build_exe.py#L13) | `action='store_true'; help='확인만 하지 않고 실제 EXE를 빌드합니다.'` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`--build`](../../5%EC%B0%A8/build_exe.py#L13)<br>**코드의 선언:** `action='store_true'; help='확인만 하지 않고 실제 EXE를 빌드합니다.'` |
 
-| 거부 조건 | 오류 메시지 |
-|---|---|
-| [`not available`](../../5%EC%B0%A8/build_exe.py#L19) | 빌드하려면 별도로 PyInstaller를 준비해야 합니다. 자동 설치하지 않습니다. |
+| 거부 조건 · 오류 메시지 |
+| --- |
+| **거부 조건:** [`not available`](../../5%EC%B0%A8/build_exe.py#L19)<br>**오류 메시지:** 빌드하려면 별도로 PyInstaller를 준비해야 합니다. 자동 설치하지 않습니다. |
 
 #### LEVEL 3 · [dashboard.py](../../5%EC%B0%A8/dashboard.py)
 
@@ -1264,16 +1285,16 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 #### LEVEL 3 · [launcher.py](../../5%EC%B0%A8/launcher.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`--no-browser`](../../5%EC%B0%A8/launcher.py#L55) | `action='store_true'` |
-| [`--port`](../../5%EC%B0%A8/launcher.py#L56) | `type=int; default=0` |
-| [`--self-test`](../../5%EC%B0%A8/launcher.py#L57) | `action='store_true'` |
-| [`--hidden`](../../5%EC%B0%A8/launcher.py#L58) | `action='store_true'` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`--no-browser`](../../5%EC%B0%A8/launcher.py#L55)<br>**코드의 선언:** `action='store_true'` |
+| **설정·옵션:** [`--port`](../../5%EC%B0%A8/launcher.py#L56)<br>**코드의 선언:** `type=int; default=0` |
+| **설정·옵션:** [`--self-test`](../../5%EC%B0%A8/launcher.py#L57)<br>**코드의 선언:** `action='store_true'` |
+| **설정·옵션:** [`--hidden`](../../5%EC%B0%A8/launcher.py#L58)<br>**코드의 선언:** `action='store_true'` |
 
-| 거부 조건 | 오류 메시지 |
-|---|---|
-| [`response.status != 200`](../../5%EC%B0%A8/launcher.py#L20) | 루프백 상태 검사에 실패했습니다. |
+| 거부 조건 · 오류 메시지 |
+| --- |
+| **거부 조건:** [`response.status != 200`](../../5%EC%B0%A8/launcher.py#L20)<br>**오류 메시지:** 루프백 상태 검사에 실패했습니다. |
 
 #### LEVEL 3 · [pipeline.py](../../5%EC%B0%A8/pipeline.py)
 
@@ -1347,16 +1368,16 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 #### LEVEL 3 · [prepare_training.py](../../5%EC%B0%A8/prepare_training.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`--prepare`](../../5%EC%B0%A8/prepare_training.py#L552) | `action="store_true"; required=True` |
-| [`ROOT`](../../5%EC%B0%A8/prepare_training.py#L22) | `정의=Path(__file__).resolve().parent` |
-| [`ARCHIVE`](../../5%EC%B0%A8/prepare_training.py#L23) | `정의=ROOT.parent / "이전 도커 실험/3차실험/trash_round3"` |
-| [`TRAINING`](../../5%EC%B0%A8/prepare_training.py#L24) | `정의=ROOT / "work/training"` |
-| [`SEED`](../../5%EC%B0%A8/prepare_training.py#L25) | `정의=20261028` |
-| [`MAX_BYTES`](../../5%EC%B0%A8/prepare_training.py#L26) | `정의=20 * 1024 ** 3` |
-| [`STREET_SIZE`](../../5%EC%B0%A8/prepare_training.py#L28) | `정의=13728630001` |
-| [`_ERROR_LOCK`](../../5%EC%B0%A8/prepare_training.py#L29) | `정의=threading.Lock()` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`--prepare`](../../5%EC%B0%A8/prepare_training.py#L552)<br>**코드의 선언:** `action="store_true"; required=True` |
+| **설정·옵션:** [`ROOT`](../../5%EC%B0%A8/prepare_training.py#L22)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
+| **설정·옵션:** [`ARCHIVE`](../../5%EC%B0%A8/prepare_training.py#L23)<br>**코드의 선언:** `정의=ROOT.parent / "이전 도커 실험/3차실험/trash_round3"` |
+| **설정·옵션:** [`TRAINING`](../../5%EC%B0%A8/prepare_training.py#L24)<br>**코드의 선언:** `정의=ROOT / "work/training"` |
+| **설정·옵션:** [`SEED`](../../5%EC%B0%A8/prepare_training.py#L25)<br>**코드의 선언:** `정의=20261028` |
+| **설정·옵션:** [`MAX_BYTES`](../../5%EC%B0%A8/prepare_training.py#L26)<br>**코드의 선언:** `정의=20 * 1024 ** 3` |
+| **설정·옵션:** [`STREET_SIZE`](../../5%EC%B0%A8/prepare_training.py#L28)<br>**코드의 선언:** `정의=13728630001` |
+| **설정·옵션:** [`_ERROR_LOCK`](../../5%EC%B0%A8/prepare_training.py#L29)<br>**코드의 선언:** `정의=threading.Lock()` |
 
 **거부 조건:** [`not all(math.isfinite(n) and n &gt; 0 for n in (width, height))`](../../5%EC%B0%A8/prepare_training.py#L72)
 
@@ -1545,21 +1566,35 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 3. 해당 차수의 실행 안내에 따라 처리하거나 이미 생성된 결과를 읽습니다.
 4. 결과의 자료 출처·분할·선택 정책·측정 범위를 함께 확인합니다.
 
-| 단계 | 내용 |
-|---|---|
-| 입력 | 쓰레기 영상·라벨·모델·선택한 차수 설정 |
-| 처리 | 자료 준비·모델/영상 처리·평가 또는 상태 표시 |
-| 출력 | 탐지 후보·평가 지표·화면·보고서 |
+**단계:** 입력
+
+**내용:** 쓰레기 영상·라벨·모델·선택한 차수 설정
+
+**단계:** 처리
+
+**내용:** 자료 준비·모델/영상 처리·평가 또는 상태 표시
+
+**단계:** 출력
+
+**내용:** 탐지 후보·평가 지표·화면·보고서
+
 
 ### LEVEL 3 · 결과와 실패를 확인하기
 
 precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함께 읽습니다. 객체 탐지, 영상 사건 후보, 실제 투기 행위 판단은 다른 평가 대상입니다. 목표 90%와 완료된 시험 성적을 구분합니다.
 
-| 상황 | 확인할 내용 |
-|---|---|
-| 학습 또는 화면이 시작되지 않음 | 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다. |
-| 원본 계약 검사 실패 | 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다. |
-| 지표 해석이 어려움 | 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다. |
+**상황:** 학습 또는 화면이 시작되지 않음
+
+**확인할 내용:** 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다.
+
+**상황:** 원본 계약 검사 실패
+
+**확인할 내용:** 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다.
+
+**상황:** 지표 해석이 어려움
+
+**확인할 내용:** 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다.
+
 
 ### LEVEL 3 · 실행 전 대조할 차수 조건
 
@@ -1578,23 +1613,30 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 
 ### LEVEL 4 · 이 차수 구현의 실제 근거
 
-| 파일 | 원문에 정의된 역할·구성 |
-|---|---|
-| [build_exe.py](../../5%EC%B0%A8/build_exe.py) | PyInstaller 의존성 확인과 사용자가 선택한 빌드를 수행합니다. |
-| [dashboard.py](../../5%EC%B0%A8/dashboard.py) | Codex와 독립 실행되는 루프백 전용 대시보드입니다. |
-| [gpu_worker.py](../../5%EC%B0%A8/gpu_worker.py) | 기존 GPU 환경에서 탐지와 학습을 독립 프로세스로 실행합니다. |
-| [launcher.py](../../5%EC%B0%A8/launcher.py) | 독립 대시보드 실행기입니다. 학습은 자동 시작하지 않습니다. |
-| [pipeline.py](../../5%EC%B0%A8/pipeline.py) | D 드라이브의 앱과 기존 GPU 컨테이너를 연결합니다. |
-| [prepare_training.py](../../5%EC%B0%A8/prepare_training.py) | 출처와 고정 평가 자료를 보존하며 추가 학습 데이터를 준비합니다. |
-| [train_pipeline.py](../../5%EC%B0%A8/train_pipeline.py) | 검증에서 기존 모델과 추가 학습 모델을 비교하고 고정 테스트를 한 번 평가합니다. |
-| [verify_sources.py](../../5%EC%B0%A8/verify_sources.py) | 소스의 UTF-8·문법과 납품 파일 존재를 검사합니다. |
-| [tests/test_dashboard.py](../../5%EC%B0%A8/tests/test_dashboard.py) | 실제 HTTP 경계와 파이프라인 오류 전달을 검사합니다. |
+| 파일 · 원문에 정의된 역할·구성 |
+| --- |
+| **파일:** [build_exe.py](../../5%EC%B0%A8/build_exe.py)<br>**원문에 정의된 역할·구성:** PyInstaller 의존성 확인과 사용자가 선택한 빌드를 수행합니다. |
+| **파일:** [dashboard.py](../../5%EC%B0%A8/dashboard.py)<br>**원문에 정의된 역할·구성:** Codex와 독립 실행되는 루프백 전용 대시보드입니다. |
+| **파일:** [gpu_worker.py](../../5%EC%B0%A8/gpu_worker.py)<br>**원문에 정의된 역할·구성:** 기존 GPU 환경에서 탐지와 학습을 독립 프로세스로 실행합니다. |
+| **파일:** [launcher.py](../../5%EC%B0%A8/launcher.py)<br>**원문에 정의된 역할·구성:** 독립 대시보드 실행기입니다. 학습은 자동 시작하지 않습니다. |
+| **파일:** [pipeline.py](../../5%EC%B0%A8/pipeline.py)<br>**원문에 정의된 역할·구성:** D 드라이브의 앱과 기존 GPU 컨테이너를 연결합니다. |
+| **파일:** [prepare_training.py](../../5%EC%B0%A8/prepare_training.py)<br>**원문에 정의된 역할·구성:** 출처와 고정 평가 자료를 보존하며 추가 학습 데이터를 준비합니다. |
+| **파일:** [train_pipeline.py](../../5%EC%B0%A8/train_pipeline.py)<br>**원문에 정의된 역할·구성:** 검증에서 기존 모델과 추가 학습 모델을 비교하고 고정 테스트를 한 번 평가합니다. |
+| **파일:** [verify_sources.py](../../5%EC%B0%A8/verify_sources.py)<br>**원문에 정의된 역할·구성:** 소스의 UTF-8·문법과 납품 파일 존재를 검사합니다. |
+| **파일:** [tests/test_dashboard.py](../../5%EC%B0%A8/tests/test_dashboard.py)<br>**원문에 정의된 역할·구성:** 실제 HTTP 경계와 파이프라인 오류 전달을 검사합니다. |
 
-| 단계 | 내용 |
-|---|---|
-| 입력 | 쓰레기 영상·라벨·모델·선택한 차수 설정 |
-| 처리 | 자료 준비·모델/영상 처리·평가 또는 상태 표시 |
-| 출력 | 탐지 후보·평가 지표·화면·보고서 |
+**단계:** 입력
+
+**내용:** 쓰레기 영상·라벨·모델·선택한 차수 설정
+
+**단계:** 처리
+
+**내용:** 자료 준비·모델/영상 처리·평가 또는 상태 표시
+
+**단계:** 출력
+
+**내용:** 탐지 후보·평가 지표·화면·보고서
+
 
 ### LEVEL 4 · 조건·변경·결과를 함께 검토하기
 
@@ -1604,13 +1646,13 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 
 #### LEVEL 4 · 소스에서 제공하는 CLI 옵션
 
-| 진입 소스 | 정의된 옵션 이름 |
-|---|---|
-| [build_exe.py](../../5%EC%B0%A8/build_exe.py) | `--build` |
-| [gpu_worker.py](../../5%EC%B0%A8/gpu_worker.py) | `--action`, `--params`, `--worker` |
-| [launcher.py](../../5%EC%B0%A8/launcher.py) | `--no-browser`, `--port`, `--self-test`, `--hidden` |
-| [pipeline.py](../../5%EC%B0%A8/pipeline.py) | `--action`, `--params` |
-| [prepare_training.py](../../5%EC%B0%A8/prepare_training.py) | `--prepare` |
+| 진입 소스 · 정의된 옵션 이름 |
+| --- |
+| **진입 소스:** [build_exe.py](../../5%EC%B0%A8/build_exe.py)<br>**정의된 옵션 이름:** `--build` |
+| **진입 소스:** [gpu_worker.py](../../5%EC%B0%A8/gpu_worker.py)<br>**정의된 옵션 이름:** `--action`, `--params`, `--worker` |
+| **진입 소스:** [launcher.py](../../5%EC%B0%A8/launcher.py)<br>**정의된 옵션 이름:** `--no-browser`, `--port`, `--self-test`, `--hidden` |
+| **진입 소스:** [pipeline.py](../../5%EC%B0%A8/pipeline.py)<br>**정의된 옵션 이름:** `--action`, `--params` |
+| **진입 소스:** [prepare_training.py](../../5%EC%B0%A8/prepare_training.py)<br>**정의된 옵션 이름:** `--prepare` |
 
 각 옵션의 기본값·필수값·부작용은 해당 main과 인자 정의를 함께 확인합니다.
 
@@ -1623,13 +1665,13 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 #### LEVEL 4 · [build_exe.py](../../5%EC%B0%A8/build_exe.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`--build`](../../5%EC%B0%A8/build_exe.py#L13) | `action='store_true'; help='확인만 하지 않고 실제 EXE를 빌드합니다.'` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`--build`](../../5%EC%B0%A8/build_exe.py#L13)<br>**코드의 선언:** `action='store_true'; help='확인만 하지 않고 실제 EXE를 빌드합니다.'` |
 
-| 거부 조건 | 오류 메시지 |
-|---|---|
-| [`not available`](../../5%EC%B0%A8/build_exe.py#L19) | 빌드하려면 별도로 PyInstaller를 준비해야 합니다. 자동 설치하지 않습니다. |
+| 거부 조건 · 오류 메시지 |
+| --- |
+| **거부 조건:** [`not available`](../../5%EC%B0%A8/build_exe.py#L19)<br>**오류 메시지:** 빌드하려면 별도로 PyInstaller를 준비해야 합니다. 자동 설치하지 않습니다. |
 
 #### LEVEL 4 · [dashboard.py](../../5%EC%B0%A8/dashboard.py)
 
@@ -1804,16 +1846,16 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 #### LEVEL 4 · [launcher.py](../../5%EC%B0%A8/launcher.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`--no-browser`](../../5%EC%B0%A8/launcher.py#L55) | `action='store_true'` |
-| [`--port`](../../5%EC%B0%A8/launcher.py#L56) | `type=int; default=0` |
-| [`--self-test`](../../5%EC%B0%A8/launcher.py#L57) | `action='store_true'` |
-| [`--hidden`](../../5%EC%B0%A8/launcher.py#L58) | `action='store_true'` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`--no-browser`](../../5%EC%B0%A8/launcher.py#L55)<br>**코드의 선언:** `action='store_true'` |
+| **설정·옵션:** [`--port`](../../5%EC%B0%A8/launcher.py#L56)<br>**코드의 선언:** `type=int; default=0` |
+| **설정·옵션:** [`--self-test`](../../5%EC%B0%A8/launcher.py#L57)<br>**코드의 선언:** `action='store_true'` |
+| **설정·옵션:** [`--hidden`](../../5%EC%B0%A8/launcher.py#L58)<br>**코드의 선언:** `action='store_true'` |
 
-| 거부 조건 | 오류 메시지 |
-|---|---|
-| [`response.status != 200`](../../5%EC%B0%A8/launcher.py#L20) | 루프백 상태 검사에 실패했습니다. |
+| 거부 조건 · 오류 메시지 |
+| --- |
+| **거부 조건:** [`response.status != 200`](../../5%EC%B0%A8/launcher.py#L20)<br>**오류 메시지:** 루프백 상태 검사에 실패했습니다. |
 
 #### LEVEL 4 · [pipeline.py](../../5%EC%B0%A8/pipeline.py)
 
@@ -1887,16 +1929,16 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 #### LEVEL 4 · [prepare_training.py](../../5%EC%B0%A8/prepare_training.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`--prepare`](../../5%EC%B0%A8/prepare_training.py#L552) | `action="store_true"; required=True` |
-| [`ROOT`](../../5%EC%B0%A8/prepare_training.py#L22) | `정의=Path(__file__).resolve().parent` |
-| [`ARCHIVE`](../../5%EC%B0%A8/prepare_training.py#L23) | `정의=ROOT.parent / "이전 도커 실험/3차실험/trash_round3"` |
-| [`TRAINING`](../../5%EC%B0%A8/prepare_training.py#L24) | `정의=ROOT / "work/training"` |
-| [`SEED`](../../5%EC%B0%A8/prepare_training.py#L25) | `정의=20261028` |
-| [`MAX_BYTES`](../../5%EC%B0%A8/prepare_training.py#L26) | `정의=20 * 1024 ** 3` |
-| [`STREET_SIZE`](../../5%EC%B0%A8/prepare_training.py#L28) | `정의=13728630001` |
-| [`_ERROR_LOCK`](../../5%EC%B0%A8/prepare_training.py#L29) | `정의=threading.Lock()` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`--prepare`](../../5%EC%B0%A8/prepare_training.py#L552)<br>**코드의 선언:** `action="store_true"; required=True` |
+| **설정·옵션:** [`ROOT`](../../5%EC%B0%A8/prepare_training.py#L22)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
+| **설정·옵션:** [`ARCHIVE`](../../5%EC%B0%A8/prepare_training.py#L23)<br>**코드의 선언:** `정의=ROOT.parent / "이전 도커 실험/3차실험/trash_round3"` |
+| **설정·옵션:** [`TRAINING`](../../5%EC%B0%A8/prepare_training.py#L24)<br>**코드의 선언:** `정의=ROOT / "work/training"` |
+| **설정·옵션:** [`SEED`](../../5%EC%B0%A8/prepare_training.py#L25)<br>**코드의 선언:** `정의=20261028` |
+| **설정·옵션:** [`MAX_BYTES`](../../5%EC%B0%A8/prepare_training.py#L26)<br>**코드의 선언:** `정의=20 * 1024 ** 3` |
+| **설정·옵션:** [`STREET_SIZE`](../../5%EC%B0%A8/prepare_training.py#L28)<br>**코드의 선언:** `정의=13728630001` |
+| **설정·옵션:** [`_ERROR_LOCK`](../../5%EC%B0%A8/prepare_training.py#L29)<br>**코드의 선언:** `정의=threading.Lock()` |
 
 **거부 조건:** [`not all(math.isfinite(n) and n &gt; 0 for n in (width, height))`](../../5%EC%B0%A8/prepare_training.py#L72)
 
@@ -2080,11 +2122,18 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 
 precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함께 읽습니다. 객체 탐지, 영상 사건 후보, 실제 투기 행위 판단은 다른 평가 대상입니다. 목표 90%와 완료된 시험 성적을 구분합니다.
 
-| 상황 | 확인할 내용 |
-|---|---|
-| 학습 또는 화면이 시작되지 않음 | 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다. |
-| 원본 계약 검사 실패 | 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다. |
-| 지표 해석이 어려움 | 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다. |
+**상황:** 학습 또는 화면이 시작되지 않음
+
+**확인할 내용:** 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다.
+
+**상황:** 원본 계약 검사 실패
+
+**확인할 내용:** 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다.
+
+**상황:** 지표 해석이 어려움
+
+**확인할 내용:** 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다.
+
 
 ### LEVEL 4 · 재현과 전체 비교
 
@@ -2124,11 +2173,18 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 <a name="-입력처리출력"></a>
 ## 입력·처리·출력
 
-| 단계 | 내용 |
-|---|---|
-| 입력 | 쓰레기 영상·라벨·모델·선택한 차수 설정 |
-| 처리 | 자료 준비·모델/영상 처리·평가 또는 상태 표시 |
-| 출력 | 탐지 후보·평가 지표·화면·보고서 |
+**단계:** 입력
+
+**내용:** 쓰레기 영상·라벨·모델·선택한 차수 설정
+
+**단계:** 처리
+
+**내용:** 자료 준비·모델/영상 처리·평가 또는 상태 표시
+
+**단계:** 출력
+
+**내용:** 탐지 후보·평가 지표·화면·보고서
+
 
 <a name="usage"></a>
 
@@ -2145,38 +2201,38 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 <a name="-실제-자료-구성"></a>
 ## 실제 자료 구성
 
-| 경로 | 자료 종류 |
-|---|---|
-| [docs/](../../5%EC%B0%A8/docs) | 하위 자료 폴더 |
-| [tests/](../../5%EC%B0%A8/tests) | 하위 자료 폴더 |
-| [web/](../../5%EC%B0%A8/web) | 하위 자료 폴더 |
-| [README.md](../../5%EC%B0%A8/README.md) | MD 파일 |
-| [build_exe.py](../../5%EC%B0%A8/build_exe.py) | PY 파일 |
-| [dashboard.py](../../5%EC%B0%A8/dashboard.py) | PY 파일 |
-| [gpu_worker.py](../../5%EC%B0%A8/gpu_worker.py) | PY 파일 |
-| [launcher.py](../../5%EC%B0%A8/launcher.py) | PY 파일 |
-| [pipeline.py](../../5%EC%B0%A8/pipeline.py) | PY 파일 |
-| [prepare_training.py](../../5%EC%B0%A8/prepare_training.py) | PY 파일 |
-| [sources.json](../../5%EC%B0%A8/sources.json) | JSON 파일 |
-| [train_pipeline.py](../../5%EC%B0%A8/train_pipeline.py) | PY 파일 |
-| [verify_sources.py](../../5%EC%B0%A8/verify_sources.py) | PY 파일 |
-| [사용안내.txt](../../5%EC%B0%A8/%EC%82%AC%EC%9A%A9%EC%95%88%EB%82%B4.txt) | TXT 파일 |
-| [실행.bat](../../5%EC%B0%A8/%EC%8B%A4%ED%96%89.bat) | BAT 파일 |
+| 경로 · 자료 종류 |
+| --- |
+| **경로:** [docs/](../../5%EC%B0%A8/docs)<br>**자료 종류:** 하위 자료 폴더 |
+| **경로:** [tests/](../../5%EC%B0%A8/tests)<br>**자료 종류:** 하위 자료 폴더 |
+| **경로:** [web/](../../5%EC%B0%A8/web)<br>**자료 종류:** 하위 자료 폴더 |
+| **경로:** [README.md](../../5%EC%B0%A8/README.md)<br>**자료 종류:** MD 파일 |
+| **경로:** [build_exe.py](../../5%EC%B0%A8/build_exe.py)<br>**자료 종류:** PY 파일 |
+| **경로:** [dashboard.py](../../5%EC%B0%A8/dashboard.py)<br>**자료 종류:** PY 파일 |
+| **경로:** [gpu_worker.py](../../5%EC%B0%A8/gpu_worker.py)<br>**자료 종류:** PY 파일 |
+| **경로:** [launcher.py](../../5%EC%B0%A8/launcher.py)<br>**자료 종류:** PY 파일 |
+| **경로:** [pipeline.py](../../5%EC%B0%A8/pipeline.py)<br>**자료 종류:** PY 파일 |
+| **경로:** [prepare_training.py](../../5%EC%B0%A8/prepare_training.py)<br>**자료 종류:** PY 파일 |
+| **경로:** [sources.json](../../5%EC%B0%A8/sources.json)<br>**자료 종류:** JSON 파일 |
+| **경로:** [train_pipeline.py](../../5%EC%B0%A8/train_pipeline.py)<br>**자료 종류:** PY 파일 |
+| **경로:** [verify_sources.py](../../5%EC%B0%A8/verify_sources.py)<br>**자료 종류:** PY 파일 |
+| **경로:** [사용안내.txt](../../5%EC%B0%A8/%EC%82%AC%EC%9A%A9%EC%95%88%EB%82%B4.txt)<br>**자료 종류:** TXT 파일 |
+| **경로:** [실행.bat](../../5%EC%B0%A8/%EC%8B%A4%ED%96%89.bat)<br>**자료 종류:** BAT 파일 |
 
 <a name="-주요-모듈과-코드-읽기"></a>
 ## 주요 모듈과 코드 읽기
 
-| 파일 | 원문에 정의된 역할·구성 |
-|---|---|
-| [build_exe.py](../../5%EC%B0%A8/build_exe.py) | PyInstaller 의존성 확인과 사용자가 선택한 빌드를 수행합니다. |
-| [dashboard.py](../../5%EC%B0%A8/dashboard.py) | Codex와 독립 실행되는 루프백 전용 대시보드입니다. |
-| [gpu_worker.py](../../5%EC%B0%A8/gpu_worker.py) | 기존 GPU 환경에서 탐지와 학습을 독립 프로세스로 실행합니다. |
-| [launcher.py](../../5%EC%B0%A8/launcher.py) | 독립 대시보드 실행기입니다. 학습은 자동 시작하지 않습니다. |
-| [pipeline.py](../../5%EC%B0%A8/pipeline.py) | D 드라이브의 앱과 기존 GPU 컨테이너를 연결합니다. |
-| [prepare_training.py](../../5%EC%B0%A8/prepare_training.py) | 출처와 고정 평가 자료를 보존하며 추가 학습 데이터를 준비합니다. |
-| [train_pipeline.py](../../5%EC%B0%A8/train_pipeline.py) | 검증에서 기존 모델과 추가 학습 모델을 비교하고 고정 테스트를 한 번 평가합니다. |
-| [verify_sources.py](../../5%EC%B0%A8/verify_sources.py) | 소스의 UTF-8·문법과 납품 파일 존재를 검사합니다. |
-| [tests/test_dashboard.py](../../5%EC%B0%A8/tests/test_dashboard.py) | 실제 HTTP 경계와 파이프라인 오류 전달을 검사합니다. |
+| 파일 · 원문에 정의된 역할·구성 |
+| --- |
+| **파일:** [build_exe.py](../../5%EC%B0%A8/build_exe.py)<br>**원문에 정의된 역할·구성:** PyInstaller 의존성 확인과 사용자가 선택한 빌드를 수행합니다. |
+| **파일:** [dashboard.py](../../5%EC%B0%A8/dashboard.py)<br>**원문에 정의된 역할·구성:** Codex와 독립 실행되는 루프백 전용 대시보드입니다. |
+| **파일:** [gpu_worker.py](../../5%EC%B0%A8/gpu_worker.py)<br>**원문에 정의된 역할·구성:** 기존 GPU 환경에서 탐지와 학습을 독립 프로세스로 실행합니다. |
+| **파일:** [launcher.py](../../5%EC%B0%A8/launcher.py)<br>**원문에 정의된 역할·구성:** 독립 대시보드 실행기입니다. 학습은 자동 시작하지 않습니다. |
+| **파일:** [pipeline.py](../../5%EC%B0%A8/pipeline.py)<br>**원문에 정의된 역할·구성:** D 드라이브의 앱과 기존 GPU 컨테이너를 연결합니다. |
+| **파일:** [prepare_training.py](../../5%EC%B0%A8/prepare_training.py)<br>**원문에 정의된 역할·구성:** 출처와 고정 평가 자료를 보존하며 추가 학습 데이터를 준비합니다. |
+| **파일:** [train_pipeline.py](../../5%EC%B0%A8/train_pipeline.py)<br>**원문에 정의된 역할·구성:** 검증에서 기존 모델과 추가 학습 모델을 비교하고 고정 테스트를 한 번 평가합니다. |
+| **파일:** [verify_sources.py](../../5%EC%B0%A8/verify_sources.py)<br>**원문에 정의된 역할·구성:** 소스의 UTF-8·문법과 납품 파일 존재를 검사합니다. |
+| **파일:** [tests/test_dashboard.py](../../5%EC%B0%A8/tests/test_dashboard.py)<br>**원문에 정의된 역할·구성:** 실제 HTTP 경계와 파이프라인 오류 전달을 검사합니다. |
 
 <a name="setup"></a>
 
@@ -2190,13 +2246,13 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 <a name="️-소스에서-제공하는-cli-옵션"></a>
 ### 소스에서 제공하는 CLI 옵션
 
-| 진입 소스 | 정의된 옵션 이름 |
-|---|---|
-| [build_exe.py](../../5%EC%B0%A8/build_exe.py) | `--build` |
-| [gpu_worker.py](../../5%EC%B0%A8/gpu_worker.py) | `--action`, `--params`, `--worker` |
-| [launcher.py](../../5%EC%B0%A8/launcher.py) | `--no-browser`, `--port`, `--self-test`, `--hidden` |
-| [pipeline.py](../../5%EC%B0%A8/pipeline.py) | `--action`, `--params` |
-| [prepare_training.py](../../5%EC%B0%A8/prepare_training.py) | `--prepare` |
+| 진입 소스 · 정의된 옵션 이름 |
+| --- |
+| **진입 소스:** [build_exe.py](../../5%EC%B0%A8/build_exe.py)<br>**정의된 옵션 이름:** `--build` |
+| **진입 소스:** [gpu_worker.py](../../5%EC%B0%A8/gpu_worker.py)<br>**정의된 옵션 이름:** `--action`, `--params`, `--worker` |
+| **진입 소스:** [launcher.py](../../5%EC%B0%A8/launcher.py)<br>**정의된 옵션 이름:** `--no-browser`, `--port`, `--self-test`, `--hidden` |
+| **진입 소스:** [pipeline.py](../../5%EC%B0%A8/pipeline.py)<br>**정의된 옵션 이름:** `--action`, `--params` |
+| **진입 소스:** [prepare_training.py](../../5%EC%B0%A8/prepare_training.py)<br>**정의된 옵션 이름:** `--prepare` |
 
 각 옵션의 기본값·필수값·부작용은 해당 main과 인자 정의를 함께 확인합니다.
 
@@ -2209,13 +2265,13 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 ### [build_exe.py](../../5%EC%B0%A8/build_exe.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`--build`](../../5%EC%B0%A8/build_exe.py#L13) | `action='store_true'; help='확인만 하지 않고 실제 EXE를 빌드합니다.'` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`--build`](../../5%EC%B0%A8/build_exe.py#L13)<br>**코드의 선언:** `action='store_true'; help='확인만 하지 않고 실제 EXE를 빌드합니다.'` |
 
-| 거부 조건 | 오류 메시지 |
-|---|---|
-| [`not available`](../../5%EC%B0%A8/build_exe.py#L19) | 빌드하려면 별도로 PyInstaller를 준비해야 합니다. 자동 설치하지 않습니다. |
+| 거부 조건 · 오류 메시지 |
+| --- |
+| **거부 조건:** [`not available`](../../5%EC%B0%A8/build_exe.py#L19)<br>**오류 메시지:** 빌드하려면 별도로 PyInstaller를 준비해야 합니다. 자동 설치하지 않습니다. |
 
 ### [dashboard.py](../../5%EC%B0%A8/dashboard.py)
 
@@ -2390,16 +2446,16 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 ### [launcher.py](../../5%EC%B0%A8/launcher.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`--no-browser`](../../5%EC%B0%A8/launcher.py#L55) | `action='store_true'` |
-| [`--port`](../../5%EC%B0%A8/launcher.py#L56) | `type=int; default=0` |
-| [`--self-test`](../../5%EC%B0%A8/launcher.py#L57) | `action='store_true'` |
-| [`--hidden`](../../5%EC%B0%A8/launcher.py#L58) | `action='store_true'` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`--no-browser`](../../5%EC%B0%A8/launcher.py#L55)<br>**코드의 선언:** `action='store_true'` |
+| **설정·옵션:** [`--port`](../../5%EC%B0%A8/launcher.py#L56)<br>**코드의 선언:** `type=int; default=0` |
+| **설정·옵션:** [`--self-test`](../../5%EC%B0%A8/launcher.py#L57)<br>**코드의 선언:** `action='store_true'` |
+| **설정·옵션:** [`--hidden`](../../5%EC%B0%A8/launcher.py#L58)<br>**코드의 선언:** `action='store_true'` |
 
-| 거부 조건 | 오류 메시지 |
-|---|---|
-| [`response.status != 200`](../../5%EC%B0%A8/launcher.py#L20) | 루프백 상태 검사에 실패했습니다. |
+| 거부 조건 · 오류 메시지 |
+| --- |
+| **거부 조건:** [`response.status != 200`](../../5%EC%B0%A8/launcher.py#L20)<br>**오류 메시지:** 루프백 상태 검사에 실패했습니다. |
 
 ### [pipeline.py](../../5%EC%B0%A8/pipeline.py)
 
@@ -2473,16 +2529,16 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 ### [prepare_training.py](../../5%EC%B0%A8/prepare_training.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`--prepare`](../../5%EC%B0%A8/prepare_training.py#L552) | `action="store_true"; required=True` |
-| [`ROOT`](../../5%EC%B0%A8/prepare_training.py#L22) | `정의=Path(__file__).resolve().parent` |
-| [`ARCHIVE`](../../5%EC%B0%A8/prepare_training.py#L23) | `정의=ROOT.parent / "이전 도커 실험/3차실험/trash_round3"` |
-| [`TRAINING`](../../5%EC%B0%A8/prepare_training.py#L24) | `정의=ROOT / "work/training"` |
-| [`SEED`](../../5%EC%B0%A8/prepare_training.py#L25) | `정의=20261028` |
-| [`MAX_BYTES`](../../5%EC%B0%A8/prepare_training.py#L26) | `정의=20 * 1024 ** 3` |
-| [`STREET_SIZE`](../../5%EC%B0%A8/prepare_training.py#L28) | `정의=13728630001` |
-| [`_ERROR_LOCK`](../../5%EC%B0%A8/prepare_training.py#L29) | `정의=threading.Lock()` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`--prepare`](../../5%EC%B0%A8/prepare_training.py#L552)<br>**코드의 선언:** `action="store_true"; required=True` |
+| **설정·옵션:** [`ROOT`](../../5%EC%B0%A8/prepare_training.py#L22)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
+| **설정·옵션:** [`ARCHIVE`](../../5%EC%B0%A8/prepare_training.py#L23)<br>**코드의 선언:** `정의=ROOT.parent / "이전 도커 실험/3차실험/trash_round3"` |
+| **설정·옵션:** [`TRAINING`](../../5%EC%B0%A8/prepare_training.py#L24)<br>**코드의 선언:** `정의=ROOT / "work/training"` |
+| **설정·옵션:** [`SEED`](../../5%EC%B0%A8/prepare_training.py#L25)<br>**코드의 선언:** `정의=20261028` |
+| **설정·옵션:** [`MAX_BYTES`](../../5%EC%B0%A8/prepare_training.py#L26)<br>**코드의 선언:** `정의=20 * 1024 ** 3` |
+| **설정·옵션:** [`STREET_SIZE`](../../5%EC%B0%A8/prepare_training.py#L28)<br>**코드의 선언:** `정의=13728630001` |
+| **설정·옵션:** [`_ERROR_LOCK`](../../5%EC%B0%A8/prepare_training.py#L29)<br>**코드의 선언:** `정의=threading.Lock()` |
 
 **거부 조건:** [`not all(math.isfinite(n) and n &gt; 0 for n in (width, height))`](../../5%EC%B0%A8/prepare_training.py#L72)
 
@@ -2674,11 +2730,18 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 <a name="️-제약과-문제-해결"></a>
 ## 제약과 문제 해결
 
-| 상황 | 확인할 내용 |
-|---|---|
-| 학습 또는 화면이 시작되지 않음 | 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다. |
-| 원본 계약 검사 실패 | 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다. |
-| 지표 해석이 어려움 | 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다. |
+**상황:** 학습 또는 화면이 시작되지 않음
+
+**확인할 내용:** 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다.
+
+**상황:** 원본 계약 검사 실패
+
+**확인할 내용:** 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다.
+
+**상황:** 지표 해석이 어려움
+
+**확인할 내용:** 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다.
+
 
 <a name="changes"></a>
 

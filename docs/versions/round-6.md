@@ -42,10 +42,10 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 
 #### LEVEL 1 · 소스에서 제공하는 CLI 옵션
 
-| 진입 소스 | 정의된 옵션 이름 |
-|---|---|
-| [build_exe.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py) | `--build` |
-| [pipeline.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/pipeline.py) | `--action`, `--params` |
+| 진입 소스 · 정의된 옵션 이름 |
+| --- |
+| **진입 소스:** [build_exe.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py)<br>**정의된 옵션 이름:** `--build` |
+| **진입 소스:** [pipeline.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/pipeline.py)<br>**정의된 옵션 이름:** `--action`, `--params` |
 
 각 옵션의 기본값·필수값·부작용은 해당 main과 인자 정의를 함께 확인합니다.
 
@@ -58,13 +58,13 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 #### LEVEL 1 · [build_exe.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`--build`](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py#L13) | `action='store_true'; help='확인만 하지 않고 실제 EXE를 빌드합니다.'` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`--build`](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py#L13)<br>**코드의 선언:** `action='store_true'; help='확인만 하지 않고 실제 EXE를 빌드합니다.'` |
 
-| 거부 조건 | 오류 메시지 |
-|---|---|
-| [`not available`](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py#L19) | 빌드하려면 별도로 PyInstaller를 준비해야 합니다. 자동 설치하지 않습니다. |
+| 거부 조건 · 오류 메시지 |
+| --- |
+| **거부 조건:** [`not available`](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py#L19)<br>**오류 메시지:** 빌드하려면 별도로 PyInstaller를 준비해야 합니다. 자동 설치하지 않습니다. |
 
 #### LEVEL 1 · [pipeline.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/pipeline.py)
 
@@ -145,10 +145,14 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 
 공개 비교에서 변경 전 동작과 검사 차이를 확인합니다. 별도 학습·추론 결과는 포함하지 않습니다.
 
-| 상황 | 확인할 내용 |
-|---|---|
-| 실행 자료가 부족함 | 이 묶음의 보존 범위와 원래 참조 차수를 확인합니다. |
-| 결과 범위 해석 | 자료 열람·기능 확인·실험 성적을 각각 구분합니다. |
+**상황:** 실행 자료가 부족함
+
+**확인할 내용:** 이 묶음의 보존 범위와 원래 참조 차수를 확인합니다.
+
+**상황:** 결과 범위 해석
+
+**확인할 내용:** 자료 열람·기능 확인·실험 성적을 각각 구분합니다.
+
 
 [자료 폴더](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8) · [직전 비교·자료 범위](../comparisons/5-to-6-snapshot.md) · [이 차수의 원래 전체 상세](#reading-level-5)
 
@@ -163,11 +167,18 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 
 ### LEVEL 2 · 입력에서 출력으로
 
-| 단계 | 내용 |
-|---|---|
-| 입력 | build_exe.py·pipeline.py·web/app.js·검사2개의 변경 전 파일 |
-| 처리 | 5차 변경 대상 구현과 검사 비교 |
-| 출력 | 다섯 파일의 이전 구현 기준 |
+**단계:** 입력
+
+**내용:** build_exe.py·pipeline.py·web/app.js·검사2개의 변경 전 파일
+
+**단계:** 처리
+
+**내용:** 5차 변경 대상 구현과 검사 비교
+
+**단계:** 출력
+
+**내용:** 다섯 파일의 이전 구현 기준
+
 
 입력·처리·출력은 위의 같은 자료 흐름을 다른 단계에서 읽는 기준입니다. 처리 조건과 출력의 의미를 함께 확인합니다.
 
@@ -183,10 +194,10 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 
 #### LEVEL 2 · 소스에서 제공하는 CLI 옵션
 
-| 진입 소스 | 정의된 옵션 이름 |
-|---|---|
-| [build_exe.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py) | `--build` |
-| [pipeline.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/pipeline.py) | `--action`, `--params` |
+| 진입 소스 · 정의된 옵션 이름 |
+| --- |
+| **진입 소스:** [build_exe.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py)<br>**정의된 옵션 이름:** `--build` |
+| **진입 소스:** [pipeline.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/pipeline.py)<br>**정의된 옵션 이름:** `--action`, `--params` |
 
 각 옵션의 기본값·필수값·부작용은 해당 main과 인자 정의를 함께 확인합니다.
 
@@ -199,13 +210,13 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 #### LEVEL 2 · [build_exe.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`--build`](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py#L13) | `action='store_true'; help='확인만 하지 않고 실제 EXE를 빌드합니다.'` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`--build`](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py#L13)<br>**코드의 선언:** `action='store_true'; help='확인만 하지 않고 실제 EXE를 빌드합니다.'` |
 
-| 거부 조건 | 오류 메시지 |
-|---|---|
-| [`not available`](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py#L19) | 빌드하려면 별도로 PyInstaller를 준비해야 합니다. 자동 설치하지 않습니다. |
+| 거부 조건 · 오류 메시지 |
+| --- |
+| **거부 조건:** [`not available`](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py#L19)<br>**오류 메시지:** 빌드하려면 별도로 PyInstaller를 준비해야 합니다. 자동 설치하지 않습니다. |
 
 #### LEVEL 2 · [pipeline.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/pipeline.py)
 
@@ -282,10 +293,14 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 
 공개 비교에서 변경 전 동작과 검사 차이를 확인합니다. 별도 학습·추론 결과는 포함하지 않습니다.
 
-| 상황 | 확인할 내용 |
-|---|---|
-| 실행 자료가 부족함 | 이 묶음의 보존 범위와 원래 참조 차수를 확인합니다. |
-| 결과 범위 해석 | 자료 열람·기능 확인·실험 성적을 각각 구분합니다. |
+**상황:** 실행 자료가 부족함
+
+**확인할 내용:** 이 묶음의 보존 범위와 원래 참조 차수를 확인합니다.
+
+**상황:** 결과 범위 해석
+
+**확인할 내용:** 자료 열람·기능 확인·실험 성적을 각각 구분합니다.
+
 
 [자료 폴더](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8) · [직전 비교·자료 범위](../comparisons/5-to-6-snapshot.md) · [이 차수의 원래 전체 상세](#reading-level-5)
 
@@ -302,10 +317,10 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 
 #### LEVEL 3 · 소스에서 제공하는 CLI 옵션
 
-| 진입 소스 | 정의된 옵션 이름 |
-|---|---|
-| [build_exe.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py) | `--build` |
-| [pipeline.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/pipeline.py) | `--action`, `--params` |
+| 진입 소스 · 정의된 옵션 이름 |
+| --- |
+| **진입 소스:** [build_exe.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py)<br>**정의된 옵션 이름:** `--build` |
+| **진입 소스:** [pipeline.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/pipeline.py)<br>**정의된 옵션 이름:** `--action`, `--params` |
 
 각 옵션의 기본값·필수값·부작용은 해당 main과 인자 정의를 함께 확인합니다.
 
@@ -318,13 +333,13 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 #### LEVEL 3 · [build_exe.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`--build`](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py#L13) | `action='store_true'; help='확인만 하지 않고 실제 EXE를 빌드합니다.'` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`--build`](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py#L13)<br>**코드의 선언:** `action='store_true'; help='확인만 하지 않고 실제 EXE를 빌드합니다.'` |
 
-| 거부 조건 | 오류 메시지 |
-|---|---|
-| [`not available`](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py#L19) | 빌드하려면 별도로 PyInstaller를 준비해야 합니다. 자동 설치하지 않습니다. |
+| 거부 조건 · 오류 메시지 |
+| --- |
+| **거부 조건:** [`not available`](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py#L19)<br>**오류 메시지:** 빌드하려면 별도로 PyInstaller를 준비해야 합니다. 자동 설치하지 않습니다. |
 
 #### LEVEL 3 · [pipeline.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/pipeline.py)
 
@@ -403,20 +418,31 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 2. 고유 설명에 적힌 입력 조건·경로·대상을 확인합니다.
 3. 연결된 비교와 기록의 관측 범위를 대조합니다.
 
-| 단계 | 내용 |
-|---|---|
-| 입력 | build_exe.py·pipeline.py·web/app.js·검사2개의 변경 전 파일 |
-| 처리 | 5차 변경 대상 구현과 검사 비교 |
-| 출력 | 다섯 파일의 이전 구현 기준 |
+**단계:** 입력
+
+**내용:** build_exe.py·pipeline.py·web/app.js·검사2개의 변경 전 파일
+
+**단계:** 처리
+
+**내용:** 5차 변경 대상 구현과 검사 비교
+
+**단계:** 출력
+
+**내용:** 다섯 파일의 이전 구현 기준
+
 
 ### LEVEL 3 · 결과와 실패를 확인하기
 
 공개 비교에서 변경 전 동작과 검사 차이를 확인합니다. 별도 학습·추론 결과는 포함하지 않습니다.
 
-| 상황 | 확인할 내용 |
-|---|---|
-| 실행 자료가 부족함 | 이 묶음의 보존 범위와 원래 참조 차수를 확인합니다. |
-| 결과 범위 해석 | 자료 열람·기능 확인·실험 성적을 각각 구분합니다. |
+**상황:** 실행 자료가 부족함
+
+**확인할 내용:** 이 묶음의 보존 범위와 원래 참조 차수를 확인합니다.
+
+**상황:** 결과 범위 해석
+
+**확인할 내용:** 자료 열람·기능 확인·실험 성적을 각각 구분합니다.
+
 
 ### LEVEL 3 · 실행 전 대조할 차수 조건
 
@@ -435,18 +461,25 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 
 ### LEVEL 4 · 이 차수 구현의 실제 근거
 
-| 파일 | 원문에 정의된 역할·구성 |
-|---|---|
-| [build_exe.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py) | PyInstaller 의존성 확인과 사용자가 선택한 빌드를 수행합니다. |
-| [pipeline.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/pipeline.py) | D 드라이브의 앱과 기존 GPU 컨테이너를 연결합니다. |
-| [tests/test_dashboard.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/tests/test_dashboard.py) | 실제 HTTP 경계와 파이프라인 오류 전달을 검사합니다. |
-| [tests/test_pipeline.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/tests/test_pipeline.py) | 허용 경로와 API 설정 실패 경로를 확인합니다. |
+| 파일 · 원문에 정의된 역할·구성 |
+| --- |
+| **파일:** [build_exe.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py)<br>**원문에 정의된 역할·구성:** PyInstaller 의존성 확인과 사용자가 선택한 빌드를 수행합니다. |
+| **파일:** [pipeline.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/pipeline.py)<br>**원문에 정의된 역할·구성:** D 드라이브의 앱과 기존 GPU 컨테이너를 연결합니다. |
+| **파일:** [tests/test_dashboard.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/tests/test_dashboard.py)<br>**원문에 정의된 역할·구성:** 실제 HTTP 경계와 파이프라인 오류 전달을 검사합니다. |
+| **파일:** [tests/test_pipeline.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/tests/test_pipeline.py)<br>**원문에 정의된 역할·구성:** 허용 경로와 API 설정 실패 경로를 확인합니다. |
 
-| 단계 | 내용 |
-|---|---|
-| 입력 | build_exe.py·pipeline.py·web/app.js·검사2개의 변경 전 파일 |
-| 처리 | 5차 변경 대상 구현과 검사 비교 |
-| 출력 | 다섯 파일의 이전 구현 기준 |
+**단계:** 입력
+
+**내용:** build_exe.py·pipeline.py·web/app.js·검사2개의 변경 전 파일
+
+**단계:** 처리
+
+**내용:** 5차 변경 대상 구현과 검사 비교
+
+**단계:** 출력
+
+**내용:** 다섯 파일의 이전 구현 기준
+
 
 ### LEVEL 4 · 조건·변경·결과를 함께 검토하기
 
@@ -456,10 +489,10 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 
 #### LEVEL 4 · 소스에서 제공하는 CLI 옵션
 
-| 진입 소스 | 정의된 옵션 이름 |
-|---|---|
-| [build_exe.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py) | `--build` |
-| [pipeline.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/pipeline.py) | `--action`, `--params` |
+| 진입 소스 · 정의된 옵션 이름 |
+| --- |
+| **진입 소스:** [build_exe.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py)<br>**정의된 옵션 이름:** `--build` |
+| **진입 소스:** [pipeline.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/pipeline.py)<br>**정의된 옵션 이름:** `--action`, `--params` |
 
 각 옵션의 기본값·필수값·부작용은 해당 main과 인자 정의를 함께 확인합니다.
 
@@ -472,13 +505,13 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 #### LEVEL 4 · [build_exe.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`--build`](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py#L13) | `action='store_true'; help='확인만 하지 않고 실제 EXE를 빌드합니다.'` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`--build`](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py#L13)<br>**코드의 선언:** `action='store_true'; help='확인만 하지 않고 실제 EXE를 빌드합니다.'` |
 
-| 거부 조건 | 오류 메시지 |
-|---|---|
-| [`not available`](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py#L19) | 빌드하려면 별도로 PyInstaller를 준비해야 합니다. 자동 설치하지 않습니다. |
+| 거부 조건 · 오류 메시지 |
+| --- |
+| **거부 조건:** [`not available`](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py#L19)<br>**오류 메시지:** 빌드하려면 별도로 PyInstaller를 준비해야 합니다. 자동 설치하지 않습니다. |
 
 #### LEVEL 4 · [pipeline.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/pipeline.py)
 
@@ -553,10 +586,14 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 
 공개 비교에서 변경 전 동작과 검사 차이를 확인합니다. 별도 학습·추론 결과는 포함하지 않습니다.
 
-| 상황 | 확인할 내용 |
-|---|---|
-| 실행 자료가 부족함 | 이 묶음의 보존 범위와 원래 참조 차수를 확인합니다. |
-| 결과 범위 해석 | 자료 열람·기능 확인·실험 성적을 각각 구분합니다. |
+**상황:** 실행 자료가 부족함
+
+**확인할 내용:** 이 묶음의 보존 범위와 원래 참조 차수를 확인합니다.
+
+**상황:** 결과 범위 해석
+
+**확인할 내용:** 자료 열람·기능 확인·실험 성적을 각각 구분합니다.
+
 
 ### LEVEL 4 · 재현과 전체 비교
 
@@ -595,11 +632,18 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 <a name="-입력처리출력"></a>
 ## 입력·처리·출력
 
-| 단계 | 내용 |
-|---|---|
-| 입력 | build_exe.py·pipeline.py·web/app.js·검사2개의 변경 전 파일 |
-| 처리 | 5차 변경 대상 구현과 검사 비교 |
-| 출력 | 다섯 파일의 이전 구현 기준 |
+**단계:** 입력
+
+**내용:** build_exe.py·pipeline.py·web/app.js·검사2개의 변경 전 파일
+
+**단계:** 처리
+
+**내용:** 5차 변경 대상 구현과 검사 비교
+
+**단계:** 출력
+
+**내용:** 다섯 파일의 이전 구현 기준
+
 
 <a name="usage"></a>
 
@@ -615,23 +659,23 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 <a name="-실제-자료-구성"></a>
 ## 실제 자료 구성
 
-| 경로 | 자료 종류 |
-|---|---|
-| [tests/](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/tests) | 하위 자료 폴더 |
-| [web/](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/web) | 하위 자료 폴더 |
-| [README.md](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/README.md) | MD 파일 |
-| [build_exe.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py) | PY 파일 |
-| [pipeline.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/pipeline.py) | PY 파일 |
+| 경로 · 자료 종류 |
+| --- |
+| **경로:** [tests/](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/tests)<br>**자료 종류:** 하위 자료 폴더 |
+| **경로:** [web/](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/web)<br>**자료 종류:** 하위 자료 폴더 |
+| **경로:** [README.md](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/README.md)<br>**자료 종류:** MD 파일 |
+| **경로:** [build_exe.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py)<br>**자료 종류:** PY 파일 |
+| **경로:** [pipeline.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/pipeline.py)<br>**자료 종류:** PY 파일 |
 
 <a name="-주요-모듈과-코드-읽기"></a>
 ## 주요 모듈과 코드 읽기
 
-| 파일 | 원문에 정의된 역할·구성 |
-|---|---|
-| [build_exe.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py) | PyInstaller 의존성 확인과 사용자가 선택한 빌드를 수행합니다. |
-| [pipeline.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/pipeline.py) | D 드라이브의 앱과 기존 GPU 컨테이너를 연결합니다. |
-| [tests/test_dashboard.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/tests/test_dashboard.py) | 실제 HTTP 경계와 파이프라인 오류 전달을 검사합니다. |
-| [tests/test_pipeline.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/tests/test_pipeline.py) | 허용 경로와 API 설정 실패 경로를 확인합니다. |
+| 파일 · 원문에 정의된 역할·구성 |
+| --- |
+| **파일:** [build_exe.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py)<br>**원문에 정의된 역할·구성:** PyInstaller 의존성 확인과 사용자가 선택한 빌드를 수행합니다. |
+| **파일:** [pipeline.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/pipeline.py)<br>**원문에 정의된 역할·구성:** D 드라이브의 앱과 기존 GPU 컨테이너를 연결합니다. |
+| **파일:** [tests/test_dashboard.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/tests/test_dashboard.py)<br>**원문에 정의된 역할·구성:** 실제 HTTP 경계와 파이프라인 오류 전달을 검사합니다. |
+| **파일:** [tests/test_pipeline.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/tests/test_pipeline.py)<br>**원문에 정의된 역할·구성:** 허용 경로와 API 설정 실패 경로를 확인합니다. |
 
 <a name="setup"></a>
 
@@ -645,10 +689,10 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 <a name="️-소스에서-제공하는-cli-옵션"></a>
 ### 소스에서 제공하는 CLI 옵션
 
-| 진입 소스 | 정의된 옵션 이름 |
-|---|---|
-| [build_exe.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py) | `--build` |
-| [pipeline.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/pipeline.py) | `--action`, `--params` |
+| 진입 소스 · 정의된 옵션 이름 |
+| --- |
+| **진입 소스:** [build_exe.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py)<br>**정의된 옵션 이름:** `--build` |
+| **진입 소스:** [pipeline.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/pipeline.py)<br>**정의된 옵션 이름:** `--action`, `--params` |
 
 각 옵션의 기본값·필수값·부작용은 해당 main과 인자 정의를 함께 확인합니다.
 
@@ -661,13 +705,13 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 ### [build_exe.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py)
 
 
-| 설정·옵션 | 코드의 선언 |
-|---|---|
-| [`--build`](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py#L13) | `action='store_true'; help='확인만 하지 않고 실제 EXE를 빌드합니다.'` |
+| 설정·옵션 · 코드의 선언 |
+| --- |
+| **설정·옵션:** [`--build`](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py#L13)<br>**코드의 선언:** `action='store_true'; help='확인만 하지 않고 실제 EXE를 빌드합니다.'` |
 
-| 거부 조건 | 오류 메시지 |
-|---|---|
-| [`not available`](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py#L19) | 빌드하려면 별도로 PyInstaller를 준비해야 합니다. 자동 설치하지 않습니다. |
+| 거부 조건 · 오류 메시지 |
+| --- |
+| **거부 조건:** [`not available`](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py#L19)<br>**오류 메시지:** 빌드하려면 별도로 PyInstaller를 준비해야 합니다. 자동 설치하지 않습니다. |
 
 ### [pipeline.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/pipeline.py)
 
@@ -750,10 +794,14 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 <a name="️-제약과-문제-해결"></a>
 ## 제약과 문제 해결
 
-| 상황 | 확인할 내용 |
-|---|---|
-| 실행 자료가 부족함 | 이 묶음의 보존 범위와 원래 참조 차수를 확인합니다. |
-| 결과 범위 해석 | 자료 열람·기능 확인·실험 성적을 각각 구분합니다. |
+**상황:** 실행 자료가 부족함
+
+**확인할 내용:** 이 묶음의 보존 범위와 원래 참조 차수를 확인합니다.
+
+**상황:** 결과 범위 해석
+
+**확인할 내용:** 자료 열람·기능 확인·실험 성적을 각각 구분합니다.
+
 
 <a name="changes"></a>
 
