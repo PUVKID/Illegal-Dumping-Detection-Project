@@ -20,15 +20,19 @@
 <a name="-데이터학습화면복구보고서를-나눈-구성"></a>
 ## 데이터·학습·화면·복구·보고서를 나눈 구성
 
-초기1·2차는 데이터 준비와 탐지 실험 노트북입니다. 최종/3차는 `data_pipeline.py`·`train_round3.py`·`inference.py`로 데이터·학습·추론을 나누고 `backend.py`·`launcher.py`와 화면을 연결합니다. 최종/4차는 기존 앙상블의 단일 프레임 확인 도구, 최종/최종은 HTML·CSV 성능보고서입니다. 자료 종류가 달라 동일한 학습 실행 절차를 적용하지 않습니다.
+초기1·2차는 데이터 준비와 탐지 실험 노트북입니다.
 
-7차의 `prepare_dataset.py`·`train_pipeline.py`·`worker.py`는 출처·준비·후보 학습을 연결합니다. training.json의 seed는20261030, 후보당6시간, GPU 여유18,000MiB·대기7,200초, 체크포인트 여유8GiB입니다. diverse_coco26l 후보는 이미지960·batch4·60epoch·patience12·lr0=0.0005, small_l_p2는1280·batch2·45epoch·patience12·lr0=0.0001을 구성합니다. 값은 계획이며 실제 완료 에폭과 다릅니다.
+최종/3차는 `data_pipeline.py`·`train_round3.py`·`inference.py`로 데이터·학습·추론을 나누고 `backend.py`·`launcher.py`와 화면을 연결합니다. 최종/4차는 기존 앙상블의 단일 프레임 확인 도구, 최종/최종은 HTML·CSV 성능보고서입니다. 자료 종류가 달라 동일한 학습 실행 절차를 적용하지 않습니다.
+
+7차의 `prepare_dataset.py`·`train_pipeline.py`·`worker.py`는 출처·준비·후보 학습을 연결합니다. training.json의 seed는 20261030이며 후보당 6시간, GPU 여유 18,000MiB·대기 7,200초, 체크포인트 여유 8GiB를 설정합니다. diverse_coco26l 후보는 이미지960·batch4·60epoch·patience12·lr0=0.0005, small_l_p2는1280·batch2·45epoch·patience12·lr0=0.0001을 구성합니다. 값은 계획이며 실제 완료 에폭과 다릅니다.
 
 검증 선택은 TACO의 min(precision,recall)·F1과 PlastOPol의 min(precision,recall)·AP50 순서를 사용하고 동률에는 기준 모델을 유지합니다. full/full_grid3 정책을 검토하며 평가 이미지1280·conf floor0.001·NMS IoU0.5·최대1000개 탐지를 설정합니다. 다운로드·최소 여유 공간은 각각100GiB입니다. 기존 평가와 독립 외부 평가의 출처·분할을 함께 읽어야 합니다.
 
 8·10차 화면은 7차 작업 상태를 읽어 현재 단계·대기·오류·재시도를 표시합니다. 9차는 상태 파일 교체 권한 오류 뒤 수신을 재개한 기록이고, 11차는 원래 7차의 동결 파일 16개를 확인하는 복구 도구입니다. 12차는 실험 종료와 결과·가중치 해시를 확인하고 report_core·report_outputs·watcher로 Word/PDF를 만드는 후처리 구성입니다. 화면이나 복구 도구 실행이 학습 완료를 뜻하지 않습니다.
 
-3차 최종 보고서의 고정 테스트150장·conf0.17·IoU0.50·ensemble/full 조건에서는 정밀도61.36%·재현율65.83%·F1 63.52%·mAP50 67.31%·mAP50–95 45.70%를 기록했습니다. 목표90%와 구분하며, 객체 탐지 수치는 CCTV 투기 행동 판정 정확도가 아닙니다. 단일 프레임 그림 역시 행동 판정이나 시험 지표 재계산 결과가 아닙니다.
+3차 최종 보고서의 고정 테스트150장·conf0.17·IoU0.50·ensemble/full 조건에서는 정밀도61.36%·재현율65.83%·F1 63.52%·mAP50 67.31%·mAP50–95 45.70%를 기록했습니다.
+
+목표90%와 구분하며, 객체 탐지 수치는 CCTV 투기 행동 판정 정확도가 아닙니다. 단일 프레임 그림 역시 행동 판정이나 시험 지표 재계산 결과가 아닙니다.
 
 [각 차수의 코드·조건·관측·전체 비교](docs/REVISION_INDEX.md)
 
