@@ -1,4 +1,5 @@
-# 📖 7차 전체 파일 비교
+<a name="-7차-전체-파일-비교"></a>
+# 7차 전체 파일 비교
 
 [← 전체 비교](../FOLDER_COMPARISONS.md) · [기능·차수 설명](../REVISION_INDEX.md)
 

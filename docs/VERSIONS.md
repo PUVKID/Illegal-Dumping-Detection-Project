@@ -1,25 +1,27 @@
-# 🗂️ 현재 공개 자료와 차수별 변화
+<a name="️-현재-공개-자료와-차수별-변화"></a>
+# 현재 공개 자료와 차수별 변화
 
 | 차수·위치 | 현재 파일 | 전체 비교 |
 | :--- | ---: | :--- |
-| [1차](../1%EC%B0%A8) | 1 | [🔎 비교](folder-comparisons/step-1.md) |
-| [2차](../2%EC%B0%A8) | 1 | [🔎 비교](folder-comparisons/step-2.md) |
-| [최종/3차](../%EC%B5%9C%EC%A2%85/3%EC%B0%A8) | 62 | [🔎 비교](folder-comparisons/step-3.md) |
-| [최종/4차](../%EC%B5%9C%EC%A2%85/4%EC%B0%A8) | 4 | [🔎 비교](folder-comparisons/step-4.md) |
-| [최종/최종](../%EC%B5%9C%EC%A2%85/%EC%B5%9C%EC%A2%85) | 10 | [🔎 비교](folder-comparisons/step-5.md) |
-| [5차](../5%EC%B0%A8) | 23 | [🔎 비교](folder-comparisons/step-6.md) |
-| [6차](../6%EC%B0%A8) | 5 | [🔎 비교](folder-comparisons/step-7.md) |
-| [7차](../7%EC%B0%A8) | 15 | [🔎 비교](folder-comparisons/step-8.md) |
-| [8차](../8%EC%B0%A8) | 17 | [🔎 비교](folder-comparisons/step-9.md) |
-| [9차](../9차/) | 2 | [🔎 비교](comparisons/8-to-9.md) |
-| [10차](../10차/) | 38 | [🔎 9차와 비교](comparisons/9-to-10.md) · [8차 화면과 비교](comparisons/8-to-10.md) |
-| [11차](../11차/) | 7 | [🔎 비교](comparisons/10-to-11.md) |
-| [12차](../12차/) | 19 | [🔎 비교](comparisons/11-to-12.md) |
-| [이전 도커 실험](../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98) | 53 | [🔎 비교](folder-comparisons/step-10.md) |
+| [1차](../1%EC%B0%A8) | 1 | [비교](folder-comparisons/step-1.md) |
+| [2차](../2%EC%B0%A8) | 1 | [비교](folder-comparisons/step-2.md) |
+| [최종/3차](../%EC%B5%9C%EC%A2%85/3%EC%B0%A8) | 62 | [비교](folder-comparisons/step-3.md) |
+| [최종/4차](../%EC%B5%9C%EC%A2%85/4%EC%B0%A8) | 4 | [비교](folder-comparisons/step-4.md) |
+| [최종/최종](../%EC%B5%9C%EC%A2%85/%EC%B5%9C%EC%A2%85) | 10 | [비교](folder-comparisons/step-5.md) |
+| [5차](../5%EC%B0%A8) | 23 | [비교](folder-comparisons/step-6.md) |
+| [6차](../6%EC%B0%A8) | 5 | [비교](folder-comparisons/step-7.md) |
+| [7차](../7%EC%B0%A8) | 15 | [비교](folder-comparisons/step-8.md) |
+| [8차](../8%EC%B0%A8) | 17 | [비교](folder-comparisons/step-9.md) |
+| [9차](../9차/) | 2 | [비교](comparisons/8-to-9.md) |
+| [10차](../10차/) | 38 | [9차와 비교](comparisons/9-to-10.md) · [8차 화면과 비교](comparisons/8-to-10.md) |
+| [11차](../11차/) | 7 | [비교](comparisons/10-to-11.md) |
+| [12차](../12차/) | 19 | [비교](comparisons/11-to-12.md) |
+| [이전 도커 실험](../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98) | 53 | [비교](folder-comparisons/step-10.md) |
 
 현재 수량은 각 보존 폴더의 전체 공개 파일을 셉니다. 별도 자료 묶음 사이의 같은 파일도 각 경로에서 보존합니다.
 
-## 🧭 자료별 의미와 근거
+<a name="-자료별-의미와-근거"></a>
+## 자료별 의미와 근거
 
 | 자료 | 실제 경로 | 목적과 내용 | 근거 |
 |---|---|---|---|
@@ -33,7 +35,8 @@
 
 `최종`은 `최종/3차`, `최종/4차`, `최종/최종`을 포함하는 상위 경로입니다. 하위 항목을 상위 항목과 나란한 독립 차수로 합산하지 않습니다.
 
-## ⚖️ 자료별 기능 비교
+<a name="️-자료별-기능-비교"></a>
+## 자료별 기능 비교
 
 | 경로 | 확인한 역할 |
 |---|---|
@@ -46,7 +49,8 @@
 3차의 [데이터 준비](../최종/3차/클린뷰/data_pipeline.py), [학습](../최종/3차/클린뷰/train_round3.py), [추론](../최종/3차/클린뷰/inference.py)을 각각 확인할 수 있습니다. 4차에는 3차 모델의 설명 이미지와 문서 변환 도구를 구성했습니다.
 
 
-## 🔎 연구·개발 자료
+<a name="-연구개발-자료"></a>
+## 연구·개발 자료
 
 | 자료와 안내 | 자료의 성격 | 구체적인 차이와 연결 |
 |---|---|---|
