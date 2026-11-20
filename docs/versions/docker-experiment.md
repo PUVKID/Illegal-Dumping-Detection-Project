@@ -83,13 +83,13 @@ matplotlib
 #### LEVEL 1 · [3차실험/trash_round3/app/backend.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py)
 
 
-| 내용 |
-| --- |
-| **설정·옵션:** [`ROOT`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L6)<br>**코드의 선언:** `정의=BASE / 'trash_round3'` |
-| **설정·옵션:** [`APP`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L7)<br>**코드의 선언:** `정의=ROOT / 'app'` |
-| **설정·옵션:** [`STATE`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L8)<br>**코드의 선언:** `정의=APP / 'state'` |
-| **설정·옵션:** [`JOBS`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L9)<br>**코드의 선언:** `정의=STATE / 'jobs'` |
-| **설정·옵션:** [`VIDEO_EXT`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L10)<br>**코드의 선언:** `정의={'.mp4', '.avi', '.mov', '.mkv', '.m4v'}` |
+| 설정·옵션 | 코드의 선언 |
+| --- | --- |
+| [`ROOT`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L6) | `정의=BASE / 'trash_round3'` |
+| [`APP`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L7) | `정의=ROOT / 'app'` |
+| [`STATE`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L8) | `정의=APP / 'state'` |
+| [`JOBS`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L9) | `정의=STATE / 'jobs'` |
+| [`VIDEO_EXT`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L10) | `정의={'.mp4', '.avi', '.mov', '.mkv', '.m4v'}` |
 
 **거부 조건:** [`not any(p.is_relative_to(r.resolve()) for r in [ROOT/'videos',APP/'uploads'])`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L52)
 
@@ -131,11 +131,11 @@ matplotlib
 #### LEVEL 1 · [3차실험/trash_round3/app/data_pipeline.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/data_pipeline.py)
 
 
-| 내용 |
-| --- |
-| **설정·옵션:** [`REF`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/data_pipeline.py#L9)<br>**코드의 선언:** `정의=ROOT/'data/reference'` |
-| **설정·옵션:** [`FULL`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/data_pipeline.py#L10)<br>**코드의 선언:** `정의=ROOT/'data/full'` |
-| **설정·옵션:** [`SEED`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/data_pipeline.py#L11)<br>**코드의 선언:** `정의=20261013` |
+| 설정·옵션 | 코드의 선언 |
+| --- | --- |
+| [`REF`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/data_pipeline.py#L9) | `정의=ROOT/'data/reference'` |
+| [`FULL`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/data_pipeline.py#L10) | `정의=ROOT/'data/full'` |
+| [`SEED`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/data_pipeline.py#L11) | `정의=20261013` |
 
 #### LEVEL 1 · [3차실험/trash_round3/app/detector.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/detector.py)
 
@@ -221,10 +221,10 @@ matplotlib
 #### LEVEL 1 · [3차실험/trash_round3/app/make_report.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/make_report.py)
 
 
-| 내용 |
-| --- |
-| **설정·옵션:** [`APP`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/make_report.py#L10)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
-| **설정·옵션:** [`OUT`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/make_report.py#L11)<br>**코드의 선언:** `정의=ROOT/'report'` |
+| 설정·옵션 | 코드의 선언 |
+| --- | --- |
+| [`APP`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/make_report.py#L10) | `정의=Path(__file__).resolve().parent` |
+| [`OUT`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/make_report.py#L11) | `정의=ROOT/'report'` |
 
 #### LEVEL 1 · [3차실험/trash_round3/data/taco/detector/detector.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/data/taco/detector/detector.py)
 
@@ -297,9 +297,9 @@ matplotlib
 #### LEVEL 1 · [3차실험/trash_round3/data/taco/detector/visualize.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/data/taco/detector/visualize.py)
 
 
-| 내용 |
-| --- |
-| **설정·옵션:** [`ROOT_DIR`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/data/taco/detector/visualize.py#L25)<br>**코드의 선언:** `정의=os.path.abspath("../")` |
+| 설정·옵션 | 코드의 선언 |
+| --- | --- |
+| [`ROOT_DIR`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/data/taco/detector/visualize.py#L25) | `정의=os.path.abspath("../")` |
 
 #### LEVEL 1 · [3차실험/trash_round3/data/taco/download.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/data/taco/download.py)
 
@@ -320,18 +320,11 @@ matplotlib
 
 precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함께 읽습니다. 객체 탐지, 영상 사건 후보, 실제 투기 행위 판단은 다른 평가 대상입니다. 목표 90%와 완료된 시험 성적을 구분합니다.
 
-**상황:** 학습 또는 화면이 시작되지 않음
-
-**확인할 내용:** 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다.
-
-**상황:** 원본 계약 검사 실패
-
-**확인할 내용:** 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다.
-
-**상황:** 지표 해석이 어려움
-
-**확인할 내용:** 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다.
-
+| 상황 | 확인할 내용 |
+| --- | --- |
+| 학습 또는 화면이 시작되지 않음 | 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다. |
+| 원본 계약 검사 실패 | 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다. |
+| 지표 해석이 어려움 | 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다. |
 
 [자료 폴더](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98) · [직전 비교·자료 범위](../comparisons/docker-to-3.md) · [이 차수의 원래 전체 상세](#reading-level-5)
 
@@ -346,18 +339,11 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 
 ### LEVEL 2 · 입력에서 출력으로
 
-**단계:** 입력
-
-**내용:** 쓰레기 영상·라벨·모델·선택한 차수 설정
-
-**단계:** 처리
-
-**내용:** 자료 준비·모델/영상 처리·평가 또는 상태 표시
-
-**단계:** 출력
-
-**내용:** 탐지 후보·평가 지표·화면·보고서
-
+| 단계 | 내용 |
+| --- | --- |
+| 입력 | 쓰레기 영상·라벨·모델·선택한 차수 설정 |
+| 처리 | 자료 준비·모델/영상 처리·평가 또는 상태 표시 |
+| 출력 | 탐지 후보·평가 지표·화면·보고서 |
 
 입력·처리·출력은 위의 같은 자료 흐름을 다른 단계에서 읽는 기준입니다. 처리 조건과 출력의 의미를 함께 확인합니다.
 
@@ -415,13 +401,13 @@ matplotlib
 #### LEVEL 2 · [3차실험/trash_round3/app/backend.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py)
 
 
-| 내용 |
-| --- |
-| **설정·옵션:** [`ROOT`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L6)<br>**코드의 선언:** `정의=BASE / 'trash_round3'` |
-| **설정·옵션:** [`APP`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L7)<br>**코드의 선언:** `정의=ROOT / 'app'` |
-| **설정·옵션:** [`STATE`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L8)<br>**코드의 선언:** `정의=APP / 'state'` |
-| **설정·옵션:** [`JOBS`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L9)<br>**코드의 선언:** `정의=STATE / 'jobs'` |
-| **설정·옵션:** [`VIDEO_EXT`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L10)<br>**코드의 선언:** `정의={'.mp4', '.avi', '.mov', '.mkv', '.m4v'}` |
+| 설정·옵션 | 코드의 선언 |
+| --- | --- |
+| [`ROOT`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L6) | `정의=BASE / 'trash_round3'` |
+| [`APP`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L7) | `정의=ROOT / 'app'` |
+| [`STATE`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L8) | `정의=APP / 'state'` |
+| [`JOBS`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L9) | `정의=STATE / 'jobs'` |
+| [`VIDEO_EXT`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L10) | `정의={'.mp4', '.avi', '.mov', '.mkv', '.m4v'}` |
 
 **거부 조건:** [`not any(p.is_relative_to(r.resolve()) for r in [ROOT/'videos',APP/'uploads'])`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L52)
 
@@ -463,11 +449,11 @@ matplotlib
 #### LEVEL 2 · [3차실험/trash_round3/app/data_pipeline.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/data_pipeline.py)
 
 
-| 내용 |
-| --- |
-| **설정·옵션:** [`REF`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/data_pipeline.py#L9)<br>**코드의 선언:** `정의=ROOT/'data/reference'` |
-| **설정·옵션:** [`FULL`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/data_pipeline.py#L10)<br>**코드의 선언:** `정의=ROOT/'data/full'` |
-| **설정·옵션:** [`SEED`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/data_pipeline.py#L11)<br>**코드의 선언:** `정의=20261013` |
+| 설정·옵션 | 코드의 선언 |
+| --- | --- |
+| [`REF`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/data_pipeline.py#L9) | `정의=ROOT/'data/reference'` |
+| [`FULL`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/data_pipeline.py#L10) | `정의=ROOT/'data/full'` |
+| [`SEED`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/data_pipeline.py#L11) | `정의=20261013` |
 
 #### LEVEL 2 · [3차실험/trash_round3/app/detector.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/detector.py)
 
@@ -553,10 +539,10 @@ matplotlib
 #### LEVEL 2 · [3차실험/trash_round3/app/make_report.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/make_report.py)
 
 
-| 내용 |
-| --- |
-| **설정·옵션:** [`APP`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/make_report.py#L10)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
-| **설정·옵션:** [`OUT`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/make_report.py#L11)<br>**코드의 선언:** `정의=ROOT/'report'` |
+| 설정·옵션 | 코드의 선언 |
+| --- | --- |
+| [`APP`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/make_report.py#L10) | `정의=Path(__file__).resolve().parent` |
+| [`OUT`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/make_report.py#L11) | `정의=ROOT/'report'` |
 
 #### LEVEL 2 · [3차실험/trash_round3/data/taco/detector/detector.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/data/taco/detector/detector.py)
 
@@ -629,9 +615,9 @@ matplotlib
 #### LEVEL 2 · [3차실험/trash_round3/data/taco/detector/visualize.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/data/taco/detector/visualize.py)
 
 
-| 내용 |
-| --- |
-| **설정·옵션:** [`ROOT_DIR`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/data/taco/detector/visualize.py#L25)<br>**코드의 선언:** `정의=os.path.abspath("../")` |
+| 설정·옵션 | 코드의 선언 |
+| --- | --- |
+| [`ROOT_DIR`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/data/taco/detector/visualize.py#L25) | `정의=os.path.abspath("../")` |
 
 #### LEVEL 2 · [3차실험/trash_round3/data/taco/download.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/data/taco/download.py)
 
@@ -647,18 +633,11 @@ matplotlib
 
 precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함께 읽습니다. 객체 탐지, 영상 사건 후보, 실제 투기 행위 판단은 다른 평가 대상입니다. 목표 90%와 완료된 시험 성적을 구분합니다.
 
-**상황:** 학습 또는 화면이 시작되지 않음
-
-**확인할 내용:** 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다.
-
-**상황:** 원본 계약 검사 실패
-
-**확인할 내용:** 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다.
-
-**상황:** 지표 해석이 어려움
-
-**확인할 내용:** 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다.
-
+| 상황 | 확인할 내용 |
+| --- | --- |
+| 학습 또는 화면이 시작되지 않음 | 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다. |
+| 원본 계약 검사 실패 | 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다. |
+| 지표 해석이 어려움 | 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다. |
 
 [자료 폴더](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98) · [직전 비교·자료 범위](../comparisons/docker-to-3.md) · [이 차수의 원래 전체 상세](#reading-level-5)
 
@@ -716,13 +695,13 @@ matplotlib
 #### LEVEL 3 · [3차실험/trash_round3/app/backend.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py)
 
 
-| 내용 |
-| --- |
-| **설정·옵션:** [`ROOT`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L6)<br>**코드의 선언:** `정의=BASE / 'trash_round3'` |
-| **설정·옵션:** [`APP`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L7)<br>**코드의 선언:** `정의=ROOT / 'app'` |
-| **설정·옵션:** [`STATE`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L8)<br>**코드의 선언:** `정의=APP / 'state'` |
-| **설정·옵션:** [`JOBS`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L9)<br>**코드의 선언:** `정의=STATE / 'jobs'` |
-| **설정·옵션:** [`VIDEO_EXT`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L10)<br>**코드의 선언:** `정의={'.mp4', '.avi', '.mov', '.mkv', '.m4v'}` |
+| 설정·옵션 | 코드의 선언 |
+| --- | --- |
+| [`ROOT`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L6) | `정의=BASE / 'trash_round3'` |
+| [`APP`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L7) | `정의=ROOT / 'app'` |
+| [`STATE`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L8) | `정의=APP / 'state'` |
+| [`JOBS`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L9) | `정의=STATE / 'jobs'` |
+| [`VIDEO_EXT`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L10) | `정의={'.mp4', '.avi', '.mov', '.mkv', '.m4v'}` |
 
 **거부 조건:** [`not any(p.is_relative_to(r.resolve()) for r in [ROOT/'videos',APP/'uploads'])`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L52)
 
@@ -764,11 +743,11 @@ matplotlib
 #### LEVEL 3 · [3차실험/trash_round3/app/data_pipeline.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/data_pipeline.py)
 
 
-| 내용 |
-| --- |
-| **설정·옵션:** [`REF`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/data_pipeline.py#L9)<br>**코드의 선언:** `정의=ROOT/'data/reference'` |
-| **설정·옵션:** [`FULL`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/data_pipeline.py#L10)<br>**코드의 선언:** `정의=ROOT/'data/full'` |
-| **설정·옵션:** [`SEED`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/data_pipeline.py#L11)<br>**코드의 선언:** `정의=20261013` |
+| 설정·옵션 | 코드의 선언 |
+| --- | --- |
+| [`REF`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/data_pipeline.py#L9) | `정의=ROOT/'data/reference'` |
+| [`FULL`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/data_pipeline.py#L10) | `정의=ROOT/'data/full'` |
+| [`SEED`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/data_pipeline.py#L11) | `정의=20261013` |
 
 #### LEVEL 3 · [3차실험/trash_round3/app/detector.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/detector.py)
 
@@ -854,10 +833,10 @@ matplotlib
 #### LEVEL 3 · [3차실험/trash_round3/app/make_report.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/make_report.py)
 
 
-| 내용 |
-| --- |
-| **설정·옵션:** [`APP`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/make_report.py#L10)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
-| **설정·옵션:** [`OUT`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/make_report.py#L11)<br>**코드의 선언:** `정의=ROOT/'report'` |
+| 설정·옵션 | 코드의 선언 |
+| --- | --- |
+| [`APP`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/make_report.py#L10) | `정의=Path(__file__).resolve().parent` |
+| [`OUT`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/make_report.py#L11) | `정의=ROOT/'report'` |
 
 #### LEVEL 3 · [3차실험/trash_round3/data/taco/detector/detector.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/data/taco/detector/detector.py)
 
@@ -930,9 +909,9 @@ matplotlib
 #### LEVEL 3 · [3차실험/trash_round3/data/taco/detector/visualize.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/data/taco/detector/visualize.py)
 
 
-| 내용 |
-| --- |
-| **설정·옵션:** [`ROOT_DIR`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/data/taco/detector/visualize.py#L25)<br>**코드의 선언:** `정의=os.path.abspath("../")` |
+| 설정·옵션 | 코드의 선언 |
+| --- | --- |
+| [`ROOT_DIR`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/data/taco/detector/visualize.py#L25) | `정의=os.path.abspath("../")` |
 
 #### LEVEL 3 · [3차실험/trash_round3/data/taco/download.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/data/taco/download.py)
 
@@ -951,35 +930,21 @@ matplotlib
 3. 해당 차수의 실행 안내에 따라 처리하거나 이미 생성된 결과를 읽습니다.
 4. 결과의 자료 출처·분할·선택 정책·측정 범위를 함께 확인합니다.
 
-**단계:** 입력
-
-**내용:** 쓰레기 영상·라벨·모델·선택한 차수 설정
-
-**단계:** 처리
-
-**내용:** 자료 준비·모델/영상 처리·평가 또는 상태 표시
-
-**단계:** 출력
-
-**내용:** 탐지 후보·평가 지표·화면·보고서
-
+| 단계 | 내용 |
+| --- | --- |
+| 입력 | 쓰레기 영상·라벨·모델·선택한 차수 설정 |
+| 처리 | 자료 준비·모델/영상 처리·평가 또는 상태 표시 |
+| 출력 | 탐지 후보·평가 지표·화면·보고서 |
 
 ### LEVEL 3 · 결과와 실패를 확인하기
 
 precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함께 읽습니다. 객체 탐지, 영상 사건 후보, 실제 투기 행위 판단은 다른 평가 대상입니다. 목표 90%와 완료된 시험 성적을 구분합니다.
 
-**상황:** 학습 또는 화면이 시작되지 않음
-
-**확인할 내용:** 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다.
-
-**상황:** 원본 계약 검사 실패
-
-**확인할 내용:** 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다.
-
-**상황:** 지표 해석이 어려움
-
-**확인할 내용:** 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다.
-
+| 상황 | 확인할 내용 |
+| --- | --- |
+| 학습 또는 화면이 시작되지 않음 | 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다. |
+| 원본 계약 검사 실패 | 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다. |
+| 지표 해석이 어려움 | 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다. |
 
 ### LEVEL 3 · 실행 전 대조할 차수 조건
 
@@ -1035,18 +1000,11 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 **원문에 정의된 역할·구성:** 노트북 16개 셀
 
 
-**단계:** 입력
-
-**내용:** 쓰레기 영상·라벨·모델·선택한 차수 설정
-
-**단계:** 처리
-
-**내용:** 자료 준비·모델/영상 처리·평가 또는 상태 표시
-
-**단계:** 출력
-
-**내용:** 탐지 후보·평가 지표·화면·보고서
-
+| 단계 | 내용 |
+| --- | --- |
+| 입력 | 쓰레기 영상·라벨·모델·선택한 차수 설정 |
+| 처리 | 자료 준비·모델/영상 처리·평가 또는 상태 표시 |
+| 출력 | 탐지 후보·평가 지표·화면·보고서 |
 
 ### LEVEL 4 · 조건·변경·결과를 함께 검토하기
 
@@ -1097,13 +1055,13 @@ matplotlib
 #### LEVEL 4 · [3차실험/trash_round3/app/backend.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py)
 
 
-| 내용 |
-| --- |
-| **설정·옵션:** [`ROOT`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L6)<br>**코드의 선언:** `정의=BASE / 'trash_round3'` |
-| **설정·옵션:** [`APP`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L7)<br>**코드의 선언:** `정의=ROOT / 'app'` |
-| **설정·옵션:** [`STATE`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L8)<br>**코드의 선언:** `정의=APP / 'state'` |
-| **설정·옵션:** [`JOBS`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L9)<br>**코드의 선언:** `정의=STATE / 'jobs'` |
-| **설정·옵션:** [`VIDEO_EXT`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L10)<br>**코드의 선언:** `정의={'.mp4', '.avi', '.mov', '.mkv', '.m4v'}` |
+| 설정·옵션 | 코드의 선언 |
+| --- | --- |
+| [`ROOT`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L6) | `정의=BASE / 'trash_round3'` |
+| [`APP`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L7) | `정의=ROOT / 'app'` |
+| [`STATE`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L8) | `정의=APP / 'state'` |
+| [`JOBS`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L9) | `정의=STATE / 'jobs'` |
+| [`VIDEO_EXT`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L10) | `정의={'.mp4', '.avi', '.mov', '.mkv', '.m4v'}` |
 
 **거부 조건:** [`not any(p.is_relative_to(r.resolve()) for r in [ROOT/'videos',APP/'uploads'])`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L52)
 
@@ -1145,11 +1103,11 @@ matplotlib
 #### LEVEL 4 · [3차실험/trash_round3/app/data_pipeline.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/data_pipeline.py)
 
 
-| 내용 |
-| --- |
-| **설정·옵션:** [`REF`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/data_pipeline.py#L9)<br>**코드의 선언:** `정의=ROOT/'data/reference'` |
-| **설정·옵션:** [`FULL`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/data_pipeline.py#L10)<br>**코드의 선언:** `정의=ROOT/'data/full'` |
-| **설정·옵션:** [`SEED`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/data_pipeline.py#L11)<br>**코드의 선언:** `정의=20261013` |
+| 설정·옵션 | 코드의 선언 |
+| --- | --- |
+| [`REF`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/data_pipeline.py#L9) | `정의=ROOT/'data/reference'` |
+| [`FULL`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/data_pipeline.py#L10) | `정의=ROOT/'data/full'` |
+| [`SEED`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/data_pipeline.py#L11) | `정의=20261013` |
 
 #### LEVEL 4 · [3차실험/trash_round3/app/detector.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/detector.py)
 
@@ -1235,10 +1193,10 @@ matplotlib
 #### LEVEL 4 · [3차실험/trash_round3/app/make_report.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/make_report.py)
 
 
-| 내용 |
-| --- |
-| **설정·옵션:** [`APP`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/make_report.py#L10)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
-| **설정·옵션:** [`OUT`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/make_report.py#L11)<br>**코드의 선언:** `정의=ROOT/'report'` |
+| 설정·옵션 | 코드의 선언 |
+| --- | --- |
+| [`APP`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/make_report.py#L10) | `정의=Path(__file__).resolve().parent` |
+| [`OUT`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/make_report.py#L11) | `정의=ROOT/'report'` |
 
 #### LEVEL 4 · [3차실험/trash_round3/data/taco/detector/detector.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/data/taco/detector/detector.py)
 
@@ -1311,9 +1269,9 @@ matplotlib
 #### LEVEL 4 · [3차실험/trash_round3/data/taco/detector/visualize.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/data/taco/detector/visualize.py)
 
 
-| 내용 |
-| --- |
-| **설정·옵션:** [`ROOT_DIR`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/data/taco/detector/visualize.py#L25)<br>**코드의 선언:** `정의=os.path.abspath("../")` |
+| 설정·옵션 | 코드의 선언 |
+| --- | --- |
+| [`ROOT_DIR`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/data/taco/detector/visualize.py#L25) | `정의=os.path.abspath("../")` |
 
 #### LEVEL 4 · [3차실험/trash_round3/data/taco/download.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/data/taco/download.py)
 
@@ -1327,18 +1285,11 @@ matplotlib
 
 precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함께 읽습니다. 객체 탐지, 영상 사건 후보, 실제 투기 행위 판단은 다른 평가 대상입니다. 목표 90%와 완료된 시험 성적을 구분합니다.
 
-**상황:** 학습 또는 화면이 시작되지 않음
-
-**확인할 내용:** 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다.
-
-**상황:** 원본 계약 검사 실패
-
-**확인할 내용:** 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다.
-
-**상황:** 지표 해석이 어려움
-
-**확인할 내용:** 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다.
-
+| 상황 | 확인할 내용 |
+| --- | --- |
+| 학습 또는 화면이 시작되지 않음 | 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다. |
+| 원본 계약 검사 실패 | 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다. |
+| 지표 해석이 어려움 | 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다. |
 
 ### LEVEL 4 · 재현과 전체 비교
 
@@ -1378,18 +1329,11 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 <a name="-입력처리출력"></a>
 ## 입력·처리·출력
 
-**단계:** 입력
-
-**내용:** 쓰레기 영상·라벨·모델·선택한 차수 설정
-
-**단계:** 처리
-
-**내용:** 자료 준비·모델/영상 처리·평가 또는 상태 표시
-
-**단계:** 출력
-
-**내용:** 탐지 후보·평가 지표·화면·보고서
-
+| 단계 | 내용 |
+| --- | --- |
+| 입력 | 쓰레기 영상·라벨·모델·선택한 차수 설정 |
+| 처리 | 자료 준비·모델/영상 처리·평가 또는 상태 표시 |
+| 출력 | 탐지 후보·평가 지표·화면·보고서 |
 
 <a name="usage"></a>
 
@@ -1406,11 +1350,11 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 <a name="-실제-자료-구성"></a>
 ## 실제 자료 구성
 
-| 내용 |
-| --- |
-| **경로:** [3차실험/](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98)<br>**자료 종류:** 하위 자료 폴더 |
-| **경로:** [불법투기탐지/](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/%EB%B6%88%EB%B2%95%ED%88%AC%EA%B8%B0%ED%83%90%EC%A7%80)<br>**자료 종류:** 하위 자료 폴더 |
-| **경로:** [README.md](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/README.md)<br>**자료 종류:** MD 파일 |
+| 경로 | 자료 종류 |
+| --- | --- |
+| [3차실험/](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98) | 하위 자료 폴더 |
+| [불법투기탐지/](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/%EB%B6%88%EB%B2%95%ED%88%AC%EA%B8%B0%ED%83%90%EC%A7%80) | 하위 자료 폴더 |
+| [README.md](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/README.md) | MD 파일 |
 
 <a name="-주요-모듈과-코드-읽기"></a>
 ## 주요 모듈과 코드 읽기
@@ -1506,13 +1450,13 @@ matplotlib
 ### [3차실험/trash_round3/app/backend.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py)
 
 
-| 내용 |
-| --- |
-| **설정·옵션:** [`ROOT`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L6)<br>**코드의 선언:** `정의=BASE / 'trash_round3'` |
-| **설정·옵션:** [`APP`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L7)<br>**코드의 선언:** `정의=ROOT / 'app'` |
-| **설정·옵션:** [`STATE`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L8)<br>**코드의 선언:** `정의=APP / 'state'` |
-| **설정·옵션:** [`JOBS`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L9)<br>**코드의 선언:** `정의=STATE / 'jobs'` |
-| **설정·옵션:** [`VIDEO_EXT`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L10)<br>**코드의 선언:** `정의={'.mp4', '.avi', '.mov', '.mkv', '.m4v'}` |
+| 설정·옵션 | 코드의 선언 |
+| --- | --- |
+| [`ROOT`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L6) | `정의=BASE / 'trash_round3'` |
+| [`APP`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L7) | `정의=ROOT / 'app'` |
+| [`STATE`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L8) | `정의=APP / 'state'` |
+| [`JOBS`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L9) | `정의=STATE / 'jobs'` |
+| [`VIDEO_EXT`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L10) | `정의={'.mp4', '.avi', '.mov', '.mkv', '.m4v'}` |
 
 **거부 조건:** [`not any(p.is_relative_to(r.resolve()) for r in [ROOT/'videos',APP/'uploads'])`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/backend.py#L52)
 
@@ -1554,11 +1498,11 @@ matplotlib
 ### [3차실험/trash_round3/app/data_pipeline.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/data_pipeline.py)
 
 
-| 내용 |
-| --- |
-| **설정·옵션:** [`REF`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/data_pipeline.py#L9)<br>**코드의 선언:** `정의=ROOT/'data/reference'` |
-| **설정·옵션:** [`FULL`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/data_pipeline.py#L10)<br>**코드의 선언:** `정의=ROOT/'data/full'` |
-| **설정·옵션:** [`SEED`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/data_pipeline.py#L11)<br>**코드의 선언:** `정의=20261013` |
+| 설정·옵션 | 코드의 선언 |
+| --- | --- |
+| [`REF`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/data_pipeline.py#L9) | `정의=ROOT/'data/reference'` |
+| [`FULL`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/data_pipeline.py#L10) | `정의=ROOT/'data/full'` |
+| [`SEED`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/data_pipeline.py#L11) | `정의=20261013` |
 
 ### [3차실험/trash_round3/app/detector.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/detector.py)
 
@@ -1644,10 +1588,10 @@ matplotlib
 ### [3차실험/trash_round3/app/make_report.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/make_report.py)
 
 
-| 내용 |
-| --- |
-| **설정·옵션:** [`APP`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/make_report.py#L10)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
-| **설정·옵션:** [`OUT`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/make_report.py#L11)<br>**코드의 선언:** `정의=ROOT/'report'` |
+| 설정·옵션 | 코드의 선언 |
+| --- | --- |
+| [`APP`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/make_report.py#L10) | `정의=Path(__file__).resolve().parent` |
+| [`OUT`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/app/make_report.py#L11) | `정의=ROOT/'report'` |
 
 ### [3차실험/trash_round3/data/taco/detector/detector.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/data/taco/detector/detector.py)
 
@@ -1720,9 +1664,9 @@ matplotlib
 ### [3차실험/trash_round3/data/taco/detector/visualize.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/data/taco/detector/visualize.py)
 
 
-| 내용 |
-| --- |
-| **설정·옵션:** [`ROOT_DIR`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/data/taco/detector/visualize.py#L25)<br>**코드의 선언:** `정의=os.path.abspath("../")` |
+| 설정·옵션 | 코드의 선언 |
+| --- | --- |
+| [`ROOT_DIR`](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/data/taco/detector/visualize.py#L25) | `정의=os.path.abspath("../")` |
 
 ### [3차실험/trash_round3/data/taco/download.py](../../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98/3%EC%B0%A8%EC%8B%A4%ED%97%98/trash_round3/data/taco/download.py)
 
@@ -1744,18 +1688,11 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 <a name="️-제약과-문제-해결"></a>
 ## 제약과 문제 해결
 
-**상황:** 학습 또는 화면이 시작되지 않음
-
-**확인할 내용:** 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다.
-
-**상황:** 원본 계약 검사 실패
-
-**확인할 내용:** 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다.
-
-**상황:** 지표 해석이 어려움
-
-**확인할 내용:** 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다.
-
+| 상황 | 확인할 내용 |
+| --- | --- |
+| 학습 또는 화면이 시작되지 않음 | 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다. |
+| 원본 계약 검사 실패 | 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다. |
+| 지표 해석이 어려움 | 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다. |
 
 <a name="changes"></a>
 

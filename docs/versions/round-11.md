@@ -64,10 +64,10 @@ python -B -X utf8 11차/recover.py --pipeline 7차/worker.py --start
 
 #### LEVEL 1 · 소스에서 제공하는 CLI 옵션
 
-| 내용 |
-| --- |
-| **진입 소스:** [recover.py](../../11%EC%B0%A8/recover.py)<br>**정의된 옵션 이름:** `--pipeline`, `--start`, `--worker` |
-| **진입 소스:** [verify_sources.py](../../11%EC%B0%A8/verify_sources.py)<br>**정의된 옵션 이름:** `--expected-digest`, `--print-digest` |
+| 진입 소스 | 정의된 옵션 이름 |
+| --- | --- |
+| [recover.py](../../11%EC%B0%A8/recover.py) | `--pipeline`, `--start`, `--worker` |
+| [verify_sources.py](../../11%EC%B0%A8/verify_sources.py) | `--expected-digest`, `--print-digest` |
 
 각 옵션의 기본값·필수값·부작용은 해당 main과 인자 정의를 함께 확인합니다.
 
@@ -79,22 +79,22 @@ python -B -X utf8 11차/recover.py --pipeline 7차/worker.py --start
 
 #### LEVEL 1 · [recover.py](../../11%EC%B0%A8/recover.py)
 
-| 내용 |
-| --- |
-| **정의:** [`Progress`](../../11%EC%B0%A8/recover.py#L47)<br>**소스에 적힌 역할:** 원장 합산은 매 본문마다 유지하고 화면 쓰기만 합칩니다. |
-| **정의:** [`NetworkRetry`](../../11%EC%B0%A8/recover.py#L63)<br>**소스에 적힌 역할:** 연결·본문 읽기 경계의 실제 일시 오류만 나타냅니다. |
+| 정의 | 소스에 적힌 역할 |
+| --- | --- |
+| [`Progress`](../../11%EC%B0%A8/recover.py#L47) | 원장 합산은 매 본문마다 유지하고 화면 쓰기만 합칩니다. |
+| [`NetworkRetry`](../../11%EC%B0%A8/recover.py#L63) | 연결·본문 읽기 경계의 실제 일시 오류만 나타냅니다. |
 
 **표 항목:** 설정·옵션 · 코드의 선언
 
-| 내용 |
-| --- |
-| **설정·옵션:** [`--pipeline`](../../11%EC%B0%A8/recover.py#L310)<br>**코드의 선언:** `required=True` |
-| **설정·옵션:** [`--start`](../../11%EC%B0%A8/recover.py#L312)<br>**코드의 선언:** `action='store_true'` |
-| **설정·옵션:** [`--worker`](../../11%EC%B0%A8/recover.py#L313)<br>**코드의 선언:** `` |
-| **설정·옵션:** [`ROOT`](../../11%EC%B0%A8/recover.py#L15)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
-| **설정·옵션:** [`ORIGINAL`](../../11%EC%B0%A8/recover.py#L16)<br>**코드의 선언:** `정의=ROOT.parent / '7차'` |
-| **설정·옵션:** [`MIN_RANGE`](../../11%EC%B0%A8/recover.py#L17)<br>**코드의 선언:** `정의=64 * 1024` |
-| **설정·옵션:** [`MAX_RANGE`](../../11%EC%B0%A8/recover.py#L18)<br>**코드의 선언:** `정의=4 * 1024 * 1024` |
+| 설정·옵션 | 코드의 선언 |
+| --- | --- |
+| [`--pipeline`](../../11%EC%B0%A8/recover.py#L310) | `required=True` |
+| [`--start`](../../11%EC%B0%A8/recover.py#L312) | `action='store_true'` |
+| [`--worker`](../../11%EC%B0%A8/recover.py#L313) | `` |
+| [`ROOT`](../../11%EC%B0%A8/recover.py#L15) | `정의=Path(__file__).resolve().parent` |
+| [`ORIGINAL`](../../11%EC%B0%A8/recover.py#L16) | `정의=ROOT.parent / '7차'` |
+| [`MIN_RANGE`](../../11%EC%B0%A8/recover.py#L17) | `정의=64 * 1024` |
+| [`MAX_RANGE`](../../11%EC%B0%A8/recover.py#L18) | `정의=4 * 1024 * 1024` |
 
 **거부 조건:** [`path.is_symlink() or path.resolve() != (ORIGINAL / 'worker.py').resolve()`](../../11%EC%B0%A8/recover.py#L23)
 
@@ -225,18 +225,11 @@ python -B -X utf8 11차/recover.py --pipeline 7차/worker.py --start
 
 복구 가능 여부는 기준 파일과 실제 상태 대조 결과입니다. 학습·평가 완료와 별도입니다.
 
-**상황:** 학습 또는 화면이 시작되지 않음
-
-**확인할 내용:** 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다.
-
-**상황:** 원본 계약 검사 실패
-
-**확인할 내용:** 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다.
-
-**상황:** 지표 해석이 어려움
-
-**확인할 내용:** 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다.
-
+| 상황 | 확인할 내용 |
+| --- | --- |
+| 학습 또는 화면이 시작되지 않음 | 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다. |
+| 원본 계약 검사 실패 | 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다. |
+| 지표 해석이 어려움 | 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다. |
 
 [자료 폴더](../../11%EC%B0%A8) · [직전 비교·자료 범위](../comparisons/10-to-11.md) · [이 차수의 원래 전체 상세](#reading-level-5)
 
@@ -251,18 +244,11 @@ python -B -X utf8 11차/recover.py --pipeline 7차/worker.py --start
 
 ### LEVEL 2 · 입력에서 출력으로
 
-**단계:** 입력
-
-**내용:** 원래7차의 동결 기준16개 파일과 중단 상태
-
-**단계:** 처리
-
-**내용:** 불변 기준 대조 → 안전한 복구 조건 판별
-
-**단계:** 출력
-
-**내용:** 복구 검사·상태 기록
-
+| 단계 | 내용 |
+| --- | --- |
+| 입력 | 원래7차의 동결 기준16개 파일과 중단 상태 |
+| 처리 | 불변 기준 대조 → 안전한 복구 조건 판별 |
+| 출력 | 복구 검사·상태 기록 |
 
 입력·처리·출력은 위의 같은 자료 흐름을 다른 단계에서 읽는 기준입니다. 처리 조건과 출력의 의미를 함께 확인합니다.
 
@@ -301,10 +287,10 @@ python -B -X utf8 11차/recover.py --pipeline 7차/worker.py --start
 
 #### LEVEL 2 · 소스에서 제공하는 CLI 옵션
 
-| 내용 |
-| --- |
-| **진입 소스:** [recover.py](../../11%EC%B0%A8/recover.py)<br>**정의된 옵션 이름:** `--pipeline`, `--start`, `--worker` |
-| **진입 소스:** [verify_sources.py](../../11%EC%B0%A8/verify_sources.py)<br>**정의된 옵션 이름:** `--expected-digest`, `--print-digest` |
+| 진입 소스 | 정의된 옵션 이름 |
+| --- | --- |
+| [recover.py](../../11%EC%B0%A8/recover.py) | `--pipeline`, `--start`, `--worker` |
+| [verify_sources.py](../../11%EC%B0%A8/verify_sources.py) | `--expected-digest`, `--print-digest` |
 
 각 옵션의 기본값·필수값·부작용은 해당 main과 인자 정의를 함께 확인합니다.
 
@@ -316,22 +302,22 @@ python -B -X utf8 11차/recover.py --pipeline 7차/worker.py --start
 
 #### LEVEL 2 · [recover.py](../../11%EC%B0%A8/recover.py)
 
-| 내용 |
-| --- |
-| **정의:** [`Progress`](../../11%EC%B0%A8/recover.py#L47)<br>**소스에 적힌 역할:** 원장 합산은 매 본문마다 유지하고 화면 쓰기만 합칩니다. |
-| **정의:** [`NetworkRetry`](../../11%EC%B0%A8/recover.py#L63)<br>**소스에 적힌 역할:** 연결·본문 읽기 경계의 실제 일시 오류만 나타냅니다. |
+| 정의 | 소스에 적힌 역할 |
+| --- | --- |
+| [`Progress`](../../11%EC%B0%A8/recover.py#L47) | 원장 합산은 매 본문마다 유지하고 화면 쓰기만 합칩니다. |
+| [`NetworkRetry`](../../11%EC%B0%A8/recover.py#L63) | 연결·본문 읽기 경계의 실제 일시 오류만 나타냅니다. |
 
 **표 항목:** 설정·옵션 · 코드의 선언
 
-| 내용 |
-| --- |
-| **설정·옵션:** [`--pipeline`](../../11%EC%B0%A8/recover.py#L310)<br>**코드의 선언:** `required=True` |
-| **설정·옵션:** [`--start`](../../11%EC%B0%A8/recover.py#L312)<br>**코드의 선언:** `action='store_true'` |
-| **설정·옵션:** [`--worker`](../../11%EC%B0%A8/recover.py#L313)<br>**코드의 선언:** `` |
-| **설정·옵션:** [`ROOT`](../../11%EC%B0%A8/recover.py#L15)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
-| **설정·옵션:** [`ORIGINAL`](../../11%EC%B0%A8/recover.py#L16)<br>**코드의 선언:** `정의=ROOT.parent / '7차'` |
-| **설정·옵션:** [`MIN_RANGE`](../../11%EC%B0%A8/recover.py#L17)<br>**코드의 선언:** `정의=64 * 1024` |
-| **설정·옵션:** [`MAX_RANGE`](../../11%EC%B0%A8/recover.py#L18)<br>**코드의 선언:** `정의=4 * 1024 * 1024` |
+| 설정·옵션 | 코드의 선언 |
+| --- | --- |
+| [`--pipeline`](../../11%EC%B0%A8/recover.py#L310) | `required=True` |
+| [`--start`](../../11%EC%B0%A8/recover.py#L312) | `action='store_true'` |
+| [`--worker`](../../11%EC%B0%A8/recover.py#L313) | `` |
+| [`ROOT`](../../11%EC%B0%A8/recover.py#L15) | `정의=Path(__file__).resolve().parent` |
+| [`ORIGINAL`](../../11%EC%B0%A8/recover.py#L16) | `정의=ROOT.parent / '7차'` |
+| [`MIN_RANGE`](../../11%EC%B0%A8/recover.py#L17) | `정의=64 * 1024` |
+| [`MAX_RANGE`](../../11%EC%B0%A8/recover.py#L18) | `정의=4 * 1024 * 1024` |
 
 **거부 조건:** [`path.is_symlink() or path.resolve() != (ORIGINAL / 'worker.py').resolve()`](../../11%EC%B0%A8/recover.py#L23)
 
@@ -457,18 +443,11 @@ python -B -X utf8 11차/recover.py --pipeline 7차/worker.py --start
 
 복구 가능 여부는 기준 파일과 실제 상태 대조 결과입니다. 학습·평가 완료와 별도입니다.
 
-**상황:** 학습 또는 화면이 시작되지 않음
-
-**확인할 내용:** 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다.
-
-**상황:** 원본 계약 검사 실패
-
-**확인할 내용:** 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다.
-
-**상황:** 지표 해석이 어려움
-
-**확인할 내용:** 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다.
-
+| 상황 | 확인할 내용 |
+| --- | --- |
+| 학습 또는 화면이 시작되지 않음 | 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다. |
+| 원본 계약 검사 실패 | 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다. |
+| 지표 해석이 어려움 | 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다. |
 
 [자료 폴더](../../11%EC%B0%A8) · [직전 비교·자료 범위](../comparisons/10-to-11.md) · [이 차수의 원래 전체 상세](#reading-level-5)
 
@@ -507,10 +486,10 @@ python -B -X utf8 11차/recover.py --pipeline 7차/worker.py --start
 
 #### LEVEL 3 · 소스에서 제공하는 CLI 옵션
 
-| 내용 |
-| --- |
-| **진입 소스:** [recover.py](../../11%EC%B0%A8/recover.py)<br>**정의된 옵션 이름:** `--pipeline`, `--start`, `--worker` |
-| **진입 소스:** [verify_sources.py](../../11%EC%B0%A8/verify_sources.py)<br>**정의된 옵션 이름:** `--expected-digest`, `--print-digest` |
+| 진입 소스 | 정의된 옵션 이름 |
+| --- | --- |
+| [recover.py](../../11%EC%B0%A8/recover.py) | `--pipeline`, `--start`, `--worker` |
+| [verify_sources.py](../../11%EC%B0%A8/verify_sources.py) | `--expected-digest`, `--print-digest` |
 
 각 옵션의 기본값·필수값·부작용은 해당 main과 인자 정의를 함께 확인합니다.
 
@@ -522,22 +501,22 @@ python -B -X utf8 11차/recover.py --pipeline 7차/worker.py --start
 
 #### LEVEL 3 · [recover.py](../../11%EC%B0%A8/recover.py)
 
-| 내용 |
-| --- |
-| **정의:** [`Progress`](../../11%EC%B0%A8/recover.py#L47)<br>**소스에 적힌 역할:** 원장 합산은 매 본문마다 유지하고 화면 쓰기만 합칩니다. |
-| **정의:** [`NetworkRetry`](../../11%EC%B0%A8/recover.py#L63)<br>**소스에 적힌 역할:** 연결·본문 읽기 경계의 실제 일시 오류만 나타냅니다. |
+| 정의 | 소스에 적힌 역할 |
+| --- | --- |
+| [`Progress`](../../11%EC%B0%A8/recover.py#L47) | 원장 합산은 매 본문마다 유지하고 화면 쓰기만 합칩니다. |
+| [`NetworkRetry`](../../11%EC%B0%A8/recover.py#L63) | 연결·본문 읽기 경계의 실제 일시 오류만 나타냅니다. |
 
 **표 항목:** 설정·옵션 · 코드의 선언
 
-| 내용 |
-| --- |
-| **설정·옵션:** [`--pipeline`](../../11%EC%B0%A8/recover.py#L310)<br>**코드의 선언:** `required=True` |
-| **설정·옵션:** [`--start`](../../11%EC%B0%A8/recover.py#L312)<br>**코드의 선언:** `action='store_true'` |
-| **설정·옵션:** [`--worker`](../../11%EC%B0%A8/recover.py#L313)<br>**코드의 선언:** `` |
-| **설정·옵션:** [`ROOT`](../../11%EC%B0%A8/recover.py#L15)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
-| **설정·옵션:** [`ORIGINAL`](../../11%EC%B0%A8/recover.py#L16)<br>**코드의 선언:** `정의=ROOT.parent / '7차'` |
-| **설정·옵션:** [`MIN_RANGE`](../../11%EC%B0%A8/recover.py#L17)<br>**코드의 선언:** `정의=64 * 1024` |
-| **설정·옵션:** [`MAX_RANGE`](../../11%EC%B0%A8/recover.py#L18)<br>**코드의 선언:** `정의=4 * 1024 * 1024` |
+| 설정·옵션 | 코드의 선언 |
+| --- | --- |
+| [`--pipeline`](../../11%EC%B0%A8/recover.py#L310) | `required=True` |
+| [`--start`](../../11%EC%B0%A8/recover.py#L312) | `action='store_true'` |
+| [`--worker`](../../11%EC%B0%A8/recover.py#L313) | `` |
+| [`ROOT`](../../11%EC%B0%A8/recover.py#L15) | `정의=Path(__file__).resolve().parent` |
+| [`ORIGINAL`](../../11%EC%B0%A8/recover.py#L16) | `정의=ROOT.parent / '7차'` |
+| [`MIN_RANGE`](../../11%EC%B0%A8/recover.py#L17) | `정의=64 * 1024` |
+| [`MAX_RANGE`](../../11%EC%B0%A8/recover.py#L18) | `정의=4 * 1024 * 1024` |
 
 **거부 조건:** [`path.is_symlink() or path.resolve() != (ORIGINAL / 'worker.py').resolve()`](../../11%EC%B0%A8/recover.py#L23)
 
@@ -666,35 +645,21 @@ python -B -X utf8 11차/recover.py --pipeline 7차/worker.py --start
 3. 해당 차수의 실행 안내에 따라 처리하거나 이미 생성된 결과를 읽습니다.
 4. 결과의 자료 출처·분할·선택 정책·측정 범위를 함께 확인합니다.
 
-**단계:** 입력
-
-**내용:** 원래7차의 동결 기준16개 파일과 중단 상태
-
-**단계:** 처리
-
-**내용:** 불변 기준 대조 → 안전한 복구 조건 판별
-
-**단계:** 출력
-
-**내용:** 복구 검사·상태 기록
-
+| 단계 | 내용 |
+| --- | --- |
+| 입력 | 원래7차의 동결 기준16개 파일과 중단 상태 |
+| 처리 | 불변 기준 대조 → 안전한 복구 조건 판별 |
+| 출력 | 복구 검사·상태 기록 |
 
 ### LEVEL 3 · 결과와 실패를 확인하기
 
 복구 가능 여부는 기준 파일과 실제 상태 대조 결과입니다. 학습·평가 완료와 별도입니다.
 
-**상황:** 학습 또는 화면이 시작되지 않음
-
-**확인할 내용:** 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다.
-
-**상황:** 원본 계약 검사 실패
-
-**확인할 내용:** 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다.
-
-**상황:** 지표 해석이 어려움
-
-**확인할 내용:** 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다.
-
+| 상황 | 확인할 내용 |
+| --- | --- |
+| 학습 또는 화면이 시작되지 않음 | 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다. |
+| 원본 계약 검사 실패 | 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다. |
+| 지표 해석이 어려움 | 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다. |
 
 ### LEVEL 3 · 실행 전 대조할 차수 조건
 
@@ -713,24 +678,17 @@ python -B -X utf8 11차/recover.py --pipeline 7차/worker.py --start
 
 ### LEVEL 4 · 이 차수 구현의 실제 근거
 
-| 내용 |
-| --- |
-| **파일:** [recover.py](../../11%EC%B0%A8/recover.py)<br>**원문에 정의된 역할·구성:** 7차 계약을 보존하며 작은 범위의 원자료 수신을 앞에 연결합니다. |
-| **파일:** [verify_sources.py](../../11%EC%B0%A8/verify_sources.py)<br>**원문에 정의된 역할·구성:** 외부에서 고정한 11차 전체 해시와 7차 원본 불변을 검사합니다. |
-| **파일:** [tests/test_recover.py](../../11%EC%B0%A8/tests/test_recover.py)<br>**원문에 정의된 역할·구성:** 작은 공식 범위 수신과 기존 작업자 연결의 실패 경로를 검사합니다. |
+| 파일 | 원문에 정의된 역할·구성 |
+| --- | --- |
+| [recover.py](../../11%EC%B0%A8/recover.py) | 7차 계약을 보존하며 작은 범위의 원자료 수신을 앞에 연결합니다. |
+| [verify_sources.py](../../11%EC%B0%A8/verify_sources.py) | 외부에서 고정한 11차 전체 해시와 7차 원본 불변을 검사합니다. |
+| [tests/test_recover.py](../../11%EC%B0%A8/tests/test_recover.py) | 작은 공식 범위 수신과 기존 작업자 연결의 실패 경로를 검사합니다. |
 
-**단계:** 입력
-
-**내용:** 원래7차의 동결 기준16개 파일과 중단 상태
-
-**단계:** 처리
-
-**내용:** 불변 기준 대조 → 안전한 복구 조건 판별
-
-**단계:** 출력
-
-**내용:** 복구 검사·상태 기록
-
+| 단계 | 내용 |
+| --- | --- |
+| 입력 | 원래7차의 동결 기준16개 파일과 중단 상태 |
+| 처리 | 불변 기준 대조 → 안전한 복구 조건 판별 |
+| 출력 | 복구 검사·상태 기록 |
 
 ### LEVEL 4 · 조건·변경·결과를 함께 검토하기
 
@@ -762,10 +720,10 @@ python -B -X utf8 11차/recover.py --pipeline 7차/worker.py --start
 
 #### LEVEL 4 · 소스에서 제공하는 CLI 옵션
 
-| 내용 |
-| --- |
-| **진입 소스:** [recover.py](../../11%EC%B0%A8/recover.py)<br>**정의된 옵션 이름:** `--pipeline`, `--start`, `--worker` |
-| **진입 소스:** [verify_sources.py](../../11%EC%B0%A8/verify_sources.py)<br>**정의된 옵션 이름:** `--expected-digest`, `--print-digest` |
+| 진입 소스 | 정의된 옵션 이름 |
+| --- | --- |
+| [recover.py](../../11%EC%B0%A8/recover.py) | `--pipeline`, `--start`, `--worker` |
+| [verify_sources.py](../../11%EC%B0%A8/verify_sources.py) | `--expected-digest`, `--print-digest` |
 
 각 옵션의 기본값·필수값·부작용은 해당 main과 인자 정의를 함께 확인합니다.
 
@@ -777,22 +735,22 @@ python -B -X utf8 11차/recover.py --pipeline 7차/worker.py --start
 
 #### LEVEL 4 · [recover.py](../../11%EC%B0%A8/recover.py)
 
-| 내용 |
-| --- |
-| **정의:** [`Progress`](../../11%EC%B0%A8/recover.py#L47)<br>**소스에 적힌 역할:** 원장 합산은 매 본문마다 유지하고 화면 쓰기만 합칩니다. |
-| **정의:** [`NetworkRetry`](../../11%EC%B0%A8/recover.py#L63)<br>**소스에 적힌 역할:** 연결·본문 읽기 경계의 실제 일시 오류만 나타냅니다. |
+| 정의 | 소스에 적힌 역할 |
+| --- | --- |
+| [`Progress`](../../11%EC%B0%A8/recover.py#L47) | 원장 합산은 매 본문마다 유지하고 화면 쓰기만 합칩니다. |
+| [`NetworkRetry`](../../11%EC%B0%A8/recover.py#L63) | 연결·본문 읽기 경계의 실제 일시 오류만 나타냅니다. |
 
 **표 항목:** 설정·옵션 · 코드의 선언
 
-| 내용 |
-| --- |
-| **설정·옵션:** [`--pipeline`](../../11%EC%B0%A8/recover.py#L310)<br>**코드의 선언:** `required=True` |
-| **설정·옵션:** [`--start`](../../11%EC%B0%A8/recover.py#L312)<br>**코드의 선언:** `action='store_true'` |
-| **설정·옵션:** [`--worker`](../../11%EC%B0%A8/recover.py#L313)<br>**코드의 선언:** `` |
-| **설정·옵션:** [`ROOT`](../../11%EC%B0%A8/recover.py#L15)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
-| **설정·옵션:** [`ORIGINAL`](../../11%EC%B0%A8/recover.py#L16)<br>**코드의 선언:** `정의=ROOT.parent / '7차'` |
-| **설정·옵션:** [`MIN_RANGE`](../../11%EC%B0%A8/recover.py#L17)<br>**코드의 선언:** `정의=64 * 1024` |
-| **설정·옵션:** [`MAX_RANGE`](../../11%EC%B0%A8/recover.py#L18)<br>**코드의 선언:** `정의=4 * 1024 * 1024` |
+| 설정·옵션 | 코드의 선언 |
+| --- | --- |
+| [`--pipeline`](../../11%EC%B0%A8/recover.py#L310) | `required=True` |
+| [`--start`](../../11%EC%B0%A8/recover.py#L312) | `action='store_true'` |
+| [`--worker`](../../11%EC%B0%A8/recover.py#L313) | `` |
+| [`ROOT`](../../11%EC%B0%A8/recover.py#L15) | `정의=Path(__file__).resolve().parent` |
+| [`ORIGINAL`](../../11%EC%B0%A8/recover.py#L16) | `정의=ROOT.parent / '7차'` |
+| [`MIN_RANGE`](../../11%EC%B0%A8/recover.py#L17) | `정의=64 * 1024` |
+| [`MAX_RANGE`](../../11%EC%B0%A8/recover.py#L18) | `정의=4 * 1024 * 1024` |
 
 **거부 조건:** [`path.is_symlink() or path.resolve() != (ORIGINAL / 'worker.py').resolve()`](../../11%EC%B0%A8/recover.py#L23)
 
@@ -916,18 +874,11 @@ python -B -X utf8 11차/recover.py --pipeline 7차/worker.py --start
 
 복구 가능 여부는 기준 파일과 실제 상태 대조 결과입니다. 학습·평가 완료와 별도입니다.
 
-**상황:** 학습 또는 화면이 시작되지 않음
-
-**확인할 내용:** 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다.
-
-**상황:** 원본 계약 검사 실패
-
-**확인할 내용:** 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다.
-
-**상황:** 지표 해석이 어려움
-
-**확인할 내용:** 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다.
-
+| 상황 | 확인할 내용 |
+| --- | --- |
+| 학습 또는 화면이 시작되지 않음 | 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다. |
+| 원본 계약 검사 실패 | 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다. |
+| 지표 해석이 어려움 | 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다. |
 
 ### LEVEL 4 · 재현과 전체 비교
 
@@ -967,18 +918,11 @@ python -B -X utf8 11차/recover.py --pipeline 7차/worker.py --start
 <a name="-입력처리출력"></a>
 ## 입력·처리·출력
 
-**단계:** 입력
-
-**내용:** 원래7차의 동결 기준16개 파일과 중단 상태
-
-**단계:** 처리
-
-**내용:** 불변 기준 대조 → 안전한 복구 조건 판별
-
-**단계:** 출력
-
-**내용:** 복구 검사·상태 기록
-
+| 단계 | 내용 |
+| --- | --- |
+| 입력 | 원래7차의 동결 기준16개 파일과 중단 상태 |
+| 처리 | 불변 기준 대조 → 안전한 복구 조건 판별 |
+| 출력 | 복구 검사·상태 기록 |
 
 <a name="usage"></a>
 
@@ -995,24 +939,24 @@ python -B -X utf8 11차/recover.py --pipeline 7차/worker.py --start
 <a name="-실제-자료-구성"></a>
 ## 실제 자료 구성
 
-| 내용 |
-| --- |
-| **경로:** [docs/](../../11%EC%B0%A8/docs)<br>**자료 종류:** 하위 자료 폴더 |
-| **경로:** [tests/](../../11%EC%B0%A8/tests)<br>**자료 종류:** 하위 자료 폴더 |
-| **경로:** [README.md](../../11%EC%B0%A8/README.md)<br>**자료 종류:** MD 파일 |
-| **경로:** [original-baseline.json](../../11%EC%B0%A8/original-baseline.json)<br>**자료 종류:** JSON 파일 |
-| **경로:** [recover.py](../../11%EC%B0%A8/recover.py)<br>**자료 종류:** PY 파일 |
-| **경로:** [verify_sources.py](../../11%EC%B0%A8/verify_sources.py)<br>**자료 종류:** PY 파일 |
-| **경로:** [변경기록.md](../../11%EC%B0%A8/%EB%B3%80%EA%B2%BD%EA%B8%B0%EB%A1%9D.md)<br>**자료 종류:** MD 파일 |
+| 경로 | 자료 종류 |
+| --- | --- |
+| [docs/](../../11%EC%B0%A8/docs) | 하위 자료 폴더 |
+| [tests/](../../11%EC%B0%A8/tests) | 하위 자료 폴더 |
+| [README.md](../../11%EC%B0%A8/README.md) | MD 파일 |
+| [original-baseline.json](../../11%EC%B0%A8/original-baseline.json) | JSON 파일 |
+| [recover.py](../../11%EC%B0%A8/recover.py) | PY 파일 |
+| [verify_sources.py](../../11%EC%B0%A8/verify_sources.py) | PY 파일 |
+| [변경기록.md](../../11%EC%B0%A8/%EB%B3%80%EA%B2%BD%EA%B8%B0%EB%A1%9D.md) | MD 파일 |
 
 <a name="-주요-모듈과-코드-읽기"></a>
 ## 주요 모듈과 코드 읽기
 
-| 내용 |
-| --- |
-| **파일:** [recover.py](../../11%EC%B0%A8/recover.py)<br>**원문에 정의된 역할·구성:** 7차 계약을 보존하며 작은 범위의 원자료 수신을 앞에 연결합니다. |
-| **파일:** [verify_sources.py](../../11%EC%B0%A8/verify_sources.py)<br>**원문에 정의된 역할·구성:** 외부에서 고정한 11차 전체 해시와 7차 원본 불변을 검사합니다. |
-| **파일:** [tests/test_recover.py](../../11%EC%B0%A8/tests/test_recover.py)<br>**원문에 정의된 역할·구성:** 작은 공식 범위 수신과 기존 작업자 연결의 실패 경로를 검사합니다. |
+| 파일 | 원문에 정의된 역할·구성 |
+| --- | --- |
+| [recover.py](../../11%EC%B0%A8/recover.py) | 7차 계약을 보존하며 작은 범위의 원자료 수신을 앞에 연결합니다. |
+| [verify_sources.py](../../11%EC%B0%A8/verify_sources.py) | 외부에서 고정한 11차 전체 해시와 7차 원본 불변을 검사합니다. |
+| [tests/test_recover.py](../../11%EC%B0%A8/tests/test_recover.py) | 작은 공식 범위 수신과 기존 작업자 연결의 실패 경로를 검사합니다. |
 
 <a name="setup"></a>
 
@@ -1051,10 +995,10 @@ python -B -X utf8 11차/recover.py --pipeline 7차/worker.py --start
 <a name="️-소스에서-제공하는-cli-옵션"></a>
 ### 소스에서 제공하는 CLI 옵션
 
-| 내용 |
-| --- |
-| **진입 소스:** [recover.py](../../11%EC%B0%A8/recover.py)<br>**정의된 옵션 이름:** `--pipeline`, `--start`, `--worker` |
-| **진입 소스:** [verify_sources.py](../../11%EC%B0%A8/verify_sources.py)<br>**정의된 옵션 이름:** `--expected-digest`, `--print-digest` |
+| 진입 소스 | 정의된 옵션 이름 |
+| --- | --- |
+| [recover.py](../../11%EC%B0%A8/recover.py) | `--pipeline`, `--start`, `--worker` |
+| [verify_sources.py](../../11%EC%B0%A8/verify_sources.py) | `--expected-digest`, `--print-digest` |
 
 각 옵션의 기본값·필수값·부작용은 해당 main과 인자 정의를 함께 확인합니다.
 
@@ -1066,22 +1010,22 @@ python -B -X utf8 11차/recover.py --pipeline 7차/worker.py --start
 
 ### [recover.py](../../11%EC%B0%A8/recover.py)
 
-| 내용 |
-| --- |
-| **정의:** [`Progress`](../../11%EC%B0%A8/recover.py#L47)<br>**소스에 적힌 역할:** 원장 합산은 매 본문마다 유지하고 화면 쓰기만 합칩니다. |
-| **정의:** [`NetworkRetry`](../../11%EC%B0%A8/recover.py#L63)<br>**소스에 적힌 역할:** 연결·본문 읽기 경계의 실제 일시 오류만 나타냅니다. |
+| 정의 | 소스에 적힌 역할 |
+| --- | --- |
+| [`Progress`](../../11%EC%B0%A8/recover.py#L47) | 원장 합산은 매 본문마다 유지하고 화면 쓰기만 합칩니다. |
+| [`NetworkRetry`](../../11%EC%B0%A8/recover.py#L63) | 연결·본문 읽기 경계의 실제 일시 오류만 나타냅니다. |
 
 **표 항목:** 설정·옵션 · 코드의 선언
 
-| 내용 |
-| --- |
-| **설정·옵션:** [`--pipeline`](../../11%EC%B0%A8/recover.py#L310)<br>**코드의 선언:** `required=True` |
-| **설정·옵션:** [`--start`](../../11%EC%B0%A8/recover.py#L312)<br>**코드의 선언:** `action='store_true'` |
-| **설정·옵션:** [`--worker`](../../11%EC%B0%A8/recover.py#L313)<br>**코드의 선언:** `` |
-| **설정·옵션:** [`ROOT`](../../11%EC%B0%A8/recover.py#L15)<br>**코드의 선언:** `정의=Path(__file__).resolve().parent` |
-| **설정·옵션:** [`ORIGINAL`](../../11%EC%B0%A8/recover.py#L16)<br>**코드의 선언:** `정의=ROOT.parent / '7차'` |
-| **설정·옵션:** [`MIN_RANGE`](../../11%EC%B0%A8/recover.py#L17)<br>**코드의 선언:** `정의=64 * 1024` |
-| **설정·옵션:** [`MAX_RANGE`](../../11%EC%B0%A8/recover.py#L18)<br>**코드의 선언:** `정의=4 * 1024 * 1024` |
+| 설정·옵션 | 코드의 선언 |
+| --- | --- |
+| [`--pipeline`](../../11%EC%B0%A8/recover.py#L310) | `required=True` |
+| [`--start`](../../11%EC%B0%A8/recover.py#L312) | `action='store_true'` |
+| [`--worker`](../../11%EC%B0%A8/recover.py#L313) | `` |
+| [`ROOT`](../../11%EC%B0%A8/recover.py#L15) | `정의=Path(__file__).resolve().parent` |
+| [`ORIGINAL`](../../11%EC%B0%A8/recover.py#L16) | `정의=ROOT.parent / '7차'` |
+| [`MIN_RANGE`](../../11%EC%B0%A8/recover.py#L17) | `정의=64 * 1024` |
+| [`MAX_RANGE`](../../11%EC%B0%A8/recover.py#L18) | `정의=4 * 1024 * 1024` |
 
 **거부 조건:** [`path.is_symlink() or path.resolve() != (ORIGINAL / 'worker.py').resolve()`](../../11%EC%B0%A8/recover.py#L23)
 
@@ -1213,18 +1157,11 @@ python -B -X utf8 11차/recover.py --pipeline 7차/worker.py --start
 <a name="️-제약과-문제-해결"></a>
 ## 제약과 문제 해결
 
-**상황:** 학습 또는 화면이 시작되지 않음
-
-**확인할 내용:** 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다.
-
-**상황:** 원본 계약 검사 실패
-
-**확인할 내용:** 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다.
-
-**상황:** 지표 해석이 어려움
-
-**확인할 내용:** 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다.
-
+| 상황 | 확인할 내용 |
+| --- | --- |
+| 학습 또는 화면이 시작되지 않음 | 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다. |
+| 원본 계약 검사 실패 | 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다. |
+| 지표 해석이 어려움 | 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다. |
 
 <a name="changes"></a>
 
