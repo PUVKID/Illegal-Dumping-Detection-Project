@@ -64,7 +64,7 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 
 | 거부 조건 | 오류 메시지 |
 | --- | --- |
-| [`not available`](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py#L19) | 빌 드하려면 별도로 PyInstaller를 준비해야 합니다.<br>자동 설치하지 않습니다. |
+| [`not available`](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py#L19) | 빌드하려면 별도로 PyInstaller를 준비해야 합니다.<br>자동 설치하지 않습니다. |
 
 #### LEVEL 1 · [pipeline.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/pipeline.py)
 
@@ -205,7 +205,7 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 
 | 거부 조건 | 오류 메시지 |
 | --- | --- |
-| [`not available`](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py#L19) | 빌 드하려면 별도로 PyInstaller를 준비해야 합니다.<br>자동 설치하지 않습니다. |
+| [`not available`](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py#L19) | 빌드하려면 별도로 PyInstaller를 준비해야 합니다.<br>자동 설치하지 않습니다. |
 
 #### LEVEL 2 · [pipeline.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/pipeline.py)
 
@@ -324,7 +324,7 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 
 | 거부 조건 | 오류 메시지 |
 | --- | --- |
-| [`not available`](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py#L19) | 빌 드하려면 별도로 PyInstaller를 준비해야 합니다.<br>자동 설치하지 않습니다. |
+| [`not available`](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py#L19) | 빌드하려면 별도로 PyInstaller를 준비해야 합니다.<br>자동 설치하지 않습니다. |
 
 #### LEVEL 3 · [pipeline.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/pipeline.py)
 
@@ -478,7 +478,7 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 
 | 거부 조건 | 오류 메시지 |
 | --- | --- |
-| [`not available`](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py#L19) | 빌 드하려면 별도로 PyInstaller를 준비해야 합니다.<br>자동 설치하지 않습니다. |
+| [`not available`](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py#L19) | 빌드하려면 별도로 PyInstaller를 준비해야 합니다.<br>자동 설치하지 않습니다. |
 
 #### LEVEL 4 · [pipeline.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/pipeline.py)
 
@@ -666,7 +666,7 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 
 | 거부 조건 | 오류 메시지 |
 | --- | --- |
-| [`not available`](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py#L19) | 빌 드하려면 별도로 PyInstaller를 준비해야 합니다.<br>자동 설치하지 않습니다. |
+| [`not available`](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/build_exe.py#L19) | 빌드하려면 별도로 PyInstaller를 준비해야 합니다.<br>자동 설치하지 않습니다. |
 
 ### [pipeline.py](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8/pipeline.py)
 

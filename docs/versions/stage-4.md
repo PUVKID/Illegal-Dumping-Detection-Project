@@ -41,7 +41,7 @@
 
 ### LEVEL 1 · 준비하고 확인할 것
 
-make_frame.py는 원래 Docker 컨테이너2026-2와/root/환경 PBL/trash_round3를 고정 참조합니다. 기존 모델·동영상·글 꼴과 Docker 환경 없이 독립 실행되지 않습니다.
+make_frame.py는 원래 Docker 컨테이너2026-2와/root/환경 PBL/trash_round3를 고정 참조합니다. 기존 모델·동영상·글꼴과 Docker 환경 없이 독립 실행되지 않습니다.
 
 관련 파일을 아래 링크에서 열어 순서대로 대조합니다.
 
@@ -91,7 +91,7 @@ test_metrics_recomputed =False로 시험 지표를 재계산하지 않습니다.
 2. 고유 설명에 적힌 입력 조건·경로·대상을 확인합니다.
 3. 연결된 비교와 기록의 관측 범위를 대조합니다.
 
-make_frame.py는 원래 Docker 컨테이너2026-2와/root/환경 PBL/trash_round3를 고정 참조합니다. 기존 모델·동영상·글 꼴과 Docker 환경 없이 독립 실행되지 않습니다.
+make_frame.py는 원래 Docker 컨테이너2026-2와/root/환경 PBL/trash_round3를 고정 참조합니다. 기존 모델·동영상·글꼴과 Docker 환경 없이 독립 실행되지 않습니다.
 
 관련 파일을 아래 링크에서 열어 순서대로 대조합니다.
 
@@ -113,7 +113,7 @@ test_metrics_recomputed =False로 시험 지표를 재계산하지 않습니다.
 
 최종 앙상블의 단일 프레임 표시와 문서 PDF 렌더 작업을 보관합니다.
 
-make_frame.py는 원래 Docker 컨테이너2026-2와/root/환경 PBL/trash_round3를 고정 참조합니다. 기존 모델·동영상·글 꼴과 Docker 환경 없이 독립 실행되지 않습니다.
+make_frame.py는 원래 Docker 컨테이너2026-2와/root/환경 PBL/trash_round3를 고정 참조합니다. 기존 모델·동영상·글꼴과 Docker 환경 없이 독립 실행되지 않습니다.
 
 관련 파일을 아래 링크에서 열어 순서대로 대조합니다.
 
@@ -179,7 +179,7 @@ test_metrics_recomputed =False로 시험 지표를 재계산하지 않습니다.
 
 ### LEVEL 4 · 조건·변경·결과를 함께 검토하기
 
-make_frame.py는 원래 Docker 컨테이너2026-2와/root/환경 PBL/trash_round3를 고정 참조합니다. 기존 모델·동영상·글 꼴과 Docker 환경 없이 독립 실행되지 않습니다.
+make_frame.py는 원래 Docker 컨테이너2026-2와/root/환경 PBL/trash_round3를 고정 참조합니다. 기존 모델·동영상·글꼴과 Docker 환경 없이 독립 실행되지 않습니다.
 
 관련 파일을 아래 링크에서 열어 순서대로 대조합니다.
 
@@ -277,7 +277,7 @@ test_metrics_recomputed =False로 시험 지표를 재계산하지 않습니다.
 <a name="-설치-환경과-실행사용법"></a>
 ## 설치 환경과 실행·사용법
 
-make_frame.py는 원래 Docker 컨테이너2026-2와/root/환경 PBL/trash_round3를 고정 참조합니다. 기존 모델·동영상·글 꼴과 Docker 환경 없이 독립 실행되지 않습니다.
+make_frame.py는 원래 Docker 컨테이너2026-2와/root/환경 PBL/trash_round3를 고정 참조합니다. 기존 모델·동영상·글꼴과 Docker 환경 없이 독립 실행되지 않습니다.
 
 관련 파일을 아래 링크에서 열어 순서대로 대조합니다.
 
