@@ -74,7 +74,9 @@ for images hosted by Flickr. If you decide to annotate these images using other 
 
 **Unofficial data**
 
-Annotations submitted via our website are added weekly to `data/annotations_unofficial.json`. These have not yet been been reviewed by us -- some may be inaccurate or have poor segmentations. 
+Annotations submitted via our website are added weekly to `data/annotations_unofficial.json`.
+
+These have not yet been been reviewed by us -- some may be inaccurate or have poor segmentations. 
 You can use the same command to download the respective images:
 ```
 python3 download.py --dataset_path ./data/annotations_unofficial.json
@@ -83,7 +85,13 @@ python3 download.py --dataset_path ./data/annotations_unofficial.json
 ### Trash Detection
 
 The implementation of [Mask R-CNN by Matterport](https://github.com/matterport/Mask_RCNN)  is included in ``/detector``
-with a few modifications. Requirements are the same. Before using this, the dataset needs to be split. You can either donwload our [weights and splits](https://github.com/pedropro/TACO/releases/tag/1.0) or generate these from scratch using the `split_dataset.py` script to generate 
+with a few modifications.
+
+Requirements are the same.
+
+Before using this, the dataset needs to be split.
+
+You can either donwload our [weights and splits](https://github.com/pedropro/TACO/releases/tag/1.0) or generate these from scratch using the `split_dataset.py` script to generate 
 N random train, val, test subsets. For example, run this inside the directory `detector`:
 ```
 python3 split_dataset.py --dataset_dir ../data
@@ -91,7 +99,11 @@ python3 split_dataset.py --dataset_dir ../data
 
 For further usage instructions, check ``detector/detector.py``.
 
-As you can see [here](http://tacodataset.org/stats), most of the original classes of TACO have very few annotations, therefore these must be either left out or merged together. Depending on the problem, ``detector/taco_config`` contains several class maps to target classes, which maintain the most dominant classes, e.g., Can, Bottles and Plastic bags. Feel free to make your own classes.
+As you can see [here](http://tacodataset.org/stats), most of the original classes of TACO have very few annotations, therefore these must be either left out or merged together.
+
+Depending on the problem, ``detector/taco_config`` contains several class maps to target classes, which maintain the most dominant classes, e.g., Can, Bottles and Plastic bags.
+
+Feel free to make your own classes.
 
 <p align="center">
 <img src="https://raw.githubusercontent.com/wiki/pedropro/TACO/images/teaser.gif" width="75%"/></p>

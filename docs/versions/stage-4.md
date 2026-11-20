@@ -1,7 +1,7 @@
 <div align="center">
 
 <a name="-최종4차"></a>
-# 최종/4차
+# 최 종/4차
 
 최종 앙상블의 단일 프레임 표시와 문서 PDF 렌더 작업을 보관합니다.
 
@@ -33,16 +33,15 @@
 3차 모델의 단일 프레임 결과와 문서를 정리했습니다.
 
 
-
 입력 — 고정 컨테이너의 첫 MP4 프레임·selected_model.json·기존 가중치
 
-처리 — 앙상블 쓰레기 탐지와 사람 검출 → 상단40% 블러 → PNG/JSON 기록
+처리 — 앙상블 쓰레기 탐지와 사람 검출 → 상단 40% 블러 → PNG/JSON 기록
 
 출력 — 단일 프레임 그림과 프레임_확인.json
 
 ### LEVEL 1 · 준비하고 확인할 것
 
-make_frame.py는 원래 Docker 컨테이너2026-2와 /root/환경 PBL/trash_round3를 고정 참조합니다. 기존 모델·동영상·글꼴과 Docker 환경 없이 독립 실행되지 않습니다.
+make_frame.py는 원래 Docker 컨테이너2026-2와/root/환경 PBL/trash_round3를 고정 참조합니다. 기존 모델·동영상·글 꼴과 Docker 환경 없이 독립 실행되지 않습니다.
 
 관련 파일을 아래 링크에서 열어 순서대로 대조합니다.
 
@@ -52,7 +51,7 @@ make_frame.py는 원래 Docker 컨테이너2026-2와 /root/환경 PBL/trash_roun
 
 ### LEVEL 1 · 결과와 주의할 범위
 
-test_metrics_recomputed=False로 시험 지표를 재계산하지 않습니다. 한 프레임의 객체 상자는 투기 사건 판정 성적이 아닙니다.
+test_metrics_recomputed =False로 시험 지표를 재계산하지 않습니다. 한 프레임의 객체 상자는 투기 사건 판정 성적이 아닙니다.
 
 | 상황 | 확인할 내용 |
 | --- | --- |
@@ -81,7 +80,7 @@ test_metrics_recomputed=False로 시험 지표를 재계산하지 않습니다. 
 | 단계 | 내용 |
 | --- | --- |
 | 입력 | 고정 컨테이너의 첫 MP4 프레임·selected_model.json·기존 가중치 |
-| 처리 | 앙상블 쓰레기 탐지와 사람 검출 → 상단40% 블러 → PNG/JSON 기록 |
+| 처리 | 앙상블 쓰레기 탐지와 사람 검출 → 상단 40% 블러 → PNG/JSON 기록 |
 | 출력 | 단일 프레임 그림과 프레임_확인.json |
 
 입력·처리·출력은 위의 같은 자료 흐름을 다른 단계에서 읽는 기준입니다. 처리 조건과 출력의 의미를 함께 확인합니다.
@@ -92,13 +91,13 @@ test_metrics_recomputed=False로 시험 지표를 재계산하지 않습니다. 
 2. 고유 설명에 적힌 입력 조건·경로·대상을 확인합니다.
 3. 연결된 비교와 기록의 관측 범위를 대조합니다.
 
-make_frame.py는 원래 Docker 컨테이너2026-2와 /root/환경 PBL/trash_round3를 고정 참조합니다. 기존 모델·동영상·글꼴과 Docker 환경 없이 독립 실행되지 않습니다.
+make_frame.py는 원래 Docker 컨테이너2026-2와/root/환경 PBL/trash_round3를 고정 참조합니다. 기존 모델·동영상·글 꼴과 Docker 환경 없이 독립 실행되지 않습니다.
 
 관련 파일을 아래 링크에서 열어 순서대로 대조합니다.
 
 ### LEVEL 2 · 관측과 해석을 구분하기
 
-test_metrics_recomputed=False로 시험 지표를 재계산하지 않습니다. 한 프레임의 객체 상자는 투기 사건 판정 성적이 아닙니다.
+test_metrics_recomputed =False로 시험 지표를 재계산하지 않습니다. 한 프레임의 객체 상자는 투기 사건 판정 성적이 아닙니다.
 
 | 상황 | 확인할 내용 |
 | --- | --- |
@@ -114,7 +113,7 @@ test_metrics_recomputed=False로 시험 지표를 재계산하지 않습니다. 
 
 최종 앙상블의 단일 프레임 표시와 문서 PDF 렌더 작업을 보관합니다.
 
-make_frame.py는 원래 Docker 컨테이너2026-2와 /root/환경 PBL/trash_round3를 고정 참조합니다. 기존 모델·동영상·글꼴과 Docker 환경 없이 독립 실행되지 않습니다.
+make_frame.py는 원래 Docker 컨테이너2026-2와/root/환경 PBL/trash_round3를 고정 참조합니다. 기존 모델·동영상·글 꼴과 Docker 환경 없이 독립 실행되지 않습니다.
 
 관련 파일을 아래 링크에서 열어 순서대로 대조합니다.
 
@@ -127,12 +126,12 @@ make_frame.py는 원래 Docker 컨테이너2026-2와 /root/환경 PBL/trash_roun
 | 단계 | 내용 |
 | --- | --- |
 | 입력 | 고정 컨테이너의 첫 MP4 프레임·selected_model.json·기존 가중치 |
-| 처리 | 앙상블 쓰레기 탐지와 사람 검출 → 상단40% 블러 → PNG/JSON 기록 |
+| 처리 | 앙상블 쓰레기 탐지와 사람 검출 → 상단 40% 블러 → PNG/JSON 기록 |
 | 출력 | 단일 프레임 그림과 프레임_확인.json |
 
 ### LEVEL 3 · 결과와 실패를 확인하기
 
-test_metrics_recomputed=False로 시험 지표를 재계산하지 않습니다. 한 프레임의 객체 상자는 투기 사건 판정 성적이 아닙니다.
+test_metrics_recomputed =False로 시험 지표를 재계산하지 않습니다. 한 프레임의 객체 상자는 투기 사건 판정 성적이 아닙니다.
 
 | 상황 | 확인할 내용 |
 | --- | --- |
@@ -175,16 +174,16 @@ test_metrics_recomputed=False로 시험 지표를 재계산하지 않습니다. 
 | 단계 | 내용 |
 | --- | --- |
 | 입력 | 고정 컨테이너의 첫 MP4 프레임·selected_model.json·기존 가중치 |
-| 처리 | 앙상블 쓰레기 탐지와 사람 검출 → 상단40% 블러 → PNG/JSON 기록 |
+| 처리 | 앙상블 쓰레기 탐지와 사람 검출 → 상단 40% 블러 → PNG/JSON 기록 |
 | 출력 | 단일 프레임 그림과 프레임_확인.json |
 
 ### LEVEL 4 · 조건·변경·결과를 함께 검토하기
 
-make_frame.py는 원래 Docker 컨테이너2026-2와 /root/환경 PBL/trash_round3를 고정 참조합니다. 기존 모델·동영상·글꼴과 Docker 환경 없이 독립 실행되지 않습니다.
+make_frame.py는 원래 Docker 컨테이너2026-2와/root/환경 PBL/trash_round3를 고정 참조합니다. 기존 모델·동영상·글 꼴과 Docker 환경 없이 독립 실행되지 않습니다.
 
 관련 파일을 아래 링크에서 열어 순서대로 대조합니다.
 
-test_metrics_recomputed=False로 시험 지표를 재계산하지 않습니다. 한 프레임의 객체 상자는 투기 사건 판정 성적이 아닙니다.
+test_metrics_recomputed =False로 시험 지표를 재계산하지 않습니다. 한 프레임의 객체 상자는 투기 사건 판정 성적이 아닙니다.
 
 | 상황 | 확인할 내용 |
 | --- | --- |
@@ -205,7 +204,6 @@ test_metrics_recomputed=False로 시험 지표를 재계산하지 않습니다. 
 
 기존의 전체 설명·표·코드·함수 참조·파일별 비교는 아래에 그대로 이어집니다. [자료 폴더](../../%EC%B5%9C%EC%A2%85/4%EC%B0%A8) · [직전 비교·자료 범위](../comparisons/3-to-4.md) · [이 차수의 원래 전체 상세](#reading-level-5)
 <!-- reading-levels:end -->
-
 
 
 [프로젝트](../../README.md) · [전체 차수](../REVISION_INDEX.md) · [원본 자료](../../%EC%B5%9C%EC%A2%85/4%EC%B0%A8) · [← 이전: 최종/3차](stage-3.md) · [다음: 최종/최종 →](stage-5.md)
@@ -230,7 +228,9 @@ test_metrics_recomputed=False로 시험 지표를 재계산하지 않습니다. 
 
 **항목:** 3
 
-**이 차수에서 확인할 내용:** - make_frame은 selected_model의 ensemble/policy/conf로 첫 영상 프레임을 예측하고 사람 상단 영역에 블러를 적용한 설명 PNG를 만듭니다. - 그림에는 단일 프레임 기능 확인·투기 사건 판정 결과 아님을 명시하고 test_metrics_recomputed를 False로 기록합니다. - render_with_word는 문서 렌더러의 PDF 변환을 Word 호출로 연결합니다. 학습이나 테스트 지표 계산 코드가 아닙니다.
+**이 차수에서 확인할 내용:** - make_frame은 selected_model의 ensemble/policy/conf로 첫 영상 프레임을 예측하고 사람 상단 영역에 블러를 적용한 설명 PNG를 만듭니다. - 그림에는 단일 프레임 기능 확인·투기 사건 판정 결과 아님을 명시하고 test_metrics_recomputed를 False로 기록합니다. - render_with_word는 문서 렌더러의 PDF 변환을 Word 호출로 연결합니다.
+
+학습이나 테스트 지표 계산 코드가 아닙니다.
 
 **항목:** 4
 
@@ -243,7 +243,7 @@ test_metrics_recomputed=False로 시험 지표를 재계산하지 않습니다. 
 | 단계 | 내용 |
 | --- | --- |
 | 입력 | 고정 컨테이너의 첫 MP4 프레임·selected_model.json·기존 가중치 |
-| 처리 | 앙상블 쓰레기 탐지와 사람 검출 → 상단40% 블러 → PNG/JSON 기록 |
+| 처리 | 앙상블 쓰레기 탐지와 사람 검출 → 상단 40% 블러 → PNG/JSON 기록 |
 | 출력 | 단일 프레임 그림과 프레임_확인.json |
 
 <a name="usage"></a>
@@ -277,7 +277,7 @@ test_metrics_recomputed=False로 시험 지표를 재계산하지 않습니다. 
 <a name="-설치-환경과-실행사용법"></a>
 ## 설치 환경과 실행·사용법
 
-make_frame.py는 원래 Docker 컨테이너2026-2와 /root/환경 PBL/trash_round3를 고정 참조합니다. 기존 모델·동영상·글꼴과 Docker 환경 없이 독립 실행되지 않습니다.
+make_frame.py는 원래 Docker 컨테이너2026-2와/root/환경 PBL/trash_round3를 고정 참조합니다. 기존 모델·동영상·글 꼴과 Docker 환경 없이 독립 실행되지 않습니다.
 
 관련 파일을 아래 링크에서 열어 순서대로 대조합니다.
 
@@ -286,7 +286,7 @@ make_frame.py는 원래 Docker 컨테이너2026-2와 /root/환경 PBL/trash_roun
 <a name="-처리-결과와-출력-읽기"></a>
 ## 처리 결과와 출력 읽기
 
-test_metrics_recomputed=False로 시험 지표를 재계산하지 않습니다. 한 프레임의 객체 상자는 투기 사건 판정 성적이 아닙니다.
+test_metrics_recomputed =False로 시험 지표를 재계산하지 않습니다. 한 프레임의 객체 상자는 투기 사건 판정 성적이 아닙니다.
 
 <a name="️-제약과-문제-해결"></a>
 ## 제약과 문제 해결

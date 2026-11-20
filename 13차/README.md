@@ -4,15 +4,31 @@
 
 ## 🔬 무엇이 달라졌는가
 
-7차 원본과 준비 계약을 보존하고 `effective_prepare.py`에 네 AST 변화만 둡니다. 원래 7차의 정규화·누출 방지·분할·학습·평가를 유지합니다. 원본 준비 SHA만으로 실효 전체를 검증했다고 쓰지 않고, 13차 제품 canonical과 resolver·공식 입력·ID 대응·작업 계보·준비 manifest를 함께 묶습니다.
+7차 원본과 준비 계약을 보존하고 `effective_prepare.py`에 네 AST 변화만 둡니다.
+
+원래 7차의 정규화·누출 방지·분할·학습·평가를 유지합니다.
+
+원본 준비 SHA만으로 실효 전체를 검증했다고 쓰지 않고, 13차 제품 canonical과 resolver·공식 입력·ID 대응·작업 계보·준비 manifest를 함께 묶습니다.
 
 공식 주석의 ID 대응은 과거 1,999개와 5차 3,839개, 중복 642개, 합집합 5,196개입니다. 과거 JPEG는 재인코딩 및 최대 2,048 축소 결과이므로 새 공식 원본과 해시가 같다고 주장하지 않습니다.
 
 ## ⚙️ 실행 경계
 
-실제 실행은 기존 Docker Linux와 7차 작업자의 시작·실행 잠금 및 작업 저장소를 사용합니다. 이전 실패 작업은 보존하고 새 시도에 `resume_of`를 기록합니다. 10차 대시보드의 디자인과 읽기 경로는 바꾸지 않습니다. GPU 학습은 같은 두 후보의 최대 60·45 epoch 및 각각 6시간 예산으로 이어집니다. 실제 정밀도·재현율 90%를 보장하지 않습니다.
+실제 실행은 기존 Docker Linux와 7차 작업자의 시작·실행 잠금 및 작업 저장소를 사용합니다.
 
-`recovery.py --start`와 `--worker`는 비공개 계획과 독립 검증에서 동결한 `--expected-canonical`이 모두 있어야 합니다. 조회나 보고서 생성은 학습을 시작하지 않습니다. 소스 캐시가 없거나 달라지면 원인을 확인해야 하며 이 복구에서 새 자료를 받지 않습니다. 기존 모델이나 다른 GPU 작업을 중단하지 않습니다.
+이전 실패 작업은 보존하고 새 시도에 `resume_of`를 기록합니다. 10차 대시보드의 디자인과 읽기 경로는 바꾸지 않습니다.
+
+GPU 학습은 같은 두 후보의 최대 60·45 epoch 및 각각 6시간 예산으로 이어집니다.
+
+실제 정밀도·재현율 90%를 보장하지 않습니다.
+
+`recovery.py --start`와 `--worker`는 비공개 계획과 독립 검증에서 동결한 `--expected-canonical`이 모두 있어야 합니다.
+
+조회나 보고서 생성은 학습을 시작하지 않습니다.
+
+소스 캐시가 없거나 달라지면 원인을 확인해야 하며 이 복구에서 새 자료를 받지 않습니다.
+
+기존 모델이나 다른 GPU 작업을 중단하지 않습니다.
 
 ## 📄 보고서
 
@@ -20,10 +36,18 @@
 
 ## ✅ 검증
 
-13차 실제 root에서 `python -B -X utf8 -m unittest discover -s tests -v` 및 `python -B -X utf8 verify_sources.py`를 실행합니다. 소스 동결 후에는 `verify_sources.py --expected-canonical <동결SHA256>`도 대조합니다. canonical은 외부 검토 기록에서 주어지며 현재 값으로 원본 baseline을 교체하지 않습니다. 단위 검사 성공은 실제 GPU 학습 완료가 아닙니다.
+13차 실제 root에서 `python -B -X utf8 -m unittest discover -s tests -v` 및 `python -B -X utf8 verify_sources.py`를 실행합니다.
+
+소스 동결 후에는 `verify_sources.py --expected-canonical <동결SHA256>`도 대조합니다. canonical은 외부 검토 기록에서 주어지며 현재 값으로 원본 baseline을 교체하지 않습니다.
+
+단위 검사 성공은 실제 GPU 학습 완료가 아닙니다.
 
 7차·12차의 로컬 원본과 보존 데이터가 필요한 연결 도구입니다. 공개 코드만 복제한 환경에는 대용량 원본·모델·비공개 계획이 포함되지 않으며 실제 기동을 보장하지 않습니다.
 
 ## 📚 자료 근거
 
-[pLitterStreet 공식 자료](https://zenodo.org/records/8288500), [PlastOPol 공식 자료](https://zenodo.org/records/5829156), [UAVVaste 공식 자료](https://zenodo.org/records/8214061)를 사용한 기존 계획을 유지합니다. 원자료 권리와 평가 한계는 [7차 고정 계약](../7차/docs/출처와실험계약.md)을 따릅니다. 원본 데이터나 모델을 이 복구 코드와 함께 재배포하지 않습니다.
+[pLitterStreet 공식 자료](https://zenodo.org/records/8288500), [PlastOPol 공식 자료](https://zenodo.org/records/5829156), [UAVVaste 공식 자료](https://zenodo.org/records/8214061)를 사용한 기존 계획을 유지합니다.
+
+원자료 권리와 평가 한계는 [7차 고정 계약](../7차/docs/출처와실험계약.md)을 따릅니다.
+
+원본 데이터나 모델을 이 복구 코드와 함께 재배포하지 않습니다.

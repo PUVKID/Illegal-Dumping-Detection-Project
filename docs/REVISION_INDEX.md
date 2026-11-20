@@ -7,8 +7,8 @@
 | --- | --- |
 | 1차 | **자료 폴더·원본** [자료 폴더](../1%EC%B0%A8)<br>**상세 설명** [상세 설명](versions/stage-1.md)<br>**직전 비교·범위** [전체 비교·범위](comparisons/initial.md) |
 | 2차 | **자료 폴더·원본** [자료 폴더](../2%EC%B0%A8)<br>**상세 설명** [상세 설명](versions/stage-2.md)<br>**직전 비교·범위** [전체 비교·범위](comparisons/1-to-2.md) |
-| 최종/3차 | **자료 폴더·원본** [자료 폴더](../%EC%B5%9C%EC%A2%85/3%EC%B0%A8)<br>**상세 설명** [상세 설명](versions/stage-3.md)<br>**직전 비교·범위** [전체 비교·범위](comparisons/2-to-3.md) |
-| 최종/4차 | **자료 폴더·원본** [자료 폴더](../%EC%B5%9C%EC%A2%85/4%EC%B0%A8)<br>**상세 설명** [상세 설명](versions/stage-4.md)<br>**직전 비교·범위** [전체 비교·범위](comparisons/3-to-4.md) |
+| 최 종/3차 | **자료 폴더·원본** [자료 폴더](../%EC%B5%9C%EC%A2%85/3%EC%B0%A8)<br>**상세 설명** [상세 설명](versions/stage-3.md)<br>**직전 비교·범위** [전체 비교·범위](comparisons/2-to-3.md) |
+| 최 종/4차 | **자료 폴더·원본** [자료 폴더](../%EC%B5%9C%EC%A2%85/4%EC%B0%A8)<br>**상세 설명** [상세 설명](versions/stage-4.md)<br>**직전 비교·범위** [전체 비교·범위](comparisons/3-to-4.md) |
 | 최종/최종 | **자료 폴더·원본** [자료 폴더](../%EC%B5%9C%EC%A2%85/%EC%B5%9C%EC%A2%85)<br>**상세 설명** [상세 설명](versions/stage-5.md)<br>**직전 비교·범위** [전체 비교·범위](comparisons/4-to-final.md) |
 | 5차 | **자료 폴더·원본** [자료 폴더](../5%EC%B0%A8)<br>**상세 설명** [상세 설명](versions/round-5.md)<br>**직전 비교·범위** [전체 비교·범위](comparisons/final-to-5.md) |
 | 6차 | **자료 폴더·원본** [자료 폴더](../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8)<br>**상세 설명** [상세 설명](versions/round-6.md)<br>**직전 비교·범위** [전체 비교·범위](comparisons/5-to-6-snapshot.md) |

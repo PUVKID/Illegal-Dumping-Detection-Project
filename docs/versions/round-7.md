@@ -38,23 +38,41 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 
 선택한 차수의 노트북·requirements·Docker 및 설정을 확인합니다. 데이터셋·학습 가중치·실행 환경은 공개 코드와 별도일 수 있습니다. 이전 차수의 모델을 요구하는 경로는 해당 모델과 계약이 함께 필요합니다.
 
-단일 노트북은 Jupyter에서 설정·데이터·모델 경로를 확인하고 셀 순서를 따릅니다. 모듈화된 차수는 해당 폴더 README의 실행 진입점과 동결 조건을 따릅니다. 보고서·운영 기록만 있는 묶음은 읽기 자료로 사용합니다.
+단일 노트북은 Jupyter에서 설정·데이터·모델 경로를 확인하고 셀 순서를 따릅니다. 모듈화된 차수는 해당 폴더 README의 실행 진입 점과 동결 조건을 따릅니다. 보고서·운영 기록만 있는 묶음은 읽기 자료로 사용합니다.
 
 #### LEVEL 1 · 이 차수 원래 안내의 세부 조건
 
 #### LEVEL 1 · 실행 조건
 
-현재 운영 환경은 Windows D:/2026/월요일 PBL/7차, Docker컨테이너2026과 /workspace/2026 마운트, /opt/venvs/torch/bin/python입니다. 기존 모델·자료·5차 결과가 필요하고 이 저장소에는 모델·데이터·EXE·로그·인증정보·개인 지침을 포함하지 않습니다. 복제만으로 전체 실험이 재현된다고 보장하지 않습니다.
+현재 운영 환경은 Windows D:/2026/월요일 PBL/7차, Docker 컨테이너 2026 과/workspace/2026 마운트,/opt/venvs/torch/bin/python입니다.
 
-학습실행.bat은자료 준비와학습을독립프로세스로시작하고학습상태.bat은실제생존상태를조회합니다. 같은준비/학습을중복실행하지않고실패원문을보존합니다. 명시적재개에는원본·코드·모델·설정계약일치가필요합니다. Codex/API토큰을요구하지않지만PC와Docker는실행돼있어야합니다.
+기존 모델·자료·5차 결과가 필요하고 이 저장소에는 모델·데이터·EXE·로그·인증 정보·개인 지침을 포함하지 않습니다.
 
-신규전송상한100GiB,최소잔여100GiB를확인합니다. 사전수신과제품준비는동일Linux의공유flock을사용하며완료된공식원본크기·MD5·SHA를재확인하고전송원장을한번만합산합니다.
+복제만으로 전체 실험이 재현된다고 보장하지 않습니다.
+
+학습 실행.bat은 자료 준비와 학습을 독립 프로세스로 시작하고 학습 상태.bat은 실제 생존 상태를 조회합니다. 같은 준비/학습을 중복 실행하지 않고 실패 원문을 보존합니다. 명시적 재개에는 원본·코드·모델·설정 계약 일치가 필요합니다. Codex/API 토큰을 요구하지 않지만 PC와 Docker는 실행돼 있어야합니다.
+
+신규 전송 상한 100GiB, 최소 잔여 100GiB를 확인합니다. 사전 수신과 제품 준비는 동일 Linux의 공유 flock을 사용하며 완료된 공식 원본 크기·MD5·SHA를 재확인하고 전송 원장을 한 번만 합산합니다.
 
 #### LEVEL 1 · 학습과 평가
 
-COCO YOLO26l960/batch4/최대60epochs와기존작은물체l-P2 1280/batch2/최대45epochs의두후보를비교합니다. 후보별누적학습예산6시간과patience12,epoch callback상한을적용합니다. 시간확인은배치·검증경계에서이뤄지고최종검증·checkpoint저장시간은추가될수있습니다. 강제종료시마지막시간원장저장뒤의일부시간이보존되지않을수있어반복강제종료에도엄밀한실제누적시간보증이라고표현하지않습니다.
+COCO YOLO26l960/batch4/최대 60epochs와 기존 작은 물체 l-P2 1280/batch2/최대 45epochs의 두 후보를 비교합니다.
 
-TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한후테스트합니다. 기존TACO test150은이미사용한historical benchmark이고,PlastOPol은사진·근접중복통제평가이며촬영장소독립성은미확인입니다. UAVVaste는항공시점외부테스트로CCTV정확도와구분합니다. 없어진과거원본1232장은전체지각중복검증을하지못한한계가있습니다. 테스트성능으로다시튜닝하거나쉬운출처하나만90%라고전체달성을주장하지않습니다.
+후보별 누적 학습 예산 6시간과 patience12,epoch callback 상한을 적용합니다.
+
+시간 확인은 배치·검증 경계에서 이뤄지고 최종 검증·checkpoint 저장 시간은 추가될 수 있습니다.
+
+강제 종료 시 마지막 시간 원장 저장 뒤의 일부 시간이 보존되지 않을 수 있어 반복 강제 종료에도 엄밀한 실제 누적 시간 보증이라고 표현하지 않습니다.
+
+TACO validation에서 모델·일반/분할 추론·신뢰도를 선택해 고정한 후 테스트합니다.
+
+기존 TACO test150은 이미 사용한 historical benchmark이고,PlastOPol은 사진·근접 중복 통제 평가이며 촬영 장소 독립성은 미확인입니다.
+
+UAVVaste는 항공 시점 외부 테스트로 CCTV 정확도와 구분합니다.
+
+없어진 과거 원본 1232장은 전체 지각 중복 검증을 하지 못한 한계가 있습니다.
+
+테스트 성능으로 다시 튜닝하거나 쉬운 출처 하나만 90%라고 전체 달성을 주장하지 않습니다.
 
 #### LEVEL 1 · 소스에서 제공하는 CLI 옵션
 
@@ -63,7 +81,7 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 | [prepare_dataset.py](../../7%EC%B0%A8/prepare_dataset.py) | `--prepare`, `--smoke` |
 | [worker.py](../../7%EC%B0%A8/worker.py) | `--action`, `--params`, `--worker` |
 
-각 옵션의 기본값·필수값·부작용은 해당 main과 인자 정의를 함께 확인합니다.
+각 옵션의 기본 값·필수값·부작용은 해당 main과 인자 정의를 함께 확인합니다.
 
 
 <details>
@@ -148,7 +166,7 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 **거부 조건:** [`partial.stat().st_size != spec['size'] or digest_file(partial,'md5') != spec['md5']`](../../7%EC%B0%A8/prepare_dataset.py#L394)
 
-**오류 메시지:** 완성 원자료의 공식 MD5가 일치하지 않습니다.
+**오류 메시지:** 완성 원 자료의 공식 MD5가 일치하지 않습니다.
 
 **거부 조건:** [`destination.is_symlink() or getattr(destination,'is_junction',lambda:False)()`](../../7%EC%B0%A8/prepare_dataset.py#L403)
 
@@ -220,7 +238,7 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 **거부 조건:** [`self.used &lt; 0 or self.used &gt; self.limit`](../../7%EC%B0%A8/prepare_dataset.py#L196)
 
-**오류 메시지:** 기존 전송량이 7차 예산과 맞지 않습니다.
+**오류 메시지:** 기존 전송 량이 7차 예산과 맞지 않습니다.
 
 **거부 조건:** [`count &lt; 0 or free-count &lt; self.minimum_free`](../../7%EC%B0%A8/prepare_dataset.py#L201)
 
@@ -300,7 +318,7 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 **거부 조건:** [`not target.exists() or sha256_file(target)!=receipt['sha256']`](../../7%EC%B0%A8/prepare_dataset.py#L300)
 
-**오류 메시지:** 사전 수신 SHA와 완성 원자료가 다릅니다.
+**오류 메시지:** 사전 수신 SHA와 완성 원 자료가 다릅니다.
 
 **거부 조건:** [`existing.is_symlink() or getattr(existing,'is_junction',lambda:False)()`](../../7%EC%B0%A8/prepare_dataset.py#L417)
 
@@ -357,7 +375,7 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 **거부 조건:** [`type(resume) is not bool`](../../7%EC%B0%A8/train_pipeline.py#L327)
 
-**오류 메시지:** 재개는 명시적 bool이어야 합니다.
+**오류 메시지:** 재개는 명시적 bool이어야합니다.
 
 **거부 조건:** [`not path.exists()`](../../7%EC%B0%A8/train_pipeline.py#L120)
 
@@ -373,7 +391,7 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 **거부 조건:** [`time.monotonic()&gt;=deadline`](../../7%EC%B0%A8/train_pipeline.py#L168)
 
-**오류 메시지:** 다른 GPU 작업 때문에 필요한 여유 VRAM을 확보하지 못했습니다.
+**오류 메시지:** 다른 GPU 작업 때문에 필요한 여유 VRAM을 확보하지 못 했습니다.
 
 **거부 조건:** [`sha256_file(local(path))!=expected`](../../7%EC%B0%A8/train_pipeline.py#L320)
 
@@ -381,7 +399,7 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 **거부 조건:** [`int(checkpoint.get('epoch',-1))&lt;0`](../../7%EC%B0%A8/train_pipeline.py#L297)
 
-**오류 메시지:** 완료 표식 없는 정리된 checkpoint입니다. 자동 재학습하지 않습니다.
+**오류 메시지:** 완료 표식 없는 정리된 checkpoint입니다. 자동 재학습 하지 않습니다.
 
 
 #### LEVEL 1 · [verify_sources.py](../../7%EC%B0%A8/verify_sources.py)
@@ -457,8 +475,8 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 
 | 상황 | 확인할 내용 |
 | --- | --- |
-| 학습 또는 화면이 시작되지 않음 | 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다. |
-| 원본 계약 검사 실패 | 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다. |
+| 학습 또는 화면이 시작되지 않음 | 해당 차수 환경·모델·데이터·설정 경로를 확인합니다.<br>화면 전용 차수는 학습 코드의 대체물이 아닙니다. |
+| 원본 계약 검사 실패 | 원래 코드·설정·자료 해시를 대조합니다.<br>현재 해시로 기준을 바꿔 우회하지 않습니다. |
 | 지표 해석이 어려움 | 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다. |
 
 [자료 폴더](../../7%EC%B0%A8) · [직전 비교·자료 범위](../comparisons/5-to-7.md) · [이 차수의 원래 전체 상세](#reading-level-5)
@@ -491,23 +509,41 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 
 선택한 차수의 노트북·requirements·Docker 및 설정을 확인합니다. 데이터셋·학습 가중치·실행 환경은 공개 코드와 별도일 수 있습니다. 이전 차수의 모델을 요구하는 경로는 해당 모델과 계약이 함께 필요합니다.
 
-단일 노트북은 Jupyter에서 설정·데이터·모델 경로를 확인하고 셀 순서를 따릅니다. 모듈화된 차수는 해당 폴더 README의 실행 진입점과 동결 조건을 따릅니다. 보고서·운영 기록만 있는 묶음은 읽기 자료로 사용합니다.
+단일 노트북은 Jupyter에서 설정·데이터·모델 경로를 확인하고 셀 순서를 따릅니다. 모듈화된 차수는 해당 폴더 README의 실행 진입 점과 동결 조건을 따릅니다. 보고서·운영 기록만 있는 묶음은 읽기 자료로 사용합니다.
 
 #### LEVEL 2 · 이 차수 원래 안내의 세부 조건
 
 #### LEVEL 2 · 실행 조건
 
-현재 운영 환경은 Windows D:/2026/월요일 PBL/7차, Docker컨테이너2026과 /workspace/2026 마운트, /opt/venvs/torch/bin/python입니다. 기존 모델·자료·5차 결과가 필요하고 이 저장소에는 모델·데이터·EXE·로그·인증정보·개인 지침을 포함하지 않습니다. 복제만으로 전체 실험이 재현된다고 보장하지 않습니다.
+현재 운영 환경은 Windows D:/2026/월요일 PBL/7차, Docker 컨테이너 2026 과/workspace/2026 마운트,/opt/venvs/torch/bin/python입니다.
 
-학습실행.bat은자료 준비와학습을독립프로세스로시작하고학습상태.bat은실제생존상태를조회합니다. 같은준비/학습을중복실행하지않고실패원문을보존합니다. 명시적재개에는원본·코드·모델·설정계약일치가필요합니다. Codex/API토큰을요구하지않지만PC와Docker는실행돼있어야합니다.
+기존 모델·자료·5차 결과가 필요하고 이 저장소에는 모델·데이터·EXE·로그·인증 정보·개인 지침을 포함하지 않습니다.
 
-신규전송상한100GiB,최소잔여100GiB를확인합니다. 사전수신과제품준비는동일Linux의공유flock을사용하며완료된공식원본크기·MD5·SHA를재확인하고전송원장을한번만합산합니다.
+복제만으로 전체 실험이 재현된다고 보장하지 않습니다.
+
+학습 실행.bat은 자료 준비와 학습을 독립 프로세스로 시작하고 학습 상태.bat은 실제 생존 상태를 조회합니다. 같은 준비/학습을 중복 실행하지 않고 실패 원문을 보존합니다. 명시적 재개에는 원본·코드·모델·설정 계약 일치가 필요합니다. Codex/API 토큰을 요구하지 않지만 PC와 Docker는 실행돼 있어야합니다.
+
+신규 전송 상한 100GiB, 최소 잔여 100GiB를 확인합니다. 사전 수신과 제품 준비는 동일 Linux의 공유 flock을 사용하며 완료된 공식 원본 크기·MD5·SHA를 재확인하고 전송 원장을 한 번만 합산합니다.
 
 #### LEVEL 2 · 학습과 평가
 
-COCO YOLO26l960/batch4/최대60epochs와기존작은물체l-P2 1280/batch2/최대45epochs의두후보를비교합니다. 후보별누적학습예산6시간과patience12,epoch callback상한을적용합니다. 시간확인은배치·검증경계에서이뤄지고최종검증·checkpoint저장시간은추가될수있습니다. 강제종료시마지막시간원장저장뒤의일부시간이보존되지않을수있어반복강제종료에도엄밀한실제누적시간보증이라고표현하지않습니다.
+COCO YOLO26l960/batch4/최대 60epochs와 기존 작은 물체 l-P2 1280/batch2/최대 45epochs의 두 후보를 비교합니다.
 
-TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한후테스트합니다. 기존TACO test150은이미사용한historical benchmark이고,PlastOPol은사진·근접중복통제평가이며촬영장소독립성은미확인입니다. UAVVaste는항공시점외부테스트로CCTV정확도와구분합니다. 없어진과거원본1232장은전체지각중복검증을하지못한한계가있습니다. 테스트성능으로다시튜닝하거나쉬운출처하나만90%라고전체달성을주장하지않습니다.
+후보별 누적 학습 예산 6시간과 patience12,epoch callback 상한을 적용합니다.
+
+시간 확인은 배치·검증 경계에서 이뤄지고 최종 검증·checkpoint 저장 시간은 추가될 수 있습니다.
+
+강제 종료 시 마지막 시간 원장 저장 뒤의 일부 시간이 보존되지 않을 수 있어 반복 강제 종료에도 엄밀한 실제 누적 시간 보증이라고 표현하지 않습니다.
+
+TACO validation에서 모델·일반/분할 추론·신뢰도를 선택해 고정한 후 테스트합니다.
+
+기존 TACO test150은 이미 사용한 historical benchmark이고,PlastOPol은 사진·근접 중복 통제 평가이며 촬영 장소 독립성은 미확인입니다.
+
+UAVVaste는 항공 시점 외부 테스트로 CCTV 정확도와 구분합니다.
+
+없어진 과거 원본 1232장은 전체 지각 중복 검증을 하지 못한 한계가 있습니다.
+
+테스트 성능으로 다시 튜닝하거나 쉬운 출처 하나만 90%라고 전체 달성을 주장하지 않습니다.
 
 #### LEVEL 2 · 소스에서 제공하는 CLI 옵션
 
@@ -516,7 +552,7 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 | [prepare_dataset.py](../../7%EC%B0%A8/prepare_dataset.py) | `--prepare`, `--smoke` |
 | [worker.py](../../7%EC%B0%A8/worker.py) | `--action`, `--params`, `--worker` |
 
-각 옵션의 기본값·필수값·부작용은 해당 main과 인자 정의를 함께 확인합니다.
+각 옵션의 기본 값·필수값·부작용은 해당 main과 인자 정의를 함께 확인합니다.
 
 
 <details>
@@ -601,7 +637,7 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 **거부 조건:** [`partial.stat().st_size != spec['size'] or digest_file(partial,'md5') != spec['md5']`](../../7%EC%B0%A8/prepare_dataset.py#L394)
 
-**오류 메시지:** 완성 원자료의 공식 MD5가 일치하지 않습니다.
+**오류 메시지:** 완성 원 자료의 공식 MD5가 일치하지 않습니다.
 
 **거부 조건:** [`destination.is_symlink() or getattr(destination,'is_junction',lambda:False)()`](../../7%EC%B0%A8/prepare_dataset.py#L403)
 
@@ -673,7 +709,7 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 **거부 조건:** [`self.used &lt; 0 or self.used &gt; self.limit`](../../7%EC%B0%A8/prepare_dataset.py#L196)
 
-**오류 메시지:** 기존 전송량이 7차 예산과 맞지 않습니다.
+**오류 메시지:** 기존 전송 량이 7차 예산과 맞지 않습니다.
 
 **거부 조건:** [`count &lt; 0 or free-count &lt; self.minimum_free`](../../7%EC%B0%A8/prepare_dataset.py#L201)
 
@@ -753,7 +789,7 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 **거부 조건:** [`not target.exists() or sha256_file(target)!=receipt['sha256']`](../../7%EC%B0%A8/prepare_dataset.py#L300)
 
-**오류 메시지:** 사전 수신 SHA와 완성 원자료가 다릅니다.
+**오류 메시지:** 사전 수신 SHA와 완성 원 자료가 다릅니다.
 
 **거부 조건:** [`existing.is_symlink() or getattr(existing,'is_junction',lambda:False)()`](../../7%EC%B0%A8/prepare_dataset.py#L417)
 
@@ -810,7 +846,7 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 **거부 조건:** [`type(resume) is not bool`](../../7%EC%B0%A8/train_pipeline.py#L327)
 
-**오류 메시지:** 재개는 명시적 bool이어야 합니다.
+**오류 메시지:** 재개는 명시적 bool이어야합니다.
 
 **거부 조건:** [`not path.exists()`](../../7%EC%B0%A8/train_pipeline.py#L120)
 
@@ -826,7 +862,7 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 **거부 조건:** [`time.monotonic()&gt;=deadline`](../../7%EC%B0%A8/train_pipeline.py#L168)
 
-**오류 메시지:** 다른 GPU 작업 때문에 필요한 여유 VRAM을 확보하지 못했습니다.
+**오류 메시지:** 다른 GPU 작업 때문에 필요한 여유 VRAM을 확보하지 못 했습니다.
 
 **거부 조건:** [`sha256_file(local(path))!=expected`](../../7%EC%B0%A8/train_pipeline.py#L320)
 
@@ -834,7 +870,7 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 **거부 조건:** [`int(checkpoint.get('epoch',-1))&lt;0`](../../7%EC%B0%A8/train_pipeline.py#L297)
 
-**오류 메시지:** 완료 표식 없는 정리된 checkpoint입니다. 자동 재학습하지 않습니다.
+**오류 메시지:** 완료 표식 없는 정리된 checkpoint입니다. 자동 재학습 하지 않습니다.
 
 
 #### LEVEL 2 · [verify_sources.py](../../7%EC%B0%A8/verify_sources.py)
@@ -905,8 +941,8 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 
 | 상황 | 확인할 내용 |
 | --- | --- |
-| 학습 또는 화면이 시작되지 않음 | 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다. |
-| 원본 계약 검사 실패 | 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다. |
+| 학습 또는 화면이 시작되지 않음 | 해당 차수 환경·모델·데이터·설정 경로를 확인합니다.<br>화면 전용 차수는 학습 코드의 대체물이 아닙니다. |
+| 원본 계약 검사 실패 | 원래 코드·설정·자료 해시를 대조합니다.<br>현재 해시로 기준을 바꿔 우회하지 않습니다. |
 | 지표 해석이 어려움 | 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다. |
 
 [자료 폴더](../../7%EC%B0%A8) · [직전 비교·자료 범위](../comparisons/5-to-7.md) · [이 차수의 원래 전체 상세](#reading-level-5)
@@ -920,23 +956,41 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 
 선택한 차수의 노트북·requirements·Docker 및 설정을 확인합니다. 데이터셋·학습 가중치·실행 환경은 공개 코드와 별도일 수 있습니다. 이전 차수의 모델을 요구하는 경로는 해당 모델과 계약이 함께 필요합니다.
 
-단일 노트북은 Jupyter에서 설정·데이터·모델 경로를 확인하고 셀 순서를 따릅니다. 모듈화된 차수는 해당 폴더 README의 실행 진입점과 동결 조건을 따릅니다. 보고서·운영 기록만 있는 묶음은 읽기 자료로 사용합니다.
+단일 노트북은 Jupyter에서 설정·데이터·모델 경로를 확인하고 셀 순서를 따릅니다. 모듈화된 차수는 해당 폴더 README의 실행 진입 점과 동결 조건을 따릅니다. 보고서·운영 기록만 있는 묶음은 읽기 자료로 사용합니다.
 
 #### LEVEL 3 · 이 차수 원래 안내의 세부 조건
 
 #### LEVEL 3 · 실행 조건
 
-현재 운영 환경은 Windows D:/2026/월요일 PBL/7차, Docker컨테이너2026과 /workspace/2026 마운트, /opt/venvs/torch/bin/python입니다. 기존 모델·자료·5차 결과가 필요하고 이 저장소에는 모델·데이터·EXE·로그·인증정보·개인 지침을 포함하지 않습니다. 복제만으로 전체 실험이 재현된다고 보장하지 않습니다.
+현재 운영 환경은 Windows D:/2026/월요일 PBL/7차, Docker 컨테이너 2026 과/workspace/2026 마운트,/opt/venvs/torch/bin/python입니다.
 
-학습실행.bat은자료 준비와학습을독립프로세스로시작하고학습상태.bat은실제생존상태를조회합니다. 같은준비/학습을중복실행하지않고실패원문을보존합니다. 명시적재개에는원본·코드·모델·설정계약일치가필요합니다. Codex/API토큰을요구하지않지만PC와Docker는실행돼있어야합니다.
+기존 모델·자료·5차 결과가 필요하고 이 저장소에는 모델·데이터·EXE·로그·인증 정보·개인 지침을 포함하지 않습니다.
 
-신규전송상한100GiB,최소잔여100GiB를확인합니다. 사전수신과제품준비는동일Linux의공유flock을사용하며완료된공식원본크기·MD5·SHA를재확인하고전송원장을한번만합산합니다.
+복제만으로 전체 실험이 재현된다고 보장하지 않습니다.
+
+학습 실행.bat은 자료 준비와 학습을 독립 프로세스로 시작하고 학습 상태.bat은 실제 생존 상태를 조회합니다. 같은 준비/학습을 중복 실행하지 않고 실패 원문을 보존합니다. 명시적 재개에는 원본·코드·모델·설정 계약 일치가 필요합니다. Codex/API 토큰을 요구하지 않지만 PC와 Docker는 실행돼 있어야합니다.
+
+신규 전송 상한 100GiB, 최소 잔여 100GiB를 확인합니다. 사전 수신과 제품 준비는 동일 Linux의 공유 flock을 사용하며 완료된 공식 원본 크기·MD5·SHA를 재확인하고 전송 원장을 한 번만 합산합니다.
 
 #### LEVEL 3 · 학습과 평가
 
-COCO YOLO26l960/batch4/최대60epochs와기존작은물체l-P2 1280/batch2/최대45epochs의두후보를비교합니다. 후보별누적학습예산6시간과patience12,epoch callback상한을적용합니다. 시간확인은배치·검증경계에서이뤄지고최종검증·checkpoint저장시간은추가될수있습니다. 강제종료시마지막시간원장저장뒤의일부시간이보존되지않을수있어반복강제종료에도엄밀한실제누적시간보증이라고표현하지않습니다.
+COCO YOLO26l960/batch4/최대 60epochs와 기존 작은 물체 l-P2 1280/batch2/최대 45epochs의 두 후보를 비교합니다.
 
-TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한후테스트합니다. 기존TACO test150은이미사용한historical benchmark이고,PlastOPol은사진·근접중복통제평가이며촬영장소독립성은미확인입니다. UAVVaste는항공시점외부테스트로CCTV정확도와구분합니다. 없어진과거원본1232장은전체지각중복검증을하지못한한계가있습니다. 테스트성능으로다시튜닝하거나쉬운출처하나만90%라고전체달성을주장하지않습니다.
+후보별 누적 학습 예산 6시간과 patience12,epoch callback 상한을 적용합니다.
+
+시간 확인은 배치·검증 경계에서 이뤄지고 최종 검증·checkpoint 저장 시간은 추가될 수 있습니다.
+
+강제 종료 시 마지막 시간 원장 저장 뒤의 일부 시간이 보존되지 않을 수 있어 반복 강제 종료에도 엄밀한 실제 누적 시간 보증이라고 표현하지 않습니다.
+
+TACO validation에서 모델·일반/분할 추론·신뢰도를 선택해 고정한 후 테스트합니다.
+
+기존 TACO test150은 이미 사용한 historical benchmark이고,PlastOPol은 사진·근접 중복 통제 평가이며 촬영 장소 독립성은 미확인입니다.
+
+UAVVaste는 항공 시점 외부 테스트로 CCTV 정확도와 구분합니다.
+
+없어진 과거 원본 1232장은 전체 지각 중복 검증을 하지 못한 한계가 있습니다.
+
+테스트 성능으로 다시 튜닝하거나 쉬운 출처 하나만 90%라고 전체 달성을 주장하지 않습니다.
 
 #### LEVEL 3 · 소스에서 제공하는 CLI 옵션
 
@@ -945,7 +999,7 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 | [prepare_dataset.py](../../7%EC%B0%A8/prepare_dataset.py) | `--prepare`, `--smoke` |
 | [worker.py](../../7%EC%B0%A8/worker.py) | `--action`, `--params`, `--worker` |
 
-각 옵션의 기본값·필수값·부작용은 해당 main과 인자 정의를 함께 확인합니다.
+각 옵션의 기본 값·필수값·부작용은 해당 main과 인자 정의를 함께 확인합니다.
 
 
 <details>
@@ -1030,7 +1084,7 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 **거부 조건:** [`partial.stat().st_size != spec['size'] or digest_file(partial,'md5') != spec['md5']`](../../7%EC%B0%A8/prepare_dataset.py#L394)
 
-**오류 메시지:** 완성 원자료의 공식 MD5가 일치하지 않습니다.
+**오류 메시지:** 완성 원 자료의 공식 MD5가 일치하지 않습니다.
 
 **거부 조건:** [`destination.is_symlink() or getattr(destination,'is_junction',lambda:False)()`](../../7%EC%B0%A8/prepare_dataset.py#L403)
 
@@ -1102,7 +1156,7 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 **거부 조건:** [`self.used &lt; 0 or self.used &gt; self.limit`](../../7%EC%B0%A8/prepare_dataset.py#L196)
 
-**오류 메시지:** 기존 전송량이 7차 예산과 맞지 않습니다.
+**오류 메시지:** 기존 전송 량이 7차 예산과 맞지 않습니다.
 
 **거부 조건:** [`count &lt; 0 or free-count &lt; self.minimum_free`](../../7%EC%B0%A8/prepare_dataset.py#L201)
 
@@ -1182,7 +1236,7 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 **거부 조건:** [`not target.exists() or sha256_file(target)!=receipt['sha256']`](../../7%EC%B0%A8/prepare_dataset.py#L300)
 
-**오류 메시지:** 사전 수신 SHA와 완성 원자료가 다릅니다.
+**오류 메시지:** 사전 수신 SHA와 완성 원 자료가 다릅니다.
 
 **거부 조건:** [`existing.is_symlink() or getattr(existing,'is_junction',lambda:False)()`](../../7%EC%B0%A8/prepare_dataset.py#L417)
 
@@ -1239,7 +1293,7 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 **거부 조건:** [`type(resume) is not bool`](../../7%EC%B0%A8/train_pipeline.py#L327)
 
-**오류 메시지:** 재개는 명시적 bool이어야 합니다.
+**오류 메시지:** 재개는 명시적 bool이어야합니다.
 
 **거부 조건:** [`not path.exists()`](../../7%EC%B0%A8/train_pipeline.py#L120)
 
@@ -1255,7 +1309,7 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 **거부 조건:** [`time.monotonic()&gt;=deadline`](../../7%EC%B0%A8/train_pipeline.py#L168)
 
-**오류 메시지:** 다른 GPU 작업 때문에 필요한 여유 VRAM을 확보하지 못했습니다.
+**오류 메시지:** 다른 GPU 작업 때문에 필요한 여유 VRAM을 확보하지 못 했습니다.
 
 **거부 조건:** [`sha256_file(local(path))!=expected`](../../7%EC%B0%A8/train_pipeline.py#L320)
 
@@ -1263,7 +1317,7 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 **거부 조건:** [`int(checkpoint.get('epoch',-1))&lt;0`](../../7%EC%B0%A8/train_pipeline.py#L297)
 
-**오류 메시지:** 완료 표식 없는 정리된 checkpoint입니다. 자동 재학습하지 않습니다.
+**오류 메시지:** 완료 표식 없는 정리된 checkpoint입니다. 자동 재학습 하지 않습니다.
 
 
 #### LEVEL 3 · [verify_sources.py](../../7%EC%B0%A8/verify_sources.py)
@@ -1347,8 +1401,8 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 
 | 상황 | 확인할 내용 |
 | --- | --- |
-| 학습 또는 화면이 시작되지 않음 | 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다. |
-| 원본 계약 검사 실패 | 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다. |
+| 학습 또는 화면이 시작되지 않음 | 해당 차수 환경·모델·데이터·설정 경로를 확인합니다.<br>화면 전용 차수는 학습 코드의 대체물이 아닙니다. |
+| 원본 계약 검사 실패 | 원래 코드·설정·자료 해시를 대조합니다.<br>현재 해시로 기준을 바꿔 우회하지 않습니다. |
 | 지표 해석이 어려움 | 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다. |
 
 ### LEVEL 3 · 실행 전 대조할 차수 조건
@@ -1388,23 +1442,41 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 
 선택한 차수의 노트북·requirements·Docker 및 설정을 확인합니다. 데이터셋·학습 가중치·실행 환경은 공개 코드와 별도일 수 있습니다. 이전 차수의 모델을 요구하는 경로는 해당 모델과 계약이 함께 필요합니다.
 
-단일 노트북은 Jupyter에서 설정·데이터·모델 경로를 확인하고 셀 순서를 따릅니다. 모듈화된 차수는 해당 폴더 README의 실행 진입점과 동결 조건을 따릅니다. 보고서·운영 기록만 있는 묶음은 읽기 자료로 사용합니다.
+단일 노트북은 Jupyter에서 설정·데이터·모델 경로를 확인하고 셀 순서를 따릅니다. 모듈화된 차수는 해당 폴더 README의 실행 진입 점과 동결 조건을 따릅니다. 보고서·운영 기록만 있는 묶음은 읽기 자료로 사용합니다.
 
 #### LEVEL 4 · 이 차수 원래 안내의 세부 조건
 
 #### LEVEL 4 · 실행 조건
 
-현재 운영 환경은 Windows D:/2026/월요일 PBL/7차, Docker컨테이너2026과 /workspace/2026 마운트, /opt/venvs/torch/bin/python입니다. 기존 모델·자료·5차 결과가 필요하고 이 저장소에는 모델·데이터·EXE·로그·인증정보·개인 지침을 포함하지 않습니다. 복제만으로 전체 실험이 재현된다고 보장하지 않습니다.
+현재 운영 환경은 Windows D:/2026/월요일 PBL/7차, Docker 컨테이너 2026 과/workspace/2026 마운트,/opt/venvs/torch/bin/python입니다.
 
-학습실행.bat은자료 준비와학습을독립프로세스로시작하고학습상태.bat은실제생존상태를조회합니다. 같은준비/학습을중복실행하지않고실패원문을보존합니다. 명시적재개에는원본·코드·모델·설정계약일치가필요합니다. Codex/API토큰을요구하지않지만PC와Docker는실행돼있어야합니다.
+기존 모델·자료·5차 결과가 필요하고 이 저장소에는 모델·데이터·EXE·로그·인증 정보·개인 지침을 포함하지 않습니다.
 
-신규전송상한100GiB,최소잔여100GiB를확인합니다. 사전수신과제품준비는동일Linux의공유flock을사용하며완료된공식원본크기·MD5·SHA를재확인하고전송원장을한번만합산합니다.
+복제만으로 전체 실험이 재현된다고 보장하지 않습니다.
+
+학습 실행.bat은 자료 준비와 학습을 독립 프로세스로 시작하고 학습 상태.bat은 실제 생존 상태를 조회합니다. 같은 준비/학습을 중복 실행하지 않고 실패 원문을 보존합니다. 명시적 재개에는 원본·코드·모델·설정 계약 일치가 필요합니다. Codex/API 토큰을 요구하지 않지만 PC와 Docker는 실행돼 있어야합니다.
+
+신규 전송 상한 100GiB, 최소 잔여 100GiB를 확인합니다. 사전 수신과 제품 준비는 동일 Linux의 공유 flock을 사용하며 완료된 공식 원본 크기·MD5·SHA를 재확인하고 전송 원장을 한 번만 합산합니다.
 
 #### LEVEL 4 · 학습과 평가
 
-COCO YOLO26l960/batch4/최대60epochs와기존작은물체l-P2 1280/batch2/최대45epochs의두후보를비교합니다. 후보별누적학습예산6시간과patience12,epoch callback상한을적용합니다. 시간확인은배치·검증경계에서이뤄지고최종검증·checkpoint저장시간은추가될수있습니다. 강제종료시마지막시간원장저장뒤의일부시간이보존되지않을수있어반복강제종료에도엄밀한실제누적시간보증이라고표현하지않습니다.
+COCO YOLO26l960/batch4/최대 60epochs와 기존 작은 물체 l-P2 1280/batch2/최대 45epochs의 두 후보를 비교합니다.
 
-TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한후테스트합니다. 기존TACO test150은이미사용한historical benchmark이고,PlastOPol은사진·근접중복통제평가이며촬영장소독립성은미확인입니다. UAVVaste는항공시점외부테스트로CCTV정확도와구분합니다. 없어진과거원본1232장은전체지각중복검증을하지못한한계가있습니다. 테스트성능으로다시튜닝하거나쉬운출처하나만90%라고전체달성을주장하지않습니다.
+후보별 누적 학습 예산 6시간과 patience12,epoch callback 상한을 적용합니다.
+
+시간 확인은 배치·검증 경계에서 이뤄지고 최종 검증·checkpoint 저장 시간은 추가될 수 있습니다.
+
+강제 종료 시 마지막 시간 원장 저장 뒤의 일부 시간이 보존되지 않을 수 있어 반복 강제 종료에도 엄밀한 실제 누적 시간 보증이라고 표현하지 않습니다.
+
+TACO validation에서 모델·일반/분할 추론·신뢰도를 선택해 고정한 후 테스트합니다.
+
+기존 TACO test150은 이미 사용한 historical benchmark이고,PlastOPol은 사진·근접 중복 통제 평가이며 촬영 장소 독립성은 미확인입니다.
+
+UAVVaste는 항공 시점 외부 테스트로 CCTV 정확도와 구분합니다.
+
+없어진 과거 원본 1232장은 전체 지각 중복 검증을 하지 못한 한계가 있습니다.
+
+테스트 성능으로 다시 튜닝하거나 쉬운 출처 하나만 90%라고 전체 달성을 주장하지 않습니다.
 
 #### LEVEL 4 · 소스에서 제공하는 CLI 옵션
 
@@ -1413,7 +1485,7 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 | [prepare_dataset.py](../../7%EC%B0%A8/prepare_dataset.py) | `--prepare`, `--smoke` |
 | [worker.py](../../7%EC%B0%A8/worker.py) | `--action`, `--params`, `--worker` |
 
-각 옵션의 기본값·필수값·부작용은 해당 main과 인자 정의를 함께 확인합니다.
+각 옵션의 기본 값·필수값·부작용은 해당 main과 인자 정의를 함께 확인합니다.
 
 
 <details>
@@ -1498,7 +1570,7 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 **거부 조건:** [`partial.stat().st_size != spec['size'] or digest_file(partial,'md5') != spec['md5']`](../../7%EC%B0%A8/prepare_dataset.py#L394)
 
-**오류 메시지:** 완성 원자료의 공식 MD5가 일치하지 않습니다.
+**오류 메시지:** 완성 원 자료의 공식 MD5가 일치하지 않습니다.
 
 **거부 조건:** [`destination.is_symlink() or getattr(destination,'is_junction',lambda:False)()`](../../7%EC%B0%A8/prepare_dataset.py#L403)
 
@@ -1570,7 +1642,7 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 **거부 조건:** [`self.used &lt; 0 or self.used &gt; self.limit`](../../7%EC%B0%A8/prepare_dataset.py#L196)
 
-**오류 메시지:** 기존 전송량이 7차 예산과 맞지 않습니다.
+**오류 메시지:** 기존 전송 량이 7차 예산과 맞지 않습니다.
 
 **거부 조건:** [`count &lt; 0 or free-count &lt; self.minimum_free`](../../7%EC%B0%A8/prepare_dataset.py#L201)
 
@@ -1650,7 +1722,7 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 **거부 조건:** [`not target.exists() or sha256_file(target)!=receipt['sha256']`](../../7%EC%B0%A8/prepare_dataset.py#L300)
 
-**오류 메시지:** 사전 수신 SHA와 완성 원자료가 다릅니다.
+**오류 메시지:** 사전 수신 SHA와 완성 원 자료가 다릅니다.
 
 **거부 조건:** [`existing.is_symlink() or getattr(existing,'is_junction',lambda:False)()`](../../7%EC%B0%A8/prepare_dataset.py#L417)
 
@@ -1707,7 +1779,7 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 **거부 조건:** [`type(resume) is not bool`](../../7%EC%B0%A8/train_pipeline.py#L327)
 
-**오류 메시지:** 재개는 명시적 bool이어야 합니다.
+**오류 메시지:** 재개는 명시적 bool이어야합니다.
 
 **거부 조건:** [`not path.exists()`](../../7%EC%B0%A8/train_pipeline.py#L120)
 
@@ -1723,7 +1795,7 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 **거부 조건:** [`time.monotonic()&gt;=deadline`](../../7%EC%B0%A8/train_pipeline.py#L168)
 
-**오류 메시지:** 다른 GPU 작업 때문에 필요한 여유 VRAM을 확보하지 못했습니다.
+**오류 메시지:** 다른 GPU 작업 때문에 필요한 여유 VRAM을 확보하지 못 했습니다.
 
 **거부 조건:** [`sha256_file(local(path))!=expected`](../../7%EC%B0%A8/train_pipeline.py#L320)
 
@@ -1731,7 +1803,7 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 **거부 조건:** [`int(checkpoint.get('epoch',-1))&lt;0`](../../7%EC%B0%A8/train_pipeline.py#L297)
 
-**오류 메시지:** 완료 표식 없는 정리된 checkpoint입니다. 자동 재학습하지 않습니다.
+**오류 메시지:** 완료 표식 없는 정리된 checkpoint입니다. 자동 재학습 하지 않습니다.
 
 
 #### LEVEL 4 · [verify_sources.py](../../7%EC%B0%A8/verify_sources.py)
@@ -1800,8 +1872,8 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 
 | 상황 | 확인할 내용 |
 | --- | --- |
-| 학습 또는 화면이 시작되지 않음 | 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다. |
-| 원본 계약 검사 실패 | 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다. |
+| 학습 또는 화면이 시작되지 않음 | 해당 차수 환경·모델·데이터·설정 경로를 확인합니다.<br>화면 전용 차수는 학습 코드의 대체물이 아닙니다. |
+| 원본 계약 검사 실패 | 원래 코드·설정·자료 해시를 대조합니다.<br>현재 해시로 기준을 바꿔 우회하지 않습니다. |
 | 지표 해석이 어려움 | 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다. |
 
 ### LEVEL 4 · 재현과 전체 비교
@@ -1819,7 +1891,6 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 
 기존의 전체 설명·표·코드·함수 참조·파일별 비교는 아래에 그대로 이어집니다. [자료 폴더](../../7%EC%B0%A8) · [직전 비교·자료 범위](../comparisons/5-to-7.md) · [이 차수의 원래 전체 상세](#reading-level-5)
 <!-- reading-levels:end -->
-
 
 
 [프로젝트](../../README.md) · [전체 차수](../REVISION_INDEX.md) · [원본 자료](../../7%EC%B0%A8) · [← 이전: 5차](round-5.md) · [다음: 8차 →](round-8.md)
@@ -1897,24 +1968,42 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 
 선택한 차수의 노트북·requirements·Docker 및 설정을 확인합니다. 데이터셋·학습 가중치·실행 환경은 공개 코드와 별도일 수 있습니다. 이전 차수의 모델을 요구하는 경로는 해당 모델과 계약이 함께 필요합니다.
 
-단일 노트북은 Jupyter에서 설정·데이터·모델 경로를 확인하고 셀 순서를 따릅니다. 모듈화된 차수는 해당 폴더 README의 실행 진입점과 동결 조건을 따릅니다. 보고서·운영 기록만 있는 묶음은 읽기 자료로 사용합니다.
+단일 노트북은 Jupyter에서 설정·데이터·모델 경로를 확인하고 셀 순서를 따릅니다. 모듈화된 차수는 해당 폴더 README의 실행 진입 점과 동결 조건을 따릅니다. 보고서·운영 기록만 있는 묶음은 읽기 자료로 사용합니다.
 
 <a name="-이-차수-원래-안내의-세부-조건"></a>
 ### 이 차수 원래 안내의 세부 조건
 
 ### 실행 조건
 
-현재 운영 환경은 Windows D:/2026/월요일 PBL/7차, Docker컨테이너2026과 /workspace/2026 마운트, /opt/venvs/torch/bin/python입니다. 기존 모델·자료·5차 결과가 필요하고 이 저장소에는 모델·데이터·EXE·로그·인증정보·개인 지침을 포함하지 않습니다. 복제만으로 전체 실험이 재현된다고 보장하지 않습니다.
+현재 운영 환경은 Windows D:/2026/월요일 PBL/7차, Docker 컨테이너 2026 과/workspace/2026 마운트,/opt/venvs/torch/bin/python입니다.
 
-학습실행.bat은자료 준비와학습을독립프로세스로시작하고학습상태.bat은실제생존상태를조회합니다. 같은준비/학습을중복실행하지않고실패원문을보존합니다. 명시적재개에는원본·코드·모델·설정계약일치가필요합니다. Codex/API토큰을요구하지않지만PC와Docker는실행돼있어야합니다.
+기존 모델·자료·5차 결과가 필요하고 이 저장소에는 모델·데이터·EXE·로그·인증 정보·개인 지침을 포함하지 않습니다.
 
-신규전송상한100GiB,최소잔여100GiB를확인합니다. 사전수신과제품준비는동일Linux의공유flock을사용하며완료된공식원본크기·MD5·SHA를재확인하고전송원장을한번만합산합니다.
+복제만으로 전체 실험이 재현된다고 보장하지 않습니다.
+
+학습 실행.bat은 자료 준비와 학습을 독립 프로세스로 시작하고 학습 상태.bat은 실제 생존 상태를 조회합니다. 같은 준비/학습을 중복 실행하지 않고 실패 원문을 보존합니다. 명시적 재개에는 원본·코드·모델·설정 계약 일치가 필요합니다. Codex/API 토큰을 요구하지 않지만 PC와 Docker는 실행돼 있어야합니다.
+
+신규 전송 상한 100GiB, 최소 잔여 100GiB를 확인합니다. 사전 수신과 제품 준비는 동일 Linux의 공유 flock을 사용하며 완료된 공식 원본 크기·MD5·SHA를 재확인하고 전송 원장을 한 번만 합산합니다.
 
 ### 학습과 평가
 
-COCO YOLO26l960/batch4/최대60epochs와기존작은물체l-P2 1280/batch2/최대45epochs의두후보를비교합니다. 후보별누적학습예산6시간과patience12,epoch callback상한을적용합니다. 시간확인은배치·검증경계에서이뤄지고최종검증·checkpoint저장시간은추가될수있습니다. 강제종료시마지막시간원장저장뒤의일부시간이보존되지않을수있어반복강제종료에도엄밀한실제누적시간보증이라고표현하지않습니다.
+COCO YOLO26l960/batch4/최대 60epochs와 기존 작은 물체 l-P2 1280/batch2/최대 45epochs의 두 후보를 비교합니다.
 
-TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한후테스트합니다. 기존TACO test150은이미사용한historical benchmark이고,PlastOPol은사진·근접중복통제평가이며촬영장소독립성은미확인입니다. UAVVaste는항공시점외부테스트로CCTV정확도와구분합니다. 없어진과거원본1232장은전체지각중복검증을하지못한한계가있습니다. 테스트성능으로다시튜닝하거나쉬운출처하나만90%라고전체달성을주장하지않습니다.
+후보별 누적 학습 예산 6시간과 patience12,epoch callback 상한을 적용합니다.
+
+시간 확인은 배치·검증 경계에서 이뤄지고 최종 검증·checkpoint 저장 시간은 추가될 수 있습니다.
+
+강제 종료 시 마지막 시간 원장 저장 뒤의 일부 시간이 보존되지 않을 수 있어 반복 강제 종료에도 엄밀한 실제 누적 시간 보증이라고 표현하지 않습니다.
+
+TACO validation에서 모델·일반/분할 추론·신뢰도를 선택해 고정한 후 테스트합니다.
+
+기존 TACO test150은 이미 사용한 historical benchmark이고,PlastOPol은 사진·근접 중복 통제 평가이며 촬영 장소 독립성은 미확인입니다.
+
+UAVVaste는 항공 시점 외부 테스트로 CCTV 정확도와 구분합니다.
+
+없어진 과거 원본 1232장은 전체 지각 중복 검증을 하지 못한 한계가 있습니다.
+
+테스트 성능으로 다시 튜닝하거나 쉬운 출처 하나만 90%라고 전체 달성을 주장하지 않습니다.
 
 <a name="️-소스에서-제공하는-cli-옵션"></a>
 ### 소스에서 제공하는 CLI 옵션
@@ -1924,7 +2013,7 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 | [prepare_dataset.py](../../7%EC%B0%A8/prepare_dataset.py) | `--prepare`, `--smoke` |
 | [worker.py](../../7%EC%B0%A8/worker.py) | `--action`, `--params`, `--worker` |
 
-각 옵션의 기본값·필수값·부작용은 해당 main과 인자 정의를 함께 확인합니다.
+각 옵션의 기본 값·필수값·부작용은 해당 main과 인자 정의를 함께 확인합니다.
 
 
 <details>
@@ -2009,7 +2098,7 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 **거부 조건:** [`partial.stat().st_size != spec['size'] or digest_file(partial,'md5') != spec['md5']`](../../7%EC%B0%A8/prepare_dataset.py#L394)
 
-**오류 메시지:** 완성 원자료의 공식 MD5가 일치하지 않습니다.
+**오류 메시지:** 완성 원 자료의 공식 MD5가 일치하지 않습니다.
 
 **거부 조건:** [`destination.is_symlink() or getattr(destination,'is_junction',lambda:False)()`](../../7%EC%B0%A8/prepare_dataset.py#L403)
 
@@ -2081,7 +2170,7 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 **거부 조건:** [`self.used &lt; 0 or self.used &gt; self.limit`](../../7%EC%B0%A8/prepare_dataset.py#L196)
 
-**오류 메시지:** 기존 전송량이 7차 예산과 맞지 않습니다.
+**오류 메시지:** 기존 전송 량이 7차 예산과 맞지 않습니다.
 
 **거부 조건:** [`count &lt; 0 or free-count &lt; self.minimum_free`](../../7%EC%B0%A8/prepare_dataset.py#L201)
 
@@ -2161,7 +2250,7 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 **거부 조건:** [`not target.exists() or sha256_file(target)!=receipt['sha256']`](../../7%EC%B0%A8/prepare_dataset.py#L300)
 
-**오류 메시지:** 사전 수신 SHA와 완성 원자료가 다릅니다.
+**오류 메시지:** 사전 수신 SHA와 완성 원 자료가 다릅니다.
 
 **거부 조건:** [`existing.is_symlink() or getattr(existing,'is_junction',lambda:False)()`](../../7%EC%B0%A8/prepare_dataset.py#L417)
 
@@ -2218,7 +2307,7 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 **거부 조건:** [`type(resume) is not bool`](../../7%EC%B0%A8/train_pipeline.py#L327)
 
-**오류 메시지:** 재개는 명시적 bool이어야 합니다.
+**오류 메시지:** 재개는 명시적 bool이어야합니다.
 
 **거부 조건:** [`not path.exists()`](../../7%EC%B0%A8/train_pipeline.py#L120)
 
@@ -2234,7 +2323,7 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 **거부 조건:** [`time.monotonic()&gt;=deadline`](../../7%EC%B0%A8/train_pipeline.py#L168)
 
-**오류 메시지:** 다른 GPU 작업 때문에 필요한 여유 VRAM을 확보하지 못했습니다.
+**오류 메시지:** 다른 GPU 작업 때문에 필요한 여유 VRAM을 확보하지 못 했습니다.
 
 **거부 조건:** [`sha256_file(local(path))!=expected`](../../7%EC%B0%A8/train_pipeline.py#L320)
 
@@ -2242,7 +2331,7 @@ TACO validation에서모델·일반/분할추론·신뢰도를선택해고정한
 
 **거부 조건:** [`int(checkpoint.get('epoch',-1))&lt;0`](../../7%EC%B0%A8/train_pipeline.py#L297)
 
-**오류 메시지:** 완료 표식 없는 정리된 checkpoint입니다. 자동 재학습하지 않습니다.
+**오류 메시지:** 완료 표식 없는 정리된 checkpoint입니다. 자동 재학습 하지 않습니다.
 
 
 ### [verify_sources.py](../../7%EC%B0%A8/verify_sources.py)
@@ -2319,8 +2408,8 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 
 | 상황 | 확인할 내용 |
 | --- | --- |
-| 학습 또는 화면이 시작되지 않음 | 해당 차수 환경·모델·데이터·설정 경로를 확인합니다. 화면 전용 차수는 학습 코드의 대체물이 아닙니다. |
-| 원본 계약 검사 실패 | 원래 코드·설정·자료 해시를 대조합니다. 현재 해시로 기준을 바꿔 우회하지 않습니다. |
+| 학습 또는 화면이 시작되지 않음 | 해당 차수 환경·모델·데이터·설정 경로를 확인합니다.<br>화면 전용 차수는 학습 코드의 대체물이 아닙니다. |
+| 원본 계약 검사 실패 | 원래 코드·설정·자료 해시를 대조합니다.<br>현재 해시로 기준을 바꿔 우회하지 않습니다. |
 | 지표 해석이 어려움 | 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다. |
 
 <a name="changes"></a>

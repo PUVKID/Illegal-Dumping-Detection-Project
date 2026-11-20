@@ -1,9 +1,9 @@
 <div align="center">
 
 <a name="-12차--실험-종료-후-보고서-생성-도구"></a>
-# 12차 · 실험 종료 후 보고서 생성 도구
+# 12차·실험 종료 후 보고서 생성 도구
 
-이미 지정된 실험이 끝나고 결과·테스트·가중치 해시가 일치할 때 작성자 관점의 Word와 같은 원고 PDF를 만드는 후처리 소프트웨어입니다. 이 도구는 자료 다운로드나 학습을 시작하지 않습니다. 실패·중단을 성공으로 바꾸지 않으며 실측 전 성능을 만들지 않습니다.
+이미 지정된 실험이 끝나고 결과·테스트·가중치해 시가 일치할 때 작성자 관점의 Word와 같은 원고 PDF를 만드는 후 처리 소프트웨어입니다. 이 도구는 자료 다운로드나 학습을 시작하지 않습니다. 실패·중단을 성공으로 바꾸지 않으며 실 측 전 성능을 만들지 않습니다.
 
 **기술 분류:** 컴퓨터 비전 · Python · 객체 탐지·실험 자료
 
@@ -24,11 +24,11 @@
 
 ### LEVEL 1 · 실제 동작을 따라 읽기
 
-이미 지정된 실험이 끝나고 결과·테스트·가중치 해시가 일치할 때 작성자 관점의 Word와 같은 원고 PDF를 만드는 후처리 소프트웨어입니다. 이 도구는 자료 다운로드나 학습을 시작하지 않습니다. 실패·중단을 성공으로 바꾸지 않으며 실측 전 성능을 만들지 않습니다.
+이미 지정된 실험이 끝나고 결과·테스트·가중치해 시가 일치할 때 작성자 관점의 Word와 같은 원고 PDF를 만드는 후 처리 소프트웨어입니다. 이 도구는 자료 다운로드나 학습을 시작하지 않습니다. 실패·중단을 성공으로 바꾸지 않으며 실 측 전 성능을 만들지 않습니다.
 
-공개 설명 본문은 보고서 생성기의 고정 템플릿이며, 실제 작성자 설정과 최종 보고서는 별도 비공개 자료입니다. 합성 결과로 만든 시제품의 8쪽 렌더와 44개 단위 검사는 실제 실험의 성과나 미래 최종 보고서 검토를 뜻하지 않습니다.
+공개 설명 본문은 보고서 생성기의 고정 템플릿이며, 실제 작성자 설정과 최종 보고서는 별도 비공개 자료입니다. 합성 결과로 만든 시제품의 8 쪽 렌더와 44개 단위 검사는 실제 실험의 성과나 미래 최종 보고서 검토를 뜻하지 않습니다.
 
-기존 7차 동결 설치 환경이 필요합니다. 공개 저장소에는 기준 문서 두 개가 없고 검사 파일 하나의 줄바꿈 바이트가 달라 단독 복제본만으로 원본 해시 검사를 통과하지 못할 수 있습니다. 기준 해시를 현재 값으로 바꾸어 우회하지 않으며, 10차 안전 읽기와 글꼴 및 11차 복구 코드의 고정 의존성도 확인합니다.
+기존 7차 동결 설치 환경이 필요합니다. 공개 저장소에는 기준 문서 두 개가 없고 검사 파일 하나의 줄 바꿈 바이트가 달라 단독 복제 본만으로 원본해 시 검사를 통과하지 못할 수 있습니다. 기준해 시를 현재 값으로 바꾸어 우회하지 않으며, 10차 안전 읽기와 글 꼴 및 11차 복구 코드의 고정 의존성도 확인합니다.
 
 CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입니다.
 
@@ -40,7 +40,7 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 
 ### LEVEL 1 · 준비하고 확인할 것
 
-report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 해시·계획/렌더 서식을 확인합니다. 기존 완료 실험과 해당 문서 렌더 환경이 필요합니다.
+report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과해 시·계획/렌더 서식을 확인합니다. 기존 완료 실험과 해당 문서 렌더 환경이 필요합니다.
 
 실험 종료 후 후처리 도구를 사용합니다. 자료 다운로드나 학습을 시작하는 도구가 아닙니다. 공개 고정 템플릿과 비공개 작성자 설정·완성 보고서의 범위를 구분합니다.
 
@@ -51,7 +51,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 | [watcher.py](../../12%EC%B0%A8/watcher.py) | `--plan`, `--once` |
 | [make_fixture.py](../../12%EC%B0%A8/tests/make_fixture.py) | `--output`, `--font`, `--author` |
 
-각 옵션의 기본값·필수값·부작용은 해당 main과 인자 정의를 함께 확인합니다.
+각 옵션의 기본 값·필수값·부작용은 해당 main과 인자 정의를 함께 확인합니다.
 
 
 <details>
@@ -66,7 +66,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 | [`safe_reader`](../../12%EC%B0%A8/report_core.py#L18) | 공유 삭제 핸들을 사용한 기존 읽기를 원본 수정 없이 불러옵니다. |
 | [`local_path`](../../12%EC%B0%A8/report_core.py#L43) | 기존 Docker 경로를 지정 프로젝트 안의 실제 파일로 대응합니다. |
 | [`validate_bundle`](../../12%EC%B0%A8/report_core.py#L122) | 완료 상태와 결과 및 모든 동결 계약이 함께 맞을 때만 반환합니다. |
-| [`match_rows`](../../12%EC%B0%A8/report_core.py#L215) | 7차와 같은 신뢰도 내림차순 탐욕 매칭이며 새 추론을 하지 않습니다. |
+| [`match_rows`](../../12%EC%B0%A8/report_core.py#L215) | 7차와 같은 신뢰도 내림 차순 탐욕 매칭이며 새 추론을 하지 않습니다. |
 
 **설정·옵션:** [`TEST_SPLITS`](../../12%EC%B0%A8/report_core.py#L10)
 
@@ -139,7 +139,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 
 **거부 조건:** [`final.get('test') != final['tests']['historical_taco']`](../../12%EC%B0%A8/report_core.py#L149)
 
-**오류 메시지:** 주평가 결과가 과거 TACO와 일치하지 않습니다.
+**오류 메시지:** 주 평가 결과가 과거 TACO와 일치하지 않습니다.
 
 **거부 조건:** [`final['manifest_sha256'] != experiment['manifest_sha256']`](../../12%EC%B0%A8/report_core.py#L152)
 
@@ -167,7 +167,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 
 **거부 조건:** [`type(op.get(key)) is not int or op[key] &lt; 0`](../../12%EC%B0%A8/report_core.py#L93)
 
-**오류 메시지:** TP/FP/FN은 음수가 아닌 정수여야 합니다.
+**오류 메시지:** TP/FP/FN은 음수가 아닌 정수여야합니다.
 
 **거부 조건:** [`not isinstance(predictions, list) or any(len(p) != 5 or not all(math.isfinite(v) for v in p) for p in predictions)`](../../12%EC%B0%A8/report_core.py#L263)
 
@@ -249,7 +249,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 
 **거부 조건:** [`not support.is_relative_to(project / '12차/work')`](../../12%EC%B0%A8/watcher.py#L64)
 
-**오류 메시지:** 비공개 지원 자료는 12차 work 안이어야 합니다.
+**오류 메시지:** 비공개 지원 자료는 12차 work 안이어야합니다.
 
 **거부 조건:** [`output == project / '최종' or output == support`](../../12%EC%B0%A8/watcher.py#L66)
 
@@ -301,7 +301,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 
 ### LEVEL 1 · 결과와 주의할 범위
 
-결과 해시·테스트·가중치 결합을 확인한 뒤 만든 Word·PDF의 표·그림·수치를 대조합니다. 공개 템플릿 자체가 작성 완료 보고서는 아닙니다.
+결과해 시·테스트·가중치 결합을 확인한 뒤 만든 Word·PDF의 표·그림·수치를 대조합니다. 공개 템플릿 자체가 작성 완료 보고서는 아닙니다.
 
 | 상황 | 확인할 내용 |
 | --- | --- |
@@ -317,11 +317,11 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 
 완료된 실험의 결과·테스트·가중치 해시를 대조한 뒤 보고서를 생성합니다. 자료 다운로드나 학습을 시작하지 않고, 실패·중단과 미측정 상태를 그대로 유지하는 후처리 단계입니다.
 
-이미 지정된 실험이 끝나고 결과·테스트·가중치 해시가 일치할 때 작성자 관점의 Word와 같은 원고 PDF를 만드는 후처리 소프트웨어입니다. 이 도구는 자료 다운로드나 학습을 시작하지 않습니다. 실패·중단을 성공으로 바꾸지 않으며 실측 전 성능을 만들지 않습니다.
+이미 지정된 실험이 끝나고 결과·테스트·가중치해 시가 일치할 때 작성자 관점의 Word와 같은 원고 PDF를 만드는 후 처리 소프트웨어입니다. 이 도구는 자료 다운로드나 학습을 시작하지 않습니다. 실패·중단을 성공으로 바꾸지 않으며 실 측 전 성능을 만들지 않습니다.
 
-공개 설명 본문은 보고서 생성기의 고정 템플릿이며, 실제 작성자 설정과 최종 보고서는 별도 비공개 자료입니다. 합성 결과로 만든 시제품의 8쪽 렌더와 44개 단위 검사는 실제 실험의 성과나 미래 최종 보고서 검토를 뜻하지 않습니다.
+공개 설명 본문은 보고서 생성기의 고정 템플릿이며, 실제 작성자 설정과 최종 보고서는 별도 비공개 자료입니다. 합성 결과로 만든 시제품의 8 쪽 렌더와 44개 단위 검사는 실제 실험의 성과나 미래 최종 보고서 검토를 뜻하지 않습니다.
 
-기존 7차 동결 설치 환경이 필요합니다. 공개 저장소에는 기준 문서 두 개가 없고 검사 파일 하나의 줄바꿈 바이트가 달라 단독 복제본만으로 원본 해시 검사를 통과하지 못할 수 있습니다. 기준 해시를 현재 값으로 바꾸어 우회하지 않으며, 10차 안전 읽기와 글꼴 및 11차 복구 코드의 고정 의존성도 확인합니다.
+기존 7차 동결 설치 환경이 필요합니다. 공개 저장소에는 기준 문서 두 개가 없고 검사 파일 하나의 줄 바꿈 바이트가 달라 단독 복제 본만으로 원본해 시 검사를 통과하지 못할 수 있습니다. 기준해 시를 현재 값으로 바꾸어 우회하지 않으며, 10차 안전 읽기와 글 꼴 및 11차 복구 코드의 고정 의존성도 확인합니다.
 
 ### LEVEL 2 · 입력에서 출력으로
 
@@ -340,7 +340,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 3. 보고서 생성기의 작성자 설정과 출력 위치를 준비합니다.
 4. 같은 원고의 Word·PDF를 생성하고 실제 표·그림·수치를 검토합니다.
 
-report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 해시·계획/렌더 서식을 확인합니다. 기존 완료 실험과 해당 문서 렌더 환경이 필요합니다.
+report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과해 시·계획/렌더 서식을 확인합니다. 기존 완료 실험과 해당 문서 렌더 환경이 필요합니다.
 
 실험 종료 후 후처리 도구를 사용합니다. 자료 다운로드나 학습을 시작하는 도구가 아닙니다. 공개 고정 템플릿과 비공개 작성자 설정·완성 보고서의 범위를 구분합니다.
 
@@ -351,7 +351,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 | [watcher.py](../../12%EC%B0%A8/watcher.py) | `--plan`, `--once` |
 | [make_fixture.py](../../12%EC%B0%A8/tests/make_fixture.py) | `--output`, `--font`, `--author` |
 
-각 옵션의 기본값·필수값·부작용은 해당 main과 인자 정의를 함께 확인합니다.
+각 옵션의 기본 값·필수값·부작용은 해당 main과 인자 정의를 함께 확인합니다.
 
 
 <details>
@@ -366,7 +366,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 | [`safe_reader`](../../12%EC%B0%A8/report_core.py#L18) | 공유 삭제 핸들을 사용한 기존 읽기를 원본 수정 없이 불러옵니다. |
 | [`local_path`](../../12%EC%B0%A8/report_core.py#L43) | 기존 Docker 경로를 지정 프로젝트 안의 실제 파일로 대응합니다. |
 | [`validate_bundle`](../../12%EC%B0%A8/report_core.py#L122) | 완료 상태와 결과 및 모든 동결 계약이 함께 맞을 때만 반환합니다. |
-| [`match_rows`](../../12%EC%B0%A8/report_core.py#L215) | 7차와 같은 신뢰도 내림차순 탐욕 매칭이며 새 추론을 하지 않습니다. |
+| [`match_rows`](../../12%EC%B0%A8/report_core.py#L215) | 7차와 같은 신뢰도 내림 차순 탐욕 매칭이며 새 추론을 하지 않습니다. |
 
 **설정·옵션:** [`TEST_SPLITS`](../../12%EC%B0%A8/report_core.py#L10)
 
@@ -439,7 +439,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 
 **거부 조건:** [`final.get('test') != final['tests']['historical_taco']`](../../12%EC%B0%A8/report_core.py#L149)
 
-**오류 메시지:** 주평가 결과가 과거 TACO와 일치하지 않습니다.
+**오류 메시지:** 주 평가 결과가 과거 TACO와 일치하지 않습니다.
 
 **거부 조건:** [`final['manifest_sha256'] != experiment['manifest_sha256']`](../../12%EC%B0%A8/report_core.py#L152)
 
@@ -467,7 +467,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 
 **거부 조건:** [`type(op.get(key)) is not int or op[key] &lt; 0`](../../12%EC%B0%A8/report_core.py#L93)
 
-**오류 메시지:** TP/FP/FN은 음수가 아닌 정수여야 합니다.
+**오류 메시지:** TP/FP/FN은 음수가 아닌 정수여야합니다.
 
 **거부 조건:** [`not isinstance(predictions, list) or any(len(p) != 5 or not all(math.isfinite(v) for v in p) for p in predictions)`](../../12%EC%B0%A8/report_core.py#L263)
 
@@ -549,7 +549,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 
 **거부 조건:** [`not support.is_relative_to(project / '12차/work')`](../../12%EC%B0%A8/watcher.py#L64)
 
-**오류 메시지:** 비공개 지원 자료는 12차 work 안이어야 합니다.
+**오류 메시지:** 비공개 지원 자료는 12차 work 안이어야합니다.
 
 **거부 조건:** [`output == project / '최종' or output == support`](../../12%EC%B0%A8/watcher.py#L66)
 
@@ -596,7 +596,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 
 ### LEVEL 2 · 관측과 해석을 구분하기
 
-결과 해시·테스트·가중치 결합을 확인한 뒤 만든 Word·PDF의 표·그림·수치를 대조합니다. 공개 템플릿 자체가 작성 완료 보고서는 아닙니다.
+결과해 시·테스트·가중치 결합을 확인한 뒤 만든 Word·PDF의 표·그림·수치를 대조합니다. 공개 템플릿 자체가 작성 완료 보고서는 아닙니다.
 
 | 상황 | 확인할 내용 |
 | --- | --- |
@@ -612,7 +612,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 
 완료된 실험의 결과·테스트·가중치 해시를 대조한 뒤 보고서를 생성합니다. 자료 다운로드나 학습을 시작하지 않고, 실패·중단과 미측정 상태를 그대로 유지하는 후처리 단계입니다.
 
-report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 해시·계획/렌더 서식을 확인합니다. 기존 완료 실험과 해당 문서 렌더 환경이 필요합니다.
+report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과해 시·계획/렌더 서식을 확인합니다. 기존 완료 실험과 해당 문서 렌더 환경이 필요합니다.
 
 실험 종료 후 후처리 도구를 사용합니다. 자료 다운로드나 학습을 시작하는 도구가 아닙니다. 공개 고정 템플릿과 비공개 작성자 설정·완성 보고서의 범위를 구분합니다.
 
@@ -623,7 +623,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 | [watcher.py](../../12%EC%B0%A8/watcher.py) | `--plan`, `--once` |
 | [make_fixture.py](../../12%EC%B0%A8/tests/make_fixture.py) | `--output`, `--font`, `--author` |
 
-각 옵션의 기본값·필수값·부작용은 해당 main과 인자 정의를 함께 확인합니다.
+각 옵션의 기본 값·필수값·부작용은 해당 main과 인자 정의를 함께 확인합니다.
 
 
 <details>
@@ -638,7 +638,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 | [`safe_reader`](../../12%EC%B0%A8/report_core.py#L18) | 공유 삭제 핸들을 사용한 기존 읽기를 원본 수정 없이 불러옵니다. |
 | [`local_path`](../../12%EC%B0%A8/report_core.py#L43) | 기존 Docker 경로를 지정 프로젝트 안의 실제 파일로 대응합니다. |
 | [`validate_bundle`](../../12%EC%B0%A8/report_core.py#L122) | 완료 상태와 결과 및 모든 동결 계약이 함께 맞을 때만 반환합니다. |
-| [`match_rows`](../../12%EC%B0%A8/report_core.py#L215) | 7차와 같은 신뢰도 내림차순 탐욕 매칭이며 새 추론을 하지 않습니다. |
+| [`match_rows`](../../12%EC%B0%A8/report_core.py#L215) | 7차와 같은 신뢰도 내림 차순 탐욕 매칭이며 새 추론을 하지 않습니다. |
 
 **설정·옵션:** [`TEST_SPLITS`](../../12%EC%B0%A8/report_core.py#L10)
 
@@ -711,7 +711,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 
 **거부 조건:** [`final.get('test') != final['tests']['historical_taco']`](../../12%EC%B0%A8/report_core.py#L149)
 
-**오류 메시지:** 주평가 결과가 과거 TACO와 일치하지 않습니다.
+**오류 메시지:** 주 평가 결과가 과거 TACO와 일치하지 않습니다.
 
 **거부 조건:** [`final['manifest_sha256'] != experiment['manifest_sha256']`](../../12%EC%B0%A8/report_core.py#L152)
 
@@ -739,7 +739,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 
 **거부 조건:** [`type(op.get(key)) is not int or op[key] &lt; 0`](../../12%EC%B0%A8/report_core.py#L93)
 
-**오류 메시지:** TP/FP/FN은 음수가 아닌 정수여야 합니다.
+**오류 메시지:** TP/FP/FN은 음수가 아닌 정수여야합니다.
 
 **거부 조건:** [`not isinstance(predictions, list) or any(len(p) != 5 or not all(math.isfinite(v) for v in p) for p in predictions)`](../../12%EC%B0%A8/report_core.py#L263)
 
@@ -821,7 +821,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 
 **거부 조건:** [`not support.is_relative_to(project / '12차/work')`](../../12%EC%B0%A8/watcher.py#L64)
 
-**오류 메시지:** 비공개 지원 자료는 12차 work 안이어야 합니다.
+**오류 메시지:** 비공개 지원 자료는 12차 work 안이어야합니다.
 
 **거부 조건:** [`output == project / '최종' or output == support`](../../12%EC%B0%A8/watcher.py#L66)
 
@@ -881,7 +881,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 
 ### LEVEL 3 · 결과와 실패를 확인하기
 
-결과 해시·테스트·가중치 결합을 확인한 뒤 만든 Word·PDF의 표·그림·수치를 대조합니다. 공개 템플릿 자체가 작성 완료 보고서는 아닙니다.
+결과해 시·테스트·가중치 결합을 확인한 뒤 만든 Word·PDF의 표·그림·수치를 대조합니다. 공개 템플릿 자체가 작성 완료 보고서는 아닙니다.
 
 | 상황 | 확인할 내용 |
 | --- | --- |
@@ -890,11 +890,11 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 
 ### LEVEL 3 · 실행 전 대조할 차수 조건
 
-이미 지정된 실험이 끝나고 결과·테스트·가중치 해시가 일치할 때 작성자 관점의 Word와 같은 원고 PDF를 만드는 후처리 소프트웨어입니다. 이 도구는 자료 다운로드나 학습을 시작하지 않습니다. 실패·중단을 성공으로 바꾸지 않으며 실측 전 성능을 만들지 않습니다.
+이미 지정된 실험이 끝나고 결과·테스트·가중치해 시가 일치할 때 작성자 관점의 Word와 같은 원고 PDF를 만드는 후 처리 소프트웨어입니다. 이 도구는 자료 다운로드나 학습을 시작하지 않습니다. 실패·중단을 성공으로 바꾸지 않으며 실 측 전 성능을 만들지 않습니다.
 
-공개 설명 본문은 보고서 생성기의 고정 템플릿이며, 실제 작성자 설정과 최종 보고서는 별도 비공개 자료입니다. 합성 결과로 만든 시제품의 8쪽 렌더와 44개 단위 검사는 실제 실험의 성과나 미래 최종 보고서 검토를 뜻하지 않습니다.
+공개 설명 본문은 보고서 생성기의 고정 템플릿이며, 실제 작성자 설정과 최종 보고서는 별도 비공개 자료입니다. 합성 결과로 만든 시제품의 8 쪽 렌더와 44개 단위 검사는 실제 실험의 성과나 미래 최종 보고서 검토를 뜻하지 않습니다.
 
-기존 7차 동결 설치 환경이 필요합니다. 공개 저장소에는 기준 문서 두 개가 없고 검사 파일 하나의 줄바꿈 바이트가 달라 단독 복제본만으로 원본 해시 검사를 통과하지 못할 수 있습니다. 기준 해시를 현재 값으로 바꾸어 우회하지 않으며, 10차 안전 읽기와 글꼴 및 11차 복구 코드의 고정 의존성도 확인합니다.
+기존 7차 동결 설치 환경이 필요합니다. 공개 저장소에는 기준 문서 두 개가 없고 검사 파일 하나의 줄 바꿈 바이트가 달라 단독 복제 본만으로 원본해 시 검사를 통과하지 못할 수 있습니다. 기준해 시를 현재 값으로 바꾸어 우회하지 않으며, 10차 안전 읽기와 글 꼴 및 11차 복구 코드의 고정 의존성도 확인합니다.
 
 [자료 폴더](../../12%EC%B0%A8) · [직전 비교·자료 범위](../comparisons/11-to-12.md) · [이 차수의 원래 전체 상세](#reading-level-5)
 
@@ -905,11 +905,11 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 
 완료된 실험의 결과·테스트·가중치 해시를 대조한 뒤 보고서를 생성합니다. 자료 다운로드나 학습을 시작하지 않고, 실패·중단과 미측정 상태를 그대로 유지하는 후처리 단계입니다.
 
-이미 지정된 실험이 끝나고 결과·테스트·가중치 해시가 일치할 때 작성자 관점의 Word와 같은 원고 PDF를 만드는 후처리 소프트웨어입니다. 이 도구는 자료 다운로드나 학습을 시작하지 않습니다. 실패·중단을 성공으로 바꾸지 않으며 실측 전 성능을 만들지 않습니다.
+이미 지정된 실험이 끝나고 결과·테스트·가중치해 시가 일치할 때 작성자 관점의 Word와 같은 원고 PDF를 만드는 후 처리 소프트웨어입니다. 이 도구는 자료 다운로드나 학습을 시작하지 않습니다. 실패·중단을 성공으로 바꾸지 않으며 실 측 전 성능을 만들지 않습니다.
 
-공개 설명 본문은 보고서 생성기의 고정 템플릿이며, 실제 작성자 설정과 최종 보고서는 별도 비공개 자료입니다. 합성 결과로 만든 시제품의 8쪽 렌더와 44개 단위 검사는 실제 실험의 성과나 미래 최종 보고서 검토를 뜻하지 않습니다.
+공개 설명 본문은 보고서 생성기의 고정 템플릿이며, 실제 작성자 설정과 최종 보고서는 별도 비공개 자료입니다. 합성 결과로 만든 시제품의 8 쪽 렌더와 44개 단위 검사는 실제 실험의 성과나 미래 최종 보고서 검토를 뜻하지 않습니다.
 
-기존 7차 동결 설치 환경이 필요합니다. 공개 저장소에는 기준 문서 두 개가 없고 검사 파일 하나의 줄바꿈 바이트가 달라 단독 복제본만으로 원본 해시 검사를 통과하지 못할 수 있습니다. 기준 해시를 현재 값으로 바꾸어 우회하지 않으며, 10차 안전 읽기와 글꼴 및 11차 복구 코드의 고정 의존성도 확인합니다.
+기존 7차 동결 설치 환경이 필요합니다. 공개 저장소에는 기준 문서 두 개가 없고 검사 파일 하나의 줄 바꿈 바이트가 달라 단독 복제 본만으로 원본해 시 검사를 통과하지 못할 수 있습니다. 기준해 시를 현재 값으로 바꾸어 우회하지 않으며, 10차 안전 읽기와 글 꼴 및 11차 복구 코드의 고정 의존성도 확인합니다.
 
 ### LEVEL 4 · 이 차수 구현의 실제 근거
 
@@ -933,7 +933,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 
 ### LEVEL 4 · 조건·변경·결과를 함께 검토하기
 
-report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 해시·계획/렌더 서식을 확인합니다. 기존 완료 실험과 해당 문서 렌더 환경이 필요합니다.
+report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과해 시·계획/렌더 서식을 확인합니다. 기존 완료 실험과 해당 문서 렌더 환경이 필요합니다.
 
 실험 종료 후 후처리 도구를 사용합니다. 자료 다운로드나 학습을 시작하는 도구가 아닙니다. 공개 고정 템플릿과 비공개 작성자 설정·완성 보고서의 범위를 구분합니다.
 
@@ -944,7 +944,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 | [watcher.py](../../12%EC%B0%A8/watcher.py) | `--plan`, `--once` |
 | [make_fixture.py](../../12%EC%B0%A8/tests/make_fixture.py) | `--output`, `--font`, `--author` |
 
-각 옵션의 기본값·필수값·부작용은 해당 main과 인자 정의를 함께 확인합니다.
+각 옵션의 기본 값·필수값·부작용은 해당 main과 인자 정의를 함께 확인합니다.
 
 
 <details>
@@ -959,7 +959,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 | [`safe_reader`](../../12%EC%B0%A8/report_core.py#L18) | 공유 삭제 핸들을 사용한 기존 읽기를 원본 수정 없이 불러옵니다. |
 | [`local_path`](../../12%EC%B0%A8/report_core.py#L43) | 기존 Docker 경로를 지정 프로젝트 안의 실제 파일로 대응합니다. |
 | [`validate_bundle`](../../12%EC%B0%A8/report_core.py#L122) | 완료 상태와 결과 및 모든 동결 계약이 함께 맞을 때만 반환합니다. |
-| [`match_rows`](../../12%EC%B0%A8/report_core.py#L215) | 7차와 같은 신뢰도 내림차순 탐욕 매칭이며 새 추론을 하지 않습니다. |
+| [`match_rows`](../../12%EC%B0%A8/report_core.py#L215) | 7차와 같은 신뢰도 내림 차순 탐욕 매칭이며 새 추론을 하지 않습니다. |
 
 **설정·옵션:** [`TEST_SPLITS`](../../12%EC%B0%A8/report_core.py#L10)
 
@@ -1032,7 +1032,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 
 **거부 조건:** [`final.get('test') != final['tests']['historical_taco']`](../../12%EC%B0%A8/report_core.py#L149)
 
-**오류 메시지:** 주평가 결과가 과거 TACO와 일치하지 않습니다.
+**오류 메시지:** 주 평가 결과가 과거 TACO와 일치하지 않습니다.
 
 **거부 조건:** [`final['manifest_sha256'] != experiment['manifest_sha256']`](../../12%EC%B0%A8/report_core.py#L152)
 
@@ -1060,7 +1060,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 
 **거부 조건:** [`type(op.get(key)) is not int or op[key] &lt; 0`](../../12%EC%B0%A8/report_core.py#L93)
 
-**오류 메시지:** TP/FP/FN은 음수가 아닌 정수여야 합니다.
+**오류 메시지:** TP/FP/FN은 음수가 아닌 정수여야합니다.
 
 **거부 조건:** [`not isinstance(predictions, list) or any(len(p) != 5 or not all(math.isfinite(v) for v in p) for p in predictions)`](../../12%EC%B0%A8/report_core.py#L263)
 
@@ -1142,7 +1142,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 
 **거부 조건:** [`not support.is_relative_to(project / '12차/work')`](../../12%EC%B0%A8/watcher.py#L64)
 
-**오류 메시지:** 비공개 지원 자료는 12차 work 안이어야 합니다.
+**오류 메시지:** 비공개 지원 자료는 12차 work 안이어야합니다.
 
 **거부 조건:** [`output == project / '최종' or output == support`](../../12%EC%B0%A8/watcher.py#L66)
 
@@ -1187,7 +1187,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 
 </details>
 
-결과 해시·테스트·가중치 결합을 확인한 뒤 만든 Word·PDF의 표·그림·수치를 대조합니다. 공개 템플릿 자체가 작성 완료 보고서는 아닙니다.
+결과해 시·테스트·가중치 결합을 확인한 뒤 만든 Word·PDF의 표·그림·수치를 대조합니다. 공개 템플릿 자체가 작성 완료 보고서는 아닙니다.
 
 | 상황 | 확인할 내용 |
 | --- | --- |
@@ -1211,7 +1211,6 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 <!-- reading-levels:end -->
 
 
-
 [프로젝트](../../README.md) · [전체 차수](../REVISION_INDEX.md) · [원본 자료](../../12%EC%B0%A8) · [← 이전: 11차](round-11.md)
 
 <a name="-목적과-이-차수의-역할"></a>
@@ -1226,15 +1225,19 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 
 **항목:** 1
 
-**이 차수에서 확인할 내용:** 이미 지정된 실험이 끝나고 결과·테스트·가중치 해시가 일치할 때 작성자 관점의 Word와 같은 원고 PDF를 만드는 후처리 소프트웨어입니다. 이 도구는 자료 다운로드나 학습을 시작하지 않습니다. 실패·중단을 성공으로 바꾸지 않으며 실측 전 성능을 만들지 않습니다.
+**이 차수에서 확인할 내용:** 이미 지정된 실험이 끝나고 결과·테스트·가중치해 시가 일치할 때 작성자 관점의 Word와 같은 원고 PDF를 만드는 후 처리 소프트웨어입니다. 이 도구는 자료 다운로드나 학습을 시작하지 않습니다. 실패·중단을 성공으로 바꾸지 않으며 실 측 전 성능을 만들지 않습니다.
 
 **항목:** 2
 
-**이 차수에서 확인할 내용:** 공개 설명 본문은 보고서 생성기의 고정 템플릿이며, 실제 작성자 설정과 최종 보고서는 별도 비공개 자료입니다. 합성 결과로 만든 시제품의 8쪽 렌더와 44개 단위 검사는 실제 실험의 성과나 미래 최종 보고서 검토를 뜻하지 않습니다.
+**이 차수에서 확인할 내용:** 공개 설명 본문은 보고서 생성기의 고정 템플릿이며, 실제 작성자 설정과 최종 보고서는 별도 비공개 자료입니다. 합성 결과로 만든 시제품의 8 쪽 렌더와 44개 단위 검사는 실제 실험의 성과나 미래 최종 보고서 검토를 뜻하지 않습니다.
 
 **항목:** 3
 
-**이 차수에서 확인할 내용:** 기존 7차 동결 설치 환경이 필요합니다. 공개 저장소에는 기준 문서 두 개가 없고 검사 파일 하나의 줄바꿈 바이트가 달라 단독 복제본만으로 원본 해시 검사를 통과하지 못할 수 있습니다. 기준 해시를 현재 값으로 바꾸어 우회하지 않으며, 10차 안전 읽기와 글꼴 및 11차 복구 코드의 고정 의존성도 확인합니다.
+**이 차수에서 확인할 내용:** 기존 7차 동결 설치 환경이 필요합니다.
+
+공개 저장소에는 기준 문서 두 개가 없고 검사 파일 하나의 줄 바꿈 바이트가 달라 단독 복제 본만으로 원본해 시 검사를 통과하지 못할 수 있습니다.
+
+기준해 시를 현재 값으로 바꾸어 우회하지 않으며, 10차 안전 읽기와 글 꼴 및 11차 복구 코드의 고정 의존성도 확인합니다.
 
 
 <a name="-입력처리출력"></a>
@@ -1294,7 +1297,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 <a name="-설치-환경과-실행사용법"></a>
 ## 설치 환경과 실행·사용법
 
-report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 해시·계획/렌더 서식을 확인합니다. 기존 완료 실험과 해당 문서 렌더 환경이 필요합니다.
+report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과해 시·계획/렌더 서식을 확인합니다. 기존 완료 실험과 해당 문서 렌더 환경이 필요합니다.
 
 실험 종료 후 후처리 도구를 사용합니다. 자료 다운로드나 학습을 시작하는 도구가 아닙니다. 공개 고정 템플릿과 비공개 작성자 설정·완성 보고서의 범위를 구분합니다.
 
@@ -1306,7 +1309,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 | [watcher.py](../../12%EC%B0%A8/watcher.py) | `--plan`, `--once` |
 | [make_fixture.py](../../12%EC%B0%A8/tests/make_fixture.py) | `--output`, `--font`, `--author` |
 
-각 옵션의 기본값·필수값·부작용은 해당 main과 인자 정의를 함께 확인합니다.
+각 옵션의 기본 값·필수값·부작용은 해당 main과 인자 정의를 함께 확인합니다.
 
 
 <details>
@@ -1321,7 +1324,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 | [`safe_reader`](../../12%EC%B0%A8/report_core.py#L18) | 공유 삭제 핸들을 사용한 기존 읽기를 원본 수정 없이 불러옵니다. |
 | [`local_path`](../../12%EC%B0%A8/report_core.py#L43) | 기존 Docker 경로를 지정 프로젝트 안의 실제 파일로 대응합니다. |
 | [`validate_bundle`](../../12%EC%B0%A8/report_core.py#L122) | 완료 상태와 결과 및 모든 동결 계약이 함께 맞을 때만 반환합니다. |
-| [`match_rows`](../../12%EC%B0%A8/report_core.py#L215) | 7차와 같은 신뢰도 내림차순 탐욕 매칭이며 새 추론을 하지 않습니다. |
+| [`match_rows`](../../12%EC%B0%A8/report_core.py#L215) | 7차와 같은 신뢰도 내림 차순 탐욕 매칭이며 새 추론을 하지 않습니다. |
 
 **설정·옵션:** [`TEST_SPLITS`](../../12%EC%B0%A8/report_core.py#L10)
 
@@ -1394,7 +1397,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 
 **거부 조건:** [`final.get('test') != final['tests']['historical_taco']`](../../12%EC%B0%A8/report_core.py#L149)
 
-**오류 메시지:** 주평가 결과가 과거 TACO와 일치하지 않습니다.
+**오류 메시지:** 주 평가 결과가 과거 TACO와 일치하지 않습니다.
 
 **거부 조건:** [`final['manifest_sha256'] != experiment['manifest_sha256']`](../../12%EC%B0%A8/report_core.py#L152)
 
@@ -1422,7 +1425,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 
 **거부 조건:** [`type(op.get(key)) is not int or op[key] &lt; 0`](../../12%EC%B0%A8/report_core.py#L93)
 
-**오류 메시지:** TP/FP/FN은 음수가 아닌 정수여야 합니다.
+**오류 메시지:** TP/FP/FN은 음수가 아닌 정수여야합니다.
 
 **거부 조건:** [`not isinstance(predictions, list) or any(len(p) != 5 or not all(math.isfinite(v) for v in p) for p in predictions)`](../../12%EC%B0%A8/report_core.py#L263)
 
@@ -1504,7 +1507,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 
 **거부 조건:** [`not support.is_relative_to(project / '12차/work')`](../../12%EC%B0%A8/watcher.py#L64)
 
-**오류 메시지:** 비공개 지원 자료는 12차 work 안이어야 합니다.
+**오류 메시지:** 비공개 지원 자료는 12차 work 안이어야합니다.
 
 **거부 조건:** [`output == project / '최종' or output == support`](../../12%EC%B0%A8/watcher.py#L66)
 
@@ -1554,7 +1557,7 @@ report_core.py·report_outputs.py·watcher.py와 docs의 원본 계약·결과 �
 <a name="-처리-결과와-출력-읽기"></a>
 ## 처리 결과와 출력 읽기
 
-결과 해시·테스트·가중치 결합을 확인한 뒤 만든 Word·PDF의 표·그림·수치를 대조합니다. 공개 템플릿 자체가 작성 완료 보고서는 아닙니다.
+결과해 시·테스트·가중치 결합을 확인한 뒤 만든 Word·PDF의 표·그림·수치를 대조합니다. 공개 템플릿 자체가 작성 완료 보고서는 아닙니다.
 
 <a name="️-제약과-문제-해결"></a>
 ## 제약과 문제 해결
