@@ -1,0 +1,78 @@
+{
+  "schema": 1,
+  "inputs": {
+    "이전 도커 실험/3차실험/trash_round3/sources/additional_manifest.json": "bddc9ed1d55137cf763967e08212439fdbaecdc5be738d3a7bc64dc5fdbd5397",
+    "이전 도커 실험/3차실험/trash_round3/sources/pLitter_annotations.json": "57e6b73a6109325a7b3864f577fdcd293065f153a6f6466d0bb31314381c21b3",
+    "이전 도커 실험/3차실험/trash_round3/sources/pLitter_annotations.zip": "d57e8306a76458e1e20c0dfd3517831ae242b9936cb8b9ee1ebe8542b5daca82",
+    "이전 도커 실험/3차실험/trash_round3/app/data_pipeline.py": "7c553ecdcbc642a56958e484a52a9d956e962859cd241f3e09fd3a781cff69c2",
+    "7차/work/sources/raw/pLitterStreet/annotations/10_class_splits/annotations_all.json": "e88a652b305561c06d0cbcff68140152022d75e60990a0f2eabbff323ee4abc9",
+    "7차/work/sources/downloads/annotations.zip": "d57e8306a76458e1e20c0dfd3517831ae242b9936cb8b9ee1ebe8542b5daca82",
+    "5차/work/training/data_manifest.json": "79184840e87155061a1f493bb679cfbd149b2985d9754f30d2d3fb838a866127",
+    "5차/prepare_training.py": "cec566249989c41acf3b20460b29d9ba26652fc5c40c3dccfc0a5c9f42292fd5",
+    "7차/work/training/preparation_contract.json": "a2c28a0154a7f26d7eaa01851c30f427461b83417ec64af1b26756eb01145851",
+    "7차/work/sources/source_contract.json": "9d02c3592100d03143e3913eee36f4cf4500b73db60de7b00ab4bb3bf0950cb9",
+    "7차/work/sources/download_ledger.json": "f66794386639b0ec4653d23cc2a71443a0d188aa1add845752c3347894fb83f3"
+  },
+  "cache": [
+    {
+      "source": "pLitterStreet",
+      "record": "8288500",
+      "name": "images.zip",
+      "size": 13728630001,
+      "md5": "02382a3b9620ae7b086ff4c7fd11891d",
+      "url": "https://zenodo.org/api/records/8288500/files/images.zip/content",
+      "license": "CC-BY-4.0",
+      "path": "7차/work/sources/downloads/images.zip",
+      "sha256": "97f2e6dfb57d8b8db2ef02e0b226d5a3e865406ed8d406700a0818d8bbef3fc8",
+      "receipt_sha256": "da7309dbde00774c8b6a592ed977be2d212ea9780eaf62ebd786fd042d46271f"
+    },
+    {
+      "source": "pLitterStreet",
+      "record": "8288500",
+      "name": "annotations.zip",
+      "size": 8764662,
+      "md5": "2484e076b1e9d66036b0a15e9928692f",
+      "url": "https://zenodo.org/api/records/8288500/files/annotations.zip/content",
+      "license": "CC-BY-4.0",
+      "path": "7차/work/sources/downloads/annotations.zip",
+      "sha256": "d57e8306a76458e1e20c0dfd3517831ae242b9936cb8b9ee1ebe8542b5daca82",
+      "receipt_sha256": "5059c43d00f3329c624562ffe5f616abc5f886a8ea6070c58f07fea0e20e92ae"
+    },
+    {
+      "source": "PlastOPol",
+      "record": "5829156",
+      "name": "PlastOpol_oneclass.zip",
+      "size": 7709841780,
+      "md5": "b5648f444ae79a9566adf23f0786e402",
+      "url": "https://zenodo.org/api/records/5829156/files/PlastOpol_oneclass.zip/content",
+      "license": "CC-BY-4.0",
+      "path": "7차/work/sources/downloads/PlastOpol_oneclass.zip",
+      "sha256": "c9ab2e8c2c7585a5aa23b91da5313407f9bd9e1b9d1f297eb648d369f6936e83",
+      "receipt_sha256": "9eecd2d2beb75357d3fd9762b8852c1a890843a084d0ebafecfb8d54a20b8ca7"
+    },
+    {
+      "source": "UAVVaste",
+      "record": "8214061",
+      "name": "UAVVasteDataset.zip",
+      "size": 3010727259,
+      "md5": "1575c32c04bdf944047563e4a1786c2a",
+      "url": "https://zenodo.org/api/records/8214061/files/UAVVasteDataset.zip/content",
+      "license": "CC-BY-4.0",
+      "path": "7차/work/sources/downloads/UAVVasteDataset.zip",
+      "sha256": "26b5cd7a201b246f5688a97965a33a949721b8140e8503018c7d89f77ffee052",
+      "receipt_sha256": "7065fa9d9460c04e80ea605cfb7e1ee121550c68bba5f48147dc96e36fc2a014"
+    }
+  ],
+  "counts": {
+    "prior": 1999,
+    "previous_round5": 3839,
+    "overlap": 642,
+    "union": 5196
+  },
+  "normalization_limit": "과거 JPEG는 OpenCV quality95 재인코딩 및 최대2048 축소 결과이다. 당시 실파일 부재로 새 공식 원본과의 바이트 동일성을 주장하지 않는다.",
+  "base_contract_scope": "기존 preparation_sha256은 원본7차 준비 소스의 해시이다. 실효 전체는13차 recovery13 계약과 함께 검증해야 한다.",
+  "dependencies": {
+    "10차/web/fonts/NanumGothic-Bold.ttf": "f96298f9fb18e364d2370f4c3ce948ac67a2b61af992d7234bc15c42b033c674",
+    "10차/web/fonts/OFL.txt": "eeacf16032901d0ed0456876ec77b8f0fda6b3fecec7d972f8543eb602e6c30f"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schema": 1,
+  "meaning": "5차 보존 테스트 결과와 마지막 실험의 저장 기록을 구분한다",
+  "baseline_round": "5차",
+  "test": {
+    "images": 150,
+    "operating": {
+      "threshold": 0.1,
+      "precision": 0.5204460966542751,
+      "recall": 0.5374280230326296,
+      "f1": 0.5288007554296507,
+      "tp": 280,
+      "fp": 258,
+      "fn": 241,
+      "iou": 0.5
+    },
+    "metrics": {
+      "metrics/mAP50(B)": 0.47478490228878745,
+      "metrics/mAP50-95(B)": 0.32448405525952334
+    },
+    "evaluator": "greedy confidence IoU, 101-point interpolated AP v1",
+    "threshold_source": "validation only"
+  },
+  "target_met": false,
+  "last_experiment": {
+    "state_recorded": "running",
+    "stage_recorded": "학습 diverse_coco26l",
+    "epoch_recorded": 2,
+    "epoch_limit": 60,
+    "user_requested_pause": true,
+    "current_process_liveness": "이번 문서 작업에서 조회하지 않음",
+    "final_test": "최종 결과 없음"
+  },
+  "limits": [
+    "5차 테스트 결과이며 14차 새 학습 성능이 아님",
+    "101점 보간 AP 자체 평가이며 COCO 공식 API 결과로 동일시하지 않음",
+    "CCTV 투기 행동 정확도는 정답 라벨 부재로 미측정",
+    "로컬 상태 기록의 running은 현재 프로세스 실행 증거가 아님"
+  ]
+}

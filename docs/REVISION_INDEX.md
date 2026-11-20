@@ -20,3 +20,5 @@
 | 이전 도커 실험 | **자료 폴더·원본** [자료 폴더](../%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98)<br>**상세 설명** [상세 설명](versions/docker-experiment.md)<br>**직전 비교·범위** [전체 비교·범위](comparisons/docker-to-3.md) |
 | 최종 | **자료 폴더·원본** [자료 폴더](../%EC%B5%9C%EC%A2%85)<br>**상세 설명** [상세 설명](versions/final-container.md)<br>**직전 비교·범위** [전체 비교·범위](comparisons/final-container.md) |
 | 12차 | **자료 폴더·원본** [자료 폴더](../12%EC%B0%A8)<br>**상세 설명** [상세 설명](versions/round-12.md)<br>**직전 비교·범위** [전체 비교·범위](comparisons/11-to-12.md) |
+| 13차 | **원본 ID 복구와 실효 계약** · [자료 폴더](../13차) · [상세 설명](versions/round-13.md) · [직전 전체 비교](comparisons/12-to-13.md) |
+| 14차 | **DMF 문서 무결성 적용** · [자료 폴더](../14차) · [상세 설명](versions/round-14.md) · [직전 전체 비교](comparisons/13-to-14.md) |

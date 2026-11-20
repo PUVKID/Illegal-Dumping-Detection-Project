@@ -1,0 +1,128 @@
+{
+  "commit": "cf550e3b2ceb0946ba89f64e43b7d6c2f5164383",
+  "files": [
+    {
+      "bytes": 2215,
+      "git_blob_sha1": "be07cbd59c610fc694c8be7a1325d8d7837f8c28",
+      "path": "CLAUDE.md",
+      "sha256": "d37c27001c6c6398c513781f5fe8488d6990c42277675d22a92b0e133470a720"
+    },
+    {
+      "bytes": 6166,
+      "git_blob_sha1": "a636eeffac2242f4834a52f6c6dfceb7018e84d9",
+      "path": "README.md",
+      "sha256": "5466f280dcb083ad9ef0baad688fcd41bcd01fc08be8b5c87841e94f3c875bb7"
+    },
+    {
+      "bytes": 30076,
+      "git_blob_sha1": "9c04cd75e5f919afa27eb9afcd54efd7eb6acff7",
+      "path": "docs/ARCHITECTURE.md",
+      "sha256": "47d67a0652f4491c05f0bd45936e2a0c68637f6ac78acdfcc77543d8f7c2af0a"
+    },
+    {
+      "bytes": 10290,
+      "git_blob_sha1": "428a29a62677d4ffcc738345e1da7fc7bc14d2af",
+      "path": "docs/USAGE.md",
+      "sha256": "d7299310161b2c952818329742404e1788ac96a899f37baa2e9885a4f26ae8da"
+    },
+    {
+      "bytes": 2389,
+      "git_blob_sha1": "e6368dfa531a27fa978d4bee9029d35d4cd07217",
+      "path": "policies/acceptance-criteria.yaml",
+      "sha256": "7a45ef55c8ffb4d37e4ae12156c3a20afa03f9be84e5b16dea2a8e4a26df4331"
+    },
+    {
+      "bytes": 2345,
+      "git_blob_sha1": "70a5ea52882ed57fa64d7188bd7f09ff042a7b1e",
+      "path": "policies/approval-policy.yaml",
+      "sha256": "b5187915fb73a0536cbba2732e678bb52b470bc239c81d3cfb5f331d6dc2b395"
+    },
+    {
+      "bytes": 2640,
+      "git_blob_sha1": "9bc270a47f7f8d0dc61c4e690d59e9f96af1444b",
+      "path": "policies/authz.cedar",
+      "sha256": "9b543441f05f5e315aa08601b9647ee516ac6289bc5192b37c693741c5d77a35"
+    },
+    {
+      "bytes": 2169,
+      "git_blob_sha1": "2fdfb481205ef4d2108606ed083ec3a46e8a2e7a",
+      "path": "policies/gate-policy.yaml",
+      "sha256": "863208a4ebfa6e60e412f17f357b3915db7d6b35d7b7b0e0b6dfd70b5c8af85e"
+    },
+    {
+      "bytes": 1673,
+      "git_blob_sha1": "7bb5bf2d576b28160cf1cf0ec0a380f88b967bd9",
+      "path": "policies/restrict-policy.yaml",
+      "sha256": "d818fbe15c3f864f92bb759ba87260dddc406f40bc9ba50d5e84b429dd19fb3c"
+    },
+    {
+      "bytes": 6075,
+      "git_blob_sha1": "09dd89356ecba33f50270695bc7fe8c2f7c2ea4d",
+      "path": "schema/jsonld/dmf-context.jsonld",
+      "sha256": "e60bf25e0572a1941fad6aeebff0b3c4fd29f4cfb3ec289b9d4405dce6a57bef"
+    },
+    {
+      "bytes": 7634,
+      "git_blob_sha1": "3fa23b601874533e0428fb10d964a857a40a876b",
+      "path": "schema/jsonld/example-ticket-lifecycle.jsonld",
+      "sha256": "ff31363664c3e1dbf679f8159e6c76037dcd61b5450165e4fe8743c1952f42c8"
+    },
+    {
+      "bytes": 25490,
+      "git_blob_sha1": "b15ae9c4f19011f407ec4940cd5e37ad35ea575d",
+      "path": "schema/postgres/001_core.sql",
+      "sha256": "bf1085696f3c42f6c02e25682fcffa8bdbdd90faf621fdbd56b04b20ef818bca"
+    },
+    {
+      "bytes": 794,
+      "git_blob_sha1": "51e98c9580e85aacb17580a0c24efa6e9377d59a",
+      "path": "src/dmf_integrity/__init__.py",
+      "sha256": "9f383ae996c4d37485614d01f9239198447c97d9cb1382ea418ad58cfb5bed8b"
+    },
+    {
+      "bytes": 5998,
+      "git_blob_sha1": "f8460ab1a62a2a0db1288c8702e45770c55fbaaa",
+      "path": "src/dmf_integrity/audit_chain.py",
+      "sha256": "fdd4fbc42233e69c4fe2e5462c5cc05c2fb808e873aa3d3b32127b6e722aafc2"
+    },
+    {
+      "bytes": 1964,
+      "git_blob_sha1": "4461f90090d8d5ad255ffa462850744255c12b47",
+      "path": "src/dmf_integrity/canonical.py",
+      "sha256": "1be37bc188623f77ca59b151c616c86ca3276bbe3d0b285f5fb70c036da4bf7b"
+    },
+    {
+      "bytes": 5934,
+      "git_blob_sha1": "8906b25e878c8976010f246398f0e9ba1a35ca94",
+      "path": "src/dmf_integrity/manifest.py",
+      "sha256": "6f57102d1007640421eaf79c02999bdc2df161255af8e9d1c5c5c8368fb60eb2"
+    },
+    {
+      "bytes": 1941,
+      "git_blob_sha1": "ac046f2252dfb4c693dcd84b1be3d5b9ac0f66db",
+      "path": "src/dmf_integrity/merge.py",
+      "sha256": "6ddac1c17581c00882ece0442c1c3b3518f9bc24fad7b4312ba081b4b1224d7f"
+    },
+    {
+      "bytes": 2256,
+      "git_blob_sha1": "c7f98aaf5e7c051ce1df23cd3adde1a7119c1a3d",
+      "path": "src/dmf_integrity/merkle.py",
+      "sha256": "185d642ce155ccddb90d62c7c7e70e160cdc25777681d911cf66780c31d4dbfc"
+    },
+    {
+      "bytes": 3543,
+      "git_blob_sha1": "a35d07a1264386c644bca301805da0b0994ebfc1",
+      "path": "src/dmf_integrity/restrict.py",
+      "sha256": "ec651adc0a95acbb41f4a2d70378b600ccd199261dcdf3e1cfdef2a9721d078a"
+    },
+    {
+      "bytes": 7891,
+      "git_blob_sha1": "9ddecc64141db77dce1992dfb6b5ad84dcf1515b",
+      "path": "tests/test_integrity.py",
+      "sha256": "7abbb056f213c9e8311abe5816160fc65e55ddd245356b0300b29afe9ae87a91"
+    }
+  ],
+  "repository": "https://github.com/leecursion/DMF",
+  "schema": "ict-dmf-upstream-pin-v1",
+  "tree": "906a2d35af5abe9449a417f2e3dbc740abb0e4e8"
+}

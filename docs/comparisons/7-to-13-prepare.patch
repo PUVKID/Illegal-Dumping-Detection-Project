@@ -1,0 +1,32 @@
+--- a/7차/prepare_dataset.py
++++ b/13차/effective_prepare.py
+@@ -21,8 +21,9 @@
+ import zipfile
+ import zlib
+ from pathlib import Path, PurePosixPath
+-
+-ROOT = Path(__file__).resolve().parent
++from legacy_ids import legacy_match
++
++ROOT = Path(__file__).resolve().parent.parent / '7차'
+ WORK = ROOT / 'work'
+ SOURCES = WORK / 'sources'
+ TRAINING = WORK / 'training'
+@@ -661,7 +662,7 @@
+         raise ValueError('실제 자료 준비는 동일 Docker2026/Linux 안에서 실행해야 합니다.')
+     TRAINING.mkdir(parents=True,exist_ok=True)
+     contract={'source_files':SOURCE_FILES,'normalization':NORMALIZATION,'seed':SEED,
+-              'preparation_sha256':sha256_file(__file__),'previous_manifest_sha256':sha256_file(PREVIOUS/'data_manifest.json'),
++              'preparation_sha256':sha256_file(ROOT/'prepare_dataset.py'),'previous_manifest_sha256':sha256_file(PREVIOUS/'data_manifest.json'),
+               'config_sha256':sha256_file(ROOT/'configs/training.json'),
+               'protected_sources_sha256':sha256_file(ROOT/'configs/protected_sources.json'),
+               'prior_additional_manifest_sha256':sha256_file(ARCHIVE/'sources/additional_manifest.json')}
+@@ -701,7 +702,7 @@
+     old_additional=load(ARCHIVE/'sources/additional_manifest.json')
+     for row in old_additional:
+         if row['source']=='pLitterStreet':
+-            match=re.search(r'street_(\d+)',row['image'])
++            match=legacy_match(row['image'])
+             if not match:raise ValueError('과거 pLitter 원본 ID를 확인할 수 없습니다.')
+             previous_ids.add(match.group(1))
+     pannotation=next(p for p in (SOURCES/'raw/pLitterStreet').rglob('annotations_all.json') if p.as_posix().endswith('10_class_splits/annotations_all.json'))

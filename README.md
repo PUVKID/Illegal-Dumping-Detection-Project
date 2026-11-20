@@ -57,7 +57,7 @@
 <a name="️-차수별-개발-흐름"></a>
 ## 차수별 개발 흐름
 
-[**1차부터 12차·최종까지 보기 →**](docs/REVISION_INDEX.md)
+[**1차부터 14차·최종까지 보기 →**](docs/REVISION_INDEX.md)
 
 ## 공개 차수와 비교
 
@@ -80,6 +80,8 @@
 | 이전 도커 실험 | **자료 폴더·원본** [자료 폴더](%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98)<br>**상세 설명** [상세 설명](docs/versions/docker-experiment.md)<br>**직전 비교·범위** [전체 비교·범위](docs/comparisons/docker-to-3.md) |
 | 최종 | **자료 폴더·원본** [자료 폴더](%EC%B5%9C%EC%A2%85)<br>**상세 설명** [상세 설명](docs/versions/final-container.md)<br>**직전 비교·범위** [전체 비교·범위](docs/comparisons/final-container.md) |
 | 12차 | **자료 폴더·원본** [자료 폴더](12%EC%B0%A8)<br>**상세 설명** [상세 설명](docs/versions/round-12.md)<br>**직전 비교·범위** [전체 비교·범위](docs/comparisons/11-to-12.md) |
+| 13차 | **원본 ID 복구와 실효 계약** · [자료 폴더](13차) · [상세 설명](docs/versions/round-13.md) · [직전 전체 비교](docs/comparisons/12-to-13.md) |
+| 14차 | **DMF 문서 무결성 적용** · [자료 폴더](14차) · [상세 설명](docs/versions/round-14.md) · [직전 전체 비교](docs/comparisons/13-to-14.md) |
 
 
 <a name="️-현재-실험을-보여-주는-10차-대시보드"></a>
@@ -385,3 +387,9 @@ python launcher.py --no-browser
 ## 최종 배포 사용안내
 
 기존 최종 보고서와 함께 [사용안내 원문](최종/최종/사용안내.txt)을 확인할 수 있습니다. Docker 환경·클린뷰 실행·결과 위치를 안내하는 기존 문서이며, [문서 추가 기록](docs/changes/2026-11-02-배포사용안내.md)과 [이번 전체 텍스트 비교](docs/comparisons/2026-11-02-deployment-guide.patch)를 함께 연결합니다. 제품의 새 개발 차수나 새 실험 결과를 추가한 것은 아닙니다.
+
+## ICT 안전 수업의 DMF 적용
+
+문서별 변경 제한과 버전·감사 기록을 실제 DMF 라이브러리로 검사합니다. 기존 학습과 분리된 로컬 검증이며 Official 승격은 수행하지 않습니다. [14차 실행과 범위](14차/README.md) · [직전 차수와 전체 비교](docs/comparisons/13-to-14.md)
+
+[ICT 안전 프로젝트 DMF 적용 보고서 PDF](14차/보고서/ICT%20안전%20프로젝트%20DMF%20적용%20보고서.pdf) · [편집 가능한 Word](14차/보고서/ICT%20안전%20프로젝트%20DMF%20적용%20보고서.docx)

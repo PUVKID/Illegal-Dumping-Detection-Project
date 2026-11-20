@@ -1,0 +1,158 @@
+{
+  "rollback_derived_from_version_id": "b696f46187a73b7a91513cbe9e97ec893d8ae48deca77838f0465aff313e03a5",
+  "versions": [
+    {
+      "document_id": "ict-safety-document",
+      "manifest_root": "2b67f1ebe154d25958cd4c5cdb68a6ae818051c8f79db049fb9470138ad38053",
+      "metadata": {
+        "dc:title": "ICT 안전 쓰레기 탐지 프로젝트 DMF 적용",
+        "scope": "local_validation_only",
+        "state": "Shadow",
+        "upstream_commit": "cf550e3b2ceb0946ba89f64e43b7d6c2f5164383"
+      },
+      "module_manifest_hash": "2b67f1ebe154d25958cd4c5cdb68a6ae818051c8f79db049fb9470138ad38053",
+      "modules": [
+        {
+          "content_sha256": "09a082f6509de480a9c46467ba085a4124977ec5a9b44593ebb3f26c18b9816c",
+          "depends_on": [],
+          "kind": "section",
+          "module_id": "project_overview",
+          "mutability": "MUTABLE",
+          "ordinal": 0
+        },
+        {
+          "content_sha256": "d18546cdf31c5125ca0c6299495165e8081c5c5f54fcf3b8e49ff13dee718fe1",
+          "depends_on": [],
+          "kind": "section",
+          "module_id": "safety_boundary",
+          "mutability": "IMMUTABLE_CORE",
+          "ordinal": 1
+        },
+        {
+          "content_sha256": "deb0afa21a88176fc9a4bf791f9004aa424a27a84b7daaae27b8aaeb146a040c",
+          "depends_on": [],
+          "kind": "section",
+          "module_id": "development",
+          "mutability": "MUTABLE",
+          "ordinal": 2
+        },
+        {
+          "content_sha256": "b2dc727537d372257cf45f6fea3243b8a32c31ea0ae451c88fe33d9eec3bd0f1",
+          "depends_on": [],
+          "kind": "section",
+          "module_id": "observed_facts",
+          "mutability": "RESTRICTED",
+          "ordinal": 3
+        }
+      ],
+      "parent_version_hash": null,
+      "parent_version_id": null,
+      "restrict_seal": "ee5e2aa1bd9a40581402db7092343318d8e6aeb0d246738fcd1db65d82ab6fbf",
+      "version_hash": "b696f46187a73b7a91513cbe9e97ec893d8ae48deca77838f0465aff313e03a5",
+      "version_id": "b696f46187a73b7a91513cbe9e97ec893d8ae48deca77838f0465aff313e03a5",
+      "version_no": 1
+    },
+    {
+      "document_id": "ict-safety-document",
+      "manifest_root": "9270997ed1159f2e474cefc0f3f3fc87858c4ec4bbac53eb36d7788fb96175b7",
+      "metadata": {
+        "dc:title": "ICT 안전 쓰레기 탐지 프로젝트 DMF 적용",
+        "scope": "local_validation_only",
+        "state": "Shadow",
+        "upstream_commit": "cf550e3b2ceb0946ba89f64e43b7d6c2f5164383"
+      },
+      "module_manifest_hash": "9270997ed1159f2e474cefc0f3f3fc87858c4ec4bbac53eb36d7788fb96175b7",
+      "modules": [
+        {
+          "content_sha256": "1122c8b596e718ec145d3d24d34eebe9d09ca2cdec7293186a11416036d9ac0b",
+          "depends_on": [],
+          "kind": "section",
+          "module_id": "project_overview",
+          "mutability": "MUTABLE",
+          "ordinal": 0
+        },
+        {
+          "content_sha256": "d18546cdf31c5125ca0c6299495165e8081c5c5f54fcf3b8e49ff13dee718fe1",
+          "depends_on": [],
+          "kind": "section",
+          "module_id": "safety_boundary",
+          "mutability": "IMMUTABLE_CORE",
+          "ordinal": 1
+        },
+        {
+          "content_sha256": "deb0afa21a88176fc9a4bf791f9004aa424a27a84b7daaae27b8aaeb146a040c",
+          "depends_on": [],
+          "kind": "section",
+          "module_id": "development",
+          "mutability": "MUTABLE",
+          "ordinal": 2
+        },
+        {
+          "content_sha256": "b2dc727537d372257cf45f6fea3243b8a32c31ea0ae451c88fe33d9eec3bd0f1",
+          "depends_on": [],
+          "kind": "section",
+          "module_id": "observed_facts",
+          "mutability": "RESTRICTED",
+          "ordinal": 3
+        }
+      ],
+      "parent_version_hash": "b696f46187a73b7a91513cbe9e97ec893d8ae48deca77838f0465aff313e03a5",
+      "parent_version_id": "b696f46187a73b7a91513cbe9e97ec893d8ae48deca77838f0465aff313e03a5",
+      "restrict_seal": "ee5e2aa1bd9a40581402db7092343318d8e6aeb0d246738fcd1db65d82ab6fbf",
+      "version_hash": "55c6e6386c6e4466b43bb2734bf6a72ac4c23efeaaf67a37fc78fca121973c6a",
+      "version_id": "55c6e6386c6e4466b43bb2734bf6a72ac4c23efeaaf67a37fc78fca121973c6a",
+      "version_no": 2
+    },
+    {
+      "document_id": "ict-safety-document",
+      "manifest_root": "2b67f1ebe154d25958cd4c5cdb68a6ae818051c8f79db049fb9470138ad38053",
+      "metadata": {
+        "dc:title": "ICT 안전 쓰레기 탐지 프로젝트 DMF 적용",
+        "scope": "local_validation_only",
+        "state": "Shadow",
+        "upstream_commit": "cf550e3b2ceb0946ba89f64e43b7d6c2f5164383"
+      },
+      "module_manifest_hash": "2b67f1ebe154d25958cd4c5cdb68a6ae818051c8f79db049fb9470138ad38053",
+      "modules": [
+        {
+          "content_sha256": "09a082f6509de480a9c46467ba085a4124977ec5a9b44593ebb3f26c18b9816c",
+          "depends_on": [],
+          "kind": "section",
+          "module_id": "project_overview",
+          "mutability": "MUTABLE",
+          "ordinal": 0
+        },
+        {
+          "content_sha256": "d18546cdf31c5125ca0c6299495165e8081c5c5f54fcf3b8e49ff13dee718fe1",
+          "depends_on": [],
+          "kind": "section",
+          "module_id": "safety_boundary",
+          "mutability": "IMMUTABLE_CORE",
+          "ordinal": 1
+        },
+        {
+          "content_sha256": "deb0afa21a88176fc9a4bf791f9004aa424a27a84b7daaae27b8aaeb146a040c",
+          "depends_on": [],
+          "kind": "section",
+          "module_id": "development",
+          "mutability": "MUTABLE",
+          "ordinal": 2
+        },
+        {
+          "content_sha256": "b2dc727537d372257cf45f6fea3243b8a32c31ea0ae451c88fe33d9eec3bd0f1",
+          "depends_on": [],
+          "kind": "section",
+          "module_id": "observed_facts",
+          "mutability": "RESTRICTED",
+          "ordinal": 3
+        }
+      ],
+      "parent_version_hash": "55c6e6386c6e4466b43bb2734bf6a72ac4c23efeaaf67a37fc78fca121973c6a",
+      "parent_version_id": "55c6e6386c6e4466b43bb2734bf6a72ac4c23efeaaf67a37fc78fca121973c6a",
+      "restrict_seal": "ee5e2aa1bd9a40581402db7092343318d8e6aeb0d246738fcd1db65d82ab6fbf",
+      "version_hash": "48b2e6e590b950623d38fc20b0956460170c1b359ccd774c0d63fa57fc3b9578",
+      "version_id": "48b2e6e590b950623d38fc20b0956460170c1b359ccd774c0d63fa57fc3b9578",
+      "version_no": 3
+    }
+  ]
+}

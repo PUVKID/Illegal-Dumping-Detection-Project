@@ -1,0 +1,148 @@
+{
+  "checks": [
+    {
+      "detail": "실제 입력 사본의 예시 개정, R1",
+      "id": "normal_edit",
+      "name": "가변 모듈 정상 수정 허용",
+      "status": "PASS"
+    },
+    {
+      "detail": "CORE_MODIFIED",
+      "id": "immutable_reject",
+      "name": "불변 안전 경계 변경 거부",
+      "status": "PASS"
+    },
+    {
+      "detail": "합성 사본의 추가 바이트가 원문 100% 초과. API는 변경률 20%를 계산하지 않고 제한 등급 접촉만으로 R2를 반환한다. 비율 정책 자동 집행 아님.",
+      "id": "restricted_risk",
+      "name": "제한 모듈 대폭 변경의 R2 하한",
+      "status": "PASS"
+    },
+    {
+      "detail": "v3 부모=v2, 내용=v1, 기존 버전 보존",
+      "id": "rollback",
+      "name": "롤백은 직전 버전에 연결한 새 버전",
+      "status": "PASS"
+    },
+    {
+      "detail": "합성 사본 메타데이터 변조",
+      "id": "history_tamper",
+      "name": "소급 버전 내용 변조 탐지",
+      "status": "PASS"
+    },
+    {
+      "detail": "wrapper에서 저장값과 실제 재계산값 추가 비교",
+      "id": "manifest_field_tamper",
+      "name": "저장 manifest 필드 변조 탐지",
+      "status": "PASS"
+    },
+    {
+      "detail": "wrapper에서 저장값과 실제 재계산값 추가 비교",
+      "id": "seal_field_tamper",
+      "name": "저장 불변 봉인 필드 변조 탐지",
+      "status": "PASS"
+    },
+    {
+      "detail": "두 편집 결과 해시 보존",
+      "id": "disjoint_merge",
+      "name": "서로 다른 모듈의 병합",
+      "status": "PASS"
+    },
+    {
+      "detail": "자동 덮어쓰기 안 함",
+      "id": "same_module_conflict",
+      "name": "같은 모듈 충돌 탐지",
+      "status": "PASS"
+    },
+    {
+      "detail": "합성 사본 actor 변경",
+      "id": "audit_tamper",
+      "name": "감사 행 변조 탐지",
+      "status": "PASS"
+    },
+    {
+      "detail": "동일 로컬 head와 대조",
+      "id": "audit_truncation",
+      "name": "감사 꼬리 삭제 탐지",
+      "status": "PASS"
+    },
+    {
+      "detail": "wrapper 빈체인 검사, 외부 앵커 아님",
+      "id": "empty_audit_anchor",
+      "name": "빈 감사와 비영 앵커 거부",
+      "status": "PASS"
+    },
+    {
+      "detail": "입력 4파일 전후 SHA-256 일치",
+      "id": "input_preserved",
+      "name": "원본 입력 바이트 보존",
+      "status": "PASS"
+    },
+    {
+      "detail": "원본 20파일 바이트/크기/Git blob 및 실제 임포트 7파일 SHA 검증",
+      "id": "upstream_import",
+      "name": "실제 임포트된 고정 원본 확인",
+      "status": "PASS"
+    }
+  ],
+  "limitations": [
+    "운영 Shadow 배포 또는 실제 트래픽 비교가 아닌 로컬 검증 상태",
+    "G1~G9 전체 게이트 미수행, 사람 승인 미생성",
+    "PostgreSQL/OIDC/KMS/전자서명/외부 타임스탬프/DB 원자성 미구현",
+    "동일 권한 주체가 코드·정책·전체 기록과 봉인을 함께 바꾸면 로컬 해시만으로 인증할 수 없음",
+    "업스트림 라이선스 미확인: 원본 코드는 로컬 비공개 참조",
+    "restricted 위험도는 R2 하한이며 20% 변경률 정책의 자동 계산은 API 미구현"
+  ],
+  "official_promotion": "pending_human_review",
+  "schema": "ict-dmf-validation-v1",
+  "scope": "local_validation_only",
+  "state": "Shadow",
+  "summary": {
+    "passed": 14,
+    "total": 14
+  },
+  "upstream": {
+    "commit": "cf550e3b2ceb0946ba89f64e43b7d6c2f5164383",
+    "imported_files": [
+      {
+        "module": "dmf_integrity",
+        "path": "src/dmf_integrity/__init__.py",
+        "sha256": "9f383ae996c4d37485614d01f9239198447c97d9cb1382ea418ad58cfb5bed8b"
+      },
+      {
+        "module": "dmf_integrity.audit_chain",
+        "path": "src/dmf_integrity/audit_chain.py",
+        "sha256": "fdd4fbc42233e69c4fe2e5462c5cc05c2fb808e873aa3d3b32127b6e722aafc2"
+      },
+      {
+        "module": "dmf_integrity.canonical",
+        "path": "src/dmf_integrity/canonical.py",
+        "sha256": "1be37bc188623f77ca59b151c616c86ca3276bbe3d0b285f5fb70c036da4bf7b"
+      },
+      {
+        "module": "dmf_integrity.manifest",
+        "path": "src/dmf_integrity/manifest.py",
+        "sha256": "6f57102d1007640421eaf79c02999bdc2df161255af8e9d1c5c5c8368fb60eb2"
+      },
+      {
+        "module": "dmf_integrity.merge",
+        "path": "src/dmf_integrity/merge.py",
+        "sha256": "6ddac1c17581c00882ece0442c1c3b3518f9bc24fad7b4312ba081b4b1224d7f"
+      },
+      {
+        "module": "dmf_integrity.merkle",
+        "path": "src/dmf_integrity/merkle.py",
+        "sha256": "185d642ce155ccddb90d62c7c7e70e160cdc25777681d911cf66780c31d4dbfc"
+      },
+      {
+        "module": "dmf_integrity.restrict",
+        "path": "src/dmf_integrity/restrict.py",
+        "sha256": "ec651adc0a95acbb41f4a2d70378b600ccd199261dcdf3e1cfdef2a9721d078a"
+      }
+    ],
+    "policy_sha256": "3331fdd907cfd54a1b18fcf365694723b5db55d9272c229e9c3f781ff329ce69",
+    "repository": "https://github.com/leecursion/DMF",
+    "tree": "906a2d35af5abe9449a417f2e3dbc740abb0e4e8",
+    "verified_source_files": 20
+  }
+}

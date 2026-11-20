@@ -1,0 +1,12 @@
+{
+  "schema": "ict-dmf-input-v1",
+  "modules": [
+    {"id": "project_overview", "path": "프로젝트개요.md", "level": "free"},
+    {"id": "safety_boundary", "path": "안전경계.md", "level": "immutable"},
+    {"id": "development", "path": "개발내용.md", "level": "free"},
+    {"id": "observed_facts", "path": "관측사실.json", "level": "restricted"}
+  ],
+  "state": "Shadow",
+  "validation_scope": "local_validation_only",
+  "official_promotion": "pending_human_review"
+}

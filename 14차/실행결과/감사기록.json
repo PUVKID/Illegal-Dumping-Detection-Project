@@ -1,0 +1,56 @@
+{
+  "entries": [
+    {
+      "action": "local.version.example",
+      "actor": "urn:ict-safety:local-validation-script",
+      "chain_id": "ict-safety-document",
+      "detail": {
+        "manifest_root": "2b67f1ebe154d25958cd4c5cdb68a6ae818051c8f79db049fb9470138ad38053",
+        "scope": "local_validation_only",
+        "version_no": "1"
+      },
+      "entry_hash": "cde5a4becaae16337bc64d5fe201c1455fec4b5e271b002d5858f945771fca99",
+      "occurred_at": "2026-11-20T05:58:12.622414Z",
+      "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+      "seq": 1,
+      "target": "b696f46187a73b7a91513cbe9e97ec893d8ae48deca77838f0465aff313e03a5",
+      "ticket_id": null
+    },
+    {
+      "action": "local.version.example",
+      "actor": "urn:ict-safety:local-validation-script",
+      "chain_id": "ict-safety-document",
+      "detail": {
+        "manifest_root": "9270997ed1159f2e474cefc0f3f3fc87858c4ec4bbac53eb36d7788fb96175b7",
+        "scope": "local_validation_only",
+        "version_no": "2"
+      },
+      "entry_hash": "d5261468280e7a614cd1d800c6307436f781d25e7496621cf98eb161a75e1c01",
+      "occurred_at": "2026-11-20T05:58:12.622414Z",
+      "prev_hash": "cde5a4becaae16337bc64d5fe201c1455fec4b5e271b002d5858f945771fca99",
+      "seq": 2,
+      "target": "55c6e6386c6e4466b43bb2734bf6a72ac4c23efeaaf67a37fc78fca121973c6a",
+      "ticket_id": null
+    },
+    {
+      "action": "local.rollback.example",
+      "actor": "urn:ict-safety:local-validation-script",
+      "chain_id": "ict-safety-document",
+      "detail": {
+        "manifest_root": "2b67f1ebe154d25958cd4c5cdb68a6ae818051c8f79db049fb9470138ad38053",
+        "scope": "local_validation_only",
+        "version_no": "3"
+      },
+      "entry_hash": "dbe760602b358b3c706acb16043bef8a0dff78e842370c2051b70e789c87f2f0",
+      "occurred_at": "2026-11-20T05:58:12.622414Z",
+      "prev_hash": "d5261468280e7a614cd1d800c6307436f781d25e7496621cf98eb161a75e1c01",
+      "seq": 3,
+      "target": "48b2e6e590b950623d38fc20b0956460170c1b359ccd774c0d63fa57fc3b9578",
+      "ticket_id": null
+    }
+  ],
+  "head": [
+    3,
+    "dbe760602b358b3c706acb16043bef8a0dff78e842370c2051b70e789c87f2f0"
+  ]
+}

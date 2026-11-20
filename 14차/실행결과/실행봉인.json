@@ -1,0 +1,66 @@
+{
+  "audit_head": [
+    3,
+    "dbe760602b358b3c706acb16043bef8a0dff78e842370c2051b70e789c87f2f0"
+  ],
+  "output_hashes": {
+    "감사기록.json": "1f2fe977451db262e961c5cb8507462b6624d62180ee2cbd26e1e2a9074bf66f",
+    "검증결과.json": "602680316e734673b1f0144bdb968426c6eac973d9befc85bae8913196072577",
+    "모듈내용.json": "5473ca9eb835f4455d337ec806fb8f52d301da39a77599053b219a6418def153",
+    "버전기록.json": "a5866abe195d8a22a25a86ade505e7994749f0f92e7ce3f8c14cb5433f27d3bc",
+    "입력해시.json": "58b5724d9d6384e9cfa395527e66db1c5edd9feae6af080fccb6d64182340299"
+  },
+  "schema": "ict-dmf-local-seal-v1",
+  "source_hashes": {
+    "configs/DMF고정해시.json": "3331fdd907cfd54a1b18fcf365694723b5db55d9272c229e9c3f781ff329ce69",
+    "configs/입력명세.json": "2be5827bf271cd1e80a86141cc9c2279924b5016c59eca93976157b83d561f63",
+    "dmf_adapter.py": "00d88b02c2b68c2bf2bd0512525c644e60ec4177618a545391f195e9b2c57885",
+    "tests/test_dmf_adapter.py": "53eb815891deb75cd056d973a5b67c347f762bb3244ed1d004dd6f1a1db0b038",
+    "실행검증.py": "b89055b6cd25ef15c9929239bb052d53165dfca82a53d74cf1be035ede9b218f"
+  },
+  "trust": "local_integrity_only_no_server_attestation",
+  "upstream": {
+    "commit": "cf550e3b2ceb0946ba89f64e43b7d6c2f5164383",
+    "imported_files": [
+      {
+        "module": "dmf_integrity",
+        "path": "src/dmf_integrity/__init__.py",
+        "sha256": "9f383ae996c4d37485614d01f9239198447c97d9cb1382ea418ad58cfb5bed8b"
+      },
+      {
+        "module": "dmf_integrity.audit_chain",
+        "path": "src/dmf_integrity/audit_chain.py",
+        "sha256": "fdd4fbc42233e69c4fe2e5462c5cc05c2fb808e873aa3d3b32127b6e722aafc2"
+      },
+      {
+        "module": "dmf_integrity.canonical",
+        "path": "src/dmf_integrity/canonical.py",
+        "sha256": "1be37bc188623f77ca59b151c616c86ca3276bbe3d0b285f5fb70c036da4bf7b"
+      },
+      {
+        "module": "dmf_integrity.manifest",
+        "path": "src/dmf_integrity/manifest.py",
+        "sha256": "6f57102d1007640421eaf79c02999bdc2df161255af8e9d1c5c5c8368fb60eb2"
+      },
+      {
+        "module": "dmf_integrity.merge",
+        "path": "src/dmf_integrity/merge.py",
+        "sha256": "6ddac1c17581c00882ece0442c1c3b3518f9bc24fad7b4312ba081b4b1224d7f"
+      },
+      {
+        "module": "dmf_integrity.merkle",
+        "path": "src/dmf_integrity/merkle.py",
+        "sha256": "185d642ce155ccddb90d62c7c7e70e160cdc25777681d911cf66780c31d4dbfc"
+      },
+      {
+        "module": "dmf_integrity.restrict",
+        "path": "src/dmf_integrity/restrict.py",
+        "sha256": "ec651adc0a95acbb41f4a2d70378b600ccd199261dcdf3e1cfdef2a9721d078a"
+      }
+    ],
+    "policy_sha256": "3331fdd907cfd54a1b18fcf365694723b5db55d9272c229e9c3f781ff329ce69",
+    "repository": "https://github.com/leecursion/DMF",
+    "tree": "906a2d35af5abe9449a417f2e3dbc740abb0e4e8",
+    "verified_source_files": 20
+  }
+}

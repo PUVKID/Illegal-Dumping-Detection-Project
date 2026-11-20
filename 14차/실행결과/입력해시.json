@@ -1,0 +1,60 @@
+{
+  "input_selection": {
+    "modules": [
+      {
+        "id": "project_overview",
+        "level": "free",
+        "path": "프로젝트개요.md"
+      },
+      {
+        "id": "safety_boundary",
+        "level": "immutable",
+        "path": "안전경계.md"
+      },
+      {
+        "id": "development",
+        "level": "free",
+        "path": "개발내용.md"
+      },
+      {
+        "id": "observed_facts",
+        "level": "restricted",
+        "path": "관측사실.json"
+      }
+    ],
+    "official_promotion": "pending_human_review",
+    "schema": "ict-dmf-input-v1",
+    "state": "Shadow",
+    "validation_scope": "local_validation_only"
+  },
+  "modules": [
+    {
+      "bytes": 560,
+      "id": "project_overview",
+      "level": "free",
+      "path": "프로젝트개요.md",
+      "sha256": "09a082f6509de480a9c46467ba085a4124977ec5a9b44593ebb3f26c18b9816c"
+    },
+    {
+      "bytes": 853,
+      "id": "safety_boundary",
+      "level": "immutable",
+      "path": "안전경계.md",
+      "sha256": "d18546cdf31c5125ca0c6299495165e8081c5c5f54fcf3b8e49ff13dee718fe1"
+    },
+    {
+      "bytes": 942,
+      "id": "development",
+      "level": "free",
+      "path": "개발내용.md",
+      "sha256": "deb0afa21a88176fc9a4bf791f9004aa424a27a84b7daaae27b8aaeb146a040c"
+    },
+    {
+      "bytes": 1355,
+      "id": "observed_facts",
+      "level": "restricted",
+      "path": "관측사실.json",
+      "sha256": "b2dc727537d372257cf45f6fea3243b8a32c31ea0ae451c88fe33d9eec3bd0f1"
+    }
+  ]
+}
