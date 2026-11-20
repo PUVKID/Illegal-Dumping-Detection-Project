@@ -28,7 +28,7 @@
 
 고정 테스트 평가는 선택된 모델과 정책을 고정한 뒤 수행하도록 구성합니다.
 
-- data_pipeline은 자료 준비와 고정 holdout 검사를, train_round3는 학습 실행을 맡습니다. - inference의 공통 predict/evaluate와 임계 값 선택을 영상 루프의 detector.detect와 구분합니다. - detector의 Events와 detect가 시간에 따른 물체·사람 상태와 영상 결과를 구성합니다. 정지·이탈 규칙의 후보 출력은 행위 정답 라벨 기반 정확도가 아닙니다.
+- data_pipeline은 자료 준비와 고정 holdout 검사를, train_round3는 학습 실행을 맡습니다. - inference의 공통 predict/evaluate와 임계값 선택을 영상 루프의 detector.detect와 구분합니다. - detector의 Events와 detect가 시간에 따른 물체·사람 상태와 영상 결과를 구성합니다. 정지·이탈 규칙의 후보 출력은 행위 정답 라벨 기반 정확도가 아닙니다.
 
 1·2차 단일 노트북에서 데이터·학습·추론·화면을 파일별로 분리한 단계입니다. 검증으로 선택한 정책과 고정 시험 결과의 역할을 구분합니다.
 
@@ -372,7 +372,7 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 
 고정 테스트 평가는 선택된 모델과 정책을 고정한 뒤 수행하도록 구성합니다.
 
-- data_pipeline은 자료 준비와 고정 holdout 검사를, train_round3는 학습 실행을 맡습니다. - inference의 공통 predict/evaluate와 임계 값 선택을 영상 루프의 detector.detect와 구분합니다. - detector의 Events와 detect가 시간에 따른 물체·사람 상태와 영상 결과를 구성합니다. 정지·이탈 규칙의 후보 출력은 행위 정답 라벨 기반 정확도가 아닙니다.
+- data_pipeline은 자료 준비와 고정 holdout 검사를, train_round3는 학습 실행을 맡습니다. - inference의 공통 predict/evaluate와 임계값 선택을 영상 루프의 detector.detect와 구분합니다. - detector의 Events와 detect가 시간에 따른 물체·사람 상태와 영상 결과를 구성합니다. 정지·이탈 규칙의 후보 출력은 행위 정답 라벨 기반 정확도가 아닙니다.
 
 1·2차 단일 노트북에서 데이터·학습·추론·화면을 파일별로 분리한 단계입니다. 검증으로 선택한 정책과 고정 시험 결과의 역할을 구분합니다.
 
@@ -1045,7 +1045,7 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 
 고정 테스트 평가는 선택된 모델과 정책을 고정한 뒤 수행하도록 구성합니다.
 
-- data_pipeline은 자료 준비와 고정 holdout 검사를, train_round3는 학습 실행을 맡습니다. - inference의 공통 predict/evaluate와 임계 값 선택을 영상 루프의 detector.detect와 구분합니다. - detector의 Events와 detect가 시간에 따른 물체·사람 상태와 영상 결과를 구성합니다. 정지·이탈 규칙의 후보 출력은 행위 정답 라벨 기반 정확도가 아닙니다.
+- data_pipeline은 자료 준비와 고정 holdout 검사를, train_round3는 학습 실행을 맡습니다. - inference의 공통 predict/evaluate와 임계값 선택을 영상 루프의 detector.detect와 구분합니다. - detector의 Events와 detect가 시간에 따른 물체·사람 상태와 영상 결과를 구성합니다. 정지·이탈 규칙의 후보 출력은 행위 정답 라벨 기반 정확도가 아닙니다.
 
 1·2차 단일 노트북에서 데이터·학습·추론·화면을 파일별로 분리한 단계입니다. 검증으로 선택한 정책과 고정 시험 결과의 역할을 구분합니다.
 
@@ -1062,7 +1062,7 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 
 고정 테스트 평가는 선택된 모델과 정책을 고정한 뒤 수행하도록 구성합니다.
 
-- data_pipeline은 자료 준비와 고정 holdout 검사를, train_round3는 학습 실행을 맡습니다. - inference의 공통 predict/evaluate와 임계 값 선택을 영상 루프의 detector.detect와 구분합니다. - detector의 Events와 detect가 시간에 따른 물체·사람 상태와 영상 결과를 구성합니다. 정지·이탈 규칙의 후보 출력은 행위 정답 라벨 기반 정확도가 아닙니다.
+- data_pipeline은 자료 준비와 고정 holdout 검사를, train_round3는 학습 실행을 맡습니다. - inference의 공통 predict/evaluate와 임계값 선택을 영상 루프의 detector.detect와 구분합니다. - detector의 Events와 detect가 시간에 따른 물체·사람 상태와 영상 결과를 구성합니다. 정지·이탈 규칙의 후보 출력은 행위 정답 라벨 기반 정확도가 아닙니다.
 
 1·2차 단일 노트북에서 데이터·학습·추론·화면을 파일별로 분리한 단계입니다. 검증으로 선택한 정책과 고정 시험 결과의 역할을 구분합니다.
 
@@ -1462,7 +1462,7 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 
 **항목:** 3
 
-**이 차수에서 확인할 내용:** - data_pipeline은 자료 준비와 고정 holdout 검사를, train_round3는 학습 실행을 맡습니다. - inference의 공통 predict/evaluate와 임계 값 선택을 영상 루프의 detector.detect와 구분합니다. - detector의 Events와 detect가 시간에 따른 물체·사람 상태와 영상 결과를 구성합니다.
+**이 차수에서 확인할 내용:** - data_pipeline은 자료 준비와 고정 holdout 검사를, train_round3는 학습 실행을 맡습니다. - inference의 공통 predict/evaluate와 임계값 선택을 영상 루프의 detector.detect와 구분합니다. - detector의 Events와 detect가 시간에 따른 물체·사람 상태와 영상 결과를 구성합니다.
 
 정지·이탈 규칙의 후보 출력은 행위 정답 라벨 기반 정확도가 아닙니다.
 

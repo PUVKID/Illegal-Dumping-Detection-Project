@@ -38,7 +38,7 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 
 선택한 차수의 노트북·requirements·Docker 및 설정을 확인합니다.
 
-데이터 셋·학습 가중치·실행 환경은 공개 코드와 별도일 수 있습니다.
+데이터셋·학습 가중치·실행 환경은 공개 코드와 별도일 수 있습니다.
 
 이전 차수의 모델을 요구하는 경로는 해당 모델과 계약이 함께 필요합니다. 11차 복구 도구는 원래 7차 동결 환경의 기준 16개 파일을 요구합니다.
 
@@ -219,7 +219,7 @@ python -B -X utf8 11차/recover.py --pipeline 7차/worker.py --start
 
 **거부 조건:** [`args.expected_digest and (not re.fullmatch(r'[0-9a-f]{64}', args.expected_digest) or digest != args.expected_digest)`](../../11%EC%B0%A8/verify_sources.py#L49)
 
-**오류 메시지:** 외부 검사 명세에 고정한 11차 해 시와 다릅니다.
+**오류 메시지:** 외부 검사 명세에 고정한 11차 해시와 다릅니다.
 
 **거부 조건:** [`path.is_symlink() or getattr(path, 'is_junction', lambda: False)()`](../../11%EC%B0%A8/verify_sources.py#L17)
 
@@ -277,7 +277,7 @@ python -B -X utf8 11차/recover.py --pipeline 7차/worker.py --start
 
 선택한 차수의 노트북·requirements·Docker 및 설정을 확인합니다.
 
-데이터 셋·학습 가중치·실행 환경은 공개 코드와 별도일 수 있습니다.
+데이터셋·학습 가중치·실행 환경은 공개 코드와 별도일 수 있습니다.
 
 이전 차수의 모델을 요구하는 경로는 해당 모델과 계약이 함께 필요합니다. 11차 복구 도구는 원래 7차 동결 환경의 기준 16개 파일을 요구합니다.
 
@@ -458,7 +458,7 @@ python -B -X utf8 11차/recover.py --pipeline 7차/worker.py --start
 
 **거부 조건:** [`args.expected_digest and (not re.fullmatch(r'[0-9a-f]{64}', args.expected_digest) or digest != args.expected_digest)`](../../11%EC%B0%A8/verify_sources.py#L49)
 
-**오류 메시지:** 외부 검사 명세에 고정한 11차 해 시와 다릅니다.
+**오류 메시지:** 외부 검사 명세에 고정한 11차 해시와 다릅니다.
 
 **거부 조건:** [`path.is_symlink() or getattr(path, 'is_junction', lambda: False)()`](../../11%EC%B0%A8/verify_sources.py#L17)
 
@@ -492,7 +492,7 @@ python -B -X utf8 11차/recover.py --pipeline 7차/worker.py --start
 
 선택한 차수의 노트북·requirements·Docker 및 설정을 확인합니다.
 
-데이터 셋·학습 가중치·실행 환경은 공개 코드와 별도일 수 있습니다.
+데이터셋·학습 가중치·실행 환경은 공개 코드와 별도일 수 있습니다.
 
 이전 차수의 모델을 요구하는 경로는 해당 모델과 계약이 함께 필요합니다. 11차 복구 도구는 원래 7차 동결 환경의 기준 16개 파일을 요구합니다.
 
@@ -673,7 +673,7 @@ python -B -X utf8 11차/recover.py --pipeline 7차/worker.py --start
 
 **거부 조건:** [`args.expected_digest and (not re.fullmatch(r'[0-9a-f]{64}', args.expected_digest) or digest != args.expected_digest)`](../../11%EC%B0%A8/verify_sources.py#L49)
 
-**오류 메시지:** 외부 검사 명세에 고정한 11차 해 시와 다릅니다.
+**오류 메시지:** 외부 검사 명세에 고정한 11차 해시와 다릅니다.
 
 **거부 조건:** [`path.is_symlink() or getattr(path, 'is_junction', lambda: False)()`](../../11%EC%B0%A8/verify_sources.py#L17)
 
@@ -729,7 +729,7 @@ python -B -X utf8 11차/recover.py --pipeline 7차/worker.py --start
 | 파일 | 원문에 정의된 역할·구성 |
 | --- | --- |
 | [recover.py](../../11%EC%B0%A8/recover.py) | 7차 계약을 보존하며 작은 범위의 원 자료 수신을 앞에 연결합니다. |
-| [verify_sources.py](../../11%EC%B0%A8/verify_sources.py) | 외부에서 고정한 11차 전체 해 시와 7차 원본 불변을 검사합니다. |
+| [verify_sources.py](../../11%EC%B0%A8/verify_sources.py) | 외부에서 고정한 11차 전체 해시와 7차 원본 불변을 검사합니다. |
 | [tests/test_recover.py](../../11%EC%B0%A8/tests/test_recover.py) | 작은 공식 범위 수신과 기존 작업자 연결의 실패 경로를 검사합니다. |
 
 | 단계 | 내용 |
@@ -742,7 +742,7 @@ python -B -X utf8 11차/recover.py --pipeline 7차/worker.py --start
 
 선택한 차수의 노트북·requirements·Docker 및 설정을 확인합니다.
 
-데이터 셋·학습 가중치·실행 환경은 공개 코드와 별도일 수 있습니다.
+데이터셋·학습 가중치·실행 환경은 공개 코드와 별도일 수 있습니다.
 
 이전 차수의 모델을 요구하는 경로는 해당 모델과 계약이 함께 필요합니다. 11차 복구 도구는 원래 7차 동결 환경의 기준 16개 파일을 요구합니다.
 
@@ -923,7 +923,7 @@ python -B -X utf8 11차/recover.py --pipeline 7차/worker.py --start
 
 **거부 조건:** [`args.expected_digest and (not re.fullmatch(r'[0-9a-f]{64}', args.expected_digest) or digest != args.expected_digest)`](../../11%EC%B0%A8/verify_sources.py#L49)
 
-**오류 메시지:** 외부 검사 명세에 고정한 11차 해 시와 다릅니다.
+**오류 메시지:** 외부 검사 명세에 고정한 11차 해시와 다릅니다.
 
 **거부 조건:** [`path.is_symlink() or getattr(path, 'is_junction', lambda: False)()`](../../11%EC%B0%A8/verify_sources.py#L17)
 
@@ -1018,7 +1018,7 @@ python -B -X utf8 11차/recover.py --pipeline 7차/worker.py --start
 | 파일 | 원문에 정의된 역할·구성 |
 | --- | --- |
 | [recover.py](../../11%EC%B0%A8/recover.py) | 7차 계약을 보존하며 작은 범위의 원 자료 수신을 앞에 연결합니다. |
-| [verify_sources.py](../../11%EC%B0%A8/verify_sources.py) | 외부에서 고정한 11차 전체 해 시와 7차 원본 불변을 검사합니다. |
+| [verify_sources.py](../../11%EC%B0%A8/verify_sources.py) | 외부에서 고정한 11차 전체 해시와 7차 원본 불변을 검사합니다. |
 | [tests/test_recover.py](../../11%EC%B0%A8/tests/test_recover.py) | 작은 공식 범위 수신과 기존 작업자 연결의 실패 경로를 검사합니다. |
 
 <a name="setup"></a>
@@ -1028,7 +1028,7 @@ python -B -X utf8 11차/recover.py --pipeline 7차/worker.py --start
 
 선택한 차수의 노트북·requirements·Docker 및 설정을 확인합니다.
 
-데이터 셋·학습 가중치·실행 환경은 공개 코드와 별도일 수 있습니다.
+데이터셋·학습 가중치·실행 환경은 공개 코드와 별도일 수 있습니다.
 
 이전 차수의 모델을 요구하는 경로는 해당 모델과 계약이 함께 필요합니다. 11차 복구 도구는 원래 7차 동결 환경의 기준 16개 파일을 요구합니다.
 
@@ -1213,7 +1213,7 @@ python -B -X utf8 11차/recover.py --pipeline 7차/worker.py --start
 
 **거부 조건:** [`args.expected_digest and (not re.fullmatch(r'[0-9a-f]{64}', args.expected_digest) or digest != args.expected_digest)`](../../11%EC%B0%A8/verify_sources.py#L49)
 
-**오류 메시지:** 외부 검사 명세에 고정한 11차 해 시와 다릅니다.
+**오류 메시지:** 외부 검사 명세에 고정한 11차 해시와 다릅니다.
 
 **거부 조건:** [`path.is_symlink() or getattr(path, 'is_junction', lambda: False)()`](../../11%EC%B0%A8/verify_sources.py#L17)
 

@@ -105,7 +105,7 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 
 **거부 조건:** [`not isinstance(value, dict) or not re.fullmatch(r'[A-Za-z0-9_-]{1,100}', value.get('id', '')) or path.stem != value['id']`](../../8%EC%B0%A8/pipeline.py#L46)
 
-**오류 메시지:** 작업 기록 ID와 파일 명이 일치하지 않습니다.
+**오류 메시지:** 작업 기록 ID와 파일명이 일치하지 않습니다.
 
 **거부 조건:** [`not re.fullmatch(r'[A-Za-z0-9_-]+', name)`](../../8%EC%B0%A8/pipeline.py#L56)
 
@@ -245,7 +245,7 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 
 **거부 조건:** [`not isinstance(value, dict) or not re.fullmatch(r'[A-Za-z0-9_-]{1,100}', value.get('id', '')) or path.stem != value['id']`](../../8%EC%B0%A8/pipeline.py#L46)
 
-**오류 메시지:** 작업 기록 ID와 파일 명이 일치하지 않습니다.
+**오류 메시지:** 작업 기록 ID와 파일명이 일치하지 않습니다.
 
 **거부 조건:** [`not re.fullmatch(r'[A-Za-z0-9_-]+', name)`](../../8%EC%B0%A8/pipeline.py#L56)
 
@@ -361,7 +361,7 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 
 **거부 조건:** [`not isinstance(value, dict) or not re.fullmatch(r'[A-Za-z0-9_-]{1,100}', value.get('id', '')) or path.stem != value['id']`](../../8%EC%B0%A8/pipeline.py#L46)
 
-**오류 메시지:** 작업 기록 ID와 파일 명이 일치하지 않습니다.
+**오류 메시지:** 작업 기록 ID와 파일명이 일치하지 않습니다.
 
 **거부 조건:** [`not re.fullmatch(r'[A-Za-z0-9_-]+', name)`](../../8%EC%B0%A8/pipeline.py#L56)
 
@@ -514,7 +514,7 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 
 **거부 조건:** [`not isinstance(value, dict) or not re.fullmatch(r'[A-Za-z0-9_-]{1,100}', value.get('id', '')) or path.stem != value['id']`](../../8%EC%B0%A8/pipeline.py#L46)
 
-**오류 메시지:** 작업 기록 ID와 파일 명이 일치하지 않습니다.
+**오류 메시지:** 작업 기록 ID와 파일명이 일치하지 않습니다.
 
 **거부 조건:** [`not re.fullmatch(r'[A-Za-z0-9_-]+', name)`](../../8%EC%B0%A8/pipeline.py#L56)
 
@@ -707,7 +707,7 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 
 **거부 조건:** [`not isinstance(value, dict) or not re.fullmatch(r'[A-Za-z0-9_-]{1,100}', value.get('id', '')) or path.stem != value['id']`](../../8%EC%B0%A8/pipeline.py#L46)
 
-**오류 메시지:** 작업 기록 ID와 파일 명이 일치하지 않습니다.
+**오류 메시지:** 작업 기록 ID와 파일명이 일치하지 않습니다.
 
 **거부 조건:** [`not re.fullmatch(r'[A-Za-z0-9_-]+', name)`](../../8%EC%B0%A8/pipeline.py#L56)
 
