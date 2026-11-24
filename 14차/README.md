@@ -20,7 +20,7 @@ CCTV 불법 쓰레기 탐지 프로젝트의 설명과 안전 경계, 보존된 
 [사용법](docs/사용법.md) · [적용 범위와 한계](docs/적용범위.md) · [변경 기록](변경기록.md) · [직전 차수](../13차/) · [DMF 원본](https://github.com/leecursion/DMF/tree/cf550e3b2ceb0946ba89f64e43b7d6c2f5164383)
 
 <details open>
-<summary><strong>LEVEL 1 · Beginner</strong> — 목적과 동작부터</summary>
+<summary>LEVEL 1 · Beginner — 목적과 동작부터</summary>
 
 <a id="reading-level-1"></a>
 ## LEVEL 1 - Beginner
@@ -56,7 +56,7 @@ CCTV 불법 쓰레기 탐지 프로젝트의 설명과 안전 경계, 보존된 
 </details>
 
 <details>
-<summary><strong>LEVEL 2 · Explorer</strong> — 구성과 연결 원리</summary>
+<summary>LEVEL 2 · Explorer — 구성과 연결 원리</summary>
 
 <a id="reading-level-2"></a>
 ## LEVEL 2 - Explorer
@@ -85,7 +85,7 @@ DMF는 문서를 모듈 참조의 순서 있는 묶음으로 표현합니다. �
 </details>
 
 <details>
-<summary><strong>LEVEL 3 · Practitioner</strong> — 준비·실행·결과 확인</summary>
+<summary>LEVEL 3 · Practitioner — 준비·실행·결과 확인</summary>
 
 <a id="reading-level-3"></a>
 ## LEVEL 3 - Practitioner
@@ -114,7 +114,7 @@ Python 표준 라이브러리만 사용하므로 패키지 설치 없이 실행�
 </details>
 
 <details>
-<summary><strong>LEVEL 4 · Advanced</strong> — 구현·설계·실패 처리</summary>
+<summary>LEVEL 4 · Advanced — 구현·설계·실패 처리</summary>
 
 <a id="reading-level-4"></a>
 ## LEVEL 4 - Advanced
@@ -143,7 +143,7 @@ Python 표준 라이브러리만 사용하므로 패키지 설치 없이 실행�
 </details>
 
 <details>
-<summary><strong>LEVEL 5 · Expert</strong> — 근거·프로토콜·한계 검토</summary>
+<summary>LEVEL 5 · Expert — 근거·프로토콜·한계 검토</summary>
 
 <a id="reading-level-5"></a>
 ## LEVEL 5 - Expert

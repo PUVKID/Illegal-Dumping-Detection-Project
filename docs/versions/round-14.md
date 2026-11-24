@@ -3,12 +3,12 @@
 [LEVEL 1 - Beginner](#reading-level-1) · [LEVEL 2 - Explorer](#reading-level-2) · [LEVEL 3 - Practitioner](#reading-level-3) · [LEVEL 4 - Advanced](#reading-level-4) · [LEVEL 5 - Expert](#reading-level-5)
 
 <details open>
-<summary><strong>LEVEL 1 · Beginner</strong> — 목적과 동작부터</summary>
+<summary>LEVEL 1 · Beginner — 목적과 동작부터</summary>
 
 <a id="reading-level-1"></a>
 ## LEVEL 1 - Beginner
 
-프로젝트 설명에 메모를 덧붙이는 일과 개인정보 보호 원칙을 지우는 일은 다르게 다뤄야 합니다. **14차는 문서 네 개가 어떻게 바뀌었는지 확인하는 로컬 검사**입니다. 해시는 파일 바이트를 계산해 만든 지문 같은 값입니다. 사진에서 쓰레기를 더 잘 찾도록 학습하거나 수치의 진실성을 자동 판정하는 기능은 아닙니다.
+프로젝트 설명에 메모를 덧붙이는 일과 개인정보 보호 원칙을 지우는 일은 다르게 다뤄야 합니다. 14차는 문서 네 개가 어떻게 바뀌었는지 확인하는 로컬 검사입니다. 해시는 파일 바이트를 계산해 만든 지문 같은 값입니다. 사진에서 쓰레기를 더 잘 찾도록 학습하거나 수치의 진실성을 자동 판정하는 기능은 아닙니다.
 
 | 문서와 예시 | 동작 | 확인 |
 | --- | --- | --- |
@@ -40,7 +40,7 @@
 
 링크 검사는 실제 링크 생성 대신 속성 모사였으며 UTF-8·Python 구문 검사는 정적 타입·린트 검사를 대신하지 않습니다.
 
-**Shadow/local_validation_only는 이 예제의 상태**이고 실제 운영 배포·교수 승인·Official 승격이 아닙니다.
+Shadow/local_validation_only는 이 예제의 상태이고 실제 운영 배포·교수 승인·Official 승격이 아닙니다.
 
 G1~G9 전체 검사는 하지 않았고 DB·로그인·전자서명·KMS·외부 시간 인증도 없습니다.
 
@@ -71,12 +71,12 @@ python -B -X utf8 -m unittest discover -s "14차/tests" -v
 </details>
 
 <details>
-<summary><strong>LEVEL 2 · Explorer</strong> — 구성과 연결 원리</summary>
+<summary>LEVEL 2 · Explorer — 구성과 연결 원리</summary>
 
 <a id="reading-level-2"></a>
 ## LEVEL 2 - Explorer
 
-문서의 **바이트 → 모듈 → manifest와 불변 봉인 → 버전 → 감사 행**이 연결되는 구조입니다. 문서 내용을 숫자 형식으로 다시 저장하지 않고 원래 UTF-8 바이트를 해시합니다. 네 모듈 가운데 안전경계만 봉인 대상이며 관측사실은 제한, 개요와 개발내용은 가변입니다.
+문서의 바이트 → 모듈 → manifest와 불변 봉인 → 버전 → 감사 행이 연결되는 구조입니다. 문서 내용을 숫자 형식으로 다시 저장하지 않고 원래 UTF-8 바이트를 해시합니다. 네 모듈 가운데 안전경계만 봉인 대상이며 관측사실은 제한, 개요와 개발내용은 가변입니다.
 
 | 연결 | 핵심 역할 | 변경 때의 의미 |
 | --- | --- | --- |
@@ -137,12 +137,12 @@ python -B -X utf8 -m unittest discover -s "14차/tests" -v
 </details>
 
 <details>
-<summary><strong>LEVEL 3 · Practitioner</strong> — 준비·실행·결과 확인</summary>
+<summary>LEVEL 3 · Practitioner — 준비·실행·결과 확인</summary>
 
 <a id="reading-level-3"></a>
 ## LEVEL 3 - Practitioner
 
-재현자는 **고정 DMF 20 파일과 입력 네 문서 및 Python 3.10 이상**을 준비합니다.
+재현자는 고정 DMF 20 파일과 입력 네 문서 및 Python 3.10 이상을 준비합니다.
 
 라이선스가 확인되지 않은 upstream 원문은 공개 저장소에 포함하지 않으므로 링크된 커밋에서 이용 조건을 확인해 로컬에 준비해야 합니다.
 
@@ -212,12 +212,12 @@ python -B -X utf8 -m unittest discover -s "14차/tests" -v
 </details>
 
 <details>
-<summary><strong>LEVEL 4 · Advanced</strong> — 구현·설계·실패 처리</summary>
+<summary>LEVEL 4 · Advanced — 구현·설계·실패 처리</summary>
 
 <a id="reading-level-4"></a>
 ## LEVEL 4 - Advanced
 
-어댑터의 신뢰 시작점은 **코드에 고정한 정책 SHA와 정책의 commit/tree·20 파일 바이트**입니다.
+어댑터의 신뢰 시작점은 코드에 고정한 정책 SHA와 정책의 commit/tree·20 파일 바이트입니다.
 
 임포트 전에 SHA-256·크기·Git blob을 확인하고 캐시된 dmf_integrity 모듈을 제거해 검증한 src에서 다시 불러 온 뒤 실제 7 파일의 경로·SHA도 검사합니다.
 
@@ -281,7 +281,7 @@ python -B -X utf8 -m unittest discover -s "14차/tests" -v
 </details>
 
 <details>
-<summary><strong>LEVEL 5 · Expert</strong> — 근거·프로토콜·한계 검토</summary>
+<summary>LEVEL 5 · Expert — 근거·프로토콜·한계 검토</summary>
 
 <a id="reading-level-5"></a>
 ## LEVEL 5 - Expert

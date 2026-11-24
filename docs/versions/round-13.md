@@ -3,7 +3,7 @@
 [LEVEL 1 - Beginner](#reading-level-1) · [LEVEL 2 - Explorer](#reading-level-2) · [LEVEL 3 - Practitioner](#reading-level-3) · [LEVEL 4 - Advanced](#reading-level-4) · [LEVEL 5 - Expert](#reading-level-5)
 
 <details open>
-<summary><strong>LEVEL 1 · Beginner</strong> — 목적과 동작부터</summary>
+<summary>LEVEL 1 · Beginner — 목적과 동작부터</summary>
 
 <a id="reading-level-1"></a>
 ## LEVEL 1 - Beginner
@@ -14,7 +14,7 @@
 
 경로에 우연히 들어 있는 숫자를 사진 번호로 추측하지 않습니다.
 
-**13차는 같은 실험을 이어 갈 수 있게 연결하는 복구 도구**이며 새 모델 성능을 측정한 결과가 아닙니다.
+13차는 같은 실험을 이어 갈 수 있게 연결하는 복구 도구이며 새 모델 성능을 측정한 결과가 아닙니다.
 
 | 확인할 일 | 쉬운 예시와 동작 | 남는 자료 |
 | --- | --- | --- |
@@ -47,7 +47,7 @@ Docker에서는 43개를 통과한 기록이 있습니다.
 
 ### 현재 공개 사본의 원본 대조
 
-불변 Git blob과 original-baseline의 실제 대조에서 **7차 기준 16 파일은 11개 일치·2개 부재·3개 상이**입니다.
+불변 Git blob과 original-baseline의 실제 대조에서 7차 기준 16 파일은 11개 일치·2개 부재·3개 상이입니다.
 
 없는 파일은 docs/구현계획.md와 docs/설계.md이며, 다른 파일은 docs/이전검증분석.md·docs/출처와실험계약.md·tests/test_worker.py입니다.
 
@@ -78,12 +78,12 @@ Docker에서는 43개를 통과한 기록이 있습니다.
 </details>
 
 <details>
-<summary><strong>LEVEL 2 · Explorer</strong> — 구성과 연결 원리</summary>
+<summary>LEVEL 2 · Explorer — 구성과 연결 원리</summary>
 
 <a id="reading-level-2"></a>
 ## LEVEL 2 - Explorer
 
-복구의 핵심은 **파일명에서 얻은 ID와 공식 주석의 ID를 연결하고, 그 연결에 사용한 코드까지 고정하는 것**입니다.
+복구의 핵심은 파일명에서 얻은 ID와 공식 주석의 ID를 연결하고, 그 연결에 사용한 코드까지 고정하는 것입니다.
 
 과거 생성기는 plitter 접두사를 사용했고 다음 준비 코드는 street 접두사를 찾았습니다.
 
@@ -130,7 +130,7 @@ ID 합집합은 공식 대응의 집계입니다.
 
 ### 현재 공개 사본의 원본 대조
 
-불변 Git blob과 original-baseline의 실제 대조에서 **7차 기준 16 파일은 11개 일치·2개 부재·3개 상이**입니다.
+불변 Git blob과 original-baseline의 실제 대조에서 7차 기준 16 파일은 11개 일치·2개 부재·3개 상이입니다.
 
 없는 파일은 docs/구현계획.md와 docs/설계.md이며, 다른 파일은 docs/이전검증분석.md·docs/출처와실험계약.md·tests/test_worker.py입니다.
 
@@ -161,12 +161,12 @@ ID 합집합은 공식 대응의 집계입니다.
 </details>
 
 <details>
-<summary><strong>LEVEL 3 · Practitioner</strong> — 준비·실행·결과 확인</summary>
+<summary>LEVEL 3 · Practitioner — 준비·실행·결과 확인</summary>
 
 <a id="reading-level-3"></a>
 ## LEVEL 3 - Practitioner
 
-재현에는 **기존 7차 동결 설치와 보존된 공식 입력·완성 캐시·모델**이 필요합니다.
+재현에는 기존 7차 동결 설치와 보존된 공식 입력·완성 캐시·모델이 필요합니다.
 
 공개 저장소 단독 복제 본은 7차 원본 기준 16 파일 중 11개가 일치하고 두 개가 없으며 세 개는 바이트가 다릅니다.
 
@@ -207,7 +207,7 @@ GPU 학습 완료와 최종 성능은 이 검사로 판정할 수 없고 90% 달
 
 ### 현재 공개 사본의 원본 대조
 
-불변 Git blob과 original-baseline의 실제 대조에서 **7차 기준 16 파일은 11개 일치·2개 부재·3개 상이**입니다.
+불변 Git blob과 original-baseline의 실제 대조에서 7차 기준 16 파일은 11개 일치·2개 부재·3개 상이입니다.
 
 없는 파일은 docs/구현계획.md와 docs/설계.md이며, 다른 파일은 docs/이전검증분석.md·docs/출처와실험계약.md·tests/test_worker.py입니다.
 
@@ -238,12 +238,12 @@ GPU 학습 완료와 최종 성능은 이 검사로 판정할 수 없고 90% 달
 </details>
 
 <details>
-<summary><strong>LEVEL 4 · Advanced</strong> — 구현·설계·실패 처리</summary>
+<summary>LEVEL 4 · Advanced — 구현·설계·실패 처리</summary>
 
 <a id="reading-level-4"></a>
 ## LEVEL 4 - Advanced
 
-정적 파생 본은 7차 prepare_dataset.py를 보존하고 **check_overlay의 전체 텍스트·AST 비교**로 변경 범위를 제한합니다. 단순히 정규식 한 줄만 교체했다고 설명하면 ROOT와 원본 SHA 보존 및 실행·보고서 바인딩의 의미를 놓치므로 네 경계와 두 단계 동결을 함께 검토해야 합니다.
+정적 파생 본은 7차 prepare_dataset.py를 보존하고 check_overlay의 전체 텍스트·AST 비교로 변경 범위를 제한합니다. 단순히 정규식 한 줄만 교체했다고 설명하면 ROOT와 원본 SHA 보존 및 실행·보고서 바인딩의 의미를 놓치므로 네 경계와 두 단계 동결을 함께 검토해야 합니다.
 
 | 구현 경계 | 구체 동작 | 차단하는 문제 |
 | --- | --- | --- |
@@ -274,7 +274,7 @@ GPU 학습 완료와 최종 성능은 이 검사로 판정할 수 없고 90% 달
 
 ### 현재 공개 사본의 원본 대조
 
-불변 Git blob과 original-baseline의 실제 대조에서 **7차 기준 16 파일은 11개 일치·2개 부재·3개 상이**입니다.
+불변 Git blob과 original-baseline의 실제 대조에서 7차 기준 16 파일은 11개 일치·2개 부재·3개 상이입니다.
 
 없는 파일은 docs/구현계획.md와 docs/설계.md이며, 다른 파일은 docs/이전검증분석.md·docs/출처와실험계약.md·tests/test_worker.py입니다.
 
@@ -305,14 +305,14 @@ GPU 학습 완료와 최종 성능은 이 검사로 판정할 수 없고 90% 달
 </details>
 
 <details>
-<summary><strong>LEVEL 5 · Expert</strong> — 근거·프로토콜·한계 검토</summary>
+<summary>LEVEL 5 · Expert — 근거·프로토콜·한계 검토</summary>
 
 <a id="reading-level-5"></a>
 ## LEVEL 5 - Expert
 
 전문 검토에서는 보존 baseline과 파생 제품 canonical의 역할을 분리합니다. verify_sources는 원본·의존성 해시와 제품 UTF-8/Python·JSON 해석을 검사하고, check_overlay는 import·ROOT·ID 매칭 호출·원본 SHA 표현의 네 텍스트 치환 및 AST 변화만 허용합니다.
 
-**현재 제품 해시를 원본 baseline으로 대체하는 방식은 계약 검증이 아닙니다.**
+현재 제품 해시를 원본 baseline으로 대체하는 방식은 계약 검증이 아닙니다.
 
 | 대조 대상 | 명세와 근거 | 검증의 경계 |
 | --- | --- | --- |
@@ -345,7 +345,7 @@ Windows에서는 Linux 전용 하나를 건너뛰었고 Docker에서는 43개 �
 
 ### 현재 공개 사본의 원본 대조
 
-불변 Git blob과 original-baseline의 실제 대조에서 **7차 기준 16 파일은 11개 일치·2개 부재·3개 상이**입니다.
+불변 Git blob과 original-baseline의 실제 대조에서 7차 기준 16 파일은 11개 일치·2개 부재·3개 상이입니다.
 
 없는 파일은 docs/구현계획.md와 docs/설계.md이며, 다른 파일은 docs/이전검증분석.md·docs/출처와실험계약.md·tests/test_worker.py입니다.
 

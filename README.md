@@ -9,11 +9,11 @@
 
 | 수준 | 이 안내에서 읽을 내용 |
 | --- | --- |
-| [**LEVEL 1 - Beginner**](docs/읽기안내/레벨1.md) | 낯선 용어를 풀어 쓰며 실제 동작·예시·오해하기 쉬운 범위를 읽습니다. |
-| [**LEVEL 2 - Explorer**](docs/읽기안내/레벨2.md) | 입력·처리·출력과 기능 사이의 연결, 차수 변화를 따라갑니다. |
-| [**LEVEL 3 - Practitioner**](docs/읽기안내/레벨3.md) | 준비 조건·사용 순서·설정·결과 및 실패 확인 방법을 읽습니다. |
-| [**LEVEL 4 - Advanced**](docs/읽기안내/레벨4.md) | 모듈 설계·상태 전이·검증 경계와 구현 선택을 검토합니다. |
-| [**LEVEL 5 - Expert**](docs/읽기안내/레벨5.md) | 실제 코드·프로토콜·설정값·전체 비교와 측정 근거를 대조합니다. |
+| [LEVEL 1 - Beginner](docs/읽기안내/레벨1.md) | 낯선 용어를 풀어 쓰며 실제 동작·예시·오해하기 쉬운 범위를 읽습니다. |
+| [LEVEL 2 - Explorer](docs/읽기안내/레벨2.md) | 입력·처리·출력과 기능 사이의 연결, 차수 변화를 따라갑니다. |
+| [LEVEL 3 - Practitioner](docs/읽기안내/레벨3.md) | 준비 조건·사용 순서·설정·결과 및 실패 확인 방법을 읽습니다. |
+| [LEVEL 4 - Advanced](docs/읽기안내/레벨4.md) | 모듈 설계·상태 전이·검증 경계와 구현 선택을 검토합니다. |
+| [LEVEL 5 - Expert](docs/읽기안내/레벨5.md) | 실제 코드·프로토콜·설정값·전체 비교와 측정 근거를 대조합니다. |
 
 모든 안내는 같은 프로젝트와 전체 차수를 다룹니다. 기존 상세 본문은 아래에 계속 보존합니다.
 <!-- project-levels:end -->
@@ -77,21 +77,21 @@
 
 | 차수·자료 | 자료 |
 | --- | --- |
-| 1차 | **자료 폴더·원본** [자료 폴더](1%EC%B0%A8)<br>**상세 설명** [상세 설명](docs/versions/stage-1.md)<br>**직전 비교·범위** [전체 비교·범위](docs/comparisons/initial.md) |
-| 2차 | **자료 폴더·원본** [자료 폴더](2%EC%B0%A8)<br>**상세 설명** [상세 설명](docs/versions/stage-2.md)<br>**직전 비교·범위** [전체 비교·범위](docs/comparisons/1-to-2.md) |
-| 최종/3차 | **자료 폴더·원본** [자료 폴더](%EC%B5%9C%EC%A2%85/3%EC%B0%A8)<br>**상세 설명** [상세 설명](docs/versions/stage-3.md)<br>**직전 비교·범위** [전체 비교·범위](docs/comparisons/2-to-3.md) |
-| 최종/4차 | **자료 폴더·원본** [자료 폴더](%EC%B5%9C%EC%A2%85/4%EC%B0%A8)<br>**상세 설명** [상세 설명](docs/versions/stage-4.md)<br>**직전 비교·범위** [전체 비교·범위](docs/comparisons/3-to-4.md) |
-| 최종/최종 | **자료 폴더·원본** [자료 폴더](%EC%B5%9C%EC%A2%85/%EC%B5%9C%EC%A2%85)<br>**상세 설명** [상세 설명](docs/versions/stage-5.md)<br>**직전 비교·범위** [전체 비교·범위](docs/comparisons/4-to-final.md) |
-| 5차 | **자료 폴더·원본** [자료 폴더](5%EC%B0%A8)<br>**상세 설명** [상세 설명](docs/versions/round-5.md)<br>**직전 비교·범위** [전체 비교·범위](docs/comparisons/final-to-5.md) |
-| 6차 | **자료 폴더·원본** [자료 폴더](6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8)<br>**상세 설명** [상세 설명](docs/versions/round-6.md)<br>**직전 비교·범위** [전체 비교·범위](docs/comparisons/5-to-6-snapshot.md) |
-| 7차 | **자료 폴더·원본** [자료 폴더](7%EC%B0%A8)<br>**상세 설명** [상세 설명](docs/versions/round-7.md)<br>**직전 비교·범위** [전체 비교·범위](docs/comparisons/5-to-7.md) |
-| 8차 | **자료 폴더·원본** [자료 폴더](8%EC%B0%A8)<br>**상세 설명** [상세 설명](docs/versions/round-8.md)<br>**직전 비교·범위** [전체 비교·범위](docs/comparisons/7-to-8.md) |
-| 9차 | **자료 폴더·원본** [자료 폴더](9%EC%B0%A8)<br>**상세 설명** [상세 설명](docs/versions/round-9.md)<br>**직전 비교·범위** [전체 비교·범위](docs/comparisons/8-to-9.md) |
-| 10차 | **자료 폴더·원본** [자료 폴더](10%EC%B0%A8)<br>**상세 설명** [상세 설명](docs/versions/round-10.md)<br>**직전 비교·범위** [전체 비교·범위](docs/comparisons/9-to-10.md) |
-| 11차 | **자료 폴더·원본** [자료 폴더](11%EC%B0%A8)<br>**상세 설명** [상세 설명](docs/versions/round-11.md)<br>**직전 비교·범위** [전체 비교·범위](docs/comparisons/10-to-11.md) |
-| 이전 도커 실험 | **자료 폴더·원본** [자료 폴더](%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98)<br>**상세 설명** [상세 설명](docs/versions/docker-experiment.md)<br>**직전 비교·범위** [전체 비교·범위](docs/comparisons/docker-to-3.md) |
-| 최종 | **자료 폴더·원본** [자료 폴더](%EC%B5%9C%EC%A2%85)<br>**상세 설명** [상세 설명](docs/versions/final-container.md)<br>**직전 비교·범위** [전체 비교·범위](docs/comparisons/final-container.md) |
-| 12차 | **자료 폴더·원본** [자료 폴더](12%EC%B0%A8)<br>**상세 설명** [상세 설명](docs/versions/round-12.md)<br>**직전 비교·범위** [전체 비교·범위](docs/comparisons/11-to-12.md) |
+| 1차 | 자료 폴더·원본 [자료 폴더](1%EC%B0%A8)<br>상세 설명 [상세 설명](docs/versions/stage-1.md)<br>직전 비교·범위 [전체 비교·범위](docs/comparisons/initial.md) |
+| 2차 | 자료 폴더·원본 [자료 폴더](2%EC%B0%A8)<br>상세 설명 [상세 설명](docs/versions/stage-2.md)<br>직전 비교·범위 [전체 비교·범위](docs/comparisons/1-to-2.md) |
+| 최종/3차 | 자료 폴더·원본 [자료 폴더](%EC%B5%9C%EC%A2%85/3%EC%B0%A8)<br>상세 설명 [상세 설명](docs/versions/stage-3.md)<br>직전 비교·범위 [전체 비교·범위](docs/comparisons/2-to-3.md) |
+| 최종/4차 | 자료 폴더·원본 [자료 폴더](%EC%B5%9C%EC%A2%85/4%EC%B0%A8)<br>상세 설명 [상세 설명](docs/versions/stage-4.md)<br>직전 비교·범위 [전체 비교·범위](docs/comparisons/3-to-4.md) |
+| 최종/최종 | 자료 폴더·원본 [자료 폴더](%EC%B5%9C%EC%A2%85/%EC%B5%9C%EC%A2%85)<br>상세 설명 [상세 설명](docs/versions/stage-5.md)<br>직전 비교·범위 [전체 비교·범위](docs/comparisons/4-to-final.md) |
+| 5차 | 자료 폴더·원본 [자료 폴더](5%EC%B0%A8)<br>상세 설명 [상세 설명](docs/versions/round-5.md)<br>직전 비교·범위 [전체 비교·범위](docs/comparisons/final-to-5.md) |
+| 6차 | 자료 폴더·원본 [자료 폴더](6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8)<br>상세 설명 [상세 설명](docs/versions/round-6.md)<br>직전 비교·범위 [전체 비교·범위](docs/comparisons/5-to-6-snapshot.md) |
+| 7차 | 자료 폴더·원본 [자료 폴더](7%EC%B0%A8)<br>상세 설명 [상세 설명](docs/versions/round-7.md)<br>직전 비교·범위 [전체 비교·범위](docs/comparisons/5-to-7.md) |
+| 8차 | 자료 폴더·원본 [자료 폴더](8%EC%B0%A8)<br>상세 설명 [상세 설명](docs/versions/round-8.md)<br>직전 비교·범위 [전체 비교·범위](docs/comparisons/7-to-8.md) |
+| 9차 | 자료 폴더·원본 [자료 폴더](9%EC%B0%A8)<br>상세 설명 [상세 설명](docs/versions/round-9.md)<br>직전 비교·범위 [전체 비교·범위](docs/comparisons/8-to-9.md) |
+| 10차 | 자료 폴더·원본 [자료 폴더](10%EC%B0%A8)<br>상세 설명 [상세 설명](docs/versions/round-10.md)<br>직전 비교·범위 [전체 비교·범위](docs/comparisons/9-to-10.md) |
+| 11차 | 자료 폴더·원본 [자료 폴더](11%EC%B0%A8)<br>상세 설명 [상세 설명](docs/versions/round-11.md)<br>직전 비교·범위 [전체 비교·범위](docs/comparisons/10-to-11.md) |
+| 이전 도커 실험 | 자료 폴더·원본 [자료 폴더](%EC%9D%B4%EC%A0%84%20%EB%8F%84%EC%BB%A4%20%EC%8B%A4%ED%97%98)<br>상세 설명 [상세 설명](docs/versions/docker-experiment.md)<br>직전 비교·범위 [전체 비교·범위](docs/comparisons/docker-to-3.md) |
+| 최종 | 자료 폴더·원본 [자료 폴더](%EC%B5%9C%EC%A2%85)<br>상세 설명 [상세 설명](docs/versions/final-container.md)<br>직전 비교·범위 [전체 비교·범위](docs/comparisons/final-container.md) |
+| 12차 | 자료 폴더·원본 [자료 폴더](12%EC%B0%A8)<br>상세 설명 [상세 설명](docs/versions/round-12.md)<br>직전 비교·범위 [전체 비교·범위](docs/comparisons/11-to-12.md) |
 | 13차 | **원본 ID 복구와 실효 계약** · [자료 폴더](13차) · [상세 설명](docs/versions/round-13.md) · [직전 전체 비교](docs/comparisons/12-to-13.md) |
 | 14차 | **DMF 문서 무결성 적용** · [자료 폴더](14차) · [상세 설명](docs/versions/round-14.md) · [직전 전체 비교](docs/comparisons/13-to-14.md) |
 
@@ -401,10 +401,10 @@ python launcher.py --no-browser
 [7차 코드와 실행 조건](7차/README.md)에 원본 보존·출처 균형·분할 평가·독립 작업을 정리했습니다. 2026-10-30 자료 수신 및 자동 준비 작업을 시작했으며, 장기 학습 완료와 90% 달성은 아직 확인되지 않았습니다.
 
 
-[**주석·공백·문서·보고서를 포함한 전체 공개 파일 비교 →**](docs/FOLDER_COMPARISONS.md)
+[주석·공백·문서·보고서를 포함한 전체 공개 파일 비교 →](docs/FOLDER_COMPARISONS.md)
 
 
-[**주석·공백·문서·보고서를 포함한 전체 공개 파일 비교 →**](docs/FOLDER_COMPARISONS.md)
+[주석·공백·문서·보고서를 포함한 전체 공개 파일 비교 →](docs/FOLDER_COMPARISONS.md)
 
 
 <a name="️-11차-수신-복구"></a>
