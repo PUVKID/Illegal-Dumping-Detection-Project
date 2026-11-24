@@ -11,7 +11,7 @@
 
 </div>
 <!-- reading-levels:start -->
-[LEVEL 1 - Beginner](#reading-level-1) · [LEVEL 2 - Explorer](#reading-level-2) · [LEVEL 3 - Practitioner](#reading-level-3) · [LEVEL 4 - Advanced](#reading-level-4) · [LEVEL 5 - Expert](#reading-level-5)
+[LEVEL 1 - Beginner](#user-content-reading-level-1) · [LEVEL 2 - Explorer](#user-content-reading-level-2) · [LEVEL 3 - Practitioner](#user-content-reading-level-3) · [LEVEL 4 - Advanced](#user-content-reading-level-4) · [LEVEL 5 - Expert](#user-content-reading-level-5)
 
 프로젝트 전체의 설명은 [LEVEL 1 - Beginner](../%EC%9D%BD%EA%B8%B0%EC%95%88%EB%82%B4/%EB%A0%88%EB%B2%A81.md)부터 [LEVEL 5 - Expert](../%EC%9D%BD%EA%B8%B0%EC%95%88%EB%82%B4/%EB%A0%88%EB%B2%A85.md)까지 같은 범위로 연결됩니다.
 
@@ -153,7 +153,7 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 | 실행 자료가 부족함 | 이 묶음의 보존 범위와 원래 참조 차수를 확인합니다. |
 | 결과 범위 해석 | 자료 열람·기능 확인·실험 성적을 각각 구분합니다. |
 
-[자료 폴더](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8) · [직전 비교·자료 범위](../comparisons/5-to-6-snapshot.md) · [이 차수의 원래 전체 상세](#reading-level-5)
+[자료 폴더](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8) · [직전 비교·자료 범위](../comparisons/5-to-6-snapshot.md) · [이 차수의 원래 전체 상세](#user-content-reading-level-5)
 
 
 </details>
@@ -296,7 +296,7 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 | 실행 자료가 부족함 | 이 묶음의 보존 범위와 원래 참조 차수를 확인합니다. |
 | 결과 범위 해석 | 자료 열람·기능 확인·실험 성적을 각각 구분합니다. |
 
-[자료 폴더](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8) · [직전 비교·자료 범위](../comparisons/5-to-6-snapshot.md) · [이 차수의 원래 전체 상세](#reading-level-5)
+[자료 폴더](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8) · [직전 비교·자료 범위](../comparisons/5-to-6-snapshot.md) · [이 차수의 원래 전체 상세](#user-content-reading-level-5)
 
 
 </details>
@@ -437,7 +437,7 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 
 5차 파일 다섯 개의 변경 전 보존 스냅샷입니다. 독립 모델이나 5차 전체의 복사 본으로 해석하지 않습니다.
 
-[자료 폴더](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8) · [직전 비교·자료 범위](../comparisons/5-to-6-snapshot.md) · [이 차수의 원래 전체 상세](#reading-level-5)
+[자료 폴더](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8) · [직전 비교·자료 범위](../comparisons/5-to-6-snapshot.md) · [이 차수의 원래 전체 상세](#user-content-reading-level-5)
 
 
 </details>
@@ -587,7 +587,7 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 
 위 구성요소의 입력·출력과 실패 조건을 같은 차수 소스에 연결해 검토합니다. 전체 비교는 추가·수정·삭제와 원래 보관 범위를 구분하는 근거입니다.
 
-[자료 폴더](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8) · [직전 비교·자료 범위](../comparisons/5-to-6-snapshot.md) · [이 차수의 원래 전체 상세](#reading-level-5)
+[자료 폴더](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8) · [직전 비교·자료 범위](../comparisons/5-to-6-snapshot.md) · [이 차수의 원래 전체 상세](#user-content-reading-level-5)
 
 </details>
 
@@ -597,7 +597,7 @@ CLI는 명령어와 옵션을 입력해 프로그램을 실행하는 방식입�
 <a id="reading-level-5"></a>
 ## LEVEL 5 - Expert
 
-기존의 전체 설명·표·코드·함수 참조·파일별 비교는 아래에 그대로 이어집니다. [자료 폴더](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8) · [직전 비교·자료 범위](../comparisons/5-to-6-snapshot.md) · [이 차수의 원래 전체 상세](#reading-level-5)
+기존의 전체 설명·표·코드·함수 참조·파일별 비교는 아래에 그대로 이어집니다. [자료 폴더](../../6%EC%B0%A8/%EB%B3%80%EA%B2%BD%EC%A0%84_5%EC%B0%A8) · [직전 비교·자료 범위](../comparisons/5-to-6-snapshot.md) · [이 차수의 원래 전체 상세](#user-content-reading-level-5)
 <!-- reading-levels:end -->
 
 

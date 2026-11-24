@@ -11,7 +11,7 @@
 
 </div>
 <!-- reading-levels:start -->
-[LEVEL 1 - Beginner](#reading-level-1) · [LEVEL 2 - Explorer](#reading-level-2) · [LEVEL 3 - Practitioner](#reading-level-3) · [LEVEL 4 - Advanced](#reading-level-4) · [LEVEL 5 - Expert](#reading-level-5)
+[LEVEL 1 - Beginner](#user-content-reading-level-1) · [LEVEL 2 - Explorer](#user-content-reading-level-2) · [LEVEL 3 - Practitioner](#user-content-reading-level-3) · [LEVEL 4 - Advanced](#user-content-reading-level-4) · [LEVEL 5 - Expert](#user-content-reading-level-5)
 
 프로젝트 전체의 설명은 [LEVEL 1 - Beginner](../%EC%9D%BD%EA%B8%B0%EC%95%88%EB%82%B4/%EB%A0%88%EB%B2%A81.md)부터 [LEVEL 5 - Expert](../%EC%9D%BD%EA%B8%B0%EC%95%88%EB%82%B4/%EB%A0%88%EB%B2%A85.md)까지 같은 범위로 연결됩니다.
 
@@ -70,7 +70,7 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 | 원본 계약 검사 실패 | 원래 코드·설정·자료 해시를 대조합니다.<br>현재 해시로 기준을 바꿔 우회하지 않습니다. |
 | 지표 해석이 어려움 | 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다. |
 
-[자료 폴더](../../2%EC%B0%A8) · [직전 비교·자료 범위](../comparisons/1-to-2.md) · [이 차수의 원래 전체 상세](#reading-level-5)
+[자료 폴더](../../2%EC%B0%A8) · [직전 비교·자료 범위](../comparisons/1-to-2.md) · [이 차수의 원래 전체 상세](#user-content-reading-level-5)
 
 
 </details>
@@ -130,7 +130,7 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 | 원본 계약 검사 실패 | 원래 코드·설정·자료 해시를 대조합니다.<br>현재 해시로 기준을 바꿔 우회하지 않습니다. |
 | 지표 해석이 어려움 | 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다. |
 
-[자료 폴더](../../2%EC%B0%A8) · [직전 비교·자료 범위](../comparisons/1-to-2.md) · [이 차수의 원래 전체 상세](#reading-level-5)
+[자료 폴더](../../2%EC%B0%A8) · [직전 비교·자료 범위](../comparisons/1-to-2.md) · [이 차수의 원래 전체 상세](#user-content-reading-level-5)
 
 
 </details>
@@ -188,7 +188,7 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 
 - YOLOv8n에서 50 epoch 학습을 구성합니다. 1차의 YOLOv8m·150 epoch와 초기 모델·학습 조건이 다릅니다. - DualBackgroundSubtractor와 ChangeTracker로 지속 변화를 추적하며 사람 탐지·근접·체류 조건으로 후보를 연결합니다. - 합성 프레임·더미 모델 검사 코드도 포함합니다. 코드 존재와 실제 CCTV 행위 정확도 검증 완료는 다릅니다.
 
-[자료 폴더](../../2%EC%B0%A8) · [직전 비교·자료 범위](../comparisons/1-to-2.md) · [이 차수의 원래 전체 상세](#reading-level-5)
+[자료 폴더](../../2%EC%B0%A8) · [직전 비교·자료 범위](../comparisons/1-to-2.md) · [이 차수의 원래 전체 상세](#user-content-reading-level-5)
 
 
 </details>
@@ -252,7 +252,7 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 
 위 구성요소의 입력·출력과 실패 조건을 같은 차수 소스에 연결해 검토합니다. 전체 비교는 추가·수정·삭제와 원래 보관 범위를 구분하는 근거입니다.
 
-[자료 폴더](../../2%EC%B0%A8) · [직전 비교·자료 범위](../comparisons/1-to-2.md) · [이 차수의 원래 전체 상세](#reading-level-5)
+[자료 폴더](../../2%EC%B0%A8) · [직전 비교·자료 범위](../comparisons/1-to-2.md) · [이 차수의 원래 전체 상세](#user-content-reading-level-5)
 
 </details>
 
@@ -262,7 +262,7 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 <a id="reading-level-5"></a>
 ## LEVEL 5 - Expert
 
-기존의 전체 설명·표·코드·함수 참조·파일별 비교는 아래에 그대로 이어집니다. [자료 폴더](../../2%EC%B0%A8) · [직전 비교·자료 범위](../comparisons/1-to-2.md) · [이 차수의 원래 전체 상세](#reading-level-5)
+기존의 전체 설명·표·코드·함수 참조·파일별 비교는 아래에 그대로 이어집니다. [자료 폴더](../../2%EC%B0%A8) · [직전 비교·자료 범위](../comparisons/1-to-2.md) · [이 차수의 원래 전체 상세](#user-content-reading-level-5)
 <!-- reading-levels:end -->
 
 

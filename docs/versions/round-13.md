@@ -1,6 +1,6 @@
 # 13차 원본 ID 복구와 실효 실행 계약
 
-[LEVEL 1 - Beginner](#reading-level-1) · [LEVEL 2 - Explorer](#reading-level-2) · [LEVEL 3 - Practitioner](#reading-level-3) · [LEVEL 4 - Advanced](#reading-level-4) · [LEVEL 5 - Expert](#reading-level-5)
+[LEVEL 1 - Beginner](#user-content-reading-level-1) · [LEVEL 2 - Explorer](#user-content-reading-level-2) · [LEVEL 3 - Practitioner](#user-content-reading-level-3) · [LEVEL 4 - Advanced](#user-content-reading-level-4) · [LEVEL 5 - Expert](#user-content-reading-level-5)
 
 <details open>
 <summary>LEVEL 1 · Beginner — 목적과 동작부터</summary>
@@ -72,7 +72,7 @@ Docker에서는 43개를 통과한 기록이 있습니다.
 
 [같은 수준의 프로젝트 안내](../읽기안내/레벨1.md) · [자료 폴더](../../13차) · [전체 비교](../comparisons/12-to-13.md)
 
-[이전 차수의 같은 수준 설명](round-12.md#reading-level-1) · [다음 차수의 같은 수준 설명](round-14.md#reading-level-1)
+[이전 차수의 같은 수준 설명](round-12.md#user-content-reading-level-1) · [다음 차수의 같은 수준 설명](round-14.md#user-content-reading-level-1)
 
 
 </details>
@@ -155,7 +155,7 @@ ID 합집합은 공식 대응의 집계입니다.
 
 [같은 수준의 프로젝트 안내](../읽기안내/레벨2.md) · [자료 폴더](../../13차) · [전체 비교](../comparisons/12-to-13.md)
 
-[이전 차수의 같은 수준 설명](round-12.md#reading-level-2) · [다음 차수의 같은 수준 설명](round-14.md#reading-level-2)
+[이전 차수의 같은 수준 설명](round-12.md#user-content-reading-level-2) · [다음 차수의 같은 수준 설명](round-14.md#user-content-reading-level-2)
 
 
 </details>
@@ -232,7 +232,7 @@ GPU 학습 완료와 최종 성능은 이 검사로 판정할 수 없고 90% 달
 
 [같은 수준의 프로젝트 안내](../읽기안내/레벨3.md) · [자료 폴더](../../13차) · [전체 비교](../comparisons/12-to-13.md)
 
-[이전 차수의 같은 수준 설명](round-12.md#reading-level-3) · [다음 차수의 같은 수준 설명](round-14.md#reading-level-3)
+[이전 차수의 같은 수준 설명](round-12.md#user-content-reading-level-3) · [다음 차수의 같은 수준 설명](round-14.md#user-content-reading-level-3)
 
 
 </details>
@@ -299,7 +299,7 @@ GPU 학습 완료와 최종 성능은 이 검사로 판정할 수 없고 90% 달
 
 [같은 수준의 프로젝트 안내](../읽기안내/레벨4.md) · [자료 폴더](../../13차) · [전체 비교](../comparisons/12-to-13.md)
 
-[이전 차수의 같은 수준 설명](round-12.md#reading-level-4) · [다음 차수의 같은 수준 설명](round-14.md#reading-level-4)
+[이전 차수의 같은 수준 설명](round-12.md#user-content-reading-level-4) · [다음 차수의 같은 수준 설명](round-14.md#user-content-reading-level-4)
 
 
 </details>
@@ -370,7 +370,7 @@ Windows에서는 Linux 전용 하나를 건너뛰었고 Docker에서는 43개 �
 
 [같은 수준의 프로젝트 안내](../읽기안내/레벨5.md) · [자료 폴더](../../13차) · [전체 비교](../comparisons/12-to-13.md)
 
-[이전 차수의 같은 수준 설명](round-12.md#reading-level-5) · [다음 차수의 같은 수준 설명](round-14.md#reading-level-5)
+[이전 차수의 같은 수준 설명](round-12.md#user-content-reading-level-5) · [다음 차수의 같은 수준 설명](round-14.md#user-content-reading-level-5)
 
 ### 전체 상세와 실행 조건
 

@@ -11,7 +11,7 @@
 
 </div>
 <!-- reading-levels:start -->
-[LEVEL 1 - Beginner](#reading-level-1) · [LEVEL 2 - Explorer](#reading-level-2) · [LEVEL 3 - Practitioner](#reading-level-3) · [LEVEL 4 - Advanced](#reading-level-4) · [LEVEL 5 - Expert](#reading-level-5)
+[LEVEL 1 - Beginner](#user-content-reading-level-1) · [LEVEL 2 - Explorer](#user-content-reading-level-2) · [LEVEL 3 - Practitioner](#user-content-reading-level-3) · [LEVEL 4 - Advanced](#user-content-reading-level-4) · [LEVEL 5 - Expert](#user-content-reading-level-5)
 
 프로젝트 전체의 설명은 [LEVEL 1 - Beginner](../%EC%9D%BD%EA%B8%B0%EC%95%88%EB%82%B4/%EB%A0%88%EB%B2%A81.md)부터 [LEVEL 5 - Expert](../%EC%9D%BD%EA%B8%B0%EC%95%88%EB%82%B4/%EB%A0%88%EB%B2%A85.md)까지 같은 범위로 연결됩니다.
 
@@ -67,7 +67,7 @@ HTML을 열 웹 브라우저와 CSV 열람 도구를 사용합니다. 학습 환
 | HTML의 그림이 표시되지 않음 | 성능 보고서 폴더의 상대 경로와 PNG 파일을 함께 유지합니다. |
 | 정밀도와 mAP의 차이 | 고정 신뢰도에서의 정밀도·재현율과 전체 신뢰도 곡선의 mAP를 구분합니다. |
 
-[자료 폴더](../../%EC%B5%9C%EC%A2%85/%EC%B5%9C%EC%A2%85) · [직전 비교·자료 범위](../comparisons/4-to-final.md) · [이 차수의 원래 전체 상세](#reading-level-5)
+[자료 폴더](../../%EC%B5%9C%EC%A2%85/%EC%B5%9C%EC%A2%85) · [직전 비교·자료 범위](../comparisons/4-to-final.md) · [이 차수의 원래 전체 상세](#user-content-reading-level-5)
 
 
 </details>
@@ -124,7 +124,7 @@ HTML을 열 웹 브라우저와 CSV 열람 도구를 사용합니다. 학습 환
 | HTML의 그림이 표시되지 않음 | 성능 보고서 폴더의 상대 경로와 PNG 파일을 함께 유지합니다. |
 | 정밀도와 mAP의 차이 | 고정 신뢰도에서의 정밀도·재현율과 전체 신뢰도 곡선의 mAP를 구분합니다. |
 
-[자료 폴더](../../%EC%B5%9C%EC%A2%85/%EC%B5%9C%EC%A2%85) · [직전 비교·자료 범위](../comparisons/4-to-final.md) · [이 차수의 원래 전체 상세](#reading-level-5)
+[자료 폴더](../../%EC%B5%9C%EC%A2%85/%EC%B5%9C%EC%A2%85) · [직전 비교·자료 범위](../comparisons/4-to-final.md) · [이 차수의 원래 전체 상세](#user-content-reading-level-5)
 
 
 </details>
@@ -179,7 +179,7 @@ CSV의 정밀도 61.36%·재현율 65.83%·F1 63.52%·mAP50 67.31%·mAP50 –95 
 
 객체 탐지의 성능보고서이며 CCTV 투기 행동 정확도나 분류 정확도가 아닙니다.
 
-[자료 폴더](../../%EC%B5%9C%EC%A2%85/%EC%B5%9C%EC%A2%85) · [직전 비교·자료 범위](../comparisons/4-to-final.md) · [이 차수의 원래 전체 상세](#reading-level-5)
+[자료 폴더](../../%EC%B5%9C%EC%A2%85/%EC%B5%9C%EC%A2%85) · [직전 비교·자료 범위](../comparisons/4-to-final.md) · [이 차수의 원래 전체 상세](#user-content-reading-level-5)
 
 
 </details>
@@ -240,7 +240,7 @@ HTML을 열 웹 브라우저와 CSV 열람 도구를 사용합니다. 학습 환
 
 위 구성요소의 입력·출력과 실패 조건을 같은 차수 소스에 연결해 검토합니다. 전체 비교는 추가·수정·삭제와 원래 보관 범위를 구분하는 근거입니다.
 
-[자료 폴더](../../%EC%B5%9C%EC%A2%85/%EC%B5%9C%EC%A2%85) · [직전 비교·자료 범위](../comparisons/4-to-final.md) · [이 차수의 원래 전체 상세](#reading-level-5)
+[자료 폴더](../../%EC%B5%9C%EC%A2%85/%EC%B5%9C%EC%A2%85) · [직전 비교·자료 범위](../comparisons/4-to-final.md) · [이 차수의 원래 전체 상세](#user-content-reading-level-5)
 
 </details>
 
@@ -250,7 +250,7 @@ HTML을 열 웹 브라우저와 CSV 열람 도구를 사용합니다. 학습 환
 <a id="reading-level-5"></a>
 ## LEVEL 5 - Expert
 
-기존의 전체 설명·표·코드·함수 참조·파일별 비교는 아래에 그대로 이어집니다. [자료 폴더](../../%EC%B5%9C%EC%A2%85/%EC%B5%9C%EC%A2%85) · [직전 비교·자료 범위](../comparisons/4-to-final.md) · [이 차수의 원래 전체 상세](#reading-level-5)
+기존의 전체 설명·표·코드·함수 참조·파일별 비교는 아래에 그대로 이어집니다. [자료 폴더](../../%EC%B5%9C%EC%A2%85/%EC%B5%9C%EC%A2%85) · [직전 비교·자료 범위](../comparisons/4-to-final.md) · [이 차수의 원래 전체 상세](#user-content-reading-level-5)
 <!-- reading-levels:end -->
 
 

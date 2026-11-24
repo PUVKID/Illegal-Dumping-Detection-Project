@@ -4,11 +4,11 @@ CCTV 불법 쓰레기 탐지 프로젝트의 설명과 안전 경계, 보존된 
 
 | 읽기 수준 | 출발점 | 바로 보기 |
 | --- | --- | --- |
-| LEVEL 1 - Beginner | 문서 변경과 보존을 처음 살펴보기 | [입문 설명](#reading-level-1) |
-| LEVEL 2 - Explorer | 모듈·해시·버전의 관계 | [구조 설명](#reading-level-2) |
-| LEVEL 3 - Practitioner | 설치 없이 실행하고 결과 확인하기 | [재현 설명](#reading-level-3) |
-| LEVEL 4 - Advanced | 연결 코드와 실패 경계 검토 | [구현 설명](#reading-level-4) |
-| LEVEL 5 - Expert | 고정 원본과 검증 범위 대조 | [전문 검토](#reading-level-5) |
+| LEVEL 1 - Beginner | 문서 변경과 보존을 처음 살펴보기 | [입문 설명](#user-content-reading-level-1) |
+| LEVEL 2 - Explorer | 모듈·해시·버전의 관계 | [구조 설명](#user-content-reading-level-2) |
+| LEVEL 3 - Practitioner | 설치 없이 실행하고 결과 확인하기 | [재현 설명](#user-content-reading-level-3) |
+| LEVEL 4 - Advanced | 연결 코드와 실패 경계 검토 | [구현 설명](#user-content-reading-level-4) |
+| LEVEL 5 - Expert | 고정 원본과 검증 범위 대조 | [전문 검토](#user-content-reading-level-5) |
 
 | 입력 | 처리 | 결과 |
 | --- | --- | --- |

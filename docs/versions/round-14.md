@@ -1,6 +1,6 @@
 # 14차 ICT 안전 프로젝트의 DMF 문서 무결성 적용
 
-[LEVEL 1 - Beginner](#reading-level-1) · [LEVEL 2 - Explorer](#reading-level-2) · [LEVEL 3 - Practitioner](#reading-level-3) · [LEVEL 4 - Advanced](#reading-level-4) · [LEVEL 5 - Expert](#reading-level-5)
+[LEVEL 1 - Beginner](#user-content-reading-level-1) · [LEVEL 2 - Explorer](#user-content-reading-level-2) · [LEVEL 3 - Practitioner](#user-content-reading-level-3) · [LEVEL 4 - Advanced](#user-content-reading-level-4) · [LEVEL 5 - Expert](#user-content-reading-level-5)
 
 <details open>
 <summary>LEVEL 1 · Beginner — 목적과 동작부터</summary>
@@ -65,7 +65,7 @@ python -B -X utf8 -m unittest discover -s "14차/tests" -v
 
 [같은 수준의 프로젝트 안내](../읽기안내/레벨1.md) · [자료 폴더](../../14차) · [전체 비교](../comparisons/13-to-14.md)
 
-[이전 차수의 같은 수준 설명](round-13.md#reading-level-1)
+[이전 차수의 같은 수준 설명](round-13.md#user-content-reading-level-1)
 
 
 </details>
@@ -131,7 +131,7 @@ python -B -X utf8 -m unittest discover -s "14차/tests" -v
 
 [같은 수준의 프로젝트 안내](../읽기안내/레벨2.md) · [자료 폴더](../../14차) · [전체 비교](../comparisons/13-to-14.md)
 
-[이전 차수의 같은 수준 설명](round-13.md#reading-level-2)
+[이전 차수의 같은 수준 설명](round-13.md#user-content-reading-level-2)
 
 
 </details>
@@ -206,7 +206,7 @@ python -B -X utf8 -m unittest discover -s "14차/tests" -v
 
 [같은 수준의 프로젝트 안내](../읽기안내/레벨3.md) · [자료 폴더](../../14차) · [전체 비교](../comparisons/13-to-14.md)
 
-[이전 차수의 같은 수준 설명](round-13.md#reading-level-3)
+[이전 차수의 같은 수준 설명](round-13.md#user-content-reading-level-3)
 
 
 </details>
@@ -275,7 +275,7 @@ python -B -X utf8 -m unittest discover -s "14차/tests" -v
 
 [같은 수준의 프로젝트 안내](../읽기안내/레벨4.md) · [자료 폴더](../../14차) · [전체 비교](../comparisons/13-to-14.md)
 
-[이전 차수의 같은 수준 설명](round-13.md#reading-level-4)
+[이전 차수의 같은 수준 설명](round-13.md#user-content-reading-level-4)
 
 
 </details>
@@ -340,7 +340,7 @@ python -B -X utf8 -m unittest discover -s "14차/tests" -v
 
 [같은 수준의 프로젝트 안내](../읽기안내/레벨5.md) · [자료 폴더](../../14차) · [전체 비교](../comparisons/13-to-14.md)
 
-[이전 차수의 같은 수준 설명](round-13.md#reading-level-5)
+[이전 차수의 같은 수준 설명](round-13.md#user-content-reading-level-5)
 
 ### 전체 상세와 실행 조건
 
