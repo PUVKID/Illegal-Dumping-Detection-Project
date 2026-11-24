@@ -30,7 +30,7 @@
 
 이 노트북은 봉투와 낱개 쓰레기 분류용으로 `yolov8n.pt`에서 시작하며, 영상 처리 흐름도 함께 담습니다. 1차의 한 클래스 재학습과 출력 역할이 다릅니다.
 
-- YOLOv8n에서 50 epoch 학습을 구성합니다. 1차의 YOLOv8m·150 epoch와 초기 모델·학습 조건이 다릅니다. - DualBackgroundSubtractor와 ChangeTracker로 지속 변화를 추적하며 사람 탐지·근접·체류 조건으로 후보를 연결합니다. - 합성 프레임·더 미 모델 검사 코드도 포함합니다. 코드 존재와 실제 CCTV 행위 정확도 검증 완료는 다릅니다.
+- YOLOv8n에서 50 epoch 학습을 구성합니다. 1차의 YOLOv8m·150 epoch와 초기 모델·학습 조건이 다릅니다. - DualBackgroundSubtractor와 ChangeTracker로 지속 변화를 추적하며 사람 탐지·근접·체류 조건으로 후보를 연결합니다. - 합성 프레임·더미 모델 검사 코드도 포함합니다. 코드 존재와 실제 CCTV 행위 정확도 검증 완료는 다릅니다.
 
 epoch는 학습 자료를 한 차례 순회하는 단위입니다.
 
@@ -82,7 +82,7 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 
 이 노트북은 봉투와 낱개 쓰레기 분류용으로 `yolov8n.pt`에서 시작하며, 영상 처리 흐름도 함께 담습니다. 1차의 한 클래스 재학습과 출력 역할이 다릅니다.
 
-- YOLOv8n에서 50 epoch 학습을 구성합니다. 1차의 YOLOv8m·150 epoch와 초기 모델·학습 조건이 다릅니다. - DualBackgroundSubtractor와 ChangeTracker로 지속 변화를 추적하며 사람 탐지·근접·체류 조건으로 후보를 연결합니다. - 합성 프레임·더 미 모델 검사 코드도 포함합니다. 코드 존재와 실제 CCTV 행위 정확도 검증 완료는 다릅니다.
+- YOLOv8n에서 50 epoch 학습을 구성합니다. 1차의 YOLOv8m·150 epoch와 초기 모델·학습 조건이 다릅니다. - DualBackgroundSubtractor와 ChangeTracker로 지속 변화를 추적하며 사람 탐지·근접·체류 조건으로 후보를 연결합니다. - 합성 프레임·더미 모델 검사 코드도 포함합니다. 코드 존재와 실제 CCTV 행위 정확도 검증 완료는 다릅니다.
 
 ### LEVEL 2 · 입력에서 출력으로
 
@@ -171,7 +171,7 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 
 이 노트북은 봉투와 낱개 쓰레기 분류용으로 `yolov8n.pt`에서 시작하며, 영상 처리 흐름도 함께 담습니다. 1차의 한 클래스 재학습과 출력 역할이 다릅니다.
 
-- YOLOv8n에서 50 epoch 학습을 구성합니다. 1차의 YOLOv8m·150 epoch와 초기 모델·학습 조건이 다릅니다. - DualBackgroundSubtractor와 ChangeTracker로 지속 변화를 추적하며 사람 탐지·근접·체류 조건으로 후보를 연결합니다. - 합성 프레임·더 미 모델 검사 코드도 포함합니다. 코드 존재와 실제 CCTV 행위 정확도 검증 완료는 다릅니다.
+- YOLOv8n에서 50 epoch 학습을 구성합니다. 1차의 YOLOv8m·150 epoch와 초기 모델·학습 조건이 다릅니다. - DualBackgroundSubtractor와 ChangeTracker로 지속 변화를 추적하며 사람 탐지·근접·체류 조건으로 후보를 연결합니다. - 합성 프레임·더미 모델 검사 코드도 포함합니다. 코드 존재와 실제 CCTV 행위 정확도 검증 완료는 다릅니다.
 
 [자료 폴더](../../2%EC%B0%A8) · [직전 비교·자료 범위](../comparisons/1-to-2.md) · [이 차수의 원래 전체 상세](#reading-level-5)
 
@@ -188,7 +188,7 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 
 이 노트북은 봉투와 낱개 쓰레기 분류용으로 `yolov8n.pt`에서 시작하며, 영상 처리 흐름도 함께 담습니다. 1차의 한 클래스 재학습과 출력 역할이 다릅니다.
 
-- YOLOv8n에서 50 epoch 학습을 구성합니다. 1차의 YOLOv8m·150 epoch와 초기 모델·학습 조건이 다릅니다. - DualBackgroundSubtractor와 ChangeTracker로 지속 변화를 추적하며 사람 탐지·근접·체류 조건으로 후보를 연결합니다. - 합성 프레임·더 미 모델 검사 코드도 포함합니다. 코드 존재와 실제 CCTV 행위 정확도 검증 완료는 다릅니다.
+- YOLOv8n에서 50 epoch 학습을 구성합니다. 1차의 YOLOv8m·150 epoch와 초기 모델·학습 조건이 다릅니다. - DualBackgroundSubtractor와 ChangeTracker로 지속 변화를 추적하며 사람 탐지·근접·체류 조건으로 후보를 연결합니다. - 합성 프레임·더미 모델 검사 코드도 포함합니다. 코드 존재와 실제 CCTV 행위 정확도 검증 완료는 다릅니다.
 
 ### LEVEL 4 · 이 차수 구현의 실제 근거
 
@@ -265,7 +265,7 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 
 **항목:** 4
 
-**이 차수에서 확인할 내용:** - YOLOv8n에서 50 epoch 학습을 구성합니다. 1차의 YOLOv8m·150 epoch와 초기 모델·학습 조건이 다릅니다. - DualBackgroundSubtractor와 ChangeTracker로 지속 변화를 추적하며 사람 탐지·근접·체류 조건으로 후보를 연결합니다. - 합성 프레임·더 미 모델 검사 코드도 포함합니다.
+**이 차수에서 확인할 내용:** - YOLOv8n에서 50 epoch 학습을 구성합니다. 1차의 YOLOv8m·150 epoch와 초기 모델·학습 조건이 다릅니다. - DualBackgroundSubtractor와 ChangeTracker로 지속 변화를 추적하며 사람 탐지·근접·체류 조건으로 후보를 연결합니다. - 합성 프레임·더미 모델 검사 코드도 포함합니다.
 
 코드 존재와 실제 CCTV 행위 정확도 검증 완료는 다릅니다.
 
