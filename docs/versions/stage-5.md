@@ -15,6 +15,9 @@
 
 프로젝트 전체의 설명은 [LEVEL 1 - Beginner](../%EC%9D%BD%EA%B8%B0%EC%95%88%EB%82%B4/%EB%A0%88%EB%B2%A81.md)부터 [LEVEL 5 - Expert](../%EC%9D%BD%EA%B8%B0%EC%95%88%EB%82%B4/%EB%A0%88%EB%B2%A85.md)까지 같은 범위로 연결됩니다.
 
+<details open>
+<summary><strong>LEVEL 1 · Beginner</strong> — 목적과 동작부터</summary>
+
 <a id="reading-level-1"></a>
 ## LEVEL 1 - Beginner
 
@@ -65,6 +68,12 @@ HTML을 열 웹 브라우저와 CSV 열람 도구를 사용합니다. 학습 환
 | 정밀도와 mAP의 차이 | 고정 신뢰도에서의 정밀도·재현율과 전체 신뢰도 곡선의 mAP를 구분합니다. |
 
 [자료 폴더](../../%EC%B5%9C%EC%A2%85/%EC%B5%9C%EC%A2%85) · [직전 비교·자료 범위](../comparisons/4-to-final.md) · [이 차수의 원래 전체 상세](#reading-level-5)
+
+
+</details>
+
+<details>
+<summary><strong>LEVEL 2 · Explorer</strong> — 구성과 연결 원리</summary>
 
 <a id="reading-level-2"></a>
 ## LEVEL 2 - Explorer
@@ -117,6 +126,12 @@ HTML을 열 웹 브라우저와 CSV 열람 도구를 사용합니다. 학습 환
 
 [자료 폴더](../../%EC%B5%9C%EC%A2%85/%EC%B5%9C%EC%A2%85) · [직전 비교·자료 범위](../comparisons/4-to-final.md) · [이 차수의 원래 전체 상세](#reading-level-5)
 
+
+</details>
+
+<details>
+<summary><strong>LEVEL 3 · Practitioner</strong> — 준비·실행·결과 확인</summary>
+
 <a id="reading-level-3"></a>
 ## LEVEL 3 - Practitioner
 
@@ -165,6 +180,12 @@ CSV의 정밀도 61.36%·재현율 65.83%·F1 63.52%·mAP50 67.31%·mAP50 –95 
 객체 탐지의 성능보고서이며 CCTV 투기 행동 정확도나 분류 정확도가 아닙니다.
 
 [자료 폴더](../../%EC%B5%9C%EC%A2%85/%EC%B5%9C%EC%A2%85) · [직전 비교·자료 범위](../comparisons/4-to-final.md) · [이 차수의 원래 전체 상세](#reading-level-5)
+
+
+</details>
+
+<details>
+<summary><strong>LEVEL 4 · Advanced</strong> — 구현·설계·실패 처리</summary>
 
 <a id="reading-level-4"></a>
 ## LEVEL 4 - Advanced
@@ -220,6 +241,12 @@ HTML을 열 웹 브라우저와 CSV 열람 도구를 사용합니다. 학습 환
 위 구성요소의 입력·출력과 실패 조건을 같은 차수 소스에 연결해 검토합니다. 전체 비교는 추가·수정·삭제와 원래 보관 범위를 구분하는 근거입니다.
 
 [자료 폴더](../../%EC%B5%9C%EC%A2%85/%EC%B5%9C%EC%A2%85) · [직전 비교·자료 범위](../comparisons/4-to-final.md) · [이 차수의 원래 전체 상세](#reading-level-5)
+
+</details>
+
+<details>
+<summary><strong>LEVEL 5 · Expert</strong> — 근거·프로토콜·한계 검토</summary>
+
 <a id="reading-level-5"></a>
 ## LEVEL 5 - Expert
 
@@ -336,3 +363,6 @@ HTML을 열 웹 브라우저와 CSV 열람 도구를 사용합니다. 학습 환
 </details>
 
 [프로젝트](../../README.md) · [전체 차수](../REVISION_INDEX.md) · [원본 자료](../../%EC%B5%9C%EC%A2%85/%EC%B5%9C%EC%A2%85) · [← 이전: 최종/4차](stage-4.md) · [다음: 5차 →](round-5.md)
+
+</details>
+

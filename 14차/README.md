@@ -19,6 +19,9 @@ CCTV 불법 쓰레기 탐지 프로젝트의 설명과 안전 경계, 보존된 
 
 [사용법](docs/사용법.md) · [적용 범위와 한계](docs/적용범위.md) · [변경 기록](변경기록.md) · [직전 차수](../13차/) · [DMF 원본](https://github.com/leecursion/DMF/tree/cf550e3b2ceb0946ba89f64e43b7d6c2f5164383)
 
+<details open>
+<summary><strong>LEVEL 1 · Beginner</strong> — 목적과 동작부터</summary>
+
 <a id="reading-level-1"></a>
 ## LEVEL 1 - Beginner
 
@@ -49,6 +52,12 @@ CCTV 불법 쓰레기 탐지 프로젝트의 설명과 안전 경계, 보존된 
 
 이전 탐지 성능은 그대로이고, 운영 데이터베이스와 전자서명, 외부 시간 인증 및 G1~G9 전체 승격 검사는 아직 없습니다.
 
+
+</details>
+
+<details>
+<summary><strong>LEVEL 2 · Explorer</strong> — 구성과 연결 원리</summary>
+
 <a id="reading-level-2"></a>
 ## LEVEL 2 - Explorer
 
@@ -71,6 +80,12 @@ DMF는 문서를 모듈 참조의 순서 있는 묶음으로 표현합니다. �
 검증 예시에서만 사본을 고치며 원본 입력과 운영 학습은 건드리지 않습니다.
 
 로컬 전체 기록과 코드까지 같은 권한으로 다시 쓰는 사람에 대한 외부 신뢰 경계는 제공하지 않습니다. [재현 절차](docs/사용법.md)와 [세부 한계](docs/적용범위.md)를 함께 확인합니다.
+
+
+</details>
+
+<details>
+<summary><strong>LEVEL 3 · Practitioner</strong> — 준비·실행·결과 확인</summary>
 
 <a id="reading-level-3"></a>
 ## LEVEL 3 - Practitioner
@@ -95,6 +110,12 @@ Python 표준 라이브러리만 사용하므로 패키지 설치 없이 실행�
 
 세부 산출물과 거부 조건은 [사용법](docs/사용법.md)에 있습니다. 14개 로컬 검사는 G1~G9 전체 승격 검사나 탐지 정확도 평가가 아닙니다.
 
+
+</details>
+
+<details>
+<summary><strong>LEVEL 4 · Advanced</strong> — 구현·설계·실패 처리</summary>
+
 <a id="reading-level-4"></a>
 ## LEVEL 4 - Advanced
 
@@ -118,6 +139,12 @@ Python 표준 라이브러리만 사용하므로 패키지 설치 없이 실행�
 
 명시 범위와 실제 검증의 차이는 [적용 범위](docs/적용범위.md)에 보존합니다.
 
+
+</details>
+
+<details>
+<summary><strong>LEVEL 5 · Expert</strong> — 근거·프로토콜·한계 검토</summary>
+
 <a id="reading-level-5"></a>
 ## LEVEL 5 - Expert
 
@@ -140,3 +167,6 @@ Python 표준 라이브러리만 사용하므로 패키지 설치 없이 실행�
 공식 승격·실제 DB/RLS·OIDC·KMS·외부 타임스탬프·서버 보증 신원 인증을 주장하지 않습니다.
 
 동일 권한으로 코드와 모든 해시 기록을 일관되게 재작성할 수 있는 주체의 공격은 외부 앵커 없이 방어할 수 없습니다. [연결 코드](dmf_adapter.py)·[검사](tests/test_dmf_adapter.py)·[변경 기록](변경기록.md)을 대조하고 독립 verifier 결과는 별도 절차에서 확인해야 합니다.
+
+</details>
+

@@ -2,6 +2,9 @@
 
 [LEVEL 1 - Beginner](#reading-level-1) · [LEVEL 2 - Explorer](#reading-level-2) · [LEVEL 3 - Practitioner](#reading-level-3) · [LEVEL 4 - Advanced](#reading-level-4) · [LEVEL 5 - Expert](#reading-level-5)
 
+<details open>
+<summary><strong>LEVEL 1 · Beginner</strong> — 목적과 동작부터</summary>
+
 <a id="reading-level-1"></a>
 ## LEVEL 1 - Beginner
 
@@ -70,6 +73,12 @@ Docker에서는 43개를 통과한 기록이 있습니다.
 [같은 수준의 프로젝트 안내](../읽기안내/레벨1.md) · [자료 폴더](../../13차) · [전체 비교](../comparisons/12-to-13.md)
 
 [이전 차수의 같은 수준 설명](round-12.md#reading-level-1) · [다음 차수의 같은 수준 설명](round-14.md#reading-level-1)
+
+
+</details>
+
+<details>
+<summary><strong>LEVEL 2 · Explorer</strong> — 구성과 연결 원리</summary>
 
 <a id="reading-level-2"></a>
 ## LEVEL 2 - Explorer
@@ -148,6 +157,12 @@ ID 합집합은 공식 대응의 집계입니다.
 
 [이전 차수의 같은 수준 설명](round-12.md#reading-level-2) · [다음 차수의 같은 수준 설명](round-14.md#reading-level-2)
 
+
+</details>
+
+<details>
+<summary><strong>LEVEL 3 · Practitioner</strong> — 준비·실행·결과 확인</summary>
+
 <a id="reading-level-3"></a>
 ## LEVEL 3 - Practitioner
 
@@ -219,6 +234,12 @@ GPU 학습 완료와 최종 성능은 이 검사로 판정할 수 없고 90% 달
 
 [이전 차수의 같은 수준 설명](round-12.md#reading-level-3) · [다음 차수의 같은 수준 설명](round-14.md#reading-level-3)
 
+
+</details>
+
+<details>
+<summary><strong>LEVEL 4 · Advanced</strong> — 구현·설계·실패 처리</summary>
+
 <a id="reading-level-4"></a>
 ## LEVEL 4 - Advanced
 
@@ -279,6 +300,12 @@ GPU 학습 완료와 최종 성능은 이 검사로 판정할 수 없고 90% 달
 [같은 수준의 프로젝트 안내](../읽기안내/레벨4.md) · [자료 폴더](../../13차) · [전체 비교](../comparisons/12-to-13.md)
 
 [이전 차수의 같은 수준 설명](round-12.md#reading-level-4) · [다음 차수의 같은 수준 설명](round-14.md#reading-level-4)
+
+
+</details>
+
+<details>
+<summary><strong>LEVEL 5 · Expert</strong> — 근거·프로토콜·한계 검토</summary>
 
 <a id="reading-level-5"></a>
 ## LEVEL 5 - Expert
@@ -360,4 +387,7 @@ Windows에서는 Linux 전용 하나를 건너뛰었고 Docker에서는 43개 �
 기존 7차 동결 설치 환경과 로컬 자료·모델 캐시가 필요합니다. 7차 기준 16개 중 공개 원문과 일치하는 것은 13개이며 설계 문서 두 개는 공개 저장소에 없고 테스트 파일 하나는 줄바꿈 바이트가 다릅니다. 공개 저장소만 복제하면 원본 해시 검사가 실패할 수 있고 기준 해시를 갱신해 우회하지 않습니다.
 
 Windows 단위 검사 43개 중 Linux 전용 1개가 건너뛰어졌고 Docker에서 43개를 통과했습니다. 보고서 연동은 합성 자료로 검사했습니다. 이는 실제 학습 완료나 성능 달성을 뜻하지 않습니다. 실제 개인 최종 보고서와 저자 설정은 공개하지 않습니다.
+
+
+</details>
 

@@ -2,6 +2,9 @@
 
 [LEVEL 1 - Beginner](#reading-level-1) · [LEVEL 2 - Explorer](#reading-level-2) · [LEVEL 3 - Practitioner](#reading-level-3) · [LEVEL 4 - Advanced](#reading-level-4) · [LEVEL 5 - Expert](#reading-level-5)
 
+<details open>
+<summary><strong>LEVEL 1 · Beginner</strong> — 목적과 동작부터</summary>
+
 <a id="reading-level-1"></a>
 ## LEVEL 1 - Beginner
 
@@ -64,6 +67,12 @@ python -B -X utf8 -m unittest discover -s "14차/tests" -v
 
 [이전 차수의 같은 수준 설명](round-13.md#reading-level-1)
 
+
+</details>
+
+<details>
+<summary><strong>LEVEL 2 · Explorer</strong> — 구성과 연결 원리</summary>
+
 <a id="reading-level-2"></a>
 ## LEVEL 2 - Explorer
 
@@ -123,6 +132,12 @@ python -B -X utf8 -m unittest discover -s "14차/tests" -v
 [같은 수준의 프로젝트 안내](../읽기안내/레벨2.md) · [자료 폴더](../../14차) · [전체 비교](../comparisons/13-to-14.md)
 
 [이전 차수의 같은 수준 설명](round-13.md#reading-level-2)
+
+
+</details>
+
+<details>
+<summary><strong>LEVEL 3 · Practitioner</strong> — 준비·실행·결과 확인</summary>
 
 <a id="reading-level-3"></a>
 ## LEVEL 3 - Practitioner
@@ -193,6 +208,12 @@ python -B -X utf8 -m unittest discover -s "14차/tests" -v
 
 [이전 차수의 같은 수준 설명](round-13.md#reading-level-3)
 
+
+</details>
+
+<details>
+<summary><strong>LEVEL 4 · Advanced</strong> — 구현·설계·실패 처리</summary>
+
 <a id="reading-level-4"></a>
 ## LEVEL 4 - Advanced
 
@@ -255,6 +276,12 @@ python -B -X utf8 -m unittest discover -s "14차/tests" -v
 [같은 수준의 프로젝트 안내](../읽기안내/레벨4.md) · [자료 폴더](../../14차) · [전체 비교](../comparisons/13-to-14.md)
 
 [이전 차수의 같은 수준 설명](round-13.md#reading-level-4)
+
+
+</details>
+
+<details>
+<summary><strong>LEVEL 5 · Expert</strong> — 근거·프로토콜·한계 검토</summary>
 
 <a id="reading-level-5"></a>
 ## LEVEL 5 - Expert
@@ -461,4 +488,7 @@ Python 표준 라이브러리만 사용하므로 패키지 설치 없이 실행�
 공식 승격·실제 DB/RLS·OIDC·KMS·외부 타임스탬프·서버 보증 신원 인증을 주장하지 않습니다.
 
 동일 권한으로 코드와 모든 해시 기록을 일관되게 재작성할 수 있는 주체의 공격은 외부 앵커 없이 방어할 수 없습니다. [연결 코드](../../14차/dmf_adapter.py)·[검사](../../14차/tests/test_dmf_adapter.py)·[변경 기록](../../14차/변경기록.md)을 대조하고 독립 verifier 결과는 별도 절차에서 확인해야 합니다.
+
+
+</details>
 

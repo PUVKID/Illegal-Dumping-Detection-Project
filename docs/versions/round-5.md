@@ -15,6 +15,9 @@
 
 프로젝트 전체의 설명은 [LEVEL 1 - Beginner](../%EC%9D%BD%EA%B8%B0%EC%95%88%EB%82%B4/%EB%A0%88%EB%B2%A81.md)부터 [LEVEL 5 - Expert](../%EC%9D%BD%EA%B8%B0%EC%95%88%EB%82%B4/%EB%A0%88%EB%B2%A85.md)까지 같은 범위로 연결됩니다.
 
+<details open>
+<summary><strong>LEVEL 1 · Beginner</strong> — 목적과 동작부터</summary>
+
 <a id="reading-level-1"></a>
 ## LEVEL 1 - Beginner
 
@@ -532,6 +535,12 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 | 지표 해석이 어려움 | 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다. |
 
 [자료 폴더](../../5%EC%B0%A8) · [직전 비교·자료 범위](../comparisons/final-to-5.md) · [이 차수의 원래 전체 상세](#reading-level-5)
+
+
+</details>
+
+<details>
+<summary><strong>LEVEL 2 · Explorer</strong> — 구성과 연결 원리</summary>
 
 <a id="reading-level-2"></a>
 ## LEVEL 2 - Explorer
@@ -1051,6 +1060,12 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 
 [자료 폴더](../../5%EC%B0%A8) · [직전 비교·자료 범위](../comparisons/final-to-5.md) · [이 차수의 원래 전체 상세](#reading-level-5)
 
+
+</details>
+
+<details>
+<summary><strong>LEVEL 3 · Practitioner</strong> — 준비·실행·결과 확인</summary>
+
 <a id="reading-level-3"></a>
 ## LEVEL 3 - Practitioner
 
@@ -1566,6 +1581,12 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 대시보드와 독립 실행 빌드, 데이터 준비·학습·평가 코드 및 검사를 보관합니다. 기존 테스트 150장은 이미 사용한 벤치마크이며 새로운 독립 평가가 아닙니다. 기존 보고서와 평가 조건이 달라 단순 개선률로 해석하지 않습니다.
 
 [자료 폴더](../../5%EC%B0%A8) · [직전 비교·자료 범위](../comparisons/final-to-5.md) · [이 차수의 원래 전체 상세](#reading-level-5)
+
+
+</details>
+
+<details>
+<summary><strong>LEVEL 4 · Advanced</strong> — 구현·설계·실패 처리</summary>
 
 <a id="reading-level-4"></a>
 ## LEVEL 4 - Advanced
@@ -2096,6 +2117,12 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 위 구성요소의 입력·출력과 실패 조건을 같은 차수 소스에 연결해 검토합니다. 전체 비교는 추가·수정·삭제와 원래 보관 범위를 구분하는 근거입니다.
 
 [자료 폴더](../../5%EC%B0%A8) · [직전 비교·자료 범위](../comparisons/final-to-5.md) · [이 차수의 원래 전체 상세](#reading-level-5)
+
+</details>
+
+<details>
+<summary><strong>LEVEL 5 · Expert</strong> — 근거·프로토콜·한계 검토</summary>
+
 <a id="reading-level-5"></a>
 ## LEVEL 5 - Expert
 
@@ -2698,3 +2725,6 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 </details>
 
 [프로젝트](../../README.md) · [전체 차수](../REVISION_INDEX.md) · [원본 자료](../../5%EC%B0%A8) · [← 이전: 최종/최종](stage-5.md) · [다음: 6차 →](round-6.md)
+
+</details>
+

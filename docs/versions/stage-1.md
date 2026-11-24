@@ -15,6 +15,9 @@
 
 프로젝트 전체의 설명은 [LEVEL 1 - Beginner](../%EC%9D%BD%EA%B8%B0%EC%95%88%EB%82%B4/%EB%A0%88%EB%B2%A81.md)부터 [LEVEL 5 - Expert](../%EC%9D%BD%EA%B8%B0%EC%95%88%EB%82%B4/%EB%A0%88%EB%B2%A85.md)까지 같은 범위로 연결됩니다.
 
+<details open>
+<summary><strong>LEVEL 1 · Beginner</strong> — 목적과 동작부터</summary>
+
 <a id="reading-level-1"></a>
 ## LEVEL 1 - Beginner
 
@@ -68,6 +71,12 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 | 지표 해석이 어려움 | 검증으로 선택한 정책과 고정 테스트, 기존 시험과 새 출처 외부 시험을 구분합니다. |
 
 [자료 폴더](../../1%EC%B0%A8) · [직전 비교·자료 범위](../comparisons/initial.md) · [이 차수의 원래 전체 상세](#reading-level-5)
+
+
+</details>
+
+<details>
+<summary><strong>LEVEL 2 · Explorer</strong> — 구성과 연결 원리</summary>
 
 <a id="reading-level-2"></a>
 ## LEVEL 2 - Explorer
@@ -123,6 +132,12 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 
 [자료 폴더](../../1%EC%B0%A8) · [직전 비교·자료 범위](../comparisons/initial.md) · [이 차수의 원래 전체 상세](#reading-level-5)
 
+
+</details>
+
+<details>
+<summary><strong>LEVEL 3 · Practitioner</strong> — 준비·실행·결과 확인</summary>
+
 <a id="reading-level-3"></a>
 ## LEVEL 3 - Practitioner
 
@@ -174,6 +189,12 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 - 데이터 수집·라벨 통합 뒤 학습·검증·시험 자료를 나누며 기본 학습 epoch는 150입니다. - 사람 겹침·기존 정지 물체·새 물체와 추적을 사용해 쓰레기 후보를 후 처리합니다.
 
 [자료 폴더](../../1%EC%B0%A8) · [직전 비교·자료 범위](../comparisons/initial.md) · [이 차수의 원래 전체 상세](#reading-level-5)
+
+
+</details>
+
+<details>
+<summary><strong>LEVEL 4 · Advanced</strong> — 구현·설계·실패 처리</summary>
 
 <a id="reading-level-4"></a>
 ## LEVEL 4 - Advanced
@@ -232,6 +253,12 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 위 구성요소의 입력·출력과 실패 조건을 같은 차수 소스에 연결해 검토합니다. 전체 비교는 추가·수정·삭제와 원래 보관 범위를 구분하는 근거입니다.
 
 [자료 폴더](../../1%EC%B0%A8) · [직전 비교·자료 범위](../comparisons/initial.md) · [이 차수의 원래 전체 상세](#reading-level-5)
+
+</details>
+
+<details>
+<summary><strong>LEVEL 5 · Expert</strong> — 근거·프로토콜·한계 검토</summary>
+
 <a id="reading-level-5"></a>
 ## LEVEL 5 - Expert
 
@@ -347,3 +374,6 @@ precision·recall·mAP와 입력 데이터·분할·정책 선택 단계를 함�
 [전체 비교·자료 범위](../comparisons/initial.md)
 
 추가·수정·삭제, 주석·공백·개행과 바이너리 크기·해시는 연결된 원래 비교 자료에서 확인합니다.
+
+</details>
+
