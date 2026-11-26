@@ -1,6 +1,30 @@
 
 <a name="-illegal-dumping-detection-project"></a>
-# Illegal Dumping Detection Project
+<!-- readme-header32:start -->
+<a name="illegal-dumping-detection-project"></a>
+<p align="center"><img src="assets/readme/icon.svg" alt="" width="72" height="72" /></p>
+<h1 align="center" id="project-title">Illegal Dumping Detection Project</h1>
+<p align="center">영상에서 사람의 검토 후보를 찾는 연구</p>
+<p align="center">
+  <a href="README.md"><img src="assets/readme/language-ko-active.svg" alt="한국어 · 현재 언어" width="126" height="32" /></a>
+  <a href="en/README.md"><img src="assets/readme/language-en-link.svg" alt="English" width="126" height="32" /></a>
+</p>
+<p align="center">
+  <a href="docs/읽기안내/레벨1.md"><img src="assets/readme/level-1.svg" alt="LEVEL 1 - Beginner" width="92" height="32" /></a>
+  <a href="docs/읽기안내/레벨2.md"><img src="assets/readme/level-2.svg" alt="LEVEL 2 - Explorer" width="92" height="32" /></a>
+  <a href="docs/읽기안내/레벨3.md"><img src="assets/readme/level-3.svg" alt="LEVEL 3 - Practitioner" width="92" height="32" /></a>
+  <a href="docs/읽기안내/레벨4.md"><img src="assets/readme/level-4.svg" alt="LEVEL 4 - Advanced" width="92" height="32" /></a>
+  <a href="docs/읽기안내/레벨5.md"><img src="assets/readme/level-5.svg" alt="LEVEL 5 - Expert" width="92" height="32" /></a>
+</p>
+<picture>
+  <source media="(max-width: 600px) and (prefers-color-scheme: dark)" srcset="assets/readme/flow-ko-dark-mobile.svg" />
+  <source media="(max-width: 600px)" srcset="assets/readme/flow-ko-light-mobile.svg" />
+  <source media="(prefers-color-scheme: dark)" srcset="assets/readme/flow-ko-dark.svg" />
+  <source media="(prefers-color-scheme: light)" srcset="assets/readme/flow-ko-light.svg" />
+  <img src="assets/readme/flow-ko-light.svg" alt="Illegal Dumping Detection Project: 영상 · 객체 라벨 → 탐지 · 정지 시간 → 검토 후보 · 보고서" width="100%" />
+</picture>
+<!-- readme-header32:end -->
+
 
 물체의 정지 시간과 사람의 이탈을 분석해 불법투기 의심 이벤트를 찾습니다.
 

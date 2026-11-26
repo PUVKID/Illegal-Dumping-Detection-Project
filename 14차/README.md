@@ -1,3 +1,7 @@
+<!-- language-choice:start -->
+🔵 **한국어** · [English overview](../en/README.md)
+<!-- language-choice:end -->
+
 # ICT 안전 문서에 DMF 적용
 
 CCTV 불법 쓰레기 탐지 프로젝트의 설명과 안전 경계, 보존된 관측값을 **고정 커밋의 DMF Python 라이브러리**로 관리하는 14차 로컬 적용입니다. 새 모델 학습이나 탐지 성능 개선 작업은 아닙니다.
