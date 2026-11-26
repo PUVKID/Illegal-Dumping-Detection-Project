@@ -22,7 +22,7 @@
   <source media="(max-width: 600px)" srcset="../assets/readme/flow-en-light-mobile.svg" />
   <source media="(prefers-color-scheme: dark)" srcset="../assets/readme/flow-en-dark.svg" />
   <source media="(prefers-color-scheme: light)" srcset="../assets/readme/flow-en-light.svg" />
-  <img src="../assets/readme/flow-en-light.svg" alt="Illegal Dumping Detection Project: Video · object labels → Detection · stationary time → Review candidates · reports" width="100%" />
+  <img src="../assets/readme/flow-en-light.svg" alt="Video · object labels: Labeled waste images and input videos → Detection · stationary time: Check stationary time and person exit → Review candidates · reports: Candidates for review, video and CSV" width="100%" />
 </picture>
 <!-- readme-header32:end -->
 

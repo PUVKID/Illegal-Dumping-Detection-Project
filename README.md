@@ -21,7 +21,7 @@
   <source media="(max-width: 600px)" srcset="assets/readme/flow-ko-light-mobile.svg" />
   <source media="(prefers-color-scheme: dark)" srcset="assets/readme/flow-ko-dark.svg" />
   <source media="(prefers-color-scheme: light)" srcset="assets/readme/flow-ko-light.svg" />
-  <img src="assets/readme/flow-ko-light.svg" alt="Illegal Dumping Detection Project: 영상 · 객체 라벨 → 탐지 · 정지 시간 → 검토 후보 · 보고서" width="100%" />
+  <img src="assets/readme/flow-ko-light.svg" alt="영상 · 객체 라벨: 쓰레기 라벨 영상과 검사 동영상 → 탐지 · 정지 시간: 물체 정지 시간과 사람 이탈 확인 → 검토 후보 · 보고서: 사람이 검토할 후보·영상·CSV" width="100%" />
 </picture>
 <!-- readme-header32:end -->
 
